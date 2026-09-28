@@ -226,7 +226,7 @@ input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
 <header class="topbar">
   <div class="brand">
     <span class="brand-name">Anatomy Sandbox</span>
-    <span class="brand-sub" id="brandSub">Z-Anatomy male · 1.71 m · 19 joints</span>
+    <span class="brand-sub" id="brandSub">Z-Anatomy male · 1.71 m · 20 joints</span>
   </div>
   <div class="seg sexes" role="group" aria-label="Body">
     <button id="sex-m" data-sex="m" data-short="M" aria-pressed="true" aria-label="Male">Male</button>
@@ -287,6 +287,11 @@ input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
       <input type="range" id="fatAmt" min="0" max="1" step="0.01" value="0">
       <span class="meta data" id="fatVal">as scanned</span>
     </div>
+    <div class="fat-row" id="mouthRow">
+      <label for="mouthAmt">Mouth open</label>
+      <input type="range" id="mouthAmt" min="0" max="35" step="1" value="0">
+      <span class="meta data" id="mouthVal">closed</span>
+    </div>
   </section>
   <section>
     <h2>Colour</h2>
@@ -319,7 +324,7 @@ input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
     Female organs: <a href="https://humanatlas.io/3d-reference-library" target="_blank" rel="noopener">HRA 3D Reference Object Library</a> (NIH HuBMAP; Kristen Browne, Heidi Schlehlein; CC BY 4.0), from the Visible Human Female, simplified and fitted onto this pelvis here; the breasts are a sculpted model.
     In Female mode the organs change and the skin and fat are reshaped: wider hips, a narrower waist, breasts and a closed urogenital surface. That shape is an estimate made here, not a scan. The vulva is not modelled yet. The muscles, skeleton, nerves and most vessels still come from the male donor.
     Exercises: <a href="https://github.com/yuhonas/free-exercise-db" target="_blank" rel="noopener">free-exercise-db</a> (Unlicense, public domain); its muscle groups are mapped onto the atlas here.
-    Movement uses a simplified 19-joint rig; stretch colours are estimates.
+    Movement uses a simplified 20-joint rig; stretch colours are estimates.
   </p>
 </aside>
 
@@ -360,6 +365,7 @@ input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
     <button data-view="left">Left</button>
     <button data-view="right">Right</button>
     <button data-view="top">Top</button>
+    <button id="teethView" title="Close-up of the teeth, with the skeleton on">Teeth</button>
     <span class="sep"></span>
     <button id="xray" aria-pressed="false" title="See bones through the muscles (X)">X-ray</button>
     <button id="showAll" hidden>Show all</button>
@@ -378,7 +384,7 @@ input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
     <span id="myPoses" class="my-poses"></span>
     <button id="savePose" title="Keep this pose in the dock">Save pose</button>
     <form id="saveForm" class="save-form" hidden><input id="poseName" type="text" maxlength="24" aria-label="Pose name" autocomplete="off" spellcheck="false"><button type="submit">Save</button><button type="button" id="saveCancel">Cancel</button></form>
-    <span class="hint">Click a body part, then drag the rings</span>
+    <span class="hint">Drag a hand or foot, or click a part and turn its rings</span>
   </div>
   <div class="dock-group" data-for="walk" hidden>
     <span class="hint"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> or click the floor · <kbd>Shift</kbd> brisk</span>
@@ -627,7 +633,7 @@ matchMedia('(prefers-color-scheme: dark)').addEventListener('change', readTheme)
 new MutationObserver(readTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
 // ---------- app state ----------
-const state = { mode: 'explore', colorMode: 'natural', cut: 'off', cutPos: 0.5, cutFlip: false, xray: false, fat: 0, sex: 'm' };
+const state = { mode: 'explore', colorMode: 'natural', cut: 'off', cutPos: 0.5, cutFlip: false, xray: false, fat: 0, sex: 'm', mouth: 0 };
 // Outside-in list order, and the see-through membranes: opacity to start with, rim (edges glint, faces stay clear), draw order
 const LAYER_ORDER = ['skin', 'fat', 'fascia', 'muscles', 'bones', 'joints', 'attachments', 'vessels', 'nerves', 'organs', 'lymph'];
 const MEMBRANE = { skin: { opacity: 0.6, rim: 0.5, order: 3 }, fat: { opacity: 0.5, rim: 0.45, order: 2 }, fascia: { opacity: 0.5, rim: 0.8, order: 1 } };
@@ -918,7 +924,11 @@ function updateHeat() {
   if (selected && selected.heat) updateCardStrain();
 }
 let poseDirty = true;
-function poseChanged() { poseDirty = true; requestRender(); }
+function poseChanged() {
+  poseDirty = true; requestRender();
+  const j = segIndex.jaw != null && bones[segIndex.jaw];  // the gizmo, a saved pose or the slider: keep the Mouth open slider honest
+  if (j && Math.round(j.rotation.x / DEG) !== state.mouth && !rep) { state.mouth = clamp(Math.round(j.rotation.x / DEG), 0, 35); $('#mouthAmt').value = String(state.mouth); $('#mouthVal').textContent = state.mouth ? `${state.mouth}°` : 'closed'; }
+}
 
 // ---------- loading ----------
 async function loadLayer(L, onProgress) {
@@ -1251,6 +1261,35 @@ function viewPreset(name) {
   flyTo(t, t.clone().add(off));
 }
 
+// ---------- mouth: the jaw hinge at the temporomandibular joint ----------
+const MOUTH_REST = new THREE.Vector3(0, 1.528, 0.086);  // between the incisors, rest space
+function setMouth(deg, quiet) {
+  if (segIndex.jaw == null) return;
+  state.mouth = clamp(Math.round(deg), 0, 35);
+  if (rep) toggleRep(false);
+  bones[segIndex.jaw].rotation.set(state.mouth * DEG, 0, 0);
+  $('#mouthAmt').value = String(state.mouth);
+  $('#mouthVal').textContent = state.mouth ? `${state.mouth}°` : 'closed';
+  if (gizmoSeg === segIndex.jaw) syncJointPanel();
+  if (!quiet) poseChanged();
+}
+$('#mouthAmt').addEventListener('input', (e) => setMouth(Number(e.target.value)));
+async function teethView() {
+  if (segIndex.jaw == null) return;
+  const bonesL = layerByKey.bones;
+  if (bonesL && !bonesL.visible) setLayerVisible(bonesL, true);
+  if (state.mouth < 12) setMouth(22);  // teeth apart, so both rows show
+  updateSkinMatrices();
+  const c = MOUTH_REST.clone().applyMatrix4(skinM[segIndex.head]);
+  c.y -= 0.012;
+  const fwd = new THREE.Vector3(0, 0, 1).applyQuaternion(bones[segIndex.head].getWorldQuaternion(new THREE.Quaternion()));
+  const d = camera.aspect < 0.8 ? 0.42 : 0.3;
+  flyTo(c, c.clone().addScaledVector(fwd, d).add(new THREE.Vector3(0, 0.03, 0)));
+  const cover = ['skin', 'fat', 'fascia', 'muscles'].filter((k) => layerByKey[k]?.visible);
+  if (cover.length) toast(`Turn off ${cover.join(', ')} in Body systems to see the teeth.`);
+}
+$('#teethView').addEventListener('click', teethView);
+
 // ---------- pose ----------
 const LIMITS = {
   lumbar: [[-30, 60], [-20, 20], [-25, 25]], thorax: [[-25, 45], [-35, 35], [-25, 25]],
@@ -1258,6 +1297,7 @@ const LIMITS = {
   shoulder: [[-20, 20], [-25, 25], [-10, 40]], upperarm: [[-180, 60], [-90, 90], [-30, 180]],
   forearm: [[-150, 5], [-80, 80], [-5, 5]], hand: [[-80, 70], [-20, 20], [-20, 35]],
   thigh: [[-130, 30], [-45, 45], [-30, 50]], shank: [[-5, 150], [-10, 10], [-5, 5]], foot: [[-30, 50], [-20, 20], [-25, 25]],
+  jaw: [[0, 35], [-4, 4], [-4, 4]],  // temporomandibular hinge: +x opens the mouth (the glide forward is not modelled)
 };
 function limitsFor(name) {
   const L = LIMITS[name.replace(/_[lr]$/, '')];
@@ -1288,7 +1328,7 @@ const POSES = {
 };
 let poseTween = null;
 const quatsOf = (name) => bones.map((b, i) => {
-  const a = (POSES[name] || {})[rig.segments[i].name] || [0, 0, 0];
+  const a = (POSES[name] || {})[rig.segments[i].name] || (i === segIndex.jaw ? [state.mouth, 0, 0] : [0, 0, 0]);  // poses keep the mouth as set
   return new THREE.Quaternion().setFromEuler(new THREE.Euler(a[0] * DEG, a[1] * DEG, a[2] * DEG));
 });
 function setPose(name) {
@@ -1405,7 +1445,7 @@ $('#rep').addEventListener('click', () => toggleRep());
 let myPoses = [];
 function loadMyPoses() {
   const saved = store.get('poses', []);
-  myPoses = Array.isArray(saved) ? saved.filter((m) => m && typeof m.name === 'string' && Array.isArray(m.q) && m.q.length === bones.length) : [];
+  myPoses = Array.isArray(saved) ? saved.filter((m) => m && typeof m.name === 'string' && Array.isArray(m.q) && m.q.length >= 19 && m.q.length <= bones.length) : [];  // poses saved before the jaw have 19
   renderMyPoses();
 }
 function renderMyPoses() {
@@ -1429,7 +1469,7 @@ function renderMyPoses() {
 function applyMyPose(m) {
   if (state.mode !== 'pose') setMode('pose');
   if (rep) toggleRep(false);
-  poseTween = { from: bones.map((b) => b.quaternion.clone()), to: m.q.map((q) => new THREE.Quaternion(...q)), t: 0, dur: reduceMotion ? 0 : 0.7 };
+  poseTween = { from: bones.map((b) => b.quaternion.clone()), to: bones.map((b, i) => (m.q[i] ? new THREE.Quaternion(...m.q[i]) : b.quaternion.clone())), t: 0, dur: reduceMotion ? 0 : 0.7 };
   lastPreset = 'mine:' + m.id; poseEdited = false;
   $$('[data-pose]').forEach((b) => b.setAttribute('aria-pressed', 'false'));
   renderMyPoses();
@@ -1523,6 +1563,97 @@ $('#jointMirror').addEventListener('click', () => {
   poseChanged(); toast('Mirrored the whole limb to the other side.');
 });
 $('#limits').addEventListener('change', syncJointPanel);
+
+// limb drag (pose mode): grab a hand, forearm, foot or shin and pull the wrist or ankle across a camera-facing plane.
+// Two-bone IK bends the elbow or knee, then joint limits clamp it and the shoulder or hip re-aims at what is left.
+const DRAG_END = { hand_l: 'hand_l', forearm_l: 'hand_l', hand_r: 'hand_r', forearm_r: 'hand_r', foot_l: 'foot_l', shank_l: 'foot_l', foot_r: 'foot_r', shank_r: 'foot_r' };
+let limbDrag = null;
+const dragPlane = new THREE.Plane(), dragHit = new THREE.Vector3();
+function rayAt(x, y) {
+  const rect = canvas.getBoundingClientRect();
+  raycaster.setFromCamera(new THREE.Vector2(((x - rect.left) / rect.width) * 2 - 1, -((y - rect.top) / rect.height) * 2 + 1), camera);
+  return raycaster.ray;
+}
+function clampLimbBone(i) {  // clampBone, but first try the other Euler solution when it sits closer to the limits
+  if (!$('#limits').checked) return;
+  const lim = limitsFor(rig.segments[i].name);
+  if (!lim) return;
+  const r = bones[i].rotation, wrap = (a) => Math.atan2(Math.sin(a), Math.cos(a));
+  const miss = (v) => v.reduce((s, a, k) => s + Math.max(0, lim[k][0] * DEG - a, a - lim[k][1] * DEG), 0);
+  const A = [r.x, r.y, r.z], B = [wrap(r.x + Math.PI), wrap(Math.PI - r.y), wrap(r.z + Math.PI)];
+  const v = miss(B) < miss(A) - 1e-6 ? B : A;
+  r.set(clamp(v[0], lim[0][0] * DEG, lim[0][1] * DEG), clamp(v[1], lim[1][0] * DEG, lim[1][1] * DEG), clamp(v[2], lim[2][0] * DEG, lim[2][1] * DEG));
+  bones[i].updateMatrixWorld(true);
+}
+function dragLimb(end, target) {
+  const [un, ln] = LIMBS[end];
+  const U = bones[segIndex[un]], M = bones[segIndex[ln]], E = bones[segIndex[end]];
+  const handLocal = E.quaternion.clone();
+  solveLimb(end, target, end.startsWith('foot') ? limbDrag.footQ : null);
+  if (end.startsWith('hand')) { E.quaternion.copy(handLocal); E.updateMatrixWorld(true); }  // the hand follows the forearm
+  clampLimbBone(segIndex[un]); clampLimbBone(segIndex[ln]); clampLimbBone(segIndex[end]);
+  const e = new THREE.Vector3(), h = new THREE.Vector3();
+  for (let it = 0; it < 4; it++) {  // an elbow or knee at its limit: swing the whole limb from the shoulder or hip instead
+    E.getWorldPosition(e); U.getWorldPosition(h);
+    if (e.distanceToSquared(target) < 1e-6) break;
+    turnBoneWorld(U, e.sub(h).normalize(), target.clone().sub(h).normalize());
+    clampLimbBone(segIndex[un]);
+  }
+}
+addEventListener('pointerdown', (e) => {
+  if (e.target !== canvas || state.mode !== 'pose' || e.button !== 0 || limbDrag || !e.isPrimary) return;
+  if (tc.object) {  // the gizmo wins where its rings are (touch has no hover, so test it here)
+    const rect = canvas.getBoundingClientRect();
+    tc.pointerHover({ x: ((e.clientX - rect.left) / rect.width) * 2 - 1, y: -((e.clientY - rect.top) / rect.height) * 2 + 1, button: 0 });
+    if (tc.axis !== null) return;
+  }
+  // a phone shows a hand a few pixels wide, so a finger (or a narrow screen) searches rings around the press point
+  const reach = e.pointerType === 'touch' || isNarrow() ? [0, 8, 16, 24] : [0, 5];
+  let hit = null, end = null;
+  search: for (const r of reach) {
+    for (let k = 0; k < (r ? 8 : 1); k++) {
+      const p = pickAt(e.clientX + r * Math.cos(k * Math.PI / 4), e.clientY + r * Math.sin(k * Math.PI / 4));
+      const en = p && DRAG_END[rig.segments[segOfPart(p)]?.name];
+      if (!r) hit = p;
+      if (en) { hit = p; end = en; break search; }
+    }
+    if (!r && hit) break;  // pressed squarely on another part (the trunk, a thigh): that press orbits, as before
+  }
+  if (!end) return;
+  e.stopImmediatePropagation();  // OrbitControls and the gizmo never see this press
+  e.preventDefault();
+  try { canvas.setPointerCapture(e.pointerId); } catch {}  // keeps the drag when the finger leaves the canvas
+  updateSkinMatrices();
+  const E = bones[segIndex[end]], p = E.getWorldPosition(new THREE.Vector3());
+  dragPlane.setFromNormalAndCoplanarPoint(camera.getWorldDirection(new THREE.Vector3()).negate(), p);
+  const ray = rayAt(e.clientX, e.clientY);
+  const off = ray.intersectPlane(dragPlane, dragHit) ? p.clone().sub(dragHit) : new THREE.Vector3();
+  limbDrag = { id: e.pointerId, end, hit, off, x: e.clientX, y: e.clientY, t: performance.now(), moved: false, footQ: E.getWorldQuaternion(new THREE.Quaternion()) };
+  controls.enabled = false;
+}, true);
+addEventListener('pointermove', (e) => {
+  if (!limbDrag || e.pointerId !== limbDrag.id) return;
+  e.stopImmediatePropagation();
+  if (!limbDrag.moved && Math.hypot(e.clientX - limbDrag.x, e.clientY - limbDrag.y) < 5) return;
+  if (!limbDrag.moved) { limbDrag.moved = true; if (rep) toggleRep(false); poseTween = null; $('#tip').hidden = true; }
+  if (!rayAt(e.clientX, e.clientY).intersectPlane(dragPlane, dragHit)) return;
+  dragLimb(limbDrag.end, dragHit.add(limbDrag.off));
+  poseEdited = true;
+  if ($('#floorLock').checked) solveGround(false);
+  syncJointPanel(); poseChanged();
+}, true);
+function endLimbDrag(e) {
+  if (!limbDrag || e.pointerId !== limbDrag.id) return;
+  e.stopImmediatePropagation();
+  const d = limbDrag;
+  limbDrag = null;
+  controls.enabled = true;
+  try { canvas.releasePointerCapture(e.pointerId); } catch {}
+  if (e.type === 'pointerup' && !d.moved && performance.now() - d.t < 450) select(d.hit);  // a tap still names the part
+  else if (d.moved) { $$('[data-pose]').forEach((b) => b.setAttribute('aria-pressed', 'false')); renderMyPoses(); }
+}
+addEventListener('pointerup', endLimbDrag, true);
+addEventListener('pointercancel', endLimbDrag, true);
 
 // ---------- walk: gait cycle + stance-foot lock so the feet plant instead of skating ----------
 const gait = { phase: 0, amp: 0, yawTarget: 0, target: null, wander: false, keys: new Set(), last: null, speed: 1 };
@@ -1628,7 +1759,7 @@ function setMode(m) {
 // ---------- male / female ----------
 // One shared body: the switch swaps only the parts that differ (sx 'm' or 'f' in parts.json). It never turns a layer
 // on, so a visitor on the skeleton stays on the skeleton.
-const SEX_SUB = { m: 'Z-Anatomy male · 1.71 m · 19 joints', f: 'Female organs, estimated female skin · 19 joints' };
+const SEX_SUB = { m: 'Z-Anatomy male · 1.71 m · 20 joints', f: 'Female organs, estimated female skin · 20 joints' };
 let femTarget = 0;  // FEM_U eases toward this, so the skin reshapes instead of jumping
 function setSex(sx, opts = {}) {
   sx = sx === 'f' ? 'f' : 'm';
@@ -2240,6 +2371,7 @@ async function boot() {
   renderLayerList();
   state.fat = clamp(Number(store.get('fat', 0)) || 0, 0, 1);
   $('#fatAmt').value = String(state.fat);
+  $('#mouthRow').hidden = segIndex.jaw == null;
   applyFat(); updateFatRow();
   const color = store.get('color', 'natural');
   setColorMode(['natural', 'action', 'heat'].includes(color) ? color : 'natural');
