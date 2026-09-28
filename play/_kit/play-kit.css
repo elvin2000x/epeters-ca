@@ -1,0 +1,292 @@
+/* ============================================================================
+   play-kit.css — the Play Factory shared design system
+   Cozy-tactile: a calm, flat modern SHELL wrapping warm, physical hero OBJECTS.
+   Every app links this via ../_kit/play-kit.css and builds on the --pk-* tokens.
+   Zero-dependency. Light + dark. Reduced-motion + AA-contrast aware.
+   Tokens + rationale: ../../_research/05-design-motion.md
+   ========================================================================== */
+
+/* ---- Fonts (optional): drop Fraunces + Inter variable woff2 into _kit/fonts/
+   and uncomment. Until then the system fallback stack in the tokens renders,
+   so there are no 404s. font-display:swap keeps text instant either way. ----
+@font-face{font-family:"Inter";src:url("fonts/Inter.var.woff2") format("woff2");
+  font-weight:100 900;font-display:swap;}
+@font-face{font-family:"Fraunces";src:url("fonts/Fraunces.var.woff2") format("woff2");
+  font-weight:100 900;font-display:swap;}
+*/
+
+:root{
+  color-scheme: light dark;
+
+  /* Surfaces (warm neutrals — never pure white/black) */
+  --pk-bg:#F4F1EA; --pk-surface:#FBF9F4; --pk-surface-sunk:#ECE7DC; --pk-line:#DED8CB;
+  /* Text */
+  --pk-ink:#23201B; --pk-ink-soft:#5C574E; --pk-ink-faint:#8B857A;
+  /* Accent (interactive chrome) */
+  --pk-accent:#C8632B; --pk-accent-ink:#FFFFFF; --pk-accent-soft:#F6E3D6; --pk-accent-press:#A64E1F;
+  /* Feedback */
+  --pk-good:#3F8F5B; --pk-warn:#C9A227; --pk-bad:#C0392B; --pk-focus:#2C6FB5;
+  /* Object materials (toys draw from these) */
+  --pk-mat-gold:#D9A441; --pk-mat-gold-dk:#A9761F;
+  --pk-mat-silver:#C9CCD1; --pk-mat-silver-dk:#8A8F98;
+  --pk-mat-ivory:#F3EDDD; --pk-mat-ivory-dk:#CFC6AE;
+  --pk-mat-kraft:#C7A76B; --pk-mat-kraft-dk:#9A7C45;
+  --pk-mat-felt:#2E6B57; --pk-mat-felt-dk:#1F4A3C;
+  /* Elevation (warm-tinted) */
+  --pk-shadow-1:0 1px 2px rgba(60,45,25,.10),0 1px 1px rgba(60,45,25,.06);
+  --pk-shadow-2:0 4px 10px rgba(60,45,25,.12),0 2px 4px rgba(60,45,25,.08);
+  --pk-shadow-3:0 12px 28px rgba(60,45,25,.18),0 6px 10px rgba(60,45,25,.10);
+  --pk-shadow-obj:0 18px 40px rgba(40,30,15,.28);
+
+  /* Type */
+  --pk-font-display:"Fraunces",ui-serif,Georgia,"Times New Roman",serif;
+  --pk-font-ui:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --pk-font-num:"Inter",ui-monospace,"SF Mono","Segoe UI",monospace;
+  --pk-fs-hero:clamp(2.5rem,6vw + 1rem,4.5rem);
+  --pk-fs-title:clamp(1.25rem,2vw + .5rem,1.75rem);
+  --pk-fs-lg:1.25rem; --pk-fs-body:1rem; --pk-fs-sm:.875rem; --pk-fs-xs:.75rem;
+  --pk-lh-tight:1.1; --pk-lh-body:1.5; --pk-tracking-hero:-.02em;
+
+  /* Motion */
+  --pk-t-instant:90ms; --pk-t-quick:180ms; --pk-t-base:280ms; --pk-t-object:650ms; --pk-t-long:1100ms;
+  --pk-ease-standard:cubic-bezier(.2,0,0,1);
+  --pk-ease-accel:cubic-bezier(.3,0,1,1);
+  --pk-ease-spring:cubic-bezier(.34,1.56,.64,1);
+  --pk-ease-settle:cubic-bezier(.16,1,.3,1);
+  --pk-ease-anticip:cubic-bezier(.7,-0.4,.4,1);
+
+  /* Shell + layout */
+  --pk-header-h:56px; --pk-maxw:720px; --pk-maxw-board:960px;
+  --pk-gap:16px; --pk-gap-lg:24px; --pk-pad:clamp(16px,4vw,32px);
+  --pk-radius-sm:8px; --pk-radius:14px; --pk-radius-lg:24px; --pk-radius-pill:999px;
+  --pk-tap:44px; --pk-z-header:100; --pk-z-sheet:200; --pk-z-toast:300;
+}
+
+:root[data-theme="dark"]{
+  --pk-bg:#1A1815; --pk-surface:#23201C; --pk-surface-sunk:#141210; --pk-line:#35312B;
+  --pk-ink:#F1ECE1; --pk-ink-soft:#B8B1A3; --pk-ink-faint:#837C6E;
+  --pk-accent:#E0844B; --pk-accent-ink:#201007; --pk-accent-soft:#3A2A1E; --pk-accent-press:#F09960;
+  --pk-good:#5FB97E; --pk-warn:#E0BE4A; --pk-bad:#E0685A; --pk-focus:#6FA8DC;
+  --pk-shadow-1:0 1px 2px rgba(0,0,0,.40);
+  --pk-shadow-2:0 4px 10px rgba(0,0,0,.45);
+  --pk-shadow-3:0 12px 28px rgba(0,0,0,.55);
+  --pk-shadow-obj:0 20px 46px rgba(0,0,0,.60);
+}
+/* Auto-dark unless the user explicitly chose light */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --pk-bg:#1A1815; --pk-surface:#23201C; --pk-surface-sunk:#141210; --pk-line:#35312B;
+    --pk-ink:#F1ECE1; --pk-ink-soft:#B8B1A3; --pk-ink-faint:#837C6E;
+    --pk-accent:#E0844B; --pk-accent-ink:#201007; --pk-accent-soft:#3A2A1E; --pk-accent-press:#F09960;
+    --pk-good:#5FB97E; --pk-warn:#E0BE4A; --pk-bad:#E0685A; --pk-focus:#6FA8DC;
+    --pk-shadow-1:0 1px 2px rgba(0,0,0,.40);
+    --pk-shadow-2:0 4px 10px rgba(0,0,0,.45);
+    --pk-shadow-3:0 12px 28px rgba(0,0,0,.55);
+    --pk-shadow-obj:0 20px 46px rgba(0,0,0,.60);
+  }
+}
+
+/* Per-app accent ramp — apps set data-accent on <html> to reskin chrome from a
+   fixed, pre-approved set (never a one-off hex). Add pairs here as apps need them.
+   NOTE: these blocks sit AFTER the dark-mode blocks and tie on specificity, so they
+   win in both themes. That means --pk-accent-soft must NOT be a hard-coded light
+   tint (it would stay pale on a dark surface) — it is mixed against --pk-surface so
+   it adapts to whichever theme is active. --pk-accent-ink is white here because every
+   ramp hue is dark enough to carry white text in both themes. */
+:root[data-accent]{ --pk-accent-ink:#FFFFFF;
+  --pk-accent-soft:color-mix(in srgb, var(--pk-accent) 16%, var(--pk-surface)); }
+:root[data-accent="indigo"]{ --pk-accent:#4C5BD4; --pk-accent-press:#3A47AB; }
+:root[data-accent="rose"]  { --pk-accent:#C0497B; --pk-accent-press:#9C3A63; }
+:root[data-accent="amber"] { --pk-accent:#C98A1E; --pk-accent-press:#A06E14; }
+:root[data-accent="teal"]  { --pk-accent:#1F8A8A; --pk-accent-press:#166B6B; }
+:root[data-accent="plum"]  { --pk-accent:#7A4CB0; --pk-accent-press:#5F3A8B; }
+:root[data-accent="forest"]{ --pk-accent:#3F7A4B; --pk-accent-press:#2F5C39; }
+:root[data-accent="slate"] { --pk-accent:#4E6076; --pk-accent-press:#3B4A5C; }
+
+/* ---------------------------------------------------------------- reset/base */
+*,*::before,*::after{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; }
+body{
+  margin:0; min-height:100dvh; background:var(--pk-bg); color:var(--pk-ink);
+  font-family:var(--pk-font-ui); font-size:var(--pk-fs-body); line-height:var(--pk-lh-body);
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  display:flex; flex-direction:column;
+}
+h1,h2,h3,p{ margin:0; }
+button{ font:inherit; color:inherit; }
+:focus-visible{ outline:3px solid var(--pk-focus); outline-offset:2px; border-radius:4px; }
+:focus:not(:focus-visible){ outline:none; }
+::selection{ background:var(--pk-accent-soft); }
+
+/* ------------------------------------------------------------------- shell */
+.pk-app{ flex:1; width:100%; display:flex; flex-direction:column; }
+
+.pk-header{
+  position:sticky; top:0; z-index:var(--pk-z-header);
+  height:var(--pk-header-h); flex:0 0 auto;
+  display:grid; grid-template-columns:var(--pk-tap) 1fr var(--pk-tap) var(--pk-tap);
+  align-items:center; gap:4px; padding:0 max(8px,env(safe-area-inset-left)) 0 max(8px,env(safe-area-inset-right));
+  background:color-mix(in srgb, var(--pk-surface) 88%, transparent);
+  backdrop-filter:saturate(1.4) blur(8px); border-bottom:1px solid var(--pk-line);
+}
+.pk-title{
+  grid-column:2; text-align:center; font-family:var(--pk-font-display);
+  font-weight:600; font-size:var(--pk-fs-title); letter-spacing:.005em;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+
+.pk-icon-btn{
+  width:var(--pk-tap); height:var(--pk-tap); display:grid; place-items:center;
+  background:transparent; border:0; border-radius:var(--pk-radius-pill); cursor:pointer;
+  color:var(--pk-ink-soft); transition:background var(--pk-t-quick) var(--pk-ease-standard),
+    color var(--pk-t-quick) var(--pk-ease-standard), transform var(--pk-t-quick) var(--pk-ease-spring);
+}
+.pk-icon-btn:hover{ background:var(--pk-surface-sunk); color:var(--pk-ink); }
+.pk-icon-btn:active{ transform:scale(.9); }
+.pk-icon-btn svg{ width:22px; height:22px; }
+
+.pk-stage{
+  flex:1; width:100%; max-width:var(--pk-maxw); margin:0 auto;
+  padding:var(--pk-pad); padding-bottom:calc(var(--pk-pad) + 8px);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:var(--pk-gap-lg); text-align:center;
+}
+.pk-app[data-board] .pk-stage{ max-width:var(--pk-maxw-board); }
+
+.pk-result{
+  font-family:var(--pk-font-display); font-weight:700; font-size:var(--pk-fs-hero);
+  line-height:var(--pk-lh-tight); letter-spacing:var(--pk-tracking-hero);
+  min-height:1.1em; word-break:break-word;
+}
+.pk-result[data-tone="good"]{ color:var(--pk-good); }
+.pk-result[data-tone="bad"]{ color:var(--pk-bad); }
+.pk-subtle{ color:var(--pk-ink-soft); font-size:var(--pk-fs-sm); }
+
+/* action bar */
+.pk-actions{
+  position:sticky; bottom:0; z-index:10; flex:0 0 auto;
+  display:flex; gap:var(--pk-gap); justify-content:center; flex-wrap:wrap;
+  padding:var(--pk-gap) var(--pk-pad) max(var(--pk-gap),env(safe-area-inset-bottom));
+  background:linear-gradient(to top, var(--pk-bg) 60%, transparent);
+}
+
+/* ------------------------------------------------------------------ buttons */
+.pk-btn{
+  --_bg:var(--pk-accent); --_fg:var(--pk-accent-ink);
+  min-height:var(--pk-tap); min-width:132px; padding:0 24px;
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  background:var(--_bg); color:var(--_fg); border:0; border-radius:var(--pk-radius-pill);
+  font-weight:650; font-size:var(--pk-fs-lg); letter-spacing:.01em; cursor:pointer;
+  box-shadow:var(--pk-shadow-2);
+  transition:transform var(--pk-t-quick) var(--pk-ease-spring),
+    box-shadow var(--pk-t-quick) var(--pk-ease-standard),
+    background var(--pk-t-quick) var(--pk-ease-standard);
+}
+.pk-btn:hover{ box-shadow:var(--pk-shadow-3); transform:translateY(-1px); }
+.pk-btn:active{ transform:translateY(0) scale(.97); background:var(--pk-accent-press); }
+.pk-btn[disabled]{ opacity:.5; cursor:not-allowed; box-shadow:none; transform:none; }
+.pk-btn--ghost{ --_bg:transparent; --_fg:var(--pk-ink); box-shadow:none;
+  border:1.5px solid var(--pk-line); font-weight:600; }
+.pk-btn--ghost:hover{ background:var(--pk-surface-sunk); box-shadow:none; }
+.pk-btn--soft{ --_bg:var(--pk-accent-soft); --_fg:var(--pk-accent-press); box-shadow:none; }
+.pk-btn--sm{ min-width:0; min-height:36px; font-size:var(--pk-fs-sm); padding:0 16px; }
+
+/* ------------------------------------------------------- panels / controls */
+.pk-panel{ background:var(--pk-surface); border:1px solid var(--pk-line);
+  border-radius:var(--pk-radius); box-shadow:var(--pk-shadow-1); padding:var(--pk-gap); }
+.pk-well{ background:var(--pk-surface-sunk); border-radius:var(--pk-radius); padding:var(--pk-gap); }
+.pk-row{ display:flex; align-items:center; gap:var(--pk-gap); flex-wrap:wrap; justify-content:center; }
+.pk-num{ font-family:var(--pk-font-num); font-variant-numeric:tabular-nums; }
+
+.pk-input,.pk-select{
+  min-height:var(--pk-tap); padding:0 12px; background:var(--pk-surface);
+  color:var(--pk-ink); border:1.5px solid var(--pk-line); border-radius:var(--pk-radius-sm);
+  font:inherit;
+}
+.pk-input:focus-visible,.pk-select:focus-visible{ border-color:var(--pk-focus); }
+.pk-chip{
+  min-height:36px; padding:0 14px; display:inline-flex; align-items:center; gap:6px;
+  background:var(--pk-surface); border:1.5px solid var(--pk-line); border-radius:var(--pk-radius-pill);
+  cursor:pointer; font-size:var(--pk-fs-sm); font-weight:600; color:var(--pk-ink-soft);
+  transition:all var(--pk-t-quick) var(--pk-ease-standard);
+}
+.pk-chip[aria-pressed="true"],.pk-chip.is-on{
+  background:var(--pk-accent-soft); border-color:var(--pk-accent); color:var(--pk-accent-press); }
+
+/* toggle switch */
+.pk-switch{ position:relative; width:44px; height:26px; flex:0 0 auto; }
+.pk-switch input{ position:absolute; opacity:0; width:100%; height:100%; margin:0; cursor:pointer; }
+.pk-switch span{ position:absolute; inset:0; background:var(--pk-surface-sunk);
+  border:1px solid var(--pk-line); border-radius:999px; transition:background var(--pk-t-quick); }
+.pk-switch span::after{ content:""; position:absolute; top:2px; left:2px; width:20px; height:20px;
+  background:var(--pk-surface); border-radius:50%; box-shadow:var(--pk-shadow-1);
+  transition:transform var(--pk-t-base) var(--pk-ease-spring); }
+.pk-switch input:checked + span{ background:var(--pk-accent); }
+.pk-switch input:checked + span::after{ transform:translateX(18px); }
+
+/* --------------------------------------------------------- settings sheet */
+.pk-sheet-backdrop{
+  position:fixed; inset:0; z-index:var(--pk-z-sheet); background:rgba(20,15,8,.42);
+  opacity:0; pointer-events:none; transition:opacity var(--pk-t-base) var(--pk-ease-standard);
+  display:flex; align-items:flex-end; justify-content:center;
+}
+.pk-sheet-backdrop.is-open{ opacity:1; pointer-events:auto; }
+.pk-sheet{
+  width:100%; max-width:480px; background:var(--pk-surface);
+  border-radius:var(--pk-radius-lg) var(--pk-radius-lg) 0 0; box-shadow:var(--pk-shadow-3);
+  padding:var(--pk-gap-lg); padding-bottom:max(var(--pk-gap-lg),env(safe-area-inset-bottom));
+  transform:translateY(16px); transition:transform var(--pk-t-base) var(--pk-ease-settle);
+  max-height:86dvh; overflow:auto;
+}
+.pk-sheet-backdrop.is-open .pk-sheet{ transform:translateY(0); }
+@media (min-width:560px){
+  .pk-sheet-backdrop{ align-items:center; }
+  .pk-sheet{ border-radius:var(--pk-radius-lg); }
+}
+.pk-sheet h2{ font-family:var(--pk-font-display); font-size:var(--pk-fs-lg); margin-bottom:var(--pk-gap); }
+.pk-setting{ display:flex; align-items:center; justify-content:space-between; gap:var(--pk-gap);
+  padding:12px 0; border-bottom:1px solid var(--pk-line); }
+.pk-setting:last-child{ border-bottom:0; }
+.pk-setting label{ font-weight:600; }
+.pk-setting small{ display:block; color:var(--pk-ink-faint); font-weight:400; }
+.pk-seg{ display:inline-flex; background:var(--pk-surface-sunk); border-radius:var(--pk-radius-pill); padding:3px; }
+.pk-seg button{ border:0; background:transparent; padding:6px 14px; border-radius:var(--pk-radius-pill);
+  cursor:pointer; font-size:var(--pk-fs-sm); font-weight:600; color:var(--pk-ink-soft); }
+.pk-seg button[aria-pressed="true"]{ background:var(--pk-surface); color:var(--pk-ink); box-shadow:var(--pk-shadow-1); }
+
+/* --------------------------------------------------------------- toast */
+.pk-toast{
+  position:fixed; left:50%; bottom:calc(env(safe-area-inset-bottom) + 88px); transform:translateX(-50%) translateY(12px);
+  z-index:var(--pk-z-toast); background:var(--pk-ink); color:var(--pk-bg);
+  padding:10px 18px; border-radius:var(--pk-radius-pill); font-size:var(--pk-fs-sm); font-weight:600;
+  box-shadow:var(--pk-shadow-3); opacity:0; pointer-events:none;
+  transition:opacity var(--pk-t-base) var(--pk-ease-standard), transform var(--pk-t-base) var(--pk-ease-spring);
+}
+.pk-toast.is-on{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+/* --------------------------------------------------------- reusable flip card */
+.pk-flip{ perspective:1200px; }
+.pk-flip__inner{ position:relative; transform-style:preserve-3d;
+  transition:transform var(--pk-t-object) var(--pk-ease-settle); }
+.pk-flip.is-flipped .pk-flip__inner{ transform:rotateY(180deg); }
+.pk-flip__face{ position:absolute; inset:0; backface-visibility:hidden; }
+.pk-flip__face--back{ transform:rotateY(180deg); }
+
+/* a11y helper */
+.pk-sr{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden;
+  clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+
+/* the theatrical-animation guard: reduced motion cross-fades instead */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important; animation-iteration-count:1 !important;
+    transition-duration:.12s !important; scroll-behavior:auto !important;
+  }
+}
+/* manual override set by PK.motion (settings toggle), independent of the OS */
+:root[data-motion="reduce"] *,
+:root[data-motion="reduce"] *::before,
+:root[data-motion="reduce"] *::after{
+  animation-duration:.001ms !important; animation-iteration-count:1 !important;
+  transition-duration:.12s !important;
+}

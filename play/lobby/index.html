@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lobby</title>
+<link rel="stylesheet" href="../_kit/play-kit.css">
+<style>
+  .lb{ width:100%; display:flex; flex-direction:column; gap:var(--pk-gap-lg); }
+  .lb-bar{ display:flex; gap:var(--pk-gap); align-items:center; justify-content:space-between; flex-wrap:wrap; }
+  .lb-code{ font-family:var(--pk-font-num); font-weight:800; letter-spacing:.22em; font-size:1.35rem;
+    color:var(--pk-accent); background:var(--pk-surface-sunk); border-radius:var(--pk-radius); padding:6px 14px; }
+  .lb-sec h2{ font-family:var(--pk-font-display); font-size:var(--pk-fs-lg); margin-bottom:8px; }
+  .who{ display:flex; gap:8px; flex-wrap:wrap; }
+  .who .p{ display:flex; align-items:center; gap:7px; padding:6px 13px; border-radius:var(--pk-radius-pill);
+    background:var(--pk-surface); border:1.5px solid var(--pk-line); font-size:var(--pk-fs-sm); font-weight:600; }
+  .who .dot{ width:8px; height:8px; border-radius:50%; background:var(--pk-good); flex:0 0 auto; }
+  .tables{ display:flex; flex-direction:column; gap:10px; }
+  .tbl{ display:flex; align-items:center; gap:12px; padding:14px; }
+  .tbl .nm{ font-weight:700; }
+  .tbl .meta{ color:var(--pk-ink-soft); font-size:var(--pk-fs-sm); }
+  .tbl .grow{ flex:1; min-width:0; }
+  .seats{ font-family:var(--pk-font-num); font-weight:700; padding:3px 10px; border-radius:var(--pk-radius-pill);
+    background:var(--pk-surface-sunk); font-size:var(--pk-fs-sm); }
+  .seats.full{ background:var(--pk-accent-soft); color:var(--pk-accent-press); }
+  .empty{ color:var(--pk-ink-faint); text-align:center; padding:22px; }
+  .chat{ display:flex; flex-direction:column; gap:8px; }
+  .chat-log{ height:150px; overflow-y:auto; background:var(--pk-surface-sunk); border-radius:var(--pk-radius);
+    padding:10px 12px; font-size:var(--pk-fs-sm); display:flex; flex-direction:column; gap:5px; }
+  .chat-log b{ color:var(--pk-accent-press); }
+  .chat-row{ display:flex; gap:8px; }
+  .chat-row input{ flex:1; }
+  .picker{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; }
+  .picker button{ text-align:left; padding:13px; }
+  .picker .g{ font-weight:700; display:block; }
+  .picker .b{ color:var(--pk-ink-soft); font-size:var(--pk-fs-xs); }
+  .toys{ display:flex; gap:8px; flex-wrap:wrap; }
+  .toys a{ text-decoration:none; }
+  /* warm depth so the shell isn't a flat void */
+  body{ background:
+      radial-gradient(900px 520px at 50% -10%, color-mix(in srgb, var(--pk-accent) 15%, transparent), transparent 70%),
+      var(--pk-bg); background-attachment:fixed; }
+  /* name gate */
+  .gate{ width:100%; max-width:440px; margin:auto; text-align:center;
+    background:var(--pk-surface); border:1px solid var(--pk-line); border-radius:var(--pk-radius-lg);
+    padding:34px 28px; box-shadow:var(--pk-shadow-3); }
+  .gate .mark{ width:74px; height:74px; margin:0 auto 16px; border-radius:20px; display:grid; place-items:center;
+    color:var(--pk-accent); background:color-mix(in srgb, var(--pk-accent) 20%, var(--pk-surface-sunk));
+    border:1px solid color-mix(in srgb, var(--pk-accent) 45%, transparent); }
+  .gate .mark svg{ width:42px; height:42px; }
+  .gate h2{ font-family:var(--pk-font-display); font-size:1.7rem; letter-spacing:-.01em; margin-bottom:6px; }
+  .gate .sub{ color:var(--pk-ink-soft); font-size:var(--pk-fs-sm); margin-bottom:20px; }
+  .gate .pk-input{ width:100%; text-align:center; font-size:1.1rem; font-weight:600; }
+  .gate .hint{ color:var(--pk-ink-faint); font-size:var(--pk-fs-xs); margin-top:16px; line-height:1.6; }
+</style>
+<link rel="canonical" href="https://epeters.ca/play/lobby/">
+</head>
+<body>
+<script src="../_kit/play-kit.js"></script>
+<script src="../_kit/net-kit.js"></script>
+<script>
+var HEADLESS = (typeof document === "undefined");
+if (!HEADLESS) (function(){
+  // Friendly names for anything the server can host; server decides what's actually available.
+  var CATALOG = {
+    dominoes:{ n:"Dominoes",   b:"Draw or Block, 2-4" },
+    checkers:{ n:"Checkers",   b:"English draughts, 2" },
+    fourfall:{ n:"Fourfall",   b:"Four in a row, 2" },
+    gridfleet:{n:"Gridfleet",  b:"Hidden fleets, salvo guessing, 2" },
+    boxcatch:{ n:"Boxcatch",   b:"Claim the boxes, 2-6" },
+    fivestar:{ n:"FiveStar",   b:"Roll for the scorecard, 2-6" },
+    "liars-cup":{ n:"Liar's Cup", b:"Bluff the dice, 2-6" },
+    wildeight:{n:"WildEight",  b:"Shed your hand, 2-6" },
+    moonshot:{ n:"Moonshot",   b:"Trick-taking, dodge the hearts, 3-6" },
+    meld:{     n:"Meld",       b:"Sets and runs, 2-6" },
+    homestretch:{n:"Homestretch", b:"Race your pieces home, 2-6" },
+    letterrush:{n:"LetterRush", b:"Categories against the clock, 2-6" },
+    "neon-walls":{ n:"Neon Walls", b:"Light-cycle duel, 2-6" },
+    fusegrid:{ n:"Fusegrid",   b:"Bomb the maze, 2-6" },
+    chess:{    n:"Chess",      b:"Full rules, 2" },
+    backgammon:{n:"Backgammon",b:"Bar, bear-off, cube" },
+    wordstar:{ n:"WordStar",   b:"Board word game" },
+    spellstar:{n:"SpellStar",  b:"Real-time word race" },
+    mahjong:{  n:"Mahjong",    b:"4-player Chinese" }
+  };
+  var TOYS = [["coin-flip","Coin Flip"],["dice-roller","Dice Roller"],["draw-straws","Draw Straws"],
+              ["fortune-teller","Fortune Teller"],["movie-picker","Movie Picker"],["baby-names","Baby Names"]];
+
+  var ui = PK.app({ title:"Lobby", slug:"lobby", accent:"forest", board:true, hubHref:".." });
+  var stage = ui.stage;
+  var net = null, lobbyId = (new URL(location.href).searchParams.get("l") || "MAIN").toUpperCase();
+  var myName = PK.store.get("play.name", "");
+  var state = null, chatLog = [];
+
+  function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  function btn(label, cls, on){ var b=document.createElement("button"); b.className="pk-btn "+(cls||""); b.textContent=label; b.onclick=on; return b; }
+
+  /* ---------- name gate ---------- */
+  function askName(){
+    stage.innerHTML =
+      '<div class="gate">'+
+        '<div class="mark"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" '+
+          'stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="15" r="6"/><circle cx="33" cy="18" r="5"/>'+
+          '<path d="M6 39c0-6.1 4.9-11 11-11s11 4.9 11 11"/><path d="M28 33c1.2-3.4 4.4-5.6 8-5.6 4.4 0 8 3.6 8 8"/></svg></div>'+
+        '<h2>Join the lobby</h2>'+
+        '<p class="sub">Pick a name your friends will recognise.</p>'+
+        '<input class="pk-input" id="nm" maxlength="24" placeholder="Your name" autocomplete="nickname">'+
+        '<div class="pk-row" style="margin-top:16px"></div>'+
+        '<p class="hint">Next: share the lobby link, open a table,<br>and everyone sits down to play.</p>'+
+      '</div>';
+    var inp = stage.querySelector("#nm"); inp.value = myName || "";
+    var go = function(){ var v=(inp.value||"").trim(); if(!v){ inp.focus(); return; }
+      myName=v; PK.store.set("play.name", v); start(); };
+    stage.querySelector(".pk-row").appendChild(btn("Enter lobby","pk-btn",go));
+    inp.onkeydown = function(e){ if(e.key==="Enter") go(); };
+    setTimeout(function(){ inp.focus(); }, 60);
+  }
+
+  /* ---------- connect ---------- */
+  function start(){
+    stage.innerHTML = '<p class="pk-subtle" style="text-align:center">Connecting…</p>';
+    net = new Net({ gameId:"lobby", name:myName });
+    net.on("lobby", function(d){ state=d; render(); });
+    net.on("lobbyChat", function(m){ chatLog.push(m); if(chatLog.length>60) chatLog.shift(); paintChat(); });
+    net.on("reconnecting", function(){ PK.toast("Reconnecting…"); });
+    net.on("reconnected", function(){ net.joinLobby(lobbyId, myName); });
+    net.on("error", function(e){ PK.toast(e.message||"Error"); });
+    net.connect().then(function(){ net.joinLobby(lobbyId, myName); });
+  }
+
+  /* ---------- render ---------- */
+  function render(){
+    if (!state) return;
+    var wrap = document.createElement("div"); wrap.className="lb";
+
+    // header bar: lobby code + invite
+    var bar = document.createElement("div"); bar.className="lb-bar";
+    bar.innerHTML = '<div><div class="pk-subtle">Lobby</div><div class="lb-code">'+esc(state.lobbyId)+'</div></div>';
+    var barBtns = document.createElement("div"); barBtns.className="pk-row";
+    barBtns.appendChild(btn("Copy invite","pk-btn--soft pk-btn--sm", function(){
+      var url = location.origin + location.pathname + "?l=" + state.lobbyId;
+      navigator.clipboard.writeText(url).then(function(){ PK.toast("Invite link copied"); },
+        function(){ PK.toast(url); });
+    }));
+    barBtns.appendChild(btn("New lobby","pk-btn--ghost pk-btn--sm", function(){
+      var code = ""; var A="ABCDEFGHJKMNPQRSTUVWXYZ23456789";
+      for (var i=0;i<4;i++) code += A[PK.rand.int(A.length)];
+      location.href = location.pathname + "?l=" + code;
+    }));
+    bar.appendChild(barBtns); wrap.appendChild(bar);
+
+    // who's here
+    var who = document.createElement("div"); who.className="lb-sec";
+    who.innerHTML = '<h2>Who\'s here <span class="pk-subtle">('+state.members.length+')</span></h2>';
+    var list = document.createElement("div"); list.className="who";
+    state.members.forEach(function(m){ var p=document.createElement("span"); p.className="p";
+      p.innerHTML = '<span class="dot"></span>'+esc(m.name)+(m.name===myName?' <span class="pk-subtle">(you)</span>':''); list.appendChild(p); });
+    who.appendChild(list); wrap.appendChild(who);
+
+    // tables
+    var ts = document.createElement("div"); ts.className="lb-sec";
+    ts.innerHTML = '<h2>Tables</h2>';
+    var tl = document.createElement("div"); tl.className="tables";
+    var live = (state.tables||[]).filter(function(t){ return !t.over; });
+    if (!live.length){ var e=document.createElement("div"); e.className="empty pk-panel";
+      e.textContent="No tables yet — open one and your friends can sit down."; tl.appendChild(e); }
+    live.forEach(function(t){
+      var c = CATALOG[t.gameId] || { n:t.gameId, b:"" };
+      var row = document.createElement("div"); row.className="pk-panel tbl";
+      row.innerHTML = '<div class="grow"><span class="nm">'+esc(c.n)+'</span>'+
+        '<div class="meta">opened by '+esc(t.createdBy||"someone")+'</div></div>'+
+        '<span class="seats'+(t.full?" full":"")+'">'+t.seated+'/'+t.capacity+'</span>';
+      row.appendChild(btn(t.full?"Watch":"Sit down","pk-btn pk-btn--sm", function(){ location.href = ".." + t.url; }));
+      tl.appendChild(row);
+    });
+    ts.appendChild(tl);
+    var nt = document.createElement("div"); nt.className="pk-row"; nt.style.marginTop="12px";
+    nt.appendChild(btn("＋ Open a table","pk-btn", openPicker));
+    ts.appendChild(nt); wrap.appendChild(ts);
+
+    // chat
+    var ch = document.createElement("div"); ch.className="lb-sec chat";
+    ch.innerHTML = '<h2>Chat</h2><div class="chat-log" id="clog"></div>'+
+      '<div class="chat-row"><input class="pk-input" id="cin" maxlength="200" placeholder="Say something…"></div>';
+    wrap.appendChild(ch);
+
+    // solo toys
+    var ty = document.createElement("div"); ty.className="lb-sec";
+    ty.innerHTML = '<h2>Solo toys</h2>';
+    var tw = document.createElement("div"); tw.className="toys";
+    TOYS.forEach(function(t){ var a=document.createElement("a"); a.className="pk-chip"; a.href="../"+t[0]+"/"; a.textContent=t[1]; tw.appendChild(a); });
+    ty.appendChild(tw); wrap.appendChild(ty);
+
+    stage.innerHTML=""; stage.appendChild(wrap);
+    paintChat();
+    var cin = document.getElementById("cin");
+    cin.onkeydown = function(e){ if(e.key==="Enter" && cin.value.trim()){ net.lobbySay(cin.value.trim()); cin.value=""; } };
+  }
+
+  function paintChat(){
+    var el = document.getElementById("clog"); if(!el) return;
+    el.innerHTML = chatLog.map(function(m){ return '<div><b>'+esc(m.name)+':</b> '+esc(m.text)+'</div>'; }).join("");
+    el.scrollTop = el.scrollHeight;
+  }
+
+  function openPicker(){
+    var avail = (state.games||[]).filter(function(g){ return g !== "lobby"; });
+    var back = document.createElement("div"); back.className="pk-sheet-backdrop is-open";
+    var inner = '<div class="pk-sheet"><h2>Open a table</h2>';
+    if (!avail.length) inner += '<p class="pk-subtle">No multiplayer games are on the server yet.</p>';
+    inner += '<div class="picker">'+ avail.map(function(g){ var c=CATALOG[g]||{n:g,b:""};
+      return '<button class="pk-btn--ghost pk-btn" data-g="'+g+'"><span class="g">'+esc(c.n)+'</span><span class="b">'+esc(c.b)+'</span></button>'; }).join("") +'</div>'+
+      '<button class="pk-btn pk-btn--ghost" id="cancel" style="width:100%;margin-top:16px">Cancel</button></div>';
+    back.innerHTML = inner;
+    document.body.appendChild(back);
+    back.querySelector("#cancel").onclick = function(){ back.remove(); };
+    back.onclick = function(e){ if(e.target===back) back.remove(); };
+    back.querySelectorAll("[data-g]").forEach(function(b){
+      b.onclick = function(){
+        var g = b.dataset.g; back.remove(); PK.toast("Opening a table…");
+        net.createTable(g, {}).then(function(t){ location.href = ".." + t.url; }); // creator sits down first
+      };
+    });
+  }
+
+  if (myName) start(); else askName();
+})();
+</script>
+<!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:10px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Get the monthly letter</a></footer><!-- /ep:ca-foot -->
+</body>
+</html>

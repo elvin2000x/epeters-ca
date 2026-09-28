@@ -1,0 +1,534 @@
+/* ===================================================================
+   site.css — the design system for elvinpeters.com.
+   Three layers:
+     L1 STRUCTURE — type scale, space, radius, measure. Context-free.
+     L2 PALETTES  — raw hex. THE ONLY PLACE A HEX LITERAL MAY LIVE.
+     L3 ROLES     — 15 color names, reassigned per context.
+   Contexts: site-light (default) · site-dark (OS or pinned) ·
+   book-light ([data-theme="book"], never flips).
+   Rules of the house: gold is a FILL, --accent-ink is the only gold
+   text; every button is a pill; breakpoints are 640 and 920 only
+   (deliberate exceptions carry a bp-exempt comment).
+   =================================================================== */
+
+:root{
+  /* ---------- L1: TYPE — 3 fixed + 6 fluid steps. 12px floor. ----------
+     The leads were fixed, which is what broke the phone: at 375px the homepage
+     ran headline 34 / lede 22 / body 16, three sizes inside one octave, so
+     nothing shouted and nothing whispered and a 53-word lede pushed the buttons
+     off screen. Both leads are fluid now and the top of the range is wider, so
+     the ratio holds at 2.1x on a phone and 2.8x on a desktop. */
+  --fs-label: 12px;                        /* FLOOR — verify.js enforces this */
+  --fs-sm: 14px;
+  --fs-body: 16px;
+  --fs-lead: clamp(17px, 1.25vw, 19px);
+  --fs-lead-lg: clamp(18px, 1.9vw, 24px);
+  --fs-h3: clamp(19px, 1.9vw, 23px);
+  --fs-h2: clamp(30px, 4.2vw, 48px);
+  --fs-h1: clamp(38px, 6.0vw, 68px);
+  --fs-display: clamp(44px, 8.2vw, 84px);
+  /* One size for every big number on the site: prices, counters, figures.
+     They were 30, 44, 52, 56 and 3.1rem in five different page style blocks. */
+  --fs-num: clamp(40px, 6vw, 76px);
+
+  --lh-tight: 1.06;                        /* 68px needs tighter than 1.12 */
+  --lh-snug: 1.2;
+  --lh-body: 1.6;
+  --lh-prose: 1.75;
+  --track-label: .16em;
+  --track-display: -.022em;
+
+  /* ---------- L1: SPACE — 4px base ---------- */
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px;
+  --sp-6:24px; --sp-7:32px; --sp-8:40px; --sp-9:56px; --sp-10:72px;
+  --sp-section: clamp(56px, 7vw, 88px);
+  --sp-section-tight: clamp(32px, 4vw, 48px);
+
+  /* ---------- L1: RADIUS ---------- */
+  --r-pill: 999px;   /* every button, chip, pill */
+  --r-sm: 10px;      /* inputs, thumbnails, sigil */
+  --r-card: 16px;    /* cards, panels */
+  --r-lg: 20px;      /* full-width bands */
+
+  /* ---------- L1: MEASURE / CHROME / MOTION ---------- */
+  --w-wide: 1080px;
+  --w-text: 720px;
+  --measure: 62ch;
+  --measure-tight: 46ch;
+  --nav-h: 64px;
+  --tap: 44px;
+  --scroll-offset: calc(var(--nav-h) + 12px);
+  --fast: .18s;
+  --slow: .35s;
+  --serif: 'EB Garamond', Georgia, 'Times New Roman', serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  /* ---------- L2: PALETTES ---------- */
+  /* site light */
+  --l-bg:#e6ebf1;      --l-bg2:#dde4ec;
+  --l-panel:#ffffff;   --l-panel2:#f3f6fa;
+  --l-line:#c3cedd;    --l-linesoft:#d3dce8;  --l-linestrong:#64778f;
+  --l-ink:#0e1a2b;     --l-ink2:#3d4d63;      --l-muted:#4f6076;
+  --l-accent:#9c761f;  --l-accenthi:#b3892f;  --l-accentink:#7a5a12; --l-accenton:#1b1304;
+  --l-info:#1c6ea8;    --l-ok:#1e7a4d;        --l-warn:#a33a3a;
+
+  /* site dark */
+  --d-bg:#0a1524;      --d-bg2:#060d18;
+  --d-panel:#1b2c45;   --d-panel2:#131f33;
+  --d-line:#2b405c;    --d-linesoft:#223351;  --d-linestrong:#64809f;
+  --d-ink:#e9eff7;     --d-ink2:#b7c6d9;      --d-muted:#8ba2bd;
+  --d-accent:#c9a250;  --d-accenthi:#e0bd6b;  --d-accentink:#e0bd6b; --d-accenton:#0b1220;
+  --d-info:#4fb3f0;    --d-ok:#5fd39b;        --d-warn:#ff8f8f;
+
+  /* book, fixed light */
+  --b-bg:#ffffff;      --b-bg2:#eef2f8;
+  --b-panel:#ffffff;   --b-panel2:#f5f8fc;
+  --b-line:#d6dfea;    --b-linesoft:#e6ecf4;  --b-linestrong:#64778f;
+  --b-ink:#0a1828;     --b-ink2:#3c4a5c;      --b-muted:#5c6b7f;
+  --b-accent:#9c761f;  --b-accenthi:#b3892f;  --b-accentink:#7a5a12; --b-accenton:#1b1304;
+  --b-info:#1f6096;    --b-ok:#1e7a4d;        --b-warn:#a33a3a;
+
+  /* ---------- L3: ROLES — default = site light ---------- */
+  --bg:var(--l-bg);              --bg-2:var(--l-bg2);
+  --panel:var(--l-panel);        --panel-2:var(--l-panel2);
+  --line:var(--l-line);          --line-soft:var(--l-linesoft);
+  --line-strong:var(--l-linestrong);
+  --ink:var(--l-ink);            --ink-2:var(--l-ink2);   --muted:var(--l-muted);
+  --accent:var(--l-accent);      --accent-hi:var(--l-accenthi);
+  --accent-ink:var(--l-accentink); --accent-on:var(--l-accenton);
+  --info:var(--l-info);          --ok:var(--l-ok);        --warn:var(--l-warn);
+  --glow: rgba(156,118,31,.14);
+  --shadow: 0 18px 40px -24px rgba(14,26,43,.45);
+  --card-lift: 0 26px 50px -28px rgba(14,26,43,.55);
+  /* legacy aliases consumed by pre-system page CSS; retire as pages migrate.
+     Every name a legacy page still references has to resolve to something. An
+     unmapped one is not a fallback, it is a dead declaration the browser drops:
+     book.html asked for --gold2 and --green and silently lost its opt-in accent
+     bar, its email focus ring, its success colour and a path-card highlight. */
+  /* --gold-2 is read as a TEXT colour on ~100 declarations across the site, so
+     it points at --accent-ink, the only gold that passes contrast on a light
+     background (5.31:1 vs 2.68:1). In dark both resolve to #e0bd6b, so this
+     changes nothing there. Use --accent-hi directly for a gold FILL. */
+  --gold:var(--accent); --gold-2:var(--accent-ink); --cyan:var(--info);
+  --gold2:var(--accent);   /* fill and border gold, not the text gold */
+  --green:var(--ok);
+}
+
+/* ---------- L3: site dark via OS, unless a theme is pinned ---------- */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme]){
+    --bg:var(--d-bg); --bg-2:var(--d-bg2);
+    --panel:var(--d-panel); --panel-2:var(--d-panel2);
+    --line:var(--d-line); --line-soft:var(--d-linesoft); --line-strong:var(--d-linestrong);
+    --ink:var(--d-ink); --ink-2:var(--d-ink2); --muted:var(--d-muted);
+    --accent:var(--d-accent); --accent-hi:var(--d-accenthi);
+    --accent-ink:var(--d-accentink); --accent-on:var(--d-accenton);
+    --info:var(--d-info); --ok:var(--d-ok); --warn:var(--d-warn);
+    --glow: rgba(201,162,80,.16);
+    --shadow: 0 24px 50px -28px rgba(0,0,0,.7);
+    --card-lift: 0 34px 60px -30px rgba(0,0,0,.8);
+  }
+}
+
+/* ---------- L3: site dark, pinned by the toggle ---------- */
+:root[data-theme="dark"]{
+  --bg:var(--d-bg); --bg-2:var(--d-bg2);
+  --panel:var(--d-panel); --panel-2:var(--d-panel2);
+  --line:var(--d-line); --line-soft:var(--d-linesoft); --line-strong:var(--d-linestrong);
+  --ink:var(--d-ink); --ink-2:var(--d-ink2); --muted:var(--d-muted);
+  --accent:var(--d-accent); --accent-hi:var(--d-accenthi);
+  --accent-ink:var(--d-accentink); --accent-on:var(--d-accenton);
+  --info:var(--d-info); --ok:var(--d-ok); --warn:var(--d-warn);
+  --glow: rgba(201,162,80,.16);
+  --shadow: 0 24px 50px -28px rgba(0,0,0,.7);
+  --card-lift: 0 34px 60px -30px rgba(0,0,0,.8);
+}
+
+/* ---------- L3: site light, pinned (explicit so the toggle beats the OS query) ---------- */
+:root[data-theme="light"]{
+  --bg:var(--l-bg); --bg-2:var(--l-bg2);
+  --panel:var(--l-panel); --panel-2:var(--l-panel2);
+  --line:var(--l-line); --line-soft:var(--l-linesoft); --line-strong:var(--l-linestrong);
+  --ink:var(--l-ink); --ink-2:var(--l-ink2); --muted:var(--l-muted);
+  --accent:var(--l-accent); --accent-hi:var(--l-accenthi);
+  --accent-ink:var(--l-accentink); --accent-on:var(--l-accenton);
+  --info:var(--l-info); --ok:var(--l-ok); --warn:var(--l-warn);
+  --glow: rgba(156,118,31,.14);
+  --shadow: 0 18px 40px -24px rgba(14,26,43,.45);
+  --card-lift: 0 26px 50px -28px rgba(14,26,43,.55);
+}
+
+/* ---------- L3: BOOK — fixed light, never flips, no toggle rendered ---------- */
+:root[data-theme="book"]{
+  color-scheme: light;
+  --bg:var(--b-bg); --bg-2:var(--b-bg2);
+  --panel:var(--b-panel); --panel-2:var(--b-panel2);
+  --line:var(--b-line); --line-soft:var(--b-linesoft); --line-strong:var(--b-linestrong);
+  --ink:var(--b-ink); --ink-2:var(--b-ink2); --muted:var(--b-muted);
+  --accent:var(--b-accent); --accent-hi:var(--b-accenthi);
+  --accent-ink:var(--b-accentink); --accent-on:var(--b-accenton);
+  --info:var(--b-info); --ok:var(--b-ok); --warn:var(--b-warn);
+  --glow: rgba(156,118,31,.10);
+  --shadow: 0 14px 34px -22px rgba(10,24,40,.38);
+  --card-lift: 0 22px 44px -26px rgba(10,24,40,.45);
+}
+
+/* ===================================================================
+   PRIMITIVES — new class names; pages adopt them wave by wave.
+   =================================================================== */
+
+html{ -webkit-text-size-adjust:100% }
+
+h1,h2,h3,h4{ font-family:var(--serif); font-weight:400; margin:0; text-wrap:balance }
+h1{ font-size:var(--fs-h1); line-height:var(--lh-tight); letter-spacing:-.015em }
+h2{ font-size:var(--fs-h2); line-height:var(--lh-tight); letter-spacing:-.01em }
+h3{ font-size:var(--fs-h3); line-height:var(--lh-snug) }
+
+[id]{ scroll-margin-top: var(--scroll-offset) }
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  min-height:var(--tap); padding:0 22px; border-radius:var(--r-pill);
+  font:600 var(--fs-body)/1 var(--sans);
+  border:1px solid transparent; cursor:pointer; white-space:nowrap;
+  color:var(--ink); text-decoration:none;
+}
+.btn--lg{ min-height:56px; padding:0 30px; font-size:var(--fs-lead) }
+.btn--primary{ background:linear-gradient(135deg,var(--accent),var(--accent-hi)); color:var(--accent-on); box-shadow:var(--shadow) }
+.btn--primary:hover{ filter:brightness(1.06) }
+.btn--ghost{ border-color:var(--line-strong); color:var(--ink) }
+.btn--ghost:hover{ border-color:var(--accent) }
+
+.label{
+  font-size:var(--fs-label); font-weight:700; letter-spacing:var(--track-label);
+  text-transform:uppercase; color:var(--accent-ink);
+}
+
+.field{
+  width:100%; min-height:var(--tap); padding:12px 14px; border-radius:var(--r-sm);
+  border:1px solid var(--line-strong); background:var(--panel); color:var(--ink);
+  font-family:var(--sans); font-size:var(--fs-body);
+}
+.field::placeholder{ color:var(--muted) }
+.field:focus{ outline:2px solid var(--accent-hi); outline-offset:1px; border-color:var(--accent) }
+
+.section{ padding:var(--sp-section) 0 }
+.section--cont{ padding-top:var(--sp-section-tight) }
+
+:focus-visible{ outline:2px solid var(--accent-hi); outline-offset:3px; border-radius:4px }
+
+/* ===================================================================
+   NAV CHROME — mobile menu (site.js drives state).
+   ≤920px: page-local link-hiding rules are superseded here; the burger
+   appears and every destination stays reachable.
+   =================================================================== */
+
+.navburger{
+  display:none; align-items:center; justify-content:center;
+  width:var(--tap); height:var(--tap); margin-left:auto;
+  background:none; border:1px solid var(--line); border-radius:var(--r-sm);
+  color:var(--ink); cursor:pointer; font-size:18px; line-height:1;
+}
+.navburger[aria-expanded="true"]{ border-color:var(--accent); color:var(--accent-ink) }
+
+.navdrawer{
+  display:none; position:fixed; top:var(--nav-h); left:0; right:0; z-index:60;
+  background:var(--panel); border-bottom:1px solid var(--line);
+  box-shadow:var(--card-lift); padding:var(--sp-4) var(--sp-6) var(--sp-6);
+  max-height:calc(100vh - var(--nav-h)); overflow:auto;
+}
+.navdrawer.open{ display:block }
+.navdrawer a{
+  display:flex; align-items:center; min-height:var(--tap);
+  padding:0 var(--sp-2); font-size:var(--fs-lead); color:var(--ink);
+  border-bottom:1px solid var(--line-soft); text-decoration:none;
+}
+.navdrawer a:last-child{ border-bottom:none }
+.navdrawer a.cta{
+  justify-content:center; margin:0 0 var(--sp-3); border:1px solid var(--accent);
+  border-radius:var(--r-pill); color:var(--accent-ink); font-weight:600;
+  border-bottom:1px solid var(--accent);
+}
+.navoverlay{
+  display:none; position:fixed; inset:var(--nav-h) 0 0 0; z-index:50;
+  background:rgba(4,10,20,.45);
+}
+.navoverlay.open{ display:block }
+
+html .nav .links a.cta, html .nav .lk a.cta{ white-space:nowrap }
+@media(max-width:920px){
+  .navburger{ display:inline-flex }
+  html .nav .links a:not(.cta), html .nav .lk a:not(.cta){ display:none }
+}
+@media(max-width:640px){
+  /* CTA moves into the drawer; html prefix outranks page-local display rules */
+  html .nav .links a.cta, html .nav .lk a.cta{ display:none }
+}
+
+
+/* ---------- BEFORE / AFTER ("the gap") ----------------------------------
+   One component for every page that shows the same task done two ways.
+   Rows (label / prompt / outcome) are locked across columns with subgrid so
+   the two cards always line up no matter how the copy wraps. Without subgrid
+   support the cards still stack cleanly, just self-sized. */
+.ba-set{
+  display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-4);
+  grid-template-rows:auto auto auto; margin:var(--sp-7) 0;
+}
+.ba-item{
+  display:grid; grid-template-rows:auto auto auto;
+  background:var(--panel); border:1px solid var(--line);
+  border-radius:var(--r-card); overflow:hidden;
+}
+@supports (grid-template-rows: subgrid){
+  .ba-item{ grid-row:span 3; grid-template-rows:subgrid }
+}
+.ba-item > *{ padding-left:var(--sp-6); padding-right:var(--sp-6) }
+.ba-item--before{ border-top:3px solid var(--warn) }
+.ba-item--after{ border-top:3px solid var(--ok) }
+
+.ba-label{
+  font-size:var(--fs-label); font-weight:700; letter-spacing:var(--track-label);
+  text-transform:uppercase; padding-top:var(--sp-5); padding-bottom:var(--sp-3);
+  display:flex; align-items:flex-start; gap:8px;
+}
+.ba-item--before .ba-label{ color:var(--warn) }
+.ba-item--after .ba-label{ color:var(--ok) }
+
+.ba-prompt{
+  font-family:var(--serif); font-style:italic; font-size:var(--fs-body);
+  line-height:1.55; color:var(--ink-2);
+  background:var(--panel-2); border-left:2px solid var(--line);
+  border-radius:var(--r-sm); margin:0 var(--sp-6);
+  padding:var(--sp-4) var(--sp-4);
+}
+.ba-item > .ba-prompt{ padding-left:var(--sp-4); padding-right:var(--sp-4) }
+
+.ba-out{ padding-top:var(--sp-4); padding-bottom:var(--sp-5); font-size:var(--fs-sm); color:var(--muted) }
+.ba-out b{ display:block; color:var(--ink); font-weight:600; margin-bottom:3px }
+
+.ba-note{ text-align:center; font-size:var(--fs-sm); color:var(--muted); margin-top:calc(-1 * var(--sp-4)) }
+
+@media(max-width:640px){
+  .ba-set{ grid-template-columns:1fr }
+  .ba-item{ grid-row:auto }
+  @supports (grid-template-rows: subgrid){ .ba-item{ grid-template-rows:auto auto auto } }
+}
+
+
+/* ---------- DATA FIGURE -----------------------------------------------
+   Built in HTML, never as a raster. A 2400px PNG scaled into a 375px
+   viewport renders its own headline at about 6px, which is under the type
+   floor and invisible to verify.js because the text is baked into the
+   image. In markup it stays legible, follows the theme, and puts the
+   numbers where they can be read and indexed.
+   One series in --accent against a recessive neutral, always directly
+   labelled, always with the source printed. */
+.fig{ margin:var(--sp-10) 0; max-width:var(--w-wide) }
+.fig .fig-kicker{
+  display:block; font:700 var(--fs-label)/1 var(--sans);
+  letter-spacing:var(--track-label); text-transform:uppercase; color:var(--accent-ink);
+}
+.fig h3{ font-size:var(--fs-h2); line-height:var(--lh-tight); margin:var(--sp-4) 0; max-width:20ch }
+.fig .fig-dek{ font-size:var(--fs-body); color:var(--ink-2); max-width:var(--measure-tight); margin:0 }
+.fig .fig-plot{ margin:var(--sp-8) 0 var(--sp-7) }
+.fig .fig-src{
+  font-size:var(--fs-label); color:var(--muted);
+  border-top:1px solid var(--line-soft); padding-top:var(--sp-4); margin:0;
+}
+
+/* the number row */
+.fig-nums{ display:grid; grid-template-columns:repeat(3,auto); gap:0 clamp(32px,6vw,80px); justify-content:start }
+.fig-nums b{
+  display:block; font-family:var(--serif); font-weight:400;
+  font-size:var(--fs-num); line-height:1; color:var(--accent-ink);
+}
+.fig-nums span{ display:block; font-size:var(--fs-sm); color:var(--ink-2); margin-top:var(--sp-3); max-width:20ch }
+
+/* unit charts: one mark per real thing counted */
+.fig-units{ display:grid; grid-template-columns:repeat(auto-fill,minmax(14px,1fr)); gap:4px }
+.fig-units i{ aspect-ratio:1; background:var(--accent); border-radius:3px; display:block }
+.fig-units--dots{ grid-template-columns:repeat(auto-fill,minmax(18px,1fr)); gap:8px }
+.fig-units--dots i{ border-radius:50% }
+.fig-units i[data-off]{ background:var(--line-strong) }
+.fig-legend{ display:flex; flex-wrap:wrap; gap:var(--sp-3) var(--sp-6); font-size:var(--fs-sm); color:var(--ink-2); margin-top:var(--sp-5) }
+.fig-legend span{ display:flex; align-items:center; gap:var(--sp-2) }
+.fig-legend em{ width:12px; height:12px; border-radius:50%; background:var(--accent); font-style:normal }
+.fig-legend em[data-off]{ background:var(--line-strong) }
+
+/* the flat line */
+.fig-reach{ position:relative; height:clamp(140px,20vh,220px); border-bottom:2px solid var(--accent) }
+.fig-reach .peak{ position:absolute; right:22%; bottom:38%; width:10px; height:10px; border-radius:50%; background:var(--accent) }
+.fig-reach .peak-label{ position:absolute; right:20%; bottom:calc(38% + 20px); font-size:var(--fs-sm); color:var(--ink-2); white-space:nowrap }
+.fig-reach .axis{ position:absolute; left:0; right:0; bottom:-26px; display:flex; justify-content:space-between; font-size:var(--fs-label); color:var(--muted) }
+.fig-baseline{ font:600 var(--fs-sm)/1 var(--sans); color:var(--ink); margin:0 0 var(--sp-3) }
+
+/* two figures side by side where they answer the same question */
+.fig-pair{ display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-9) }
+.fig-pair .fig{ margin:0 }
+
+@media(max-width:920px){ .fig-pair{ grid-template-columns:1fr; gap:var(--sp-9) } }
+@media(max-width:640px){
+  .fig-nums{ grid-template-columns:1fr; gap:var(--sp-6) }
+  .fig-units{ grid-template-columns:repeat(auto-fill,minmax(11px,1fr)); gap:3px }
+  .fig-units--dots{ grid-template-columns:repeat(auto-fill,minmax(14px,1fr)); gap:6px }
+}
+
+
+/* ---------- FAQ ---------------------------------------------------------
+   One accordion for the whole site. It was built three different ways: most
+   pages used <details>, /system/ used static divs that could not be opened,
+   and /claude/ had no FAQ at all despite being the most expensive product.
+   Elvin found it: "on the book page the FAQs are expandable but on system
+   they are static."
+   Native <details> so it works with no JS, is keyboard accessible, and is
+   findable by in-page search when open. */
+.faq{ max-width:var(--w-text); margin:var(--sp-7) auto 0 }
+.faq details{ border-bottom:1px solid var(--line-soft) }
+.faq details:first-child{ border-top:1px solid var(--line-soft) }
+.faq summary{
+  display:flex; align-items:center; justify-content:space-between; gap:var(--sp-5);
+  cursor:pointer; list-style:none; min-height:var(--tap);
+  padding:var(--sp-5) 0; font-weight:600; font-size:var(--fs-body); color:var(--ink);
+}
+.faq summary::-webkit-details-marker{ display:none }
+.faq summary::after{
+  content:"+"; color:var(--accent-ink); font-weight:700;
+  font-size:var(--fs-lead); line-height:1; flex:none;
+}
+.faq details[open] summary::after{ content:"\2212" }
+.faq summary:hover{ color:var(--accent-ink) }
+.faq details > p{
+  margin:0 0 var(--sp-5); padding-right:var(--sp-8);
+  font-size:var(--fs-sm); color:var(--ink-2); line-height:var(--lh-prose); max-width:none;
+}
+
+/* ---------- INLINE EMAIL CAPTURE ----------------------------------------
+   One opt-in for every page that has something to offer. It lived inline in
+   book.html, which is why /system/ (the $37 page) had nothing but a desktop
+   exit-intent popup bound to mouseout + clientY<=0, an event that does not
+   exist on a phone, and why /claude/ and /content-machine/ had no email
+   capture at all. Promoted here so all four money pages share it.
+   Every instance posts to the owned endpoint with its own source tag and a
+   honeypot named `website`; the handler lives in js/site.js.               */
+.optin{
+  background:var(--panel); border:1px solid var(--line);
+  border-top:3px solid var(--accent);
+  border-radius:var(--r-card); padding:var(--sp-7) var(--sp-7);
+  max-width:var(--w-text); margin:0 auto;
+}
+.optin .oi-eyebrow{
+  font-size:var(--fs-label); font-weight:700; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--accent-ink);
+}
+.optin h2{ font-size:var(--fs-h3); font-weight:600; margin:var(--sp-3) 0 var(--sp-3) }
+.optin > p{ font-size:var(--fs-sm); color:var(--ink-2); margin:0 0 var(--sp-6); line-height:var(--lh-prose) }
+.optin form{ display:flex; gap:var(--sp-3); flex-wrap:wrap }
+.optin input[type=email]{
+  flex:1; min-width:min(220px, 100%); padding:14px 16px; border-radius:var(--r-sm);
+  border:1px solid var(--line); background:var(--bg); color:var(--ink);
+  font-size:16px;               /* below 16 and iOS zooms the page on focus */
+  font-family:inherit; min-height:44px;
+}
+.optin input[type=email]:focus{ outline:2px solid var(--accent); outline-offset:1px; border-color:transparent }
+.optin button{
+  padding:14px 26px; border-radius:var(--r-pill); border:0;
+  background:var(--accent); color:var(--accent-on);
+  font-weight:700; font-size:16px; cursor:pointer; min-height:44px; font-family:inherit;
+}
+.optin button:hover{ filter:brightness(1.06) }
+.optin button[disabled]{ opacity:.6; cursor:default }
+.optin .oi-note{ font-size:var(--fs-label); color:var(--muted); margin:var(--sp-3) 0 0 }
+.optin .oi-msg{ display:none; font-size:var(--fs-sm); margin:var(--sp-3) 0 0; color:var(--ok); font-weight:600 }
+.optinband{ padding:var(--sp-9) 24px }
+/* Screen-reader-only. The opt-in's email label uses it; without this rule the
+   words "Your email" render as stray visible text above the field. */
+.visually-hidden{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap }
+
+/* ---------- COMPARISON TABLE (Amazon vs the System) ----------------------
+   One honest table, rendered on book.html and /system/ from the same source
+   in build.js. Each column wins rows outright: Amazon owns paper, formats
+   and reviews; the System owns speed, the kit and the guarantee. The rows
+   Amazon wins are what make the table read as information, not as a funnel. */
+.compare{ max-width:var(--w-text); margin:var(--sp-7) auto 0; border:1px solid var(--line);
+  border-radius:var(--r-card); overflow:hidden; background:var(--panel) }
+.compare table{ width:100%; border-collapse:collapse; font-size:var(--fs-sm) }
+.compare th{ text-align:left; padding:14px 18px; font-size:var(--fs-label);
+  letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+  border-bottom:2px solid var(--line); background:var(--panel-2) }
+.compare th:first-child{ width:34% }
+.compare td{ padding:13px 18px; border-bottom:1px solid var(--line-soft);
+  color:var(--ink-2); vertical-align:top; line-height:1.5 }
+.compare tr:last-child td{ border-bottom:0 }
+.compare td:first-child{ font-weight:600; color:var(--ink) }
+.compare .win{ color:var(--ink); font-weight:600 }
+.compare .win::before{ content:"✓ "; color:var(--ok); font-weight:800 }
+.compare .no{ color:var(--muted) }
+.compare-note{ max-width:var(--w-text); margin:var(--sp-3) auto 0;
+  font-size:var(--fs-label); color:var(--muted); text-align:center }
+@media(max-width:640px){
+  .compare th,.compare td{ padding:11px 12px }
+}
+
+/* --- Services dropdown -----------------------------------------------------
+   Markup is generated by renderNavDropdown() in build.js from
+   content/services.json, the same file the homepage service cards read, so the
+   menu cannot drift from the cards. Opens on hover and on keyboard focus. The
+   trigger is a real link to /services/, so with no JS, or on a touch screen
+   where hover does not fire, tapping it still lands on the services page.
+   Below 920px the whole component is hidden and js/site.js mirrors every link
+   into the mobile drawer. -------------------------------------------------- */
+.nav .links .navdd{position:relative;display:flex;align-items:center}
+.nav .links a.navdd-t{display:inline-flex;align-items:center;gap:5px}
+.navdd-c{transition:transform .16s ease}
+.nav .links .navdd:hover .navdd-c,
+.nav .links .navdd:focus-within .navdd-c{transform:rotate(180deg)}
+.nav .links .navdd-p{
+  position:absolute;top:100%;left:50%;
+  transform:translateX(-50%) translateY(6px);
+  min-width:264px;padding:12px 8px 8px;
+  background:var(--panel,#f6f8fb);
+  border:1px solid var(--line,#cdd6e2);
+  border-radius:var(--r-sm,10px);
+  box-shadow:var(--card-lift,var(--shadow,0 26px 50px -28px rgba(14,26,43,.55)));
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .16s ease,transform .16s ease;
+}
+.nav .links .navdd:hover .navdd-p,
+.nav .links .navdd:focus-within .navdd-p{
+  opacity:1;visibility:visible;pointer-events:auto;
+  transform:translateX(-50%) translateY(0);
+}
+/* Bridges the gap under the trigger so the pointer can travel into the panel
+   without crossing dead space and closing it. */
+.nav .links .navdd-p::before{content:"";position:absolute;top:-10px;left:0;right:0;height:10px}
+.navdd-l{
+  display:block;padding:7px 12px 4px;
+  font-size:11px;letter-spacing:.09em;text-transform:uppercase;font-weight:600;
+  color:var(--ink-3,var(--ink-2,#5b6779));
+}
+.navdd-g + .navdd-g{margin-top:6px;padding-top:6px;border-top:1px solid var(--line-soft,#dbe2ec)}
+.nav .links a.navdd-i{
+  display:flex;align-items:center;min-height:40px;padding:0 12px;
+  border-radius:var(--r-sm,8px);white-space:nowrap;
+  font-size:var(--fs-sm,14px);color:var(--ink,#0e1a2b);
+}
+.nav .links a.navdd-i:hover,
+.nav .links a.navdd-i:focus-visible{
+  background:color-mix(in srgb,var(--ink,#0e1a2b) 6%,transparent);
+  color:var(--gold-2,#b3892f);
+}
+/* Drawer copies of the dropdown children, indented so the grouping survives. */
+.navdrawer a.sub{padding-left:24px;color:var(--ink-2,#5b6779);font-size:var(--fs-sm,15px)}
+@media(max-width:920px){ html .nav .links .navdd{display:none} }
+
+
+/* Products dropdown: card-style rows, one gold buy action on top. Rendered by
+   build.js from content/products.json; .navdd-s subtitles hide in the drawer. */
+.nav .links .navdd-cards{min-width:288px}
+.nav .links .navdd-cards a.navdd-i{flex-direction:column;align-items:flex-start;justify-content:center;min-height:0;padding:9px 12px;white-space:normal;line-height:1.35;font-weight:600}
+.navdd-s{display:block;font-size:12px;font-weight:400;color:var(--muted,#7e8aa0);margin-top:1px}
+.nav .links a.navdd-buy{background:linear-gradient(135deg,var(--gold,#c9a250),var(--gold-2,#b3892f));color:var(--accent-on,#141414);border-radius:10px;margin:2px 4px 6px}
+.nav .links a.navdd-buy .navdd-s{color:var(--accent-on,#141414);opacity:.75}
+.nav .links a.navdd-buy:hover,.nav .links a.navdd-buy:focus-visible{background:linear-gradient(135deg,var(--gold,#c9a250),var(--gold-2,#b3892f));color:var(--accent-on,#141414);filter:brightness(1.06)}
+.navdrawer .navdd-s{display:none}

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="One self-contained file beside a cluster of linked dependencies">
+  <rect width="480" height="300" fill="#15171A"/>
+  <rect x="34" y="96" width="118" height="140" rx="8" fill="#1D2025" stroke="#6FA3D8" stroke-width="3"/>
+  <g stroke="#6FA3D8" stroke-width="3" stroke-linecap="round">
+    <line x1="58" y1="130" x2="128" y2="130"/>
+    <line x1="58" y1="152" x2="112" y2="152"/>
+    <line x1="58" y1="174" x2="128" y2="174"/>
+    <line x1="58" y1="196" x2="100" y2="196"/>
+  </g>
+  <g stroke="#3A3E44" stroke-width="2">
+    <line x1="300" y1="166" x2="248" y2="120"/><line x1="300" y1="166" x2="360" y2="112"/>
+    <line x1="300" y1="166" x2="246" y2="216"/><line x1="300" y1="166" x2="366" y2="212"/>
+    <line x1="360" y1="112" x2="420" y2="150"/><line x1="246" y1="216" x2="300" y2="256"/>
+    <line x1="366" y1="212" x2="420" y2="150"/>
+  </g>
+  <g fill="#2A2D31" stroke="#3A3E44" stroke-width="2">
+    <circle cx="248" cy="120" r="13"/><circle cx="360" cy="112" r="13"/>
+    <circle cx="246" cy="216" r="13"/><circle cx="366" cy="212" r="13"/>
+    <circle cx="420" cy="150" r="13"/><circle cx="300" cy="256" r="13"/>
+  </g>
+  <circle cx="300" cy="166" r="16" fill="#1D2025" stroke="#7A8290" stroke-width="3"/>
+  <text x="34" y="66" font-family="Consolas,monospace" font-size="19" font-weight="700" fill="#EAEBE6">one file</text>
+  <text x="238" y="66" font-family="Consolas,monospace" font-size="19" font-weight="700" fill="#7A8290">or all this</text>
+</svg>

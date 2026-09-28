@@ -1,0 +1,1173 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="stylesheet" href="../_kit/play-kit.css">
+<title>Office Reset</title>
+<style>
+  /* ============================================================ office-reset
+     Everything styles from --pk-* tokens (accent = teal, set via PK.app).
+     Light + dark + reduced-motion all inherit from the kit. The one second
+     colour is the material-gold ramp, reserved for the Standing badge. */
+
+  /* the countdown fraction: 0 -> 1 of the current phase ELAPSED.
+     inherits:true so the ring band and its leading cap both read it. */
+  @property --pk-progress { syntax:'<number>'; inherits:true; initial-value:0; }
+
+  /* ---------------------------------------------------------- screens */
+  .or-screen{ display:none; width:100%; flex-direction:column; align-items:center;
+    gap:var(--pk-gap-lg); }
+  .or-screen.is-on{ display:flex; }
+  .or-fade{ animation:or-fade var(--pk-t-base) var(--pk-ease-settle) both; }
+  @keyframes or-fade{ from{ opacity:0; transform:translateY(16px); } to{ opacity:1; transform:none; } }
+
+  /* ---------------------------------------------------------- start */
+  .or-lede{ font-family:var(--pk-font-display); font-weight:600;
+    font-size:clamp(22px,5.5vw,30px); line-height:var(--pk-lh-tight); max-width:18ch; }
+  .or-sub{ color:var(--pk-ink-soft); max-width:34ch; }
+  .or-opts{ display:flex; flex-direction:column; gap:var(--pk-gap); align-items:center; width:100%; }
+  .or-opt{ display:flex; flex-direction:column; gap:6px; align-items:center; }
+  .or-opt > span{ font-size:var(--pk-fs-xs); font-weight:700; letter-spacing:.09em;
+    text-transform:uppercase; color:var(--pk-ink-soft); }
+  .or-seg button{ min-height:38px; padding:6px 18px; }
+  .or-streak{ color:var(--pk-ink-soft); font-size:var(--pk-fs-sm); min-height:1.2em; }
+  .or-link{ background:none; border:0; padding:8px 12px; min-height:var(--pk-tap);
+    color:var(--pk-ink-soft); font-size:var(--pk-fs-sm); font-weight:600;
+    text-decoration:underline; text-underline-offset:3px; cursor:pointer; }
+  .or-link:hover{ color:var(--pk-ink); }
+
+  /* ---------------------------------------------------------- get ready */
+  .or-countin{ font-family:var(--pk-font-num); font-variant-numeric:tabular-nums;
+    font-size:clamp(84px,26vw,150px); font-weight:700; line-height:1;
+    color:var(--pk-accent); min-height:1em; }
+  .or-countin.is-pop{ animation:or-pop 620ms var(--pk-ease-spring) both; }
+  @keyframes or-pop{ from{ transform:scale(.8); opacity:.35; } 60%{ opacity:1; } to{ transform:scale(1); opacity:1; } }
+  .or-first{ font-family:var(--pk-font-display); font-size:clamp(20px,5vw,28px); font-weight:600; }
+
+  /* ---------------------------------------------------------- player */
+  .or-player{ position:relative; width:100%; display:flex; flex-direction:column;
+    align-items:center; gap:var(--pk-gap); }
+  .or-top{ width:100%; display:flex; flex-direction:column; gap:8px; }
+  .or-bar{ height:6px; border-radius:var(--pk-radius-pill); background:var(--pk-surface-sunk);
+    overflow:hidden; box-shadow:inset 0 0 0 1px var(--pk-line); }
+  .or-bar__fill{ height:100%; width:0; border-radius:var(--pk-radius-pill);
+    background:var(--pk-accent); transition:width 140ms linear; }
+  .or-meta{ display:flex; align-items:center; gap:8px; justify-content:space-between; }
+  .or-meta__l{ display:flex; align-items:center; gap:10px; min-width:0; }
+  .or-step{ font-size:var(--pk-fs-sm); font-weight:650; color:var(--pk-ink-soft); white-space:nowrap; }
+  .or-tag{ font-size:var(--pk-fs-xs); font-weight:700; letter-spacing:.07em; text-transform:uppercase;
+    color:var(--pk-ink-soft); border:1px solid var(--pk-line); border-radius:var(--pk-radius-pill);
+    padding:2px 10px; white-space:nowrap; }
+  .or-dots{ display:flex; gap:5px; flex-wrap:wrap; justify-content:center; padding:2px 0; }
+  .or-dot{ width:6px; height:6px; border-radius:50%; background:var(--pk-line);
+    transition:background var(--pk-t-quick) var(--pk-ease-standard),
+               transform var(--pk-t-quick) var(--pk-ease-spring); }
+  .or-dot.is-done{ background:var(--pk-accent); }
+  .or-dot.is-now{ background:var(--pk-accent); transform:scale(1.65); }
+
+  .or-badge{ display:inline-flex; align-items:center; gap:6px; min-height:28px; padding:2px 14px;
+    border-radius:var(--pk-radius-pill); font-size:var(--pk-fs-sm); font-weight:700;
+    letter-spacing:.02em; border:1px solid transparent; }
+  .or-badge::before{ content:""; width:8px; height:8px; border-radius:50%; background:currentColor; }
+  .or-badge[data-posture="seated"]{
+    background:color-mix(in srgb, var(--pk-accent) 18%, var(--pk-surface));
+    border-color:color-mix(in srgb, var(--pk-accent) 42%, var(--pk-surface));
+    color:color-mix(in srgb, var(--pk-accent-press) 55%, var(--pk-ink)); }
+  .or-badge[data-posture="standing"]{
+    background:color-mix(in srgb, var(--pk-mat-gold) 20%, var(--pk-surface));
+    border-color:color-mix(in srgb, var(--pk-mat-gold) 55%, var(--pk-surface));
+    color:color-mix(in srgb, var(--pk-mat-gold-dk) 55%, var(--pk-ink)); }
+
+  .or-move{ font-family:var(--pk-font-display); font-weight:700;
+    font-size:clamp(28px,7vw,40px); line-height:var(--pk-lh-tight);
+    letter-spacing:var(--pk-tracking-hero); max-width:16ch; min-height:1.1em; }
+
+  /* ------------------------------------------------------- the ring */
+  .or-ringwrap{ --pk-progress:0; --or-ring:clamp(176px,50vw,244px);
+    position:relative; width:var(--or-ring); height:var(--or-ring); flex:0 0 auto; }
+  .or-ring{ position:absolute; inset:0; border-radius:50%;
+    /* --pk-progress is time ELAPSED, so the sunk wedge grows and the teal
+       remainder shrinks: the ring visibly depletes clockwise. */
+    background:conic-gradient(from 0deg,
+      var(--pk-surface-sunk) calc(var(--pk-progress) * 360deg), var(--pk-accent) 0);
+    -webkit-mask:radial-gradient(farthest-side, transparent 69%, #000 70%);
+            mask:radial-gradient(farthest-side, transparent 69%, #000 70%); }
+  .or-ring__track{ position:absolute; inset:0; border-radius:50%;
+    box-shadow:inset 0 0 0 1px var(--pk-line); pointer-events:none; }
+  .or-caprot{ position:absolute; inset:0; transform:rotate(calc(var(--pk-progress) * 360deg));
+    pointer-events:none; }
+  .or-cap{ position:absolute; top:0; left:50%; width:3px; height:16%; margin-left:-1.5px;
+    border-radius:2px; background:color-mix(in srgb, var(--pk-accent) 55%, white); }
+  .or-secs{ position:absolute; inset:0; display:grid; place-items:center;
+    font-size:clamp(44px,13vw,62px); font-weight:700; line-height:1; letter-spacing:-.02em; }
+  .or-secs small{ display:block; font-family:var(--pk-font-ui); font-size:var(--pk-fs-xs);
+    font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--pk-ink-soft);
+    margin-top:4px; }
+
+  .or-cue{ font-size:clamp(18px,4.5vw,24px); line-height:1.4; max-width:30ch; min-height:2.8em; }
+  .or-safe{ max-width:34ch; min-height:1.2em; }
+  .or-next{ width:100%; max-width:420px; padding:10px 14px; border-radius:var(--pk-radius-pill);
+    background:var(--pk-surface-sunk); color:var(--pk-ink-soft); font-size:var(--pk-fs-sm);
+    font-weight:600; min-height:40px; display:flex; align-items:center; justify-content:center;
+    gap:6px; }
+
+  .or-controls{ display:flex; gap:10px; width:100%; max-width:440px; }
+  .or-controls .pk-btn{ min-width:0; flex:1; padding:0 10px; font-size:var(--pk-fs-body); }
+  .or-controls .pk-btn--main{ flex:1.5; font-size:var(--pk-fs-lg); }
+
+  /* paused veil */
+  .or-veil{ position:absolute; inset:-8px; z-index:5; border-radius:var(--pk-radius-lg);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px;
+    background:color-mix(in srgb, var(--pk-bg) 84%, transparent);
+    backdrop-filter:blur(2px); cursor:pointer; border:0; color:inherit; width:auto; }
+  .or-veil[hidden]{ display:none; }
+  .or-veil b{ font-family:var(--pk-font-display); font-size:clamp(24px,6vw,34px); font-weight:700; }
+
+  /* ---------------------------------------------------------- finish */
+  .or-stats{ display:flex; gap:var(--pk-gap-lg); justify-content:center; flex-wrap:wrap; }
+  .or-stat{ display:flex; flex-direction:column; align-items:center; gap:2px; }
+  .or-stat b{ font-family:var(--pk-font-num); font-variant-numeric:tabular-nums;
+    font-size:clamp(26px,7vw,34px); font-weight:700; line-height:1; }
+  .or-stat span{ font-size:var(--pk-fs-xs); font-weight:700; letter-spacing:.09em;
+    text-transform:uppercase; color:var(--pk-ink-soft); }
+  .or-chips{ display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+  .or-chips .pk-chip{ cursor:default; }
+  .or-chip-in{ animation:or-chip 340ms var(--pk-ease-spring) both; }
+  @keyframes or-chip{ from{ opacity:0; transform:scale(.7); } to{ opacity:1; transform:scale(1); } }
+  .or-nudge{ color:var(--pk-ink-soft); font-size:var(--pk-fs-sm); max-width:32ch; }
+
+  /* ---------------------------------------------------------- modals */
+  .or-modal .pk-sheet{ text-align:left; }
+  .or-modal h2{ margin-bottom:8px; }
+  .or-modal p{ font-size:var(--pk-fs-sm); line-height:1.55; color:var(--pk-ink-soft);
+    margin-bottom:12px; }
+  .or-modal p strong{ color:var(--pk-ink); }
+  .or-modal .or-acts{ display:flex; gap:10px; margin-top:16px; }
+  .or-modal .or-acts .pk-btn{ flex:1; min-width:0; }
+
+  /* app options inside the kit settings sheet */
+  .or-setrow{ display:flex; align-items:center; justify-content:space-between; gap:var(--pk-gap);
+    padding:12px 0; border-top:1px solid var(--pk-line); }
+  .or-setrow label{ font-weight:600; }
+  .or-setrow small{ display:block; color:var(--pk-ink-faint); font-weight:400; }
+
+  @media (max-width:380px){
+    .or-controls{ gap:8px; }
+    .or-controls .pk-btn{ padding:0 6px; font-size:var(--pk-fs-sm); }
+  }
+  /* reduced motion: no sweep cap, no pops (timing itself is untouched) */
+  @media (prefers-reduced-motion: reduce){ .or-caprot{ display:none; } }
+  :root[data-motion="reduce"] .or-caprot{ display:none; }
+</style>
+<link rel="canonical" href="https://epeters.ca/play/office-reset/">
+</head><body>
+
+<script src="../_kit/play-kit.js"></script>
+
+<script>
+var HEADLESS = (typeof document === "undefined");
+
+/* =====================================================================
+   PURE LOGIC  ·  no DOM, injectable rng.  Exported as globalThis.OFFICERESET
+   rng(n) -> uniform int in [0, n).  In the browser that is PK.rand.int.
+   ===================================================================== */
+
+var AREAS = ["neck", "shoulders", "wrists", "back", "hips", "legs", "eyes", "breath"];
+var COUNTS = { 2: 4, 5: 9, 10: 17 };
+var TRANSITION = 3;                       // seconds of "Next up" between moves
+/* soft coverage order (SPEC 6.2 rule 6); breath is not listed, so it sorts last */
+var COVERAGE_PRIORITY = ["neck", "shoulders", "wrists", "back", "hips", "legs", "eyes"];
+
+/* The 28-move library. Every cue is written in our own words from the movement
+   facts in RESEARCH.md (NHS / CSP / Mayo / ACE / AOA); no source prose is copied. */
+var EXERCISES = [
+  { id:"neck_rotate", name:"Slow Neck Turns", area:"neck", posture:"seated", dur:30,
+    intensity:"gentle", warm:true, cool:false, src:"NHS,Mayo",
+    cue:"Sit tall with both feet flat. Turn your head slowly toward one shoulder, rest there for a breath, then travel back through the middle to the other side.",
+    safety:"Keep it slow and comfortable. Skip this one if you get dizzy." },
+  { id:"neck_tilt", name:"Ear-to-Shoulder Tilt", area:"neck", posture:"seated", dur:30,
+    intensity:"gentle", warm:false, cool:false, src:"Mayo",
+    cue:"Let one ear drift toward that shoulder while the other shoulder stays heavy and low. Breathe, then swap sides.",
+    safety:"Let gravity do the work. Never pull on your head." },
+  { id:"neck_nod", name:"Chin Tuck & Nod", area:"neck", posture:"seated", dur:25,
+    intensity:"gentle", warm:false, cool:false, src:"Mayo",
+    cue:"Draw your chin gently back over your throat to make a soft double chin, then nod a small yes and release.",
+    safety:"Small half-nods only. No full head circles." },
+
+  { id:"shoulder_rolls", name:"Shoulder Rolls", area:"shoulders", posture:"seated", dur:30,
+    intensity:"gentle", warm:true, cool:false, src:"Mayo,ACE",
+    cue:"Roll both shoulders up toward your ears, back, and down in one smooth circle. Halfway through, reverse the direction.",
+    safety:"" },
+  { id:"shoulder_shrug", name:"Shrug & Release", area:"shoulders", posture:"seated", dur:25,
+    intensity:"gentle", warm:true, cool:false, src:"ACE",
+    cue:"Lift both shoulders toward your ears, hold the squeeze for a slow count of three, then let them drop and soften.",
+    safety:"" },
+  { id:"chest_stretch", name:"Open-Chest Stretch", area:"shoulders", posture:"seated", dur:30,
+    intensity:"gentle", warm:false, cool:false, src:"NHS,CSP",
+    cue:"Clasp your hands behind your back, or hold the sides of the chair, lift your chest and draw your shoulder blades toward each other.",
+    safety:"Ease off straight away if you feel tingling in your arms or hands." },
+  { id:"upper_twist", name:"Seated Upper-Body Twist", area:"shoulders", posture:"seated", dur:30,
+    intensity:"gentle", warm:false, cool:false, src:"NHS",
+    cue:"Feet planted, rest one hand on the opposite knee and turn your ribs and shoulders around to look behind you. Unwind, then twist the other way.",
+    safety:"Turn from the ribs, not the lower back, and never force it." },
+  { id:"overhead_reach", name:"Overhead Reach & Side Bend", area:"shoulders", posture:"seated", dur:30,
+    intensity:"gentle", warm:false, cool:false, src:"Mayo,ACE",
+    cue:"Reach one arm to the ceiling, then lean gently away from it until you feel a long line down your side. Swap arms.",
+    safety:"" },
+  { id:"arm_across", name:"Cross-Body Shoulder Stretch", area:"shoulders", posture:"seated", dur:30,
+    intensity:"gentle", warm:false, cool:false, src:"ACE",
+    cue:"Bring one straight arm across your chest and hug it closer with the other forearm. Keep the shoulder low, then change arms.",
+    safety:"" },
+  { id:"tricep_reach", name:"Overhead Triceps Stretch", area:"shoulders", posture:"seated", dur:30,
+    intensity:"gentle", warm:false, cool:false, src:"ACE",
+    cue:"Reach one hand up and over toward the middle of your back, then use the other hand to ease that elbow back a little. Switch sides.",
+    safety:"Only go as far as feels easy on the shoulder." },
+
+  { id:"wrist_circles", name:"Wrist Circles", area:"wrists", posture:"seated", dur:25,
+    intensity:"gentle", warm:true, cool:false, src:"ACE",
+    cue:"Hold your arms out in front of you and draw slow circles with both hands, one direction for a while, then the other.",
+    safety:"" },
+  { id:"wrist_flexor", name:"Prayer Stretch", area:"wrists", posture:"seated", dur:30,
+    intensity:"gentle", warm:false, cool:false, src:"ACE",
+    cue:"Press your palms together in front of your chest, then lower both hands toward your waist until the forearms feel a gentle pull.",
+    safety:"Stop at a stretch, never at a sharp or electric feeling." },
+  { id:"wrist_extensor", name:"Extensor Stretch", area:"wrists", posture:"seated", dur:30,
+    intensity:"gentle", warm:false, cool:false, src:"ACE",
+    cue:"Stretch one arm forward with the palm facing down, then use your other hand to draw the fingers gently toward the floor. Swap hands.",
+    safety:"" },
+  { id:"finger_spread", name:"Fist & Fan", area:"wrists", posture:"seated", dur:20,
+    intensity:"gentle", warm:false, cool:false, src:"ACE",
+    cue:"Make a soft fist, then fan your fingers as wide as they comfortably go. Repeat at an easy rhythm.",
+    safety:"" },
+
+  { id:"seated_cat_cow", name:"Seated Cat-Cow", area:"back", posture:"seated", dur:30,
+    intensity:"gentle", warm:false, cool:false, src:"Mayo",
+    cue:"Hands on your knees. Breathe in and open your chest as the back curves in, then breathe out and round your spine with your chin toward your chest.",
+    safety:"" },
+  { id:"back_ext", name:"Standing Back Extension", area:"back", posture:"standing", dur:25,
+    intensity:"standard", warm:false, cool:false, src:"Mayo",
+    cue:"Stand up, place your hands on your lower back, and lean gently backwards for a couple of seconds before returning upright.",
+    safety:"Stay next to the desk for support and keep the range small." },
+  { id:"seated_fwd_fold", name:"Gentle Seated Forward Fold", area:"back", posture:"seated", dur:25,
+    intensity:"gentle", warm:false, cool:true, src:"Mayo",
+    cue:"Sit toward the front of the chair, let your upper body fold slowly over your thighs and your arms hang, then roll up one bone at a time.",
+    safety:"Come up slowly so you do not get a head rush." },
+  { id:"posture_reset", name:"Posture Reset", area:"back", posture:"seated", dur:25,
+    intensity:"gentle", warm:false, cool:true, src:"CSP,ACE",
+    cue:"Sit tall, stack your ears over your shoulders, and draw your shoulder blades gently down and together. Hold, release, repeat.",
+    safety:"" },
+
+  { id:"hip_march", name:"Seated Hip Marching", area:"hips", posture:"seated", dur:30,
+    intensity:"standard", warm:false, cool:false, src:"NHS",
+    cue:"Sitting tall, lift one knee, set the foot down, then lift the other. An unhurried march without leaning back.",
+    safety:"Hold the seat if you feel at all wobbly." },
+  { id:"fig4_hip", name:"Seated Figure-4 Stretch", area:"hips", posture:"seated", dur:40,
+    intensity:"gentle", warm:false, cool:false, src:"Mayo",
+    cue:"Rest one ankle on the opposite knee so the legs make a figure four, sit tall, and hinge forward a little. Change legs halfway.",
+    safety:"Skip this one if your knee or hip objects." },
+
+  { id:"seated_ham", name:"Seated Hamstring Stretch", area:"legs", posture:"seated", dur:40,
+    intensity:"gentle", warm:false, cool:false, src:"CSP",
+    cue:"Slide one heel forward with the leg straight and the toes up, then hinge from your hips until you feel a stretch behind the thigh. Swap legs.",
+    safety:"Keep your back long rather than rounding over." },
+  { id:"quad_stretch", name:"Standing Quad Stretch", area:"legs", posture:"standing", dur:40,
+    intensity:"standard", warm:false, cool:false, src:"CSP",
+    cue:"Stand up, hold the desk, and bring one heel toward your backside until the front of the thigh lengthens. Change legs halfway.",
+    safety:"Hold something solid. Lock the chair wheels or grip the desk." },
+  { id:"calf_raises", name:"Calf Raises", area:"legs", posture:"standing", dur:30,
+    intensity:"standard", warm:false, cool:false, src:"Mayo",
+    cue:"Stand tall with a hand on the desk, rise onto the balls of your feet, pause at the top, then lower slowly.",
+    safety:"Keep a fingertip on the desk for balance." },
+  { id:"ankle_pumps", name:"Seated Ankle Pumps", area:"legs", posture:"seated", dur:30,
+    intensity:"gentle", warm:true, cool:false, src:"NHS",
+    cue:"Lift one foot off the floor, point the toes away, then pull them back toward your shin. Add a few ankle circles, then change feet.",
+    safety:"" },
+  { id:"sit_to_stand", name:"Sit-to-Stand", area:"legs", posture:"standing", dur:30,
+    intensity:"standard", warm:false, cool:false, src:"Mayo",
+    cue:"From the front of the chair, stand up without using your hands if you can, then sit back down under control. Repeat at an easy pace.",
+    safety:"Lock the wheels or use a stable chair before you start." },
+
+  { id:"eye_2020", name:"20-20-20 Eye Rest", area:"eyes", posture:"seated", dur:20,
+    intensity:"gentle", warm:false, cool:true, src:"AOA",
+    cue:"Look away from the screen at something about twenty feet away, out of a window if you have one, and let your eyes simply rest there.",
+    safety:"" },
+  { id:"eye_palm", name:"Palming & Blinks", area:"eyes", posture:"seated", dur:20,
+    intensity:"gentle", warm:false, cool:true, src:"AOA",
+    cue:"Rub your palms warm, cup them lightly over closed eyes without pressing, then uncover and blink slowly a few times.",
+    safety:"" },
+
+  { id:"deep_breath", name:"Reset Breath", area:"breath", posture:"seated", dur:30,
+    intensity:"gentle", warm:true, cool:true, src:"Mayo",
+    cue:"Sit tall and breathe in through your nose so the ribs widen, then let a slower breath out through your mouth. Repeat calmly.",
+    safety:"" }
+];
+
+function isStandard(ex){ return !!ex && ex.intensity === "standard"; }
+
+function poolFor(intensity){
+  if (intensity === "standard") return EXERCISES.slice();
+  return EXERCISES.filter(function(e){ return e.intensity === "gentle"; });
+}
+
+function routineSeconds(routine){
+  if (!routine || !routine.length) return 0;
+  var s = 0, i;
+  for (i = 0; i < routine.length; i++) s += Number(routine[i].dur) || 0;
+  return s + TRANSITION * (routine.length - 1);
+}
+
+function areasTouched(routine){
+  var out = [], seen = {}, i, a;
+  if (!routine) return out;
+  for (i = 0; i < routine.length; i++){
+    a = routine[i] && routine[i].area;
+    if (a && !seen[a]){ seen[a] = 1; out.push(a); }
+  }
+  return out;
+}
+
+/* --- assembler helpers ------------------------------------------------ */
+function prioOf(area){
+  var i = COVERAGE_PRIORITY.indexOf(area);
+  return i < 0 ? 99 : i;
+}
+/* random rotation: rng picks the entry we try FIRST, the rest stay available
+   as ordered fallbacks so backtracking can never dead-end. */
+function rotate(arr, rng){
+  var out = [], i, s = arr.length > 1 ? rng(arr.length) : 0;
+  for (i = 0; i < arr.length; i++) out.push(arr[(s + i) % arr.length]);
+  return out;
+}
+function pickPreferring(list, recentSet, rng){
+  var fresh = list.filter(function(e){ return !recentSet[e.id]; });
+  var src = fresh.length ? fresh : list;
+  return src[src.length > 1 ? rng(src.length) : 0];
+}
+/* soft posture batching: only ever GROUPS standing moves (never suppresses
+   them), so the user is not popping up and down move after move. */
+function postureFirst(list, prev){
+  if (!prev || prev.posture !== "standing") return list;
+  var same = list.filter(function(e){ return e.posture === "standing"; });
+  if (!same.length || same.length === list.length) return list;
+  return same.concat(list.filter(function(e){ return e.posture !== "standing"; }));
+}
+function freshFirst(list, recentSet){
+  var a = list.filter(function(e){ return !recentSet[e.id]; });
+  if (!a.length || a.length === list.length) return list;
+  return a.concat(list.filter(function(e){ return !!recentSet[e.id]; }));
+}
+
+/* Build the ordered try-list for one middle slot: soft preferences become
+   TIERS (tried first), never hard filters, so nothing is ever unreachable. */
+function orderCandidates(cands, prev, touched, recentSet, opts, rng, slotsLeft, quota, stdSoFar){
+  if (!opts.pref) return rotate(cands, rng);
+  var tiers = [], rest = cands.slice(), eyes, fresh, harder;
+
+  /* Standard has to feel standard: keep a loose quota of higher-exertion moves
+     and chase one whenever the routine is falling behind pace. */
+  if (quota > stdSoFar && slotsLeft <= (quota - stdSoFar) * 3){
+    harder = rest.filter(isStandard);
+    if (harder.length){
+      tiers.push(harder);
+      rest = rest.filter(function(e){ return !isStandard(e); });
+    }
+  }
+
+  /* aim to land an eye break in every 5- and 10-minute session */
+  if (!touched.eyes && slotsLeft <= 3){
+    eyes = rest.filter(function(e){ return e.area === "eyes"; });
+    if (eyes.length){
+      tiers.push(eyes);
+      rest = rest.filter(function(e){ return e.area !== "eyes"; });
+    }
+  }
+  /* coverage: chase areas the routine has not visited yet */
+  fresh = rest.filter(function(e){ return !touched[e.area]; });
+  if (fresh.length){
+    fresh = fresh.slice().sort(function(a, b){ return prioOf(a.area) - prioOf(b.area); });
+    tiers.push(postureFirst(fresh, prev));
+    rest = rest.filter(function(e){ return !!touched[e.area]; });
+  }
+  if (rest.length) tiers.push(postureFirst(freshFirst(rest, recentSet), prev));
+
+  var out = [], i;
+  for (i = 0; i < tiers.length; i++) out = out.concat(rotate(tiers[i], rng));
+  return out;
+}
+
+/* Depth-first fill of the middle slots with backtracking. `opts` switches the
+   hard rules on/off for the constraint-relaxation ladder in buildRoutine. */
+function solveMiddle(avail, m, first, last, rng, opts, recentSet, quota){
+  var used = {}, out = new Array(m), touched = {}, budget = 200000, stdSoFar = 0;
+  touched[first.area] = 1;
+  touched[last.area] = 1;
+
+  function rec(i, prev){
+    if (i === m) return true;
+    if (--budget < 0) return false;
+    var isFinal = (i === m - 1), cands = [], k, e;
+    for (k = 0; k < avail.length; k++){
+      e = avail[k];
+      if (used[e.id]) continue;                                   // rule 4 (never relaxed)
+      if (opts.area && e.area === prev.area) continue;             // rule 3
+      if (opts.area && isFinal && e.area === last.area) continue;  // rule 3 at the seam
+      if (opts.exert && isStandard(e) && isStandard(prev)) continue; // rule 5
+      cands.push(e);
+    }
+    if (!cands.length) return false;
+    var order = orderCandidates(cands, prev, touched, recentSet, opts, rng, m - i,
+      quota || 0, stdSoFar), had, wasStd;
+    for (k = 0; k < order.length; k++){
+      e = order[k];
+      used[e.id] = 1; out[i] = e;
+      had = touched[e.area]; touched[e.area] = 1;
+      wasStd = isStandard(e); if (wasStd) stdSoFar++;
+      if (rec(i + 1, e)) return true;
+      used[e.id] = 0;
+      if (wasStd) stdSoFar--;
+      if (!had) delete touched[e.area];
+    }
+    return false;
+  }
+  return rec(0, first) ? out : null;
+}
+
+/* buildRoutine(length, intensity, rng[, recentIds])
+   -> exactly COUNTS[length] distinct exercises: warm opener, cool closer,
+      no same area back-to-back, no two higher-exertion moves adjacent. */
+function buildRoutine(length, intensity, rng, recent){
+  var n = COUNTS[length] || COUNTS[5];
+  var mode = (intensity === "standard") ? "standard" : "gentle";
+  var pool = poolFor(mode);
+  var recentSet = {}, i;
+  if (recent && recent.length) for (i = 0; i < recent.length; i++) recentSet[recent[i]] = 1;
+
+  var warms = pool.filter(function(e){ return e.warm; });
+  var first = pickPreferring(warms.length ? warms : pool, recentSet, rng);
+
+  var cools = pool.filter(function(e){ return e.cool && e.id !== first.id; });
+  var last = pickPreferring(cools.length ? cools
+    : pool.filter(function(e){ return e.id !== first.id; }), recentSet, rng);
+
+  if (n <= 1) return [first];
+  if (n === 2) return [first, last];
+
+  var m = n - 2;
+  var avail = pool.filter(function(e){ return e.id !== first.id && e.id !== last.id; });
+  /* soft target for higher-exertion moves so "Standard" actually feels standard */
+  var quota = (mode === "standard") ? Math.max(1, Math.round(n / 4)) : 0;
+
+  /* relaxation ladder: preferences -> exertion adjacency -> same-area.
+     No-repeat and the exact length are never relaxed. */
+  var LEVELS = [
+    { pref:true,  exert:true,  area:true  },
+    { pref:false, exert:true,  area:true  },
+    { pref:false, exert:false, area:true  },
+    { pref:false, exert:false, area:false }
+  ];
+  for (i = 0; i < LEVELS.length; i++){
+    var mid = solveMiddle(avail, m, first, last, rng, LEVELS[i], recentSet, quota);
+    if (mid) return [first].concat(mid, [last]);
+  }
+  return [first].concat(avail.slice(0, m), [last]);   // unreachable with this library
+}
+
+/* =====================================================================
+   BROWSER WIRING — every DOM / PK / audio / timer touch lives in here.
+   ===================================================================== */
+if (!HEADLESS) {
+
+  var SLUG = "office-reset";
+  var KEY = {
+    length:    "play." + SLUG + ".length",
+    intensity: "play." + SLUG + ".intensity",
+    accepted:  "play." + SLUG + ".accepted",
+    last:      "play." + SLUG + ".last",
+    streak:    "play." + SLUG + ".streak",
+    voice:     "play." + SLUG + ".voice"
+  };
+
+  var DISCLAIMER_HTML =
+    '<p><strong>Not medical advice.</strong> Office Reset offers general wellness and stretching ' +
+    'suggestions for healthy adults and is not a substitute for professional medical advice, ' +
+    'diagnosis, or treatment.</p>' +
+    '<p>These movements are meant to be gentle and comfortable, so never push into pain. Stop ' +
+    'immediately and rest if you feel pain, dizziness, numbness, or shortness of breath.</p>' +
+    '<p>If you are pregnant, recovering from an injury or surgery, or have any heart, ' +
+    'blood-pressure, joint, or other health condition, talk to your doctor or a physiotherapist ' +
+    'before starting.</p>' +
+    '<p>By using this app you accept that you do so at your own risk.</p>';
+
+  var SAFETY_LINE = "Gentle moves only. Stop if anything hurts.";
+
+  /* ---- live state ---- */
+  var G = {
+    state: "idle",        // idle | ready | playing | paused | done
+    phase: "hold",        // ready | hold | trans
+    routine: [],
+    i: 0,
+    completed: 0,
+    dur: 0, remain: 0, endAt: 0,
+    lastWhole: -1,
+    raf: 0
+  };
+
+  var opt = {
+    length: normLength(PK.store.get(KEY.length, 5)),
+    intensity: PK.store.get(KEY.intensity, "gentle") === "standard" ? "standard" : "gentle",
+    voice: PK.store.get(KEY.voice, false) === true
+  };
+  var accepted = PK.store.get(KEY.accepted, false) === true;
+
+  var ui, el = {}, discBackdrop = null, endBackdrop = null;
+
+  function normLength(v){ v = Number(v); return (v === 2 || v === 5 || v === 10) ? v : 5; }
+  function esc(s){
+    return String(s).replace(/[&<>"]/g, function(c){
+      return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c];
+    });
+  }
+  function postureLabel(p){ return p === "standing" ? "Standing" : "Seated"; }
+  function fmtClock(sec){
+    sec = Math.max(0, Math.round(sec));
+    var m = Math.floor(sec / 60), s = sec % 60;
+    return m + ":" + (s < 10 ? "0" : "") + s;
+  }
+  function areaLabel(a){ return a.charAt(0).toUpperCase() + a.slice(1); }
+
+  /* ---------------------------------------------------------- screens */
+  var curScreen = null;
+  function show(name){
+    if (curScreen === name) return;
+    curScreen = name;
+    ["start", "ready", "play", "done"].forEach(function(s){
+      el[s].classList.toggle("is-on", s === name);
+    });
+    var inSession = (name === "ready" || name === "play");
+    ui.actions.hidden = inSession;
+    el.btnRepeat.hidden = (name !== "done");
+    el.btnChange.hidden = (name !== "done");
+    if (!PK.motion.reduced){
+      var node = el[name];
+      node.classList.remove("or-fade");
+      void node.offsetWidth;
+      node.classList.add("or-fade");
+    }
+  }
+  function setPrimary(label){ if (ui.primary) ui.primary.textContent = label; }
+
+  /* ---------------------------------------------------------- start */
+  function paintStart(){
+    el.segLen.querySelectorAll("button").forEach(function(b){
+      b.setAttribute("aria-pressed", String(Number(b.dataset.v) === opt.length));
+    });
+    el.segInt.querySelectorAll("button").forEach(function(b){
+      b.setAttribute("aria-pressed", String(b.dataset.v === opt.intensity));
+    });
+    var mv = COUNTS[opt.length];
+    el.sub.textContent = "A " + opt.length + "-minute body reset for desk workers. " +
+      mv + " moves, " + (opt.intensity === "standard" ? "standard" : "gentle") + " pace.";
+    var st = readStreak();
+    el.streak.textContent = st.count > 0
+      ? (st.count === 1 ? "1 reset this week." : st.count + " resets this week.")
+      : "";
+  }
+
+  function readStreak(){
+    var st = PK.store.get(KEY.streak, null), ws = weekStart();
+    if (!st || st.weekStart !== ws) return { count: 0, weekStart: ws };
+    return st;
+  }
+  function weekStart(){
+    var d = new Date();
+    d.setHours(0, 0, 0, 0);
+    d.setDate(d.getDate() - d.getDay());
+    return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+  }
+  function bumpStreak(){
+    var st = readStreak();
+    st.count += 1;
+    PK.store.set(KEY.streak, st);
+  }
+
+  /* ---------------------------------------------------------- session */
+  function startSession(routine){
+    if (!accepted){ openDisclaimer(); return; }
+    if (!routine){
+      var recent = PK.store.get(KEY.last, []) || [];
+      routine = buildRoutine(opt.length, opt.intensity, PK.rand.int, recent);
+    }
+    G.routine = routine;
+    G.i = 0;
+    G.completed = 0;
+    G.state = "ready";
+    G.phase = "ready";
+    setPrimary("Pause");
+    buildDots();
+    el.readyFirst.textContent = "First up: " + routine[0].name;
+    el.readySafe.textContent = SAFETY_LINE;
+    el.countin.textContent = "3";
+    show("ready");
+    PK.announce("Get ready. First up, " + routine[0].name + ".");
+    PK.sound.play("timerTick");
+    startPhase("ready", 3);
+    G.state = "playing";
+  }
+
+  function startPhase(kind, seconds){
+    G.phase = kind;
+    G.dur = seconds;
+    G.remain = seconds;
+    G.endAt = now() + seconds * 1000;
+    G.lastWhole = -1;
+    paintRing(seconds, seconds, true);
+    if (!G.raf) G.raf = requestAnimationFrame(loop);
+  }
+
+  function now(){ return (window.performance && performance.now) ? performance.now() : Date.now(); }
+
+  function loop(t){
+    if (G.state !== "playing" && G.state !== "paused"){ G.raf = 0; return; }
+    G.raf = requestAnimationFrame(loop);
+    if (G.state !== "playing"){ return; }
+    var remain = (G.endAt - t) / 1000;
+    if (remain < 0) remain = 0;
+    G.remain = remain;
+    var whole = Math.ceil(remain - 0.001);
+    if (whole < 0) whole = 0;
+    var flipped = (whole !== G.lastWhole);
+    if (flipped) G.lastWhole = whole;
+    paintRing(remain, G.dur, flipped);
+    if (flipped) onSecond(whole);
+    if (remain <= 0) phaseDone();
+  }
+
+  /* the ring is the hero: --pk-progress is elapsed/dur, updated every frame
+     from performance.now() deltas so the countdown is drift-free and linear. */
+  function paintRing(remain, dur, secondFlipped){
+    var reduced = PK.motion.reduced;
+    var elapsed = dur > 0 ? (dur - remain) / dur : 0;
+    if (elapsed < 0) elapsed = 0; if (elapsed > 1) elapsed = 1;
+    if (!reduced || secondFlipped) el.ringwrap.style.setProperty("--pk-progress", elapsed.toFixed(4));
+    if (secondFlipped){
+      var whole = Math.ceil(remain - 0.001); if (whole < 0) whole = 0;
+      el.secs.firstChild.nodeValue = String(whole);
+    }
+    if (G.phase !== "ready"){
+      var per = 1 / Math.max(1, G.routine.length);
+      var frac = (G.phase === "hold") ? elapsed : 0;
+      var pct = Math.min(1, (G.i + frac) * per) * 100;
+      el.barFill.style.width = pct.toFixed(2) + "%";
+    }
+  }
+
+  function onSecond(whole){
+    if (G.phase === "ready"){
+      if (whole > 0){
+        el.countin.textContent = String(whole);
+        if (!PK.motion.reduced){
+          el.countin.classList.remove("is-pop");
+          void el.countin.offsetWidth;
+          el.countin.classList.add("is-pop");
+        }
+        PK.sound.play("timerTick");
+      }
+      return;
+    }
+    if (G.phase === "hold" && whole > 0 && whole <= 3) PK.sound.play("tick");
+  }
+
+  function phaseDone(){
+    if (G.phase === "ready"){ enterMove(0, false); return; }
+    if (G.phase === "trans"){ enterMove(G.i, false); return; }
+    /* a hold ran all the way down: that move counts as completed */
+    G.completed += 1;
+    if (G.i >= G.routine.length - 1){ finish(); return; }
+    G.i += 1;
+    startTransition();
+  }
+
+  function startTransition(){
+    G.phase = "trans";
+    PK.sound.play("reveal");
+    PK.buzz(120);
+    renderCard(true);
+    startPhase("trans", TRANSITION);
+  }
+
+  /* enter the hold for move index i */
+  function enterMove(i, silent){
+    G.i = i;
+    G.phase = "hold";
+    if (!silent) PK.sound.play("tick");
+    renderCard(false);
+    startPhase("hold", G.routine[i].dur);
+    var ex = G.routine[i];
+    PK.announce("Move " + (i + 1) + " of " + G.routine.length + ". " +
+      ex.name + ", " + postureLabel(ex.posture) + ". " + ex.cue);
+    speak(ex);
+  }
+
+  function renderCard(isTransition){
+    var n = G.routine.length, ex = G.routine[G.i], next = G.routine[G.i + 1];
+    show("play");
+    el.badge.setAttribute("data-posture", ex.posture);
+    el.badge.lastChild.nodeValue = postureLabel(ex.posture);
+    el.move.textContent = ex.name;
+    el.step.textContent = "Move " + (G.i + 1) + " of " + n;
+    el.tag.textContent = opt.intensity === "standard" ? "Standard" : "Gentle";
+    if (isTransition){
+      el.cue.textContent = "Next up. Take a breath and get into position.";
+      el.safe.textContent = ex.safety || "";
+      el.nextUp.textContent = "Coming up: " + ex.name + " (" + postureLabel(ex.posture) + ")";
+      el.secsCap.textContent = "get set";
+    } else {
+      el.cue.textContent = ex.cue;
+      el.safe.textContent = ex.safety || "";
+      el.nextUp.textContent = next
+        ? "Next: " + next.name + " (" + postureLabel(next.posture) + ")"
+        : "Last move. Finish line in sight.";
+      el.secsCap.textContent = "seconds";
+    }
+    paintDots();
+    if (!PK.motion.reduced && !isTransition){
+      el.card.classList.remove("or-fade");
+      void el.card.offsetWidth;
+      el.card.classList.add("or-fade");
+    }
+  }
+
+  function buildDots(){
+    var html = "", i;
+    for (i = 0; i < G.routine.length; i++) html += '<span class="or-dot"></span>';
+    el.dots.innerHTML = html;
+  }
+  function paintDots(){
+    var kids = el.dots.children, i;
+    for (i = 0; i < kids.length; i++){
+      kids[i].className = "or-dot" + (i < G.i ? " is-done" : (i === G.i ? " is-now" : ""));
+    }
+  }
+
+  /* ---- controls ---- */
+  function pause(){
+    if (G.state !== "playing") return;
+    G.state = "paused";
+    G.remain = Math.max(0, (G.endAt - now()) / 1000);
+    el.veil.hidden = false;
+    setPrimary("Resume");
+    el.pause.textContent = "Resume";
+    PK.announce("Paused.");
+  }
+  function resume(){
+    if (G.state !== "paused") return;
+    G.endAt = now() + G.remain * 1000;
+    G.state = "playing";
+    if (!G.raf) G.raf = requestAnimationFrame(loop);
+    el.veil.hidden = true;
+    setPrimary("Pause");
+    el.pause.textContent = "Pause";
+    PK.announce("Resumed.");
+  }
+  function togglePause(){ if (G.state === "paused") resume(); else pause(); }
+
+  function skip(){
+    if (G.state !== "playing" && G.state !== "paused") return;
+    if (G.state === "paused") resume();
+    if (G.phase === "ready"){ enterMove(0, false); return; }
+    if (G.i >= G.routine.length - 1){ finish(); return; }
+    enterMove(G.i + 1, false);
+  }
+  function back(){
+    if (G.state !== "playing" && G.state !== "paused") return;
+    if (G.state === "paused") resume();
+    if (G.phase === "ready"){ enterMove(0, false); return; }
+    enterMove(Math.max(0, G.i - 1), false);
+  }
+
+  function stopClock(){
+    if (G.raf){ cancelAnimationFrame(G.raf); G.raf = 0; }
+    if (window.speechSynthesis) { try { speechSynthesis.cancel(); } catch (e) {} }
+  }
+
+  function finish(){
+    stopClock();
+    G.state = "done";
+    el.veil.hidden = true;
+    var r = G.routine;
+    PK.store.set(KEY.last, r.map(function(e){ return e.id; }));
+    if (G.completed > 0) bumpStreak();
+
+    el.doneMoves.textContent = G.completed + "/" + r.length;
+    el.doneTime.textContent = fmtClock(routineSeconds(r));
+    var areas = areasTouched(r);
+    el.doneChips.innerHTML = "";
+    areas.forEach(function(a, idx){
+      var c = document.createElement("span");
+      c.className = "pk-chip is-on";
+      c.textContent = areaLabel(a) + " ✓";
+      if (!PK.motion.reduced){
+        c.classList.add("or-chip-in");
+        c.style.animationDelay = (idx * 50) + "ms";
+      }
+      el.doneChips.appendChild(c);
+    });
+    setPrimary("Do another");
+    show("done");
+    PK.sound.play("win");
+    PK.buzz([80, 60, 80]);
+    PK.announce("Nice. You reset. " + G.completed + " of " + r.length +
+      " moves completed. Areas: " + areas.map(areaLabel).join(", ") + ".", true);
+  }
+
+  function endSession(){ openEndConfirm(); }
+
+  function backToStart(){
+    stopClock();
+    G.state = "idle";
+    el.veil.hidden = true;
+    setPrimary("Start Reset");
+    paintStart();
+    show("start");
+  }
+
+  function repeatLast(){
+    var ids = PK.store.get(KEY.last, []) || [];
+    var byId = {}, i;
+    for (i = 0; i < EXERCISES.length; i++) byId[EXERCISES[i].id] = EXERCISES[i];
+    var routine = [];
+    for (i = 0; i < ids.length; i++) if (byId[ids[i]]) routine.push(byId[ids[i]]);
+    if (!routine.length){ startSession(); return; }
+    startSession(routine);
+  }
+
+  /* ---- optional voice cues (off by default, feature-detected) ---- */
+  function speak(ex){
+    if (!opt.voice || !window.speechSynthesis || !window.SpeechSynthesisUtterance) return;
+    try {
+      speechSynthesis.cancel();
+      var line = ex.name + ". " + String(ex.cue).split(". ")[0] + ".";
+      var u = new SpeechSynthesisUtterance(line);
+      u.rate = 0.95; u.volume = PK.sound.enabled ? 1 : 0;
+      if (PK.sound.enabled) speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+
+  /* ---------------------------------------------------------- modals */
+  function buildModal(title, bodyHtml, actionsHtml, label){
+    var b = document.createElement("div");
+    b.className = "pk-sheet-backdrop or-modal";
+    b.innerHTML =
+      '<div class="pk-sheet" role="dialog" aria-modal="true" aria-label="' + esc(label) + '">' +
+        '<h2>' + esc(title) + '</h2>' + bodyHtml +
+        '<div class="or-acts">' + actionsHtml + '</div>' +
+      '</div>';
+    document.body.appendChild(b);
+    return b;
+  }
+
+  function openDisclaimer(){
+    if (!discBackdrop){
+      discBackdrop = buildModal("Safety & disclaimer", DISCLAIMER_HTML,
+        '<button class="pk-btn pk-btn--ghost" id="or-disc-close">Close</button>' +
+        '<button class="pk-btn" id="or-disc-ok">I understand</button>',
+        "Safety and disclaimer");
+      discBackdrop.querySelector("#or-disc-ok").addEventListener("click", function(){
+        accepted = true;
+        PK.store.set(KEY.accepted, true);
+        if (ui.primary) ui.primary.disabled = false;
+        closeModal(discBackdrop);
+        PK.toast("Thanks. Move gently.");
+      });
+      discBackdrop.querySelector("#or-disc-close").addEventListener("click", function(){
+        closeModal(discBackdrop);
+      });
+      wireModal(discBackdrop);
+    }
+    discBackdrop.querySelector("#or-disc-ok").hidden = accepted;
+    discBackdrop.querySelector("#or-disc-close").textContent = accepted ? "Done" : "Not now";
+    openModal(discBackdrop);
+  }
+
+  function openEndConfirm(){
+    if (!endBackdrop){
+      endBackdrop = buildModal("End this reset?",
+        '<p>You can stop any time. We will show what you finished so far.</p>',
+        '<button class="pk-btn pk-btn--ghost" id="or-end-no">Keep going</button>' +
+        '<button class="pk-btn" id="or-end-yes">End session</button>',
+        "End session");
+      endBackdrop.querySelector("#or-end-no").addEventListener("click", function(){
+        closeModal(endBackdrop);
+        resume();
+      });
+      endBackdrop.querySelector("#or-end-yes").addEventListener("click", function(){
+        closeModal(endBackdrop);
+        finish();
+      });
+      wireModal(endBackdrop);
+    }
+    pause();
+    openModal(endBackdrop);
+  }
+
+  function wireModal(b){
+    b.addEventListener("click", function(e){ if (e.target === b) closeModal(b); });
+    b.addEventListener("keydown", function(e){
+      if (e.key === "Escape"){ closeModal(b); return; }
+      if (e.key === "Tab"){
+        var f = b.querySelectorAll("button");
+        if (!f.length) return;
+        var first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+      }
+    });
+  }
+  var modalReturn = null;
+  function openModal(b){
+    modalReturn = document.activeElement;
+    b.classList.add("is-open");
+    var f = b.querySelector("button:not([hidden])");
+    if (f) f.focus();
+  }
+  function closeModal(b){
+    b.classList.remove("is-open");
+    if (modalReturn && modalReturn.focus) modalReturn.focus();
+  }
+
+  /* ---------------------------------------------------------- primary */
+  function primaryFire(){
+    if (G.state === "idle") return startSession();
+    if (G.state === "playing" || G.state === "paused") return togglePause();
+    if (G.state === "done") return backToStartAndGo();
+  }
+  function backToStartAndGo(){ backToStart(); startSession(); }
+
+  /* ---------------------------------------------------------- boot */
+  function boot(){
+    ui = PK.app({
+      title: "Office Reset", slug: SLUG, accent: "teal",
+      action: { label: "Start Reset", onFire: primaryFire, key: " " }
+    });
+
+    ui.stage.innerHTML =
+      /* ---------------- start ---------------- */
+      '<section class="or-screen" id="or-start">' +
+        '<h2 class="or-lede">A five-minute body reset for desk workers.</h2>' +
+        '<p class="or-sub" id="or-sub"></p>' +
+        '<div class="or-opts">' +
+          '<div class="or-opt">' +
+            '<span id="or-lbl-len">Length</span>' +
+            '<div class="pk-seg or-seg" id="or-seg-len" role="group" aria-labelledby="or-lbl-len">' +
+              '<button type="button" data-v="2">2 min</button>' +
+              '<button type="button" data-v="5">5 min</button>' +
+              '<button type="button" data-v="10">10 min</button>' +
+            '</div>' +
+          '</div>' +
+          '<div class="or-opt">' +
+            '<span id="or-lbl-int">Intensity</span>' +
+            '<div class="pk-seg or-seg" id="or-seg-int" role="group" aria-labelledby="or-lbl-int">' +
+              '<button type="button" data-v="gentle">Gentle</button>' +
+              '<button type="button" data-v="standard">Standard</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<p class="or-streak" id="or-streak"></p>' +
+        '<button class="or-link" id="or-safety-link">Safety &amp; disclaimer</button>' +
+      '</section>' +
+
+      /* ---------------- get ready ---------------- */
+      '<section class="or-screen" id="or-ready">' +
+        '<p class="pk-subtle">Get ready…</p>' +
+        '<div class="or-countin" id="or-countin" aria-hidden="true">3</div>' +
+        '<p class="or-first" id="or-ready-first"></p>' +
+        '<p class="pk-subtle or-safe" id="or-ready-safe"></p>' +
+      '</section>' +
+
+      /* ---------------- player ---------------- */
+      '<section class="or-screen" id="or-play">' +
+        '<div class="or-player" id="or-card">' +
+          '<div class="or-top">' +
+            '<div class="or-bar"><div class="or-bar__fill" id="or-barfill"></div></div>' +
+            '<div class="or-meta">' +
+              '<span class="or-meta__l">' +
+                '<span class="or-step pk-num" id="or-step">Move 1 of 9</span>' +
+                '<span class="or-tag" id="or-tag">Gentle</span>' +
+              '</span>' +
+              '<button class="pk-icon-btn" id="or-endbtn" aria-label="End session" title="End session">' +
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" ' +
+                'stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>' +
+              '</button>' +
+            '</div>' +
+            '<div class="or-dots" id="or-dots" aria-hidden="true"></div>' +
+          '</div>' +
+          '<span class="or-badge" id="or-badge" data-posture="seated">Seated</span>' +
+          '<h2 class="or-move" id="or-move"></h2>' +
+          '<div class="or-ringwrap" id="or-ringwrap" role="timer" aria-label="Time remaining">' +
+            '<div class="or-ring"></div>' +
+            '<div class="or-ring__track"></div>' +
+            '<div class="or-caprot"><span class="or-cap"></span></div>' +
+            '<div class="or-secs pk-num" id="or-secs">0<small id="or-secscap">seconds</small></div>' +
+          '</div>' +
+          '<p class="or-cue" id="or-cue"></p>' +
+          '<p class="pk-subtle or-safe" id="or-safe"></p>' +
+          '<p class="or-next" id="or-next"></p>' +
+          '<div class="or-controls">' +
+            '<button class="pk-btn pk-btn--ghost" id="or-back">Back</button>' +
+            '<button class="pk-btn pk-btn--main" id="or-pause">Pause</button>' +
+            '<button class="pk-btn pk-btn--ghost" id="or-skip">Skip</button>' +
+          '</div>' +
+          '<button class="or-veil" id="or-veil" hidden>' +
+            '<b>Paused</b><span class="pk-subtle">Tap anywhere to resume</span>' +
+          '</button>' +
+        '</div>' +
+      '</section>' +
+
+      /* ---------------- finish ---------------- */
+      '<section class="or-screen" id="or-done">' +
+        '<h2 class="pk-result">Nice. You reset.</h2>' +
+        '<div class="or-stats">' +
+          '<span class="or-stat"><b id="or-done-moves">0</b><span>moves</span></span>' +
+          '<span class="or-stat"><b id="or-done-time">0:00</b><span>routine</span></span>' +
+        '</div>' +
+        '<div class="or-chips" id="or-done-chips"></div>' +
+        '<p class="or-nudge">Aim to get up and move every 30 to 60 minutes.</p>' +
+        '<button class="or-link" id="or-safety-link2">Safety &amp; disclaimer</button>' +
+      '</section>';
+
+    /* ---- element cache ---- */
+    el.start = document.getElementById("or-start");
+    el.ready = document.getElementById("or-ready");
+    el.play  = document.getElementById("or-play");
+    el.done  = document.getElementById("or-done");
+    el.sub   = document.getElementById("or-sub");
+    el.segLen = document.getElementById("or-seg-len");
+    el.segInt = document.getElementById("or-seg-int");
+    el.streak = document.getElementById("or-streak");
+    el.countin = document.getElementById("or-countin");
+    el.readyFirst = document.getElementById("or-ready-first");
+    el.readySafe = document.getElementById("or-ready-safe");
+    el.card = document.getElementById("or-card");
+    el.barFill = document.getElementById("or-barfill");
+    el.step = document.getElementById("or-step");
+    el.tag = document.getElementById("or-tag");
+    el.dots = document.getElementById("or-dots");
+    el.badge = document.getElementById("or-badge");
+    el.move = document.getElementById("or-move");
+    el.ringwrap = document.getElementById("or-ringwrap");
+    el.secs = document.getElementById("or-secs");
+    el.secsCap = document.getElementById("or-secscap");
+    el.cue = document.getElementById("or-cue");
+    el.safe = document.getElementById("or-safe");
+    el.nextUp = document.getElementById("or-next");
+    el.back = document.getElementById("or-back");
+    el.pause = document.getElementById("or-pause");
+    el.skip = document.getElementById("or-skip");
+    el.veil = document.getElementById("or-veil");
+    el.doneMoves = document.getElementById("or-done-moves");
+    el.doneTime = document.getElementById("or-done-time");
+    el.doneChips = document.getElementById("or-done-chips");
+
+    /* ---- finish-screen extra actions live in the kit action bar ---- */
+    el.btnRepeat = PK.el("button", { "class":"pk-btn pk-btn--ghost", type:"button",
+      onClick: function(){ backToStart(); repeatLast(); } }, ["Repeat"]);
+    el.btnChange = PK.el("button", { "class":"pk-btn pk-btn--ghost", type:"button",
+      onClick: function(){ backToStart(); el.segLen.querySelector("button").focus(); } },
+      ["Change length"]);
+    ui.actions.insertBefore(el.btnRepeat, ui.primary);
+    ui.actions.appendChild(el.btnChange);
+
+    /* ---- wiring ---- */
+    el.segLen.addEventListener("click", function(e){
+      var b = e.target.closest("button"); if (!b) return;
+      opt.length = normLength(b.dataset.v);
+      PK.store.set(KEY.length, opt.length);
+      PK.sound.play("click");
+      paintStart();
+    });
+    el.segInt.addEventListener("click", function(e){
+      var b = e.target.closest("button"); if (!b) return;
+      opt.intensity = b.dataset.v === "standard" ? "standard" : "gentle";
+      PK.store.set(KEY.intensity, opt.intensity);
+      PK.sound.play("click");
+      paintStart();
+    });
+    document.getElementById("or-safety-link").addEventListener("click", openDisclaimer);
+    document.getElementById("or-safety-link2").addEventListener("click", openDisclaimer);
+    document.getElementById("or-endbtn").addEventListener("click", endSession);
+    el.back.addEventListener("click", back);
+    el.skip.addEventListener("click", skip);
+    el.pause.addEventListener("click", togglePause);
+    el.veil.addEventListener("click", resume);
+
+    /* keyboard: Space handled by the kit (primary), arrows are ours */
+    document.addEventListener("keydown", function(e){
+      var tag = (e.target && e.target.tagName) || "";
+      if (/INPUT|TEXTAREA|SELECT/.test(tag)) return;
+      if (document.querySelector(".pk-sheet-backdrop.is-open")) return;
+      if (G.state !== "playing" && G.state !== "paused") return;
+      if (e.key === "ArrowRight"){ e.preventDefault(); skip(); }
+      else if (e.key === "ArrowLeft"){ e.preventDefault(); back(); }
+    });
+
+    /* a real interruption should not burn the clock */
+    document.addEventListener("visibilitychange", function(){
+      if (document.hidden && G.state === "playing") pause();
+    });
+
+    /* ---- app options in the kit settings sheet ---- */
+    var slot = document.createElement("div");
+    slot.innerHTML =
+      '<div class="or-setrow">' +
+        '<label for="or-sw-voice">Voice cues<small>Read each move aloud</small></label>' +
+        '<span class="pk-switch"><input type="checkbox" id="or-sw-voice"></span>' +
+      '</div>' +
+      '<div class="or-setrow">' +
+        '<label>Safety<small>Non-medical-advice note</small></label>' +
+        '<button class="pk-btn pk-btn--ghost pk-btn--sm" id="or-set-safety">Read it</button>' +
+      '</div>';
+    var sw = slot.querySelector("#or-sw-voice");
+    sw.checked = opt.voice;
+    if (!window.speechSynthesis){ sw.disabled = true; }
+    sw.addEventListener("change", function(){
+      opt.voice = sw.checked; PK.store.set(KEY.voice, opt.voice);
+    });
+    slot.querySelector("#or-set-safety").addEventListener("click", function(){
+      var sheet = document.querySelector(".pk-sheet-backdrop.is-open");
+      if (sheet) sheet.classList.remove("is-open");
+      openDisclaimer();
+    });
+    PK.settings.register(slot);
+
+    /* ---- first paint ---- */
+    paintStart();
+    show("start");
+    if (!accepted){
+      if (ui.primary) ui.primary.disabled = true;
+      setTimeout(openDisclaimer, 240);
+    }
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+}
+
+/* =====================================================================
+   Export the pure, testable surface for node bot_test.js (no DOM in Node).
+   ===================================================================== */
+if (HEADLESS && typeof globalThis !== "undefined") {
+  globalThis.OFFICERESET = {
+    EXERCISES: EXERCISES,
+    AREAS: AREAS,
+    COUNTS: COUNTS,
+    TRANSITION: TRANSITION,
+    COVERAGE_PRIORITY: COVERAGE_PRIORITY,
+    isStandard: isStandard,
+    poolFor: poolFor,
+    buildRoutine: buildRoutine,
+    routineSeconds: routineSeconds,
+    areasTouched: areasTouched
+  };
+}
+</script>
+<!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:10px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Get the monthly letter</a></footer><!-- /ep:ca-foot -->
+</body></html>

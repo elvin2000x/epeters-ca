@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="One climb into a long flat plateau that ends before the ceiling">
+  <rect width="480" height="300" fill="#15171A"/>
+  <g stroke="#2A2D31" stroke-width="1">
+    <line x1="0" y1="75" x2="480" y2="75"/>
+    <line x1="0" y1="140" x2="480" y2="140"/>
+    <line x1="0" y1="205" x2="480" y2="205"/>
+  </g>
+  <line x1="0" y1="58" x2="480" y2="58" stroke="#3A3E44" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <path d="M14 272 L118 106 L200 100 L300 103 L404 99 L404 285 L14 285 Z" fill="#EFA43A" opacity="0.12"/>
+  <path d="M14 272 L118 106 L200 100 L300 103 L404 99" fill="none" stroke="#EFA43A" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="404" cy="99" r="6" fill="#EFA43A"/>
+  <text x="18" y="42" font-family="Consolas,monospace" font-size="19" font-weight="700" fill="#EAEBE6">load, hold, close</text>
+  <text x="330" y="128" font-family="Consolas,monospace" font-size="13" fill="#A3AAB4">checkpoint</text>
+</svg>

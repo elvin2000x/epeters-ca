@@ -1,0 +1,631 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="stylesheet" href="../_kit/play-kit.css">
+<title>Movie Picker</title>
+<style>
+  /* ============================================================ movie-picker
+     All styling builds on --pk-* tokens (accent = indigo). Light + dark +
+     reduced-motion inherit from the kit. Hero = a 2:3 poster card; the
+     signature moment is a decelerating slot-reel shuffle-reveal. */
+
+  /* ---- filter rail ---- */
+  .mp-rail{ width:100%; max-width:520px; display:flex; flex-direction:column; gap:12px; }
+  .mp-lane{ display:flex; flex-direction:column; gap:6px; }
+  .mp-lane__label{ font-size:var(--pk-fs-xs); font-weight:700; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--pk-ink-faint); text-align:left; padding-left:2px; }
+  .mp-chiprow{ display:flex; gap:8px; overflow-x:auto; padding:2px 2px 6px; scroll-snap-type:x proximity;
+    -webkit-overflow-scrolling:touch; scrollbar-width:thin; }
+  .mp-chiprow::-webkit-scrollbar{ height:6px; }
+  .mp-chiprow::-webkit-scrollbar-thumb{ background:var(--pk-line); border-radius:999px; }
+  .mp-chiprow .pk-chip{ flex:0 0 auto; scroll-snap-align:start; white-space:nowrap; }
+  .mp-decade{ display:flex; gap:8px; align-items:center; }
+  .mp-decade .pk-select{ flex:1; min-width:0; }
+
+  .mp-count{ font-size:var(--pk-fs-sm); color:var(--pk-ink-soft); min-height:1.3em; }
+  .mp-count b{ font-family:var(--pk-font-num); font-variant-numeric:tabular-nums;
+    color:var(--pk-ink); font-weight:700; }
+
+  /* ---- the poster card (hero) ---- */
+  .mp-stage-wrap{ display:flex; flex-direction:column; align-items:center; gap:16px; width:100%; }
+  .mp-card{
+    position:relative; width:min(300px, 72vw); aspect-ratio:2/3; border-radius:var(--pk-radius);
+    background:var(--pk-surface-sunk); box-shadow:var(--pk-shadow-obj);
+    overflow:hidden; perspective:1200px; isolation:isolate;
+    transform:translateY(0) scale(1); will-change:transform;
+  }
+  .mp-card.is-priming{ transform:scale(.97); }
+  .mp-card.is-idle{ animation:mp-breathe 5s ease-in-out infinite; }
+  @keyframes mp-breathe{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-4px);} }
+
+  .mp-poster{ position:absolute; inset:0; width:100%; height:100%; }
+  .mp-poster img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    background:var(--pk-surface-sunk); }
+
+  /* film-strip placeholder — sprocket border + centered title/year */
+  .mp-ph{ position:absolute; inset:0; display:grid; place-items:center; padding:18px 26px;
+    background:
+      linear-gradient(150deg, color-mix(in srgb, var(--pk-accent) 22%, var(--pk-surface)) 0%,
+        var(--pk-surface) 55%, color-mix(in srgb, var(--pk-accent) 12%, var(--pk-surface-sunk)) 100%); }
+  .mp-ph::before, .mp-ph::after{ content:""; position:absolute; top:0; bottom:0; width:16px;
+    background:
+      repeating-linear-gradient(to bottom, transparent 0 8px,
+        color-mix(in srgb, var(--pk-ink) 34%, transparent) 8px 16px, transparent 16px 24px);
+    -webkit-mask:repeating-linear-gradient(to bottom, transparent 0 6px, #000 6px 18px, transparent 18px 24px);
+            mask:repeating-linear-gradient(to bottom, transparent 0 6px, #000 6px 18px, transparent 18px 24px);
+    background:color-mix(in srgb, var(--pk-ink) 40%, transparent); opacity:.5; }
+  .mp-ph::before{ left:0; } .mp-ph::after{ right:0; }
+  .mp-ph__inner{ text-align:center; z-index:1; }
+  .mp-ph__title{ font-family:var(--pk-font-display); font-weight:700; font-size:1.15rem;
+    line-height:1.15; color:var(--pk-ink); }
+  .mp-ph__year{ margin-top:6px; font-family:var(--pk-font-num); font-variant-numeric:tabular-nums;
+    font-size:var(--pk-fs-sm); color:var(--pk-ink-soft); }
+  .mp-ph__mark{ margin-bottom:12px; font-size:var(--pk-fs-xs); letter-spacing:.14em;
+    text-transform:uppercase; color:var(--pk-accent); font-weight:700; opacity:.8; }
+
+  /* specular glint on land */
+  .mp-card.is-land::after{ content:""; position:absolute; inset:0; z-index:3; pointer-events:none;
+    background:linear-gradient(105deg, transparent 40%, rgba(255,255,255,.55) 50%, transparent 60%);
+    animation:mp-spec .5s var(--pk-ease-standard) forwards; }
+  @keyframes mp-spec{ from{ transform:translateX(-120%);} to{ transform:translateX(120%);} }
+
+  /* ---- detail readout (below the poster) ---- */
+  .mp-detail{ width:min(340px,86vw); display:flex; flex-direction:column; gap:8px; align-items:center; }
+  .pk-result.mp-title{ font-size:clamp(1.4rem,4vw + .6rem,2.1rem); min-height:0; }
+  .mp-meta{ display:inline-flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:center;
+    font-family:var(--pk-font-num); font-variant-numeric:tabular-nums; font-size:var(--pk-fs-sm);
+    color:var(--pk-ink-soft); }
+  .mp-meta .mp-dot{ width:3px; height:3px; border-radius:50%; background:var(--pk-ink-faint); }
+  .mp-star{ color:var(--pk-accent); }
+  .mp-tag{ padding:2px 10px; border-radius:var(--pk-radius-pill); font-size:var(--pk-fs-xs);
+    font-weight:700; letter-spacing:.03em; text-transform:uppercase;
+    background:var(--pk-accent-soft); color:var(--pk-accent-press); }
+  .mp-blurb{ color:var(--pk-ink-soft); font-size:var(--pk-fs-sm); line-height:1.45;
+    display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
+    max-width:340px; }
+
+  /* staged reveal of detail lines */
+  .mp-detail.is-revealing .mp-title,
+  .mp-detail.is-revealing .mp-meta,
+  .mp-detail.is-revealing .mp-blurb{ animation:mp-rise .28s var(--pk-ease-settle) both; }
+  .mp-detail.is-revealing .mp-meta{ animation-delay:.04s; }
+  .mp-detail.is-revealing .mp-blurb{ animation-delay:.08s; }
+  @keyframes mp-rise{ from{ opacity:0; transform:translateY(8px);} to{ opacity:1; transform:none;} }
+
+  /* ---- empty pool ---- */
+  .mp-empty{ width:min(340px,86vw); display:flex; flex-direction:column; gap:12px; align-items:center; }
+  .mp-empty .pk-well{ width:100%; }
+
+  /* ---- footer credit + sample note ---- */
+  .mp-foot{ width:100%; max-width:520px; display:flex; flex-direction:column; gap:6px;
+    margin-top:4px; }
+  .mp-note{ font-size:var(--pk-fs-xs); color:var(--pk-ink-faint); }
+  .mp-credit{ font-size:var(--pk-fs-xs); color:var(--pk-ink-faint); line-height:1.4; }
+
+  /* ---- settings credits block ---- */
+  .mp-credits{ display:flex; flex-direction:column; gap:10px; padding-top:12px;
+    border-top:1px solid var(--pk-line); margin-top:4px; }
+  .mp-credits__head{ display:flex; align-items:center; gap:10px; }
+  .mp-credits__logo{ width:64px; height:auto; flex:0 0 auto; }
+  .mp-credits__notice{ font-size:var(--pk-fs-sm); color:var(--pk-ink-soft); line-height:1.45; }
+
+  @media (max-width:400px){
+    .mp-card{ width:min(240px, 66vw); }
+  }
+</style>
+<link rel="canonical" href="https://epeters.ca/play/movie-picker/">
+</head><body>
+
+<script src="../_kit/play-kit.js"></script>
+
+<script>
+var HEADLESS = (typeof document === "undefined");
+
+/* =====================================================================
+   PURE LOGIC — no DOM, injectable rng. Exported as globalThis.MOVIEPICKER.
+   rng(n) -> uniform int in [0, n).
+   ===================================================================== */
+
+var GENRES = {
+  28:"Action", 12:"Adventure", 16:"Animation", 35:"Comedy", 80:"Crime",
+  99:"Documentary", 18:"Drama", 10751:"Family", 14:"Fantasy", 36:"History",
+  27:"Horror", 10402:"Music", 9648:"Mystery", 10749:"Romance", 878:"Science Fiction",
+  10770:"TV Movie", 53:"Thriller", 10752:"War", 37:"Western"
+};
+
+var MOODS = {
+  "feel-good":      { label:"Feel-Good",     genres:[35,10751,10402,10749] },
+  "edge-of-seat":   { label:"Edge-of-Seat",  genres:[53,28,9648,80] },
+  "mind-bending":   { label:"Mind-Bending",  genres:[878,9648,14] },
+  "good-cry":       { label:"Good Cry",      genres:[18,10749,10752] },
+  "scared-silly":   { label:"Scared Silly",  genres:[27,53] },
+  "epic-journey":   { label:"Epic Journey",  genres:[12,14,36] },
+  "laugh-out-loud": { label:"Laugh Out Loud",genres:[35] },
+  "true-story":     { label:"True Story",    genres:[99,36,18] }
+};
+
+var DECADES = [
+  { key:"pre1970", label:"Pre-1970" },
+  { key:"1970s",   label:"1970s" },
+  { key:"1980s",   label:"1980s" },
+  { key:"1990s",   label:"1990s" },
+  { key:"2000s",   label:"2000s" },
+  { key:"2010s",   label:"2010s" },
+  { key:"2020s",   label:"2020s" }
+];
+
+// <1970 => 'pre1970'; 2020+ => '2020s'; else the floor-10 bucket ('1970s' .. '2010s')
+function decadeOf(year){
+  year = Math.floor(Number(year));
+  if (!isFinite(year)) return null;
+  if (year < 1970) return "pre1970";
+  if (year >= 2020) return "2020s";
+  return (Math.floor(year / 10) * 10) + "s";
+}
+
+// -> array of TMDB genre ids for that mood; 'any'/unknown => []
+function expandMood(moodKey){
+  if (moodKey === "any" || !moodKey) return [];
+  var m = MOODS[moodKey];
+  return m ? m.genres.slice() : [];
+}
+
+function matchesGenre(movie, genreId){
+  if (genreId === "any" || genreId == null) return true;
+  return movie.genres.indexOf(Number(genreId)) !== -1;
+}
+function matchesMood(movie, moodKey){
+  if (moodKey === "any" || !moodKey) return true;
+  var set = expandMood(moodKey);
+  if (!set.length) return true;
+  for (var i = 0; i < movie.genres.length; i++){
+    if (set.indexOf(movie.genres[i]) !== -1) return true;
+  }
+  return false;
+}
+function matchesDecade(movie, decadeKey){
+  if (decadeKey === "any" || !decadeKey) return true;
+  return decadeOf(movie.year) === decadeKey;
+}
+
+// AND of the three matchers; returns a NEW array, original order preserved.
+function filterMovies(movies, criteria){
+  criteria = criteria || {};
+  var g  = criteria.genre  == null ? "any" : criteria.genre;
+  var mo = criteria.mood   == null ? "any" : criteria.mood;
+  var de = criteria.decade == null ? "any" : criteria.decade;
+  var out = [];
+  for (var i = 0; i < movies.length; i++){
+    var m = movies[i];
+    if (matchesGenre(m, g) && matchesMood(m, mo) && matchesDecade(m, de)) out.push(m);
+  }
+  return out;
+}
+
+// uniform pick; empty => null; length 1 => that movie (documented no-repeat exception);
+// length > 1 => uniform pick whose id !== avoidId (re-draw until distinct).
+function pickMovie(pool, rng, avoidId){
+  if (!pool || pool.length === 0) return null;
+  if (pool.length === 1) return pool[0];
+  var m = pool[rng(pool.length)];
+  if (avoidId == null) return m;
+  var guard = 0;
+  while (m.id === avoidId && guard < 10000){ m = pool[rng(pool.length)]; guard++; }
+  return m;
+}
+
+var POSTER_SIZES = ["w92","w154","w185","w342","w500","w780","original"];
+function clampSize(size){ return POSTER_SIZES.indexOf(size) !== -1 ? size : "w342"; }
+// only place the TMDB CDN base lives; null path => null (caller draws the placeholder).
+function posterUrl(poster_path, size){
+  if (poster_path == null) return null;
+  return "https://image.tmdb.org/t/p/" + clampSize(size) + poster_path;
+}
+
+/* =====================================================================
+   BROWSER WIRING — everything below touches DOM / PK, fully guarded by
+   !HEADLESS so node bot_test.js never reaches it.
+   ===================================================================== */
+if (!HEADLESS) {
+
+  var EASE = {
+    standard: "cubic-bezier(.2,0,0,1)",
+    spring:   "cubic-bezier(.34,1.56,.64,1)",
+    settle:   "cubic-bezier(.16,1,.3,1)",
+    anticip:  "cubic-bezier(.7,-0.4,.4,1)"
+  };
+  var STORE_FILTERS = "play.movie-picker.filters";
+  var TAGLINE = "Pick a movie";
+  var ACCLAIM = { classic:"Classic", popular:"Popular", acclaimed:"Acclaimed", beloved:"Beloved" };
+
+  var ALL = [];
+  var filters = normalizeFilters(PK.store.get(STORE_FILTERS, { genre:"any", mood:"any", decade:"any" }));
+  var currentPool = [];
+  var lastId = null;
+  var picking = false;
+
+  var ui, railEl, genreRowEl, moodRowEl, decadeSelEl, countEl,
+      wrapEl, cardEl, posterEl, detailEl, titleEl, metaEl, blurbEl, emptyEl, resetBtn;
+
+  function normalizeFilters(f){
+    f = f || {};
+    var g = f.genre;
+    if (g !== "any" && GENRES[g] == null) g = "any"; else if (g !== "any") g = Number(g);
+    var mo = (f.mood === "any" || MOODS[f.mood]) ? f.mood : "any";
+    var okDec = f.decade === "any" || DECADES.some(function(d){ return d.key === f.decade; });
+    return { genre: g, mood: okDec ? (mo) : mo, decade: okDec ? f.decade : "any" };
+  }
+
+  function escapeHtml(s){ return String(s).replace(/[&<>"]/g, function(c){
+    return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]; }); }
+
+  function formatRuntime(min){
+    min = Math.floor(Number(min) || 0);
+    if (min <= 0) return "";
+    var h = Math.floor(min / 60), m = min % 60;
+    return h ? (h + "h" + (m ? " " + m + "m" : "")) : (m + "m");
+  }
+
+  /* ---- render a poster (real img or film-strip placeholder) into a host ---- */
+  function renderPoster(host, movie){
+    var url = movie ? posterUrl(movie.poster_path, "w342") : null;
+    if (url){
+      var url2 = posterUrl(movie.poster_path, "w780");
+      host.innerHTML =
+        '<img loading="lazy" decoding="async" alt="' + escapeHtml(movie.title) + ' poster" ' +
+        'src="' + url + '" srcset="' + url + ' 342w, ' + url2 + ' 780w" ' +
+        'sizes="(max-width:400px) 66vw, 300px">';
+      var img = host.firstChild;
+      img.onerror = function(){ host.innerHTML = placeholderHTML(movie); };
+    } else {
+      host.innerHTML = placeholderHTML(movie);
+    }
+  }
+  function placeholderHTML(movie){
+    var title = movie ? movie.title : TAGLINE;
+    var year  = movie && movie.year ? String(movie.year) : "";
+    return '<div class="mp-ph"><div class="mp-ph__inner">' +
+      '<div class="mp-ph__mark">Now Showing</div>' +
+      '<div class="mp-ph__title">' + escapeHtml(title) + '</div>' +
+      (year ? '<div class="mp-ph__year">' + escapeHtml(year) + '</div>' : '') +
+      '</div></div>';
+  }
+
+  /* ---- detail readout ---- */
+  function metaHTML(movie){
+    var bits = [];
+    if (movie.year) bits.push('<span>' + movie.year + '</span>');
+    if (movie.rating != null && isFinite(movie.rating)){
+      bits.push('<span><span class="mp-star">&#9733;</span> ' + movie.rating + '</span>');
+    } else if (movie.acclaim && ACCLAIM[movie.acclaim]){
+      // sample set carries a qualitative tag instead of an invented numeric rating
+      bits.push('<span class="mp-tag">' + ACCLAIM[movie.acclaim] + '</span>');
+    }
+    var rt = formatRuntime(movie.runtime);
+    if (rt) bits.push('<span>' + rt + '</span>');
+    return bits.join('<span class="mp-dot"></span>');
+  }
+  function announceText(movie){
+    var parts = [movie.title];
+    if (movie.year) parts.push(String(movie.year));
+    if (movie.rating != null && isFinite(movie.rating)) parts.push(movie.rating + " out of 10");
+    else if (movie.acclaim && ACCLAIM[movie.acclaim]) parts.push(ACCLAIM[movie.acclaim]);
+    var rt = formatRuntime(movie.runtime); if (rt) parts.push(rt);
+    var s = parts.join(", ") + ".";
+    if (movie.overview) s += " " + movie.overview;
+    return s;
+  }
+
+  function showDetail(movie, animate){
+    titleEl.textContent = movie.title;
+    metaEl.innerHTML = metaHTML(movie);
+    blurbEl.textContent = movie.overview || "";
+    blurbEl.title = movie.overview || "";
+    detailEl.hidden = false;
+    if (animate){
+      detailEl.classList.remove("is-revealing");
+      void detailEl.offsetWidth;           // restart the stagger
+      detailEl.classList.add("is-revealing");
+    }
+    PK.announce(announceText(movie), true);
+  }
+
+  function finishPick(movie){
+    lastId = movie.id;
+    picking = false;
+    ui.primary.disabled = false;
+    ui.primary.textContent = "Pick Again";
+  }
+
+  /* ---- the shuffle-reveal ---- */
+  function land(movie){
+    renderPoster(posterEl, movie);
+    cardEl.classList.remove("is-priming", "is-idle");
+    cardEl.classList.add("is-land");
+    if (!PK.motion.reduced){
+      cardEl.animate([{ transform:"scale(1.03)" }, { transform:"scale(1)" }],
+        { duration:200, easing:EASE.spring, fill:"forwards" });
+    }
+    PK.sound.play("reveal");
+    PK.buzz(12);
+    setTimeout(function(){ cardEl.classList.remove("is-land"); }, 520);
+    showDetail(movie, !PK.motion.reduced);
+    finishPick(movie);
+  }
+
+  function crossfadeTo(movie){
+    // reduced-motion path: quick cross-fade straight to the decided poster
+    posterEl.animate([{ opacity:.3 }, { opacity:1 }], { duration:140, easing:EASE.settle });
+    renderPoster(posterEl, movie);
+    PK.sound.play("reveal");
+    PK.buzz(12);
+    showDetail(movie, false);
+    finishPick(movie);
+  }
+
+  function runShuffle(deck, movie){
+    var N = deck.length, i = 0;
+    function step(){
+      var frame = deck[i];
+      renderPoster(posterEl, frame);
+      posterEl.animate(
+        [{ transform:"rotateY(-14deg)", opacity:.55 }, { transform:"rotateY(0deg)", opacity:1 }],
+        { duration:110, easing:EASE.standard });
+      if (i % 2 === 0) PK.sound.play("cardFlip");
+      i++;
+      if (i < N){
+        var p = i / N;
+        var dwell = Math.round(55 + (180 - 55) * p * p);   // slot-reel deceleration
+        setTimeout(step, dwell);
+      } else {
+        land(movie);
+      }
+    }
+    setTimeout(step, 90);   // prime dip
+  }
+
+  function buildDeck(pool, movie){
+    var sample = PK.rand.shuffle(pool);
+    var frames = sample.slice(0, Math.min(13, sample.length));
+    frames.push(movie);   // always end on the decided film
+    return frames;
+  }
+
+  /* ---- main action ---- */
+  function doPick(){
+    if (picking || !currentPool.length) return;
+    picking = true;
+    ui.primary.disabled = true;
+    cardEl.classList.remove("is-idle");
+
+    // DECIDE FIRST (commit-then-reveal), crypto RNG, never Math.random.
+    var movie = pickMovie(currentPool, PK.rand.int, lastId);
+
+    detailEl.classList.remove("is-revealing");
+    PK.sound.play("cardFlip");
+
+    if (PK.motion.reduced || currentPool.length === 1){
+      crossfadeTo(movie);
+      return;
+    }
+    cardEl.classList.add("is-priming");
+    var deck = buildDeck(currentPool, movie);
+    setTimeout(function(){ cardEl.classList.remove("is-priming"); runShuffle(deck, movie); }, 100);
+  }
+
+  /* ---- filters ---- */
+  function recompute(){
+    currentPool = filterMovies(ALL, filters);
+    var n = currentPool.length;
+    countEl.innerHTML = "<b>" + n + "</b> " + (n === 1 ? "movie matches" : "movies match");
+    var empty = (n === 0);
+    emptyEl.hidden = !empty;
+    wrapEl.hidden = empty;
+    ui.primary.disabled = empty || picking;
+    PK.store.set(STORE_FILTERS, filters);
+  }
+
+  function selectGenre(id){
+    filters.genre = (filters.genre === id) ? "any" : id;
+    paintChips(genreRowEl, "genre");
+    resetResult();
+    PK.sound.play("tick");
+    recompute();
+  }
+  function selectMood(key){
+    filters.mood = (filters.mood === key) ? "any" : key;
+    paintChips(moodRowEl, "mood");
+    resetResult();
+    PK.sound.play("tick");
+    recompute();
+  }
+  function selectDecade(key){
+    filters.decade = key;
+    resetResult();
+    recompute();
+  }
+  function resetFilters(){
+    filters = { genre:"any", mood:"any", decade:"any" };
+    paintChips(genreRowEl, "genre");
+    paintChips(moodRowEl, "mood");
+    decadeSelEl.value = "any";
+    resetResult();
+    recompute();
+    PK.sound.play("click");
+  }
+
+  function paintChips(row, kind){
+    var cur = filters[kind];
+    row.querySelectorAll(".pk-chip").forEach(function(c){
+      var v = c.dataset.val;
+      var on = (kind === "genre")
+        ? (v === "any" ? cur === "any" : Number(v) === cur)
+        : (v === cur);
+      c.setAttribute("aria-pressed", String(on));
+    });
+  }
+
+  function resetResult(){
+    if (picking) return;
+    detailEl.hidden = true;
+    detailEl.classList.remove("is-revealing");
+    cardEl.classList.remove("is-land");
+    renderPoster(posterEl, null);       // placeholder / tagline
+    if (!PK.motion.reduced) cardEl.classList.add("is-idle");
+    titleEl.textContent = TAGLINE;
+    if (ui.primary) ui.primary.textContent = "Pick a Movie";
+  }
+
+  /* ---- build the filter rail ---- */
+  function chip(label, val, onClick){
+    var b = PK.el("button", { "class":"pk-chip", type:"button", "data-val":val, onClick:onClick }, []);
+    b.textContent = label;
+    return b;
+  }
+  function buildRail(){
+    genreRowEl.appendChild(chip("Any genre", "any", function(){ selectGenre("any"); }));
+    Object.keys(GENRES).forEach(function(id){
+      genreRowEl.appendChild(chip(GENRES[id], id, function(){ selectGenre(Number(id)); }));
+    });
+    moodRowEl.appendChild(chip("Any mood", "any", function(){ selectMood("any"); }));
+    Object.keys(MOODS).forEach(function(k){
+      moodRowEl.appendChild(chip(MOODS[k].label, k, function(){ selectMood(k); }));
+    });
+    var opts = '<option value="any">Any decade</option>';
+    DECADES.forEach(function(d){ opts += '<option value="' + d.key + '">' + d.label + '</option>'; });
+    decadeSelEl.innerHTML = opts;
+    decadeSelEl.value = filters.decade;
+    decadeSelEl.addEventListener("change", function(){ selectDecade(decadeSelEl.value); });
+    paintChips(genreRowEl, "genre");
+    paintChips(moodRowEl, "mood");
+  }
+
+  /* ---- TMDB attribution (mandatory) ---- */
+  var TMDB_NOTICE = "This product uses the TMDB API but is not endorsed or certified by TMDB.";
+  var TMDB_FOOTER = "Movie data and images provided by The Movie Database (TMDB). " + TMDB_NOTICE;
+  // Inline TMDB-style logo mark (brand colors; no external asset).
+  var TMDB_LOGO =
+    '<svg class="mp-credits__logo" viewBox="0 0 273 35" role="img" aria-label="TMDB">' +
+      '<defs><linearGradient id="mp-tmdb-g" x1="0" y1="0" x2="1" y2="0">' +
+      '<stop offset="0" stop-color="#90cea1"/><stop offset="0.56" stop-color="#3cbec9"/>' +
+      '<stop offset="1" stop-color="#00b3e5"/></linearGradient></defs>' +
+      '<rect x="0" y="0" width="273" height="35" rx="8" fill="#0d253f"/>' +
+      '<rect x="8" y="9" width="257" height="17" rx="6" fill="url(#mp-tmdb-g)"/>' +
+      '<text x="136.5" y="22" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" ' +
+      'font-size="13" font-weight="700" fill="#0d253f" letter-spacing="1.5">TMDB</text>' +
+    '</svg>';
+
+  function buildCredits(){
+    var box = document.createElement("div");
+    box.className = "mp-credits";
+    box.innerHTML =
+      '<div class="pk-setting" style="border:0;padding-bottom:4px"><label>Credits' +
+        '<small>Data source &amp; attribution</small></label></div>' +
+      '<div class="mp-credits__head">' + TMDB_LOGO + '</div>' +
+      '<p class="mp-credits__notice">' + TMDB_NOTICE + '</p>' +
+      '<p class="mp-credits__notice pk-subtle">Starter sample set (' + '{{N}}' +
+        ' well-known films). The full TMDB snapshot drops in later — see data/BUILD-DATA.md.</p>';
+    return box;
+  }
+
+  /* ---- boot ---- */
+  function boot(){
+    ui = PK.app({ title:"Movie Picker", slug:"movie-picker", accent:"indigo",
+      action:{ label:"Pick a Movie", onFire:doPick, key:" " } });
+
+    ui.stage.innerHTML =
+      '<div class="mp-rail" id="mp-rail">' +
+        '<div class="mp-lane"><span class="mp-lane__label">Genre</span>' +
+          '<div class="mp-chiprow" id="mp-genre" role="group" aria-label="Filter by genre"></div></div>' +
+        '<div class="mp-lane"><span class="mp-lane__label">Mood</span>' +
+          '<div class="mp-chiprow" id="mp-mood" role="group" aria-label="Filter by mood"></div></div>' +
+        '<div class="mp-lane"><span class="mp-lane__label">Decade</span>' +
+          '<div class="mp-decade"><select class="pk-select" id="mp-decade" aria-label="Filter by decade"></select></div></div>' +
+        '<div class="mp-count" id="mp-count" role="status" aria-live="polite"></div>' +
+      '</div>' +
+      '<div class="mp-stage-wrap" id="mp-wrap">' +
+        '<div class="mp-card is-idle" id="mp-card" aria-hidden="true"><div class="mp-poster" id="mp-poster"></div></div>' +
+        '<div class="mp-detail" id="mp-detail" hidden>' +
+          '<div class="pk-result mp-title" id="mp-title" aria-hidden="true"></div>' +
+          '<div class="mp-meta" id="mp-meta"></div>' +
+          '<p class="mp-blurb" id="mp-blurb"></p>' +
+        '</div>' +
+      '</div>' +
+      '<div class="mp-empty" id="mp-empty" hidden>' +
+        '<div class="pk-well">No movies match — loosen a filter.</div>' +
+      '</div>' +
+      '<div class="mp-foot">' +
+        '<p class="mp-note" id="mp-note"></p>' +
+        '<p class="mp-credit">' + TMDB_FOOTER + '</p>' +
+      '</div>';
+
+    railEl      = document.getElementById("mp-rail");
+    genreRowEl  = document.getElementById("mp-genre");
+    moodRowEl   = document.getElementById("mp-mood");
+    decadeSelEl = document.getElementById("mp-decade");
+    countEl     = document.getElementById("mp-count");
+    wrapEl      = document.getElementById("mp-wrap");
+    cardEl      = document.getElementById("mp-card");
+    posterEl    = document.getElementById("mp-poster");
+    detailEl    = document.getElementById("mp-detail");
+    titleEl     = document.getElementById("mp-title");
+    metaEl      = document.getElementById("mp-meta");
+    blurbEl     = document.getElementById("mp-blurb");
+    emptyEl     = document.getElementById("mp-empty");
+
+    // Reset-filters button lives in the empty state
+    resetBtn = PK.el("button", { "class":"pk-btn pk-btn--soft pk-btn--sm", type:"button",
+      onClick:resetFilters }, []);
+    resetBtn.textContent = "Reset filters";
+    emptyEl.appendChild(resetBtn);
+
+    buildRail();
+    renderPoster(posterEl, null);
+    titleEl.textContent = TAGLINE;
+
+    // settings Credits block (TMDB logo + exact notice) — registered after data load for the count
+    loadData();
+  }
+
+  function loadData(){
+    fetch("data/movies.json", { cache:"no-cache" })
+      .then(function(r){ if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(function(data){
+        ALL = Array.isArray(data) ? data : [];
+        onDataReady();
+      })
+      .catch(function(){
+        ALL = [];
+        document.getElementById("mp-note").textContent =
+          "Could not load the movie sample (data/movies.json). Serve this folder over http to load it.";
+        recompute();
+      });
+  }
+  function onDataReady(){
+    document.getElementById("mp-note").textContent =
+      "Starter sample set — " + ALL.length + " well-known films. Full TMDB catalog drops in later.";
+    var credits = buildCredits();
+    credits.innerHTML = credits.innerHTML.replace("{{N}}", String(ALL.length));
+    PK.settings.register(credits);
+    recompute();
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+}
+
+/* =====================================================================
+   Export the pure, testable surface for node bot_test.js (no DOM in Node).
+   ===================================================================== */
+if (HEADLESS && typeof globalThis !== "undefined") {
+  globalThis.MOVIEPICKER = {
+    GENRES: GENRES, MOODS: MOODS, DECADES: DECADES,
+    decadeOf: decadeOf, expandMood: expandMood,
+    matchesGenre: matchesGenre, matchesMood: matchesMood, matchesDecade: matchesDecade,
+    filterMovies: filterMovies, pickMovie: pickMovie,
+    posterUrl: posterUrl, clampSize: clampSize
+  };
+}
+</script>
+<!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:10px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Get the monthly letter</a></footer><!-- /ep:ca-foot -->
+</body></html>

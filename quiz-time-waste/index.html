@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CLZ7N26J1Q');
+    gtag('config', 'AW-637214471');   /* Google Ads: remarketing + conversions */
+  </script>
+  <!-- X (Twitter) pixel base code -->
+  <script>!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+  },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+  a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');twq('config','re26u');</script>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1699232654449762');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1699232654449762&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  <!-- TikTok Pixel Code Start -->
+  <script>
+  !function (w, d, t) {
+    w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+    ttq.load('D93C3IRC77U4775FLNR0');
+    ttq.page();
+  }(window, document, 'ttq');
+  </script>
+  <!-- TikTok Pixel Code End -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The AI Time-Waste Calculator — How Many Hours You're Losing</title>
+  <meta name="description" content="See exactly how many hours and dollars you lose every year to busywork AI could handle, and which of your workflows to automate first. Takes 60 seconds." />
+<link rel="canonical" href="https://epeters.ca/quiz-time-waste/">
+  <meta property="og:title" content="The AI Time-Waste Calculator" />
+  <meta property="og:description" content="A 60-second calculator that shows the hours and dollars you could reclaim every year with AI, and where to start." />
+  <meta property="og:image" content="https://elvinpeters.com/cover.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+/* Deliberate styling island: the quiz funnel family shares its own always-dark
+   palette. NOT a drifted copy of the system palette; do not migrate. */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black:#060f1a; --dark:#0a1828; --card:#0f2035; --border:#1a3248;
+      --accent:#c9a250; --accent2:#4fb3f0; --white:#f0f5fa; --muted:#6a8faa; --text:#b8d0e4;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: radial-gradient(140% 100% at 50% 0%, #0a1e35 0%, #060f1a 60%);
+      min-height: 100vh; color: var(--text);
+      font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .wrap { width: 100%; max-width: 640px; padding: 24px; margin: 0 auto; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; padding: 8px 4px 0; margin-bottom: 28px; }
+    .brand { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+    .brand a { color: var(--accent); text-decoration: none; }
+    .topbar .skip { font-size: 12px; color: var(--muted); text-decoration: none; padding: 12px 0 12px 14px; }
+    .topbar .skip:hover { color: var(--accent); }
+    .progress-wrap { height: 4px; background: var(--border); border-radius: 99px; overflow: hidden; margin-bottom: 28px; }
+    .progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent2), var(--accent)); transition: width 0.35s ease; }
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 36px 32px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+    .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    h1, h2.as-h1 { font-family: 'EB Garamond', Georgia, serif; font-weight: 600; color: var(--white); line-height: 1.12; letter-spacing: -0.01em; }
+    .intro h1 { font-size: clamp(32px, 6vw, 48px); margin-bottom: 18px; }
+    .intro p { font-size: 18px; color: var(--text); margin-bottom: 14px; }
+    .intro .meta { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
+    .intro .meta b { color: var(--text); }
+    .qnum { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+    .qtext { font-family: 'EB Garamond', serif; font-size: clamp(24px, 4.5vw, 32px); font-weight: 600; color: var(--white); line-height: 1.2; margin-bottom: 26px; }
+    .options { display: flex; flex-direction: column; gap: 12px; }
+    .opt {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--dark); border: 1px solid var(--border); border-radius: 10px;
+      padding: 18px 20px; cursor: pointer; transition: border-color 0.15s, background 0.15s, transform 0.1s;
+      font-size: 16px; color: var(--text); text-align: left; width: 100%; font-family: 'Inter', sans-serif;
+    }
+    .opt:hover { border-color: var(--accent); background: #11263f; }
+    .opt.sel { border-color: var(--accent); background: rgba(201,162,80,0.10); color: var(--white); }
+    .opt .dot {
+      width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--muted); flex-shrink: 0;
+      position: relative; transition: border-color 0.15s;
+    }
+    .opt.sel .dot { border-color: var(--accent); }
+    .opt.sel .dot::after { content:""; position:absolute; inset: 3px; border-radius: 50%; background: var(--accent); }
+    .btn {
+      display: inline-block; background: var(--accent); color: var(--black);
+      font-size: 16px; font-weight: 700; padding: 16px 32px; border-radius: 8px;
+      text-decoration: none; border: none; cursor: pointer; font-family: 'Inter', sans-serif;
+      letter-spacing: 0.01em; transition: opacity 0.15s, transform 0.12s;
+      box-shadow: 0 6px 24px rgba(201,162,80,0.22);
+    }
+    .btn:hover { opacity: 0.92; transform: translateY(-1px); }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+    .btn.full { width: 100%; }
+    .nav-row { display: flex; align-items: center; justify-content: space-between; margin-top: 26px; }
+    .back { background: none; border: none; color: var(--muted); font-size: 14px; cursor: pointer; font-family: 'Inter', sans-serif; padding: 8px; ;min-height:44px;display:inline-flex;align-items:center}
+    .back:hover { color: var(--accent); }
+    .back:disabled { opacity: 0; pointer-events: none; }
+    .gate label { display:block; font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+    .gate input {
+      width: 100%; background: var(--dark); border: 1px solid var(--border); border-radius: 8px;
+      padding: 15px 16px; color: var(--white); font-size: 16px; font-family: 'Inter', sans-serif; margin-bottom: 16px;
+    }
+    .gate input:focus { outline: none; border-color: var(--accent); }
+    .gate .fineprint { font-size: 12px; color: var(--muted); margin-top: 14px; text-align: center; }
+    .gate .err { color: #e07a7a; font-size: 13px; margin-bottom: 12px; display: none; }
+    .result .type-eyebrow { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .result h1, .result h2.as-h1 { font-size: clamp(30px, 6vw, 46px); margin-bottom: 8px; }
+    .result .tagline { font-size: 18px; color: var(--text); margin-bottom: 24px; font-style: italic; font-family: 'EB Garamond', serif; }
+    .bignums { display:flex; gap:12px; margin-bottom:26px; flex-wrap:wrap; }
+    .bignum { flex:1; min-width:150px; background: linear-gradient(160deg, rgba(79,179,240,0.10), rgba(201,162,80,0.05)); border:1px solid var(--accent2); border-radius:12px; padding:20px 18px; text-align:center; }
+    .bignum .n { font-family:'EB Garamond',serif; font-size:38px; font-weight:600; color:var(--white); line-height:1.1; }
+    .bignum .l { font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; margin-top:6px; }
+    .block { margin-bottom: 26px; }
+    .block h3 { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent2); margin-bottom: 14px; }
+    .block p { font-size: 16px; color: var(--text); line-height: 1.7; }
+    .tools { display: flex; flex-direction: column; gap: 10px; }
+    .tool { display:flex; gap: 12px; align-items: flex-start; background: var(--dark); border:1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+    .tool .tn { font-weight: 600; color: var(--white); }
+    .tool .td { font-size: 14px; color: var(--muted); }
+    .tool .th { font-size:12px; color: var(--accent); font-weight:700; margin-left:auto; white-space:nowrap; padding-left:10px; }
+    .magnet { display:block; background: var(--dark); border:1px solid var(--border); border-radius: 10px; padding: 16px 18px; text-decoration:none; transition: border-color .15s, background .15s; margin-bottom:10px; }
+    .magnet:hover { border-color: var(--accent); background:#11263f; }
+    .magnet .mn { font-weight:600; color: var(--white); font-size:15px; }
+    .magnet .md { font-size:13px; color: var(--muted); margin-top:3px; }
+    .magnet .mg { font-size:12px; color: var(--accent); letter-spacing:0.1em; text-transform:uppercase; font-weight:700; }
+    .book-cta { background: linear-gradient(160deg, #112a47 0%, #0a1828 100%); border:1px solid var(--border); border-radius: 12px; padding: 28px 26px; text-align: center; margin-top: 8px; }
+    .book-cta .why { font-size: 16px; color: var(--text); line-height: 1.7; margin-bottom: 20px; }
+    .book-cta .why b { color: var(--white); }
+    .book-cta .price { font-size: 13px; color: var(--muted); margin-top: 12px; }
+    .share { text-align: center; margin-top: 22px; font-size: 14px; }
+    .share a { color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--border); }
+    .share a:hover { color: var(--accent); border-color: var(--accent); }
+    .disclaimer { font-size:12px; color:var(--muted); margin-top:6px; line-height:1.5; }
+    .hidden { display: none !important; }
+    .fade { animation: fade 0.32s ease; }
+    @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    footer { font-size: 12px; color: var(--muted); text-align: center; padding: 30px 24px 40px; }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+    @media (max-width: 640px) { .card { padding: 28px 22px; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <span class="brand"><a href="https://elvinpeters.com/?utm_source=epeters.ca&utm_medium=link&utm_campaign=quizzes">The Artificial Advantage</a></span>
+      <a class="skip" href="https://elvinpeters.com/free/automation-kit/?utm_source=epeters.ca&utm_medium=link&utm_campaign=quizzes" target="_blank" rel="noopener" id="skipLink">Skip to the automation kit →</a>
+    </div>
+    <div class="progress-wrap"><div class="progress-bar" id="bar"></div></div>
+    <div id="stage"></div>
+  </div>
+  <footer>© 2026 Elvin M. Peters · <a href="https://elvinpeters.com/?utm_source=epeters.ca&utm_medium=link&utm_campaign=quizzes">elvinpeters.com</a></footer>
+
+<script>
+/* =========================================================================
+   AI TIME-WASTE CALCULATOR — self-contained, config-driven.
+   Six task questions each carry an option `h` (estimated hours/week on that
+   task) and the question carries `auto` (the conservative share of that task
+   AI can realistically take off your plate). One rate question sets the value
+   of an hour. Result = reclaimable hours/week, hours/year, and dollars/year,
+   plus the workflows to automate first (sorted by hours reclaimed).
+   Numbers are honest estimates, clearly labelled as such on the result.
+   ========================================================================= */
+var QUIZ = {
+  source: "time-waste-quiz",
+  leadName: "Time-Waste Calculator",
+  bookUrl: "https://elvinpeters.com/",
+  salesUrl: "https://elvinpeters.com/",
+  leadApi: "https://ultimateaidirectory.com/api/lead", // owned lead DB (HTTPS, CORS-enabled)
+  workWeeks: 46, // conservative working weeks per year (allows for time off)
+
+  intro: {
+    eyebrow: "60-Second Calculator",
+    title: "How much time is AI-able busywork costing you?",
+    body: [
+      "Email, reports, research, scheduling, data entry. A big share of the week goes to work that AI can now do in a fraction of the time, and most people never add it up.",
+      "Answer 7 quick questions and you'll see the hours and the dollars you could reclaim every year, and exactly which of your workflows to hand off first."
+    ],
+    meta: "7 questions · about 60 seconds · free personalized number",
+    cta: "Calculate my number →"
+  },
+
+  // Task questions: option `h` = hours/week; question `auto` = realistic AI-reclaimable share.
+  // The rate question sets `rate` = value of one hour.
+  questions: [
+    {
+      q: "How many hours a week go to email and messages?",
+      task: "Email and inbox", auto: 0.4,
+      tip: "AI drafts replies, summarizes long threads, and clears your inbox to a few decisions a day.",
+      opts: [
+        { t: "Almost none, under an hour", h:0.5 },
+        { t: "A couple of hours", h:2.5 },
+        { t: "Most of a day, 4 to 6 hours", h:5 },
+        { t: "A huge chunk, 7 or more hours", h:9 }
+      ]
+    },
+    {
+      q: "How many hours a week go to writing reports, docs, and summaries?",
+      task: "Reports and writing", auto: 0.5,
+      tip: "AI turns your notes and data into a solid first draft in minutes, so you edit instead of stare at a blank page.",
+      opts: [
+        { t: "Almost none, under an hour", h:0.5 },
+        { t: "A couple of hours", h:2.5 },
+        { t: "A solid half day, 4 to 6 hours", h:5 },
+        { t: "A big load, 7 or more hours", h:9 }
+      ]
+    },
+    {
+      q: "How many hours a week go to research and gathering information?",
+      task: "Research and gathering", auto: 0.55,
+      tip: "AI finds, reads, and summarizes sources for you, and hands back the answer with the receipts.",
+      opts: [
+        { t: "Almost none, under an hour", h:0.5 },
+        { t: "A couple of hours", h:2.5 },
+        { t: "A meaningful part, 4 to 6 hours", h:5 },
+        { t: "A large part, 7 or more hours", h:9 }
+      ]
+    },
+    {
+      q: "How many hours a week go to scheduling, meeting prep, and notes?",
+      task: "Scheduling and meetings", auto: 0.55,
+      tip: "AI books the meetings, preps the agenda, and writes the recap and action items for you.",
+      opts: [
+        { t: "Almost none, under an hour", h:0.5 },
+        { t: "A couple of hours", h:2.5 },
+        { t: "A fair amount, 4 to 6 hours", h:5 },
+        { t: "A lot, 7 or more hours", h:9 }
+      ]
+    },
+    {
+      q: "How many hours a week go to data entry and copying between tools?",
+      task: "Data entry and copying", auto: 0.6,
+      tip: "AI moves, cleans, and formats data between your tools, which is exactly the work it does best.",
+      opts: [
+        { t: "Almost none, under an hour", h:0.5 },
+        { t: "A couple of hours", h:2.5 },
+        { t: "A real drag, 4 to 6 hours", h:5 },
+        { t: "Constant, 7 or more hours", h:9 }
+      ]
+    },
+    {
+      q: "How many hours a week go to repetitive admin and formatting?",
+      task: "Admin and formatting", auto: 0.5,
+      tip: "AI handles the repeatable formatting, templating, and tidy-up so it stops eating your afternoons.",
+      opts: [
+        { t: "Almost none, under an hour", h:0.5 },
+        { t: "A couple of hours", h:2.5 },
+        { t: "A steady tax, 4 to 6 hours", h:5 },
+        { t: "Endless, 7 or more hours", h:9 }
+      ]
+    },
+    {
+      q: "Roughly what is an hour of your time worth?",
+      type: "rate",
+      opts: [
+        { t: "Around $25 an hour", rate:25 },
+        { t: "Around $50 an hour", rate:50 },
+        { t: "Around $100 an hour", rate:100 },
+        { t: "$150 an hour or more", rate:175 }
+      ]
+    }
+  ],
+
+  bands: [
+    {
+      max: 3.99,
+      name: "The Quiet Leak",
+      tagline: "It's not a flood, and it still adds up to real days off your calendar every year.",
+      summary: "You're fairly lean already, and there's still a steady trickle of busywork AI could absorb. The value here isn't survival, it's compounding: hand off the workflows below and you turn scattered lost hours into whole days you get back for work that actually moves things."
+    },
+    {
+      max: 9.99,
+      name: "The Time Sink",
+      tagline: "A meaningful slice of your week is going to work a machine could now do for you.",
+      summary: "You're losing enough time to feel it, and every hour is recoverable. You don't need to automate everything at once. Start with the one or two workflows below that cost you the most, get those running, and the reclaimed time funds the next change."
+    },
+    {
+      max: 999,
+      name: "The Runaway Clock",
+      tagline: "You're spending a large part of every week on work AI is genuinely built to handle.",
+      summary: "This is the best kind of problem, because the upside is enormous and the fixes are proven. You could reclaim close to a full day a week. Take the top workflow below, automate just that one this week, and the change pays for itself almost immediately, then do the next."
+    }
+  ],
+
+  magnets: [
+    { n:"The AI Automation Starter Kit", d:"Seven no-code automations that quietly do your daily busywork for you.", url:"https://elvinpeters.com/free/automation-kit/" },
+    { n:"The Meeting and Email Machine", d:"Done-for-you AI workflows for the email and meetings that eat your day.", url:"https://elvinpeters.com/free/email-meetings/" }
+  ],
+
+  angle: "That number is only potential until you know how to capture it. <b>The Artificial Advantage</b> is the step-by-step playbook for turning your busywork into automations that run without you, starting with the workflows above."
+};
+
+/* ===================== ENGINE ===================== */
+function startQuizEngine() {
+  var stageEl = document.getElementById("stage");
+  var barEl = document.getElementById("bar");
+  var answers = [];
+  var cur = 0;
+  var N = QUIZ.questions.length;
+  var lead = { email:"", name:"" };
+
+  // Ad conversion ids for THIS quiz (lead capture). Create a Google Ads
+  // "Submit lead form" conversion and an X "Lead" event for the Time-Waste
+  // quiz, then paste them here. Both dormant until then.
+  var ADS = { x: "tw-re26u-re279", g: "AW-637214471/AKwFCNHut9UcEIe-7K8C" }; // shared "Quiz Lead" conversion; the source field segments which quiz produced the lead
+
+  function setBar(p){ barEl.style.width = p + "%"; }
+  function quizHit(e){ if (e !== "quiz_start" && e !== "quiz_lead" && e !== "quiz_result") return; try{ navigator.sendBeacon("https://studio.elvinpeters.com/s/api/quiz/time-waste/hit", new Blob([e], {type:"text/plain"})); }catch(x){} } /* QUIZ STUDIO PATCH: start/lead/result counts, no personal data */
+  function track(name, params){ quizHit(name); try{ gtag('event', name, params||{}); }catch(e){} }
+  function render(html){ stageEl.innerHTML = html; stageEl.firstElementChild && stageEl.firstElementChild.classList.add('fade'); }
+  function fmt(n){ return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+
+  function showIntro(){
+    cur = 0; setBar(0);
+    var i = QUIZ.intro;
+    render(
+      '<div class="card intro">' +
+        '<div class="eyebrow">'+i.eyebrow+'</div>' +
+        '<h1>'+i.title+'</h1>' +
+        i.body.map(function(p){return '<p>'+p+'</p>';}).join('') +
+        '<div class="meta">'+i.meta+'</div>' +
+        '<button class="btn full" id="startBtn">'+i.cta+'</button>' +
+      '</div>'
+    );
+    document.getElementById("startBtn").onclick = function(){ track('quiz_start'); cur=0; showQuestion(); };
+  }
+
+  function showQuestion(){
+    var L = QUIZ.labels || {};
+    var Q = QUIZ.questions[cur];
+    setBar(Math.round((cur)/(N+1)*100));
+    var picked = answers[cur] ? answers[cur].optIndex : -1;
+    var opts = Q.opts.map(function(o, idx){
+      return '<button class="opt'+(idx===picked?' sel':'')+'" data-i="'+idx+'">' +
+               '<span class="dot"></span><span>'+o.t+'</span>' +
+             '</button>';
+    }).join('');
+    render(
+      '<div class="card">' +
+        '<div class="qnum">Question '+(cur+1)+' of '+N+'</div>' +
+        '<div class="qtext">'+Q.q+'</div>' +
+        '<div class="options">'+opts+'</div>' +
+        '<div class="nav-row">' +
+          '<button class="back" id="backBtn"'+(cur===0?' disabled':'')+'>← Back</button>' +
+          '<button class="btn" id="nextBtn"'+(picked<0?' disabled':'')+'>'+(cur===N-1?(L.last||"See my number →"):'Next →')+'</button>' +
+        '</div>' +
+      '</div>'
+    );
+    Array.prototype.forEach.call(document.querySelectorAll(".opt"), function(b){
+      b.onclick = function(){
+        var idx = +b.getAttribute("data-i");
+        answers[cur] = { optIndex: idx, text: Q.opts[idx].t };
+        Array.prototype.forEach.call(document.querySelectorAll(".opt"), function(x){x.classList.remove("sel");});
+        b.classList.add("sel");
+        document.getElementById("nextBtn").disabled = false;
+      };
+    });
+    document.getElementById("backBtn").onclick = function(){ if(cur>0){ cur--; showQuestion(); } };
+    document.getElementById("nextBtn").onclick = function(){
+      if(!answers[cur]) return;
+      if(cur < N-1){ cur++; showQuestion(); } else { showGate(); }
+    };
+  }
+
+  function showGate(){
+    var G = QUIZ.gate || {};
+    setBar(Math.round(N/(N+1)*100));
+    render(
+      '<div class="card gate">' +
+        '<div class="eyebrow">'+(G.eyebrow||"Almost there")+'</div>' +
+        '<h2 class=\"as-h1\" style=\"font-size:30px;margin-bottom:10px;\">'+(G.title||"One step before your number")+'</h2>' +
+        '<p style="color:var(--muted);margin-bottom:22px;">'+(G.body||"Your reclaimable hours and dollars, the workflows to automate first, plus one short email a week on automating your busywork. No spam, unsubscribe any time.")+'</p>' +
+        '<div class="err" id="gateErr">Please enter a valid email.</div>' +
+        '<label for="qname">First name (optional)</label>' +
+        '<input id="qname" type="text" autocomplete="given-name" placeholder="Alex" />' +
+        '<label for="qemail">Email</label>' +
+        '<input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off" /><input id="qemail" type="email" autocomplete="email" placeholder="you@work.com" />' +
+        '<button class="btn full" id="seeBtn">'+(G.button||"Show me my number →")+'</button>' +
+        '<div class="fineprint">'+(G.fineprint||"Instant result on this page. We also send the free starter kit by email.")+'</div>' +
+        '<div class="nav-row"><button class="back" id="backBtn2">← Back</button><span></span></div>' +
+      '</div>'
+    );
+    document.getElementById("backBtn2").onclick = function(){ cur = N-1; showQuestion(); };
+    document.getElementById("seeBtn").onclick = function(){
+      var email = document.getElementById("qemail").value.trim();
+      var name = document.getElementById("qname").value.trim();
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ document.getElementById("gateErr").style.display="block"; return; }
+      lead.email = email; lead.name = name;
+      track('quiz_lead', {});
+      try{ fbq('track','Lead',{content_name:QUIZ.leadName+' Quiz'}); }catch(e){}
+      submitLead();
+      showResult();
+    };
+  }
+
+  function scoreTime(){
+    var rate = 50, tasks = [];
+    var weeklyHours = 0;
+    answers.forEach(function(a, qi){
+      var Q = QUIZ.questions[qi];
+      var o = Q.opts[a.optIndex];
+      if(Q.type === "rate"){ rate = o.rate; return; }
+      var reclaim = o.h * Q.auto; // hours/week AI can realistically take
+      weeklyHours += reclaim;
+      tasks.push({ task: Q.task, hours: reclaim, tip: Q.tip });
+    });
+    var yearlyHours = weeklyHours * QUIZ.workWeeks;
+    var yearlyDollars = yearlyHours * rate;
+    tasks.sort(function(x,y){ return y.hours - x.hours; });
+    var band = QUIZ.bands[QUIZ.bands.length-1];
+    for(var i=0;i<QUIZ.bands.length;i++){ if(weeklyHours <= QUIZ.bands[i].max){ band = QUIZ.bands[i]; break; } }
+    return { rate:rate, weeklyHours:weeklyHours, yearlyHours:yearlyHours, yearlyDollars:yearlyDollars, tasks:tasks, band:band };
+  }
+
+  function submitLead(){
+    var res = scoreTime();
+    var summary = answers.map(function(a, qi){ return (qi+1)+". "+QUIZ.questions[qi].q+" -> "+a.text; }).join("  |  ");
+    var payload = {
+      name: lead.name || "Quiz lead",
+      email: lead.email,
+      message: "[TIME WASTE: "+res.band.name+" · "+res.weeklyHours.toFixed(1)+"h/wk · "+Math.round(res.yearlyHours)+"h/yr · $"+Math.round(res.yearlyDollars)+"/yr]  "+summary,
+      source: QUIZ.source + (location.search || "")
+    };
+    try {
+      var body = new URLSearchParams(payload).toString();
+      fetch(QUIZ.leadApi, {
+        method: "POST", mode: "cors", keepalive: true,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body
+      }).catch(function(){});
+    } catch(e){}
+    // Ad conversions: quiz lead captured. Fire-and-forget, never blocks the funnel.
+    try{ if(ADS.x && typeof twq==='function') twq('event', ADS.x, {}); }catch(e){}      // fires shared Quiz Lead conversion
+    try{ if(ADS.g && typeof gtag==='function') gtag('event','conversion',{send_to:ADS.g}); }catch(e){}  // fires shared Quiz Lead conversion
+  }
+
+  function showResult(){
+    var C = QUIZ.cta || {}, L = QUIZ.labels || {};
+    setBar(100);
+    var res = scoreTime();
+    var B = res.band;
+    track('quiz_result', { band: B.name, weekly_hours: Math.round(res.weeklyHours), yearly_dollars: Math.round(res.yearlyDollars) });
+
+    var top = res.tasks.filter(function(t){ return t.hours > 0.2; }).slice(0,3);
+    var topHtml = top.length ? '<div class="tools">' + top.map(function(t){
+      return '<div class="tool"><span class="dot" style="margin-top:3px;"></span><div><div class="tn">'+t.task+'</div><div class="td">'+t.tip+'</div></div><span class="th">~'+t.hours.toFixed(1)+' h/wk</span></div>';
+    }).join('') + '</div>'
+      : '<p>You\'re running remarkably lean already. The workflows above are still worth automating so the small stuff never creeps back onto your plate.</p>';
+
+    var magnets = QUIZ.magnets.map(function(m){
+      return '<a class="magnet" href="'+m.url+'" target="_blank" rel="noopener" data-mn="'+m.n+'">' +
+               '<div class="mg">Free guide</div><div class="mn">'+m.n+'</div><div class="md">'+m.d+'</div>' +
+             '</a>';
+    }).join('');
+
+    render(
+      '<div class="card result">' +
+        '<div class="type-eyebrow">'+(L.eyebrow||"Your time-waste number")+'</div>' +
+        '<h2 class=\"as-h1\">'+B.name+'</h2>' +
+        '<div class="tagline">'+B.tagline+'</div>' +
+        '<div class="bignums">' +
+          '<div class="bignum"><div class="n">'+res.weeklyHours.toFixed(1)+'</div><div class="l">hours / week</div></div>' +
+          '<div class="bignum"><div class="n">'+fmt(res.yearlyHours)+'</div><div class="l">hours / year</div></div>' +
+          '<div class="bignum"><div class="n">$'+fmt(res.yearlyDollars)+'</div><div class="l">value / year</div></div>' +
+        '</div>' +
+        '<div class="disclaimer">A conservative estimate based on your answers, at $'+res.rate+'/hour over '+QUIZ.workWeeks+' working weeks. It counts only the share of each task AI can realistically take off your plate today.</div>' +
+        '<div class="block" style="margin-top:26px;"><h3>What this means</h3><p>'+B.summary+'</p></div>' +
+        '<div class="block"><h3>Automate these first</h3>'+topHtml+'</div>' +
+        '<div class="block"><h3>Start reclaiming it, free</h3>'+magnets+'</div>' +
+        '<div class="book-cta">' +
+          '<div class="why">'+QUIZ.angle+'</div>' +
+          '<a class="btn" href="'+QUIZ.bookUrl+'" id="bookBtn">'+(C.button||"See the book →")+'</a>' +
+          (C.price ? '<div class="price">'+C.price+'</div>' : '') +
+        '</div>' +
+        '<div class="share"><a href="'+QUIZ.salesUrl+'">'+(C.more||"Read more about the book →")+'</a></div>' +
+      '</div>'
+    );
+    Array.prototype.forEach.call(document.querySelectorAll(".magnet"), function(a){
+      a.onclick = function(){ track('magnet_click', {event_label:a.getAttribute('data-mn')}); };
+    });
+    var bb = document.getElementById("bookBtn");
+    if(bb) bb.onclick = function(){ track('system_click', {event_label:'quiz_result'}); };
+  }
+
+  showIntro();
+}
+
+/* ===================== BOOT: Quiz Studio config with inline fallback (QUIZ STUDIO PATCH) =====
+   Loads the version published in Quiz Studio (studio.elvinpeters.com/studio/quizzes/time-waste).
+   Any failure (offline, slow, bad JSON) runs the inline QUIZ above. Never blocks the quiz. */
+(function () {
+  var CONFIG_URL = "https://studio.elvinpeters.com/s/quiz/time-waste/config.json";
+  var started = false;
+  function start(){ if (!started) { started = true; startQuizEngine(); } }
+  function boot(){
+    var timer = setTimeout(start, 2500);
+    try {
+      fetch(CONFIG_URL, { mode: "cors", cache: "no-cache" })
+        .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+        .then(function (cfg) {
+          if (!started && cfg && cfg.intro && cfg.questions && cfg.questions.length && cfg.bands) { QUIZ = cfg; }
+          clearTimeout(timer); start();
+        })
+        .catch(function () { clearTimeout(timer); start(); });
+    } catch (e) { clearTimeout(timer); start(); }
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot); else boot();
+})();
+</script>
+<!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:10px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=quizzes">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=quizzes">Get the monthly letter</a></footer><!-- /ep:ca-foot -->
+</body>
+</html>

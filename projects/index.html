@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects | Elvin M. Peters</title>
+<meta name="description" content="A working portfolio: free calculators, 13 original browser games with real-time multiplayer, a continuously verified AI directory, a white-label lead funnel platform, and a self-hosted site builder. Everything here is live and you can open it.">
+<link rel="canonical" href="https://epeters.ca/projects/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Projects | Elvin M. Peters">
+<meta property="og:description" content="Free calculators, 13 original browser games with real-time multiplayer, a verified AI directory, and self-hosted platforms. All live, all clickable.">
+<meta property="og:url" content="https://epeters.ca/projects/">
+<meta property="og:image" content="https://elvinpeters.com/cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@elvin_peters">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/apps/_kit/apps-kit.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CLZ7N26J1Q');</script>
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1699232654449762');fbq('track','PageView');</script>
+
+<link rel="stylesheet" href="/css/site.css">
+<style>
+/* On the design system: tokens come from css/site.css. This page used to
+   carry a hand-copied palette here, which is exactly how the retired navy
+   survived on three pages for weeks. Component styles stay page-local. */
+
+  .hero{padding:64px 0 34px;border-bottom:1px solid var(--line-soft)}
+  .hero h1{font-size:clamp(2.4rem,6vw,4rem);line-height:1.03;margin:12px 0 16px;max-width:16ch}
+  .hero h1 em{font-style:normal;color:var(--gold-2)}
+  .hero .lede{color:var(--ink-2);font-size:clamp(16px,2vw,19px);max-width:60ch;margin:0 0 26px}
+
+  .strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;
+    background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:6px}
+  .strip div{background:var(--panel);padding:18px 20px}
+  .strip b{display:block;font-family:var(--serif);font-size:2rem;line-height:1;color:var(--gold-2)}
+  .strip span{display:block;font-size:12px;color:var(--muted);margin-top:5px}
+
+  .filters{display:flex;gap:8px;flex-wrap:wrap;padding:34px 0 6px;position:sticky;top:64px;z-index:20;
+    background:linear-gradient(180deg,var(--bg) 72%,transparent)}
+  .chip{border:1px solid var(--line);background:var(--panel);color:var(--ink-2);
+    padding:8px 16px;border-radius:var(--r-pill);font-size:14px;font-weight:600;cursor:pointer;transition:.15s;min-height:44px;display:inline-flex;align-items:center}
+  .chip:hover{color:var(--ink);border-color:var(--gold)}
+  .chip[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:#0a1524}
+
+  .catsec{margin:34px 0 0}
+  .catsec h2{font-size:1.7rem}
+  .catsec .catblurb{color:var(--muted);font-size:14px;margin:4px 0 18px}
+
+  .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));margin-bottom:34px}
+  .app{display:flex;flex-direction:column;gap:10px;background:var(--panel);border:1px solid var(--line);
+    border-radius:var(--r);padding:22px;box-shadow:var(--shadow);position:relative;overflow:hidden;
+    transition:transform .18s cubic-bezier(.2,.9,.3,1.2),box-shadow .18s,border-color .18s}
+  .app::after{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--line)}
+  .app.is-featured::after{background:linear-gradient(90deg,var(--gold),var(--cyan))}
+  a.app:hover{transform:translateY(-4px);box-shadow:var(--lift);border-color:color-mix(in srgb,var(--gold) 50%,var(--line))}
+  .app .row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .app h3{font-size:1.3rem}
+  .app p{margin:0;color:var(--ink-2);font-size:14px;line-height:1.55;flex:1}
+  .app .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+  .app .tags span{font-size:12px;color:var(--muted);border:1px solid var(--line);
+    border-radius:var(--r-pill);padding:3px 9px}
+  .app .foot-row{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding-top:12px;margin-top:2px;border-top:1px solid var(--line-soft);font-size:13px}
+  .app .stat{color:var(--gold-2);font-weight:600}
+  .app .go{color:var(--gold-2);font-weight:600}
+  .badge{font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+    border-radius:var(--r-pill);padding:4px 10px;white-space:nowrap;flex:0 0 auto}
+  .badge.live{color:var(--good);background:color-mix(in srgb,var(--good) 14%,transparent)}
+  .badge.private{color:var(--muted);background:color-mix(in srgb,var(--muted) 14%,transparent)}
+  .app.is-private{opacity:.92}
+  .app.is-private .go{color:var(--muted);font-weight:400}
+
+  .cta-band{margin:56px 0 0;border:1px solid color-mix(in srgb,var(--gold) 40%,var(--line));border-radius:var(--r);
+    background:linear-gradient(135deg,color-mix(in srgb,var(--gold) 13%,var(--panel)),var(--panel) 60%);
+    padding:34px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .cta-band h2{font-size:1.7rem;margin-bottom:6px}
+  .cta-band p{margin:0;color:var(--ink-2);max-width:52ch;font-size:15px}
+</style>
+<script src="/js/site.js"></script>
+  <link rel="stylesheet" href="/css/contact-modal.css">
+  <script src="/js/contact-modal.js" defer></script>
+</head>
+<body>
+<!-- ep:ca-bar --><style>.rhbar{background:#0a1524;border-bottom:1px solid #2b405c;font:500 14px/1.4 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;position:relative;z-index:50}.rhbar .rhin{max-width:1120px;margin:0 auto;padding:0 16px;min-height:52px;display:flex;align-items:center;gap:6px 18px;flex-wrap:wrap}.rhbar a{color:#b7c6d9;text-decoration:none;padding:12px 2px;display:inline-block}.rhbar a:hover{color:#e0bd6b}.rhbar .rhbrand{color:#e0bd6b;font-family:'EB Garamond',Georgia,serif;font-size:18px;margin-right:auto}.rhbar .rhlk{display:flex;gap:16px;flex-wrap:wrap}.rhbar a:focus-visible,.rhfoot a:focus-visible{outline:2px solid #e0bd6b;outline-offset:2px}</style><nav class="rhbar" aria-label="The Rabbit Hole"><div class="rhin"><a class="rhbrand" href="/">The Rabbit Hole</a><span class="rhlk"><a href="/writing/">Writing</a><a href="/play/">Play</a><a href="/#quizzes">Quizzes</a><a href="/projects/">Projects</a></span></div></nav><!-- /ep:ca-bar -->
+<div data-apps-nav></div>
+
+<header class="hero">
+  <div class="container">
+    <span class="eyebrow">Projects</span>
+    <h1>Things I built, that you can <em>actually open</em>.</h1>
+    <p class="lede">Not screenshots and not case studies. Every link below is a running application — click one and use it. Most of them are free, none of them ask you to sign up, and all of them run on infrastructure I own. This page is the proof behind everything I claim about shipping with AI.</p>
+    <div class="strip">
+      <div><b id="n-apps">—</b><span>live builds</span></div>
+      <div><b>13</b><span>browser games</span></div>
+      <div><b>11</b><span>free calculators</span></div>
+      <div><b>100%</b><span>self-hosted</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <div class="filters" id="filters"></div>
+  <div id="apps-root"></div>
+
+  <section class="cta-band">
+    <div>
+      <h2>Want one of these for your business?</h2>
+      <p>This is what I do for clients — the same tools, pointed at your problem instead of mine. Booking is free and I will tell you honestly if you do not need me.</p>
+    </div>
+    <a class="btn primary" href="https://elvinpeters.com/contact/?utm_source=epeters.ca&utm_medium=link&utm_campaign=projects" data-contact="Working together on " data-contact-source="projects">Get in touch</a>
+  </section>
+</main>
+
+<div data-apps-foot></div>
+
+<script src="/apps/_kit/apps-kit.js"></script>
+<script src="/apps/registry.js"></script>
+<script>
+(function () {
+  'use strict';
+  var R = JSON.parse(JSON.stringify(window.APPS_REGISTRY).replace(/\\\/\\*AID:[a-z_]*\\\*\\\//g, '').replace(/\\\/\\*\\\/AID\\\*\\\//g, ''));
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) {
+    return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]; }); };
+
+  document.getElementById('n-apps').textContent = R.apps.filter(function (a) { return a.status === 'live'; }).length;
+
+  var active = 'all';
+  var filters = document.getElementById('filters');
+  var root = document.getElementById('apps-root');
+
+  filters.innerHTML = '<button class="chip" data-cat="all" aria-pressed="true">Everything</button>' +
+    R.categories.map(function (c) {
+      return '<button class="chip" data-cat="' + c.id + '" aria-pressed="false">' + esc(c.label) + '</button>';
+    }).join('');
+
+  function cardFor(a) {
+    var live = a.status === 'live';
+    var inner =
+      '<div class="row"><h3>' + esc(a.name) + '</h3>' +
+        '<span class="badge ' + (live ? 'live' : 'private') + '">' + (live ? 'Live' : 'Private') + '</span></div>' +
+      '<p>' + esc(a.blurb) + '</p>' +
+      (a.tags ? '<div class="tags">' + a.tags.map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('') + '</div>' : '') +
+      '<div class="foot-row"><span class="stat">' + esc(a.stat || '') + '</span>' +
+        '<span class="go">' + (live ? 'Open it →' : 'Demo on request') + '</span></div>';
+
+    var cls = 'app' + (a.featured ? ' is-featured' : '') + (live ? '' : ' is-private');
+    if (!live) return '<div class="' + cls + '">' + inner + '</div>';
+    var ext = a.href.indexOf('http') === 0 && a.href.indexOf('elvinpeters.com') < 0;
+    return '<a class="' + cls + '" href="' + esc(a.href) + '"' +
+      (ext ? ' target="_blank" rel="noopener"' : '') + '>' + inner + '</a>';
+  }
+
+  function paint() {
+    root.innerHTML = R.categories.map(function (cat) {
+      if (active !== 'all' && active !== cat.id) return '';
+      var inCat = R.apps.filter(function (a) { return a.cat === cat.id; });
+      if (!inCat.length) return '';
+      inCat.sort(function (a, b) { return (b.featured ? 1 : 0) - (a.featured ? 1 : 0); });
+      return '<section class="catsec"><h2>' + esc(cat.label) + '</h2>' +
+        '<p class="catblurb">' + esc(cat.blurb) + '</p>' +
+        '<div class="grid">' + inCat.map(cardFor).join('') + '</div></section>';
+    }).join('');
+  }
+
+  filters.addEventListener('click', function (e) {
+    var b = e.target.closest('.chip'); if (!b) return;
+    active = b.dataset.cat;
+    Array.prototype.forEach.call(filters.children, function (c) {
+      c.setAttribute('aria-pressed', String(c.dataset.cat === active));
+    });
+    paint();
+  });
+
+  paint();
+})();
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"CollectionPage",
+"name":"Projects by Elvin M. Peters","url":"https://epeters.ca/projects/",
+"description":"A working portfolio of live applications: financial calculators, browser games, a verified AI directory, a conversational lead funnel platform, and a self-hosted site builder.",
+"author":{"@type":"Person","name":"Elvin M. Peters","url":"https://elvinpeters.com/"}}
+</script>
+<!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:10px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=projects">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=projects">Get the monthly letter</a></footer><!-- /ep:ca-foot -->
+</body>
+</html>

@@ -1,0 +1,782 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="stylesheet" href="../_kit/play-kit.css">
+<title>Baby Names</title>
+<style>
+  /* ============================================================ baby-names
+     Tender + hopeful. One warm bone nameplate, one gentle riffle, one name.
+     All styling builds on --pk-* tokens only. Light + dark + reduced-motion
+     inherit from the kit. Accent = rose. */
+
+  /* ---- filter row ---- */
+  .bn-filters{ width:100%; max-width:560px; display:flex; flex-wrap:wrap; gap:10px;
+    align-items:flex-end; justify-content:center; }
+  .bn-field{ display:flex; flex-direction:column; gap:4px; align-items:flex-start; text-align:left; }
+  .bn-field > label{ font-size:var(--pk-fs-xs); font-weight:700; letter-spacing:.06em;
+    text-transform:uppercase; color:var(--pk-ink-faint); padding-left:2px; }
+  .bn-field .pk-select{ min-width:130px; max-width:170px; }
+  .bn-field--meaning{ flex:1 1 150px; }
+  .bn-field--meaning .pk-input{ width:100%; }
+  .bn-seg{ flex-wrap:wrap; }
+  .bn-seg button{ min-height:32px; }
+
+  .bn-count{ font-size:var(--pk-fs-sm); color:var(--pk-ink-soft); font-weight:600;
+    min-height:1.2em; }
+  .bn-count b{ font-family:var(--pk-font-num); font-variant-numeric:tabular-nums;
+    color:var(--pk-ink); }
+  .bn-count.is-empty{ color:var(--pk-accent-press); }
+
+  /* ---- the nameplate hero ---- */
+  .bn-plate{
+    position:relative; width:100%; max-width:460px; min-height:200px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:14px; padding:30px 26px 26px;
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--pk-mat-ivory) 70%, var(--pk-surface)) 0%,
+        var(--pk-surface) 100%);
+    border:1px solid var(--pk-line);
+    border-radius:22px;
+    box-shadow:var(--pk-shadow-2), inset 0 1px 0 color-mix(in srgb, #fff 60%, transparent);
+    transition:box-shadow var(--pk-t-base) var(--pk-ease-settle),
+      transform var(--pk-t-base) var(--pk-ease-settle);
+    will-change:transform;
+  }
+  :root[data-theme="dark"] .bn-plate{
+    background:linear-gradient(180deg, color-mix(in srgb, var(--pk-surface) 82%, #000) 0%, var(--pk-surface) 100%);
+    box-shadow:var(--pk-shadow-2), inset 0 1px 0 rgba(255,255,255,.05);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .bn-plate{
+      background:linear-gradient(180deg, color-mix(in srgb, var(--pk-surface) 82%, #000) 0%, var(--pk-surface) 100%);
+      box-shadow:var(--pk-shadow-2), inset 0 1px 0 rgba(255,255,255,.05);
+    }
+  }
+  /* soft deckle rounded inner edge like an enamel pin / announcement card */
+  .bn-plate::before{ content:""; position:absolute; inset:8px; border-radius:16px;
+    border:1.5px dashed color-mix(in srgb, var(--pk-accent) 34%, var(--pk-line));
+    opacity:.5; pointer-events:none; }
+  .bn-plate.is-lift{ transform:translateY(-2px); box-shadow:var(--pk-shadow-3); }
+
+  .bn-name{
+    font-family:var(--pk-font-display); font-weight:700; line-height:1.02;
+    letter-spacing:var(--pk-tracking-hero); color:var(--pk-ink);
+    font-size:clamp(2.1rem, 11vw, 3.6rem); word-break:break-word; max-width:100%;
+    min-height:1.02em;
+  }
+  .bn-name.is-tagline{ font-size:clamp(1.15rem,5vw,1.5rem); font-weight:600;
+    color:var(--pk-ink-soft); letter-spacing:0; font-style:italic; }
+  .bn-name.is-empty{ font-size:clamp(1.05rem,4.6vw,1.35rem); font-weight:600;
+    color:var(--pk-accent-press); font-style:normal; letter-spacing:0; }
+
+  /* detail block beneath the name */
+  .bn-details{ display:flex; flex-direction:column; align-items:center; gap:9px;
+    width:100%; }
+  .bn-details[hidden]{ display:none; }
+  .bn-detrow{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center; }
+
+  .bn-gender{ display:inline-flex; align-items:center; gap:6px; font-size:var(--pk-fs-sm);
+    font-weight:700; color:var(--pk-accent-press); }
+  .bn-gender svg{ width:18px; height:18px; }
+  .bn-gender.is-neutral{ color:var(--pk-ink-soft); }
+
+  .bn-chip{ min-height:28px; padding:0 12px; display:inline-flex; align-items:center;
+    background:var(--pk-accent-soft); border:1px solid color-mix(in srgb, var(--pk-accent) 40%, transparent);
+    border-radius:var(--pk-radius-pill); font-size:var(--pk-fs-xs); font-weight:700;
+    color:var(--pk-accent-press); letter-spacing:.02em; }
+
+  .bn-meaning{ font-size:var(--pk-fs-body); color:var(--pk-ink); font-style:italic;
+    max-width:38ch; line-height:1.4; }
+  .bn-meaning.is-missing{ font-style:normal; color:var(--pk-ink-faint); }
+
+  .bn-pop{ font-size:var(--pk-fs-sm); color:var(--pk-ink-soft); font-weight:600; }
+  .bn-variants{ font-size:var(--pk-fs-sm); color:var(--pk-ink-soft); }
+  .bn-variants b{ color:var(--pk-ink); font-weight:600; }
+  .bn-source{ font-size:var(--pk-fs-xs); color:var(--pk-ink-faint); }
+
+  /* footer links (sources + sample note) */
+  .bn-foot{ display:flex; flex-wrap:wrap; gap:6px 14px; justify-content:center;
+    align-items:center; font-size:var(--pk-fs-xs); color:var(--pk-ink-faint); max-width:520px; }
+  .bn-link{ background:none; border:0; padding:2px 4px; color:var(--pk-accent-press);
+    font:inherit; font-weight:700; cursor:pointer; text-decoration:underline;
+    text-underline-offset:2px; border-radius:4px; }
+  .bn-note{ line-height:1.4; }
+
+  /* heart button */
+  .bn-heart{ position:relative; }
+  .bn-heart svg{ width:24px; height:24px; transition:transform var(--pk-t-quick) var(--pk-ease-spring); }
+  .bn-heart[aria-pressed="true"]{ color:var(--pk-accent); }
+  .bn-heart[aria-pressed="true"] svg{ fill:var(--pk-accent); }
+  .bn-heart.is-pop svg{ transform:scale(1.2); }
+
+  /* loading / error states */
+  .bn-load{ display:flex; flex-direction:column; align-items:center; gap:14px;
+    color:var(--pk-ink-soft); }
+  .bn-spinner{ width:34px; height:34px; border-radius:50%;
+    border:3px solid var(--pk-line); border-top-color:var(--pk-accent);
+    animation:bn-spin .8s linear infinite; }
+  @keyframes bn-spin{ to{ transform:rotate(360deg); } }
+
+  /* shortlist drawer (reuses kit sheet backdrop) */
+  .bn-drawer-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px;
+    max-height:52vh; overflow:auto; }
+  .bn-drawer-empty{ color:var(--pk-ink-faint); text-align:center; padding:24px 0; }
+  .bn-drawer-item{ display:flex; align-items:center; gap:10px; padding:10px 12px;
+    background:var(--pk-surface-sunk); border-radius:var(--pk-radius-sm); }
+  .bn-drawer-item__name{ font-family:var(--pk-font-display); font-weight:600; font-size:1.1rem;
+    flex:1; text-align:left; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .bn-drawer-item__sub{ font-size:var(--pk-fs-xs); color:var(--pk-ink-faint); font-weight:400; }
+
+  /* sources panel body (registered into settings sheet) */
+  .bn-src h3{ font-family:var(--pk-font-display); font-size:1rem; margin:4px 0 8px; }
+  .bn-src ul{ margin:0 0 10px; padding-left:18px; font-size:var(--pk-fs-sm); color:var(--pk-ink-soft);
+    line-height:1.6; }
+  .bn-src p{ font-size:var(--pk-fs-sm); color:var(--pk-ink-soft); line-height:1.5; }
+
+  @media (max-width:420px){
+    .bn-field .pk-select{ min-width:118px; }
+    .bn-plate{ padding:24px 18px 22px; }
+  }
+</style>
+<link rel="canonical" href="https://epeters.ca/play/baby-names/">
+</head><body>
+
+<script src="../_kit/play-kit.js"></script>
+
+<script>
+var HEADLESS = (typeof document === "undefined");
+
+/* =====================================================================
+   PURE LOGIC — no DOM, injectable rng. Exported as globalThis.BABYNAMES.
+   Every function takes its data as an argument (bot_test drives them over
+   its own inline fixture — no names.json needed). rng(n) -> int in [0,n).
+   ===================================================================== */
+
+var CONFIG = { POP_POPULAR: 100, POP_UNCOMMON: 1000 };
+
+function firstLetterOf(name){
+  if (name && name.first_letter) return String(name.first_letter).toUpperCase();
+  var s = (name && name.name) ? String(name.name) : "";
+  return s.charAt(0).toUpperCase();
+}
+
+function popBand(name){
+  var p = name && name.popularity;
+  // r = us_rank_recent ?? uk_rank_recent  (null/undefined fall through)
+  var r = null;
+  if (p){
+    r = (p.us_rank_recent != null) ? p.us_rank_recent
+      : (p.uk_rank_recent != null ? p.uk_rank_recent : null);
+  }
+  if (r == null) return "rare";                 // no popularity data -> long-tail / rare
+  if (r <= CONFIG.POP_POPULAR)  return "popular";
+  if (r <= CONFIG.POP_UNCOMMON) return "uncommon";
+  return "rare";
+}
+
+function matchesCriteria(name, criteria){
+  criteria = criteria || {};
+
+  // origin — case-insensitive membership in name.origins
+  var o = criteria.origin;
+  if (o != null && o !== "" && o !== "any"){
+    var oc = String(o).toLowerCase(), origins = name.origins || [], hit = false;
+    for (var i = 0; i < origins.length; i++){
+      if (String(origins[i]).toLowerCase() === oc){ hit = true; break; }
+    }
+    if (!hit) return false;
+  }
+
+  // gender — f/m also surface unisex; u is strict
+  var g = criteria.gender;
+  if (g != null && g !== "" && g !== "any"){
+    if (g === "f"){ if (!(name.gender === "f" || name.gender === "u")) return false; }
+    else if (g === "m"){ if (!(name.gender === "m" || name.gender === "u")) return false; }
+    else if (g === "u"){ if (name.gender !== "u") return false; }
+  }
+
+  // letter — firstLetterOf compared uppercased
+  var l = criteria.letter;
+  if (l != null && l !== "" && l !== "any"){
+    if (firstLetterOf(name) !== String(l).toUpperCase()) return false;
+  }
+
+  // meaning — trimmed, case-insensitive substring; no-meaning names excluded when set
+  var m = criteria.meaning;
+  if (m != null && String(m).trim() !== ""){
+    var q = String(m).trim().toLowerCase();
+    if (!name.meaning || String(name.meaning).toLowerCase().indexOf(q) === -1) return false;
+  }
+
+  // popularity — band match
+  var pp = criteria.popularity;
+  if (pp != null && pp !== "" && pp !== "any"){
+    if (popBand(name) !== pp) return false;
+  }
+
+  return true;
+}
+
+function filterNames(names, criteria){
+  names = names || [];
+  return names.filter(function(n){ return matchesCriteria(n, criteria); });
+}
+
+// pick(pool, rng, avoidName) — the fair reveal (commit-then-reveal)
+function pick(pool, rng, avoidName){
+  if (!pool || pool.length === 0) return null;
+  if (avoidName != null && pool.length > 1){
+    var trimmed = pool.filter(function(n){ return n.name !== avoidName; });
+    if (trimmed.length > 0) return trimmed[rng(trimmed.length)];
+    // pool was all duplicates of avoidName -> fall back to the full pool
+  }
+  return pool[rng(pool.length)];
+}
+
+function originsOf(names){
+  names = names || [];
+  var seen = {}, out = [];
+  names.forEach(function(n){
+    (n.origins || []).forEach(function(o){ if (!seen[o]){ seen[o] = true; out.push(o); } });
+  });
+  return out.sort();
+}
+
+/* =====================================================================
+   BROWSER WIRING — everything below touches the DOM / PK, fully guarded
+   behind !HEADLESS; never reached by node bot_test.js.
+   ===================================================================== */
+if (!HEADLESS) {
+
+  var STORE = {
+    filters:   "play.baby-names.filters",
+    shortlist: "play.baby-names.shortlist",
+    last:      "play.baby-names.last"
+  };
+
+  var SRC_LABELS = {
+    ssa: "US SSA (public domain)",
+    ons: "UK ONS (OGL v3)",
+    wikidata: "Wikidata (CC0)",
+    wiktionary: "Wiktionary (CC BY-SA 3.0)",
+    btn: "Behind the Name (CC BY-SA 4.0)"
+  };
+
+  var GENDER_GLYPH = {
+    f: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="5"/><path d="M12 13v8M9 18h6"/></svg>',
+    m: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="14" r="5"/><path d="M14 10l6-6M15 4h5v5"/></svg>',
+    u: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="11" r="4.2"/><path d="M12 15v6M9.5 18.5h5M12 6.8l3-3M13.4 3.8H15v1.6"/></svg>'
+  };
+  var GENDER_LABEL = { f: "Girl", m: "Boy", u: "Unisex" };
+  var HEART = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M20.8 6.6a5 5 0 0 0-7.1 0L12 8.3l-1.7-1.7a5 5 0 1 0-7.1 7.1L12 21l8.8-8.8a5 5 0 0 0 0-7.1z"/></svg>';
+
+  var TAGLINE = "Press for a name chosen just for you.";
+  var EASE = {
+    standard: "cubic-bezier(.2,0,0,1)", spring: "cubic-bezier(.34,1.56,.64,1)",
+    settle: "cubic-bezier(.16,1,.3,1)", anticip: "cubic-bezier(.7,-0.4,.4,1)"
+  };
+
+  var ALL = [];                 // loaded name records
+  var filters = PK.store.get(STORE.filters, { origin:"any", gender:"any", letter:"any", meaning:"", popularity:"any" });
+  var shortlist = PK.store.get(STORE.shortlist, []);
+  var lastName = PK.store.get(STORE.last, null);
+  var currentName = null;       // the decided record on screen
+  var revealing = false;
+  var scrambleTimer = null;
+  var lastTick = 0;
+
+  var ui, els = {};
+
+  /* ---------- boot ---------- */
+  function boot(){
+    ui = PK.app({ title:"Baby Names", slug:"baby-names", accent:"rose",
+      action:{ label:"Reveal a Name", onFire:doReveal, key:" " } });
+
+    ui.stage.innerHTML =
+      '<div class="bn-filters" id="bn-filters" role="group" aria-label="Name filters" hidden>' +
+        '<div class="bn-field"><label for="bn-origin">Origin</label>' +
+          '<select class="pk-select" id="bn-origin" aria-label="Origin or culture"></select></div>' +
+        '<div class="bn-field"><label id="bn-gender-lbl">Gender</label>' +
+          '<div class="pk-seg bn-seg" id="bn-gender" role="group" aria-labelledby="bn-gender-lbl">' +
+            '<button data-v="any">Any</button><button data-v="f">Girl</button>' +
+            '<button data-v="m">Boy</button><button data-v="u">Unisex</button></div></div>' +
+        '<div class="bn-field"><label for="bn-letter">Starts with</label>' +
+          '<select class="pk-select" id="bn-letter" aria-label="Starting letter"></select></div>' +
+        '<div class="bn-field bn-field--meaning"><label for="bn-meaning">Meaning contains</label>' +
+          '<input class="pk-input" id="bn-meaning" type="text" autocomplete="off" ' +
+            'placeholder="e.g. grace, light, star" aria-label="Meaning contains"></div>' +
+        '<div class="bn-field"><label id="bn-pop-lbl">Popularity</label>' +
+          '<div class="pk-seg bn-seg" id="bn-pop" role="group" aria-labelledby="bn-pop-lbl">' +
+            '<button data-v="any">Any</button><button data-v="popular">Popular</button>' +
+            '<button data-v="uncommon">Uncommon</button><button data-v="rare">Rare</button></div></div>' +
+      '</div>' +
+      '<p class="bn-count" id="bn-count" aria-live="polite" hidden></p>' +
+      '<div class="bn-plate" id="bn-plate" hidden>' +
+        '<div class="bn-name pk-result is-tagline" id="bn-name" aria-hidden="true">' + TAGLINE + '</div>' +
+        '<div class="bn-details" id="bn-details" hidden></div>' +
+      '</div>' +
+      '<div class="bn-load" id="bn-load">' +
+        '<div class="bn-spinner" aria-hidden="true"></div><p>Gathering names…</p></div>' +
+      '<div class="bn-foot" id="bn-foot" hidden>' +
+        '<button class="bn-link" id="bn-src-link">Sources &amp; licence</button>' +
+        '<span class="bn-note">Starter sample set (' + '<b id="bn-total">0</b> real names). ' +
+          'The full dataset ships under CC BY-SA 4.0.</span>' +
+      '</div>';
+
+    els.filters = q("#bn-filters"); els.origin = q("#bn-origin"); els.gender = q("#bn-gender");
+    els.letter = q("#bn-letter"); els.meaning = q("#bn-meaning"); els.pop = q("#bn-pop");
+    els.count = q("#bn-count"); els.plate = q("#bn-plate"); els.name = q("#bn-name");
+    els.details = q("#bn-details"); els.load = q("#bn-load"); els.foot = q("#bn-foot");
+    els.total = q("#bn-total");
+
+    // heart + shortlist buttons in the action bar
+    var heart = mkIconBtn("bn-heart", "Save to shortlist", HEART, toggleShortlist);
+    heart.id = "bn-heart"; heart.disabled = true; els.heart = heart;
+    ui.actions.insertBefore(heart, ui.primary);
+
+    var draw = PK.el("button", { "class":"pk-btn pk-btn--ghost pk-btn--sm", id:"bn-drawer-btn",
+      onClick: openDrawer, "aria-label":"Open shortlist" }, []);
+    els.drawerBtn = draw;
+    ui.actions.appendChild(draw);
+    refreshDrawerBtn();
+
+    q("#bn-src-link").addEventListener("click", function(){ PK.settings.open(); });
+
+    registerSources();
+    wireFilters();
+    ui.primary.disabled = true;
+
+    loadData();
+  }
+
+  /* ---------- data load (honest — no fake result on failure) ---------- */
+  function loadData(){
+    els.load.hidden = false;
+    els.load.innerHTML = '<div class="bn-spinner" aria-hidden="true"></div><p>Gathering names…</p>';
+    els.filters.hidden = true; els.count.hidden = true; els.plate.hidden = true; els.foot.hidden = true;
+    ui.primary.disabled = true;
+
+    fetch("data/names.json", { cache: "no-cache" })
+      .then(function(r){ if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(function(data){
+        var arr = Array.isArray(data) ? data : (data && data.names) || [];
+        if (!arr.length) throw new Error("empty dataset");
+        ALL = arr;
+        onDataReady();
+      })
+      .catch(function(err){ showLoadError(err); });
+  }
+
+  function showLoadError(err){
+    els.load.hidden = false;
+    els.filters.hidden = true; els.count.hidden = true; els.plate.hidden = true; els.foot.hidden = true;
+    els.load.innerHTML =
+      '<p style="color:var(--pk-accent-press);font-weight:700">Could not load the name library.</p>' +
+      '<p class="pk-subtle">' + esc(String(err && err.message || err)) + '</p>' +
+      '<button class="pk-btn pk-btn--soft" id="bn-retry">Retry</button>';
+    var rb = q("#bn-retry"); if (rb) rb.addEventListener("click", loadData);
+  }
+
+  function onDataReady(){
+    els.load.hidden = true;
+    els.filters.hidden = false; els.count.hidden = false; els.plate.hidden = false; els.foot.hidden = false;
+    els.total.textContent = String(ALL.length);
+
+    buildOriginOptions();
+    buildLetterOptions();
+    syncFilterControls();
+    updateCount();
+
+    // restore last revealed name (if it still exists) so the plate isn't empty
+    if (lastName){
+      var found = findByName(lastName);
+      if (found){ showResult(found, /*announce*/false); }
+    }
+  }
+
+  /* ---------- filter controls ---------- */
+  function buildOriginOptions(){
+    var origins = originsOf(ALL);
+    var html = '<option value="any">Any origin</option>';
+    origins.forEach(function(o){ html += '<option value="' + esc(o) + '">' + esc(o) + '</option>'; });
+    els.origin.innerHTML = html;
+  }
+  function buildLetterOptions(){
+    var present = {};
+    ALL.forEach(function(n){ present[firstLetterOf(n)] = true; });
+    var html = '<option value="any">Any</option>';
+    for (var c = 65; c <= 90; c++){
+      var L = String.fromCharCode(c);
+      if (present[L]) html += '<option value="' + L + '">' + L + '</option>';
+    }
+    els.letter.innerHTML = html;
+  }
+  function syncFilterControls(){
+    els.origin.value = filters.origin || "any";
+    els.letter.value = filters.letter || "any";
+    els.meaning.value = filters.meaning || "";
+    paintSeg(els.gender, filters.gender || "any");
+    paintSeg(els.pop, filters.popularity || "any");
+  }
+  function paintSeg(seg, val){
+    seg.querySelectorAll("button").forEach(function(b){
+      b.setAttribute("aria-pressed", String(b.dataset.v === val));
+    });
+  }
+  function wireFilters(){
+    els.origin.addEventListener("change", function(){ filters.origin = els.origin.value; onFilterChange(); });
+    els.letter.addEventListener("change", function(){ filters.letter = els.letter.value; onFilterChange(); });
+    els.meaning.addEventListener("input", function(){ filters.meaning = els.meaning.value; onFilterChange(); });
+    els.gender.addEventListener("click", function(e){ var b = e.target.closest("button"); if (!b) return;
+      filters.gender = b.dataset.v; paintSeg(els.gender, b.dataset.v); onFilterChange(); });
+    els.pop.addEventListener("click", function(e){ var b = e.target.closest("button"); if (!b) return;
+      filters.popularity = b.dataset.v; paintSeg(els.pop, b.dataset.v); onFilterChange(); });
+  }
+  function onFilterChange(){
+    PK.store.set(STORE.filters, filters);
+    updateCount();
+    PK.sound.play("tick");
+  }
+
+  function currentPool(){ return filterNames(ALL, filters); }
+
+  function updateCount(){
+    var n = currentPool().length;
+    if (n === 0){
+      els.count.classList.add("is-empty");
+      els.count.textContent = "0 names match — loosen a filter";
+      ui.primary.disabled = true;
+      // show empty state on the plate but keep any prior detail block hidden
+      setTagline("No names match — loosen a filter", /*empty*/true);
+      els.details.hidden = true;
+      els.heart.disabled = true;
+    } else {
+      els.count.classList.remove("is-empty");
+      els.count.innerHTML = "<b>" + n + "</b> name" + (n === 1 ? "" : "s") + " match";
+      if (!revealing) ui.primary.disabled = false;
+      // if the plate is showing the empty message, restore tagline
+      if (els.name.classList.contains("is-empty")){
+        if (currentName) showResult(currentName, false); else setTagline(TAGLINE, false);
+      }
+    }
+  }
+
+  /* ---------- the reveal (commit-then-reveal) ---------- */
+  function doReveal(){
+    if (revealing) return;
+    var pool = currentPool();
+    if (pool.length === 0) return;               // never pick from nothing
+
+    // DECIDE FIRST — crypto RNG, avoid an immediate repeat.
+    var decided = pick(pool, PK.rand.int, lastName);
+    if (!decided) return;
+
+    revealing = true;
+    ui.primary.disabled = true;
+    els.heart.disabled = true;
+    els.details.hidden = true;
+    els.name.classList.remove("is-tagline", "is-empty");
+    els.name.setAttribute("aria-hidden", "true");
+
+    if (PK.motion.reduced){
+      // cross-fade straight to the decided name; details appear at once.
+      els.name.style.transition = "opacity 120ms " + EASE.settle;
+      els.name.style.opacity = "0";
+      setTimeout(function(){
+        els.name.textContent = decided.name;
+        els.name.style.opacity = "1";
+        PK.sound.play("reveal");
+        PK.buzz(12);
+        finishReveal(decided);
+      }, 120);
+      return;
+    }
+
+    // Full motion: dip, riffle real pool names, lock, bloom.
+    var scramble = buildScramble(pool, decided);
+    els.plate.classList.remove("is-lift");
+    animatePlate([
+      { transform:"translateY(0) scale(1)" },
+      { transform:"translateY(6px) scale(.985)" }
+    ], 90, EASE.anticip);
+
+    var i = 0, steps = scramble.length;
+    lastTick = 0;
+    function step(){
+      if (i >= steps){ lockOn(decided); return; }
+      els.name.textContent = scramble[i];
+      throttledTick();
+      var frac = steps > 1 ? i / (steps - 1) : 1;
+      var dur = Math.round(40 + (120 - 40) * frac);     // decelerate 40ms -> 120ms
+      i++;
+      scrambleTimer = setTimeout(step, dur);
+    }
+    scrambleTimer = setTimeout(step, 90);               // after the dip
+  }
+
+  function buildScramble(pool, decided){
+    // ~8–12 real names drawn from the filtered pool (a genuine preview).
+    var count = 8 + PK.rand.int(5);
+    var out = [];
+    for (var i = 0; i < count; i++){ out.push(PK.rand.pick(pool).name); }
+    return out;
+  }
+
+  function lockOn(decided){
+    els.name.textContent = decided.name;
+    els.plate.classList.add("is-lift");
+    animateName([
+      { transform:"scale(.9)", opacity:.4 },
+      { transform:"scale(1.04)", opacity:1, offset:.7 },
+      { transform:"scale(1)", opacity:1 }
+    ], 150, EASE.spring);
+    PK.sound.play("reveal");
+    PK.buzz(12);
+    setTimeout(function(){ els.plate.classList.remove("is-lift"); }, 380);
+    finishReveal(decided);
+  }
+
+  function finishReveal(decided){
+    currentName = decided;
+    lastName = decided.name;
+    PK.store.set(STORE.last, lastName);
+    renderDetails(decided, /*bloom*/ !PK.motion.reduced);
+    els.name.setAttribute("aria-hidden", "false");
+    els.heart.disabled = false;
+    reflectHeart();
+    revealing = false;
+    ui.primary.disabled = currentPool().length === 0;
+    ui.primary.textContent = "Reveal Again";
+    PK.announce(announceText(decided), true);
+  }
+
+  function announceText(n){
+    var parts = [n.name];
+    parts.push(GENDER_LABEL[n.gender] || "name");
+    if (n.origins && n.origins.length) parts.push(n.origins.join(", ") + " origin");
+    parts.push(n.meaning ? ("meaning " + n.meaning) : "meaning not recorded");
+    return parts.join(", ") + ".";
+  }
+
+  /* ---------- detail block ---------- */
+  function renderDetails(n, bloom){
+    var glyph = GENDER_GLYPH[n.gender] || GENDER_GLYPH.u;
+    var neutral = n.gender === "u" ? " is-neutral" : "";
+    var chips = (n.origins || []).map(function(o){ return '<span class="bn-chip">' + esc(o) + '</span>'; }).join("");
+
+    var meaningHtml = n.meaning
+      ? '<div class="bn-meaning">&ldquo;' + esc(n.meaning) + '&rdquo;</div>'
+      : '<div class="bn-meaning is-missing">Meaning not recorded</div>';
+
+    var popHtml = '<div class="bn-pop">' + popNote(n) + '</div>';
+
+    var variantsHtml = (n.variants && n.variants.length)
+      ? '<div class="bn-variants">Also: <b>' + n.variants.map(esc).join("</b>, <b>") + '</b></div>' : "";
+
+    var srcHtml = '<div class="bn-source">' + sourceNote(n) + '</div>';
+
+    els.details.innerHTML =
+      '<div class="bn-detrow">' +
+        '<span class="bn-gender' + neutral + '">' + glyph +
+          '<span aria-hidden="true">' + (GENDER_LABEL[n.gender] || "") + '</span>' +
+          '<span class="pk-sr">Gender: ' + (GENDER_LABEL[n.gender] || "unknown") + '</span></span>' +
+        (chips ? '<span class="bn-detrow" style="gap:6px">' + chips + '</span>' : "") +
+      '</div>' +
+      meaningHtml + popHtml + variantsHtml + srcHtml;
+
+    els.details.hidden = false;
+
+    if (bloom){
+      var kids = els.details.children;
+      for (var i = 0; i < kids.length; i++){
+        (function(el, idx){
+          el.animate([
+            { opacity:0, transform:"translateY(6px)" },
+            { opacity:1, transform:"translateY(0)" }
+          ], { duration:200, delay:idx * 40, easing:EASE.settle, fill:"backwards" });
+        })(kids[i], i);
+      }
+    }
+  }
+
+  function popNote(n){
+    var band = popBand(n);
+    var p = n.popularity || null;
+    var rank = p ? (p.us_rank_recent != null ? p.us_rank_recent : p.uk_rank_recent) : null;
+    if (band === "popular")  return "Popular" + (rank != null ? " — around #" + rank + " in the US recently" : "");
+    if (band === "uncommon") return "Uncommon" + (rank != null ? " — around #" + rank + " in the US recently" : "");
+    return rank != null ? "Rare — around #" + rank + " recently" : "Rarely recorded";
+  }
+  function sourceNote(n){
+    if (n.meaning && n.meaning_source && SRC_LABELS[n.meaning_source])
+      return "Meaning via " + SRC_LABELS[n.meaning_source];
+    return "Origin via " + SRC_LABELS.wikidata;
+  }
+
+  /* ---------- shortlist ---------- */
+  function inShortlist(name){ return shortlist.some(function(x){ return x.name === name; }); }
+  function toggleShortlist(){
+    if (!currentName) return;
+    if (inShortlist(currentName.name)){
+      shortlist = shortlist.filter(function(x){ return x.name !== currentName.name; });
+      PK.toast("Removed from shortlist");
+    } else {
+      shortlist = shortlist.concat([currentName]);
+      PK.sound.play("click");
+      els.heart.classList.add("is-pop");
+      setTimeout(function(){ els.heart.classList.remove("is-pop"); }, 220);
+      PK.toast("Saved to shortlist");
+    }
+    PK.store.set(STORE.shortlist, shortlist);
+    reflectHeart();
+    refreshDrawerBtn();
+    if (els.drawerBackdrop && els.drawerBackdrop.classList.contains("is-open")) renderDrawer();
+  }
+  function reflectHeart(){
+    var on = currentName && inShortlist(currentName.name);
+    els.heart.setAttribute("aria-pressed", String(!!on));
+    els.heart.setAttribute("aria-label", on ? "Remove from shortlist" : "Save to shortlist");
+  }
+  function refreshDrawerBtn(){
+    els.drawerBtn.textContent = "Shortlist" + (shortlist.length ? " (" + shortlist.length + ")" : "");
+  }
+
+  function openDrawer(){
+    if (!els.drawerBackdrop) buildDrawer();
+    renderDrawer();
+    els.drawerBackdrop.classList.add("is-open");
+    var f = els.drawerBackdrop.querySelector("button"); if (f) f.focus();
+  }
+  function closeDrawer(){ if (els.drawerBackdrop) els.drawerBackdrop.classList.remove("is-open"); }
+  function buildDrawer(){
+    var b = document.createElement("div");
+    b.className = "pk-sheet-backdrop";
+    b.innerHTML =
+      '<div class="pk-sheet" role="dialog" aria-modal="true" aria-label="Shortlist">' +
+        '<h2>Your shortlist</h2>' +
+        '<ul class="bn-drawer-list" id="bn-drawer-list"></ul>' +
+        '<button class="pk-btn pk-btn--ghost" id="bn-drawer-close" style="width:100%;margin-top:16px">Done</button>' +
+      '</div>';
+    document.body.appendChild(b);
+    els.drawerBackdrop = b;
+    b.addEventListener("click", function(e){ if (e.target === b) closeDrawer(); });
+    b.addEventListener("keydown", function(e){ if (e.key === "Escape") closeDrawer(); });
+    q("#bn-drawer-close").addEventListener("click", closeDrawer);
+  }
+  function renderDrawer(){
+    var list = q("#bn-drawer-list");
+    if (!shortlist.length){
+      list.innerHTML = '<li class="bn-drawer-empty">No saved names yet.<br>Tap the heart on a name you love.</li>';
+      return;
+    }
+    list.innerHTML = "";
+    shortlist.slice().reverse().forEach(function(n){
+      var li = document.createElement("li");
+      li.className = "bn-drawer-item";
+      var sub = (n.origins && n.origins.length ? n.origins[0] : "") +
+        (n.meaning ? " · " + n.meaning : "");
+      li.innerHTML =
+        '<span class="bn-drawer-item__name">' + esc(n.name) +
+          '<span class="bn-drawer-item__sub"> ' + esc(sub) + '</span></span>';
+      var reveal = mkIconBtn("", "Show " + n.name, '&#8635;', function(){ showResult(n, true); closeDrawer(); });
+      reveal.classList.add("pk-icon-btn"); reveal.innerHTML = "&#8635;";
+      var rm = mkIconBtn("", "Remove " + n.name, "&times;", function(){
+        shortlist = shortlist.filter(function(x){ return x.name !== n.name; });
+        PK.store.set(STORE.shortlist, shortlist);
+        reflectHeart(); refreshDrawerBtn(); renderDrawer();
+      });
+      rm.innerHTML = "&times;"; rm.style.fontSize = "20px";
+      li.appendChild(reveal); li.appendChild(rm);
+      list.appendChild(li);
+    });
+  }
+
+  // show a specific name (from shortlist / restored last) without the riffle
+  function showResult(n, announce){
+    if (revealing) return;
+    currentName = n; lastName = n.name;
+    PK.store.set(STORE.last, lastName);
+    els.name.classList.remove("is-tagline", "is-empty");
+    els.name.textContent = n.name;
+    els.name.setAttribute("aria-hidden", "false");
+    renderDetails(n, false);
+    els.heart.disabled = false;
+    reflectHeart();
+    ui.primary.textContent = "Reveal Again";
+    if (announce) PK.announce(announceText(n), true);
+  }
+
+  function setTagline(text, empty){
+    els.name.textContent = text;
+    els.name.classList.toggle("is-empty", !!empty);
+    els.name.classList.toggle("is-tagline", !empty);
+    els.name.setAttribute("aria-hidden", "true");
+  }
+
+  /* ---------- sources / licence panel (mandatory) ---------- */
+  function registerSources(){
+    var node = document.createElement("div");
+    node.className = "bn-src pk-setting";
+    node.style.display = "block";
+    node.innerHTML =
+      '<h3>Sources &amp; licence</h3>' +
+      '<p>This is a small <b>starter sample</b> of real names, hand-checked against well-established ' +
+        'facts. Meaning coverage is honestly uneven (richer for European, Biblical, Arabic and Sanskrit ' +
+        'origins; thinner for many East Asian, African and SE Asian names) — a name may show its origin ' +
+        'and gender but say &ldquo;Meaning not recorded&rdquo; rather than guess. Popularity flags are ' +
+        'approximate recent US-rank bands.</p>' +
+      '<p>The full dataset is a licence-clean offline merge of:</p>' +
+      '<ul>' +
+        '<li><b>US SSA</b> baby names — public domain</li>' +
+        '<li><b>UK ONS</b> baby names — Open Government Licence v3</li>' +
+        '<li><b>Behind the Name</b> (CC download) — CC BY-SA 4.0</li>' +
+        '<li><b>Wikidata</b> — CC0</li>' +
+        '<li><b>Wiktionary</b> / etymology-db — CC BY-SA 3.0</li>' +
+      '</ul>' +
+      '<p>The merged <code>names.json</code> is released under <b>CC BY-SA 4.0</b> ' +
+        '(share-alike + attribution). Every result is picked with your device&rsquo;s cryptographic ' +
+        'random generator, decided before the animation.</p>';
+    PK.settings.register(node);
+  }
+
+  /* ---------- tiny helpers ---------- */
+  function q(sel){ return document.querySelector(sel); }
+  function esc(s){ return String(s == null ? "" : s).replace(/[&<>"]/g, function(c){
+    return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]; }); }
+  function findByName(name){ for (var i = 0; i < ALL.length; i++) if (ALL[i].name === name) return ALL[i]; return null; }
+  function throttledTick(){ var t = Date.now(); if (t - lastTick > 55){ PK.sound.play("tick"); lastTick = t; } }
+  function mkIconBtn(cls, label, html, onClick){
+    var b = document.createElement("button");
+    b.className = "pk-icon-btn" + (cls ? " " + cls : "");
+    b.type = "button"; b.setAttribute("aria-label", label); b.innerHTML = html;
+    b.addEventListener("click", onClick);
+    return b;
+  }
+  function animatePlate(frames, dur, ease){
+    try { els.plate.animate(frames, { duration:dur, easing:ease, fill:"none" }); } catch(e){}
+  }
+  function animateName(frames, dur, ease){
+    try { els.name.animate(frames, { duration:dur, easing:ease, fill:"none" }); } catch(e){}
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+}
+
+/* =====================================================================
+   Export the pure, testable surface for node bot_test.js (no DOM in Node).
+   ===================================================================== */
+if (HEADLESS && typeof globalThis !== "undefined") {
+  globalThis.BABYNAMES = {
+    matchesCriteria: matchesCriteria,
+    filterNames: filterNames,
+    popBand: popBand,
+    pick: pick,
+    originsOf: originsOf,
+    firstLetterOf: firstLetterOf,
+    CONFIG: CONFIG
+  };
+}
+</script>
+<!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:10px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Get the monthly letter</a></footer><!-- /ep:ca-foot -->
+</body></html>

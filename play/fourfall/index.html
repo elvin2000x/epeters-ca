@@ -1,0 +1,944 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fourfall</title>
+<meta name="description" content="Fourfall — drop glass discs down a seven-by-six gravity grid and line up four in a row. Hotseat, versus the computer, or online with a friend.">
+<link rel="stylesheet" href="../_kit/play-kit.css">
+<style>
+  /* ---- app-scoped materials, all derived from kit tokens (no brand hexes) ---- */
+  :root{
+    --ff-gap: clamp(3px, 1.1vw, 8px);
+    --ff-rack: var(--pk-surface-sunk);
+    --ff-rack-hi: color-mix(in srgb, white 34%, var(--pk-surface-sunk));
+    --ff-rack-lo: color-mix(in srgb, black 16%, var(--pk-surface-sunk));
+    --ff-well: color-mix(in srgb, black 16%, var(--pk-surface-sunk));
+    --ff-well-lit: color-mix(in srgb, var(--pk-accent) 12%, var(--ff-well));
+    --ff-s0: var(--pk-accent);                 /* seat 0 — teal, solid core   */
+    --ff-s1: var(--pk-warn);                   /* seat 1 — amber, ring core   */
+  }
+  :root[data-theme="dark"]{ --ff-well: color-mix(in srgb, black 55%, var(--pk-surface-sunk)); }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){ --ff-well: color-mix(in srgb, black 55%, var(--pk-surface-sunk)); }
+  }
+
+  .ff-wrap{ width:100%; display:flex; flex-direction:column; gap:var(--pk-gap); align-items:stretch; }
+
+  /* ---------------- turn banner ---------------- */
+  .turnbar{ text-align:center; min-height:2.4em; }
+  .turnbar .t{ font-family:var(--pk-font-display); font-size:var(--pk-fs-lg); font-weight:700; }
+  .turnbar .sub{ color:var(--pk-ink-soft); font-size:var(--pk-fs-sm); min-height:1.2em; }
+  .think::after{ content:""; display:inline-block; width:.5em; height:.5em; margin-left:.45em; border-radius:50%;
+    background:var(--pk-accent); animation:ffPulse 1s ease-in-out infinite; vertical-align:middle; }
+  @keyframes ffPulse{ 0%,100%{ opacity:.25; transform:scale(.8);} 50%{ opacity:1; transform:scale(1.15);} }
+
+  /* ---------------- seat rail + scoreline ---------------- */
+  .seatrail{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
+  .seat{ display:flex; align-items:center; gap:8px; padding:6px 12px; border-radius:var(--pk-radius-pill);
+    background:var(--pk-surface); border:1.5px solid var(--pk-line); font-size:var(--pk-fs-sm); font-weight:600; }
+  .seat.is-turn{ border-color:var(--pk-accent); background:var(--pk-accent-soft); color:var(--pk-accent-press); }
+  .seat.is-off{ opacity:.55; }
+  .seat .sw{ width:16px; height:16px; border-radius:50%; flex:0 0 auto; position:relative; }
+  .seat .cnt{ font-family:var(--pk-font-num); font-variant-numeric:tabular-nums;
+    background:var(--pk-surface-sunk); border-radius:999px; padding:1px 8px; }
+  .scoreline{ display:flex; gap:10px; justify-content:center; align-items:center; flex-wrap:wrap;
+    font-size:var(--pk-fs-sm); color:var(--pk-ink-soft); }
+  .scoreline b{ color:var(--pk-ink); }
+  .scoreline .big{ font-size:var(--pk-fs-lg); font-weight:800; }
+
+  /* ---------------- the rack ---------------- */
+  .rackwrap{ position:relative; width:min(100%, 460px); margin:0 auto; }
+  .lane{ display:grid; grid-template-columns:repeat(var(--ff-cols,7),1fr); gap:var(--ff-gap);
+    padding:0 var(--ff-gap); margin-bottom:4px; }
+  .laneslot{ position:relative; aspect-ratio:1/1; display:grid; place-items:center; }
+  .rack{ display:grid; grid-template-columns:repeat(var(--ff-cols,7),1fr); gap:var(--ff-gap);
+    background:linear-gradient(170deg, var(--ff-rack-hi) 0%, var(--ff-rack) 14%, var(--ff-rack-lo) 100%);
+    border:1px solid var(--pk-line); border-radius:var(--pk-radius-lg); padding:var(--ff-gap);
+    box-shadow:var(--pk-shadow-obj), inset 0 1px 0 rgba(255,255,255,.30); }
+  .col{ display:grid; grid-template-rows:repeat(var(--ff-rows,6),1fr); gap:var(--ff-gap);
+    background:transparent; border:0; padding:0; margin:0; border-radius:var(--pk-radius-sm); cursor:pointer;
+    transition:background var(--pk-t-quick) var(--pk-ease-standard); }
+  .col:disabled{ cursor:not-allowed; }
+  .col:focus-visible{ outline:3px solid var(--pk-focus); outline-offset:2px; }
+  .col.is-aimed .cell{ background:var(--ff-well-lit); }
+  .col.shake{ animation:ffShake 180ms var(--pk-ease-standard); }
+  @keyframes ffShake{ 0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)} }
+
+  .cell{ position:relative; aspect-ratio:1/1; border-radius:50%; background:var(--ff-well);
+    box-shadow:inset 0 3px 6px rgba(0,0,0,.45), inset 0 -1px 0 rgba(255,255,255,.07);
+    display:grid; place-items:center; }
+
+  /* ---------------- the glass disc (hero object, pure CSS) ---------------- */
+  .disc{ position:relative; width:88%; height:88%; border-radius:50%;
+    background:radial-gradient(circle at 34% 28%,
+      color-mix(in srgb, var(--ff-c) 55%, white),
+      var(--ff-c) 56%,
+      color-mix(in srgb, var(--ff-c) 62%, black) 100%);
+    box-shadow:
+      inset 0 2px 3px color-mix(in srgb, white 45%, transparent),
+      inset 0 -3px 5px rgba(0,0,0,.42),
+      0 3px 5px rgba(0,0,0,.40);
+  }
+  .disc.s0{ --ff-c:var(--ff-s0); }
+  .disc.s1{ --ff-c:var(--ff-s1); }
+  /* core treatment — the second, non-colour channel of seat identity (WCAG 1.4.1) */
+  .disc::before{ content:""; position:absolute; inset:27%; border-radius:50%; }
+  .disc.s0::before{ background:color-mix(in srgb, var(--ff-c) 74%, black);
+    box-shadow:inset 0 1px 2px rgba(0,0,0,.45), 0 1px 0 rgba(255,255,255,.14); }   /* SOLID core */
+  .disc.s1::before{ background:var(--ff-well);
+    box-shadow:inset 0 1px 3px rgba(0,0,0,.55), 0 1px 0 rgba(255,255,255,.16); }   /* RING core  */
+  /* specular highlight */
+  .disc::after{ content:""; position:absolute; left:22%; top:16%; width:34%; height:24%; border-radius:50%;
+    background:rgba(255,255,255,.42); filter:blur(.4px); pointer-events:none; }
+  .disc.last{ box-shadow:
+      inset 0 2px 3px color-mix(in srgb, white 45%, transparent),
+      inset 0 -3px 5px rgba(0,0,0,.42),
+      0 3px 5px rgba(0,0,0,.40),
+      0 0 0 2px color-mix(in srgb, var(--ff-c) 70%, transparent); }
+  .disc.fly{ position:absolute; z-index:6; pointer-events:none; }
+  .cell.dim .disc{ filter:saturate(.35) brightness(.92); opacity:.72;
+    transition:filter var(--pk-t-quick) var(--pk-ease-standard), opacity var(--pk-t-quick) var(--pk-ease-standard); }
+  .cell.win{ box-shadow:inset 0 0 0 3px var(--ff-c-win), inset 0 3px 6px rgba(0,0,0,.35); }
+  .cell.win .disc{ animation:ffPop 380ms var(--pk-ease-spring) both; }
+  @keyframes ffPop{ 0%{transform:scale(1)} 45%{transform:scale(1.12)} 100%{transform:scale(1)} }
+
+  /* the ghost disc in the drop lane */
+  .ghost{ width:88%; height:88%; border-radius:50%; opacity:.62; pointer-events:none;
+    background:radial-gradient(circle at 34% 28%,
+      color-mix(in srgb, var(--ff-c) 55%, white), var(--ff-c) 56%,
+      color-mix(in srgb, var(--ff-c) 62%, black) 100%);
+    box-shadow:0 0 0 1.5px color-mix(in srgb, white 55%, transparent), 0 3px 8px rgba(0,0,0,.35);
+    animation:ffBob 2.4s ease-in-out infinite; }
+  .ghost::before{ content:""; position:absolute; inset:calc(6% + 27%); border-radius:50%; }
+  .ghost.s0{ --ff-c:var(--ff-s0); } .ghost.s1{ --ff-c:var(--ff-s1); }
+  @keyframes ffBob{ 0%,100%{ transform:translateY(-2px);} 50%{ transform:translateY(2px);} }
+  .lane.no-aim .ghost{ display:none; }
+
+  /* the win beam */
+  .beam{ position:absolute; z-index:5; height:8px; border-radius:999px; pointer-events:none;
+    transform-origin:0 50%; opacity:.55; background:var(--ff-c-win);
+    box-shadow:0 0 14px color-mix(in srgb, var(--ff-c-win) 60%, transparent); }
+
+  /* ---------------- mode select / invite ---------------- */
+  .modecard{ width:100%; max-width:420px; text-align:left; display:flex; gap:12px; align-items:center;
+    padding:16px; margin:0 auto; cursor:pointer; }
+  .modecard h3{ font-family:var(--pk-font-display); font-size:1.1rem; margin:0 0 2px; }
+  .modecard p{ margin:0; color:var(--pk-ink-soft); font-size:var(--pk-fs-sm); }
+  .modecard .ic{ flex:0 0 auto; width:2rem; height:2rem; display:grid; place-items:center; }
+  .minidisc{ width:20px; height:20px; border-radius:50%; position:relative; }
+  .opts{ width:100%; max-width:420px; margin:0 auto; display:flex; flex-direction:column; gap:10px; }
+  .optrow{ display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+  .optrow > span{ font-size:var(--pk-fs-sm); font-weight:600; color:var(--pk-ink-soft); }
+  .code{ font-family:var(--pk-font-num); font-size:clamp(1.8rem,9vw,2.4rem); letter-spacing:.28em;
+    font-weight:800; color:var(--pk-accent); background:var(--pk-surface-sunk);
+    border-radius:var(--pk-radius); padding:10px 10px 10px 24px; display:inline-block; }
+  .banner{ text-align:center; color:var(--pk-ink-soft); min-height:1.4em; font-weight:600; }
+  .hint{ text-align:center; color:var(--pk-ink-faint); font-size:var(--pk-fs-xs); }
+
+  /* ---------------- result overlay ---------------- */
+  .overlay{ position:fixed; inset:0; z-index:150; background:rgba(20,15,8,.58); display:grid;
+    place-items:center; padding:24px; }
+  .overlay .card{ background:var(--pk-surface); border-radius:var(--pk-radius-lg); box-shadow:var(--pk-shadow-3);
+    padding:24px; max-width:440px; width:100%; text-align:center; }
+  .overlay .pk-result{ font-size:clamp(1.4rem,5vw,2rem); }
+
+  @media (max-width:420px){ .code{ letter-spacing:.2em; padding-left:16px; } }
+  @media (prefers-reduced-motion: reduce){
+    .ghost{ animation:none; } .think::after{ animation:none; opacity:.8; }
+    .cell.win .disc{ animation:none; }
+  }
+  :root[data-motion="reduce"] .ghost{ animation:none; }
+  :root[data-motion="reduce"] .think::after{ animation:none; opacity:.8; }
+  :root[data-motion="reduce"] .cell.win .disc{ animation:none; }
+</style>
+<link rel="canonical" href="https://epeters.ca/play/fourfall/">
+</head>
+<body>
+<script src="../_kit/play-kit.js"></script>
+<script src="../_kit/net-kit.js"></script>
+<script src="rules.js"></script>
+<script>
+var HEADLESS = (typeof document === "undefined");
+
+if (!HEADLESS) (function () {
+  "use strict";
+  var R = window.FOURFALL_RULES;
+
+  var ui = PK.app({
+    title: "Fourfall", slug: "fourfall", accent: "teal", board: true,
+    action: { label: "Drop", onFire: function () { primaryFire(); }, key: null }  // the board owns Space/Enter
+  });
+  var stage = ui.stage, actions = ui.actions, primary = ui.primary;
+
+  /* ------------------------------------------------------------ app state */
+  var net = null, view = null, pendingView = null;
+  var myMode = "hotseat";                 // hotseat | ai | online
+  var aim = 3, busy = false, hiddenIdx = -1, lastShownPly = -1;
+  var revealWin = false, resultShown = false, roomInfo = null, extras = [];
+  var driftT = null, tossDone = false;
+  var primaryFire = function () { openModeSelect(); };
+
+  var cfg = {
+    name: PK.store.get("play.fourfall.name", PK.store.get("play.name", "Guest")),
+    mode: PK.store.get("play.fourfall.mode", "hotseat"),
+    difficulty: PK.store.get("play.fourfall.difficulty", "medium"),
+    target: PK.store.get("play.fourfall.target", 3)
+  };
+
+  var SEAT_NAME = ["Teal", "Amber"];
+
+  /* -------------------------------------------------------------- helpers */
+  function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+  function btn(label, cls, on) { var b = document.createElement("button"); b.type = "button"; b.className = "pk-btn " + (cls || ""); b.textContent = label; b.onclick = on; return b; }
+  function reduced() { return PK.motion.reduced; }
+  function setExtras(list) {
+    extras.forEach(function (b) { if (b.parentNode) b.parentNode.removeChild(b); });
+    extras = list || [];
+    extras.forEach(function (b) { actions.appendChild(b); });
+  }
+  function isSpectator() { return !!(net && net.isSpectator); }
+  function mySeat() {
+    if (!view) return null;
+    if (myMode === "online") return (net && net.seat != null) ? net.seat : null;
+    if (myMode === "ai") return 0;
+    return view.turn;                                   // hotseat: the mover holds the device
+  }
+  function myTurn() { return !!(view && !view.over && !isSpectator() && mySeat() === view.turn); }
+  function aiThinking() { return !!(view && !view.over && myMode === "ai" && view.turn === 1); }
+  function seatLabel(s) {
+    if (myMode === "ai") return (s === 0 ? "You" : "Computer") + " · " + SEAT_NAME[s];
+    if (myMode === "online") {
+      var p = (net && net.players || []).filter(function (x) { return x.seat === s; })[0];
+      var nm = (p && p.name) ? p.name : SEAT_NAME[s];
+      return nm + (s === (net && net.seat) ? " (you)" : "") + " · " + SEAT_NAME[s];
+    }
+    return SEAT_NAME[s];
+  }
+  function seatName(s) { return s === 0 || s === 1 ? SEAT_NAME[s] : "Nobody"; }
+  function discEl(seat, cls) { return el("div", "disc s" + seat + (cls ? " " + cls : "")); }
+  function swatch(seat) { var d = el("span", "sw"); d.appendChild(discEl(seat)); return d; }
+  function cellOf(i) { return document.querySelector('.cell[data-i="' + i + '"]'); }
+  function colEl(c) { return document.querySelector('.col[data-c="' + c + '"]'); }
+
+  function clearTimers() { if (driftT) { clearInterval(driftT); driftT = null; } }
+
+  /* ---------------------------------------------------------- mode select */
+  function openModeSelect() {
+    clearTimers();
+    if (net && net.disconnect) { try { net.disconnect(); } catch (e) {} }
+    net = null; view = null; pendingView = null; busy = false; hiddenIdx = -1;
+    lastShownPly = -1; revealWin = false; resultShown = false; roomInfo = null; tossDone = false;
+    var o = document.querySelector(".overlay"); if (o) o.remove();
+    setExtras([]);
+    stage.innerHTML = "";
+    if (primary) { primary.style.display = "none"; }
+    primaryFire = function () {};
+
+    var wrap = el("div", "ff-wrap"); wrap.style.alignItems = "center"; wrap.style.gap = "14px";
+    var h = el("h2", "", "Four in a row"); h.style.cssText = "font-family:var(--pk-font-display);font-size:var(--pk-fs-lg)";
+    wrap.appendChild(h);
+    wrap.appendChild(el("p", "pk-subtle", "Drop a disc into a column — it falls to the lowest free cell. Line up <b>four</b> across, up, or on either diagonal."));
+
+    function card(icHtml, title, desc, fn) {
+      var c = el("button", "pk-panel modecard");
+      c.type = "button";
+      c.innerHTML = '<span class="ic">' + icHtml + '</span><span><h3>' + title + '</h3><p>' + desc + '</p></span>';
+      c.onclick = fn; return c;
+    }
+    var twoDiscs = '<span style="display:flex;gap:3px"><span class="minidisc disc s0"></span><span class="minidisc disc s1"></span></span>';
+    wrap.appendChild(card(twoDiscs, "Local hotseat", "Two players, one device. No curtain — nothing is hidden.", function () { start("hotseat"); }));
+    wrap.appendChild(card("&#129302;", "Vs computer", "A depth-limited opponent in three strengths.", function () { start("ai"); }));
+    wrap.appendChild(card("&#128279;", "Play a friend", "Get a 4-character room code and a link.", function () { start("online"); }));
+    var joinRow = el("div", "pk-row");
+    joinRow.appendChild(btn("Have a code? Join a room", "pk-btn--ghost pk-btn--sm", openJoinPrompt));
+    wrap.appendChild(joinRow);
+
+    var opts = el("div", "opts pk-well");
+
+    var r1 = el("div", "optrow"); r1.appendChild(el("span", "", "Computer strength"));
+    var seg = el("div", "pk-seg");
+    [["easy", "Easy"], ["medium", "Medium"], ["hard", "Hard"]].forEach(function (d) {
+      var b = document.createElement("button"); b.type = "button"; b.dataset.v = d[0]; b.textContent = d[1]; seg.appendChild(b);
+    });
+    r1.appendChild(seg); opts.appendChild(r1);
+
+    var r2 = el("div", "optrow"); r2.appendChild(el("span", "", "Match length"));
+    var seg2 = el("div", "pk-seg");
+    [[1, "1 game"], [3, "First to 3"], [5, "First to 5"]].forEach(function (d) {
+      var b = document.createElement("button"); b.type = "button"; b.dataset.v = String(d[0]); b.textContent = d[1]; seg2.appendChild(b);
+    });
+    r2.appendChild(seg2); opts.appendChild(r2);
+
+    var r3 = el("div", "optrow"); r3.appendChild(el("span", "", "Your name"));
+    var nameIn = document.createElement("input");
+    nameIn.className = "pk-input"; nameIn.value = cfg.name; nameIn.maxLength = 16;
+    nameIn.setAttribute("aria-label", "Your display name");
+    nameIn.style.width = "10em";
+    nameIn.onchange = function () { cfg.name = nameIn.value.trim() || "Guest"; PK.store.set("play.fourfall.name", cfg.name); };
+    r3.appendChild(nameIn); opts.appendChild(r3);
+    wrap.appendChild(opts);
+
+    function paint() {
+      seg.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.v === cfg.difficulty)); });
+      seg2.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(+b.dataset.v === +cfg.target)); });
+    }
+    seg.onclick = function (e) { var b = e.target.closest("button"); if (!b) return; cfg.difficulty = b.dataset.v; PK.store.set("play.fourfall.difficulty", cfg.difficulty); paint(); PK.sound.play("click"); };
+    seg2.onclick = function (e) { var b = e.target.closest("button"); if (!b) return; cfg.target = +b.dataset.v; PK.store.set("play.fourfall.target", cfg.target); paint(); PK.sound.play("click"); };
+    paint();
+
+    stage.appendChild(wrap);
+  }
+
+  function openJoinPrompt() {
+    stage.innerHTML = "";
+    var wrap = el("div", "ff-wrap"); wrap.style.alignItems = "center"; wrap.style.gap = "14px";
+    var h = el("h2", "", "Join a game"); h.style.cssText = "font-family:var(--pk-font-display)";
+    wrap.appendChild(h);
+    var inp = document.createElement("input");
+    inp.className = "pk-input"; inp.maxLength = 4; inp.placeholder = "CODE"; inp.autocapitalize = "characters";
+    inp.style.cssText = "text-transform:uppercase;letter-spacing:.3em;text-align:center;width:9em;font-family:var(--pk-font-num)";
+    inp.setAttribute("aria-label", "Room code");
+    wrap.appendChild(inp);
+    var row = el("div", "pk-row");
+    function go() { var c = inp.value.trim().toUpperCase(); if (c.length >= 3) joinOnline(c, false); }
+    row.appendChild(btn("Join", "", go));
+    row.appendChild(btn("Back", "pk-btn--ghost", openModeSelect));
+    wrap.appendChild(row);
+    stage.appendChild(wrap); inp.focus();
+    inp.onkeydown = function (e) { if (e.key === "Enter") { e.preventDefault(); go(); } };
+  }
+
+  /* --------------------------------------------------------------- start */
+  function resetRound() {
+    clearTimers();
+    busy = false; hiddenIdx = -1; lastShownPly = -1; revealWin = false; resultShown = false; pendingView = null;
+    var o = document.querySelector(".overlay"); if (o) o.remove();
+  }
+
+  function start(mode) {
+    myMode = mode; PK.store.set("play.fourfall.mode", mode);
+    resetRound(); view = null; aim = 3; tossDone = false; roomInfo = null;
+    if (primary) primary.style.display = "";
+
+    var options = { target: cfg.target };
+
+    if (mode === "hotseat") {
+      net = new LocalNet({ gameId: "fourfall", mode: "hotseat", rules: R, seats: 2, rng: PK.rand.int, options: options });
+      wire(); net.connect();
+    } else if (mode === "ai") {
+      net = new LocalNet({
+        gameId: "fourfall", mode: "ai", rules: R, seats: 2, rng: PK.rand.int, aiSeat: 1, options: options,
+        ai: function (v) { return R.aiMove(v, { difficulty: cfg.difficulty }, PK.rand.int); }
+      });
+      wire(); net.connect();
+    } else {
+      net = new Net({ gameId: "fourfall", name: cfg.name, rules: R });
+      wire();
+      stage.innerHTML = '<p class="banner">Connecting&hellip;</p>';
+      if (primary) primary.style.display = "none";
+      setExtras([btn("Cancel", "pk-btn--ghost pk-btn--sm", openModeSelect)]);
+      var live = net;
+      var giveUp = setTimeout(function () {                     // the server is optional — never hang on it
+        if (net === live && !roomInfo) { PK.toast("Game server unreachable — hotseat and vs-computer still work"); openModeSelect(); }
+      }, 7000);
+      net.connect().then(function () { return net.createRoom({ options: options }); })
+        .then(function (room) { if (net !== live) return; clearTimeout(giveUp); roomInfo = room; inviteScreen(room); })
+        .catch(function () { clearTimeout(giveUp); if (net === live) { PK.toast("Could not reach the game server"); openModeSelect(); } });
+    }
+  }
+
+  function joinOnline(code, spectate) {
+    myMode = "online"; resetRound(); view = null; roomInfo = null; aim = 3; tossDone = false;
+    net = new Net({ gameId: "fourfall", name: cfg.name, rules: R });
+    wire();
+    var live = net;
+    var giveUp = setTimeout(function () {
+      if (net === live && !view) { PK.toast("Game server unreachable — hotseat and vs-computer still work"); openModeSelect(); }
+    }, 7000);
+    net.connect().then(function () { return net.joinRoom(code, { asSpectator: !!spectate }); })
+      .then(function () { clearTimeout(giveUp); })
+      .catch(function () { clearTimeout(giveUp); if (net === live) { PK.toast("Could not reach the game server"); openModeSelect(); } });
+    stage.innerHTML = '<p class="banner">Joining room ' + String(code).toUpperCase() + '&hellip;</p>';
+    if (primary) primary.style.display = "none";
+    setExtras([btn("Cancel", "pk-btn--ghost pk-btn--sm", openModeSelect)]);
+  }
+
+  function inviteScreen(room) {
+    setExtras([]);
+    if (primary) primary.style.display = "none";
+    stage.innerHTML = "";
+    var wrap = el("div", "ff-wrap"); wrap.style.alignItems = "center"; wrap.style.gap = "16px";
+    var h = el("h2", "", "Share to start"); h.style.cssText = "font-family:var(--pk-font-display)";
+    wrap.appendChild(h);
+    wrap.appendChild(el("div", "code", room.roomId || "----"));
+    wrap.appendChild(el("p", "pk-subtle", "Send the link or read them the code. The game starts when they join."));
+    var row = el("div", "pk-row");
+    row.appendChild(btn("Copy link", "", function () {
+      net.copyInvite().then(function () { PK.toast("Link copied"); }, function () { PK.toast("Copy failed — read out the code"); });
+    }));
+    if (navigator.share) row.appendChild(btn("Share", "pk-btn--soft", function () { net.share(); }));
+    row.appendChild(btn("Cancel", "pk-btn--ghost", openModeSelect));
+    wrap.appendChild(row);
+    var qr = el("div", ""); wrap.appendChild(qr);
+    if (net.qrDataUrl) net.qrDataUrl().then(function (u) {
+      if (!u) return;
+      var img = document.createElement("img"); img.src = u; img.alt = "Invite QR code";
+      img.style.cssText = "width:150px;height:150px;image-rendering:pixelated;border-radius:8px;background:#fff;padding:6px";
+      qr.appendChild(img);
+    }, function () {});
+    var b = el("p", "banner", "Waiting for an opponent&hellip;"); b.id = "bn"; wrap.appendChild(b);
+    stage.appendChild(wrap);
+    PK.announce("Room code " + (room.roomId || "") + ". Waiting for an opponent.");
+  }
+
+  /* -------------------------------------------------------------- render */
+  function activePlayers() {
+    return (net && net.players ? net.players : []).filter(function (p) { return p.status !== "disconnected"; }).length;
+  }
+  function colHasRoom(c) { return !!(view && view.heights[c] < view.rows); }
+  function nearestOpenCol(from) {
+    if (!view) return from;
+    if (colHasRoom(from)) return from;
+    for (var d = 1; d < view.cols; d++) {
+      if (from - d >= 0 && colHasRoom(from - d)) return from - d;
+      if (from + d < view.cols && colHasRoom(from + d)) return from + d;
+    }
+    return from;
+  }
+
+  function render() {
+    if (!view) return;
+
+    // online: hold on the invite / waiting screen until both seats are filled
+    if (myMode === "online" && !view.over && !isSpectator() && activePlayers() < 2) {
+      var wb = document.getElementById("bn");
+      if (wb) { wb.textContent = "Waiting for opponent… (" + activePlayers() + "/2)"; return; }
+      if (roomInfo) { inviteScreen(roomInfo); return; }
+    }
+
+    aim = nearestOpenCol(aim);
+    var focusWasBoard = document.activeElement && document.activeElement.classList && document.activeElement.classList.contains("col");
+
+    stage.innerHTML = "";
+    if (primary) primary.style.display = "";
+    var wrap = el("div", "ff-wrap");
+    wrap.style.setProperty("--ff-cols", view.cols);
+    wrap.style.setProperty("--ff-rows", view.rows);
+
+    // turn banner
+    var tb = el("div", "turnbar");
+    var t = el("div", "t"); t.id = "tt"; tb.appendChild(t);
+    var sub = el("div", "sub"); sub.id = "ts"; tb.appendChild(sub);
+    wrap.appendChild(tb);
+
+    // seat rail
+    var rail = el("div", "seatrail");
+    [0, 1].forEach(function (s) {
+      var seat = el("div", "seat" + (view.turn === s && !view.over ? " is-turn" : ""));
+      var p = (net && net.players || []).filter(function (x) { return x.seat === s; })[0];
+      if (myMode === "online" && p && p.status === "disconnected") seat.className += " is-off";
+      seat.appendChild(swatch(s));
+      seat.appendChild(el("span", "", seatLabel(s)));
+      seat.appendChild(el("span", "cnt", String(view.scores[s])));
+      if (myMode === "online" && p && p.status === "disconnected") seat.appendChild(el("span", "", " ⟳"));
+      rail.appendChild(seat);
+    });
+    wrap.appendChild(rail);
+
+    // scoreline
+    var sl = el("div", "scoreline");
+    sl.innerHTML =
+      '<span>' + SEAT_NAME[0] + ' <b class="pk-num big">' + view.scores[0] + '</b></span>' +
+      '<span class="pk-subtle">—</span>' +
+      '<span><b class="pk-num big">' + view.scores[1] + '</b> ' + SEAT_NAME[1] + '</span>' +
+      '<span class="pk-subtle">draws <b class="pk-num">' + view.draws + '</b></span>' +
+      '<span class="pk-subtle">' + (view.target > 1 ? 'first to <b class="pk-num">' + view.target + '</b>' : 'single game') + '</span>' +
+      '<span class="pk-subtle">game <b class="pk-num">' + view.gameNo + '</b></span>';
+    wrap.appendChild(sl);
+
+    // rack + drop lane
+    var rackwrap = el("div", "rackwrap"); rackwrap.id = "rackwrap";
+    var lane = el("div", "lane"); lane.id = "lane";
+    lane.setAttribute("aria-hidden", "true");
+    for (var lc = 0; lc < view.cols; lc++) {
+      var slot = el("div", "laneslot"); slot.dataset.c = String(lc); lane.appendChild(slot);
+    }
+    rackwrap.appendChild(lane);
+
+    var rack = el("div", "rack"); rack.id = "rack";
+    rack.setAttribute("role", "group");
+    rack.setAttribute("aria-label", "Seven columns by six rows. Choose a column to drop your disc.");
+    for (var c = 0; c < view.cols; c++) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "col"; b.dataset.c = String(c);
+      var filled = view.heights[c], free = view.rows - filled;
+      b.disabled = free === 0 || !myTurn();
+      b.tabIndex = (c === aim) ? 0 : -1;
+      if (c === aim) b.classList.add("is-aimed");
+      b.setAttribute("aria-pressed", String(c === aim));
+      b.setAttribute("aria-label", "Column " + (c + 1) + ", " + filled + (filled === 1 ? " disc, " : " discs, ") +
+        free + (free === 1 ? " space left" : " spaces left"));
+      for (var r = view.rows - 1; r >= 0; r--) {       // top row first, visually
+        var i = r * view.cols + c;
+        var cell = el("div", "cell"); cell.dataset.i = String(i);
+        var val = view.board[i];
+        if (val === 0 || val === 1) {
+          var d = discEl(val);
+          if (view.lastDrop && view.lastDrop.idx === i && !view.over) d.classList.add("last");
+          if (i === hiddenIdx) d.style.visibility = "hidden";
+          cell.appendChild(d);
+        }
+        b.appendChild(cell);
+      }
+      b.onclick = (function (cc) { return function () { onColumn(cc); }; })(c);
+      b.onmouseenter = (function (cc) { return function () { setAim(cc, false); }; })(c);
+      b.onfocus = (function (cc) { return function () { setAim(cc, false); }; })(c);
+      rack.appendChild(b);
+    }
+    rack.addEventListener("keydown", onBoardKey);
+    rackwrap.appendChild(rack);
+    wrap.appendChild(rackwrap);
+
+    wrap.appendChild(el("p", "hint", "Aim with &larr; &rarr; or the number keys, then Enter to drop. " +
+      "Teal has a solid core, Amber a ring core."));
+
+    stage.appendChild(wrap);
+
+    paintGhost();
+    if (revealWin && view.over && view.result && view.result.line) paintWin();
+    paintStatus();
+
+    // action bar
+    var list = [];
+    if (!view.over && !isSpectator() && (myMode !== "ai" || view.turn === 0)) list.push(btn("Resign", "pk-btn--ghost pk-btn--sm", doResign));
+    if (myMode === "online") list.push(btn("Leave", "pk-btn--ghost pk-btn--sm", function () { net.leave(); openModeSelect(); }));
+    else list.push(btn("Menu", "pk-btn--ghost pk-btn--sm", openModeSelect));
+    setExtras(list);
+
+    if (focusWasBoard) { var f = colEl(aim); if (f && !f.disabled) f.focus(); }
+  }
+
+  function paintStatus() {
+    var t = document.getElementById("tt"), s = document.getElementById("ts");
+    if (!t) return;
+    var txt = "", subtxt = "";
+    if (view.over) {
+      txt = resultTitle();
+      subtxt = view.result && view.result.matchOver ? matchLine() : "";
+    } else if (isSpectator()) {
+      txt = seatName(view.turn) + " to move"; subtxt = "Watching";
+    } else if (aiThinking()) {
+      txt = SEAT_NAME[1] + " is thinking"; t.className = "t think";
+    } else if (myMode === "hotseat") {
+      txt = seatName(view.turn) + "'s turn";
+      subtxt = "Pass the device — nothing is hidden.";
+    } else if (myTurn()) {
+      txt = "Your turn"; subtxt = SEAT_NAME[mySeat()] + " · column " + (aim + 1);
+    } else {
+      txt = "Waiting for " + seatName(view.turn) + "…";
+    }
+    if (!view.over && (view.moves || []).length === 0) {
+      subtxt = (view.gameNo === 1 ? seatName(view.startSeat) + " starts — coin toss" : seatName(view.startSeat) + " starts this game")
+        + (subtxt ? " · " + subtxt : "");
+    }
+    t.textContent = txt;
+    s.textContent = subtxt;
+
+    if (primary) {
+      primary.textContent = "Drop";
+      primary.disabled = !(myTurn() && colHasRoom(aim)) || busy;
+    }
+    primaryFire = function () { onColumn(aim); };
+  }
+
+  function paintGhost() {
+    var lane = document.getElementById("lane");
+    if (!lane) return;
+    var old = lane.querySelector(".ghost"); if (old) old.remove();
+    var showSeat = null;
+    if (view.over) showSeat = null;
+    else if (aiThinking()) showSeat = 1;
+    else if (myTurn()) showSeat = view.turn;
+    if (showSeat === null) return;
+    var g = el("div", "ghost s" + showSeat);
+    var slot = lane.querySelector('.laneslot[data-c="' + aim + '"]');
+    if (slot) slot.appendChild(g);
+  }
+
+  function moveGhost(oldAim) {
+    var lane = document.getElementById("lane");
+    if (!lane) return;
+    var g = lane.querySelector(".ghost");
+    if (!g) { paintGhost(); return; }
+    var prev = g.getBoundingClientRect();
+    var slot = lane.querySelector('.laneslot[data-c="' + aim + '"]');
+    if (!slot) return;
+    slot.appendChild(g);
+    if (!reduced() && g.animate && prev.width) {
+      var next = g.getBoundingClientRect();
+      g.animate([{ transform: "translateX(" + (prev.left - next.left) + "px)" }, { transform: "translateX(0)" }],
+        { duration: 150, easing: "cubic-bezier(.16,1,.3,1)" });
+    }
+  }
+
+  function paintWin() {
+    var line = view.result.line, winner = view.result.winner;
+    var lookup = {}; line.forEach(function (i) { lookup[i] = true; });
+    var rackwrap = document.getElementById("rackwrap");
+    if (!rackwrap) return;
+    rackwrap.style.setProperty("--ff-c-win", winner === 0 ? "var(--ff-s0)" : "var(--ff-s1)");
+    document.querySelectorAll(".cell").forEach(function (cell) {
+      var i = +cell.dataset.i;
+      if (lookup[i]) { cell.classList.add("win"); cell.style.setProperty("--ff-c-win", winner === 0 ? "var(--ff-s0)" : "var(--ff-s1)"); }
+      else if (cell.firstChild) cell.classList.add("dim");
+    });
+    if (reduced()) return;                       // static rings only under reduced motion
+    var a = cellOf(line[0]), b = cellOf(line[line.length - 1]);
+    if (!a || !b) return;
+    var wr = rackwrap.getBoundingClientRect(), ar = a.getBoundingClientRect(), br = b.getBoundingClientRect();
+    var x1 = ar.left + ar.width / 2 - wr.left, y1 = ar.top + ar.height / 2 - wr.top;
+    var x2 = br.left + br.width / 2 - wr.left, y2 = br.top + br.height / 2 - wr.top;
+    var len = Math.hypot(x2 - x1, y2 - y1), ang = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+    var thick = Math.max(6, ar.width * 0.3);
+    var beam = el("div", "beam");
+    beam.style.cssText = "left:" + x1 + "px;top:" + (y1 - thick / 2) + "px;height:" + thick + "px;width:" + len + "px;" +
+      "transform:rotate(" + ang + "deg);";
+    rackwrap.appendChild(beam);
+    if (beam.animate) beam.animate([{ width: "0px", opacity: .85 }, { width: len + "px", opacity: .55 }],
+      { duration: 260, easing: "cubic-bezier(.16,1,.3,1)", fill: "forwards" });
+  }
+
+  /* --------------------------------------------------------------- input */
+  function setAim(c, silent) {
+    if (!view || view.over) return;
+    if (c < 0 || c >= view.cols) return;
+    if (c === aim) return;
+    var old = aim;
+    aim = c;
+    document.querySelectorAll(".col").forEach(function (b) {
+      var on = +b.dataset.c === aim;
+      b.classList.toggle("is-aimed", on);
+      b.setAttribute("aria-pressed", String(on));
+      b.tabIndex = on ? 0 : -1;
+    });
+    moveGhost(old);
+    paintStatus();
+    if (!silent) PK.sound.play("tick");
+  }
+
+  function onColumn(c) {
+    if (busy || !view || view.over || isSpectator()) return;
+    if (!myTurn()) { PK.toast(aiThinking() ? "The computer is thinking" : "Not your turn"); return; }
+    setAim(c, true);
+    if (!colHasRoom(c)) { shakeCol(c); return; }
+    net.sendMove({ type: "drop", col: c });
+  }
+
+  function shakeCol(c) {
+    var b = colEl(c); if (!b) return;
+    PK.sound.play("tick");
+    b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake");
+    setTimeout(function () { b.classList.remove("shake"); }, 220);
+  }
+
+  function onBoardKey(e) {
+    if (!view || view.over) return;
+    var k = e.key, next = null;
+    if (k === "ArrowRight") next = stepAim(1);
+    else if (k === "ArrowLeft") next = stepAim(-1);
+    else if (k === "Home") next = nearestOpenCol(0);
+    else if (k === "End") next = nearestOpenCol(view.cols - 1);
+    else if (/^[1-9]$/.test(k)) { var c = +k - 1; if (c < view.cols) next = c; }
+    else if (k === "Enter" || k === " " || k === "Spacebar") { e.preventDefault(); onColumn(aim); return; }
+    else return;
+    e.preventDefault();
+    if (next === null || next === aim) return;
+    setAim(next, false);
+    var f = colEl(aim); if (f && !f.disabled) f.focus();
+  }
+  function stepAim(dir) {
+    for (var d = 1; d <= view.cols; d++) {
+      var c = aim + dir * d;
+      if (c < 0 || c >= view.cols) break;
+      if (colHasRoom(c)) return c;
+    }
+    return aim;
+  }
+
+  function doResign() {
+    if (!view || view.over) return;
+    if (!window.confirm("Resign this game?")) return;
+    net.sendMove({ type: "resign" });
+  }
+
+  /* ----------------------------------------------------------- the drop */
+  function playDrop(drop, done) {
+    var cell = cellOf(drop.idx);
+    var disc = cell && cell.querySelector(".disc");
+    var pitch = 0.70 + drop.row * 0.13;             // lower rows thunk lower
+    function land() { PK.sound.play("diceClack", { pitch: pitch }); PK.buzz(12); }
+    if (!cell || !disc) { land(); done(); return; }
+
+    if (reduced() || !disc.animate) {               // cross-fade into the landed well
+      disc.style.visibility = "";
+      hiddenIdx = -1;
+      if (disc.animate) disc.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 120 });
+      land();
+      setTimeout(done, 130);
+      return;
+    }
+
+    var rackwrap = document.getElementById("rackwrap");
+    var laneSlot = document.querySelector('.laneslot[data-c="' + drop.col + '"]');
+    if (!rackwrap || !laneSlot) { disc.style.visibility = ""; hiddenIdx = -1; land(); done(); return; }
+
+    var wr = rackwrap.getBoundingClientRect(), cr = cell.getBoundingClientRect(), lr = laneSlot.getBoundingClientRect();
+    var fly = discEl(drop.seat, "fly");
+    fly.style.cssText = "left:" + (cr.left - wr.left) + "px;top:" + (cr.top - wr.top) + "px;" +
+      "width:" + cr.width + "px;height:" + cr.height + "px;";
+    rackwrap.appendChild(fly);
+
+    var dy = cr.top - lr.top;
+    var travelled = view.rows - drop.row;                       // cells fallen, lane included
+    var dur = Math.min(320, 90 + 38 * travelled);
+    var finished = false;
+    function finish() {
+      if (finished) return;
+      finished = true;
+      clearTimeout(watchdog);
+      if (fly.parentNode) fly.remove();
+      disc.style.visibility = "";
+      hiddenIdx = -1;
+      done();
+    }
+    var watchdog = setTimeout(finish, dur + 900);               // a backgrounded tab never fires onfinish
+
+    var fall = fly.animate(
+      [{ transform: "translateY(" + (-dy) + "px)" }, { transform: "translateY(0)" }],
+      { duration: dur, easing: "cubic-bezier(.3,0,1,1)", fill: "forwards" });
+    fall.onfinish = function () {
+      land();
+      ripple(drop.col, drop.row);
+      var squash = fly.animate(
+        [{ transform: "scaleY(.84) scaleX(1.08)" }, { transform: "scaleY(1.04) scaleX(.98)", offset: .55 }, { transform: "none" }],
+        { duration: 110, easing: "cubic-bezier(.34,1.56,.64,1)" });
+      squash.onfinish = finish;
+      setTimeout(finish, 260);
+    };
+  }
+
+  // the discs already stacked in that column nudge down and back, bottom-up
+  function ripple(col, row) {
+    if (reduced()) return;
+    for (var r = 0; r < row; r++) {
+      var c = cellOf(r * view.cols + col);
+      var d = c && c.querySelector(".disc");
+      if (!d || !d.animate) continue;
+      d.animate([{ transform: "translateY(0)" }, { transform: "translateY(1px)", offset: .4 }, { transform: "translateY(0)" }],
+        { duration: 180, delay: (row - 1 - r) * 35, easing: "cubic-bezier(.16,1,.3,1)" });
+    }
+  }
+
+  /* ------------------------------------------------- the coin toss + drift */
+  function coinToss() {
+    if (tossDone || !view || view.gameNo !== 1 || (view.moves || []).length) return;
+    tossDone = true;
+    var who = seatName(view.startSeat);
+    PK.announce(who + " starts — decided by a coin toss.");
+    if (reduced()) return;                                     // the flicker is pure theatre
+    var lane = document.getElementById("lane");
+    var g = lane && lane.querySelector(".ghost");
+    if (!g) return;
+    var n = 0, flip = setInterval(function () {
+      n++;
+      var s = (n % 2 === 0) ? view.startSeat : 1 - view.startSeat;
+      g.className = "ghost s" + s;
+      if (n >= 6) { clearInterval(flip); g.className = "ghost s" + (myTurn() ? view.turn : view.startSeat); paintGhost(); }
+    }, 80);
+  }
+
+  // cosmetic: the ghost drifts while the computer thinks (the move is already decided)
+  function startDrift() {
+    clearTimers();
+    if (reduced() || !aiThinking()) return;
+    driftT = setInterval(function () {
+      if (!aiThinking() || busy) { clearTimers(); return; }
+      var open = R.legalCols(view);
+      if (!open.length) { clearTimers(); return; }
+      var c = open[PK.rand.int(open.length)];
+      var old = aim; aim = c;
+      document.querySelectorAll(".col").forEach(function (b) { b.classList.toggle("is-aimed", +b.dataset.c === aim); });
+      moveGhost(old);
+    }, 220);
+  }
+
+  /* -------------------------------------------------------------- flushing */
+  function schedule() {
+    if (busy || !pendingView) return;
+    var prevPly = lastShownPly;
+    view = pendingView; pendingView = null;
+    var ply = (view.moves || []).length;
+    var drop = (prevPly >= 0 && ply > prevPly && view.lastDrop) ? view.lastDrop : null;
+    lastShownPly = ply;
+    hiddenIdx = drop ? drop.idx : -1;
+    if (drop && !view.over) revealWin = false;
+    render();
+    coinToss();
+
+    if (drop) {
+      busy = true;
+      if (primary) primary.disabled = true;
+      playDrop(drop, function () {
+        busy = false;
+        PK.announce(seatName(drop.seat) + " drops in column " + (drop.col + 1) + ", row " + (drop.row + 1) + ".");
+        if (view.over) finishGame();
+        else { paintStatus(); paintGhost(); startDrift(); }
+        schedule();
+      });
+    } else {
+      if (view.over) finishGame();
+      else startDrift();
+    }
+  }
+
+  function finishGame() {
+    if (!revealWin) {
+      revealWin = true;
+      if (view.result && view.result.line) {
+        PK.sound.play("win"); PK.buzz(30);
+        paintWin();
+        setTimeout(function () { PK.sound.play("reveal"); }, 240);
+        if (myMode === "ai" && view.result.winner === 1) PK.sound.play("lose");
+      } else if (view.result && view.result.kind === "draw") {
+        PK.sound.play("reveal");
+        boardExhale();
+      } else {
+        PK.sound.play("reveal");
+      }
+      paintStatus();
+      paintGhost();
+    }
+    showResult();
+  }
+
+  function boardExhale() {
+    if (reduced()) return;
+    var rack = document.getElementById("rack");
+    if (rack && rack.animate) rack.animate(
+      [{ transform: "scale(1)" }, { transform: "scale(.995)", offset: .5 }, { transform: "scale(1)" }],
+      { duration: 220, easing: "cubic-bezier(.16,1,.3,1)" });
+  }
+
+  /* ---------------------------------------------------------------- result */
+  function resultTitle() {
+    var r = view.result || {};
+    if (r.kind === "draw") return "Full board — draw";
+    if (r.kind === "resign") return seatName(1 - r.winner) + " resigned — " + seatName(r.winner) + " takes the game";
+    var how = r.dir === "h" ? "four across" : r.dir === "v" ? "four up" : "four on the diagonal";
+    if (r.line && r.line.length > 4) how = r.line.length + " on the " + (r.dir === "h" ? "row" : r.dir === "v" ? "column" : "diagonal");
+    return seatName(r.winner) + " takes it — " + how;
+  }
+  function matchLine() {
+    var r = view.result || {};
+    if (!r.matchOver) return "";
+    var w = r.matchWinner, l = 1 - w;
+    return seatName(w) + " wins the match " + view.scores[w] + "–" + view.scores[l];
+  }
+
+  function showResult() {
+    if (resultShown) return;
+    resultShown = true;
+    var r = view.result || {};
+    var title = r.matchOver ? matchLine() : resultTitle();
+    var sub = r.matchOver ? resultTitle() : "";
+    var me = mySeat();
+    var tone = "";
+    if (r.kind !== "draw" && me != null && myMode !== "hotseat" && !isSpectator()) tone = (r.winner === me) ? "good" : "bad";
+    PK.announce(title + (sub ? ". " + sub : ""), true);
+
+    var o = el("div", "overlay");
+    var card = el("div", "card");
+    var res = el("div", "pk-result"); res.id = "ffres"; res.textContent = title;
+    if (tone) res.setAttribute("data-tone", tone);
+    card.appendChild(res);
+    if (sub) card.appendChild(el("p", "pk-subtle", sub));
+    card.appendChild(el("p", "pk-subtle", SEAT_NAME[0] + " " + view.scores[0] + " — " + view.scores[1] + " " + SEAT_NAME[1] +
+      (view.draws ? " · " + view.draws + (view.draws === 1 ? " draw" : " draws") : "")));
+    if (!r.matchOver) card.appendChild(el("p", "pk-subtle", seatName(1 - view.startSeat) + " starts the next game."));
+
+    var row = el("div", "pk-row"); row.style.marginTop = "16px";
+    if (r.matchOver) {
+      row.appendChild(btn(myMode === "online" ? "Rematch" : "New match", "", function () {
+        o.remove();
+        if (myMode === "online") { resetRound(); net.rematch(); } else { start(myMode); }
+      }));
+    } else {
+      row.appendChild(btn("Next game", "", function () {
+        o.remove();
+        if (myMode === "online") { resetRound(); net.rematch(); } else { nextGameLocal(); }
+      }));
+    }
+    row.appendChild(btn("Menu", "pk-btn--ghost", function () { o.remove(); openModeSelect(); }));
+    card.appendChild(row);
+    o.appendChild(card);
+    document.body.appendChild(o);
+    row.querySelector("button").focus();
+  }
+
+  // Offline "next game": rebuild through createState with the match carried over,
+  // so the scoreline survives and the opening seat flips (rules.nextGame semantics).
+  function nextGameLocal() {
+    if (!net || !net.isLocal) return;
+    net.options = Object.assign({}, net.options || {}, {
+      cols: view.cols, rows: view.rows, connect: view.connect, target: view.target,
+      scores: view.scores.slice(), draws: view.draws,
+      gameNo: (view.gameNo || 1) + 1, startSeat: 1 - view.startSeat
+    });
+    resetRound();
+    net.connect();
+  }
+
+  /* -------------------------------------------------------------- wiring */
+  function wire() {
+    net.on("state", function (d) { pendingView = d.state; schedule(); });
+    net.on("rejected", function (d) {
+      PK.toast(d.reason === "not_your_turn" ? "Not your turn" :
+               d.reason === "column_full" ? "That column is full" :
+               d.reason === "game_over" ? "The game is over" : "Illegal move");
+      if (d.reason === "column_full" && d.move) shakeCol(d.move.col);
+      pendingView = net.state || pendingView;
+      if (view) render();
+    });
+    net.on("presence", function (d) {
+      if (d.players) net.players = d.players;
+      if (myMode === "online") {
+        if ((d.players || []).some(function (p) { return p.status === "disconnected"; })) PK.toast("Opponent reconnecting…");
+        if (d.spectators) PK.announce(d.spectators + " watching");
+      }
+      if (view) render(); else if (pendingView) schedule();
+    });
+    net.on("gameOver", function () { schedule(); });
+    net.on("reconnecting", function () { PK.toast("Reconnecting…"); });
+    net.on("reconnected", function () { PK.toast("Back online"); });
+    net.on("error", function (d) {
+      PK.toast(d.message || d.code || "Error");
+      if (d.code === "not_found" || d.code === "room_full") openModeSelect();
+    });
+    net.on("room", function (r) { roomInfo = r; });
+  }
+
+  /* ----------------------------------------------------------------- boot */
+  (function boot() {
+    var params = new URL(location.href).searchParams;
+    var code = params.get("r");
+    if (code) { joinOnline(code, params.get("spectate") === "1"); return; }
+    openModeSelect();
+  })();
+
+  window.addEventListener("resize", function () { if (view && !busy) render(); });
+})();
+</script>
+<!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:10px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Get the monthly letter</a></footer><!-- /ep:ca-foot -->
+</body>
+</html>

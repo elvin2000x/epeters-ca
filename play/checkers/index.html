@@ -1,0 +1,823 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Checkers</title>
+<link rel="stylesheet" href="../_kit/play-kit.css">
+<style>
+  /* ---- app-scoped OBJECT materials, all derived from kit --pk-mat-* tokens.
+         (Physical materials are theme-independent, exactly like the kit's own
+         --pk-mat-* set; chrome colour still comes from --pk-accent/--pk-ink.) ---- */
+  :root{
+    --ck-felt:       var(--pk-mat-felt);
+    --ck-felt-dk:    var(--pk-mat-felt-dk);
+    --ck-bone:       var(--pk-mat-ivory);
+    --ck-bone-dk:    var(--pk-mat-ivory-dk);
+    --ck-frame:      color-mix(in srgb, var(--pk-mat-kraft-dk) 70%, black);
+    --ck-frame-hi:   var(--pk-mat-kraft);
+    /* espresso disc (Black) */
+    --ck-b-hi:  color-mix(in srgb, var(--pk-mat-kraft-dk) 62%, black);
+    --ck-b-mid: color-mix(in srgb, var(--pk-mat-kraft-dk) 32%, black);
+    --ck-b-lo:  color-mix(in srgb, var(--pk-mat-kraft-dk) 16%, black);
+    --ck-b-ring:color-mix(in srgb, var(--pk-mat-ivory) 48%, transparent);
+    /* ivory disc (White) */
+    --ck-w-hi:  color-mix(in srgb, var(--pk-mat-ivory) 70%, white);
+    --ck-w-mid: var(--pk-mat-ivory);
+    --ck-w-lo:  color-mix(in srgb, var(--pk-mat-ivory-dk) 88%, black);
+    --ck-w-ring:color-mix(in srgb, var(--pk-mat-kraft-dk) 55%, black);
+  }
+
+  .ck-wrap{ width:100%; display:flex; flex-direction:column; gap:var(--pk-gap); align-items:stretch; }
+
+  /* ---------------- turn indicator ---------------- */
+  .turnbar{ text-align:center; min-height:2.1em; }
+  .turnbar .t{ font-family:var(--pk-font-display); font-size:var(--pk-fs-lg); font-weight:700;
+    transition:opacity var(--pk-t-quick) var(--pk-ease-settle); }
+  .turnbar .t.flip{ opacity:0; }
+  .turnbar .sub{ color:var(--pk-ink-soft); font-size:var(--pk-fs-sm); min-height:1.2em; }
+  .turnbar .sub b{ color:var(--pk-accent-press); }
+  .think::after{ content:""; display:inline-block; width:.5em; height:.5em; margin-left:.45em; border-radius:50%;
+    background:var(--pk-accent); animation:ckPulse 1s ease-in-out infinite; vertical-align:middle; }
+  @keyframes ckPulse{ 0%,100%{ opacity:.25; transform:scale(.8);} 50%{ opacity:1; transform:scale(1.15);} }
+
+  /* ---------------- seat rail + tally ---------------- */
+  .seatrail{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
+  .seat{ display:flex; align-items:center; gap:8px; padding:6px 12px; border-radius:var(--pk-radius-pill);
+    background:var(--pk-surface); border:1.5px solid var(--pk-line); font-size:var(--pk-fs-sm); font-weight:600; }
+  .seat.is-turn{ border-color:var(--pk-accent); background:var(--pk-accent-soft); color:var(--pk-accent-press); }
+  .seat.is-off{ opacity:.55; }
+  .seat .cnt{ font-family:var(--pk-font-num); font-variant-numeric:tabular-nums;
+    background:var(--pk-surface-sunk); border-radius:999px; padding:1px 8px; }
+  .seat .pip{ width:14px; height:14px; border-radius:50%; flex:0 0 auto; }
+  .seat .pip.b{ background:radial-gradient(circle at 34% 28%,var(--ck-b-hi),var(--ck-b-mid) 70%,var(--ck-b-lo));
+    box-shadow:0 0 0 1.5px var(--ck-w-ring); }
+  .seat .pip.w{ background:radial-gradient(circle at 34% 28%,var(--ck-w-hi),var(--ck-w-mid) 70%,var(--ck-w-lo));
+    box-shadow:0 0 0 1.5px var(--ck-w-ring); }
+  .tally{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap;
+    font-size:var(--pk-fs-sm); color:var(--pk-ink-soft); }
+  .tally .grp{ display:flex; align-items:center; gap:5px; }
+  .tally .mini{ width:11px; height:11px; border-radius:50%; }
+  .tally .mini.b{ background:var(--ck-b-mid); box-shadow:0 0 0 1px var(--ck-w-ring); }
+  .tally .mini.w{ background:var(--ck-w-mid); box-shadow:0 0 0 1px var(--ck-w-ring); }
+  .tally .mini.gone{ opacity:.22; }
+
+  /* ---------------- the board ---------------- */
+  .frame{ width:100%; max-width:520px; margin:0 auto; padding:clamp(7px,2vw,12px);
+    border-radius:var(--pk-radius-lg); background:linear-gradient(160deg,var(--ck-frame-hi),var(--ck-frame));
+    box-shadow:var(--pk-shadow-obj), inset 0 1px 0 rgba(255,255,255,.25); }
+  .cboard{ position:relative; width:100%; aspect-ratio:1/1; display:grid;
+    grid-template-columns:repeat(8,1fr); grid-template-rows:repeat(8,1fr);
+    border-radius:var(--pk-radius-sm); overflow:hidden;
+    box-shadow:inset 0 2px 14px rgba(0,0,0,.42); }
+  .sq{ position:relative; margin:0; padding:0; border:0; display:grid; place-items:center; }
+  .sq.light{ background:var(--ck-bone); }
+  .sq.dark{ background-color:var(--ck-felt); cursor:default;
+    background-image:repeating-linear-gradient(45deg,transparent 0 3px,rgba(0,0,0,.055) 3px 6px),
+                     repeating-linear-gradient(-45deg,transparent 0 3px,rgba(255,255,255,.035) 3px 6px); }
+  .sq.dark.playable{ cursor:pointer; }
+  .sq:focus-visible{ outline:3px solid var(--pk-focus); outline-offset:-3px; z-index:6; }
+  .sq.last{ box-shadow:inset 0 0 0 3px color-mix(in srgb,var(--pk-mat-gold) 78%,transparent); }
+  .sq.cursor{ box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--pk-mat-ivory) 60%,transparent); }
+  .sq .num{ position:absolute; left:3px; top:2px; font-size:9px; line-height:1;
+    color:rgba(255,255,255,.30); font-family:var(--pk-font-num); pointer-events:none; }
+
+  /* ---------------- discs ---------------- */
+  .disc{ position:relative; width:78%; aspect-ratio:1/1; border-radius:50%;
+    transition:transform var(--pk-t-quick) var(--pk-ease-settle), box-shadow var(--pk-t-quick) var(--pk-ease-settle); }
+  .disc.b{ background:radial-gradient(circle at 34% 28%,var(--ck-b-hi),var(--ck-b-mid) 58%,var(--ck-b-lo) 100%);
+    box-shadow:inset 0 -3px 5px rgba(0,0,0,.55), inset 0 2px 3px rgba(255,255,255,.16),
+      0 3px 5px rgba(0,0,0,.45), 0 0 0 2px var(--ck-b-ring); }
+  .disc.w{ background:radial-gradient(circle at 34% 28%,var(--ck-w-hi),var(--ck-w-mid) 58%,var(--ck-w-lo) 100%);
+    box-shadow:inset 0 -3px 5px rgba(0,0,0,.28), inset 0 2px 3px rgba(255,255,255,.75),
+      0 3px 5px rgba(0,0,0,.40), 0 0 0 2px var(--ck-w-ring); }
+  /* carved concentric ring (the turned-wood face) */
+  .disc::before{ content:""; position:absolute; inset:17%; border-radius:50%;
+    box-shadow:inset 0 1px 2px rgba(0,0,0,.40), 0 1px 0 rgba(255,255,255,.16); }
+  .disc.king{ box-shadow:inset 0 -3px 5px rgba(0,0,0,.5), inset 0 2px 3px rgba(255,255,255,.2),
+      0 6px 9px rgba(0,0,0,.5), 0 0 0 2px var(--ck-b-ring), 0 -3px 0 -1px rgba(0,0,0,.35); }
+  .disc.w.king{ box-shadow:inset 0 -3px 5px rgba(0,0,0,.3), inset 0 2px 3px rgba(255,255,255,.8),
+      0 6px 9px rgba(0,0,0,.45), 0 0 0 2px var(--ck-w-ring), 0 -3px 0 -1px rgba(0,0,0,.28); }
+  .disc .crown{ position:absolute; inset:24%; display:block; }
+  .disc .crown path{ fill:var(--pk-mat-gold); stroke:var(--pk-mat-gold-dk); stroke-width:8; stroke-linejoin:round; }
+  .sq.sel .disc{ transform:translateY(-3px) scale(1.05); }
+  .disc.must{ box-shadow:0 3px 5px rgba(0,0,0,.45), 0 0 0 3px var(--pk-accent); }
+  .disc.movable{ cursor:pointer; }
+  .disc.breathe{ animation:ckBreathe 2.6s ease-in-out infinite; }
+  @keyframes ckBreathe{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-1.5px);} }
+
+  /* destination markers */
+  .dot{ width:26%; aspect-ratio:1/1; border-radius:50%; pointer-events:none;
+    background:color-mix(in srgb,var(--pk-mat-ivory) 82%,transparent); box-shadow:0 1px 2px rgba(0,0,0,.4); }
+  .ring{ width:74%; aspect-ratio:1/1; border-radius:50%; pointer-events:none; box-sizing:border-box;
+    border:3px dashed var(--pk-mat-gold); }
+
+  /* animation layer */
+  .ghost{ position:absolute; left:0; top:0; width:12.5%; height:12.5%; display:grid; place-items:center;
+    pointer-events:none; z-index:5; will-change:transform; }
+  .ghost.puff{ z-index:4; }
+
+  /* ---------------- mode select / invite ---------------- */
+  .modecard{ width:100%; max-width:420px; text-align:left; display:flex; gap:12px; align-items:center;
+    padding:16px; margin:0 auto; cursor:pointer; }
+  .modecard h3{ font-family:var(--pk-font-display); font-size:1.1rem; margin:0 0 2px; }
+  .modecard p{ margin:0; color:var(--pk-ink-soft); font-size:var(--pk-fs-sm); }
+  .modecard .ic{ font-size:1.7rem; flex:0 0 auto; width:2rem; text-align:center; }
+  .opts{ width:100%; max-width:420px; margin:0 auto; display:flex; flex-direction:column; gap:10px; }
+  .optrow{ display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+  .optrow > span{ font-size:var(--pk-fs-sm); font-weight:600; color:var(--pk-ink-soft); }
+  .code{ font-family:var(--pk-font-num); font-size:clamp(1.8rem,9vw,2.4rem); letter-spacing:.28em;
+    font-weight:800; color:var(--pk-accent); background:var(--pk-surface-sunk);
+    border-radius:var(--pk-radius); padding:10px 10px 10px 24px; display:inline-block; }
+  .banner{ text-align:center; color:var(--pk-ink-soft); min-height:1.4em; font-weight:600; }
+  .hint{ text-align:center; color:var(--pk-ink-faint); font-size:var(--pk-fs-xs); }
+
+  /* ---------------- result overlay ---------------- */
+  .overlay{ position:fixed; inset:0; z-index:150; background:rgba(20,15,8,.58); display:grid;
+    place-items:center; padding:24px; }
+  .overlay .card{ background:var(--pk-surface); border-radius:var(--pk-radius-lg); box-shadow:var(--pk-shadow-3);
+    padding:28px; max-width:420px; width:100%; text-align:center; }
+  .overlay h2{ font-family:var(--pk-font-display); font-size:1.7rem; margin-bottom:6px; }
+
+  @media (max-width:400px){
+    .sq .num{ display:none; }
+    .code{ letter-spacing:.2em; padding-left:16px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .disc.breathe{ animation:none; }
+    .think::after{ animation:none; opacity:.8; }
+  }
+  :root[data-motion="reduce"] .disc.breathe{ animation:none; }
+  :root[data-motion="reduce"] .think::after{ animation:none; opacity:.8; }
+</style>
+<link rel="canonical" href="https://epeters.ca/play/checkers/">
+</head>
+<body>
+<script src="../_kit/play-kit.js"></script>
+<script src="../_kit/net-kit.js"></script>
+<script src="rules.js"></script>
+<script>
+var HEADLESS = (typeof document === "undefined");
+
+if (!HEADLESS) (function () {
+  "use strict";
+  var R = window.CHECKERS_RULES;
+
+  var ui = PK.app({
+    title: "Checkers", slug: "checkers", accent: "forest", board: true,
+    action: { label: "New game", onFire: openModeSelect, key: null }   // key:null — the board owns Space/Enter
+  });
+  var stage = ui.stage, actions = ui.actions, primary = ui.primary;
+
+  /* ------------------------------------------------------------ app state */
+  var net = null, view = null, pendingView = null;
+  var myMode = "hotseat";          // hotseat | ai | online
+  var humanColor = "b";            // vs-AI: the side the player takes
+  var aiDepth = 4;
+  // sel      = the square the chain is currently "standing on" (origin, or a mid-chain landing)
+  // selMoves = [{ full: <legal Move>, rest: [remaining landing squares] }]
+  var sel = null, selOrigin = null, selMoves = [], cursor = 11, busy = false, animQ = [], extras = [];
+  var lastShownTurn = null, roomInfo = null, resultShown = false;
+
+  var cfg = {
+    difficulty: PK.store.get("play.checkers.difficulty", "medium"),
+    side: PK.store.get("play.checkers.side", "black"),
+    name: PK.store.get("play.name", "Guest")
+  };
+
+  /* ------------------------------------------------------------ helpers */
+  function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+  function btn(label, cls, on) { var b = document.createElement("button"); b.className = "pk-btn " + (cls || ""); b.textContent = label; b.onclick = on; return b; }
+  function setExtras(list) {
+    extras.forEach(function (b) { if (b.parentNode) b.parentNode.removeChild(b); });
+    extras = list || [];
+    extras.forEach(function (b) { actions.appendChild(b); });
+  }
+  function colorName(c) { return c === "b" ? "Black" : "White"; }
+  function reduced() { return PK.motion.reduced; }
+
+  var CROWN_SVG = '<svg class="crown" viewBox="0 0 100 100" aria-hidden="true">' +
+    '<path d="M12 68 L12 34 L30 50 L50 22 L70 50 L88 34 L88 68 Z"/></svg>';
+
+  function discEl(color, king) {
+    var d = el("div", "disc " + color + (king ? " king" : ""));
+    if (king) d.innerHTML = CROWN_SVG;
+    return d;
+  }
+
+  function myColor() {
+    if (!view) return null;
+    if (myMode === "online") return R.colorOfSeat(net && net.seat);
+    if (myMode === "ai") return humanColor;
+    return view.turn;                                   // hotseat: the mover holds the device
+  }
+  function isSpectator() { return !!(net && net.isSpectator); }
+  function myTurn() { return !!(view && !view.over && !isSpectator() && myColor() === view.turn); }
+  function aiThinking() { return !!(view && !view.over && myMode === "ai" && view.turn !== humanColor); }
+  function opponentColor() { var c = myColor(); return c === "b" ? "w" : c === "w" ? "b" : null; }
+
+  /* ------------------------------------------------------- mode select */
+  function openModeSelect() {
+    if (net && net.disconnect) { try { net.disconnect(); } catch (e) {} }
+    net = null; view = null; pendingView = null; clearSel(); animQ = []; busy = false;
+    resultShown = false; lastShownTurn = null; roomInfo = null;
+    var o = document.querySelector(".overlay"); if (o) o.remove();
+    setExtras([]);
+    stage.innerHTML = "";
+
+    var wrap = el("div", "ck-wrap"); wrap.style.alignItems = "center"; wrap.style.gap = "14px";
+    wrap.appendChild(el("h2", "", "English draughts")).style.cssText =
+      "font-family:var(--pk-font-display);font-size:var(--pk-fs-lg)";
+    var lead = el("p", "pk-subtle", "Forced captures, multi-jumps, short kings. <b>Black moves first.</b>");
+    wrap.appendChild(lead);
+
+    function card(ic, title, desc, fn) {
+      var c = el("button", "pk-panel modecard");
+      c.innerHTML = '<span class="ic">' + ic + '</span><span><h3>' + title + '</h3><p>' + desc + '</p></span>';
+      c.onclick = fn; return c;
+    }
+    wrap.appendChild(card("&#9899;&#9898;", "Local hotseat", "Two players, one device. Pass and play.", function () { start("hotseat"); }));
+    wrap.appendChild(card("&#129302;", "Vs computer", "Minimax opponent — four difficulty tiers.", function () { start("ai"); }));
+    wrap.appendChild(card("&#128279;", "Play a friend", "Get a 4-character room code and a link.", function () { start("online"); }));
+    var joinRow = el("div", "pk-row");
+    joinRow.appendChild(btn("Have a code? Join a room", "pk-btn--ghost pk-btn--sm", openJoinPrompt));
+    wrap.appendChild(joinRow);
+
+    // vs-computer options
+    var opts = el("div", "opts pk-well");
+    var r1 = el("div", "optrow"); r1.appendChild(el("span", "", "Computer strength"));
+    var seg = el("div", "pk-seg");
+    [["easy", "Easy"], ["medium", "Medium"], ["hard", "Hard"], ["expert", "Expert"]].forEach(function (d) {
+      var b = document.createElement("button"); b.type = "button"; b.dataset.v = d[0]; b.textContent = d[1];
+      seg.appendChild(b);
+    });
+    r1.appendChild(seg); opts.appendChild(r1);
+
+    var r2 = el("div", "optrow"); r2.appendChild(el("span", "", "You play"));
+    var seg2 = el("div", "pk-seg");
+    [["black", "Black (first)"], ["white", "White"], ["random", "Random"]].forEach(function (d) {
+      var b = document.createElement("button"); b.type = "button"; b.dataset.v = d[0]; b.textContent = d[1];
+      seg2.appendChild(b);
+    });
+    r2.appendChild(seg2); opts.appendChild(r2);
+    wrap.appendChild(opts);
+
+    function paint() {
+      seg.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.v === cfg.difficulty)); });
+      seg2.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.v === cfg.side)); });
+    }
+    seg.onclick = function (e) { var b = e.target.closest("button"); if (!b) return; cfg.difficulty = b.dataset.v; PK.store.set("play.checkers.difficulty", cfg.difficulty); paint(); PK.sound.play("click"); };
+    seg2.onclick = function (e) { var b = e.target.closest("button"); if (!b) return; cfg.side = b.dataset.v; PK.store.set("play.checkers.side", cfg.side); paint(); PK.sound.play("click"); };
+    paint();
+
+    stage.appendChild(wrap);
+    if (primary) primary.textContent = "New game";
+  }
+
+  /* ------------------------------------------------------------- start */
+  function start(mode) {
+    myMode = mode; PK.store.set("play.checkers.mode", mode);
+    clearSel(); animQ = []; busy = false; resultShown = false; lastShownTurn = null;
+    view = null; pendingView = null; cursor = 11;
+
+    if (mode === "hotseat") {
+      net = new LocalNet({ gameId: "checkers", mode: "hotseat", rules: R, seats: 2, rng: PK.rand.int });
+      wire(); net.connect();
+    } else if (mode === "ai") {
+      aiDepth = R.depthFor(cfg.difficulty);
+      humanColor = cfg.side === "white" ? "w" : cfg.side === "random" ? (PK.rand.bool() ? "b" : "w") : "b";
+      var aiColor = humanColor === "b" ? "w" : "b";
+      net = new LocalNet({
+        gameId: "checkers", mode: "ai", rules: R, rng: PK.rand.int,
+        aiSeat: aiColor,                                  // LocalNet compares this to state.turn
+        ai: function (v) { return R.bestMove(v, aiDepth, PK.rand.int); }
+      });
+      wire(); net.connect();
+    } else {
+      net = new Net({ gameId: "checkers", name: cfg.name, rules: R });
+      wire();
+      stage.innerHTML = '<p class="banner">Connecting&hellip;</p>';
+      setExtras([btn("Cancel", "pk-btn--ghost pk-btn--sm", openModeSelect)]);
+      var live = net;
+      var giveUp = setTimeout(function () {                 // the VPS is optional — never hang on it
+        if (net === live && !roomInfo) { PK.toast("Game server unreachable — hotseat and vs-computer still work"); openModeSelect(); }
+      }, 7000);
+      net.connect().then(function () {
+        return net.createRoom({ options: {} });
+      }).then(function (room) {
+        if (net !== live) return;
+        clearTimeout(giveUp); roomInfo = room; inviteScreen(room);
+      }).catch(function () {
+        clearTimeout(giveUp);
+        if (net === live) { PK.toast("Could not reach the game server"); openModeSelect(); }
+      });
+    }
+  }
+
+  function joinOnline(code, spectate) {
+    myMode = "online"; resultShown = false; roomInfo = null; view = null; pendingView = null;
+    net = new Net({ gameId: "checkers", name: cfg.name, rules: R });
+    wire();
+    var live = net;
+    var giveUp = setTimeout(function () {
+      if (net === live && !roomInfo) { PK.toast("Game server unreachable — hotseat and vs-computer still work"); openModeSelect(); }
+    }, 7000);
+    net.connect().then(function () { return net.joinRoom(code, { asSpectator: !!spectate }); })
+      .then(function () { clearTimeout(giveUp); })
+      .catch(function () { clearTimeout(giveUp); if (net === live) { PK.toast("Could not reach the game server"); openModeSelect(); } });
+    stage.innerHTML = '<p class="banner">Joining room ' + String(code).toUpperCase() + '&hellip;</p>';
+    setExtras([btn("Cancel", "pk-btn--ghost pk-btn--sm", openModeSelect)]);
+  }
+
+  function openJoinPrompt() {
+    stage.innerHTML = "";
+    var wrap = el("div", "ck-wrap"); wrap.style.alignItems = "center"; wrap.style.gap = "14px";
+    wrap.appendChild(el("h2", "", "Join a game")).style.cssText = "font-family:var(--pk-font-display)";
+    var inp = document.createElement("input");
+    inp.className = "pk-input"; inp.maxLength = 4; inp.placeholder = "CODE"; inp.autocapitalize = "characters";
+    inp.style.cssText = "text-transform:uppercase;letter-spacing:.3em;text-align:center;width:9em;font-family:var(--pk-font-num)";
+    inp.setAttribute("aria-label", "Room code");
+    wrap.appendChild(inp);
+    var row = el("div", "pk-row");
+    row.appendChild(btn("Join", "", function () { var c = inp.value.trim().toUpperCase(); if (c.length >= 3) joinOnline(c, false); }));
+    row.appendChild(btn("Back", "pk-btn--ghost", openModeSelect));
+    wrap.appendChild(row);
+    stage.appendChild(wrap); inp.focus();
+    inp.onkeydown = function (e) { if (e.key === "Enter") { e.preventDefault(); var c = inp.value.trim().toUpperCase(); if (c.length >= 3) joinOnline(c, false); } };
+  }
+
+  function inviteScreen(room) {
+    setExtras([]);
+    stage.innerHTML = "";
+    var wrap = el("div", "ck-wrap"); wrap.style.alignItems = "center"; wrap.style.gap = "16px";
+    wrap.appendChild(el("h2", "", "Share to start")).style.cssText = "font-family:var(--pk-font-display)";
+    wrap.appendChild(el("div", "code", room.roomId || "----"));
+    wrap.appendChild(el("p", "pk-subtle", "Send the link or read them the code. You are <b>Black</b> and move first."));
+    var row = el("div", "pk-row");
+    row.appendChild(btn("Copy link", "", function () {
+      net.copyInvite().then(function () { PK.toast("Link copied"); }, function () { PK.toast("Copy failed — read out the code"); });
+    }));
+    if (navigator.share) row.appendChild(btn("Share", "pk-btn--soft", function () { net.share(); }));
+    row.appendChild(btn("Cancel", "pk-btn--ghost", function () { openModeSelect(); }));
+    wrap.appendChild(row);
+    var qr = el("div", ""); wrap.appendChild(qr);
+    if (net.qrDataUrl) net.qrDataUrl().then(function (u) {
+      if (!u) return; var img = document.createElement("img"); img.src = u; img.alt = "Invite QR code";
+      img.style.cssText = "width:150px;height:150px;image-rendering:pixelated;border-radius:8px;background:#fff;padding:6px";
+      qr.appendChild(img);
+    }, function () {});
+    var b = el("p", "banner", "Waiting for an opponent&hellip;"); b.id = "bn"; wrap.appendChild(b);
+    stage.appendChild(wrap);
+    PK.announce("Room code " + (room.roomId || "") + ". Waiting for an opponent.");
+  }
+
+  /* ------------------------------------------------------------- render */
+  function activePlayers() {
+    return (net && net.players ? net.players : []).filter(function (p) { return p.status !== "disconnected"; }).length;
+  }
+
+  function render() {
+    if (!view) return;
+
+    // online: hold on the invite/waiting screen until both seats are filled
+    if (myMode === "online" && !view.over && activePlayers() < 2 && !isSpectator()) {
+      var wb = document.getElementById("bn");
+      if (wb) { wb.textContent = "Waiting for opponent… (" + activePlayers() + "/2)"; return; }
+      if (roomInfo) { inviteScreen(roomInfo); return; }
+    }
+
+    var focusWasBoard = document.activeElement && document.activeElement.classList &&
+      document.activeElement.classList.contains("sq");
+
+    stage.innerHTML = "";
+    var wrap = el("div", "ck-wrap");
+
+    // turn indicator ------------------------------------------------------
+    var tb = el("div", "turnbar");
+    var t = el("div", "t"); t.id = "tt"; tb.appendChild(t);
+    var sub = el("div", "sub"); sub.id = "ts"; tb.appendChild(sub);
+    wrap.appendChild(tb);
+
+    // seat rail -----------------------------------------------------------
+    var rail = el("div", "seatrail");
+    ["b", "w"].forEach(function (c) {
+      var s = el("div", "seat" + (view.turn === c && !view.over ? " is-turn" : ""));
+      var seatIdx = R.seatOfColor(c);
+      var p = (net && net.players || []).filter(function (x) { return x.seat === seatIdx; })[0];
+      if (myMode === "online" && p && p.status === "disconnected") s.className += " is-off";
+      var label = colorName(c);
+      if (myMode === "online") {
+        label = (p && p.name) ? p.name : colorName(c);
+        if (seatIdx === (net && net.seat)) label += " (you)";
+      } else if (myMode === "ai") {
+        label = (c === humanColor ? "You" : "Computer") + " · " + colorName(c);
+      }
+      s.innerHTML = '<span class="pip ' + c + '"></span>' + label +
+        ' <span class="cnt">' + (view.counts ? view.counts[c] : "") + '</span>' +
+        (myMode === "online" && p && p.status === "disconnected" ? " ⟳" : "");
+      rail.appendChild(s);
+    });
+    wrap.appendChild(rail);
+
+    // board ---------------------------------------------------------------
+    var frame = el("div", "frame");
+    var board = el("div", "cboard"); board.id = "cboard";
+    board.setAttribute("role", "group"); board.setAttribute("aria-label", "Checkers board");
+
+    var legal = view.over ? [] : R.legalMoves(view);
+    var movable = {}; legal.forEach(function (m) { movable[m.from] = true; });
+    var forced = legal.length > 0 && legal[0].captures.length > 0;
+    // step-by-step: only the NEXT landing square of each selected chain is a target
+    var destMap = {}; selMoves.forEach(function (s) {
+      var nextSq = s.rest[0];
+      if (!destMap[nextSq]) destMap[nextSq] = [];
+      destMap[nextSq].push(s);
+    });
+
+    for (var r = 0; r < 8; r++) for (var c = 0; c < 8; c++) {
+      var sq = R.rcToSq(r, c);
+      if (!sq) { var lt = el("div", "sq light"); lt.setAttribute("aria-hidden", "true"); board.appendChild(lt); continue; }
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "sq dark"; b.dataset.sq = String(sq);
+      b.tabIndex = (sq === cursor) ? 0 : -1;
+      if (sq === cursor) b.classList.add("cursor");
+      if (view.last && (view.last.from === sq || view.last.to === sq)) b.classList.add("last");
+      if (sel === sq || selOrigin === sq) b.classList.add("sel");
+      b.appendChild(el("span", "num", String(sq)));
+
+      var cell = view.board[sq - 1];
+      var lbl = "Square " + sq + ", ";
+      if (cell) {
+        var d = discEl(cell.color, cell.king);
+        if (!view.over && myTurn() && cell.color === view.turn && movable[sq]) {
+          d.classList.add("movable");
+          if (forced) d.classList.add("must");
+          if (!reduced() && sel !== sq) d.classList.add("breathe");
+          b.classList.add("playable");
+        }
+        b.appendChild(d);
+        lbl += colorName(cell.color) + (cell.king ? " king" : " man");
+        if (movable[sq] && myTurn()) lbl += forced ? ", must jump" : ", can move";
+      } else {
+        lbl += "empty";
+      }
+      if (destMap[sq]) {
+        var isCap = destMap[sq][0].full.captures.length > 0;
+        b.appendChild(el("div", isCap ? "ring" : "dot"));
+        b.classList.add("playable");
+        lbl += isCap ? ", capture landing" : ", legal move";
+      }
+      b.setAttribute("aria-label", lbl);
+      b.onclick = (function (s) { return function () { onSquare(s); }; })(sq);
+      board.appendChild(b);
+    }
+    board.addEventListener("keydown", onBoardKey);
+    frame.appendChild(board); wrap.appendChild(frame);
+
+    // material tally ------------------------------------------------------
+    var tally = el("div", "tally");
+    ["b", "w"].forEach(function (c) {
+      var alive = view.counts ? view.counts[c] : 12;
+      var g = el("div", "grp");
+      g.appendChild(el("span", "", colorName(c) + " lost"));
+      for (var i = 0; i < 12; i++) g.appendChild(el("span", "mini " + c + (i < 12 - alive ? "" : " gone")));
+      g.appendChild(el("span", "pk-num", String(12 - alive)));
+      tally.appendChild(g);
+    });
+    wrap.appendChild(tally);
+    wrap.appendChild(el("p", "hint", "Tap a piece, then tap a highlighted square. Arrow keys move the cursor, Enter selects."));
+
+    stage.appendChild(wrap);
+    paintStatus(legal, forced);
+
+    // action bar ----------------------------------------------------------
+    var list = [];
+    if (!view.over && !isSpectator()) list.push(btn("Resign", "pk-btn--ghost pk-btn--sm", doResign));
+    if (myMode === "online") list.push(btn("Leave", "pk-btn--ghost pk-btn--sm", function () { net.leave(); openModeSelect(); }));
+    setExtras(list);
+
+    if (focusWasBoard) { var f = squareEl(cursor); if (f) f.focus(); }
+  }
+
+  function paintStatus(legal, forced) {
+    var t = document.getElementById("tt"), s = document.getElementById("ts");
+    if (!t) return;
+    var txt, subtxt = "";
+    if (view.over) {
+      txt = resultLine(view.winner, view.reason); subtxt = reasonLine(view.reason);
+    } else if (isSpectator()) {
+      txt = colorName(view.turn) + " to move"; subtxt = "Watching";
+    } else if (aiThinking()) {
+      txt = "Computer thinking";
+    } else if (myMode === "hotseat") {
+      txt = colorName(view.turn) + " to move";
+    } else {
+      txt = myTurn() ? "Your move" : "Opponent's turn";
+      subtxt = colorName(myColor() || "b") + (myTurn() ? "" : " · waiting");
+    }
+    if (!view.over && forced && myTurn()) subtxt = "<b>Capture available — you must jump.</b>";
+    t.textContent = txt;
+    if (aiThinking()) t.className = "t think";
+    s.innerHTML = subtxt;
+
+    if (!view.over && view.turn !== lastShownTurn) {
+      lastShownTurn = view.turn;
+      if (!reduced()) { t.classList.add("flip"); setTimeout(function () { t.classList.remove("flip"); }, 30); }
+    }
+  }
+
+  function resultLine(winner, reason) {
+    if (winner === "draw") return "Draw";
+    var me = myColor();
+    if (myMode === "hotseat" || isSpectator()) return colorName(winner) + " wins";
+    return winner === me ? "You win" : "You lose";
+  }
+  function reasonLine(reason) {
+    return ({
+      "no-pieces": "Every piece captured.",
+      "no-moves": "No legal move left.",
+      "40-move": "40 moves each with no capture or man advance.",
+      "threefold": "The same position three times.",
+      "resign": "Resigned."
+    })[reason] || "";
+  }
+
+  function squareEl(sq) { return document.querySelector('.sq[data-sq="' + sq + '"]'); }
+
+  /* ------------------------------------------------------------- input */
+  function clearSel() { sel = null; selOrigin = null; selMoves = []; }
+
+  function onSquare(sq) {
+    if (busy || !view || view.over || isSpectator()) return;
+    if (!myTurn()) { PK.toast(aiThinking() ? "Computer is thinking" : "Not your turn"); return; }
+
+    // 1. is this the next landing square of the chain being built?
+    var cands = selMoves.filter(function (s) { return s.rest[0] === sq; });
+    if (sel !== null && cands.length) {
+      var advanced = cands.map(function (s) { return { full: s.full, rest: s.rest.slice(1) }; });
+      if (advanced.length === 1) { submit(advanced[0].full); return; }   // unambiguous — send the whole chain
+      // two or more chains still share this landing: keep stepping so intent stays explicit
+      var ongoing = advanced.filter(function (s) { return s.rest.length; });
+      if (!ongoing.length) { submit(advanced[0].full); return; }         // defensive: nothing left to pick
+      selMoves = ongoing;
+      sel = sq; cursor = sq; PK.sound.play("click"); render(); return;
+    }
+
+    // 2. selecting (or re-selecting) one of your own pieces
+    var cell = view.board[sq - 1];
+    if (cell && cell.color === view.turn) {
+      var ms = R.legalMovesFrom(view, sq);
+      if (!ms.length) { PK.toast(R.hasCapture(view) ? "A capture is available elsewhere" : "That piece has no move"); return; }
+      sel = sq; selOrigin = sq; cursor = sq;
+      selMoves = ms.map(function (m) { return { full: m, rest: m.path.slice(1) }; });
+      PK.sound.play("click"); PK.buzz(8);
+      render(); return;
+    }
+
+    // 3. anywhere else clears the selection
+    if (sel !== null) { clearSel(); render(); }
+  }
+
+  function submit(full) {
+    clearSel();
+    net.sendMove({ from: full.from, path: full.path.slice() });
+  }
+
+  function onBoardKey(e) {
+    var k = e.key, next = cursor;
+    if (k === "ArrowRight") next = Math.min(32, cursor + 1);
+    else if (k === "ArrowLeft") next = Math.max(1, cursor - 1);
+    else if (k === "ArrowDown") next = Math.min(32, cursor + 4);
+    else if (k === "ArrowUp") next = Math.max(1, cursor - 4);
+    else if (k === "Enter" || k === " ") { e.preventDefault(); onSquare(cursor); return; }
+    else if (k === "Escape") { if (sel !== null) { clearSel(); render(); } return; }
+    else return;
+    e.preventDefault();
+    if (next === cursor) return;
+    var prev = squareEl(cursor); if (prev) { prev.tabIndex = -1; prev.classList.remove("cursor"); }
+    cursor = next;
+    var nx = squareEl(cursor); if (nx) { nx.tabIndex = 0; nx.classList.add("cursor"); nx.focus(); }
+  }
+
+  function doResign() {
+    if (!view || view.over) return;
+    if (!window.confirm("Resign this game?")) return;
+    net.sendMove({ type: "resign" });
+  }
+
+  /* --------------------------------------------------------- animation */
+  function clearGhosts() {
+    document.querySelectorAll(".ghost").forEach(function (g) { g.remove(); });
+    document.querySelectorAll(".disc").forEach(function (d) { d.style.visibility = ""; });
+  }
+
+  function playAnim(a, done) {
+    var board = document.getElementById("cboard");
+    var mv = a.move, color = a.color, wasKing = a.wasKing;
+    if (!board || !mv || !mv.path || mv.path.length < 2) { done(); return; }
+    var cell = board.clientWidth / 8;
+    function pos(sq) { var rc = R.sqToRC(sq); return { x: rc.c * cell, y: rc.r * cell }; }
+
+    // captured discs are already gone from the rebuilt board — put ghosts back to puff them
+    var puffs = {};
+    mv.captures.forEach(function (sq) {
+      var p = pos(sq), g = el("div", "ghost puff");
+      g.style.transform = "translate(" + p.x + "px," + p.y + "px)";
+      g.appendChild(discEl(color === "b" ? "w" : "b", !!(a.capturedKings && a.capturedKings[sq])));
+      board.appendChild(g); puffs[sq] = g;
+    });
+
+    var destSq = squareEl(mv.to), destDisc = destSq && destSq.querySelector(".disc");
+    if (destDisc) destDisc.style.visibility = "hidden";
+
+    function puff(sq) {
+      var g = puffs[sq]; if (!g) return;
+      var d = g.firstChild;
+      if (reduced()) { d.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 120, fill: "forwards" }).onfinish = function () { g.remove(); }; }
+      else { d.animate([{ transform: "scale(1)", opacity: 1 }, { transform: "scale(0)", opacity: 0 }],
+              { duration: 180, easing: "cubic-bezier(.3,0,1,1)", fill: "forwards" }).onfinish = function () { g.remove(); }; }
+      PK.buzz(15);
+    }
+
+    var finished = false, watchdog = null;
+    function finish() {
+      // Belt-and-braces: a backgrounded tab stops compositing, so Web Animations never
+      // fire `onfinish`. The watchdog below force-settles the board so play never locks.
+      if (finished) return;
+      finished = true; clearTimeout(watchdog);
+      Object.keys(puffs).forEach(function (k) { if (puffs[k].parentNode) puffs[k].remove(); });
+      var gh = board.querySelector(".ghost.mover"); if (gh) gh.remove();
+      if (destDisc) destDisc.style.visibility = "";
+      if (mv.promo) {
+        PK.sound.play("reveal"); PK.buzz(15);
+        var crown = destDisc && destDisc.querySelector(".crown");
+        if (crown && !reduced()) crown.animate(
+          [{ transform: "translateY(-20px)", opacity: 0 }, { transform: "translateY(0)", opacity: 1 }],
+          { duration: 260, easing: "cubic-bezier(.34,1.56,.64,1)" });
+      }
+      done();
+    }
+
+    if (reduced()) {                                    // teleport + fade, same outcome
+      mv.captures.forEach(puff);
+      watchdog = setTimeout(finish, 130);
+      return;
+    }
+
+    var ghost = el("div", "ghost mover");
+    ghost.appendChild(discEl(color, wasKing));
+    var p0 = pos(mv.from);
+    ghost.style.transform = "translate(" + p0.x + "px," + p0.y + "px)";
+    board.appendChild(ghost);
+
+    var legs = [];
+    for (var i = 1; i < mv.path.length; i++) {
+      legs.push({ from: mv.path[i - 1], to: mv.path[i], capture: mv.captures[i - 1] || null });
+    }
+    var budget = 0;
+    legs.forEach(function (L) { budget += L.capture ? 300 : 220; });
+    watchdog = setTimeout(finish, budget + 800);
+
+    function leg(i) {
+      if (finished) return;
+      if (i >= legs.length) { finish(); return; }
+      var L = legs[i], A = pos(L.from), B = pos(L.to);
+      var dur = L.capture ? 300 : 220;
+      var frames = L.capture
+        ? [{ transform: "translate(" + A.x + "px," + A.y + "px)" },
+           { transform: "translate(" + ((A.x + B.x) / 2) + "px," + (((A.y + B.y) / 2) - 22) + "px)", offset: 0.5 },
+           { transform: "translate(" + B.x + "px," + B.y + "px)" }]
+        : [{ transform: "translate(" + A.x + "px," + A.y + "px)" },
+           { transform: "translate(" + B.x + "px," + B.y + "px)" }];
+      var anim = ghost.animate(frames, {
+        duration: dur, fill: "forwards",
+        easing: L.capture ? "cubic-bezier(.34,1.56,.64,1)" : "cubic-bezier(.2,0,0,1)"
+      });
+      if (L.capture) setTimeout(function () { puff(L.capture); }, dur * 0.42);
+      anim.onfinish = function () {
+        PK.sound.play("diceClack", { pitch: 0.92 + i * 0.07 });   // each landing clacks, pitched up the chain
+        leg(i + 1);                                                // chained hops run back-to-back
+      };
+    }
+    leg(0);
+  }
+
+  /* ----------------------------------------------------------- flushing */
+  function schedule() {
+    if (busy) return;
+    if (!pendingView) return;
+    view = pendingView; pendingView = null;
+    clearSel();
+    clearGhosts();
+    render();
+
+    var a = animQ.shift();
+    if (a) {
+      busy = true;
+      playAnim(a, function () {
+        busy = false;
+        announceMove(a);
+        if (view.over) showResult();
+        schedule();
+      });
+    } else {
+      if (view.over) showResult();
+    }
+  }
+
+  function announceMove(a) {
+    var mv = a.move;
+    var line = R.describeMove(mv, a.color);
+    PK.announce(line);
+    if (!view.over) PK.announce(colorName(view.turn) + " to move");
+  }
+
+  /* ------------------------------------------------------------ result */
+  function showResult() {
+    if (resultShown) return; resultShown = true;
+    var winner = view.winner, reason = view.reason;
+    var me = myColor();
+    if (winner === "draw") PK.sound.play("reveal");
+    else if (myMode === "hotseat" || isSpectator()) PK.sound.play("win");
+    else PK.sound.play(winner === me ? "win" : "lose");
+
+    var title = resultLine(winner, reason);
+    PK.announce(title + ". " + reasonLine(reason), true);
+
+    var o = el("div", "overlay");
+    var card = el("div", "card");
+    card.appendChild(el("h2", "", title));
+    card.appendChild(el("p", "pk-subtle", reasonLine(reason)));
+    var row = el("div", "pk-row"); row.style.marginTop = "16px";
+    row.appendChild(btn(myMode === "online" ? "Rematch" : "Play again", "", function () {
+      o.remove(); resultShown = false; lastShownTurn = null;
+      if (myMode === "online") { net.rematch(); }
+      else { start(myMode); }
+    }));
+    row.appendChild(btn("Menu", "pk-btn--ghost", function () { o.remove(); openModeSelect(); }));
+    card.appendChild(row); o.appendChild(card); document.body.appendChild(o);
+    row.querySelector("button").focus();
+  }
+
+  /* ------------------------------------------------------------- wiring */
+  function wire() {
+    net.on("state", function (d) { pendingView = d.state; schedule(); });
+    net.on("move", function (d) {
+      var mv = d.move || {}, ev = (d.events || []).filter(function (e) { return e.type === "moved"; })[0];
+      var full = ev ? ev : null;
+      var pre = pendingView || view;                     // the board BEFORE this move
+      if (!full && pre) {                                // online delta without events: re-derive
+        var cand = R.legalMoves(pre).filter(function (m) { return m.from === mv.from && (!mv.path || m.path.join() === mv.path.join()); })[0];
+        full = cand || null;
+      }
+      if (!full || !pre) return;
+      var moverCell = pre.board[full.from - 1];
+      var capturedKings = {};
+      (full.captures || []).forEach(function (sq) { var c = pre.board[sq - 1]; if (c && c.king) capturedKings[sq] = true; });
+      animQ.push({
+        move: { from: full.from, to: full.to, path: full.path.slice(), captures: (full.captures || []).slice(), promo: !!full.promo },
+        color: moverCell ? moverCell.color : pre.turn,
+        wasKing: !!(moverCell && moverCell.king),
+        capturedKings: capturedKings
+      });
+    });
+    net.on("rejected", function (d) {
+      clearSel(); animQ = [];
+      PK.toast(d.reason === "not-your-turn" ? "Not your turn" : "Illegal move");
+      render();
+    });
+    net.on("presence", function (d) {
+      if (d.players) net.players = d.players;
+      if (myMode === "online") {
+        var disc = (d.players || []).some(function (p) { return p.status === "disconnected"; });
+        if (disc) PK.toast("Opponent reconnecting…");
+        if (d.spectators) PK.announce(d.spectators + " watching");
+      }
+      if (view) render();
+      else if (pendingView) schedule();
+    });
+    net.on("gameOver", function () { schedule(); });
+    net.on("reconnecting", function () { PK.toast("Reconnecting…"); });
+    net.on("reconnected", function () { PK.toast("Back online"); });
+    net.on("error", function (d) {
+      PK.toast(d.message || d.code || "Error");
+      if (d.code === "not_found" || d.code === "room_full") openModeSelect();
+    });
+    net.on("room", function (r) { roomInfo = r; });
+  }
+
+  /* --------------------------------------------------------------- boot */
+  (function boot() {
+    var params = new URL(location.href).searchParams;
+    var code = params.get("r");
+    if (code) { joinOnline(code, params.get("spectate") === "1"); return; }
+    openModeSelect();
+  })();
+
+  // Recompute nothing on resize beyond a re-render (square size is CSS-driven).
+  window.addEventListener("resize", function () { if (view && !busy) render(); });
+})();
+</script>
+<!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:10px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Get the monthly letter</a></footer><!-- /ep:ca-foot -->
+</body>
+</html>

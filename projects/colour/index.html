@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Colour Match: your colours from one selfie</title>
+<meta name="description" content="Answer five quick questions, upload one selfie, and get your season, undertone, the colours that suit you and the ones to skip. Then let the extension grey out the wrong shades while you shop.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CLZ7N26J1Q');
+</script>
+<link rel="canonical" href="https://epeters.ca/projects/colour/">
+</head>
+<body>
+<header class="nav">
+  <div class="container">
+    <a class="brandmark" href="./">Colour Match</a>
+    <span class="tag">by Justine and Elvin Peters</span>
+  </div>
+</header>
+
+<main class="container">
+  <!-- Step 0: welcome -->
+  <section id="welcome" class="hero">
+    <h1>Your colours, from one selfie.</h1>
+    <p class="lede">Five quick questions, then one photo. You get your season, undertone and contrast, twelve colours that suit you, eight to skip, and makeup notes. Your photo is analysed once and never stored.</p>
+    <div class="cta-row">
+      <button id="start" class="btn primary" type="button">Start, it takes a minute</button>
+      <button id="skipquiz" class="btn ghost" type="button">Skip to the selfie</button>
+    </div>
+    <p class="fine">Prototype. Free while we test. The result is a starting point, not a verdict: light and phone cameras shift colour, so retake in daylight if the confidence is low.</p>
+  </section>
+
+  <!-- Step 1..n: quiz -->
+  <section id="quiz" class="quiz" hidden>
+    <div class="progress" aria-hidden="true"><span id="bar"></span></div>
+    <p class="kicker"><span id="qnum">Question 1</span> of <span id="qtotal">5</span></p>
+    <h2 id="qtitle">Question</h2>
+    <p id="qhelp" class="lede"></p>
+    <div id="qopts" class="options" role="radiogroup"></div>
+    <div class="quiz-nav">
+      <button id="back" class="btn ghost" type="button">Back</button>
+      <span id="guess" class="guess"></span>
+    </div>
+  </section>
+
+  <!-- Step selfie -->
+  <section id="upload" class="hero upload" hidden>
+    <p class="kicker">Last step</p>
+    <h2>Now the selfie.</h2>
+    <p id="quizsum" class="lede"></p>
+    <form id="form" class="uploader">
+      <label class="drop" for="file">
+        <input id="file" type="file" accept="image/*" capture="user">
+        <span class="drop-icon" aria-hidden="true">+</span>
+        <span class="drop-text"><b>Choose a selfie</b> or drop one here</span>
+        <span class="drop-hint">JPEG or PNG. Face filling the frame, natural light, no sunglasses, no filter.</span>
+      </label>
+      <img id="preview" class="preview" alt="" width="160" height="160" hidden>
+      <button id="go" class="btn primary" type="submit" disabled>Analyse my colours</button>
+      <p id="status" class="status" role="status"></p>
+    </form>
+    <p class="fine"><button id="redo" class="linkbtn" type="button">Change my quiz answers</button></p>
+  </section>
+
+  <!-- Result -->
+  <section id="result" class="result" hidden>
+    <div class="result-head">
+      <p class="kicker">Your profile</p>
+      <h2 id="season">Season</h2>
+      <p id="summary" class="lede"></p>
+      <ul class="facts">
+        <li><span>Undertone</span><b id="undertone"></b></li>
+        <li><span>Contrast</span><b id="contrast"></b></li>
+        <li><span>Depth</span><b id="depth"></b></li>
+        <li><span>Jewellery</span><b id="jewellery"></b></li>
+        <li><span>Confidence</span><b id="confidence"></b></li>
+      </ul>
+      <p id="agree" class="fine"></p>
+      <p id="lowconf" class="notice" hidden>Confidence is on the low side. Retake in daylight, face the window, no filter, and run it again.</p>
+    </div>
+
+    <h3>Wear these near your face</h3>
+    <div id="best" class="swatches"></div>
+    <h3>Your neutrals</h3>
+    <div id="neutrals" class="swatches"></div>
+    <h3>Skip these</h3>
+    <div id="avoid" class="swatches avoid"></div>
+
+    <h3>Makeup</h3>
+    <div id="makeup" class="makeup"></div>
+
+    <div id="unlock" class="tokenbox unlock">
+      <h3 id="unlock-title">Unlock the shopping extension</h3>
+      <p id="unlock-text">Your palette above is free. The extension that marks shades on Sephora, H&amp;M and Zara is $19 once, or $4 a month if you would rather try it.</p>
+      <div class="cta-row unlock-row">
+        <button id="buy-once" class="btn primary" type="button">Unlock for $19</button>
+        <button id="buy-monthly" class="btn ghost" type="button">$4 a month instead</button>
+      </div>
+      <p id="unlock-status" class="fine"></p>
+    </div>
+    <div class="tokenbox">
+      <h3>Your shopping key</h3>
+      <p>Paste this into the Colour Match extension and it will grey out shades that do not suit you on Sephora. Keep it; it is the only way back to this profile.</p>
+      <div class="tokenrow">
+        <code id="token"></code>
+        <button id="copy" class="btn ghost" type="button">Copy</button>
+      </div>
+      <p class="fine">Profile link: <a id="plink" href="./"></a></p>
+    </div>
+
+    <details class="raw">
+      <summary>Profile JSON (for the extension and for debugging)</summary>
+      <pre id="json"></pre>
+    </details>
+    <p><button id="again" class="btn ghost" type="button">Start over</button></p>
+  </section>
+</main>
+
+<section id="privacy" class="privacy container">
+  <h3>Privacy, in plain words</h3>
+  <ul>
+    <li>Your photo is shrunk in your browser, sent once to Google's Gemini model to read your colouring, and never written to disk. We keep a one-way fingerprint of the file so a repeat upload does not cost a second analysis.</li>
+    <li>What we store: the profile (season, palettes, notes), your shopping key, and the time it was made. No name, no email, no account.</li>
+    <li>The extension reads product colours on the page in front of you and sends nothing about your browsing anywhere. It only fetches your profile from our server using your key.</li>
+    <li>Delete everything by emailing hello@elvinpeters.com with your shopping key.</li>
+  </ul>
+</section>
+<footer class="foot container">
+  <p>Colour Match is a prototype from <a href="https://elvinpeters.com/?utm_source=epeters.ca&utm_medium=link&utm_campaign=projects">elvinpeters.com</a>. Photos are sent to the analyser once and are not kept. Questions: hello@elvinpeters.com</p>
+</footer>
+<script>window.CM_API = "https://api.elvinpeters.com/colour/api";</script>
+<script src="app.js"></script>
+<!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:10px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=projects">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=projects">Get the monthly letter</a></footer><!-- /ep:ca-foot -->
+</body>
+</html>

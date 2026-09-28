@@ -1,0 +1,823 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="stylesheet" href="../_kit/play-kit.css">
+<title>Dice Roller</title>
+<style>
+  /* ============================================================= dice-roller
+     All app styling builds on --pk-* tokens only (no hard-coded brand color).
+     Accent = slate. Light + dark + reduced-motion inherit from the kit. */
+
+  .dr-wrap{ width:100%; display:flex; flex-direction:column; gap:var(--pk-gap-lg); text-align:left; }
+
+  /* ---- pool builder ---- */
+  .dr-pool{ display:grid; grid-template-columns:repeat(auto-fit,minmax(84px,1fr)); gap:10px; width:100%; }
+  .dr-pool.is-advanced{ opacity:.42; pointer-events:none; filter:saturate(.4); }
+  .dr-dt{ display:flex; flex-direction:column; align-items:center; gap:8px; padding:10px 6px;
+    background:var(--pk-surface); border:1.5px solid var(--pk-line); border-radius:var(--pk-radius);
+    transition:border-color var(--pk-t-quick) var(--pk-ease-standard),
+      background var(--pk-t-quick) var(--pk-ease-standard), transform var(--pk-t-quick) var(--pk-ease-spring); }
+  .dr-dt.is-active{ border-color:var(--pk-accent); background:var(--pk-accent-soft); }
+  .dr-dt__shape{ position:relative; width:52px; height:52px; border:0; background:transparent; cursor:pointer;
+    padding:0; display:grid; place-items:center; }
+  .dr-dt__shape:active{ transform:scale(.92); }
+  .dr-dt__mini{ position:absolute; inset:0; }
+  .dr-dt__lbl{ position:relative; z-index:2; font-family:var(--pk-font-display); font-weight:700;
+    font-size:.9rem; color:color-mix(in srgb, var(--pk-ink) 78%, #000); pointer-events:none; }
+  .dr-step{ display:inline-flex; align-items:center; gap:2px; }
+  .dr-step button{ width:30px; height:30px; display:grid; place-items:center; border:1.5px solid var(--pk-line);
+    background:var(--pk-surface); color:var(--pk-ink-soft); border-radius:var(--pk-radius-pill); cursor:pointer;
+    font-size:1.1rem; line-height:1; }
+  .dr-step button:hover{ background:var(--pk-surface-sunk); color:var(--pk-ink); }
+  .dr-step button:disabled{ opacity:.4; cursor:not-allowed; }
+  .dr-step__n{ min-width:26px; text-align:center; font-weight:700; font-size:1rem; }
+
+  .dr-modrow{ display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; }
+  .dr-modrow .dr-modlbl{ font-size:var(--pk-fs-sm); color:var(--pk-ink-soft); font-weight:600;
+    text-transform:uppercase; letter-spacing:.04em; }
+
+  .dr-adv{ font-size:var(--pk-fs-sm); color:var(--pk-ink-soft); text-align:center; padding:4px 0; }
+  .dr-adv.is-off{ display:none; }
+
+  /* ---- presets ---- */
+  .dr-presets{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+
+  /* ---- notation field ---- */
+  .dr-note{ width:100%; display:flex; flex-direction:column; gap:6px; }
+  .dr-note__field{ width:100%; font-family:var(--pk-font-num); font-variant-numeric:tabular-nums;
+    font-size:var(--pk-fs-lg); text-align:center; }
+  .dr-note__field.is-bad{ border-color:var(--pk-bad); box-shadow:0 2px 0 -1px var(--pk-bad); }
+  .dr-err{ min-height:1.1em; color:var(--pk-bad); font-size:var(--pk-fs-sm); font-weight:600; text-align:center; }
+  .dr-err.is-off{ visibility:hidden; }
+
+  /* ---- dice tray ---- */
+  .dr-tray{ width:100%; min-height:120px; display:flex; flex-wrap:wrap; gap:10px;
+    justify-content:center; align-items:center; padding:8px 0; }
+  .dr-tray:empty::after{ content:"Add a die, then roll."; color:var(--pk-ink-faint);
+    font-size:var(--pk-fs-sm); }
+
+  .dr-die{ position:relative; width:60px; height:60px; will-change:transform;
+    display:grid; place-items:center; }
+  .dr-die__shape{ position:absolute; inset:0; will-change:transform,filter;
+    background:radial-gradient(circle at 36% 28%,
+        color-mix(in srgb, var(--pk-mat-ivory) 70%, #fff) 0%,
+        var(--pk-mat-ivory) 46%,
+        var(--pk-mat-ivory-dk) 100%);
+    box-shadow:inset 0 -4px 8px color-mix(in srgb, var(--pk-mat-ivory-dk) 80%, #000),
+      inset 0 4px 7px color-mix(in srgb, var(--pk-mat-ivory) 60%, #fff),
+      var(--pk-shadow-2); }
+  .dr-die__num{ position:relative; z-index:2; font-family:var(--pk-font-display); font-weight:700;
+    font-size:1.35rem; line-height:1; color:color-mix(in srgb, var(--pk-ink) 84%, #000);
+    font-variant-numeric:tabular-nums; pointer-events:none; }
+
+  /* shapes via clip-path */
+  .dr-die[data-shape="tri"] .dr-die__shape{ clip-path:polygon(50% 4%,96% 92%,4% 92%); }
+  .dr-die[data-shape="tri"] .dr-die__num{ transform:translateY(22%); }
+  .dr-die[data-shape="sq"]  .dr-die__shape{ border-radius:12px; }
+  .dr-die[data-shape="dia"] .dr-die__shape{ clip-path:polygon(50% 2%,98% 50%,50% 98%,2% 50%); }
+  .dr-die[data-shape="kite"] .dr-die__shape{ clip-path:polygon(50% 2%,96% 40%,50% 98%,4% 40%); }
+  .dr-die[data-shape="pent"] .dr-die__shape{ clip-path:polygon(50% 2%,98% 40%,80% 98%,20% 98%,2% 40%); }
+  .dr-die[data-shape="hex"] .dr-die__shape{ clip-path:polygon(50% 2%,94% 26%,94% 74%,50% 98%,6% 74%,6% 26%); }
+  .dr-die[data-shape="round"] .dr-die__shape{ border-radius:50%; }
+  .dr-die[data-shape="round"] .dr-die__num{ font-size:1.05rem; }
+
+  /* clickable landed dice (single-die reroll) */
+  .dr-die.is-landed{ cursor:pointer; }
+  .dr-die.is-landed:hover .dr-die__shape{ box-shadow:inset 0 -4px 8px color-mix(in srgb, var(--pk-mat-ivory-dk) 80%, #000),
+      inset 0 4px 7px color-mix(in srgb, var(--pk-mat-ivory) 60%, #fff), var(--pk-shadow-3);
+    filter:brightness(1.04); }
+
+  /* dropped dice — the keep/drop legibility trick */
+  .dr-die.is-dropped{ opacity:.4; transform:scale(.84); }
+  .dr-die.is-dropped .dr-die__num{ text-decoration:line-through; }
+
+  /* crit / fumble on a natural d20 */
+  .dr-die.is-crit .dr-die__shape{
+    background:radial-gradient(circle at 36% 28%,
+        color-mix(in srgb, var(--pk-mat-gold) 60%, #fff) 0%,
+        var(--pk-mat-gold) 46%, var(--pk-mat-gold-dk) 100%);
+    box-shadow:0 0 0 2px var(--pk-mat-gold-dk), 0 0 16px color-mix(in srgb, var(--pk-mat-gold) 70%, transparent),
+      var(--pk-shadow-2); }
+  .dr-die.is-crit .dr-die__num{ color:#3a2a08; }
+  .dr-die.is-fumble .dr-die__shape{
+    background:radial-gradient(circle at 36% 28%,
+        color-mix(in srgb, var(--pk-mat-silver) 78%, #fff) 0%,
+        var(--pk-mat-silver) 46%, var(--pk-mat-silver-dk) 100%);
+    box-shadow:inset 0 -4px 8px var(--pk-mat-silver-dk), var(--pk-shadow-1); }
+  .dr-die.is-fumble .dr-die__num{ color:#3a3d42; }
+
+  /* ---- result + breakdown ---- */
+  .dr-result-wrap{ display:flex; flex-direction:column; align-items:center; gap:8px; width:100%; }
+  .dr-total{ font-family:var(--pk-font-display); font-weight:700; font-size:var(--pk-fs-hero);
+    line-height:1; letter-spacing:var(--pk-tracking-hero); font-variant-numeric:tabular-nums; min-height:1.05em; }
+  .dr-total.is-crit{ color:var(--pk-warn); }
+  .dr-tagline{ color:var(--pk-ink-soft); font-size:var(--pk-fs-sm); min-height:1.1em; }
+  .dr-break{ display:flex; flex-wrap:wrap; gap:6px 10px; justify-content:center; width:100%; }
+  .dr-chip{ display:inline-flex; align-items:center; gap:4px; padding:4px 10px; border-radius:var(--pk-radius-pill);
+    background:var(--pk-surface-sunk); font-size:var(--pk-fs-sm); font-family:var(--pk-font-num);
+    font-variant-numeric:tabular-nums; }
+  .dr-chip b{ font-family:var(--pk-font-ui); font-weight:700; color:var(--pk-ink-soft); }
+  .dr-chip .v{ color:var(--pk-ink); }
+  .dr-chip .v.dropped{ text-decoration:line-through; opacity:.5; }
+  .dr-chip .v.crit{ color:var(--pk-warn); font-weight:800; }
+  .dr-chip .v.fumble{ color:var(--pk-ink-faint); }
+  .dr-chip.mod{ font-weight:700; }
+
+  /* ---- history ---- */
+  .dr-hist{ width:100%; display:flex; flex-direction:column; gap:10px; }
+  .dr-hist__head{ display:flex; align-items:center; justify-content:space-between; gap:8px; }
+  .dr-hist__title{ font-family:var(--pk-font-display); font-weight:600; font-size:var(--pk-fs-lg); }
+  .dr-hist__btns{ display:flex; gap:8px; }
+  .dr-hist__list{ display:flex; flex-direction:column; gap:6px; max-height:280px; overflow:auto;
+    border-radius:var(--pk-radius); }
+  .dr-hist__list:empty::after{ content:"No rolls yet."; color:var(--pk-ink-faint); font-size:var(--pk-fs-sm);
+    padding:8px 4px; }
+  .dr-hrow{ background:var(--pk-surface); border:1px solid var(--pk-line); border-radius:var(--pk-radius-sm);
+    padding:10px 12px; cursor:pointer; }
+  .dr-hrow__top{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; }
+  .dr-hrow__note{ font-family:var(--pk-font-num); font-variant-numeric:tabular-nums; font-weight:600; }
+  .dr-hrow__tot{ font-family:var(--pk-font-display); font-weight:700; font-size:1.15rem; }
+  .dr-hrow__ts{ color:var(--pk-ink-faint); font-size:var(--pk-fs-xs); }
+  .dr-hrow__detail{ margin-top:8px; display:none; }
+  .dr-hrow.is-open .dr-hrow__detail{ display:block; }
+
+  @media (max-width:400px){
+    .dr-die{ width:52px; height:52px; }
+    .dr-die__num{ font-size:1.15rem; }
+    .dr-pool{ grid-template-columns:repeat(auto-fit,minmax(72px,1fr)); }
+  }
+</style>
+<link rel="canonical" href="https://epeters.ca/play/dice-roller/">
+</head><body>
+
+<script src="../_kit/play-kit.js"></script>
+
+<script>
+var HEADLESS = (typeof document === "undefined");
+
+/* =====================================================================
+   PURE LOGIC — no DOM, injectable rng. Exported as globalThis.DICEROLLER.
+   rng(n) -> uniform int in [0, n).  Every die face = 1 + rng(sides).
+   parse() NEVER throws; it returns { groups, error }.
+   ===================================================================== */
+
+var CONFIG = { MAX_COUNT:1000, MIN_SIDES:2, MAX_SIDES:1000, HISTORY_MAX:50, DIE_TYPES:[4,6,8,10,12,20,100] };
+
+/* per-term regex: sign captured separately; dice OR flat modifier */
+var TERM = /^([+-]?)(?:(\d*)d(\d+|%)(?:(kh|kl|dh|dl)(\d+))?|(\d+))$/i;
+
+function clampCount(n){
+  n = Math.floor(Number(n));
+  if (!isFinite(n)) return 1;
+  if (n < 1) return 1;
+  if (n > CONFIG.MAX_COUNT) return CONFIG.MAX_COUNT;
+  return n;
+}
+function clampSides(n){
+  n = Math.floor(Number(n));
+  if (!isFinite(n)) return CONFIG.MIN_SIDES;
+  if (n < CONFIG.MIN_SIDES) return CONFIG.MIN_SIDES;
+  if (n > CONFIG.MAX_SIDES) return CONFIG.MAX_SIDES;
+  return n;
+}
+
+function parse(notation){
+  if (notation == null) return { groups:[], error:null };
+  var s = String(notation).replace(/\s+/g, "").toLowerCase();
+  if (s === "") return { groups:[], error:null };
+  // break into signed terms: turn '-' into a '+-' boundary, split on '+'
+  var parts = s.replace(/-/g, "+-").split("+").filter(function(p){ return p !== ""; });
+  if (parts.length === 0) return { groups:[], error:null };
+  var groups = [];
+  for (var i = 0; i < parts.length; i++){
+    var term = parts[i];
+    var mm = term.match(TERM);
+    if (!mm) return { groups:null, error:"Can’t read “" + term + "” — try 2d6+3." };
+    var sign = mm[1] === "-" ? -1 : 1;
+    if (mm[6] !== undefined){
+      groups.push({ type:"mod", value: parseInt(mm[6], 10) * sign });
+      continue;
+    }
+    var count = (mm[2] === "" || mm[2] === undefined) ? 1 : parseInt(mm[2], 10);
+    var sides = mm[3] === "%" ? 100 : parseInt(mm[3], 10);
+    var keep = mm[4] ? mm[4].toLowerCase() : null;
+    var keepN = (mm[5] !== undefined) ? parseInt(mm[5], 10) : null;
+    if (count < 1 || count > CONFIG.MAX_COUNT)
+      return { groups:null, error:"Dice count must be 1–" + CONFIG.MAX_COUNT + " (got " + count + ")." };
+    if (sides < CONFIG.MIN_SIDES || sides > CONFIG.MAX_SIDES)
+      return { groups:null, error:"Sides must be " + CONFIG.MIN_SIDES + "–" + CONFIG.MAX_SIDES + " (got " + sides + ")." };
+    if (keep !== null && (keepN === null || keepN < 0))
+      return { groups:null, error:"Keep/drop needs a count ≥ 0." };
+    groups.push({ type:"dice", sign:sign, count:count, sides:sides, keep:keep, keepN:keepN });
+  }
+  return { groups: groups, error: null };
+}
+
+/* keep/drop: select by value, preserve original roll order in kept/dropped */
+function applyKeepDrop(rolls, keep, keepN){
+  if (!keep) return { kept: rolls.slice(), dropped: [] };
+  var n = rolls.length;
+  var idx = rolls.map(function(_, i){ return i; });
+  idx.sort(function(a, b){ return rolls[a] - rolls[b] || a - b; });   // ascending by value
+  var keepSet = {};
+  var k = Math.max(0, Math.floor(keepN));
+  var i, start;
+  if (keep === "kh"){ start = Math.max(0, n - k); for (i = start; i < n; i++) keepSet[idx[i]] = true; }
+  else if (keep === "kl"){ var end = Math.min(n, k); for (i = 0; i < end; i++) keepSet[idx[i]] = true; }
+  else if (keep === "dh"){ var kU = n - Math.min(n, k); for (i = 0; i < kU; i++) keepSet[idx[i]] = true; }
+  else if (keep === "dl"){ var dC = Math.min(n, k); for (i = dC; i < n; i++) keepSet[idx[i]] = true; }
+  var kept = [], dropped = [];
+  for (var j = 0; j < n; j++){ if (keepSet[j]) kept.push(rolls[j]); else dropped.push(rolls[j]); }
+  return { kept: kept, dropped: dropped };
+}
+
+function roll(groups, rng){
+  var total = 0, detail = [];
+  for (var i = 0; i < groups.length; i++){
+    var g = groups[i];
+    if (g.type === "mod"){ total += g.value; detail.push({ type:"mod", value: g.value }); continue; }
+    var rolls = [];
+    for (var j = 0; j < g.count; j++) rolls.push(1 + rng(g.sides));
+    var kd = applyKeepDrop(rolls, g.keep, g.keepN);
+    var sum = 0;
+    for (var m = 0; m < kd.kept.length; m++) sum += kd.kept[m];
+    sum = sum * g.sign;
+    total += sum;
+    detail.push({ type:"dice", sides:g.sides, sign:g.sign, rolls:rolls, kept:kd.kept, dropped:kd.dropped, sum:sum });
+  }
+  return { total: total, detail: detail };
+}
+
+function rollNotation(notation, rng){
+  var p = parse(notation);
+  if (p.error) return { ok:false, error:p.error, notation:notation };
+  var r = roll(p.groups, rng);
+  return { ok:true, total:r.total, detail:r.detail, notation:notation };
+}
+
+function poolToNotation(pool){
+  var dice = (pool && pool.dice) || [];
+  var parts = [];
+  for (var i = 0; i < dice.length; i++) parts.push(dice[i].count + "d" + dice[i].sides);
+  var s = parts.join(" + ");
+  var mod = (pool && pool.mod) || 0;
+  if (mod > 0) s += (s ? " + " : "") + mod;
+  else if (mod < 0) s += (s ? " - " : "-") + Math.abs(mod);
+  return s;
+}
+
+function notationToPool(notation){
+  var p = parse(notation);
+  if (p.error || p.groups === null) return null;
+  var pool = { dice:[], mod:0 };
+  for (var i = 0; i < p.groups.length; i++){
+    var g = p.groups[i];
+    if (g.type === "mod"){ pool.mod += g.value; continue; }
+    if (g.sign !== 1 || g.keep !== null) return null;   // not representable in the simple builder
+    pool.dice.push({ sides:g.sides, count:g.count });
+  }
+  return pool;
+}
+
+/* =====================================================================
+   BROWSER WIRING — touches DOM / PK, so fully behind !HEADLESS.
+   ===================================================================== */
+if (!HEADLESS) {
+
+  var EASE = {
+    standard:"cubic-bezier(.2,0,0,1)", accel:"cubic-bezier(.3,0,1,1)",
+    spring:"cubic-bezier(.34,1.56,.64,1)", settle:"cubic-bezier(.16,1,.3,1)"
+  };
+  var SHAPE = { 4:"tri", 6:"sq", 8:"dia", 10:"kite", 12:"pent", 20:"hex", 100:"round" };
+  var STORE = { pool:"play.dice-roller.pool", history:"play.dice-roller.history" };
+  var TAGLINE = "Build a pool or type notation, then roll.";
+  var PRESETS = [
+    { label:"1d20", note:"1d20" }, { label:"2d6", note:"2d6" },
+    { label:"Advantage", note:"2d20kh1" }, { label:"Disadvantage", note:"2d20kl1" },
+    { label:"Stats", note:"4d6dl1" }, { label:"d%", note:"1d100" }
+  ];
+
+  var ui, poolEl, advEl, presetEl, notationEl, errEl, trayEl, totalEl, taglineEl, breakEl,
+      histListEl, modNEl;
+  var counts = {}, mod = 0, advanced = false;
+  var lastGroups = null;         // parsed groups currently rollable
+  var current = null;            // { groups, result:{total,detail}, tiles:[[el...]] }
+  var rolling = false;
+  var history = PK.store.get(STORE.history, []);
+
+  CONFIG.DIE_TYPES.forEach(function(s){ counts[s] = 0; });
+
+  /* ---------- pool <-> notation ---------- */
+  function builderPool(){
+    var dice = [];
+    CONFIG.DIE_TYPES.forEach(function(s){ if (counts[s] > 0) dice.push({ sides:s, count:counts[s] }); });
+    return { dice:dice, mod:mod };
+  }
+  function persistPool(){ PK.store.set(STORE.pool, builderPool()); }
+
+  function syncFromPool(){
+    advanced = false;
+    var str = poolToNotation(builderPool());
+    notationEl.value = str;
+    var p = parse(str);
+    lastGroups = p.error ? null : p.groups;
+    clearError(); setAdvanced(false); renderPoolTiles();
+    resetButtonLabel(); updateRollEnabled(); persistPool();
+  }
+
+  function syncFromNotation(){
+    var str = notationEl.value;
+    var p = parse(str);
+    if (p.error){ showError(p.error); lastGroups = null; resetButtonLabel(); updateRollEnabled(); return; }
+    clearError();
+    lastGroups = p.groups;
+    var pool = notationToPool(str);
+    var repr = pool !== null && pool.dice.every(function(d){ return CONFIG.DIE_TYPES.indexOf(d.sides) !== -1; });
+    if (repr){
+      setAdvanced(false);
+      CONFIG.DIE_TYPES.forEach(function(s){ counts[s] = 0; });
+      pool.dice.forEach(function(d){ counts[d.sides] += d.count; });
+      mod = pool.mod;
+      renderPoolTiles();
+      persistPool();
+    } else {
+      setAdvanced(true);
+    }
+    resetButtonLabel(); updateRollEnabled();
+  }
+
+  function setNotation(str){ notationEl.value = str; syncFromNotation(); }
+
+  function setAdvanced(on){
+    advanced = on;
+    poolEl.classList.toggle("is-advanced", on);
+    advEl.classList.toggle("is-off", !on);
+  }
+  function hasDice(groups){ return !!groups && groups.some(function(g){ return g.type === "dice"; }); }
+  function updateRollEnabled(){
+    var ok = hasDice(lastGroups) && !rolling;
+    if (ui && ui.primary) ui.primary.disabled = !ok;
+  }
+  function resetButtonLabel(){ if (ui && ui.primary && !rolling) ui.primary.textContent = "Roll"; }
+
+  /* ---------- pool builder UI ---------- */
+  function renderPool(){
+    poolEl.innerHTML = "";
+    CONFIG.DIE_TYPES.forEach(function(s){
+      var dt = document.createElement("div");
+      dt.className = "dr-dt"; dt.setAttribute("data-sides", s);
+      var shape = document.createElement("button");
+      shape.className = "dr-dt__shape"; shape.type = "button";
+      shape.setAttribute("aria-label", "Add a d" + s);
+      shape.innerHTML = miniShape(s) + '<span class="dr-dt__lbl">d' + s + '</span>';
+      shape.addEventListener("click", function(){ if (advanced) return; setCount(s, counts[s] + 1); PK.sound.play("tick"); });
+      var step = document.createElement("div"); step.className = "dr-step";
+      var minus = mkStepBtn("−", "Fewer d" + s, function(){ setCount(s, counts[s] - 1); PK.sound.play("tick"); });
+      var nEl = document.createElement("span"); nEl.className = "dr-step__n pk-num"; nEl.textContent = counts[s];
+      var plus = mkStepBtn("＋", "More d" + s, function(){ setCount(s, counts[s] + 1); PK.sound.play("tick"); });
+      step.appendChild(minus); step.appendChild(nEl); step.appendChild(plus);
+      dt._n = nEl; dt._sides = s;
+      dt.appendChild(shape); dt.appendChild(step);
+      poolEl.appendChild(dt);
+    });
+    renderPoolTiles();
+  }
+  function renderPoolTiles(){
+    Array.prototype.forEach.call(poolEl.children, function(dt){
+      var s = dt._sides; dt._n.textContent = counts[s];
+      dt.classList.toggle("is-active", counts[s] > 0);
+    });
+    if (modNEl) modNEl.textContent = (mod > 0 ? "+" : "") + mod;
+  }
+  function mkStepBtn(sym, label, fn){
+    var b = document.createElement("button"); b.type = "button"; b.setAttribute("aria-label", label);
+    b.textContent = sym; b.addEventListener("click", function(){ if (advanced) return; fn(); });
+    return b;
+  }
+  function setCount(sides, n){
+    counts[sides] = clampCount0(n);
+    renderPoolTiles(); syncFromPool();
+  }
+  function clampCount0(n){ n = Math.floor(Number(n)); if (!isFinite(n) || n < 0) return 0; if (n > CONFIG.MAX_COUNT) return CONFIG.MAX_COUNT; return n; }
+  function setMod(n){ mod = Math.max(-999, Math.min(999, Math.floor(Number(n)) || 0)); renderPoolTiles(); syncFromPool(); }
+
+  /* small inline die glyph for the builder tile */
+  function miniShape(s){
+    var clip = { 4:"polygon(50% 6%,94% 90%,6% 90%)", 6:"", 8:"polygon(50% 3%,97% 50%,50% 97%,3% 50%)",
+      10:"polygon(50% 3%,95% 40%,50% 97%,5% 40%)", 12:"polygon(50% 3%,97% 40%,80% 97%,20% 97%,3% 40%)",
+      20:"polygon(50% 3%,93% 27%,93% 73%,50% 97%,7% 73%,7% 27%)", 100:"" }[s];
+    var rad = (s === 6) ? "border-radius:10px;" : (s === 100) ? "border-radius:50%;" : "";
+    var cp = clip ? "clip-path:" + clip + ";" : "";
+    return '<span class="dr-dt__mini" style="' + cp + rad +
+      "background:radial-gradient(circle at 36% 28%,color-mix(in srgb,var(--pk-mat-ivory) 70%,#fff),var(--pk-mat-ivory) 46%,var(--pk-mat-ivory-dk));" +
+      'box-shadow:inset 0 -3px 6px color-mix(in srgb,var(--pk-mat-ivory-dk) 80%,#000),var(--pk-shadow-1);"></span>';
+  }
+
+  /* ---------- dice tile ---------- */
+  function buildDie(sides, value){
+    var die = document.createElement("div");
+    die.className = "dr-die"; die.setAttribute("data-shape", SHAPE[sides] || "hex");
+    die.innerHTML = '<span class="dr-die__shape"></span><span class="dr-die__num"></span>';
+    die._num = die.querySelector(".dr-die__num");
+    die._sides = sides; die._value = value;
+    die._num.textContent = value;
+    return die;
+  }
+  function applyFlags(die){
+    var s = die._sides, v = die._value;
+    die.classList.remove("is-crit", "is-fumble");
+    if (s === 20 && v === 20) die.classList.add("is-crit");
+    else if (s === 20 && v === 1) die.classList.add("is-fumble");
+  }
+
+  /* ---------- the roll ---------- */
+  function doRoll(){
+    if (rolling || !hasDice(lastGroups)) return;
+    rolling = true; ui.primary.disabled = true;
+    var groups = lastGroups;
+    var result = roll(groups, PK.rand.int);       // DECIDE FIRST (crypto), then animate.
+    current = { groups:groups, result:result, tiles:[] };
+
+    // build tray
+    trayEl.innerHTML = ""; breakEl.innerHTML = "";
+    totalEl.textContent = ""; totalEl.classList.remove("is-crit");
+    taglineEl.hidden = true;
+
+    var tiles = [];            // flat list of animating dice tiles
+    result.detail.forEach(function(det, gi){
+      current.tiles[gi] = [];
+      if (det.type !== "dice") return;
+      var droppedPool = det.dropped.slice();
+      det.rolls.forEach(function(v, ri){
+        var die = buildDie(det.sides, v);
+        // mark dropped: consume from a copy of dropped multiset
+        var di = droppedPool.indexOf(v);
+        if (di !== -1){ die._dropped = true; droppedPool.splice(di, 1); }
+        die._gi = gi; die._ri = ri;
+        die.addEventListener("click", function(){ rerollDie(die); });
+        trayEl.appendChild(die);
+        current.tiles[gi][ri] = die;
+        tiles.push(die);
+      });
+    });
+
+    PK.sound.play("diceClack", { pitch:0.6 });   // toss whoosh
+    var reduced = PK.motion.reduced;
+    var landed = 0, soundBudget = 10;
+    var CAP = 24;                                  // full-tumble only the first CAP; rest fade in
+
+    function onLand(die){
+      finalizeDie(die);
+      if (soundBudget > 0 && !reduced){ PK.sound.play("diceClack", { pitch: 0.7 + Math.min(die._sides,20)/20 }); soundBudget--; }
+      landed++;
+      if (landed === tiles.length) finishRoll();
+    }
+
+    tiles.forEach(function(die, i){
+      var delay = reduced ? Math.min(i * 10, 120) : Math.min(i * 50, 700);
+      if (reduced || i >= CAP) fadeDie(die, delay, onLand);
+      else tumbleDie(die, delay, onLand);
+    });
+    if (tiles.length === 0) finishRoll();
+  }
+
+  function finalizeDie(die){
+    die._num.textContent = die._value;
+    if (die._dropped) die.classList.add("is-dropped");
+    applyFlags(die);
+    die.classList.add("is-landed");
+    die.setAttribute("title", "Tap to reroll this d" + die._sides);
+  }
+
+  function tumbleDie(die, delay, onLand){
+    var shape = die.querySelector(".dr-die__shape"), num = die._num, sides = die._sides;
+    setTimeout(function(){
+      var cyc = setInterval(function(){ num.textContent = 1 + PK.rand.int(sides); }, 60);
+      var dir = PK.rand.int(2) ? 1 : -1;
+      var turns = dir * (2 + PK.rand.int(2));       // integer full-turns -> lands upright
+      var sx = (PK.rand.int(2) ? 1 : -1) * (30 + PK.rand.int(40));
+      var DUR = 150 + 700 + 250;
+      die.animate([
+        { transform:"translate(" + sx + "px,-70px) scale(.7)", opacity:0, easing:EASE.settle },
+        { transform:"translate(0,0) scale(1.06)", opacity:1, offset:0.16, easing:EASE.standard },
+        { transform:"translate(0,0) scale(1)", offset:0.82, easing:EASE.standard },
+        { transform:"translate(0,0) scale(1)", offset:1 }
+      ], { duration:DUR, fill:"both" });
+      shape.animate([
+        { transform:"rotate(0deg)", easing:EASE.standard },
+        { transform:"rotate(" + (turns * 360) + "deg)", offset:0.82, easing:EASE.standard },
+        { transform:"rotate(" + (turns * 360) + "deg)", offset:1 }
+      ], { duration:DUR, fill:"both" });
+      setTimeout(function(){
+        clearInterval(cyc);
+        num.textContent = die._value;
+        die.animate([{ transform:"scale(1.2)" }, { transform:"scale(1)" }], { duration:220, easing:EASE.spring, fill:"both" });
+        PK.buzz(10);
+        onLand(die);
+      }, 150 + 700);
+    }, delay);
+  }
+
+  function fadeDie(die, delay, onLand){
+    setTimeout(function(){
+      die._num.textContent = die._value;
+      die.animate([{ opacity:0, transform:"scale(.6)" }, { opacity:1, transform:"scale(1)" }],
+        { duration: PK.motion.reduced ? 120 : 200, easing:EASE.settle, fill:"both" });
+      onLand(die);
+    }, delay);
+  }
+
+  function finishRoll(){
+    var result = current.result;
+    renderBreakdown(result.detail);
+    // crit / fumble scan
+    var crit = false, fumble = false;
+    result.detail.forEach(function(d){
+      if (d.type !== "dice" || d.sides !== 20) return;
+      if (d.rolls.indexOf(20) !== -1) crit = true;
+      if (d.rolls.indexOf(1) !== -1) fumble = true;
+    });
+    countUp(totalEl, result.total, 350);
+    if (crit){ totalEl.classList.add("is-crit"); PK.sound.play("win"); }
+    else if (fumble){ totalEl.classList.remove("is-crit"); }
+    PK.buzz(15);
+    var summary = current.groups.length ? (notationEl.value + " = " + result.total) : String(result.total);
+    PK.announce("Rolled " + result.total + ". " + breakdownText(result.detail), true);
+    pushHistory({ notation: notationEl.value.trim(), total: result.total, detail: result.detail, ts: Date.now() });
+    rolling = false;
+    ui.primary.disabled = false;
+    ui.primary.textContent = "Roll Again";
+  }
+
+  /* single-die reroll: recompute just this die, re-evaluate its group's keep/drop, recount total */
+  function rerollDie(die){
+    if (rolling || !current) return;
+    var gi = die._gi, ri = die._ri;
+    var det = current.result.detail[gi];
+    var grp = current.groups[gi];
+    if (!det || det.type !== "dice") return;
+    rolling = true; ui.primary.disabled = true;
+    var nv = 1 + PK.rand.int(det.sides);
+    det.rolls[ri] = nv;
+    var kd = applyKeepDrop(det.rolls, grp.keep, grp.keepN);
+    det.kept = kd.kept; det.dropped = kd.dropped;
+    var sum = 0; for (var m = 0; m < kd.kept.length; m++) sum += kd.kept[m];
+    det.sum = sum * grp.sign;
+    // recompute total
+    var total = 0;
+    current.result.detail.forEach(function(d){ total += (d.type === "dice") ? d.sum : d.value; });
+    current.result.total = total;
+    // update this group's tiles' dropped state + values
+    var droppedPool = det.dropped.slice();
+    current.tiles[gi].forEach(function(t, i){
+      t._value = det.rolls[i];
+      t._dropped = false;
+      var di = droppedPool.indexOf(det.rolls[i]);
+      if (di !== -1){ t._dropped = true; droppedPool.splice(di, 1); }
+      t.classList.toggle("is-dropped", !!t._dropped);
+      if (t !== die){ t._num.textContent = t._value; applyFlags(t); }
+    });
+    die._value = nv;
+    tumbleDie(die, 0, function(d){
+      finalizeDie(d);
+      renderBreakdown(current.result.detail);
+      countUp(totalEl, current.result.total, 300);
+      totalEl.classList.remove("is-crit");
+      if (d._sides === 20 && nv === 20){ totalEl.classList.add("is-crit"); PK.sound.play("win"); }
+      PK.announce("Rerolled to " + nv + ". New total " + current.result.total, true);
+      rolling = false; ui.primary.disabled = false;
+    });
+    PK.toast("Rerolled one die");
+  }
+
+  function countUp(el, to, dur){
+    if (PK.motion.reduced) dur = Math.min(dur, 200);
+    var from = to === 0 ? 0 : Math.max(0, Math.min(to, Math.round(to * 0.15)));
+    if (to < 0) from = 0;
+    var start = null;
+    function ease(p){ return 1 - Math.pow(1 - p, 3); }
+    function step(ts){
+      if (start === null) start = ts;
+      var p = Math.min(1, (ts - start) / dur);
+      el.textContent = String(Math.round(from + (to - from) * ease(p)));
+      if (p < 1) requestAnimationFrame(step); else el.textContent = String(to);
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* ---------- breakdown ---------- */
+  function renderBreakdown(detail){
+    breakEl.innerHTML = "";
+    detail.forEach(function(d){
+      var chip = document.createElement("span");
+      if (d.type === "mod"){
+        chip.className = "dr-chip mod";
+        chip.textContent = (d.value >= 0 ? "+" : "−") + Math.abs(d.value);
+        breakEl.appendChild(chip); return;
+      }
+      chip.className = "dr-chip";
+      var lbl = document.createElement("b");
+      lbl.textContent = (d.sign < 0 ? "−" : "") + "d" + d.sides + ":";
+      chip.appendChild(lbl);
+      var droppedPool = d.dropped.slice();
+      d.rolls.forEach(function(v, i){
+        var span = document.createElement("span"); span.className = "v";
+        var di = droppedPool.indexOf(v);
+        if (di !== -1){ span.classList.add("dropped"); droppedPool.splice(di, 1); }
+        if (d.sides === 20 && v === 20) span.classList.add("crit");
+        else if (d.sides === 20 && v === 1) span.classList.add("fumble");
+        span.textContent = v + (i < d.rolls.length - 1 ? "," : "");
+        chip.appendChild(span);
+      });
+      breakEl.appendChild(chip);
+    });
+  }
+  function breakdownText(detail){
+    return detail.map(function(d){
+      if (d.type === "mod") return (d.value >= 0 ? "plus " : "minus ") + Math.abs(d.value);
+      return "d" + d.sides + " " + d.kept.join(" ");
+    }).join(", ");
+  }
+
+  /* ---------- history ---------- */
+  function pushHistory(entry){
+    history.unshift(entry);
+    if (history.length > CONFIG.HISTORY_MAX) history = history.slice(0, CONFIG.HISTORY_MAX);
+    PK.store.set(STORE.history, history);
+    renderHistory();
+  }
+  function fmtTime(ts){
+    try { return new Date(ts).toLocaleTimeString([], { hour:"2-digit", minute:"2-digit" }); }
+    catch (e) { return ""; }
+  }
+  function renderHistory(){
+    histListEl.innerHTML = "";
+    history.forEach(function(h){
+      var row = document.createElement("div"); row.className = "dr-hrow"; row.setAttribute("tabindex", "0");
+      row.setAttribute("role", "button"); row.setAttribute("aria-expanded", "false");
+      var top = document.createElement("div"); top.className = "dr-hrow__top";
+      top.innerHTML = '<span class="dr-hrow__note pk-num">' + escapeHtml(h.notation || "roll") + '</span>' +
+        '<span class="dr-hrow__tot pk-num">' + h.total + '</span>';
+      var ts = document.createElement("div"); ts.className = "dr-hrow__ts"; ts.textContent = fmtTime(h.ts);
+      var detail = document.createElement("div"); detail.className = "dr-hrow__detail dr-break";
+      var savedBreak = breakEl;
+      row.appendChild(top); row.appendChild(ts); row.appendChild(detail);
+      row._built = false; row._h = h; row._detailEl = detail;
+      function toggle(){
+        var open = row.classList.toggle("is-open");
+        row.setAttribute("aria-expanded", String(open));
+        if (open && !row._built){ buildRowDetail(row._detailEl, h.detail); row._built = true; }
+      }
+      row.addEventListener("click", toggle);
+      row.addEventListener("keydown", function(e){ if (e.key === "Enter" || e.key === " "){ e.preventDefault(); toggle(); } });
+      histListEl.appendChild(row);
+    });
+  }
+  function buildRowDetail(container, detail){
+    (detail || []).forEach(function(d){
+      var chip = document.createElement("span");
+      if (d.type === "mod"){ chip.className = "dr-chip mod"; chip.textContent = (d.value >= 0 ? "+" : "−") + Math.abs(d.value); container.appendChild(chip); return; }
+      chip.className = "dr-chip";
+      var lbl = document.createElement("b"); lbl.textContent = (d.sign < 0 ? "−" : "") + "d" + d.sides + ":"; chip.appendChild(lbl);
+      var dp = (d.dropped || []).slice();
+      (d.rolls || []).forEach(function(v, i){
+        var span = document.createElement("span"); span.className = "v";
+        var di = dp.indexOf(v); if (di !== -1){ span.classList.add("dropped"); dp.splice(di, 1); }
+        if (d.sides === 20 && v === 20) span.classList.add("crit");
+        else if (d.sides === 20 && v === 1) span.classList.add("fumble");
+        span.textContent = v + (i < d.rolls.length - 1 ? "," : ""); chip.appendChild(span);
+      });
+      container.appendChild(chip);
+    });
+  }
+  function copyHistory(){
+    if (!history.length){ PK.toast("Nothing to copy"); return; }
+    var txt = history.map(function(h){ return (h.notation || "roll") + " = " + h.total + "  (" + fmtTime(h.ts) + ")"; }).join("\n");
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(function(){ PK.toast("History copied"); }, function(){ PK.toast("Copy failed"); });
+    } else { PK.toast("Copy not supported"); }
+  }
+  function clearHistory(){
+    history = []; PK.store.set(STORE.history, history); renderHistory(); PK.toast("History cleared");
+  }
+  function escapeHtml(s){ return String(s).replace(/[&<>"]/g, function(c){ return { "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]; }); }
+
+  /* ---------- boot ---------- */
+  function boot(){
+    ui = PK.app({ title:"Dice Roller", slug:"dice-roller", accent:"slate",
+      action:{ label:"Roll", onFire:doRoll, key:" " } });
+
+    ui.stage.innerHTML =
+      '<div class="dr-wrap">' +
+        '<div class="dr-pool" id="dr-pool" role="group" aria-label="Dice pool builder"></div>' +
+        '<div class="dr-modrow">' +
+          '<span class="dr-modlbl">Modifier</span>' +
+          '<div class="dr-step" role="group" aria-label="Flat modifier">' +
+            '<button type="button" id="dr-mod-minus" aria-label="Decrease modifier">−</button>' +
+            '<span class="dr-step__n pk-num" id="dr-mod-n" aria-live="polite">+0</span>' +
+            '<button type="button" id="dr-mod-plus" aria-label="Increase modifier">＋</button>' +
+          '</div>' +
+          '<button class="pk-btn pk-btn--ghost pk-btn--sm" id="dr-clear-pool" type="button">Clear pool</button>' +
+        '</div>' +
+        '<p class="dr-adv is-off" id="dr-adv">Advanced roll — edit it in the notation field below.</p>' +
+        '<div class="dr-presets" id="dr-presets" role="group" aria-label="Presets"></div>' +
+        '<div class="dr-note">' +
+          '<input class="pk-input dr-note__field" id="dr-notation" type="text" autocomplete="off" ' +
+            'autocapitalize="off" spellcheck="false" aria-label="Dice notation" placeholder="e.g. 2d6+1d20+3">' +
+          '<div class="dr-err is-off" id="dr-err" role="alert"></div>' +
+        '</div>' +
+        '<div class="dr-tray" id="dr-tray" aria-hidden="true"></div>' +
+        '<div class="dr-result-wrap">' +
+          '<div class="dr-total pk-result" id="dr-total" aria-hidden="true"></div>' +
+          '<p class="dr-tagline" id="dr-tagline">' + TAGLINE + '</p>' +
+          '<div class="dr-break" id="dr-break"></div>' +
+        '</div>' +
+        '<div class="dr-hist">' +
+          '<div class="dr-hist__head">' +
+            '<span class="dr-hist__title">History</span>' +
+            '<div class="dr-hist__btns">' +
+              '<button class="pk-btn pk-btn--ghost pk-btn--sm" id="dr-copy" type="button">Copy</button>' +
+              '<button class="pk-btn pk-btn--ghost pk-btn--sm" id="dr-clear-hist" type="button">Clear history</button>' +
+            '</div>' +
+          '</div>' +
+          '<div class="dr-hist__list" id="dr-hist-list"></div>' +
+        '</div>' +
+      '</div>';
+
+    poolEl = document.getElementById("dr-pool");
+    advEl = document.getElementById("dr-adv");
+    presetEl = document.getElementById("dr-presets");
+    notationEl = document.getElementById("dr-notation");
+    errEl = document.getElementById("dr-err");
+    trayEl = document.getElementById("dr-tray");
+    totalEl = document.getElementById("dr-total");
+    taglineEl = document.getElementById("dr-tagline");
+    breakEl = document.getElementById("dr-break");
+    histListEl = document.getElementById("dr-hist-list");
+    modNEl = document.getElementById("dr-mod-n");
+
+    // presets
+    PRESETS.forEach(function(p){
+      var chip = document.createElement("button");
+      chip.className = "pk-chip"; chip.type = "button"; chip.textContent = p.label;
+      chip.addEventListener("click", function(){ setNotation(p.note); PK.sound.play("click"); });
+      presetEl.appendChild(chip);
+    });
+
+    // modifier steppers
+    document.getElementById("dr-mod-minus").addEventListener("click", function(){ setMod(mod - 1); PK.sound.play("tick"); });
+    document.getElementById("dr-mod-plus").addEventListener("click", function(){ setMod(mod + 1); PK.sound.play("tick"); });
+    document.getElementById("dr-clear-pool").addEventListener("click", function(){
+      CONFIG.DIE_TYPES.forEach(function(s){ counts[s] = 0; }); mod = 0; renderPoolTiles(); syncFromPool(); PK.sound.play("click");
+    });
+
+    // notation field
+    notationEl.addEventListener("input", syncFromNotation);
+
+    // history buttons
+    document.getElementById("dr-copy").addEventListener("click", copyHistory);
+    document.getElementById("dr-clear-hist").addEventListener("click", clearHistory);
+
+    // restore pool
+    var saved = PK.store.get(STORE.pool, null);
+    if (saved && saved.dice){
+      saved.dice.forEach(function(d){ if (counts[d.sides] !== undefined) counts[d.sides] += d.count; });
+      mod = saved.mod || 0;
+    } else {
+      counts[20] = 1;   // sensible default: a lone d20
+    }
+
+    renderPool();
+    renderHistory();
+    syncFromPool();
+    if (advanced) {} // no-op
+
+    showError._ready = true;
+  }
+
+  function showError(msg){ errEl.textContent = msg; errEl.classList.remove("is-off"); notationEl.classList.add("is-bad"); }
+  function clearError(){ errEl.textContent = ""; errEl.classList.add("is-off"); notationEl.classList.remove("is-bad"); }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+}
+
+/* =====================================================================
+   Export the pure, testable surface for node bot_test.js (no DOM in Node).
+   ===================================================================== */
+if (HEADLESS && typeof globalThis !== "undefined") {
+  globalThis.DICEROLLER = {
+    CONFIG: CONFIG,
+    parse: parse,
+    roll: roll,
+    rollNotation: rollNotation,
+    poolToNotation: poolToNotation,
+    notationToPool: notationToPool,
+    clampCount: clampCount,
+    clampSides: clampSides,
+    applyKeepDrop: applyKeepDrop
+  };
+}
+</script>
+<!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:10px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Get the monthly letter</a></footer><!-- /ep:ca-foot -->
+</body></html>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="Three gates in a row, each passing output to the next, the last one blocking">
+  <rect width="480" height="300" fill="#15171A"/>
+  <line x1="0" y1="150" x2="480" y2="150" stroke="#2A2D31" stroke-width="1"/>
+  <g fill="none" stroke="#7CB984" stroke-width="3.5" stroke-linecap="round">
+    <line x1="20" y1="150" x2="86" y2="150"/>
+    <line x1="146" y1="150" x2="206" y2="150"/>
+    <line x1="266" y1="150" x2="326" y2="150"/>
+  </g>
+  <g fill="#1D2025" stroke="#7CB984" stroke-width="3">
+    <rect x="86" y="122" width="60" height="56" rx="6"/>
+    <rect x="206" y="122" width="60" height="56" rx="6"/>
+  </g>
+  <rect x="326" y="122" width="60" height="56" rx="6" fill="#1D2025" stroke="#D97A72" stroke-width="3"/>
+  <g stroke="#7CB984" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <polyline points="102,150 113,161 130,138"/>
+    <polyline points="222,150 233,161 250,138"/>
+  </g>
+  <g stroke="#D97A72" stroke-width="3.5" stroke-linecap="round">
+    <line x1="344" y1="136" x2="368" y2="164"/>
+    <line x1="368" y1="136" x2="344" y2="164"/>
+  </g>
+  <text x="20" y="48" font-family="Consolas,monospace" font-size="19" font-weight="700" fill="#EAEBE6">loud, caught, unshippable</text>
+  <text x="326" y="212" font-family="Consolas,monospace" font-size="13" fill="#D97A72">blocked</text>
+</svg>

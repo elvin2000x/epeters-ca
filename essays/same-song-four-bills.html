@@ -1,0 +1,162 @@
+<style>
+/* Post-specific modules only. Shell, type, neutrals and the shared module
+   library live in /css/post.css. Accent: amber (set on the wrapper). */
+.trp .statstrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--rule);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:2.5rem 0;}
+.trp .stat{background:var(--paper);padding:18px 16px;}
+.trp .stat b{display:block;font-family:var(--mono);font-size:1.7rem;font-weight:600;font-variant-numeric:tabular-nums;}
+.trp .stat span{font-family:var(--disp);font-size:.78rem;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;}
+</style>
+<div class="trp accent-amber">
+<div class="wrap">
+<div class="col"><a class="trp-back" href="/writing/">&larr; Blog</a></div>
+<header class="col" style="padding-top:56px;">
+  <div class="eyebrow">Field report · AI operations</div>
+  <h1>Same Song, Four Different&nbsp;Bills</h1>
+  <p class="dek">Four Claude runs, one songwriting task, and the biggest gap in the whole benchmark came from a single model measured against itself twice. This is what a model-efficiency test looks like before it has earned the right to name a winner.</p>
+  <div class="byline">Elvin Peters · August 2026 · Data: 4 runs, 1 locked task, 1 continuing session</div>
+</header>
+
+<div class="statstrip">
+  <div class="stat"><b>5.25x</b><span>same model, measured twice</span></div>
+  <div class="stat"><b>99%+</b><span>of all tokens were cache traffic</span></div>
+  <div class="stat"><b>52,062</b><span>cheapest run, in tokens (Opus)</span></div>
+  <div class="stat"><b>148.8s</b><span>fastest run (Sonnet)</span></div>
+  <div class="stat"><b>n=1</b><span>per model, so nobody wins yet</span></div>
+</div>
+
+<div class="col">
+<p>I ran an identical songwriting brief through four back-to-back generations on <a href="https://suno.com">Suno</a>, across three Claude models in one sitting: Opus twice, Sonnet once, Haiku once. Same required structure, same repeated hook line, same Suno style tags, same execution steps.</p>
+<p>Two runs of the exact same model, on the exact same task, produced model-controlled token counts of 52,062 and 273,147. That is a 5.25x spread, from a single model measured against itself twice. If a model can disagree with itself by that much, a single run per model can do no better than point at a winner.</p>
+<div class="pull">The cheapest run and the most expensive run were both Opus.</div>
+<p>One disclosure before the numbers: I built the measurement harness myself, inside the same session I was measuring, running Anthropic's own models. Nobody at Anthropic reviewed or funded any of this, and I went in already curious whether Sonnet would come out ahead. Read what follows as a workbench log.</p>
+
+<h2>The bill you actually get charged</h2>
+<p>The naive way to compare models is to add up every token in the transcript and call the smallest number the winner. That number is close to meaningless here, and the reason is prompt caching.</p>
+<p>Claude's API charges cache-read tokens, the context you resend, at a tenth of the base input price, and charges cache-write tokens, the context getting newly cached on the default five-minute tier, at one and a quarter times the base price (<a href="https://platform.claude.com/docs/en/build-with-claude/prompt-caching">Anthropic, 2026</a>). Across all four runs, over 99 percent of every token counted was cache traffic: context getting resent or re-cached from turn to turn. Output, the part the model actually controls, was under 1 percent of the total. A raw token count mostly measures how long the conversation had gotten by the time a given run started.</p>
+<p>That is the same shape I found auditing three months of real sessions in <a href="/writing/token-efficiency/">the last post in this series</a>, where 86 percent of the bill turned out to be resent context. A different measurement landed on the same underlying fact: context is the expense, and output is the part everyone thinks they are paying for.</p>
+<p>So I built a narrower number for this test: <b>model-controlled tokens</b>, defined as output tokens plus 1.25 times cache-write tokens. It drops cache-read entirely, since that is context history the model neither generated nor chose. What is left is closer to "how much did this model actually produce to get the job done," which is the question a token-efficiency comparison is supposed to answer.</p>
+</div>
+
+<figure>
+  <div class="chart"><svg id="runs" viewBox="0 0 900 240" role="img" aria-label="Bar chart of model-controlled tokens per run: Opus run 2 at 52,062, Sonnet run 3 at 58,471, Haiku run 4 at 82,996, Opus run 1 at 273,147"></svg></div>
+  <figcaption>Model-controlled tokens per run, lower is cheaper. Color marks the model, and the two amber bars are the same one. The spread between them is bigger than every other gap in the chart combined.</figcaption>
+</figure>
+
+<div class="col">
+<h2>Speed and cost pick different winners</h2>
+<p>On wall clock, Sonnet finished the whole songwriting-plus-Suno workflow in 148.8 seconds, 29 percent faster than Haiku's 209.6 and 44 percent faster than Opus's slower run at 265.4. Sonnet also used the fewest tool calls of any run, 12 against Haiku's 26, while logging the fewest tool errors, one against Opus's six on its slower pass. On the raw numbers, Sonnet looks like the efficient, predictable option.</p>
+<p>But the token-cost metric complicates that story. Opus's better run used 52,062 model-controlled tokens, about 11 percent fewer than Sonnet's 58,471. The same model that spiked to 273,147 tokens on its first pass also produced the single cheapest run in the whole set. Speed and token cost picked different favorites, and the model with the widest range beat everyone once.</p>
+<p>Haiku's story is a mechanism. It got things wrong about as often as the others, two tool errors against Sonnet's one, and it reached the same result through 55 API calls instead of Sonnet's 21, breaking the same handful of actions into smaller steps. That is a strategy difference in how a smaller model sequences tool use, and it is the direct reason its wall clock trailed Sonnet despite comparable output token counts.</p>
+</div>
+
+<figure>
+  <div class="chart"><svg id="steps" viewBox="0 0 900 200" role="img" aria-label="Grouped bar chart: Haiku used 55 API calls to Sonnet's 21, and 26 tool calls to Sonnet's 12"></svg></div>
+  <figcaption>Same task, same finished song, different granularity. Every extra step re-pays the session's context, which is how a small model with comparable output ends up slower and heavier per run.</figcaption>
+</figure>
+
+<div class="col">
+<h2>The scoreboard</h2>
+<table>
+  <thead><tr><th>Run</th><th style="text-align:right">Model-controlled tokens</th><th style="text-align:right">Wall clock</th><th style="text-align:right">Tool errors</th><th style="text-align:right">Cache reads</th></tr></thead>
+  <tbody>
+    <tr><td>1 · Opus</td><td class="n">273,147</td><td class="n">265.4s</td><td class="n">6</td><td class="n">2.0M</td></tr>
+    <tr><td>2 · Opus</td><td class="n">52,062</td><td class="n">n/a</td><td class="n">n/a</td><td class="n">3.2M</td></tr>
+    <tr><td>3 · Sonnet</td><td class="n">58,471</td><td class="n">148.8s</td><td class="n">1</td><td class="n">3.3M</td></tr>
+    <tr><td>4 · Haiku</td><td class="n">82,996</td><td class="n">209.6s</td><td class="n">2</td><td class="n">4.1M</td></tr>
+  </tbody>
+</table>
+<p>The two n/a cells are the harness grading its own homework: the cheapest run kept the thinnest paper trail, which is one more thing the next round fixes.</p>
+</div>
+
+<div class="col">
+<h2>What this can't tell you yet</h2>
+<p>Two gaps keep this from being a real answer.</p>
+<p>First, all four runs happened in one continuing session, so cache-read tokens climbed with every run regardless of model: 2.0 million, then 3.2, then 3.3, then 4.1. Model-controlled tokens sidesteps that specific inflation since it ignores cache-read, but a subtler cost rides in through the write side. Cached context expires after five idle minutes, and the first call after an expiry re-writes the whole conversation at the premium rate, billed to whichever run it lands in. A single expiry on a session this size drops six figures into the metric through pure scheduling luck. Opus's 273,147 first pass, which started cold off the harness build and logged six tool errors, is exactly where that fingerprint would land, and the harness as built cannot yet separate a cold cache from a genuinely wasteful run.</p>
+<p>The session leaked into the environment too. Suno's workspace filled up with prior tracks as the sitting went on, so later runs were clicking through a busier page than earlier ones. That is an environment difference stacked on top of the accounting one, and it landed hardest on Haiku, which ran last.</p>
+</div>
+
+<figure>
+  <div class="chart"><svg id="reads" viewBox="0 0 900 220" role="img" aria-label="Bar chart of cache-read tokens per run climbing from 2.0 million on run 1 to 4.1 million on run 4"></svg></div>
+  <figcaption>Cache-read tokens per run, in run order. The conversation got heavier underneath every later run no matter which model was driving, which is the signature of benchmarking inside a live session.</figcaption>
+</figure>
+
+<div class="col">
+<p>Second, and more basic: n of 1 per model, n of 2 for Opus, is an anecdote with a spreadsheet attached. The Opus swing proves that directly. A single run could have caught any of the three models on an unusually clean or unusually messy pass, and there is no way to tell which from inside one data point.</p>
+<p>Someone could reasonably ask why publish this at all if it can't confirm anything. The answer is that the harness and the metric are the actual finding here, and they are worth having in hand before the sample size gets fixed. A method that can't survive a model disagreeing with itself by 5x has no business declaring a winner regardless of how many times you run it.</p>
+
+<h2>The narrow thing that would fix this</h2>
+<p>Sonnet has the early lead on speed and consistency, and Opus has the early lead on token cost when it is having a good run. Neither claim survives on one data point, and I am making neither one yet.</p>
+<p>The fix is specific and small: run each model three times, each run in its own fresh session with an empty Suno workspace, under this same locked protocol, with the harness logging the gap between calls and the size of every cache write so a cold cache can no longer impersonate a wasteful model. That removes all three confounds at once and turns single points into a median worth trusting. That is the next post in this series. If Sonnet's lead survives three clean sessions, I will say so plainly. If it does not, I will say that too.</p>
+
+<div class="foot">Method: four runs generated back to back in one Claude session on August 27, 2026, each driving <a href="https://suno.com">Suno</a> through the same locked step list; token counts parsed from the session transcript and weighted at API list prices (cache read 0.1x, cache write 1.25x on the five-minute tier). Author's own harness, directional, and not independently replicated. Further reading: Anthropic's <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-caching">prompt caching documentation</a> and <a href="/writing/token-efficiency/">The Rent You Pay Every Turn</a>, the audit this test grew out of.</div>
+</div>
+</div>
+
+<script>
+(function(){
+const css = n => getComputedStyle(document.querySelector('.trp')).getPropertyValue(n).trim();
+function draw(){
+const AMBER=css('--amber'), BLUE=css('--blue'), GRID=css('--grid'), MUTED=css('--muted'), RULE=css('--rule');
+const S=(id)=>document.getElementById(id);
+
+/* 1. model-controlled tokens per run */
+{
+const svg=S('runs'); svg.innerHTML='';
+const data=[["Opus (run 2)",52062,AMBER],["Sonnet (run 3)",58471,BLUE],["Haiku (run 4)",82996,MUTED],["Opus (run 1)",273147,AMBER]];
+const L=170,R=880,rowH=42,T=26; let out='';
+const max=273147, X=v=>L+(R-L-90)*v/max;
+[50000,150000,250000].forEach(function(g){
+  out+='<line x1="'+X(g)+'" y1="'+(T-10)+'" x2="'+X(g)+'" y2="'+(T+4*rowH-12)+'" stroke="'+GRID+'" stroke-width="1"/>';
+});
+data.forEach(function(d,i){
+  const y=T+i*rowH;
+  const w=Math.max(X(d[1])-L,3);
+  out+='<text class="lbl" x="'+(L-10)+'" y="'+(y+17)+'" text-anchor="end">'+d[0]+'</text>';
+  out+='<rect x="'+L+'" y="'+y+'" width="'+w+'" height="24" rx="2" fill="'+d[2]+'"/>';
+  out+='<text class="lbl big" x="'+(L+w+8)+'" y="'+(y+17)+'">'+d[1].toLocaleString('en-US')+'</text>';
+});
+out+='<text x="'+L+'" y="'+(T+4*rowH+8)+'">model-controlled tokens: output + 1.25 &#215; cache write</text>';
+svg.innerHTML=out;
+}
+
+/* 2. step granularity, Sonnet vs Haiku */
+{
+const svg=S('steps'); svg.innerHTML='';
+const groups=[["API calls",21,55],["Tool calls",12,26]];
+const L=170,R=880,T=24,bh=20,pair=2*bh+6,gap=26; let out='';
+const max=55, X=v=>L+(R-L-60)*v/max;
+groups.forEach(function(g,i){
+  const y=T+i*(pair+gap);
+  out+='<text class="lbl" x="'+(L-10)+'" y="'+(y+pair/2+4)+'" text-anchor="end">'+g[0]+'</text>';
+  out+='<rect x="'+L+'" y="'+y+'" width="'+Math.max(X(g[1])-L,3)+'" height="'+bh+'" rx="2" fill="'+BLUE+'"/>';
+  out+='<text x="'+(X(g[1])+8)+'" y="'+(y+14)+'">Sonnet '+g[1]+'</text>';
+  out+='<rect x="'+L+'" y="'+(y+bh+6)+'" width="'+Math.max(X(g[2])-L,3)+'" height="'+bh+'" rx="2" fill="'+MUTED+'" opacity="0.8"/>';
+  out+='<text x="'+(X(g[2])+8)+'" y="'+(y+bh+20)+'">Haiku '+g[2]+'</text>';
+});
+out+='<text x="'+L+'" y="'+(T+2*pair+gap+26)+'">same finished song at the end of both columns</text>';
+svg.innerHTML=out;
+}
+
+/* 3. cache reads climbing per run */
+{
+const svg=S('reads'); svg.innerHTML='';
+const data=[["Run 1 · Opus",2.0],["Run 2 · Opus",3.2],["Run 3 · Sonnet",3.3],["Run 4 · Haiku",4.1]];
+const L=60,W=840,T=26,B=168,bw=140,gap=(W-L-4*bw)/4; let out='';
+const max=4.5, Y=v=>B-(B-T)*v/max;
+[0,1,2,3,4].forEach(function(g){
+  out+='<line x1="'+L+'" y1="'+Y(g)+'" x2="'+(L+W-40)+'" y2="'+Y(g)+'" stroke="'+GRID+'"/>';
+  out+='<text x="'+(L-8)+'" y="'+(Y(g)+4)+'" text-anchor="end">'+g+'M</text>';
+});
+data.forEach(function(d,i){
+  const x=L+26+i*(bw+gap);
+  out+='<rect x="'+x+'" y="'+Y(d[1])+'" width="'+bw+'" height="'+(B-Y(d[1]))+'" rx="3" fill="'+BLUE+'"'+(i===3?'':' opacity="0.75"')+'/>';
+  out+='<text class="lbl big" x="'+(x+bw/2)+'" y="'+(Y(d[1])-8)+'" text-anchor="middle">'+d[1].toFixed(1)+'M</text>';
+  out+='<text class="lbl" x="'+(x+bw/2)+'" y="'+(B+18)+'" text-anchor="middle">'+d[0]+'</text>';
+});
+svg.innerHTML=out;
+}
+}
+draw();
+})();
+</script>
+</div>

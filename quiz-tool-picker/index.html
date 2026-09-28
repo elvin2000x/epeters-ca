@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CLZ7N26J1Q');
+    gtag('config', 'AW-637214471');   /* Google Ads: remarketing + conversions */
+  </script>
+  <!-- X (Twitter) pixel base code -->
+  <script>!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+  },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+  a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');twq('config','re26u');</script>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1699232654449762');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1699232654449762&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  <!-- TikTok Pixel Code Start -->
+  <script>
+  !function (w, d, t) {
+    w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+    ttq.load('D93C3IRC77U4775FLNR0');
+    ttq.page();
+  }(window, document, 'ttq');
+  </script>
+  <!-- TikTok Pixel Code End -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Which AI Tool Should You Actually Use? | 60-Second Quiz</title>
+  <meta name="description" content="Stop guessing between ChatGPT, Claude, and Gemini. Answer a few questions and get an honest recommendation for the AI stack that fits your real work and budget." />
+<link rel="canonical" href="https://epeters.ca/quiz-tool-picker/">
+  <meta property="og:title" content="Which AI Tool Should You Actually Use?" />
+  <meta property="og:description" content="A 60-second quiz that cuts through the hype and tells you which AI tools actually fit your role, tasks, and budget." />
+  <meta property="og:image" content="https://elvinpeters.com/cover.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+/* Deliberate styling island: the quiz funnel family shares its own always-dark
+   palette. NOT a drifted copy of the system palette; do not migrate. */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black:#060f1a; --dark:#0a1828; --card:#0f2035; --border:#1a3248;
+      --accent:#c9a250; --accent2:#4fb3f0; --white:#f0f5fa; --muted:#6a8faa; --text:#b8d0e4;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: radial-gradient(140% 100% at 50% 0%, #0a1e35 0%, #060f1a 60%);
+      min-height: 100vh; color: var(--text);
+      font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .wrap { width: 100%; max-width: 640px; padding: 24px; margin: 0 auto; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; padding: 8px 4px 0; margin-bottom: 28px; }
+    .brand { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+    .brand a { color: var(--accent); text-decoration: none; }
+    .topbar .skip { font-size: 12px; color: var(--muted); text-decoration: none; padding: 12px 0 12px 14px; }
+    .topbar .skip:hover { color: var(--accent); }
+    .progress-wrap { height: 4px; background: var(--border); border-radius: 99px; overflow: hidden; margin-bottom: 28px; }
+    .progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent2), var(--accent)); transition: width 0.35s ease; }
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 36px 32px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+    .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    h1, h2.as-h1 { font-family: 'EB Garamond', Georgia, serif; font-weight: 600; color: var(--white); line-height: 1.12; letter-spacing: -0.01em; }
+    .intro h1 { font-size: clamp(32px, 6vw, 48px); margin-bottom: 18px; }
+    .intro p { font-size: 18px; color: var(--text); margin-bottom: 14px; }
+    .intro .meta { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
+    .intro .meta b { color: var(--text); }
+    .qnum { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+    .qtext { font-family: 'EB Garamond', serif; font-size: clamp(24px, 4.5vw, 32px); font-weight: 600; color: var(--white); line-height: 1.2; margin-bottom: 26px; }
+    .options { display: flex; flex-direction: column; gap: 12px; }
+    .opt {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--dark); border: 1px solid var(--border); border-radius: 10px;
+      padding: 18px 20px; cursor: pointer; transition: border-color 0.15s, background 0.15s, transform 0.1s;
+      font-size: 16px; color: var(--text); text-align: left; width: 100%; font-family: 'Inter', sans-serif;
+    }
+    .opt:hover { border-color: var(--accent); background: #11263f; }
+    .opt.sel { border-color: var(--accent); background: rgba(201,162,80,0.10); color: var(--white); }
+    .opt .dot {
+      width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--muted); flex-shrink: 0;
+      position: relative; transition: border-color 0.15s;
+    }
+    .opt.sel .dot { border-color: var(--accent); }
+    .opt.sel .dot::after { content:""; position:absolute; inset: 3px; border-radius: 50%; background: var(--accent); }
+    .btn {
+      display: inline-block; background: var(--accent); color: var(--black);
+      font-size: 16px; font-weight: 700; padding: 16px 32px; border-radius: 8px;
+      text-decoration: none; border: none; cursor: pointer; font-family: 'Inter', sans-serif;
+      letter-spacing: 0.01em; transition: opacity 0.15s, transform 0.12s;
+      box-shadow: 0 6px 24px rgba(201,162,80,0.22);
+    }
+    .btn:hover { opacity: 0.92; transform: translateY(-1px); }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+    .btn.full { width: 100%; }
+    .nav-row { display: flex; align-items: center; justify-content: space-between; margin-top: 26px; }
+    .back { background: none; border: none; color: var(--muted); font-size: 14px; cursor: pointer; font-family: 'Inter', sans-serif; padding: 8px; ;min-height:44px;display:inline-flex;align-items:center}
+    .back:hover { color: var(--accent); }
+    .back:disabled { opacity: 0; pointer-events: none; }
+    .gate label { display:block; font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+    .gate input {
+      width: 100%; background: var(--dark); border: 1px solid var(--border); border-radius: 8px;
+      padding: 15px 16px; color: var(--white); font-size: 16px; font-family: 'Inter', sans-serif; margin-bottom: 16px;
+    }
+    .gate input:focus { outline: none; border-color: var(--accent); }
+    .gate .fineprint { font-size: 12px; color: var(--muted); margin-top: 14px; text-align: center; }
+    .gate .err { color: #e07a7a; font-size: 13px; margin-bottom: 12px; display: none; }
+    .result .type-eyebrow { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .result h1, .result h2.as-h1 { font-size: clamp(30px, 6vw, 46px); margin-bottom: 8px; }
+    .result .tagline { font-size: 18px; color: var(--text); margin-bottom: 24px; font-style: italic; font-family: 'EB Garamond', serif; }
+    .primary { background: linear-gradient(160deg, rgba(79,179,240,0.12), rgba(201,162,80,0.06)); border:1px solid var(--accent2); border-radius:12px; padding:22px 22px; margin-bottom:24px; }
+    .primary .plabel { font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent2); margin-bottom:8px; }
+    .primary .pname { font-family:'EB Garamond',serif; font-size:28px; color:var(--white); font-weight:600; margin-bottom:8px; }
+    .primary .pwhy { font-size:15px; color:var(--text); line-height:1.7; }
+    .block { margin-bottom: 26px; }
+    .block h3 { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent2); margin-bottom: 14px; }
+    .block p { font-size: 16px; color: var(--text); line-height: 1.7; }
+    .tools { display: flex; flex-direction: column; gap: 10px; }
+    .tool { display:flex; gap: 12px; align-items: flex-start; background: var(--dark); border:1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+    .tool .tn { font-weight: 600; color: var(--white); }
+    .tool .td { font-size: 14px; color: var(--muted); }
+    .magnet { display:block; background: var(--dark); border:1px solid var(--border); border-radius: 10px; padding: 16px 18px; text-decoration:none; transition: border-color .15s, background .15s; margin-bottom:10px; }
+    .magnet:hover { border-color: var(--accent); background:#11263f; }
+    .magnet .mn { font-weight:600; color: var(--white); font-size:15px; }
+    .magnet .md { font-size:13px; color: var(--muted); margin-top:3px; }
+    .magnet .mg { font-size:12px; color: var(--accent); letter-spacing:0.1em; text-transform:uppercase; font-weight:700; }
+    .book-cta { background: linear-gradient(160deg, #112a47 0%, #0a1828 100%); border:1px solid var(--border); border-radius: 12px; padding: 28px 26px; text-align: center; margin-top: 8px; }
+    .book-cta .why { font-size: 16px; color: var(--text); line-height: 1.7; margin-bottom: 20px; }
+    .book-cta .why b { color: var(--white); }
+    .book-cta .price { font-size: 13px; color: var(--muted); margin-top: 12px; }
+    .share { text-align: center; margin-top: 22px; font-size: 14px; }
+    .share a { color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--border); }
+    .share a:hover { color: var(--accent); border-color: var(--accent); }
+    .hidden { display: none !important; }
+    .fade { animation: fade 0.32s ease; }
+    @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    footer { font-size: 12px; color: var(--muted); text-align: center; padding: 30px 24px 40px; }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+    @media (max-width: 640px) { .card { padding: 28px 22px; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <span class="brand"><a href="https://elvinpeters.com/?utm_source=epeters.ca&utm_medium=link&utm_campaign=quizzes">The Artificial Advantage</a></span>
+      <a class="skip" href="https://elvinpeters.com/free/?utm_source=epeters.ca&utm_medium=link&utm_campaign=quizzes" target="_blank" rel="noopener" id="skipLink">Skip to the free guides →</a>
+    </div>
+    <div class="progress-wrap"><div class="progress-bar" id="bar"></div></div>
+    <div id="stage"></div>
+  </div>
+  <footer>© 2026 Elvin M. Peters · <a href="https://elvinpeters.com/?utm_source=epeters.ca&utm_medium=link&utm_campaign=quizzes">elvinpeters.com</a></footer>
+
+<script>
+/* =========================================================================
+   TOOL PICKER — self-contained, config-driven.
+   Each option carries weights toward tool keys (claude/chatgpt/gemini/
+   copilot/perplexity). The highest-weighted tool becomes the lead
+   recommendation; each lead has a curated, honest stack in `stacks`.
+   ========================================================================= */
+var QUIZ = {
+  source: "tool-picker-quiz",
+  leadName: "Tool Picker",
+  bookUrl: "https://elvinpeters.com/",
+  salesUrl: "https://elvinpeters.com/",
+  leadApi: "https://ultimateaidirectory.com/api/lead", // owned lead DB (HTTPS, CORS-enabled)
+
+  intro: {
+    eyebrow: "60-Second Quiz",
+    title: "Which AI tool should you actually use?",
+    body: [
+      "ChatGPT, Claude, Gemini, Copilot, Perplexity. Everyone has an opinion, most of it is noise, and paying for the wrong one is the easiest money to waste.",
+      "Answer 7 quick questions and you'll get an honest recommendation for the AI stack that fits your role, your real tasks, and your budget, with the plain reasoning behind each pick."
+    ],
+    meta: "7 questions · about 60 seconds · free personalized recommendation",
+    cta: "Find my AI stack →"
+  },
+
+  // Weights push toward a lead tool. Keys: claude, chatgpt, gemini, copilot, perplexity.
+  questions: [
+    {
+      q: "What best describes your role?",
+      opts: [
+        { t: "Writer, marketer, or communicator", w:{claude:2,chatgpt:1} },
+        { t: "Analyst, researcher, or knowledge worker", w:{perplexity:2,claude:1} },
+        { t: "Manager, founder, or generalist juggling everything", w:{chatgpt:2,claude:1} },
+        { t: "Ops, admin, or heavy spreadsheet and document work", w:{copilot:2,gemini:1} }
+      ]
+    },
+    {
+      q: "What will you use AI for most?",
+      opts: [
+        { t: "Writing, editing, and thinking through ideas", w:{claude:3} },
+        { t: "A bit of everything, whatever comes up that day", w:{chatgpt:3} },
+        { t: "Research and getting to trustworthy answers fast", w:{perplexity:3} },
+        { t: "Work inside my docs, sheets, email, and slides", w:{copilot:2,gemini:2} }
+      ]
+    },
+    {
+      q: "Where does most of your daily work actually live?",
+      opts: [
+        { t: "Microsoft 365 (Word, Excel, Outlook, Teams)", w:{copilot:3} },
+        { t: "Google Workspace (Docs, Sheets, Gmail)", w:{gemini:3} },
+        { t: "Mostly in a browser, notes, and other apps", w:{chatgpt:1,claude:1} },
+        { t: "A mix, nothing I'd call home base", w:{chatgpt:2} }
+      ]
+    },
+    {
+      q: "What matters most in the answers you get?",
+      opts: [
+        { t: "Natural, high-quality writing I barely have to edit", w:{claude:3} },
+        { t: "Accuracy I can trust, with sources I can click", w:{perplexity:3} },
+        { t: "Flexibility to handle images, voice, and odd requests", w:{chatgpt:3} },
+        { t: "That it just works inside the apps I already use", w:{copilot:2,gemini:2} }
+      ]
+    },
+    {
+      q: "What's your monthly budget for AI tools?",
+      opts: [
+        { t: "Free only for now", w:{chatgpt:1,gemini:1} },
+        { t: "Around $20 a month for one good tool", w:{claude:2,chatgpt:2} },
+        { t: "I'll pay for two if they each earn their keep", w:{claude:1,perplexity:1,chatgpt:1} },
+        { t: "Whatever makes me meaningfully faster", w:{copilot:1,chatgpt:1,claude:1} }
+      ]
+    },
+    {
+      q: "How comfortable are you with new software?",
+      opts: [
+        { t: "Keep it simple, I want it to just work", w:{chatgpt:2,gemini:1} },
+        { t: "Comfortable enough to poke around", w:{claude:1,chatgpt:1} },
+        { t: "Confident, I like getting under the hood", w:{claude:2,perplexity:1} },
+        { t: "Very, I want power and control", w:{claude:2,perplexity:1} }
+      ]
+    },
+    {
+      q: "What would make an AI tool genuinely worth it for you?",
+      opts: [
+        { t: "Writing that sounds like a sharper version of me", w:{claude:3} },
+        { t: "One tool that handles almost anything I throw at it", w:{chatgpt:3} },
+        { t: "Answers I can defend, backed by real sources", w:{perplexity:3} },
+        { t: "Hours saved on the documents and email I already do", w:{copilot:2,gemini:2} }
+      ]
+    }
+  ],
+
+  // Lead-tool result profiles. Each has a curated, honest 3-tool stack.
+  stacks: {
+    claude: {
+      name: "Claude",
+      lead: "Claude",
+      tagline: "Your work lives or dies on the quality of the words, and this is the tool built for that.",
+      leadWhy: "You write, edit, and think for a living, and Claude is the strongest of the major tools at exactly that. It produces natural, considered writing that needs less cleanup, holds a long document in its head without losing the thread, and follows nuanced instructions closely. Start with the free version, and the roughly $20 a month plan pays for itself the first week you stop rewriting its output.",
+      stack: [
+        { n:"Claude, your daily driver", d:"Best-in-class for writing, editing, and reasoning through anything with nuance." },
+        { n:"ChatGPT, your utility knife", d:"Keep the free version for images, voice, and the odd task Claude doesn't cover." },
+        { n:"Perplexity, your fact-checker", d:"When you need a sourced answer you can trust, this shows its work." }
+      ]
+    },
+    chatgpt: {
+      name: "ChatGPT",
+      lead: "ChatGPT",
+      tagline: "You need one tool that handles almost anything, and this is the most capable all-rounder.",
+      leadWhy: "You touch a bit of everything and don't want to manage a toolkit, so the broadest generalist wins. ChatGPT writes, analyzes, makes images, handles voice, and covers the widest range of tasks with the least fuss. The free tier is genuinely useful, and the roughly $20 a month plan is worth it once AI becomes a daily habit rather than an occasional novelty.",
+      stack: [
+        { n:"ChatGPT, your daily driver", d:"The most flexible all-rounder. Save your best prompts so good results repeat." },
+        { n:"Claude, your writing upgrade", d:"Reach for it when the writing has to be excellent." },
+        { n:"Perplexity, your research tab", d:"For anything where a wrong fact would cost you, it answers with sources." }
+      ]
+    },
+    gemini: {
+      name: "Gemini",
+      lead: "Gemini",
+      tagline: "Your work runs on Google, so the AI that lives inside it saves you the most friction.",
+      leadWhy: "Your day happens in Docs, Sheets, and Gmail, and Gemini is built right into them. That means drafting, summarizing, and pulling things together without copying text back and forth between tabs. If your organization already pays for Workspace, this is often the highest-leverage tool you can turn on, because it meets you where the work already is.",
+      stack: [
+        { n:"Gemini, your in-Workspace assistant", d:"Drafts, summaries, and help directly inside Docs, Sheets, and Gmail." },
+        { n:"ChatGPT or Claude, your thinking partner", d:"For heavier writing and reasoning outside the Google apps. Try both free and keep the one you prefer." },
+        { n:"Perplexity, your sourced research", d:"When an answer needs sources you can check." }
+      ]
+    },
+    copilot: {
+      name: "Microsoft Copilot",
+      lead: "Microsoft Copilot",
+      tagline: "Your work runs on Office, so the AI wired into it removes the most busywork.",
+      leadWhy: "You spend your day in Word, Excel, Outlook, and Teams, and Copilot works inside all of them. It drafts documents, builds and explains spreadsheet formulas, summarizes long email threads, and recaps meetings without you leaving the app. If your workplace already has Microsoft 365, turning Copilot on is usually the fastest hours-saved you'll get from any AI tool.",
+      stack: [
+        { n:"Microsoft Copilot, your in-Office assistant", d:"Drafting, formulas, email, and meeting recaps directly inside the apps you already live in." },
+        { n:"ChatGPT or Claude, your open-ended tool", d:"For writing and thinking that goes beyond the Office apps. Both have strong free tiers." },
+        { n:"Perplexity, your research companion", d:"For sourced answers you can stand behind." }
+      ]
+    },
+    perplexity: {
+      name: "Perplexity",
+      lead: "Perplexity",
+      tagline: "You live or die on getting the right answer, and this one shows its sources by default.",
+      leadWhy: "Your work depends on being right, and Perplexity is built for exactly that. It answers questions with citations you can click and check, which rebuilds the trust that gets burned when a chatbot invents a fact. It's the fastest way to get a defensible answer, and it pairs naturally with a general tool for the writing and thinking around your research.",
+      stack: [
+        { n:"Perplexity, your research engine", d:"Sourced, checkable answers. Your first stop for anything that has to be accurate." },
+        { n:"Claude, your writing partner", d:"Turn what you find into clear, polished work that reads well." },
+        { n:"ChatGPT, your everything-else tool", d:"The flexible generalist for images, voice, and whatever else comes up." }
+      ]
+    }
+  },
+
+  // Free guides the result funnels into (self-hosted magnets on /free/).
+  magnets: [
+    { n:"The Free AI Guide Library", d:"Cheat sheets, prompt packs, and workflow guides for every tool above.", url:"https://elvinpeters.com/free/" },
+    { n:"50 Prompts That Actually Work", d:"Copy-paste prompts that get more out of whichever tool you land on.", url:"https://elvinpeters.com/free/50-prompts/" }
+  ],
+
+  angle: "Picking the tool is the easy part. Getting great work out of it is the skill, and it's the same skill across every tool above. <b>The Artificial Advantage</b> is the plain-English playbook for exactly that: how to direct any of these tools so the output stops being generic and starts being genuinely good."
+};
+
+/* ===================== ENGINE ===================== */
+function startQuizEngine() {
+  var stageEl = document.getElementById("stage");
+  var barEl = document.getElementById("bar");
+  var answers = [];
+  var cur = 0;
+  var N = QUIZ.questions.length;
+  var lead = { email:"", name:"" };
+
+  // Ad conversion ids for THIS quiz (lead capture). Create a Google Ads
+  // "Submit lead form" conversion and an X "Lead" event for the Tool Picker
+  // quiz, then paste them here. Both dormant until then.
+  var ADS = { x: "tw-re26u-re279", g: "AW-637214471/AKwFCNHut9UcEIe-7K8C" }; // shared "Quiz Lead" conversion; the source field segments which quiz produced the lead
+
+  function setBar(p){ barEl.style.width = p + "%"; }
+  function quizHit(e){ if (e !== "quiz_start" && e !== "quiz_lead" && e !== "quiz_result") return; try{ navigator.sendBeacon("https://studio.elvinpeters.com/s/api/quiz/tool-picker/hit", new Blob([e], {type:"text/plain"})); }catch(x){} } /* QUIZ STUDIO PATCH: start/lead/result counts, no personal data */
+  function track(name, params){ quizHit(name); try{ gtag('event', name, params||{}); }catch(e){} }
+  function render(html){ stageEl.innerHTML = html; stageEl.firstElementChild && stageEl.firstElementChild.classList.add('fade'); }
+
+  function showIntro(){
+    cur = 0; setBar(0);
+    var i = QUIZ.intro;
+    render(
+      '<div class="card intro">' +
+        '<div class="eyebrow">'+i.eyebrow+'</div>' +
+        '<h1>'+i.title+'</h1>' +
+        i.body.map(function(p){return '<p>'+p+'</p>';}).join('') +
+        '<div class="meta">'+i.meta+'</div>' +
+        '<button class="btn full" id="startBtn">'+i.cta+'</button>' +
+      '</div>'
+    );
+    document.getElementById("startBtn").onclick = function(){ track('quiz_start'); cur=0; showQuestion(); };
+  }
+
+  function showQuestion(){
+    var L = QUIZ.labels || {};
+    var Q = QUIZ.questions[cur];
+    setBar(Math.round((cur)/(N+1)*100));
+    var picked = answers[cur] ? answers[cur].optIndex : -1;
+    var opts = Q.opts.map(function(o, idx){
+      return '<button class="opt'+(idx===picked?' sel':'')+'" data-i="'+idx+'">' +
+               '<span class="dot"></span><span>'+o.t+'</span>' +
+             '</button>';
+    }).join('');
+    render(
+      '<div class="card">' +
+        '<div class="qnum">Question '+(cur+1)+' of '+N+'</div>' +
+        '<div class="qtext">'+Q.q+'</div>' +
+        '<div class="options">'+opts+'</div>' +
+        '<div class="nav-row">' +
+          '<button class="back" id="backBtn"'+(cur===0?' disabled':'')+'>← Back</button>' +
+          '<button class="btn" id="nextBtn"'+(picked<0?' disabled':'')+'>'+(cur===N-1?(L.last||"See my recommendation →"):'Next →')+'</button>' +
+        '</div>' +
+      '</div>'
+    );
+    Array.prototype.forEach.call(document.querySelectorAll(".opt"), function(b){
+      b.onclick = function(){
+        var idx = +b.getAttribute("data-i");
+        answers[cur] = { optIndex: idx, text: Q.opts[idx].t };
+        Array.prototype.forEach.call(document.querySelectorAll(".opt"), function(x){x.classList.remove("sel");});
+        b.classList.add("sel");
+        document.getElementById("nextBtn").disabled = false;
+      };
+    });
+    document.getElementById("backBtn").onclick = function(){ if(cur>0){ cur--; showQuestion(); } };
+    document.getElementById("nextBtn").onclick = function(){
+      if(!answers[cur]) return;
+      if(cur < N-1){ cur++; showQuestion(); } else { showGate(); }
+    };
+  }
+
+  function showGate(){
+    var G = QUIZ.gate || {};
+    setBar(Math.round(N/(N+1)*100));
+    render(
+      '<div class="card gate">' +
+        '<div class="eyebrow">'+(G.eyebrow||"Almost there")+'</div>' +
+        '<h2 class="as-h1" style="font-size:30px;margin-bottom:10px;">'+(G.title||"One step before your recommendation")+'</h2>' +
+        '<p style="color:var(--muted);margin-bottom:22px;">'+(G.body||"Your recommended stack and the reasoning, plus one short email a week on getting more out of these tools. No spam, unsubscribe any time.")+'</p>' +
+        '<div class="err" id="gateErr">Please enter a valid email.</div>' +
+        '<label for="qname">First name (optional)</label>' +
+        '<input id="qname" type="text" autocomplete="given-name" placeholder="Alex" />' +
+        '<label for="qemail">Email</label>' +
+        '<input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off" /><input id="qemail" type="email" autocomplete="email" placeholder="you@work.com" />' +
+        '<button class="btn full" id="seeBtn">'+(G.button||"Show me my AI stack →")+'</button>' +
+        '<div class="fineprint">'+(G.fineprint||"Instant result on this page. We also send the free starter kit by email.")+'</div>' +
+        '<div class="nav-row"><button class="back" id="backBtn2">← Back</button><span></span></div>' +
+      '</div>'
+    );
+    document.getElementById("backBtn2").onclick = function(){ cur = N-1; showQuestion(); };
+    document.getElementById("seeBtn").onclick = function(){
+      var email = document.getElementById("qemail").value.trim();
+      var name = document.getElementById("qname").value.trim();
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ document.getElementById("gateErr").style.display="block"; return; }
+      lead.email = email; lead.name = name;
+      track('quiz_lead', {});
+      try{ fbq('track','Lead',{content_name:QUIZ.leadName+' Quiz'}); }catch(e){}
+      submitLead();
+      showResult();
+    };
+  }
+
+  function scoreTool(){
+    var sc = {}; Object.keys(QUIZ.stacks).forEach(function(k){ sc[k] = 0; });
+    answers.forEach(function(a, qi){
+      var o = QUIZ.questions[qi].opts[a.optIndex];
+      for(var k in o.w){ sc[k] += o.w[k]; }
+    });
+    // Tie-break order favors the more broadly useful tool when scores are equal.
+    var order = QUIZ.order || ["chatgpt","claude","perplexity","gemini","copilot"];
+    var best = order[0], bestv = -1;
+    order.forEach(function(k){ if(sc[k] > bestv){ bestv = sc[k]; best = k; } });
+    return { key: best, scores: sc };
+  }
+
+  function submitLead(){
+    var res = scoreTool();
+    var S = QUIZ.stacks[res.key];
+    var summary = answers.map(function(a, qi){ return (qi+1)+". "+QUIZ.questions[qi].q+" -> "+a.text; }).join("  |  ");
+    var payload = {
+      name: lead.name || "Quiz lead",
+      email: lead.email,
+      message: "[TOOL PICK: "+S.lead+"]  "+summary,
+      source: QUIZ.source + (location.search || "")
+    };
+    try {
+      var body = new URLSearchParams(payload).toString();
+      fetch(QUIZ.leadApi, {
+        method: "POST", mode: "cors", keepalive: true,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body
+      }).catch(function(){});
+    } catch(e){}
+    // Ad conversions: quiz lead captured. Fire-and-forget, never blocks the funnel.
+    try{ if(ADS.x && typeof twq==='function') twq('event', ADS.x, {}); }catch(e){}      // fires shared Quiz Lead conversion
+    try{ if(ADS.g && typeof gtag==='function') gtag('event','conversion',{send_to:ADS.g}); }catch(e){}  // fires shared Quiz Lead conversion
+  }
+
+  function showResult(){
+    var C = QUIZ.cta || {}, L = QUIZ.labels || {};
+    setBar(100);
+    var res = scoreTool();
+    var S = QUIZ.stacks[res.key];
+    track('quiz_result', { tool: S.lead });
+
+    var stack = S.stack.map(function(t){
+      return '<div class="tool"><span class="dot" style="margin-top:3px;"></span><div><div class="tn">'+t.n+'</div><div class="td">'+t.d+'</div></div></div>';
+    }).join('');
+
+    var magnets = QUIZ.magnets.map(function(m){
+      return '<a class="magnet" href="'+m.url+'" target="_blank" rel="noopener" data-mn="'+m.n+'">' +
+               '<div class="mg">Free</div><div class="mn">'+m.n+'</div><div class="md">'+m.d+'</div>' +
+             '</a>';
+    }).join('');
+
+    render(
+      '<div class="card result">' +
+        '<div class="type-eyebrow">'+(L.eyebrow||"Your recommended AI tool")+'</div>' +
+        '<h2 class="as-h1">Start with '+S.lead+'</h2>' +
+        '<div class="tagline">'+S.tagline+'</div>' +
+        '<div class="primary"><div class="plabel">Why this fits you</div><div class="pname">'+S.name+'</div><div class="pwhy">'+S.leadWhy+'</div></div>' +
+        '<div class="block"><h3>Your honest stack</h3><div class="tools">'+stack+'</div></div>' +
+        '<div class="block"><h3>Get more out of it, free</h3>'+magnets+'</div>' +
+        '<div class="book-cta">' +
+          '<div class="why">'+QUIZ.angle+'</div>' +
+          '<a class="btn" href="'+QUIZ.bookUrl+'" id="bookBtn">'+(C.button||"See the book →")+'</a>' +
+          (C.price ? '<div class="price">'+C.price+'</div>' : '') +
+        '</div>' +
+        '<div class="share"><a href="'+QUIZ.salesUrl+'">'+(C.more||"Read more about the book →")+'</a></div>' +
+      '</div>'
+    );
+    Array.prototype.forEach.call(document.querySelectorAll(".magnet"), function(a){
+      a.onclick = function(){ track('magnet_click', {event_label:a.getAttribute('data-mn')}); };
+    });
+    var bb = document.getElementById("bookBtn");
+    if(bb) bb.onclick = function(){ track('system_click', {event_label:'quiz_result'}); };
+  }
+
+  showIntro();
+}
+
+/* ===================== BOOT: Quiz Studio config with inline fallback (QUIZ STUDIO PATCH) =====
+   Loads the version published in Quiz Studio (studio.elvinpeters.com/studio/quizzes/tool-picker).
+   Any failure (offline, slow, bad JSON) runs the inline QUIZ above. Never blocks the quiz. */
+(function () {
+  var CONFIG_URL = "https://studio.elvinpeters.com/s/quiz/tool-picker/config.json";
+  var started = false;
+  function start(){ if (!started) { started = true; startQuizEngine(); } }
+  function boot(){
+    var timer = setTimeout(start, 2500);
+    try {
+      fetch(CONFIG_URL, { mode: "cors", cache: "no-cache" })
+        .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+        .then(function (cfg) {
+          if (!started && cfg && cfg.intro && cfg.questions && cfg.questions.length && cfg.stacks) { QUIZ = cfg; }
+          clearTimeout(timer); start();
+        })
+        .catch(function () { clearTimeout(timer); start(); });
+    } catch (e) { clearTimeout(timer); start(); }
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot); else boot();
+})();
+</script>
+<!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:10px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=quizzes">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=quizzes">Get the monthly letter</a></footer><!-- /ep:ca-foot -->
+</body>
+</html>

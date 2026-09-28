@@ -1,0 +1,59 @@
+/* ===========================================================================
+   CONTACT MODAL — standalone component
+   Linked by every page that carries a [data-contact] trigger, alongside
+   js/contact-modal.js. Standalone because the older service pages load
+   css/nav-drawer.css and never load css/site.css. Every custom property
+   has a literal fallback so it renders on both token sets.
+   =========================================================================== */
+.cmodal{position:fixed;inset:0;z-index:120;display:none}
+.cmodal.open{display:block}
+.cmodal-back{position:absolute;inset:0;background:rgba(4,10,20,.62);backdrop-filter:blur(2px)}
+.cmodal-card{
+  position:relative;z-index:1;
+  width:min(560px,calc(100vw - 32px));
+  max-height:calc(100dvh - 48px);overflow:auto;
+  margin:24px auto;padding:30px 30px 26px;
+  background:var(--panel,#fff);
+  border:1px solid var(--line,#cdd6e2);
+  border-radius:var(--r-lg,16px);
+  box-shadow:0 40px 90px -30px rgba(4,10,20,.7);
+}
+@media(min-width:640px){ .cmodal-card{margin:min(9vh,90px) auto} }
+.cmodal-x{
+  position:absolute;top:12px;right:12px;
+  width:38px;height:38px;line-height:1;font-size:26px;
+  display:flex;align-items:center;justify-content:center;
+  background:none;border:0;border-radius:999px;cursor:pointer;
+  color:var(--ink-2,#5b6779);
+}
+.cmodal-x:hover{background:color-mix(in srgb,var(--ink,#0e1a2b) 8%,transparent);color:var(--ink,#0e1a2b)}
+.cmodal-card h2{margin:0 0 6px;font-size:clamp(21px,2.4vw,25px);color:var(--ink,#0e1a2b)}
+.cmodal-dek{margin:0 0 20px;color:var(--ink-2,#5b6779);font-size:var(--fs-sm,14px);line-height:1.55}
+.cmodal-form input[name="website"]{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.cmodal-form .field{margin-bottom:14px;display:flex;flex-direction:column;gap:6px}
+.cmodal-form label{font-size:13px;font-weight:600;color:var(--ink,#0e1a2b)}
+.cmodal-form input[type=text],.cmodal-form input[type=email],.cmodal-form textarea{
+  width:100%;padding:11px 13px;font:inherit;font-size:15px;
+  color:var(--ink,#0e1a2b);background:var(--bg,#fff);
+  border:1px solid var(--line,#cdd6e2);border-radius:var(--r-sm,9px);
+}
+.cmodal-form textarea{resize:vertical;min-height:104px;line-height:1.5}
+.cmodal-form input:focus-visible,.cmodal-form textarea:focus-visible{
+  outline:2px solid var(--gold,#9c761f);outline-offset:1px;border-color:var(--gold,#9c761f);
+}
+.cmodal-send{width:100%;justify-content:center;margin-top:4px}
+.cmodal-send[disabled]{opacity:.65;cursor:default}
+.cmodal-msg{margin:10px 0 0;font-size:14px;min-height:0}
+.cmodal-msg:empty{display:none}
+.cmodal-msg.err{color:var(--bad,#b4342c)}
+.cmodal-msg.ok{color:var(--good,#1f7a4d)}
+.cmodal-fine{margin:14px 0 0;font-size:12.5px;line-height:1.5;color:var(--ink-3,var(--ink-2,#5b6779))}
+.cmodal-done{text-align:center;padding:14px 0 6px}
+.cmodal-tick{
+  width:60px;height:60px;margin:0 auto 16px;border-radius:999px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--good,#1f7a4d);
+  background:color-mix(in srgb,var(--good,#1f7a4d) 14%,transparent);
+}
+.cmodal-done h3{margin:0 0 8px;font-size:20px;color:var(--ink,#0e1a2b)}
+.cmodal-done-p{margin:0 0 20px;color:var(--ink-2,#5b6779);line-height:1.6}

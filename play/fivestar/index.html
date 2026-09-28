@@ -1,0 +1,1043 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FiveStar</title>
+<meta name="description" content="FiveStar — five dice, three rolls, fifteen rows. Play a scorecard dice game hotseat, against the computer, or online with a friend.">
+<link rel="stylesheet" href="../_kit/play-kit.css">
+<style>
+  /* ---- app-scoped materials, all derived from kit tokens (never hard-coded) ---- */
+  :root{
+    --fs-paper:      var(--pk-surface);
+    --fs-paper-sunk: var(--pk-surface-sunk);
+    --fs-rule:       var(--pk-line);
+    --fs-felt:       var(--pk-mat-felt);
+    --fs-felt-dk:    var(--pk-mat-felt-dk);
+    --fs-bone:       var(--pk-mat-ivory);
+    --fs-bone-dk:    var(--pk-mat-ivory-dk);
+    --fs-bone-hi:    color-mix(in srgb, var(--pk-mat-ivory) 72%, white);
+    --fs-pip:        color-mix(in srgb, var(--pk-mat-kraft-dk) 34%, black);
+    --fs-ghost:      var(--pk-ink-faint);
+  }
+
+  .fs-wrap{ width:100%; display:flex; flex-direction:column; gap:var(--pk-gap); text-align:left; }
+  .fs-cols{ display:flex; flex-direction:column; gap:var(--pk-gap); width:100%; }
+  @media (min-width:900px){
+    .fs-cols{ flex-direction:row; align-items:flex-start; }
+    .fs-left{ flex:1 1 46%; position:sticky; top:calc(var(--pk-header-h) + 8px); }
+    .fs-right{ flex:1 1 54%; }
+  }
+  .fs-left,.fs-right{ min-width:0; display:flex; flex-direction:column; gap:12px; }
+
+  /* ---------------------------------------------------------- seat rail --- */
+  .seatrail{ display:flex; gap:8px; overflow-x:auto; padding:2px 2px 6px; scrollbar-width:thin; }
+  .seat{ flex:0 0 auto; display:flex; align-items:center; gap:8px; padding:6px 12px; min-height:38px;
+    border-radius:var(--pk-radius-pill); background:var(--pk-surface); border:1.5px solid var(--pk-line);
+    font-size:var(--pk-fs-sm); font-weight:600; color:var(--pk-ink); cursor:pointer;
+    transition:border-color var(--pk-t-quick) var(--pk-ease-standard),
+               background var(--pk-t-quick) var(--pk-ease-standard); }
+  .seat .dot{ width:9px; height:9px; border-radius:50%; background:var(--pk-line); flex:0 0 auto; }
+  .seat.is-turn{ border-color:var(--pk-accent); background:var(--pk-accent-soft); color:var(--pk-accent-press); font-weight:750; }
+  .seat.is-turn .dot{ background:var(--pk-accent); }
+  .seat.is-shown{ box-shadow:inset 0 -3px 0 var(--pk-accent); }
+  .seat.is-off{ opacity:.55; }
+  .seat .tot{ font-family:var(--pk-font-num); font-variant-numeric:tabular-nums;
+    background:var(--pk-surface-sunk); border-radius:999px; padding:1px 8px; }
+
+  /* ------------------------------------------------------------- dice ----- */
+  .tray{ background:linear-gradient(160deg,var(--fs-felt),var(--fs-felt-dk));
+    border-radius:var(--pk-radius); padding:14px 10px; box-shadow:inset 0 2px 14px rgba(0,0,0,.30);
+    display:flex; gap:8px; justify-content:center; flex-wrap:wrap; min-height:86px; align-items:center;
+    position:relative; }
+  .keeprail{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; align-items:center;
+    min-height:70px; padding:8px; border-radius:var(--pk-radius);
+    background:var(--fs-paper-sunk); border:1.5px dashed var(--pk-line); }
+  .keeprail .hint{ color:var(--pk-ink-faint); font-size:var(--pk-fs-xs); }
+  .keeplabel{ font-size:var(--pk-fs-xs); font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--pk-ink-faint); }
+
+  .die{ width:clamp(46px,13vw,60px); aspect-ratio:1/1; border-radius:22%; border:1px solid var(--fs-bone-dk);
+    background:linear-gradient(160deg,var(--fs-bone-hi),var(--fs-bone) 62%,var(--fs-bone-dk));
+    box-shadow:var(--pk-shadow-2), inset 0 1px 0 rgba(255,255,255,.7); padding:9%; cursor:pointer;
+    display:block; position:relative;
+    transition:transform var(--pk-t-quick) var(--pk-ease-spring), box-shadow var(--pk-t-quick); }
+  .die[disabled]{ cursor:default; opacity:.9; }
+  .die:not([disabled]):hover{ transform:translateY(-3px); box-shadow:var(--pk-shadow-3); }
+  .die[aria-pressed="true"]{ box-shadow:var(--pk-shadow-1), inset 0 0 0 2px var(--pk-accent); }
+  .die[aria-pressed="true"]::after{ content:""; position:absolute; left:22%; right:22%; bottom:-5px;
+    height:3px; border-radius:2px; background:var(--pk-accent); }
+  .die.land{ animation:fsLand 130ms var(--pk-ease-spring); }
+  @keyframes fsLand{ 0%{ transform:scale(1.07);} 100%{ transform:scale(1);} }
+  .die.tumbling{ animation:fsTumble 200ms linear infinite; }
+  @keyframes fsTumble{ 0%{ transform:translateY(0) rotate(-7deg);} 50%{ transform:translateY(-5px) rotate(7deg);} 100%{ transform:translateY(0) rotate(-7deg);} }
+  .pips{ width:100%; height:100%; display:grid; grid-template:repeat(3,1fr)/repeat(3,1fr); }
+  .pips i{ display:block; width:74%; aspect-ratio:1/1; border-radius:50%; align-self:center; justify-self:center;
+    background:var(--fs-pip); box-shadow:inset 0 1px 1px rgba(0,0,0,.55), 0 1px 0 rgba(255,255,255,.35); }
+  .placeholder{ opacity:.42; }
+
+  .starburst{ position:absolute; inset:-6px; pointer-events:none; opacity:0; }
+  .starburst svg{ width:100%; height:100%; }
+  .starburst path{ fill:none; stroke:var(--pk-accent); stroke-width:3; stroke-linejoin:round;
+    stroke-dasharray:360; stroke-dashoffset:360; }
+  .tray.is-star .starburst{ opacity:1; }
+  .tray.is-star .starburst path{ animation:fsTrace 520ms var(--pk-ease-settle) forwards; }
+  @keyframes fsTrace{ to{ stroke-dashoffset:0; } }
+
+  /* ------------------------------------------------------- roll controls -- */
+  .rollbar{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; justify-content:center; }
+  .rollbar .pk-btn{ flex:1 1 180px; }
+  .pips3{ display:flex; gap:6px; align-items:center; }
+  .pips3 b{ width:10px; height:10px; border-radius:50%; background:var(--pk-accent); display:block; }
+  .pips3 b.off{ background:var(--pk-line); }
+  .banner{ min-height:1.4em; font-weight:650; color:var(--pk-ink); text-align:center; }
+  .banner.soft{ color:var(--pk-ink-soft); font-weight:600; }
+  .confirm{ background:var(--pk-accent-soft); border:1.5px solid var(--pk-accent);
+    border-radius:var(--pk-radius); padding:12px; display:flex; gap:10px; align-items:center;
+    flex-wrap:wrap; justify-content:space-between; }
+  .confirm span{ font-size:var(--pk-fs-sm); font-weight:650; color:var(--pk-accent-press); }
+
+  /* ------------------------------------------------------------- card ----- */
+  .card{ padding:0; overflow:hidden; }
+  .cardhead{ display:flex; align-items:baseline; justify-content:space-between; gap:8px; flex-wrap:wrap;
+    padding:12px 14px; border-bottom:1px solid var(--pk-line); background:var(--fs-paper-sunk); }
+  .cardhead h3{ font-family:var(--pk-font-display); font-size:var(--pk-fs-lg); font-weight:700; }
+  .cardhead .who{ font-size:var(--pk-fs-xs); color:var(--pk-ink-soft); }
+  .sect{ padding:6px 0; }
+  .secthead{ font-size:var(--pk-fs-xs); letter-spacing:.10em; text-transform:uppercase; font-weight:750;
+    color:var(--pk-ink-faint); padding:6px 14px 2px; }
+  .row{ width:100%; display:flex; align-items:center; gap:10px; padding:9px 14px; min-height:var(--pk-tap);
+    background:transparent; border:0; border-bottom:1px solid var(--fs-rule); text-align:left;
+    font-size:var(--pk-fs-sm); font-weight:600; cursor:default; position:relative;
+    transition:background var(--pk-t-quick) var(--pk-ease-standard); }
+  .row .lbl{ flex:1 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .row .max{ color:var(--pk-ink-faint); font-size:var(--pk-fs-xs); font-family:var(--pk-font-num); }
+  .row .val{ flex:0 0 auto; min-width:2.6em; text-align:right; font-family:var(--pk-font-num);
+    font-variant-numeric:tabular-nums; font-size:var(--pk-fs-body); font-weight:700; }
+  .row .val.ghost{ color:var(--fs-ghost); font-weight:600; }
+  .row .val.zero{ color:var(--pk-ink-faint); font-weight:500; }
+  .row.open.live{ cursor:pointer; }
+  .row.open.live:hover{ background:var(--pk-accent-soft); }
+  .row.is-best{ box-shadow:inset 3px 0 0 var(--pk-accent); }
+  .row.filled{ background:var(--fs-paper-sunk); color:var(--pk-ink-soft); }
+  .row.filled .val{ color:var(--pk-ink); }
+  .row.armed{ background:var(--pk-accent-soft); box-shadow:inset 0 0 0 2px var(--pk-accent); }
+  .row.shake{ animation:fsShake 180ms var(--pk-ease-standard); }
+  @keyframes fsShake{ 25%{ transform:translateX(-4px);} 75%{ transform:translateX(4px);} }
+  .row.stamped .val{ animation:fsStamp 130ms var(--pk-ease-spring); }
+  @keyframes fsStamp{ 0%{ transform:scale(1.25);} 100%{ transform:scale(1);} }
+  .row.stamped::after{ content:""; position:absolute; inset:0; border:1px solid var(--pk-accent);
+    border-radius:var(--pk-radius-sm); animation:fsBleed 200ms var(--pk-ease-settle) forwards; pointer-events:none; }
+  @keyframes fsBleed{ from{ opacity:.9; transform:scale(.96);} to{ opacity:0; transform:scale(1.02);} }
+  .row .star{ width:14px; height:14px; flex:0 0 auto; }
+  .row .star path{ fill:var(--pk-accent); }
+  .row.derived{ background:transparent; font-weight:700; color:var(--pk-ink); cursor:default; }
+  .row.derived .lbl{ color:var(--pk-ink-soft); font-weight:650; }
+  .row.total{ border-bottom:0; font-size:var(--pk-fs-body); }
+  .row.total .val{ font-size:var(--pk-fs-lg); }
+  .sect.sweep .row{ animation:fsSweep 420ms var(--pk-ease-settle); }
+  @keyframes fsSweep{ 0%{ background:var(--pk-accent-soft);} 100%{ background:transparent;} }
+
+  .meter{ padding:8px 14px 12px; display:flex; flex-direction:column; gap:6px; }
+  .meter .bar{ height:6px; border-radius:3px; background:var(--pk-surface-sunk); overflow:hidden; }
+  .meter .bar i{ display:block; height:100%; background:var(--pk-ink-faint);
+    transition:width var(--pk-t-base) var(--pk-ease-settle); }
+  .meter.is-on .bar i{ background:var(--pk-accent); }
+  .meter .cap{ display:flex; justify-content:space-between; gap:8px;
+    font-size:var(--pk-fs-xs); color:var(--pk-ink-soft); }
+  .meter .cap b{ font-family:var(--pk-font-num); color:var(--pk-ink); }
+
+  /* -------------------------------------------------------------- log ----- */
+  .log{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:2px; }
+  .log li{ font-size:var(--pk-fs-xs); color:var(--pk-ink-soft); }
+  .log li b{ color:var(--pk-ink); font-family:var(--pk-font-num); }
+  .log li .auto{ color:var(--pk-ink-faint); }
+
+  /* ------------------------------------------------- mode select / invite - */
+  .modecard{ width:100%; max-width:420px; text-align:left; display:flex; gap:12px; align-items:center;
+    padding:16px; margin:0 auto; cursor:pointer; }
+  .modecard h3{ font-family:var(--pk-font-display); font-size:1.1rem; margin:0 0 2px; }
+  .modecard p{ margin:0; color:var(--pk-ink-soft); font-size:var(--pk-fs-sm); }
+  .modecard .ic{ font-size:1.7rem; flex:0 0 auto; width:2rem; text-align:center; }
+  .opts{ width:100%; max-width:420px; margin:0 auto; display:flex; flex-direction:column; gap:10px; }
+  .optrow{ display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+  .optrow > span{ font-size:var(--pk-fs-sm); font-weight:600; color:var(--pk-ink-soft); }
+  .stepper{ display:inline-flex; align-items:center; gap:4px; background:var(--pk-surface-sunk);
+    border-radius:var(--pk-radius-pill); padding:3px; }
+  .stepper button{ width:34px; height:34px; border:0; background:transparent; border-radius:50%;
+    cursor:pointer; font-size:1.1rem; font-weight:700; color:var(--pk-ink-soft); }
+  .stepper button:hover{ background:var(--pk-surface); color:var(--pk-ink); }
+  .stepper .n{ min-width:2ch; text-align:center; font-family:var(--pk-font-num); font-weight:700; }
+  .code{ font-family:var(--pk-font-num); font-size:clamp(1.8rem,9vw,2.4rem); letter-spacing:.28em;
+    font-weight:800; color:var(--pk-accent); background:var(--pk-surface-sunk);
+    border-radius:var(--pk-radius); padding:10px 10px 10px 24px; display:inline-block; }
+  .hint{ text-align:center; color:var(--pk-ink-faint); font-size:var(--pk-fs-xs); }
+  .lockup{ display:flex; align-items:center; gap:10px; justify-content:center; }
+  .lockup svg{ width:28px; height:28px; }
+  .lockup svg path{ fill:var(--pk-accent); }
+  .lockup h2{ font-family:var(--pk-font-display); font-size:var(--pk-fs-lg); }
+
+  /* --------------------------------------------------------- overlays ----- */
+  .plate,.overlay{ position:fixed; inset:0; z-index:150; display:grid; place-items:center; padding:24px; }
+  .plate{ background:var(--pk-bg); text-align:center; }
+  .overlay{ background:rgba(20,15,8,.58); }
+  .overlay .card2{ background:var(--pk-surface); border-radius:var(--pk-radius-lg); box-shadow:var(--pk-shadow-3);
+    padding:24px; max-width:460px; width:100%; text-align:center; max-height:86dvh; overflow:auto; }
+  .overlay h2{ font-family:var(--pk-font-display); font-size:1.6rem; margin-bottom:6px; }
+  .stand{ width:100%; border-collapse:collapse; margin:14px 0; font-size:var(--pk-fs-sm); }
+  .stand th,.stand td{ padding:7px 6px; border-bottom:1px solid var(--pk-line); text-align:right; }
+  .stand th:first-child,.stand td:first-child{ text-align:left; }
+  .stand td{ font-family:var(--pk-font-num); font-variant-numeric:tabular-nums; }
+  .stand td:first-child{ font-family:var(--pk-font-ui); font-weight:650; }
+  .stand tr.win td{ color:var(--pk-accent-press); font-weight:800; }
+
+  @media (max-width:400px){ .code{ letter-spacing:.2em; padding-left:16px; } }
+  @media (prefers-reduced-motion: reduce){
+    .die.tumbling,.die.land,.row.stamped .val,.row.stamped::after,.sect.sweep .row,.starburst path{ animation:none; }
+  }
+  :root[data-motion="reduce"] .die.tumbling,
+  :root[data-motion="reduce"] .die.land,
+  :root[data-motion="reduce"] .row.stamped .val,
+  :root[data-motion="reduce"] .row.stamped::after,
+  :root[data-motion="reduce"] .sect.sweep .row,
+  :root[data-motion="reduce"] .starburst path{ animation:none; }
+</style>
+<link rel="canonical" href="https://epeters.ca/play/fivestar/">
+</head>
+<body>
+<script src="../_kit/play-kit.js"></script>
+<script src="../_kit/net-kit.js"></script>
+<script src="rules.js"></script>
+<script>
+var HEADLESS = (typeof document === "undefined");
+
+if (!HEADLESS) (function () {
+  "use strict";
+  var R = window.FIVESTAR_RULES;
+
+  var ui = PK.app({
+    title: "FiveStar", slug: "fivestar", accent: "indigo", board: true,
+    action: { label: "New game", onFire: openModeSelect, key: null }
+  });
+  var stage = ui.stage, actions = ui.actions, primary = ui.primary;
+
+  /* ------------------------------------------------------------ app state */
+  var net = null, view = null, myMode = "hotseat";
+  var aiSeats = {}, cardSeat = 0, pinnedSeat = null, busy = false, resultShown = false, roomInfo = null;
+  var confirmCat = null, extras = [], timers = [], aiTimer = null;
+  var pendingEvents = [], lastTurn = -1, passPending = false, rotation = 0, firstTurnDone = false;
+
+  var cfg = {
+    players: R.clampPlayers(PK.store.get("play.fivestar.players", 2)),
+    ai: PK.store.get("play.fivestar.ai", 1),
+    name: PK.store.get("play.fivestar.name", PK.store.get("play.name", "Guest")),
+    ghosts: PK.store.get("play.fivestar.ghosts", true)
+  };
+
+  var HIGH_ROWS = { fivestar: 1, smallStraight: 1, largeStraight: 1, fourKind: 1 };
+  var PIPMAP = { 1: [4], 2: [0, 8], 3: [0, 4, 8], 4: [0, 2, 6, 8], 5: [0, 2, 4, 6, 8], 6: [0, 2, 3, 5, 6, 8] };
+  var STAR = '<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 L61.8 37.6 L97 38.2 L68.8 59.4 L79.4 93 L50 72.8 L20.6 93 L31.2 59.4 L3 38.2 L38.2 37.6 Z"/></svg>';
+
+  /* ---------------------------------------------------------- tiny helpers */
+  function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+  function btn(label, cls, on) { var b = document.createElement("button"); b.type = "button"; b.className = "pk-btn " + (cls || ""); b.textContent = label; b.onclick = on; return b; }
+  function reduced() { return PK.motion.reduced; }
+  function setExtras(list) {
+    extras.forEach(function (b) { if (b.parentNode) b.parentNode.removeChild(b); });
+    extras = list || [];
+    extras.forEach(function (b) { actions.appendChild(b); });
+  }
+  function clearTimers() { timers.forEach(function (t) { clearTimeout(t); clearInterval(t); }); timers = []; aiTimer = null; }
+  function later(fn, ms) { var t = setTimeout(fn, ms); timers.push(t); return t; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); }
+
+  function isSpectator() { return !!(net && net.isSpectator); }
+  function seatName(i) {
+    if (myMode === "online") {
+      var p = (net && net.players || []).filter(function (x) { return x.seat === i; })[0];
+      var n = (p && p.name) ? p.name : "Player " + (i + 1);
+      if (net && i === net.seat) n += " (you)";
+      return n;
+    }
+    if (myMode === "ai") {
+      if (aiSeats[i]) return "Computer" + (Object.keys(aiSeats).length > 1 ? " " + (i + 1) : "");
+      var humans = (view ? view.numPlayers : cfg.players) - Object.keys(aiSeats).length;
+      if (humans > 1) return named(i);
+      return (cfg.name && cfg.name !== "Guest") ? cfg.name : "You";
+    }
+    return named(i);
+  }
+  function named(i) {
+    return (i === 0 && cfg.name && cfg.name !== "Guest") ? cfg.name : "Player " + (i + 1);
+  }
+  function seatStatus(i) {
+    var p = (net && net.players || []).filter(function (x) { return x.seat === i; })[0];
+    return p ? p.status : "active";
+  }
+  function controlSeat() {                       // the seat this device may act as, or null
+    if (!view || view.over || isSpectator()) return null;
+    if (myMode === "online") return (net && net.seat != null) ? net.seat : null;
+    if (myMode === "ai" && aiSeats[view.turn]) return null;
+    return view.turn;                            // hotseat / human seat: whoever holds the device
+  }
+  function myTurn() { return controlSeat() === (view ? view.turn : -1); }
+
+  /* --------------------------------------------------------- mode select */
+  function openModeSelect() {
+    if (net && net.disconnect) { try { net.disconnect(); } catch (e) {} }
+    clearTimers(); if (aiTimer) { clearTimeout(aiTimer); aiTimer = null; }
+    net = null; view = null; busy = false; resultShown = false; roomInfo = null;
+    confirmCat = null; lastTurn = -1; passPending = false; firstTurnDone = false; pinnedSeat = null;
+    document.querySelectorAll(".overlay,.plate").forEach(function (o) { o.remove(); });
+    setExtras([]);
+    stage.style.justifyContent = "center";
+    stage.innerHTML = "";
+
+    var wrap = el("div", "fs-wrap"); wrap.style.alignItems = "center"; wrap.style.gap = "14px"; wrap.style.textAlign = "center";
+    var lock = el("div", "lockup", STAR + "<h2>Five dice, three rolls, fifteen rows</h2>");
+    wrap.appendChild(lock);
+    wrap.appendChild(el("p", "pk-subtle", "Hold what you like, reroll the rest, then ink one row. Highest card wins."));
+
+    function card(ic, title, desc, fn) {
+      var c = el("button", "pk-panel modecard");
+      c.type = "button";
+      c.innerHTML = '<span class="ic" aria-hidden="true">' + ic + '</span><span><h3>' + title + '</h3><p>' + desc + '</p></span>';
+      c.onclick = fn; return c;
+    }
+    wrap.appendChild(card("&#127922;", "Local hotseat", "Two to six players, one device.", function () { start("hotseat"); }));
+    wrap.appendChild(card("&#129302;", "Vs computer", "A steady heuristic opponent.", function () { start("ai"); }));
+    wrap.appendChild(card("&#128279;", "Play a friend", "Get a 4-character room code and a link.", function () { start("online"); }));
+    var joinRow = el("div", "pk-row");
+    joinRow.appendChild(btn("Have a code? Join a room", "pk-btn--ghost pk-btn--sm", openJoinPrompt));
+    wrap.appendChild(joinRow);
+
+    var opts = el("div", "opts pk-well");
+    opts.appendChild(stepRow("Players", cfg.players, 2, 6, function (v) {
+      cfg.players = v; PK.store.set("play.fivestar.players", v);
+      if (cfg.ai > v - 1) { cfg.ai = v - 1; PK.store.set("play.fivestar.ai", cfg.ai); }
+      openModeSelect();
+    }));
+    opts.appendChild(stepRow("Computer seats", Math.min(cfg.ai, cfg.players - 1), 1, cfg.players - 1, function (v) {
+      cfg.ai = v; PK.store.set("play.fivestar.ai", v);
+    }));
+    var nameRow = el("div", "optrow");
+    nameRow.appendChild(el("span", "", "Your name"));
+    var inp = document.createElement("input");
+    inp.className = "pk-input"; inp.maxLength = 14; inp.value = cfg.name === "Guest" ? "" : cfg.name;
+    inp.placeholder = "Guest"; inp.setAttribute("aria-label", "Your name"); inp.style.width = "11em";
+    inp.oninput = function () { cfg.name = inp.value.trim() || "Guest"; PK.store.set("play.fivestar.name", cfg.name); };
+    nameRow.appendChild(inp); opts.appendChild(nameRow);
+    wrap.appendChild(opts);
+    wrap.appendChild(el("p", "hint", "Bonus 50 at 63 in the upper block. Small straight 15, large straight 20, five of a kind 50."));
+
+    stage.appendChild(wrap);
+    if (primary) { primary.textContent = "New game"; primary.disabled = false; }
+  }
+
+  function stepRow(label, value, min, max, onChange) {
+    var row = el("div", "optrow");
+    row.appendChild(el("span", "", label));
+    var st = el("div", "stepper");
+    var dec = el("button", "", "&minus;"); dec.type = "button"; dec.setAttribute("aria-label", "Decrease " + label);
+    var num = el("span", "n", String(value));
+    var inc = el("button", "", "+"); inc.type = "button"; inc.setAttribute("aria-label", "Increase " + label);
+    var v = value;
+    function set(nv) { v = Math.max(min, Math.min(max, nv)); num.textContent = String(v); PK.sound.play("click"); onChange(v); }
+    dec.onclick = function () { set(v - 1); };
+    inc.onclick = function () { set(v + 1); };
+    st.appendChild(dec); st.appendChild(num); st.appendChild(inc);
+    row.appendChild(st);
+    return row;
+  }
+
+  function openJoinPrompt() {
+    stage.innerHTML = "";
+    var wrap = el("div", "fs-wrap"); wrap.style.alignItems = "center"; wrap.style.textAlign = "center";
+    wrap.appendChild(el("h2", "", "Join a game")).style.cssText = "font-family:var(--pk-font-display)";
+    var inp = document.createElement("input");
+    inp.className = "pk-input"; inp.maxLength = 4; inp.placeholder = "CODE"; inp.autocapitalize = "characters";
+    inp.style.cssText = "text-transform:uppercase;letter-spacing:.3em;text-align:center;width:9em;font-family:var(--pk-font-num)";
+    inp.setAttribute("aria-label", "Room code");
+    wrap.appendChild(inp);
+    var row = el("div", "pk-row");
+    function go() { var c = inp.value.trim().toUpperCase(); if (c.length >= 3) joinOnline(c, false); }
+    row.appendChild(btn("Join", "", go));
+    row.appendChild(btn("Back", "pk-btn--ghost", openModeSelect));
+    wrap.appendChild(row);
+    stage.appendChild(wrap); inp.focus();
+    inp.onkeydown = function (e) { if (e.key === "Enter") { e.preventDefault(); go(); } };
+  }
+
+  /* --------------------------------------------------------------- start */
+  function start(mode) {
+    myMode = mode; PK.store.set("play.fivestar.mode", mode);
+    clearTimers(); if (aiTimer) { clearTimeout(aiTimer); aiTimer = null; }
+    view = null; busy = false; resultShown = false; confirmCat = null;
+    lastTurn = -1; passPending = false; firstTurnDone = false; pinnedSeat = null;
+    document.querySelectorAll(".overlay,.plate").forEach(function (o) { o.remove(); });
+    stage.style.justifyContent = "flex-start";
+
+    var players = R.clampPlayers(cfg.players);
+    var firstSeat = rotation % players; rotation++;
+    aiSeats = {};
+    if (mode === "ai") {
+      var n = Math.max(1, Math.min(players - 1, cfg.ai));
+      for (var i = players - n; i < players; i++) aiSeats[i] = true;   // AI takes the highest seats
+    }
+    cardSeat = 0;
+
+    if (mode === "hotseat" || mode === "ai") {
+      // One driver for both offline modes: LocalNet runs rules.js in-tab and the
+      // AI seats are stepped from here so the pacing lives in the UI (SPEC 6.7).
+      net = new LocalNet({
+        gameId: "fivestar", mode: "hotseat", rules: R, seats: players,
+        rng: PK.rand.int, options: { numPlayers: players, firstSeat: firstSeat }
+      });
+      wire(); net.connect();
+      return;
+    }
+
+    net = new Net({ gameId: "fivestar", name: cfg.name, rules: R });
+    wire();
+    stage.innerHTML = '<p class="banner soft">Connecting&hellip;</p>';
+    setExtras([btn("Cancel", "pk-btn--ghost pk-btn--sm", openModeSelect)]);
+    var live = net;
+    var giveUp = later(function () {
+      if (net === live && !roomInfo) { PK.toast("Game server unreachable — hotseat and vs-computer still work"); openModeSelect(); }
+    }, 7000);
+    net.connect().then(function () {
+      return net.createRoom({ options: { numPlayers: players, players: players } });
+    }).then(function (room) {
+      if (net !== live) return;
+      clearTimeout(giveUp); roomInfo = room; inviteScreen(room);
+    }).catch(function () {
+      clearTimeout(giveUp);
+      if (net === live) { PK.toast("Could not reach the game server"); openModeSelect(); }
+    });
+  }
+
+  function joinOnline(code, spectate) {
+    myMode = "online"; resultShown = false; roomInfo = null; view = null; aiSeats = {};
+    pinnedSeat = null; lastTurn = -1; firstTurnDone = false; confirmCat = null;
+    clearTimers(); stage.style.justifyContent = "flex-start";
+    net = new Net({ gameId: "fivestar", name: cfg.name, rules: R });
+    wire();
+    var live = net;
+    var giveUp = later(function () {
+      if (net === live && !view) { PK.toast("Game server unreachable — hotseat and vs-computer still work"); openModeSelect(); }
+    }, 7000);
+    net.connect().then(function () { return net.joinRoom(code, { asSpectator: !!spectate }); })
+      .then(function () { clearTimeout(giveUp); })
+      .catch(function () { clearTimeout(giveUp); if (net === live) { PK.toast("Could not reach the game server"); openModeSelect(); } });
+    stage.innerHTML = '<p class="banner soft">Joining room ' + esc(String(code).toUpperCase()) + '&hellip;</p>';
+    setExtras([btn("Cancel", "pk-btn--ghost pk-btn--sm", openModeSelect)]);
+  }
+
+  function inviteScreen(room) {
+    setExtras([]);
+    stage.style.justifyContent = "center";
+    stage.innerHTML = "";
+    var wrap = el("div", "fs-wrap"); wrap.style.alignItems = "center"; wrap.style.gap = "16px"; wrap.style.textAlign = "center";
+    wrap.appendChild(el("h2", "", "Share to start")).style.cssText = "font-family:var(--pk-font-display)";
+    wrap.appendChild(el("div", "code", (room && room.roomId) || "----"));
+    wrap.appendChild(el("p", "pk-subtle", "Send the link or read out the code. Play starts when every seat is filled."));
+    var row = el("div", "pk-row");
+    row.appendChild(btn("Copy link", "", function () {
+      net.copyInvite().then(function () { PK.toast("Link copied"); }, function () { PK.toast("Copy failed — read out the code"); });
+    }));
+    if (navigator.share) row.appendChild(btn("Share", "pk-btn--soft", function () { net.share(); }));
+    row.appendChild(btn("Cancel", "pk-btn--ghost", openModeSelect));
+    wrap.appendChild(row);
+    var qr = el("div", "");
+    wrap.appendChild(qr);
+    if (net.qrDataUrl) net.qrDataUrl().then(function (u) {
+      if (!u) return;
+      var img = document.createElement("img"); img.src = u; img.alt = "Invite QR code";
+      img.style.cssText = "width:150px;height:150px;image-rendering:pixelated;border-radius:8px;background:#fff;padding:6px";
+      qr.appendChild(img);
+    }, function () {});
+    var b = el("p", "banner soft", "Waiting for players&hellip;"); b.id = "bn";
+    wrap.appendChild(b);
+    stage.appendChild(wrap);
+    PK.announce("Room code " + ((room && room.roomId) || "") + ". Waiting for players.");
+  }
+
+  /* -------------------------------------------------------------- render */
+  function activeSeats() {
+    var p = (net && net.players) || [];
+    if (!p.length) return 0;
+    return p.filter(function (x) { return x.status !== "disconnected"; }).length;
+  }
+
+  function render() {
+    if (!view) return;
+    if (myMode === "online" && !view.over && !isSpectator() && activeSeats() < view.numPlayers) {
+      var wb = document.getElementById("bn");
+      if (wb) { wb.textContent = "Waiting for players… (" + activeSeats() + "/" + view.numPlayers + ")"; return; }
+      if (roomInfo) { inviteScreen(roomInfo); return; }
+    }
+    if (cardSeat >= view.numPlayers) cardSeat = 0;
+
+    stage.style.justifyContent = "flex-start";
+    stage.innerHTML = "";
+    var wrap = el("div", "fs-wrap");
+    wrap.appendChild(buildSeatRail());
+
+    var cols = el("div", "fs-cols");
+    cols.appendChild(buildDiceColumn());
+    cols.appendChild(buildCard());
+    wrap.appendChild(cols);
+    stage.appendChild(wrap);
+
+    var list = [];
+    if (myMode === "online") list.push(btn("Leave", "pk-btn--ghost pk-btn--sm", function () { net.leave(); openModeSelect(); }));
+    else list.push(btn("Menu", "pk-btn--ghost pk-btn--sm", openModeSelect));
+    setExtras(list);
+  }
+
+  function buildSeatRail() {
+    var rail = el("div", "seatrail");
+    rail.setAttribute("aria-label", "Players");
+    for (var i = 0; i < view.numPlayers; i++) {
+      (function (i) {
+        var done = R.sheetComplete(view.sheets[i]);
+        var b = el("button", "seat" +
+          (i === view.turn && !view.over ? " is-turn" : "") +
+          (i === cardSeat ? " is-shown" : "") +
+          (seatStatus(i) === "disconnected" ? " is-off" : ""));
+        b.type = "button";
+        b.innerHTML = '<span class="dot" aria-hidden="true"></span>' + esc(seatName(i)) +
+          (done ? ' <span aria-hidden="true">&#9733;</span>' : "") +
+          ' <span class="tot pk-num">' + R.grandTotal(view.sheets[i]) + "</span>" +
+          (seatStatus(i) === "disconnected" ? ' <span aria-hidden="true">&#8635;</span>' : "");
+        b.setAttribute("aria-label", seatName(i) + ", total " + R.grandTotal(view.sheets[i]) +
+          (i === view.turn && !view.over ? ", to play" : "") + ". Show this card.");
+        if (i === view.turn && !view.over) b.setAttribute("aria-current", "true");
+        b.onclick = function () {
+          pinnedSeat = (i === view.turn) ? null : i;      // tapping the live seat resumes following
+          cardSeat = i; PK.sound.play("click"); render();
+        };
+        rail.appendChild(b);
+      })(i);
+    }
+    return rail;
+  }
+
+  function buildDiceColumn() {
+    var left = el("div", "fs-left");
+    var banner = el("div", "banner"); banner.id = "bn"; banner.textContent = bannerText();
+    left.appendChild(banner);
+
+    var tray = el("div", "tray"); tray.id = "tray";
+    tray.setAttribute("role", "group"); tray.setAttribute("aria-label", "Dice tray");
+    var keep = el("div", "keeprail"); keep.id = "keep";
+    keep.setAttribute("role", "group"); keep.setAttribute("aria-label", "Dice you are keeping");
+    keep.appendChild(el("span", "keeplabel", "Keep"));
+
+    if (!view.dice) {
+      for (var p = 0; p < R.DICE_COUNT; p++) tray.appendChild(dieEl(p, 0, false, true));
+      keep.appendChild(el("span", "hint", "Tap a die after your first roll to keep it"));
+    } else {
+      var anyKept = false;
+      for (var i = 0; i < R.DICE_COUNT; i++) {
+        var kept = !!view.held[i];
+        var d = dieEl(i, view.dice[i], kept, false);
+        if (kept) { keep.appendChild(d); anyKept = true; } else tray.appendChild(d);
+      }
+      if (!anyKept) keep.appendChild(el("span", "hint", "Tap a die to keep it"));
+    }
+    var burst = el("div", "starburst", STAR); burst.setAttribute("aria-hidden", "true");
+    tray.appendChild(burst);
+    left.appendChild(tray);
+    left.appendChild(keep);
+
+    // roll bar
+    var bar = el("div", "rollbar");
+    var roll = document.createElement("button");
+    roll.type = "button"; roll.className = "pk-btn"; roll.id = "rollbtn";
+    var can = myTurn() && view.rollsLeft > 0;
+    roll.textContent = view.rollsLeft === R.ROLLS_PER_TURN ? "Roll"
+      : view.rollsLeft > 0 ? "Roll (" + view.rollsLeft + " left)" : "Choose a row";
+    roll.disabled = !can;
+    roll.onclick = doRoll;
+    bar.appendChild(roll);
+    var pips = el("div", "pips3");
+    pips.setAttribute("aria-label", view.rollsLeft + " rolls left");
+    for (var k = 0; k < R.ROLLS_PER_TURN; k++) pips.appendChild(el("b", k < view.rollsLeft ? "" : "off"));
+    bar.appendChild(pips);
+    left.appendChild(bar);
+
+    if (confirmCat) {
+      var c = el("div", "confirm");
+      c.appendChild(el("span", "", "Scratch " + R.LABELS[confirmCat] + " for 0?"));
+      var r2 = el("div", "pk-row");
+      r2.appendChild(btn("Confirm", "pk-btn--sm", function () { var k2 = confirmCat; confirmCat = null; commit(k2); }));
+      r2.appendChild(btn("Cancel", "pk-btn--ghost pk-btn--sm", function () { confirmCat = null; render(); }));
+      c.appendChild(r2);
+      left.appendChild(c);
+    }
+
+    // rolling log (last five)
+    var log = el("ul", "log");
+    var entries = view.log.slice(-5);
+    for (var e = entries.length - 1; e >= 0; e--) {
+      var en = entries[e];
+      log.appendChild(el("li", "", esc(seatName(en.seat)) + " took " + R.LABELS[en.category] +
+        " for <b>" + en.value + "</b>" + (en.auto ? ' <span class="auto">(auto)</span>' : "")));
+    }
+    if (entries.length) left.appendChild(log);
+    return left;
+  }
+
+  function dieEl(index, value, kept, placeholder) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "die" + (placeholder ? " placeholder" : "");
+    b.dataset.i = String(index);
+    b.appendChild(pipsEl(placeholder ? 0 : value));
+    b.setAttribute("aria-pressed", String(!!kept));
+    if (placeholder) {
+      b.disabled = true;
+      b.setAttribute("aria-label", "Die " + (index + 1) + ", not rolled yet");
+    } else {
+      b.disabled = !(myTurn() && view.rollsLeft > 0);
+      b.setAttribute("aria-label", "Die " + (index + 1) + " showing " + value + (kept ? ", kept" : "") +
+        (b.disabled ? "" : ", press to " + (kept ? "release" : "keep")));
+      b.onclick = function () { toggleHold(index); };
+    }
+    return b;
+  }
+  function pipsEl(value) {
+    var g = el("span", "pips");
+    var map = PIPMAP[value] || [];
+    for (var i = 0; i < 9; i++) {
+      var cell = document.createElement("span");
+      if (map.indexOf(i) >= 0) cell.appendChild(document.createElement("i"));
+      g.appendChild(cell);
+    }
+    return g;
+  }
+  function setFace(dieNode, value) {
+    var old = dieNode.querySelector(".pips");
+    if (old) dieNode.replaceChild(pipsEl(value), old);
+  }
+  function dieNodeFor(index) { return document.querySelector('.die[data-i="' + index + '"]'); }
+
+  function buildCard() {
+    var right = el("div", "fs-right");
+    var panel = el("div", "pk-panel card");
+    var sheet = view.sheets[cardSeat];
+    var ghosts = (cfg.ghosts && view.dice && cardSeat === view.turn && !view.over) ? R.scoresForAll(view.dice) : null;
+    var live = myTurn() && view.dice && cardSeat === view.turn;
+
+    var head = el("div", "cardhead");
+    head.innerHTML = "<h3>" + esc(seatName(cardSeat)) + "</h3>" +
+      '<span class="who">Round ' + view.round + " of 15</span>";
+    if (pinnedSeat !== null && cardSeat !== view.turn && !view.over) {
+      head.appendChild(btn("Back to the live card", "pk-btn--ghost pk-btn--sm", function () {
+        pinnedSeat = null; cardSeat = view.turn; PK.sound.play("click"); render();
+      }));
+    }
+    panel.appendChild(head);
+
+    // best open row (a hint, never an auto-pick)
+    var bestKey = null;
+    if (ghosts) {
+      var bestVal = 0;
+      R.openCategories(sheet).forEach(function (k) { if (ghosts[k] > bestVal) { bestVal = ghosts[k]; bestKey = k; } });
+    }
+
+    var upper = el("div", "sect"); upper.id = "sect-upper";
+    upper.appendChild(el("div", "secthead", "Upper"));
+    R.UPPER.forEach(function (k) { upper.appendChild(rowEl(k, sheet, ghosts, live, bestKey)); });
+    upper.appendChild(derivedRow("Upper sum", R.upperSum(sheet)));
+    upper.appendChild(derivedRow("Bonus (63+)", R.bonusFor(sheet) ? "+" + R.BONUS_POINTS : "—"));
+    upper.appendChild(bonusMeter(sheet));
+    panel.appendChild(upper);
+
+    var lower = el("div", "sect");
+    lower.appendChild(el("div", "secthead", "Lower"));
+    R.LOWER.forEach(function (k) { lower.appendChild(rowEl(k, sheet, ghosts, live, bestKey)); });
+    panel.appendChild(lower);
+
+    var tot = derivedRow("Total", R.grandTotal(sheet));
+    tot.className = "row derived total"; tot.id = "grandtotal";
+    panel.appendChild(tot);
+    right.appendChild(panel);
+    right.appendChild(el("p", "hint", "Keys: 1–5 keep a die, R rolls, arrows walk the card, Enter inks the row."));
+    return right;
+  }
+
+  function rowEl(key, sheet, ghosts, live, bestKey) {
+    var filled = sheet[key] !== null && sheet[key] !== undefined;
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "row " + (filled ? "filled" : "open") + (live && !filled ? " live" : "") +
+      (!filled && bestKey === key ? " is-best" : "") + (confirmCat === key ? " armed" : "");
+    b.dataset.cat = key;
+    var label = R.LABELS[key];
+    b.innerHTML = (key === "fivestar" ? '<span class="star" aria-hidden="true">' + STAR + "</span>" : "") +
+      '<span class="lbl">' + label + "</span>" +
+      (key === "smallStraight" ? '<span class="max">15</span>' :
+       key === "largeStraight" ? '<span class="max">20</span>' :
+       key === "fivestar" ? '<span class="max">50</span>' : "");
+    var v = el("span", "val");
+    if (filled) { v.textContent = String(sheet[key]); if (!sheet[key]) v.className = "val zero"; }
+    else if (ghosts) { v.className = "val ghost" + (ghosts[key] ? "" : " zero"); v.textContent = ghosts[key] ? String(ghosts[key]) : "0"; }
+    else { v.className = "val ghost"; v.textContent = "—"; }
+    b.appendChild(v);
+
+    if (filled) {
+      b.setAttribute("aria-disabled", "true");
+      b.setAttribute("aria-label", label + ", inked for " + sheet[key]);
+      b.onclick = function () { shake(b); PK.sound.play("tick"); };
+    } else {
+      b.setAttribute("aria-label", label + ", open" + (ghosts ? ", would score " + ghosts[key] : "") +
+        (live ? ". Press to ink it." : ""));
+      b.onclick = function () { pickRow(key); };
+    }
+    b.onkeydown = cardKey;
+    return b;
+  }
+
+  function derivedRow(label, value) {
+    var d = el("div", "row derived");
+    d.innerHTML = '<span class="lbl">' + label + '</span><span class="val pk-num">' + value + "</span>";
+    return d;
+  }
+
+  function bonusMeter(sheet) {
+    var up = R.upperSum(sheet), delta = R.parDelta(sheet), on = up >= R.BONUS_THRESHOLD;
+    var m = el("div", "meter" + (on ? " is-on" : "")); m.id = "meter";
+    var pct = Math.max(0, Math.min(100, Math.round(up / R.BONUS_THRESHOLD * 100)));
+    var par = delta === 0 ? "on par" : (delta > 0 ? "+" + delta + " over par" : delta + " under par");
+    m.innerHTML = '<div class="bar"><i style="width:' + pct + '%"></i></div>' +
+      '<div class="cap"><span>' + (on ? "Bonus earned" : par) + "</span>" +
+      "<span><b>" + up + "</b> / " + R.BONUS_THRESHOLD + "</span></div>";
+    return m;
+  }
+
+  function shake(node) { node.classList.remove("shake"); void node.offsetWidth; node.classList.add("shake"); }
+
+  function bannerText() {
+    if (!view) return "";
+    if (view.over) return "Card complete";
+    if (isSpectator()) return "Watching " + seatName(view.turn);
+    if (myMode === "ai" && aiSeats[view.turn]) return seatName(view.turn) + " is thinking…";
+    if (!myTurn()) return seatName(view.turn) + " to play…";
+    if (!view.dice) return "Your turn — roll the dice";
+    if (view.rollsLeft === 0) {
+      return allZero() ? "No scoring row. Choose one to scratch." : "Last look — ink a row";
+    }
+    return allZero() ? "Nothing scores yet — reroll or scratch" : "Keep what you like, then reroll";
+  }
+  function allZero() {
+    if (!view.dice) return false;
+    var sc = R.scoresForAll(view.dice), open = R.openCategories(view.sheets[view.turn]);
+    for (var i = 0; i < open.length; i++) if (sc[open[i]] > 0) return false;
+    return true;
+  }
+
+  /* --------------------------------------------------------------- input */
+  function doRoll() {
+    if (busy || !view || !myTurn() || view.rollsLeft <= 0) return;
+    confirmCat = null;
+    net.sendMove({ type: "roll" });
+  }
+
+  function toggleHold(index) {
+    if (busy || !view || !myTurn() || !view.dice || view.rollsLeft <= 0) return;
+    var mask = view.held.slice();
+    mask[index] = !mask[index];
+    view.held = mask;                                   // optimistic paint; state reconciles
+    PK.sound.play("click"); PK.buzz(10);
+    render();
+    var node = dieNodeFor(index);
+    if (node && !reduced()) node.classList.add("land");
+    net.sendMove({ type: "hold", held: mask });
+  }
+
+  function pickRow(key) {
+    if (!view || view.over) return;
+    if (!myTurn() || !view.dice) {
+      var n = document.querySelector('.row[data-cat="' + key + '"]');
+      if (n) shake(n);
+      PK.sound.play("tick");
+      PK.toast(!view.dice ? "Roll first" : "Not your turn");
+      return;
+    }
+    var val = R.scoreCategory(key, view.dice);
+    if (val === 0 && HIGH_ROWS[key] && confirmCat !== key) {
+      confirmCat = key;
+      PK.sound.play("tick");
+      PK.announce("Scratching " + R.LABELS[key] + " for zero. Confirm to ink it.");
+      render();
+      return;
+    }
+    confirmCat = null;
+    commit(key);
+  }
+
+  function commit(key) {
+    if (!view || !myTurn() || !view.dice) return;
+    net.sendMove({ type: "score", category: key });
+  }
+
+  function cardKey(e) {
+    var k = e.key;
+    if (k !== "ArrowDown" && k !== "ArrowUp") return;
+    e.preventDefault();
+    var rows = Array.prototype.slice.call(document.querySelectorAll(".row[data-cat]"));
+    var i = rows.indexOf(e.currentTarget);
+    if (i < 0) return;
+    var next = rows[k === "ArrowDown" ? Math.min(rows.length - 1, i + 1) : Math.max(0, i - 1)];
+    if (next) next.focus();
+  }
+
+  document.addEventListener("keydown", function (e) {
+    var tag = (e.target && e.target.tagName) || "";
+    if (/INPUT|TEXTAREA|SELECT/.test(tag) || (e.target && e.target.isContentEditable)) return;
+    if (document.querySelector(".pk-sheet-backdrop.is-open")) return;
+    if (!view || view.over) return;
+    if (e.key >= "1" && e.key <= "5") { e.preventDefault(); toggleHold(Number(e.key) - 1); return; }
+    if (e.key === "r" || e.key === "R") {
+      e.preventDefault();
+      var rb = document.getElementById("rollbtn");
+      if (rb && !rb.disabled) rb.click();
+    }
+  });
+
+  /* ---------------------------------------------------------- animation */
+  function animateRoll(ev, done) {
+    var dice = ev.dice, idx = (ev.rolled || []).filter(function (i) { return dieNodeFor(i); });
+    if (!idx.length) { done(); return; }
+    if (reduced()) {
+      idx.forEach(function (i) { setFace(dieNodeFor(i), dice[i]); });
+      PK.sound.play("diceClack", { pitch: 1 });
+      later(done, 120);
+      return;
+    }
+    idx.forEach(function (i, k) {
+      var node = dieNodeFor(i);
+      node.classList.add("tumbling");
+      var spin = setInterval(function () { setFace(node, PK.rand.int(6) + 1); }, 70);
+      timers.push(spin);
+      later(function () {
+        clearInterval(spin);
+        node.classList.remove("tumbling");
+        setFace(node, dice[i]);
+        node.classList.add("land");
+        PK.sound.play("diceClack", { pitch: 0.9 + k * 0.06 });
+      }, 90 + k * 45 + 620);
+    });
+    later(done, 90 + (idx.length - 1) * 45 + 620 + 140);
+  }
+
+  function animateStamp(ev, done) {
+    var node = (ev.seat === cardSeat) ? document.querySelector('.row[data-cat="' + ev.category + '"]') : null;
+    PK.sound.play("reveal"); PK.buzz(18);
+    if (node && !reduced()) { node.classList.add("stamped"); }
+    if (!reduced() && ev.seat === cardSeat) countUp(document.querySelector("#grandtotal .val"), ev.value);
+    later(done, reduced() ? 60 : 320);
+  }
+
+  function countUp(node, delta) {
+    if (!node) return;
+    var end = Number(node.textContent) || 0, start = Math.max(0, end - (delta || 0)), t0 = Date.now();
+    if (start === end) return;
+    var iv = setInterval(function () {
+      var p = Math.min(1, (Date.now() - t0) / 300);
+      node.textContent = String(Math.round(start + (end - start) * p));
+      if (p >= 1) clearInterval(iv);
+    }, 40);
+    timers.push(iv);
+  }
+
+  function celebrate(events) {
+    events.forEach(function (ev) {
+      if (ev.type === "bonus") {
+        var sect = document.getElementById("sect-upper");
+        if (sect && !reduced()) { sect.classList.add("sweep"); later(function () { sect.classList.remove("sweep"); }, 460); }
+        PK.sound.play("reveal"); PK.announce("Upper bonus, plus " + R.BONUS_POINTS);
+      }
+      if (ev.type === "fivestar") {
+        var tray = document.getElementById("tray");
+        if (tray) { tray.classList.add("is-star"); later(function () { tray.classList.remove("is-star"); }, 900); }
+        PK.sound.play("win"); PK.buzz(24);
+      }
+    });
+  }
+
+  /* ------------------------------------------------------------- flushing */
+  function afterState() {
+    var evs = pendingEvents; pendingEvents = [];
+    var rolled = evs.filter(function (e) { return e.type === "rolled"; })[0];
+    var scored = evs.filter(function (e) { return e.type === "scored"; })[0];
+
+    if (rolled) {
+      busy = true;
+      announceRoll(rolled);
+      animateRoll(rolled, function () { busy = false; settle(); });
+      return;
+    }
+    if (scored) {
+      busy = true;
+      announceScore(scored);
+      animateStamp(scored, function () { busy = false; celebrate(evs); settle(); });
+      return;
+    }
+    settle();
+  }
+
+  function announceRoll(ev) {
+    PK.announce("Rolled " + ev.dice.join(", ") + ". " + ev.rollsLeft + " rolls left.");
+  }
+  function announceScore(ev) {
+    var t = R.grandTotal(view.sheets[ev.seat]);
+    PK.announce(seatName(ev.seat) + " took " + R.LABELS[ev.category] + " for " + ev.value + "; total " + t + ".");
+  }
+
+  function settle() {
+    if (!view) return;
+    if (view.over) { showResult(); return; }
+    // hotseat hand-off plate: nothing is secret, this only stops a stray tap
+    if (myMode !== "online" && humanSeatCount() > 1 && view.turn !== lastTurn && firstTurnDone && !aiSeats[view.turn]) {
+      showPassPlate();
+      return;
+    }
+    lastTurn = view.turn; firstTurnDone = true;
+    maybeAI();
+  }
+  function humanSeatCount() { return (view ? view.numPlayers : 0) - Object.keys(aiSeats).length; }
+
+  function showPassPlate() {
+    if (passPending) return;
+    passPending = true;
+    var name = seatName(view.turn);
+    var p = el("div", "plate");
+    p.innerHTML = '<div><h2 style="font-family:var(--pk-font-display);font-size:2rem">Pass to ' + esc(name) + "</h2>" +
+      '<p class="pk-subtle">Everything is face up — this is just so nobody rolls out of turn.</p><br>' +
+      '<button type="button" class="pk-btn">' + esc(name) + ", I'm ready</button></div>";
+    p.querySelector("button").onclick = function () {
+      passPending = false; p.remove(); lastTurn = view.turn; render(); maybeAI();
+    };
+    document.body.appendChild(p);
+    p.querySelector("button").focus();
+    PK.announce("Pass to " + name);
+  }
+
+  function maybeAI() {
+    if (myMode !== "ai" || !view || view.over || busy) return;
+    if (!aiSeats[view.turn]) return;
+    if (aiTimer) return;
+    aiTimer = setTimeout(function () {
+      aiTimer = null;
+      if (!view || view.over || busy || !aiSeats[view.turn]) return;
+      var mv = R.fivestarAI(view);
+      if (mv) net.sendMove(mv);
+    }, 450 + PK.rand.int(250));                    // visibly paced — pacing lives here, not in rules.js
+    timers.push(aiTimer);
+  }
+
+  /* -------------------------------------------------------------- result */
+  function showResult() {
+    if (resultShown) return; resultShown = true;
+    var res = view.result || {};
+    var rows = R.standings(view);
+    var winners = res.winners || [];
+    var title;
+    if (winners.length > 1) title = winners.map(seatName).join(" and ") + " tie";
+    else if (myMode === "online" && net && winners[0] === net.seat) title = "You win";
+    else title = seatName(winners[0] != null ? winners[0] : rows[0].seat) + " wins";
+
+    PK.sound.play("win");
+    PK.announce(title + ". Final totals: " + rows.map(function (r) { return seatName(r.seat) + " " + r.total; }).join(", "), true);
+
+    var o = el("div", "overlay");
+    var card = el("div", "card2");
+    card.appendChild(el("h2", "", esc(title)));
+    var best = 0;
+    view.log.forEach(function (e) { if (e.value > best) best = e.value; });
+    card.appendChild(el("p", "pk-subtle", "Best single row this game: " + best));
+    var t = el("table", "stand");
+    var html = "<thead><tr><th>Player</th><th>Upper</th><th>Bonus</th><th>Total</th></tr></thead><tbody>";
+    rows.forEach(function (r) {
+      html += '<tr class="' + (winners.indexOf(r.seat) >= 0 ? "win" : "") + '"><td>' + esc(seatName(r.seat)) +
+        "</td><td>" + r.upper + "</td><td>" + (r.bonus ? "+" + r.bonus : "—") + "</td><td>" + r.total + "</td></tr>";
+    });
+    t.innerHTML = html + "</tbody>";
+    card.appendChild(t);
+    var row = el("div", "pk-row");
+    row.appendChild(btn(myMode === "online" ? "Rematch" : "Play again", "", function () {
+      o.remove(); resultShown = false;
+      if (myMode === "online") { net.rematch(); } else { start(myMode); }
+    }));
+    row.appendChild(btn("Menu", "pk-btn--ghost", function () { o.remove(); openModeSelect(); }));
+    card.appendChild(row);
+    o.appendChild(card);
+    document.body.appendChild(o);
+    row.querySelector("button").focus();
+  }
+
+  /* ------------------------------------------------------------- wiring */
+  function wire() {
+    net.on("state", function (d) {
+      clearTimers();
+      view = d.state;
+      if (pinnedSeat === null && !view.over) cardSeat = view.turn;    // the card follows the live seat
+      if (view && !view.over && lastTurn === -1) lastTurn = view.turn;
+      render();
+      afterState();
+    });
+    net.on("move", function (d) { pendingEvents = (d.events || []).slice(); });
+    net.on("rejected", function (d) {
+      confirmCat = null;
+      PK.toast(({
+        not_your_turn: "Not your turn", must_roll: "Roll first", no_rolls_left: "No rolls left",
+        category_used: "That row is already inked", bad_category: "Unknown row", game_over: "The game is over"
+      })[d.reason] || "Illegal move");
+      PK.sound.play("tick");
+      if (net.state) { view = net.state; render(); }
+    });
+    net.on("presence", function (d) {
+      if (d && d.players) net.players = d.players;
+      if (myMode === "online" && d && d.spectators) PK.announce(d.spectators + " watching");
+      if (view) render();
+    });
+    net.on("gameOver", function () { if (!busy) settle(); });
+    net.on("reconnecting", function () { PK.toast("Reconnecting…"); });
+    net.on("reconnected", function () { PK.toast("Back online"); });
+    net.on("error", function (d) {
+      PK.toast((d && (d.message || d.code)) || "Error");
+      if (d && (d.code === "not_found" || d.code === "room_full")) openModeSelect();
+    });
+    net.on("room", function (r) { roomInfo = r; });
+  }
+
+  /* ------------------------------------------------------ app settings */
+  (function appSettings() {
+    var box = document.createElement("div");
+    box.className = "pk-setting";
+    box.innerHTML = '<label for="fs-ghosts">Pending values<small>Show what each open row would score</small></label>' +
+      '<span class="pk-switch"><input type="checkbox" id="fs-ghosts"></span>';
+    var input = box.querySelector("input");
+    input.checked = !!cfg.ghosts;
+    input.addEventListener("change", function () {
+      cfg.ghosts = input.checked; PK.store.set("play.fivestar.ghosts", cfg.ghosts);
+      if (view) render();
+    });
+    PK.settings.register(box);
+  })();
+
+  /* --------------------------------------------------------------- boot */
+  (function boot() {
+    var params = new URL(location.href).searchParams;
+    var code = params.get("r");
+    if (code) { joinOnline(code, params.get("spectate") === "1"); return; }
+    openModeSelect();
+  })();
+})();
+</script>
+<!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:10px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Get the monthly letter</a></footer><!-- /ep:ca-foot -->
+</body>
+</html>

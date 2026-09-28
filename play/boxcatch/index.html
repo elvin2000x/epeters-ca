@@ -1,0 +1,979 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Boxcatch</title>
+<meta name="description" content="Boxcatch — draw lines, close boxes, take another turn. Play on one device, against the computer, or with a friend online.">
+<link rel="stylesheet" href="../_kit/play-kit.css">
+<style>
+  /* ---- Seat palette: the six kit accent-ramp hues, one per seat, in the fixed
+         order indigo / rose / amber / teal / plum / forest. Ownership is carried by
+         a monogram glyph as well as hue, so it never depends on colour alone.
+         Fills mix toward the live surface token and inks mix toward the live ink
+         token, so both stay AA-legible in light AND dark without a second palette. */
+  :root{
+    --bx-seat-0:#4C5BD4; --bx-seat-1:#C0497B; --bx-seat-2:#C98A1E;
+    --bx-seat-3:#1F8A8A; --bx-seat-4:#7A4CB0; --bx-seat-5:#3F7A4B;
+    --bx-paper:color-mix(in srgb, var(--pk-surface) 90%, var(--pk-mat-ivory));
+    --bx-dot:color-mix(in srgb, var(--pk-ink) 46%, var(--pk-surface));
+    --bx-ink:color-mix(in srgb, var(--pk-ink) 88%, var(--pk-surface));
+  }
+  .s0{ --seat:var(--bx-seat-0); } .s1{ --seat:var(--bx-seat-1); } .s2{ --seat:var(--bx-seat-2); }
+  .s3{ --seat:var(--bx-seat-3); } .s4{ --seat:var(--bx-seat-4); } .s5{ --seat:var(--bx-seat-5); }
+  .s0,.s1,.s2,.s3,.s4,.s5{
+    --seat-fill:color-mix(in srgb, var(--seat) 20%, var(--pk-surface));
+    --seat-ink:color-mix(in srgb, var(--seat) 60%, var(--pk-ink));
+  }
+
+  .bx-wrap{ width:100%; display:flex; flex-direction:column; gap:12px; align-items:stretch; }
+
+  /* ------------------------------------------------------------ seat rail -- */
+  .seatrail{ display:flex; gap:6px; justify-content:center; flex-wrap:wrap; }
+  .seatchip{ display:inline-flex; align-items:center; gap:7px; padding:5px 11px; border-radius:var(--pk-radius-pill);
+    background:var(--pk-surface); border:1.5px solid var(--pk-line); font-size:var(--pk-fs-sm);
+    font-weight:650; color:var(--pk-ink-soft); max-width:100%;
+    transition:border-color var(--pk-t-quick) var(--pk-ease-standard),
+      background var(--pk-t-quick) var(--pk-ease-standard), transform var(--pk-t-quick) var(--pk-ease-spring); }
+  .seatchip.is-turn{ border-color:var(--seat); background:var(--seat-fill); color:var(--seat-ink);
+    box-shadow:0 0 0 3px color-mix(in srgb, var(--seat) 22%, transparent); }
+  .seatchip.is-off{ opacity:.5; }
+  .seatchip .swatch{ width:18px; height:18px; border-radius:6px; flex:0 0 auto; display:grid; place-items:center;
+    background:var(--seat-fill); border:1.5px solid var(--seat); color:var(--seat-ink);
+    font-size:11px; line-height:1; font-weight:800; }
+  .seatchip .nm{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:9ch; }
+  .seatchip .cnt{ font-family:var(--pk-font-num); font-variant-numeric:tabular-nums;
+    background:var(--pk-surface-sunk); border-radius:999px; padding:0 7px; min-width:22px; text-align:center; }
+  .seatrail.compact .nm{ display:none; }
+  @media (max-width:420px){ .seatrail .nm{ max-width:6ch; } }
+  .seatchip.pulse{ animation:bxPulse 380ms var(--pk-ease-spring); }
+  @keyframes bxPulse{ 0%{transform:scale(1);} 45%{transform:scale(1.06);} 100%{transform:scale(1);} }
+
+  /* --------------------------------------------------------- status + pill -- */
+  .statusbar{ text-align:center; min-height:2.2em; }
+  .statusbar .t{ font-family:var(--pk-font-display); font-size:var(--pk-fs-lg); font-weight:700; }
+  .statusbar .sub{ color:var(--pk-ink-soft); font-size:var(--pk-fs-sm); min-height:1.2em; }
+  .think::after{ content:""; display:inline-block; width:.5em; height:.5em; margin-left:.45em; border-radius:50%;
+    background:var(--pk-accent); animation:bxBlink 1s ease-in-out infinite; vertical-align:middle; }
+  @keyframes bxBlink{ 0%,100%{opacity:.25;transform:scale(.8);} 50%{opacity:1;transform:scale(1.15);} }
+  .chainrow{ min-height:30px; display:flex; justify-content:center; align-items:center; }
+  .chainpill{ display:inline-flex; align-items:center; gap:6px; padding:3px 14px; border-radius:var(--pk-radius-pill);
+    background:var(--seat-fill,var(--pk-accent-soft)); color:var(--seat-ink,var(--pk-accent-press));
+    border:1.5px solid var(--seat,var(--pk-accent)); font-size:var(--pk-fs-sm); font-weight:700; }
+  .chainpill .n{ font-family:var(--pk-font-num); font-size:1.05rem; }
+
+  /* ---------------------------------------------------------------- paper -- */
+  .paper{ background:var(--bx-paper); border:1px solid var(--pk-line); border-radius:var(--pk-radius-lg);
+    box-shadow:var(--pk-shadow-1), inset 0 1px 0 color-mix(in srgb,#fff 30%,transparent);
+    padding:20px; display:flex; justify-content:center; align-items:center; }
+  .lattice{ position:relative; }
+  .board-wait .lattice{ opacity:.88; }
+  .waiting .lattice{ opacity:.88; }
+
+  .boxcell{ position:absolute; border-radius:5px; display:grid; place-items:center; pointer-events:none;
+    background:transparent; }
+  .boxcell.owned{ background:var(--seat-fill); box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--seat) 30%,transparent); }
+  .boxcell .glyph{ font-size:calc(var(--cell) * .40px); line-height:1; font-weight:800; color:var(--seat-ink);
+    font-family:var(--pk-font-ui); }
+  .boxcell.assist{ box-shadow:inset 0 0 0 2px var(--pk-warn); border-radius:6px; animation:bxShimmer 1.8s ease-in-out infinite; }
+  @keyframes bxShimmer{ 0%,100%{opacity:.55;} 50%{opacity:1;} }
+
+  .dot{ position:absolute; border-radius:50%; background:var(--bx-dot); transform:translate(-50%,-50%);
+    box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 40%,transparent); pointer-events:none;
+    transition:transform var(--pk-t-instant) var(--pk-ease-standard), background var(--pk-t-instant); }
+  .dot.swell{ transform:translate(-50%,-50%) scale(1.25); background:var(--pk-accent); }
+
+  .edge{ position:absolute; padding:0; margin:0; border:0; background:transparent; cursor:pointer;
+    display:grid; place-items:center; border-radius:7px; overflow:visible; }
+  .edge[disabled]{ cursor:default; }
+  .edge .ink{ display:block; border-radius:999px; background:var(--bx-ink); opacity:0;
+    transition:opacity var(--pk-t-instant) var(--pk-ease-standard); }
+  .edge.h .ink{ height:var(--th); width:calc(var(--cell) * 1px); }
+  .edge.v .ink{ width:var(--th); height:calc(var(--cell) * 1px); }
+  .edge:not(.drawn):hover .ink{ opacity:.35; }
+  .edge:not(.drawn):focus-visible .ink{ opacity:.45; }
+  .edge.drawn .ink{ opacity:1; }
+  .edge.pending .ink{ opacity:.6; }
+  .edge.grab .ink{ background:var(--seat); }
+  .edge:focus-visible{ outline:3px solid var(--pk-focus); outline-offset:1px; z-index:6; }
+  .edge.shake{ animation:bxShake 180ms var(--pk-ease-standard); }
+  @keyframes bxShake{ 0%,100%{transform:translate(0,0);} 25%{transform:translate(-3px,0);}
+    50%{transform:translate(3px,0);} 75%{transform:translate(-2px,0);} }
+
+  .meta{ display:flex; gap:14px; justify-content:center; align-items:center; flex-wrap:wrap;
+    font-size:var(--pk-fs-sm); color:var(--pk-ink-soft); }
+  .meta b{ font-family:var(--pk-font-num); color:var(--pk-ink); }
+  .meta.low b{ color:var(--pk-accent); }
+  .hint{ text-align:center; color:var(--pk-ink-faint); font-size:var(--pk-fs-xs); }
+
+  /* ------------------------------------------------------- mode select ---- */
+  .modecard{ width:100%; max-width:420px; text-align:left; display:flex; gap:12px; align-items:center;
+    padding:16px; margin:0 auto; cursor:pointer; }
+  .modecard h3{ font-family:var(--pk-font-display); font-size:1.1rem; margin:0 0 2px; }
+  .modecard p{ margin:0; color:var(--pk-ink-soft); font-size:var(--pk-fs-sm); }
+  .modecard .ic{ font-size:1.6rem; flex:0 0 auto; width:2rem; text-align:center; }
+  .opts{ width:100%; max-width:420px; margin:0 auto; display:flex; flex-direction:column; gap:10px; }
+  .optrow{ display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+  .optrow > .lbl{ font-size:var(--pk-fs-sm); font-weight:650; color:var(--pk-ink-soft); text-align:left; }
+  .stepper{ display:inline-flex; align-items:center; gap:8px; background:var(--pk-surface);
+    border:1.5px solid var(--pk-line); border-radius:var(--pk-radius-pill); padding:2px; }
+  .stepper button{ width:34px; height:34px; border:0; border-radius:50%; background:transparent; cursor:pointer;
+    font-size:1.1rem; font-weight:700; color:var(--pk-ink); }
+  .stepper button:hover{ background:var(--pk-surface-sunk); }
+  .stepper .val{ min-width:3.4em; text-align:center; font-family:var(--pk-font-num); font-weight:700; }
+  .code{ font-family:var(--pk-font-num); font-size:clamp(1.8rem,9vw,2.4rem); letter-spacing:.28em;
+    font-weight:800; color:var(--pk-accent); background:var(--pk-surface-sunk);
+    border-radius:var(--pk-radius); padding:10px 10px 10px 24px; display:inline-block; }
+  .banner{ text-align:center; color:var(--pk-ink-soft); min-height:1.4em; font-weight:600; }
+  .seatdots{ display:flex; gap:6px; justify-content:center; }
+  .seatdots i{ width:12px; height:12px; border-radius:50%; background:var(--pk-surface-sunk);
+    border:1.5px solid var(--pk-line); display:inline-block; }
+  .seatdots i.on{ background:var(--pk-accent); border-color:var(--pk-accent); }
+
+  /* ------------------------------------------------------------ overlay ---- */
+  .overlay{ position:fixed; inset:0; z-index:150; background:rgba(20,15,8,.58); display:grid;
+    place-items:center; padding:20px; }
+  .overlay .card{ background:var(--pk-surface); border-radius:var(--pk-radius-lg); box-shadow:var(--pk-shadow-3);
+    padding:24px; max-width:420px; width:100%; text-align:center; }
+  .overlay h2{ font-family:var(--pk-font-display); font-size:1.6rem; margin-bottom:4px; }
+  .bars{ display:flex; flex-direction:column; gap:8px; margin:16px 0 4px; text-align:left; }
+  .barrow{ display:flex; align-items:center; gap:8px; font-size:var(--pk-fs-sm); font-weight:650; }
+  .barrow .who{ width:8.5em; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--seat-ink); }
+  .barrow .track{ flex:1; height:14px; background:var(--pk-surface-sunk); border-radius:999px; overflow:hidden; }
+  .barrow .fill{ height:100%; width:0; background:var(--seat); border-radius:999px;
+    transition:width 300ms var(--pk-ease-settle); }
+  .barrow .n{ font-family:var(--pk-font-num); min-width:2em; text-align:right; }
+
+  @media (prefers-reduced-motion: reduce){
+    .boxcell.assist,.think::after,.seatchip.pulse{ animation:none; }
+  }
+  :root[data-motion="reduce"] .boxcell.assist,
+  :root[data-motion="reduce"] .think::after,
+  :root[data-motion="reduce"] .seatchip.pulse{ animation:none; }
+</style>
+<link rel="canonical" href="https://epeters.ca/play/boxcatch/">
+</head>
+<body>
+<script src="../_kit/play-kit.js"></script>
+<script src="../_kit/net-kit.js"></script>
+<script src="rules.js"></script>
+<script>
+var HEADLESS = (typeof document === "undefined");
+
+if (!HEADLESS) (function () {
+  "use strict";
+  var R = window.BOXCATCH_RULES;
+
+  var ui = PK.app({
+    title: "Boxcatch", slug: "boxcatch", accent: "indigo", board: true,
+    action: { label: "New game", onFire: openModeSelect, key: null }   // the board owns Space/Enter
+  });
+  var stage = ui.stage, actions = ui.actions, primary = ui.primary;
+
+  /* --------------------------------------------------------------- state -- */
+  var net = null, view = null, myMode = "hotseat";
+  var roomInfo = null, resultShown = false, extras = [];
+  var cursor = null, lastAnimated = -1, lastTurnSeen = -1, pendingEdge = null;
+  var boardBox = {}, boardDot = {}, boardEdge = {}, cellPx = 40;
+
+  var GLYPH = ["●", "▲", "■", "◆", "★", "✚"];  // ● ▲ ■ ◆ ★ ✚
+  var PRESETS = { small: 4, classic: 6, large: 8 };
+
+  var cfg = {
+    players: R.clampPlayers(PK.store.get("play.boxcatch.players", 2)),
+    cols: R.clampGrid(PK.store.get("play.boxcatch.cols", 6)),
+    rows: R.clampGrid(PK.store.get("play.boxcatch.rows", 6)),
+    ai: PK.store.get("play.boxcatch.ai", "chainer"),
+    assist: !!PK.store.get("play.boxcatch.assist", false),
+    name: PK.store.get("play.boxcatch.name", PK.store.get("play.name", "Guest"))
+  };
+
+  /* -------------------------------------------------------------- helpers -- */
+  function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+  function btn(label, cls, on) { var b = document.createElement("button"); b.type = "button"; b.className = "pk-btn " + (cls || ""); b.textContent = label; b.onclick = on; return b; }
+  function setExtras(list) {
+    extras.forEach(function (b) { if (b.parentNode) b.parentNode.removeChild(b); });
+    extras = list || [];
+    extras.forEach(function (b) { actions.appendChild(b); });
+  }
+  function reduced() { return PK.motion.reduced; }
+  function seatClass(i) { return "s" + (((i % 6) + 6) % 6); }
+  function players() { return (net && net.players) ? net.players : []; }
+  function seatName(i) {
+    var p = players().filter(function (x) { return x.seat === i; })[0];
+    if (myMode === "ai") return i === aiSeat() ? "Computer" : "You";
+    if (p && p.name) return p.name;
+    return "Player " + (i + 1);
+  }
+  function aiSeat() { return net && net.aiSeat != null ? net.aiSeat : 1; }
+  function seatMark(i) {
+    // prefer a unique initial from the name, else the fixed per-seat glyph
+    var n = seatName(i).trim();
+    var ch = n ? n.charAt(0).toUpperCase() : "";
+    if (/[A-Z0-9]/.test(ch)) {
+      var clash = false;
+      for (var j = 0; view && j < view.numPlayers; j++) {
+        if (j === i) continue;
+        var o = seatName(j).trim().charAt(0).toUpperCase();
+        if (o === ch) clash = true;
+      }
+      if (!clash) return ch;
+    }
+    return GLYPH[i % 6];
+  }
+  function isSpectator() { return !!(net && net.isSpectator); }
+  function myTurn() { return !!(view && !view.over && !isSpectator() && view.yourSeat != null && view.turn === view.yourSeat); }
+  function aiThinking() { return !!(view && !view.over && myMode === "ai" && view.turn === aiSeat()); }
+  function edgeKey(dir, r, c) { return dir + r + "_" + c; }
+
+  /* ---------------------------------------------------------- mode select -- */
+  function openModeSelect() {
+    if (net && net.disconnect) { try { net.disconnect(); } catch (e) {} }
+    net = null; view = null; roomInfo = null; resultShown = false; lastAnimated = -1;
+    lastTurnSeen = -1; cursor = null; pendingEdge = null;
+    var o = document.querySelector(".overlay"); if (o) o.remove();
+    setExtras([]); stage.innerHTML = "";
+
+    var wrap = el("div", "bx-wrap"); wrap.style.alignItems = "center"; wrap.style.gap = "14px";
+    var h2 = el("h2", "", "Draw lines. Close boxes.");
+    h2.style.cssText = "font-family:var(--pk-font-display);font-size:var(--pk-fs-lg)";
+    wrap.appendChild(h2);
+    wrap.appendChild(el("p", "pk-subtle", "Close the fourth side of a square and it is yours &mdash; <b>and you go again</b>."));
+
+    function card(ic, title, desc, fn) {
+      var c = el("button", "pk-panel modecard");
+      c.type = "button";
+      c.innerHTML = '<span class="ic">' + ic + '</span><span><h3>' + title + '</h3><p>' + desc + '</p></span>';
+      c.onclick = fn; return c;
+    }
+    wrap.appendChild(card("&#9635;", "Local hotseat", "Two to six players sharing this device.", function () { start("hotseat"); }));
+    wrap.appendChild(card("&#129302;", "Vs computer", "A chain-aware opponent. Two tiers.", function () { start("ai"); }));
+    wrap.appendChild(card("&#128279;", "Play a friend", "Get a 4-character room code and a link.", function () { start("online"); }));
+    var joinRow = el("div", "pk-row");
+    joinRow.appendChild(btn("Have a code? Join a room", "pk-btn--ghost pk-btn--sm", openJoinPrompt));
+    wrap.appendChild(joinRow);
+
+    /* options ---------------------------------------------------------- */
+    var opts = el("div", "opts pk-well");
+
+    // players
+    var rP = el("div", "optrow"); rP.appendChild(el("span", "lbl", "Players<br><small class=\"pk-subtle\">hotseat &amp; online</small>"));
+    var stepP = stepper(2, 6, function () { return cfg.players; }, function (v) {
+      cfg.players = v; PK.store.set("play.boxcatch.players", v); paintDots();
+    }, function (v) { return String(v); }, "Number of players");
+    rP.appendChild(stepP.node); opts.appendChild(rP);
+    var dots = el("div", "seatdots"); opts.appendChild(dots);
+    function paintDots() {
+      dots.innerHTML = "";
+      for (var i = 0; i < 6; i++) {
+        var d = el("i", i < cfg.players ? "on" : "");
+        if (i < cfg.players) {
+          d.style.background = "var(--bx-seat-" + i + ")";
+          d.style.borderColor = "var(--bx-seat-" + i + ")";
+        }
+        dots.appendChild(d);
+      }
+    }
+    paintDots();
+
+    // board size
+    var rG = el("div", "optrow"); rG.appendChild(el("span", "lbl", "Board"));
+    var seg = el("div", "pk-seg");
+    [["small", "4&times;4"], ["classic", "6&times;6"], ["large", "8&times;8"]].forEach(function (p) {
+      var b = document.createElement("button"); b.type = "button"; b.dataset.v = p[0]; b.innerHTML = p[1];
+      seg.appendChild(b);
+    });
+    rG.appendChild(seg); opts.appendChild(rG);
+    var rC = el("div", "optrow"); rC.appendChild(el("span", "lbl", "Custom size"));
+    var stepG = stepper(3, 9, function () { return cfg.cols; }, function (v) {
+      cfg.cols = v; cfg.rows = v;
+      PK.store.set("play.boxcatch.cols", v); PK.store.set("play.boxcatch.rows", v); paintSeg();
+    }, function (v) { return v + "×" + v; }, "Board size");
+    rC.appendChild(stepG.node); opts.appendChild(rC);
+    function paintSeg() {
+      seg.querySelectorAll("button").forEach(function (b) {
+        b.setAttribute("aria-pressed", String(PRESETS[b.dataset.v] === cfg.cols && cfg.cols === cfg.rows));
+      });
+      stepG.paint();
+    }
+    seg.onclick = function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      cfg.cols = cfg.rows = PRESETS[b.dataset.v];
+      PK.store.set("play.boxcatch.cols", cfg.cols); PK.store.set("play.boxcatch.rows", cfg.rows);
+      paintSeg(); PK.sound.play("click");
+    };
+    paintSeg();
+
+    // AI tier
+    var rA = el("div", "optrow"); rA.appendChild(el("span", "lbl", "Computer"));
+    var seg2 = el("div", "pk-seg");
+    [["easy", "Easy"], ["chainer", "Chainer"]].forEach(function (p) {
+      var b = document.createElement("button"); b.type = "button"; b.dataset.v = p[0]; b.textContent = p[1];
+      seg2.appendChild(b);
+    });
+    rA.appendChild(seg2); opts.appendChild(rA);
+    function paintAI() { seg2.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.v === cfg.ai)); }); }
+    seg2.onclick = function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      cfg.ai = b.dataset.v; PK.store.set("play.boxcatch.ai", cfg.ai); paintAI(); PK.sound.play("click");
+    };
+    paintAI();
+
+    // assist
+    var rAs = el("div", "optrow");
+    rAs.appendChild(el("span", "lbl", "Assist<br><small class=\"pk-subtle\">mark boxes on 3 sides</small>"));
+    rAs.appendChild(assistSwitch("ms"));
+    opts.appendChild(rAs);
+
+    // name (online)
+    var rN = el("div", "optrow"); rN.appendChild(el("span", "lbl", "Your name"));
+    var inp = document.createElement("input");
+    inp.className = "pk-input"; inp.maxLength = 12; inp.value = cfg.name === "Guest" ? "" : cfg.name;
+    inp.placeholder = "Guest"; inp.style.width = "10em";
+    inp.setAttribute("aria-label", "Your display name");
+    inp.oninput = function () { cfg.name = inp.value.trim() || "Guest"; PK.store.set("play.boxcatch.name", cfg.name); };
+    rN.appendChild(inp); opts.appendChild(rN);
+
+    wrap.appendChild(opts);
+    stage.appendChild(wrap);
+    if (primary) primary.textContent = "New game";
+  }
+
+  function stepper(min, max, get, set, fmt, label) {
+    var node = el("div", "stepper");
+    var minus = document.createElement("button"); minus.type = "button"; minus.textContent = "−";
+    minus.setAttribute("aria-label", "Decrease " + label);
+    var val = el("span", "val"); val.setAttribute("aria-live", "polite");
+    var plus = document.createElement("button"); plus.type = "button"; plus.textContent = "+";
+    plus.setAttribute("aria-label", "Increase " + label);
+    node.appendChild(minus); node.appendChild(val); node.appendChild(plus);
+    function paint() { val.textContent = fmt(get()); minus.disabled = get() <= min; plus.disabled = get() >= max; }
+    minus.onclick = function () { if (get() > min) { set(get() - 1); paint(); PK.sound.play("click"); } };
+    plus.onclick = function () { if (get() < max) { set(get() + 1); paint(); PK.sound.play("click"); } };
+    paint();
+    return { node: node, paint: paint };
+  }
+
+  function assistSwitch(idSuffix) {
+    var wrapEl = el("span", "pk-switch");
+    var input = document.createElement("input");
+    input.type = "checkbox"; input.id = "bx-assist-" + idSuffix; input.checked = cfg.assist;
+    input.setAttribute("aria-label", "Highlight boxes on three sides");
+    input.onchange = function () {
+      cfg.assist = input.checked; PK.store.set("play.boxcatch.assist", cfg.assist);
+      document.querySelectorAll(".pk-switch input[id^='bx-assist-']").forEach(function (o) { o.checked = cfg.assist; });
+      if (view) render();
+    };
+    wrapEl.appendChild(input); wrapEl.appendChild(document.createElement("span"));
+    return wrapEl;
+  }
+
+  // the app's own row in the kit settings sheet
+  (function registerSettings() {
+    var row = el("div", "pk-setting");
+    row.appendChild(el("label", "", "Assist<small>Mark boxes that sit on three sides</small>"));
+    row.appendChild(assistSwitch("sheet"));
+    PK.settings.register(row);
+  })();
+
+  /* ---------------------------------------------------------------- start -- */
+  function start(mode) {
+    myMode = mode;
+    resultShown = false; lastAnimated = -1; lastTurnSeen = -1; cursor = null; view = null; roomInfo = null;
+    var o = document.querySelector(".overlay"); if (o) o.remove();
+
+    if (mode === "hotseat") {
+      net = new LocalNet({
+        gameId: "boxcatch", mode: "hotseat", rules: R, seats: cfg.players, rng: PK.rand.int,
+        options: { cols: cfg.cols, rows: cfg.rows }
+      });
+      wire(); net.connect();
+    } else if (mode === "ai") {
+      net = new LocalNet({
+        gameId: "boxcatch", mode: "ai", rules: R, rng: PK.rand.int, aiSeat: 1,
+        options: { cols: cfg.cols, rows: cfg.rows },
+        ai: function (v) { return cfg.ai === "easy" ? R.randomAI(v, PK.rand.int) : R.boxAI(v, PK.rand.int); }
+      });
+      wire(); net.connect();
+    } else {
+      net = new Net({ gameId: "boxcatch", name: cfg.name, rules: R });
+      wire();
+      stage.innerHTML = '<p class="banner">Connecting&hellip;</p>';
+      setExtras([btn("Cancel", "pk-btn--ghost pk-btn--sm", openModeSelect)]);
+      var live = net;
+      var giveUp = setTimeout(function () {
+        if (net === live && !roomInfo) { PK.toast("Game server unreachable — hotseat and vs-computer still work"); openModeSelect(); }
+      }, 7000);
+      net.connect().then(function () {
+        return net.createRoom({ options: { numPlayers: cfg.players, players: cfg.players, cols: cfg.cols, rows: cfg.rows } });
+      }).then(function (room) {
+        if (net !== live) return;
+        clearTimeout(giveUp); roomInfo = room; inviteScreen(room);
+      }).catch(function () {
+        clearTimeout(giveUp);
+        if (net === live) { PK.toast("Could not reach the game server"); openModeSelect(); }
+      });
+    }
+  }
+
+  function joinOnline(code, spectate) {
+    myMode = "online"; resultShown = false; roomInfo = null; view = null; lastAnimated = -1;
+    net = new Net({ gameId: "boxcatch", name: cfg.name, rules: R });
+    wire();
+    var live = net;
+    var giveUp = setTimeout(function () {
+      if (net === live && !view) { PK.toast("Game server unreachable — hotseat and vs-computer still work"); openModeSelect(); }
+    }, 7000);
+    net.connect().then(function () { return net.joinRoom(code, { asSpectator: !!spectate }); })
+      .then(function () { clearTimeout(giveUp); })
+      .catch(function () { clearTimeout(giveUp); if (net === live) { PK.toast("Could not reach the game server"); openModeSelect(); } });
+    stage.innerHTML = '<p class="banner">Joining room ' + String(code).toUpperCase() + '&hellip;</p>';
+    setExtras([btn("Cancel", "pk-btn--ghost pk-btn--sm", openModeSelect)]);
+  }
+
+  function openJoinPrompt() {
+    stage.innerHTML = ""; setExtras([]);
+    var wrap = el("div", "bx-wrap"); wrap.style.alignItems = "center"; wrap.style.gap = "14px";
+    var h = el("h2", "", "Join a game"); h.style.cssText = "font-family:var(--pk-font-display)"; wrap.appendChild(h);
+    var inp = document.createElement("input");
+    inp.className = "pk-input"; inp.maxLength = 4; inp.placeholder = "CODE"; inp.autocapitalize = "characters";
+    inp.style.cssText = "text-transform:uppercase;letter-spacing:.3em;text-align:center;width:9em;font-family:var(--pk-font-num)";
+    inp.setAttribute("aria-label", "Room code");
+    wrap.appendChild(inp);
+    var row = el("div", "pk-row");
+    function go() { var c = inp.value.trim().toUpperCase(); if (c.length >= 3) joinOnline(c, false); }
+    row.appendChild(btn("Join", "", go));
+    row.appendChild(btn("Back", "pk-btn--ghost", openModeSelect));
+    wrap.appendChild(row); stage.appendChild(wrap); inp.focus();
+    inp.onkeydown = function (e) { if (e.key === "Enter") { e.preventDefault(); go(); } };
+  }
+
+  function inviteScreen(room) {
+    setExtras([]); stage.innerHTML = "";
+    var wrap = el("div", "bx-wrap"); wrap.style.alignItems = "center"; wrap.style.gap = "16px";
+    var h = el("h2", "", "Share to start"); h.style.cssText = "font-family:var(--pk-font-display)"; wrap.appendChild(h);
+    wrap.appendChild(el("div", "code", room.roomId || "----"));
+    wrap.appendChild(el("p", "pk-subtle", "Send the link or read out the code. " +
+      cfg.cols + "×" + cfg.rows + " board, " + cfg.players + " players."));
+    var row = el("div", "pk-row");
+    row.appendChild(btn("Copy link", "", function () {
+      net.copyInvite().then(function () { PK.toast("Link copied"); }, function () { PK.toast("Copy failed — read out the code"); });
+    }));
+    if (navigator.share) row.appendChild(btn("Share", "pk-btn--soft", function () { net.share(); }));
+    row.appendChild(btn("Cancel", "pk-btn--ghost", openModeSelect));
+    wrap.appendChild(row);
+    var qr = el("div", ""); wrap.appendChild(qr);
+    if (net.qrDataUrl) net.qrDataUrl().then(function (u) {
+      if (!u) return;
+      var img = document.createElement("img"); img.src = u; img.alt = "Invite QR code";
+      img.style.cssText = "width:150px;height:150px;image-rendering:pixelated;border-radius:8px;background:#fff;padding:6px";
+      qr.appendChild(img);
+    }, function () {});
+    var b = el("p", "banner", "Waiting for players&hellip;"); b.id = "bn"; wrap.appendChild(b);
+    stage.appendChild(wrap);
+    PK.announce("Room code " + (room.roomId || "") + ". Waiting for players.");
+  }
+
+  /* --------------------------------------------------------------- render -- */
+  function activeCount() {
+    return players().filter(function (p) { return p.status !== "disconnected"; }).length;
+  }
+
+  function render() {
+    if (!view) return;
+
+    // online: hold the invite / waiting screen until every seat is filled
+    if (myMode === "online" && !view.over && !isSpectator() && activeCount() < view.numPlayers) {
+      var wb = document.getElementById("bn");
+      var msg = "Waiting for players… (" + activeCount() + "/" + view.numPlayers + ")";
+      if (wb) { wb.textContent = msg; return; }
+      if (roomInfo) { inviteScreen(roomInfo); var wb2 = document.getElementById("bn"); if (wb2) wb2.textContent = msg; return; }
+    }
+
+    var hadBoardFocus = document.activeElement && document.activeElement.classList &&
+      document.activeElement.classList.contains("edge");
+
+    stage.innerHTML = "";
+    var wrap = el("div", "bx-wrap");
+    if (!myTurn()) wrap.classList.add("waiting");
+
+    // seat rail ---------------------------------------------------------
+    var rail = el("div", "seatrail" + (view.numPlayers >= 5 ? " compact" : ""));
+    for (var i = 0; i < view.numPlayers; i++) {
+      var p = players().filter(function (x) { return x.seat === i; })[0];   // evaluated now, so `i` is current
+      var chip = el("div", "seatchip " + seatClass(i) + (view.turn === i && !view.over ? " is-turn" : "") +
+        (p && p.status === "disconnected" ? " is-off" : ""));
+      chip.dataset.seat = String(i);
+      var label = seatName(i);
+      if (myMode === "online" && view.yourSeat === i) label += " (you)";
+      chip.innerHTML = '<span class="swatch">' + seatMark(i) + '</span>' +
+        '<span class="nm">' + label + '</span>' +
+        '<span class="cnt">' + (view.scores[i] || 0) + '</span>' +
+        (p && p.status === "disconnected" ? " ⟳" : "");
+      chip.title = label + " — " + (view.scores[i] || 0) + " boxes";
+      chip.setAttribute("aria-label", label + ", " + (view.scores[i] || 0) + " boxes" +
+        (view.turn === i && !view.over ? ", to move" : ""));
+      rail.appendChild(chip);
+    }
+    wrap.appendChild(rail);
+
+    // status ------------------------------------------------------------
+    var sb = el("div", "statusbar");
+    var t = el("div", "t"); t.id = "tt"; sb.appendChild(t);
+    var sub = el("div", "sub"); sub.id = "ts"; sb.appendChild(sub);
+    wrap.appendChild(sb);
+
+    var chainRow = el("div", "chainrow"); chainRow.id = "chainrow"; wrap.appendChild(chainRow);
+
+    // board -------------------------------------------------------------
+    var paper = el("div", "paper");
+    var lat = el("div", "lattice"); lat.id = "lat";
+    lat.setAttribute("role", "group");
+    lat.setAttribute("aria-label", "Board, " + view.cols + " by " + view.rows + " boxes");
+    paper.appendChild(lat); wrap.appendChild(paper);
+
+    // meta --------------------------------------------------------------
+    var meta = el("div", "meta" + (view.edgesLeft < 10 ? " low" : ""));
+    meta.innerHTML = 'Lines left <b class="pk-num">' + view.edgesLeft + '</b>' +
+      '<span>Boxes <b class="pk-num">' + (view.cols * view.rows) + '</b></span>';
+    wrap.appendChild(meta);
+    wrap.appendChild(el("p", "hint", "Tap between two dots to draw a line. Arrow keys move, Enter draws."));
+
+    stage.appendChild(wrap);
+    buildLattice(lat);
+    paintStatus();
+
+    // action bar --------------------------------------------------------
+    var list = [];
+    var as = btn("Assist", "pk-btn--ghost pk-btn--sm", function () {
+      cfg.assist = !cfg.assist; PK.store.set("play.boxcatch.assist", cfg.assist);
+      document.querySelectorAll(".pk-switch input[id^='bx-assist-']").forEach(function (o) { o.checked = cfg.assist; });
+      PK.sound.play("click"); render();
+    });
+    as.setAttribute("aria-pressed", String(cfg.assist));
+    list.push(as);
+    if (myMode === "online") list.push(btn("Leave", "pk-btn--ghost pk-btn--sm", function () { net.leave(); openModeSelect(); }));
+    else list.push(btn("Menu", "pk-btn--ghost pk-btn--sm", openModeSelect));
+    setExtras(list);
+
+    if (hadBoardFocus) focusCursor();
+  }
+
+  function paintStatus() {
+    var t = document.getElementById("tt"), s = document.getElementById("ts");
+    if (!t) return;
+    var txt = "", subtxt = "";
+    if (view.over) {
+      txt = resultLine(); subtxt = "";
+    } else if (isSpectator()) {
+      txt = seatName(view.turn) + " to move"; subtxt = "Watching";
+    } else if (aiThinking()) {
+      txt = "Computer thinking"; t.className = "t think";
+    } else if (myMode === "hotseat") {
+      txt = seatName(view.turn) + "’s turn";
+      subtxt = "Box count " + view.scores.join(" · ");
+    } else {
+      txt = myTurn() ? "Your turn" : seatName(view.turn) + "’s turn";
+      subtxt = myTurn() ? "" : "Waiting…";
+    }
+    t.textContent = txt;
+    s.textContent = subtxt;
+    paintChain();
+  }
+
+  function paintChain() {
+    var row = document.getElementById("chainrow"); if (!row) return;
+    row.innerHTML = "";
+    if (view.over || !view.chain) return;
+    var pill = el("div", "chainpill " + seatClass(view.turn));
+    pill.innerHTML = 'chain <span class="n pk-num">×' + view.chain + '</span>';
+    row.appendChild(pill);
+  }
+
+  /* ------------------------------------------------------------- lattice -- */
+  function computeCell() {
+    var lat = document.getElementById("lat");
+    var host = lat && lat.parentNode ? lat.parentNode : null;
+    var avail = host ? host.clientWidth - 40 : Math.min(window.innerWidth - 72, 560);
+    if (!(avail > 40)) avail = Math.min(window.innerWidth - 72, 560);
+    var availH = Math.max(190, window.innerHeight - 340);
+    var c = Math.min(avail / view.cols, availH / view.rows);
+    return Math.max(20, Math.min(Math.floor(c), 74));
+  }
+
+  function buildLattice(lat) {
+    var cols = view.cols, rows = view.rows, r, c;
+    var cell = cellPx = computeCell();
+    var th = Math.max(14, Math.min(Math.round(cell * 0.5), 26));   // hit thickness
+    var ink = Math.max(3, Math.round(cell * 0.085));
+    var dotSize = Math.max(5, Math.min(Math.round(cell * 0.15), 9));
+    lat.style.width = (cols * cell) + "px";
+    lat.style.height = (rows * cell) + "px";
+    lat.style.setProperty("--cell", String(cell));
+    lat.style.setProperty("--th", ink + "px");
+    boardBox = {}; boardDot = {}; boardEdge = {};
+
+    var sides = R.sidesArray(view);
+
+    // boxes
+    for (r = 0; r < rows; r++) for (c = 0; c < cols; c++) {
+      var bi = R.boxIndex(cols, r, c), owner = view.owners[bi];
+      var b = el("div", "boxcell" + (owner >= 0 ? " owned " + seatClass(owner) : "") +
+        (cfg.assist && owner < 0 && sides[bi] === 3 ? " assist" : ""));
+      b.style.left = (c * cell) + "px"; b.style.top = (r * cell) + "px";
+      b.style.width = cell + "px"; b.style.height = cell + "px";
+      if (owner >= 0) b.innerHTML = '<span class="glyph">' + seatMark(owner) + "</span>";
+      lat.appendChild(b); boardBox[bi] = b;
+    }
+
+    // edges
+    function addEdge(dir, er, ec) {
+      var drawn = R.edgeDrawn(view, dir, er, ec);
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "edge " + dir + (drawn ? " drawn" : "");
+      var w, h, x, y;
+      if (dir === "h") { w = cell - th / 2; h = th; x = (ec + 0.5) * cell; y = er * cell; }
+      else { w = th; h = cell - th / 2; x = ec * cell; y = (er + 0.5) * cell; }
+      b.style.width = w + "px"; b.style.height = h + "px";
+      b.style.left = (x - w / 2) + "px"; b.style.top = (y - h / 2) + "px";
+      b.innerHTML = '<span class="ink"></span>';
+      b.dataset.dir = dir; b.dataset.r = String(er); b.dataset.c = String(ec);
+      b.setAttribute("aria-label",
+        (dir === "h" ? "horizontal" : "vertical") + " line, row " + (er + 1) + ", column " + (ec + 1) +
+        " — " + (drawn ? "already drawn" : "available"));
+      if (drawn || !myTurn()) { b.disabled = true; b.tabIndex = -1; }
+      else b.tabIndex = (cursor && cursor.dir === dir && cursor.r === er && cursor.c === ec) ? 0 : -1;
+      b.onclick = function () { onEdge(dir, er, ec); };
+      b.onkeydown = onEdgeKey;
+      b.onmouseenter = function () { swell(dir, er, ec, true); };
+      b.onmouseleave = function () { swell(dir, er, ec, false); };
+      b.onfocus = function () { cursor = { dir: dir, r: er, c: ec }; swell(dir, er, ec, true); };
+      b.onblur = function () { swell(dir, er, ec, false); };
+      lat.appendChild(b); boardEdge[edgeKey(dir, er, ec)] = b;
+    }
+    for (r = 0; r <= rows; r++) for (c = 0; c < cols; c++) addEdge("h", r, c);
+    for (r = 0; r < rows; r++) for (c = 0; c <= cols; c++) addEdge("v", r, c);
+
+    // dots (drawn last so they sit above the ink)
+    for (r = 0; r <= rows; r++) for (c = 0; c <= cols; c++) {
+      var d = el("span", "dot");
+      d.style.left = (c * cell) + "px"; d.style.top = (r * cell) + "px";
+      d.style.width = dotSize + "px"; d.style.height = dotSize + "px";
+      lat.appendChild(d); boardDot[r + "_" + c] = d;
+    }
+
+    // make sure the cursor sits on a live edge
+    if (!cursor || !boardEdge[edgeKey(cursor.dir, cursor.r, cursor.c)] ||
+        boardEdge[edgeKey(cursor.dir, cursor.r, cursor.c)].disabled) {
+      var first = R.legalMoves(view)[0];
+      cursor = first ? { dir: first.dir, r: first.r, c: first.c } : null;
+      if (cursor && myTurn()) {
+        var ce = boardEdge[edgeKey(cursor.dir, cursor.r, cursor.c)];
+        if (ce && !ce.disabled) ce.tabIndex = 0;
+      }
+    }
+  }
+
+  function swell(dir, r, c, on) {
+    var a = boardDot[r + "_" + c];                       // both edge kinds start at dot (r,c)
+    var b = dir === "h" ? boardDot[r + "_" + (c + 1)] : boardDot[(r + 1) + "_" + c];
+    [a, b].forEach(function (d) { if (d) d.classList.toggle("swell", !!on); });
+  }
+
+  function focusCursor() {
+    if (!cursor) return;
+    var e = boardEdge[edgeKey(cursor.dir, cursor.r, cursor.c)];
+    if (e && !e.disabled) { e.tabIndex = 0; e.focus(); }
+  }
+
+  /* ----------------------------------------------------------- keyboard --- */
+  // The lattice as an interleaved grid: h(r,c) -> (2r, 2c+1); v(r,c) -> (2r+1, 2c).
+  function toRC(cur) { return cur.dir === "h" ? { R: 2 * cur.r, C: 2 * cur.c + 1 } : { R: 2 * cur.r + 1, C: 2 * cur.c }; }
+  function fromRC(RR, CC) {
+    if (RR % 2 === 0 && Math.abs(CC % 2) === 1) {
+      var r = RR / 2, c = (CC - 1) / 2;
+      return R.inRange(view.cols, view.rows, "h", r, c) ? { dir: "h", r: r, c: c } : null;
+    }
+    if (Math.abs(RR % 2) === 1 && CC % 2 === 0) {
+      var r2 = (RR - 1) / 2, c2 = CC / 2;
+      return R.inRange(view.cols, view.rows, "v", r2, c2) ? { dir: "v", r: r2, c: c2 } : null;
+    }
+    return null;
+  }
+  function nudge(cur, dR, dC) {
+    var p = toRC(cur);
+    var straight = fromRC(p.R + 2 * dR, p.C + 2 * dC);          // same orientation, one slot along
+    if (straight) return straight;
+    var mR = p.R + dR, mC = p.C + dC;                            // the dot / box centre between
+    var cands = dR ? [[mR, mC + 1], [mR, mC - 1]] : [[mR + 1, mC], [mR - 1, mC]];
+    for (var i = 0; i < cands.length; i++) {
+      var t = fromRC(cands[i][0], cands[i][1]);
+      if (t) return t;
+    }
+    return null;
+  }
+  function moveCursor(dR, dC) {
+    if (!cursor) return;
+    var cur = cursor, guard = 60;
+    while (guard-- > 0) {
+      var next = nudge(cur, dR, dC);
+      if (!next) return;                                        // edge of the board
+      cur = next;
+      var e = boardEdge[edgeKey(cur.dir, cur.r, cur.c)];
+      if (e && !e.disabled) {
+        var old = boardEdge[edgeKey(cursor.dir, cursor.r, cursor.c)];
+        if (old) old.tabIndex = -1;
+        cursor = cur; e.tabIndex = 0; e.focus();
+        return;
+      }
+    }
+  }
+  function onEdgeKey(e) {
+    var k = e.key;
+    if (k === "ArrowUp") { e.preventDefault(); moveCursor(-1, 0); }
+    else if (k === "ArrowDown") { e.preventDefault(); moveCursor(1, 0); }
+    else if (k === "ArrowLeft") { e.preventDefault(); moveCursor(0, -1); }
+    else if (k === "ArrowRight") { e.preventDefault(); moveCursor(0, 1); }
+    else if (k === "Enter" || k === " ") {
+      e.preventDefault();
+      if (cursor) onEdge(cursor.dir, cursor.r, cursor.c);
+    }
+  }
+
+  /* -------------------------------------------------------------- moving -- */
+  function onEdge(dir, r, c) {
+    if (!view || view.over || isSpectator()) return;
+    if (!myTurn()) { shake(dir, r, c); PK.toast(aiThinking() ? "Computer is thinking" : "Not your turn"); return; }
+    if (R.edgeDrawn(view, dir, r, c)) { shake(dir, r, c); PK.sound.play("tick"); return; }
+    cursor = { dir: dir, r: r, c: c };
+    pendingEdge = { dir: dir, r: r, c: c };
+    var e = boardEdge[edgeKey(dir, r, c)];
+    if (e) e.classList.add("pending");                          // optimistic hint; state decides truth
+    net.sendMove({ type: "line", dir: dir, r: r, c: c });
+  }
+
+  function shake(dir, r, c) {
+    var e = boardEdge[edgeKey(dir, r, c)];
+    if (!e || reduced()) return;
+    e.classList.remove("shake");
+    void e.offsetWidth;
+    e.classList.add("shake");
+    setTimeout(function () { e.classList.remove("shake"); }, 200);
+  }
+
+  /* ----------------------------------------------------------- animation -- */
+  function animateMove() {
+    var lm = view.lastMove;
+    if (!lm) return;
+    var e = boardEdge[edgeKey(lm.dir, lm.r, lm.c)];
+    PK.sound.play("click"); PK.buzz(8);
+    if (e) {
+      var inkEl = e.querySelector(".ink");
+      if (inkEl) {
+        if (reduced()) inkEl.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 120, easing: "linear" });
+        else {
+          inkEl.style.transformOrigin = lm.dir === "h" ? "left center" : "center top";  // stroke from the origin dot
+          inkEl.animate(
+            [{ transform: lm.dir === "h" ? "scaleX(0)" : "scaleY(0)", opacity: .2 },
+             { transform: "none", opacity: 1 }],
+            { duration: 160, easing: "cubic-bezier(.34,1.56,.64,1)" });
+        }
+      }
+    }
+    var boxes = lm.boxes || [];
+    boxes.forEach(function (bi, i) { bloom(bi, lm, i); });
+    if (boxes.length) {
+      PK.buzz(18);
+      var run = view.chain;
+      if (run >= 4 && run - boxes.length < 4) PK.sound.play("reveal");
+      var who = seatName(lm.seat);
+      PK.announce(who + " closed " + boxes.length + " box" + (boxes.length > 1 ? "es" : "") +
+        ". Chain " + run + ". " + (view.over ? "" : who + " plays again."));
+    }
+  }
+
+  function bloom(bi, lm, i) {
+    var b = boardBox[bi];
+    if (!b) return;
+    var delay = reduced() ? 0 : i * 70;
+    setTimeout(function () {
+      PK.sound.play("tick");
+      if (i > 0 || view.chain > 1) PK.sound.play("diceClack", { pitch: Math.min(2.2, 1 + 0.12 * Math.max(0, view.chain - 1)) });
+      if (reduced()) return;
+      var p = R.boxRC(view.cols, bi);
+      var origin = "center";
+      if (lm.dir === "h") origin = (lm.r === p.r) ? "center top" : "center bottom";
+      else origin = (lm.c === p.c) ? "left center" : "right center";
+      b.style.transformOrigin = origin;
+      b.animate([{ transform: "scale(.6)", opacity: 0 }, { transform: "scale(1)", opacity: 1 }],
+        { duration: 220, easing: "cubic-bezier(.16,1,.3,1)" });
+      var g = b.querySelector(".glyph");
+      if (g) g.animate([{ transform: "scale(0)" }, { transform: "scale(1)" }],
+        { duration: 260, delay: 90, easing: "cubic-bezier(.34,1.56,.64,1)", fill: "backwards" });
+      // the box briefly "grabs" its four sides in the owner's ink
+      var owner = view.owners[bi];
+      R.boxEdges(view.cols, view.rows, bi).forEach(function (ed) {
+        var e = boardEdge[edgeKey(ed.dir, ed.r, ed.c)];
+        if (!e) return;
+        e.classList.add("grab", seatClass(owner));
+        setTimeout(function () { e.classList.remove("grab", seatClass(owner)); }, 220);
+      });
+    }, delay);
+  }
+
+  function boardInWave() {
+    if (reduced()) return;
+    var lat = document.getElementById("lat"); if (!lat) return;
+    var cx = view.cols / 2, cy = view.rows / 2;
+    Object.keys(boardDot).forEach(function (k) {
+      var p = k.split("_"), r = +p[0], c = +p[1];
+      var d = Math.sqrt(Math.pow(c - cx, 2) + Math.pow(r - cy, 2));
+      boardDot[k].animate([{ opacity: 0, transform: "translate(-50%,-50%) scale(.3)" },
+                           { opacity: 1, transform: "translate(-50%,-50%) scale(1)" }],
+        { duration: 220, delay: Math.round(d * 26), easing: "cubic-bezier(.16,1,.3,1)", fill: "backwards" });
+    });
+    PK.sound.play("reveal");
+  }
+
+  /* ------------------------------------------------------------- result --- */
+  function resultLine() {
+    var res = view.result || {};
+    if (res.kind === "draw") {
+      var names = (res.winners || []).map(seatName);
+      var joined = names.length > 1 ? names.slice(0, -1).join(", ") + " and " + names[names.length - 1] : names[0];
+      var n = res.scores ? res.scores[res.winners[0]] : 0;
+      return "Draw — " + joined + " tie on " + n + " box" + (n === 1 ? "" : "es");
+    }
+    var w = res.winner;
+    var boxes = res.scores ? res.scores[w] : 0;
+    var who = (myMode !== "hotseat" && !isSpectator() && view.yourSeat === w) ? "You win" : seatName(w) + " wins";
+    return who + " with " + boxes + " box" + (boxes === 1 ? "" : "es");
+  }
+
+  function showResult() {
+    if (resultShown) return; resultShown = true;
+    var res = view.result || {};
+    var line = resultLine();
+    PK.sound.play("win");
+    PK.announce(line, true);
+
+    // final wave: claimed boxes lift and settle, winners last
+    if (!reduced()) {
+      var order = [];
+      for (var bi = 0; bi < view.owners.length; bi++) order.push(bi);
+      order.sort(function (a, b) {
+        var wa = (res.winners || []).indexOf(view.owners[a]) >= 0 ? 1 : 0;
+        var wb = (res.winners || []).indexOf(view.owners[b]) >= 0 ? 1 : 0;
+        if (wa !== wb) return wa - wb;
+        return view.owners[a] - view.owners[b];
+      });
+      order.forEach(function (bi, i) {
+        var b = boardBox[bi]; if (!b) return;
+        b.animate([{ transform: "translateY(0)" }, { transform: "translateY(-2px)" }, { transform: "translateY(0)" }],
+          { duration: 240, delay: i * 40, easing: "cubic-bezier(.16,1,.3,1)" });
+      });
+    }
+
+    var o = el("div", "overlay");
+    var card = el("div", "card");
+    card.appendChild(el("h2", "", line));
+    var sub = res.kind === "draw" ? "Nobody could break the tie." : "Final scores";
+    card.appendChild(el("p", "pk-subtle", sub));
+
+    var bars = el("div", "bars");
+    var max = Math.max.apply(null, view.scores.concat([1]));
+    for (var i = 0; i < view.numPlayers; i++) {
+      var row = el("div", "barrow " + seatClass(i));
+      row.innerHTML = '<span class="who">' + seatName(i) + '</span>' +
+        '<span class="track"><span class="fill"></span></span>' +
+        '<span class="n pk-num">' + view.scores[i] + '</span>';
+      bars.appendChild(row);
+      (function (row, val) {
+        var f = row.querySelector(".fill");
+        var pct = Math.round((val / max) * 100);
+        if (reduced()) f.style.width = pct + "%";
+        else setTimeout(function () { f.style.width = pct + "%"; }, 60);
+      })(row, view.scores[i]);
+    }
+    card.appendChild(bars);
+
+    var row2 = el("div", "pk-row"); row2.style.marginTop = "18px";
+    row2.appendChild(btn(myMode === "online" ? "Rematch" : "Play again", "", function () {
+      o.remove(); resultShown = false; lastAnimated = -1; lastTurnSeen = -1; cursor = null;
+      if (myMode === "online") net.rematch(); else net.rematch();
+    }));
+    row2.appendChild(btn("Menu", "pk-btn--ghost", function () { o.remove(); openModeSelect(); }));
+    card.appendChild(row2);
+    o.appendChild(card); document.body.appendChild(o);
+    var f = row2.querySelector("button"); if (f) f.focus();
+  }
+
+  /* ------------------------------------------------------------- wiring --- */
+  function wire() {
+    net.on("state", function (d) {
+      var prev = view;
+      view = d.state;
+      if (prev && view.moveCount === 0 && prev.moveCount > 0) { resultShown = false; lastAnimated = -1; lastTurnSeen = -1; cursor = null; }
+      pendingEdge = null;
+      render();
+      var animated = false;
+      if (view.moveCount === 0) { boardInWave(); lastAnimated = 0; }
+      else if (view.moveCount !== lastAnimated) {
+        lastAnimated = view.moveCount;
+        animateMove(); animated = true;
+        if (view.turn === lastTurnSeen && view.lastMove && view.lastMove.boxes.length) pulseSeat(view.turn);
+      }
+      lastTurnSeen = view.turn;
+      if (view.over) {
+        if (animated) setTimeout(function () { if (view && view.over) showResult(); }, 560);
+        else showResult();
+      }
+    });
+    net.on("rejected", function (d) {
+      if (pendingEdge) { shake(pendingEdge.dir, pendingEdge.r, pendingEdge.c); pendingEdge = null; }
+      PK.toast(d.reason === "not_your_turn" ? "Not your turn" : d.reason === "edge_taken" ? "That line is taken" : "Illegal move");
+      if (view) render();
+    });
+    net.on("presence", function (d) {
+      if (d.players) net.players = d.players;
+      if (myMode === "online") {
+        if ((d.players || []).some(function (p) { return p.status === "disconnected"; })) PK.toast("Opponent reconnecting…");
+        if (d.spectators) PK.announce(d.spectators + " watching");
+      }
+      if (view) render();
+    });
+    net.on("gameOver", function () { setTimeout(function () { if (view && view.over) showResult(); }, 620); });
+    net.on("reconnecting", function () { PK.toast("Reconnecting…"); });
+    net.on("reconnected", function () { PK.toast("Back online"); });
+    net.on("room", function (r) { roomInfo = r; });
+    net.on("error", function (d) {
+      PK.toast(d.message || d.code || "Error");
+      if (d.code === "not_found" || d.code === "room_full") openModeSelect();
+    });
+  }
+
+  function pulseSeat(seat) {
+    var chip = document.querySelector('.seatchip[data-seat="' + seat + '"]');
+    if (!chip || reduced()) return;
+    chip.classList.remove("pulse"); void chip.offsetWidth; chip.classList.add("pulse");
+  }
+
+  /* --------------------------------------------------------------- boot --- */
+  var resizeT = null;
+  window.addEventListener("resize", function () {
+    clearTimeout(resizeT);
+    resizeT = setTimeout(function () { if (view && document.getElementById("lat")) render(); }, 140);
+  });
+
+  (function boot() {
+    var params = new URL(location.href).searchParams;
+    var code = params.get("r");
+    if (code) { joinOnline(code, params.get("spectate") === "1"); return; }
+    openModeSelect();
+  })();
+})();
+</script>
+<!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:10px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Get the monthly letter</a></footer><!-- /ep:ca-foot -->
+</body>
+</html>

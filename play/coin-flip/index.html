@@ -1,0 +1,764 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="stylesheet" href="../_kit/play-kit.css">
+<title>Coin Flip</title>
+<style>
+  /* ============================================================= coin-flip
+     All app styling builds on --pk-* tokens only (no hard-coded brand color).
+     Light + dark + reduced-motion inherit from the kit. */
+
+  /* coin-type chips row */
+  .cf-chips{ display:flex; gap:8px; flex-wrap:wrap; justify-content:center; max-width:100%; }
+  .cf-chip{ position:relative; }
+  .cf-chip__dot{ width:14px; height:14px; border-radius:50%;
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.18); flex:0 0 auto; }
+  .cf-chip__x{ display:inline-grid; place-items:center; width:18px; height:18px; margin:0 -4px 0 2px;
+    border:0; border-radius:50%; background:transparent; color:inherit; cursor:pointer; font-size:14px;
+    line-height:1; opacity:.6; }
+  .cf-chip__x:hover{ opacity:1; background:color-mix(in srgb, var(--pk-ink) 12%, transparent); }
+
+  /* the arena that holds the coin(s) */
+  .cf-arena{
+    --coin-size:200px; --lift:140px;
+    perspective:1100px; width:100%;
+    display:grid; grid-template-columns:repeat(auto-fit, var(--coin-size));
+    justify-content:center; align-items:end; gap:14px 16px;
+    min-height:236px;
+  }
+  .cf-arena.is-single{ display:flex; }
+
+  .cf-slot{ position:relative; width:var(--coin-size); height:calc(var(--coin-size) + 26px);
+    display:flex; align-items:flex-start; justify-content:center; }
+
+  .cf-lift{ width:var(--coin-size); height:var(--coin-size); will-change:transform;
+    transform:translateY(0) scaleY(1); }
+
+  .cf-shadow{ position:absolute; left:50%; bottom:4px; width:76%; height:16px;
+    transform:translateX(-50%) scale(1); border-radius:50%;
+    background:radial-gradient(ellipse at center, rgba(30,22,10,.55), rgba(30,22,10,0) 72%);
+    filter:blur(6px); opacity:.5; will-change:transform,opacity; pointer-events:none; }
+  :root[data-theme="dark"] .cf-shadow,
+  :root:not([data-theme="light"]) .cf-shadow{ background:radial-gradient(ellipse at center, rgba(0,0,0,.7), rgba(0,0,0,0) 72%); }
+
+  /* the coin: preserve-3d, two backface-hidden faces + a ridged edge */
+  .cf-coin{ position:relative; width:100%; height:100%; transform-style:preserve-3d;
+    transform:rotateY(0deg); will-change:transform,filter; }
+
+  .cf-face{ position:absolute; inset:0; border-radius:50%; backface-visibility:hidden;
+    display:grid; place-items:center; overflow:hidden;
+    font-family:var(--pk-font-display); font-weight:700; letter-spacing:.02em;
+    text-transform:uppercase; color:color-mix(in srgb, var(--fc) 32%, #1c140a);
+    background:
+      radial-gradient(circle at 34% 27%,
+        color-mix(in srgb, var(--fc) 46%, white) 0%,
+        var(--fc) 40%,
+        color-mix(in srgb, var(--fc) 72%, black) 100%);
+    box-shadow:
+      inset 0 0 0 4px color-mix(in srgb, var(--fc) 64%, black),
+      inset 0 0 0 6px color-mix(in srgb, var(--fc) 40%, white),
+      inset 0 -8px 18px color-mix(in srgb, var(--fc) 58%, black),
+      inset 0 8px 16px color-mix(in srgb, var(--fc) 30%, white),
+      var(--pk-shadow-2);
+    transform:translateZ(3px);
+  }
+  .cf-face--a{ --fc:var(--fa); }
+  .cf-face--b{ --fc:var(--fb); transform:rotateY(180deg) translateZ(3px); }
+  .cf-face__label{ font-size:calc(var(--coin-size) * .17); line-height:1;
+    max-width:80%; text-align:center; text-shadow:0 1px 0 color-mix(in srgb, var(--fc) 30%, white); }
+  /* the struck engraving: fills the face, carries rim lettering + relief motif */
+  .cf-svg{ position:absolute; inset:0; width:100%; height:100%; border-radius:50%;
+    pointer-events:none; }
+  .cf-arena.is-dense .cf-svg .cf-fine{ display:none; }   /* drop hairline detail on tiny coins */
+
+  /* milled ridge ring (skipped when the grid is dense for perf) */
+  .cf-face::before{ content:""; position:absolute; inset:2px; border-radius:50%; pointer-events:none;
+    background:repeating-conic-gradient(
+      color-mix(in srgb, var(--fc) 62%, black) 0deg 3deg,
+      color-mix(in srgb, var(--fc) 38%, white) 3deg 6deg);
+    -webkit-mask:radial-gradient(circle, transparent 0 calc(50% - 7px), #000 calc(50% - 7px));
+            mask:radial-gradient(circle, transparent 0 calc(50% - 7px), #000 calc(50% - 7px));
+    opacity:.55; }
+  .cf-arena.is-dense .cf-face::before{ display:none; }
+
+  /* thin ridged edge band, revealed at the coin's profile mid-spin */
+  .cf-edge{ position:absolute; top:12%; bottom:12%; left:50%; width:7px;
+    transform:translateX(-50%) rotateY(90deg); border-radius:4px;
+    background:repeating-linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--edge) 70%, black) 0 2px,
+      color-mix(in srgb, var(--edge) 45%, white) 2px 4px);
+    box-shadow:0 0 3px rgba(0,0,0,.4); }
+  .cf-arena.is-dense .cf-edge{ display:none; }
+
+  /* specular sweep across the face while spinning */
+  .cf-coin.is-flipping .cf-face__label{ mix-blend-mode:normal; }
+  .cf-coin.is-flipping .cf-face::after{ content:""; position:absolute; inset:0; border-radius:50%;
+    background:linear-gradient(105deg, transparent 42%, rgba(255,255,255,.6) 50%, transparent 58%);
+    animation:cf-spec .52s var(--pk-ease-standard) forwards; pointer-events:none; }
+  @keyframes cf-spec{ from{ transform:translateX(-120%);} to{ transform:translateX(120%);} }
+
+  /* gentle idle breathing on the resting single coin */
+  .cf-coin.is-idle{ animation:cf-sway 4.2s ease-in-out infinite; }
+  @keyframes cf-sway{ 0%,100%{ transform:rotateY(0deg) translateY(0);} 50%{ transform:rotateY(-7deg) translateY(-3px);} }
+
+  /* result + tally */
+  .cf-tagline{ color:var(--pk-ink-soft); font-size:var(--pk-fs-sm); }
+  .cf-tally{ width:100%; max-width:420px; display:flex; flex-direction:column; gap:8px; }
+  .cf-tally-row{ display:flex; align-items:baseline; justify-content:space-between; gap:12px;
+    font-family:var(--pk-font-num); font-variant-numeric:tabular-nums; }
+  .cf-tally-row b{ font-family:var(--pk-font-display); font-size:1.4rem; }
+  .cf-tally-side{ display:flex; align-items:center; gap:8px; color:var(--pk-ink-soft);
+    text-transform:uppercase; letter-spacing:.04em; font-size:var(--pk-fs-sm); font-weight:600; }
+  .cf-tally-side .cf-chip__dot{ width:16px; height:16px; }
+  .cf-bar{ height:14px; border-radius:999px; overflow:hidden; display:flex;
+    background:var(--pk-surface-sunk); box-shadow:inset 0 0 0 1px var(--pk-line); }
+  .cf-bar__a{ height:100%; transition:width var(--pk-t-base) var(--pk-ease-settle); }
+  .cf-bar__b{ height:100%; flex:1; }
+  .cf-verdict{ color:var(--pk-ink-soft); font-size:var(--pk-fs-sm); min-height:1.2em; }
+
+  /* count stepper in the action bar */
+  .cf-stepper{ display:inline-flex; align-items:center; gap:2px; padding:2px;
+    background:var(--pk-surface); border:1.5px solid var(--pk-line); border-radius:var(--pk-radius-pill); }
+  .cf-stepper button{ width:38px; height:38px; }
+  .cf-stepper__val{ min-width:56px; text-align:center; font-size:var(--pk-fs-lg); font-weight:650;
+    font-variant-numeric:tabular-nums; }
+  .cf-stepper__val small{ display:block; font-size:10px; font-weight:600; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--pk-ink-faint); }
+
+  /* custom-coin editor sheet (reuses kit sheet classes) */
+  .cf-ed-grid{ display:flex; flex-direction:column; gap:16px; }
+  .cf-ed-face{ display:flex; flex-direction:column; gap:8px; }
+  .cf-ed-face > label{ font-weight:600; font-size:var(--pk-fs-sm); color:var(--pk-ink-soft); }
+  .cf-swatches{ display:flex; flex-wrap:wrap; gap:6px; }
+  .cf-sw{ width:30px; height:30px; border-radius:50%; border:2px solid transparent; cursor:pointer;
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.2); padding:0; }
+  .cf-sw[aria-pressed="true"]{ border-color:var(--pk-ink); transform:scale(1.06); }
+  .cf-ed-preview{ display:flex; justify-content:center; padding:8px 0; }
+  .cf-ed-preview .cf-arena{ min-height:0; --coin-size:120px; --lift:0px; }
+  .cf-ed-actions{ display:flex; gap:8px; margin-top:8px; }
+
+  @media (max-width:400px){
+    .cf-arena{ --coin-size:min(200px, 62vw); }
+  }
+</style>
+<link rel="canonical" href="https://epeters.ca/play/coin-flip/">
+</head><body>
+
+<script src="../_kit/play-kit.js"></script>
+
+<script>
+var HEADLESS = (typeof document === "undefined");
+
+/* =====================================================================
+   PURE LOGIC — no DOM, injectable rng. Exported as globalThis.COINFLIP.
+   rng(n) -> uniform int in [0, n).  faceIndex: 0 = face A, 1 = face B.
+   ===================================================================== */
+
+function flip(rng){ return rng(2); }                 // one independent 50/50 draw -> 0 | 1
+
+function clampCount(n){                               // floor, clamp to [1,100], non-numbers -> 1
+  n = Math.floor(Number(n));
+  if (!isFinite(n)) return 1;
+  if (n < 1) return 1;
+  if (n > 100) return 100;
+  return n;
+}
+
+function flipMany(n, rng){                            // n independent flips + tally + majority
+  n = clampCount(n);
+  var results = [], counts = [0, 0], i, f;
+  for (i = 0; i < n; i++){ f = flip(rng); results.push(f); counts[f]++; }
+  var majority = (counts[0] === counts[1]) ? -1 : (counts[0] > counts[1] ? 0 : 1);
+  return { results: results, counts: counts, majority: majority };
+}
+
+function halfTurns(faceIndex, spins){                 // even => lands face 0, odd => face 1
+  return spins * 2 + faceIndex;                       // spins adds full turns for drama
+}
+
+/* =====================================================================
+   BROWSER WIRING — everything below touches the DOM / PK, so it is fully
+   guarded behind !HEADLESS and is never reached by node bot_test.js.
+   ===================================================================== */
+if (!HEADLESS) {
+
+  var EASE = {
+    standard: "cubic-bezier(.2,0,0,1)",
+    accel:    "cubic-bezier(.3,0,1,1)",
+    spring:   "cubic-bezier(.34,1.56,.64,1)",
+    settle:   "cubic-bezier(.16,1,.3,1)",
+    anticip:  "cubic-bezier(.7,-0.4,.4,1)"
+  };
+
+  var STORE = { type: "play.coin-flip.type", count: "play.coin-flip.count", customs: "play.coin-flip.customs" };
+  var TAGLINE = "Call it in the air.";
+
+  // Struck-coin presets. `legendA/legendB/denom/year` are the rim engravings; motifs are drawn
+  // in relief from the coin's own metal. Deliberately generic coinage grammar (bust / laurel /
+  // dentils / arc lettering) — never a reproduction of a real mint's protected artwork.
+  var PRESETS = {
+    gold:   { id:"gold",   name:"Gold",   a:{ label:"Heads", color:"#D9A441" }, b:{ label:"Tails", color:"#D9A441" }, edge:"#A9761F",
+              legendA:"PLAYHOUSE", legendB:"ONE CROWN", denom:"ONE", year:"2026" },
+    silver: { id:"silver", name:"Silver", a:{ label:"Heads", color:"#C9CCD1" }, b:{ label:"Tails", color:"#C9CCD1" }, edge:"#8A8F98",
+              legendA:"LIBERTY",   legendB:"QUARTER",   denom:"25", year:"2026" },
+    copper: { id:"copper", name:"Copper", a:{ label:"Heads", color:"#B5732E" }, b:{ label:"Tails", color:"#B5732E" }, edge:"#7A4A17",
+              legendA:"DOMINION",  legendB:"ONE CENT",  denom:"1",  year:"2026" }
+  };
+
+  /* ---- metal shading: derive struck-relief tones from any base colour ---- */
+  function hex2rgb(h){ h = String(h).replace("#",""); if (h.length === 3) h = h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
+    return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)]; }
+  function mix(hex, target, amt){ var c = hex2rgb(hex), t = hex2rgb(target), o = "#";
+    for (var i = 0; i < 3; i++){ var v = Math.round(c[i] + (t[i]-c[i]) * amt).toString(16); o += v.length < 2 ? "0"+v : v; }
+    return o; }
+  function shades(base){ return { mid: mix(base,"#000",0.20), dark: mix(base,"#000",0.58), light: mix(base,"#fff",0.58) }; }
+
+  /* ---- the engraving: dentils + arc legends + relief motif ---- */
+  function dentils(cx, cy, r, n){
+    var s = "";
+    for (var i = 0; i < n; i++){
+      var deg = i * 360 / n, a = deg * Math.PI / 180;
+      var x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r;
+      s += '<rect x="' + (x-0.5).toFixed(2) + '" y="' + (y-1.05).toFixed(2) + '" width="1" height="2.1" rx="0.4"' +
+           ' transform="rotate(' + (deg+90).toFixed(1) + ' ' + x.toFixed(2) + ' ' + y.toFixed(2) + ')"/>';
+    }
+    return s;
+  }
+  // classical left-facing profile bust
+  var BUST = '<path d="M60 27.5 C51 24.6 42 29.8 39.5 38.8 C38.6 42.3 37 44.4 35 46.4 '
+    + 'C33.5 47.9 32 49.4 31 50.9 C30.4 51.9 30.8 52.7 32 53.1 L34 53.9 C34.4 55.5 34 56.7 33.2 57.9 '
+    + 'C32.6 58.8 33 59.5 34 59.9 L35.6 60.5 C35.4 62.5 36.4 64.1 38.4 65.1 C40.4 66.1 42.6 66.5 44.6 66.3 '
+    + 'L45 71.4 C45.1 73.4 46.5 74.9 48.5 75.5 C54 76.9 60 75.9 64.5 72.9 C69 69.9 71.6 64.9 72 58.9 '
+    + 'C72.6 49.9 70 39.9 64.5 32.9 C63.2 30.9 61.6 29.3 60 27.5 Z"/>';
+  // laurel wreath, open at the top (U-shaped), leaves tangent to the arc
+  function wreath(){
+    var s = "", cx = 50, cy = 51, r = 27.5;
+    for (var i = 0; i <= 14; i++){
+      var deg = 22 + (i/14) * 136, a = deg * Math.PI / 180;
+      var x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r;
+      s += '<ellipse cx="' + x.toFixed(2) + '" cy="' + y.toFixed(2) + '" rx="4.7" ry="2.05"'
+         + ' transform="rotate(' + (deg+90).toFixed(1) + ' ' + x.toFixed(2) + ' ' + y.toFixed(2) + ')"/>';
+    }
+    return s;
+  }
+  function relief(shape, sh){                       // struck look: dark below, light above, metal on top
+    return '<g fill="' + sh.dark  + '" opacity=".55" transform="translate(0.85,0.95)">' + shape + '</g>'
+         + '<g fill="' + sh.light + '" opacity=".55" transform="translate(-0.75,-0.85)">' + shape + '</g>'
+         + '<g fill="' + sh.mid   + '">' + shape + '</g>';
+    }
+  function arcText(id, txt, sh, size, spacing){
+    var t = '<text font-family="Georgia,serif" font-weight="700" font-size="' + size + '" letter-spacing="' + spacing + '"'
+          + ' text-anchor="middle"><textPath href="#' + id + '" startOffset="50%">' + txt + '</textPath></text>';
+    return '<g fill="' + sh.dark + '" opacity=".5" transform="translate(0.6,0.7)">' + t + '</g>'
+         + '<g fill="' + sh.light + '" opacity=".5" transform="translate(-0.5,-0.6)">' + t + '</g>'
+         + '<g fill="' + sh.mid + '">' + t + '</g>';
+  }
+
+  // Build one struck face. f: 0 = obverse (bust), 1 = reverse (wreath + denomination).
+  function coinFaceSVG(def, f, uid){
+    var base = f === 0 ? def.a.color : def.b.color;
+    var sh = shades(base);
+    var isPreset = !!def.legendA;
+    var topId = "arcT" + uid + f, botId = "arcB" + uid + f;
+    var svg = '<svg class="cf-svg" viewBox="0 0 100 100" aria-hidden="true" focusable="false">'
+      + '<defs>'
+      +   '<path id="' + topId + '" d="M 17.5,50 A 32.5,32.5 0 0 1 82.5,50" fill="none"/>'
+      +   '<path id="' + botId + '" d="M 16.5,50 A 33.5,33.5 0 0 0 83.5,50" fill="none"/>'
+      + '</defs>'
+      // rim rings + dentils
+      + '<g class="cf-fine">'
+      +   '<circle cx="50" cy="50" r="48.2" fill="none" stroke="' + sh.dark + '" stroke-width="1.1" opacity=".55"/>'
+      +   '<circle cx="50" cy="50" r="46.4" fill="none" stroke="' + sh.light + '" stroke-width="0.7" opacity=".5"/>'
+      +   '<g fill="' + sh.dark + '" opacity=".45">' + dentils(50, 50, 43.6, 60) + '</g>'
+      +   '<circle cx="50" cy="50" r="39.4" fill="none" stroke="' + sh.dark + '" stroke-width="0.6" opacity=".35"/>'
+      + '</g>';
+
+    if (!isPreset){
+      // custom coin: the owner's label, struck in the same metal
+      var lbl = String(f === 0 ? def.a.label : def.b.label).slice(0, 8);
+      var esc = lbl.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+      var t = '<text x="50" y="50" dominant-baseline="central" text-anchor="middle"'
+            + ' font-family="Georgia,serif" font-weight="700" font-size="' + (esc.length > 5 ? 13 : 18) + '">' + esc + '</text>';
+      svg += '<g fill="' + sh.dark + '" opacity=".55" transform="translate(0.85,0.95)">' + t + '</g>'
+           + '<g fill="' + sh.light + '" opacity=".55" transform="translate(-0.75,-0.85)">' + t + '</g>'
+           + '<g fill="' + sh.mid + '">' + t + '</g>';
+      return svg + '</svg>';
+    }
+
+    if (f === 0){
+      svg += relief(BUST, sh)
+          +  '<g class="cf-fine">' + arcText(topId, def.legendA, sh, 9.5, 2.6) + '</g>'
+          +  '<g class="cf-fine">' + arcText(botId, def.year, sh, 8, 1.6) + '</g>';
+    } else {
+      var denom = '<text x="50" y="46" dominant-baseline="central" text-anchor="middle"'
+                + ' font-family="Georgia,serif" font-weight="700" font-size="26">' + def.denom + '</text>';
+      svg += relief(wreath(), sh)
+          +  '<g fill="' + sh.dark + '" opacity=".55" transform="translate(0.85,0.95)">' + denom + '</g>'
+          +  '<g fill="' + sh.light + '" opacity=".55" transform="translate(-0.75,-0.85)">' + denom + '</g>'
+          +  '<g fill="' + sh.mid + '">' + denom + '</g>'
+          +  '<g class="cf-fine">' + arcText(topId, def.legendB, sh, 9, 2.2) + '</g>';
+    }
+    return svg + '</svg>';
+  }
+  var COIN_UID = 0;
+
+  // Pre-approved palette (material + accent ramp) — never a free-form hex picker.
+  var COLORS = [
+    ["Gold","#D9A441"], ["Silver","#C9CCD1"], ["Copper","#B5732E"], ["Ivory","#E4D9BC"],
+    ["Terracotta","#C8632B"], ["Amber","#C98A1E"], ["Rose","#C0497B"], ["Teal","#1F8A8A"],
+    ["Indigo","#4C5BD4"], ["Plum","#7A4CB0"], ["Forest","#3F7A4B"], ["Slate","#4E6076"]
+  ];
+
+  /* ---- persisted state ---- */
+  var customs = PK.store.get(STORE.customs, []);
+  var currentType = PK.store.get(STORE.type, "gold");
+  var currentCount = clampCount(PK.store.get(STORE.count, 1));
+  var flipping = false;
+  var lastSingleFace = 0;   // for seamless single-coin continuity across flips
+
+  var ui, arenaEl, resultEl, taglineEl, tallyEl, tHeadsEl, tTailsEl, barAEl, barBEl, verdictEl,
+      chipsEl, stepValEl, edBackdrop = null, edState = null;
+
+  /* ---- helpers ---- */
+  function coinDef(id){
+    if (PRESETS[id]) return PRESETS[id];
+    for (var i = 0; i < customs.length; i++) if (customs[i].id === id) return customs[i];
+    return PRESETS.gold;
+  }
+  function faceLabel(def, f){ return f === 0 ? def.a.label : def.b.label; }
+
+  function coinSize(count){
+    if (count <= 1)  return 200;
+    if (count <= 4)  return 132;
+    if (count <= 9)  return 96;
+    if (count <= 16) return 76;
+    if (count <= 36) return 58;
+    if (count <= 64) return 46;
+    return 38;
+  }
+
+  /* ---- build one coin element (starts showing startFace) ---- */
+  function buildCoin(def, startFace){
+    var slot = document.createElement("div");
+    slot.className = "cf-slot";
+    var lift = document.createElement("div"); lift.className = "cf-lift";
+    var coin = document.createElement("div"); coin.className = "cf-coin";
+    coin.style.setProperty("--fa", def.a.color);
+    coin.style.setProperty("--fb", def.b.color);
+    coin.style.setProperty("--edge", def.edge || def.a.color);
+    coin.style.transform = "rotateY(" + (startFace * 180) + "deg)";
+    var uid = ++COIN_UID;
+    coin.innerHTML =
+      '<div class="cf-face cf-face--a">' + coinFaceSVG(def, 0, uid) + '</div>' +
+      '<div class="cf-face cf-face--b">' + coinFaceSVG(def, 1, uid) + '</div>' +
+      '<div class="cf-edge"></div>';
+    lift.appendChild(coin);
+    var shadow = document.createElement("div"); shadow.className = "cf-shadow";
+    slot.appendChild(lift); slot.appendChild(shadow);
+    slot._coin = coin; slot._lift = lift; slot._shadow = shadow;
+    return slot;
+  }
+
+  /* ---- render the resting arena (count coins on face A) ---- */
+  function renderArena(){
+    var def = coinDef(currentType);
+    var count = currentCount;
+    var size = coinSize(count);
+    arenaEl.style.setProperty("--coin-size", size + "px");
+    arenaEl.style.setProperty("--lift", Math.min(140, Math.round(size * 0.7)) + "px");
+    arenaEl.classList.toggle("is-single", count === 1);
+    arenaEl.classList.toggle("is-dense", count > 24);
+    arenaEl.innerHTML = "";
+    var start = (count === 1) ? lastSingleFace : 0;
+    for (var i = 0; i < count; i++){
+      var slot = buildCoin(def, count === 1 ? start : 0);
+      if (count === 1 && !PK.motion.reduced) slot._coin.classList.add("is-idle");
+      arenaEl.appendChild(slot);
+    }
+    arenaEl._slots = Array.prototype.slice.call(arenaEl.querySelectorAll(".cf-slot"));
+  }
+
+  /* ---- the theatrical toss of a single coin (returns land-delay ms) ---- */
+  function tossCoin(slot, startFace, endFace){
+    var coin = slot._coin, lift = slot._lift, shadow = slot._shadow;
+    var TOTAL = 1070, LAND = 770;
+    var spins = 5 + PK.rand.int(2);                                  // 5 or 6 -> ~1800-2160deg+
+    var addHalf = spins * 2 + ((endFace - startFace + 2) % 2);       // land on endFace, continuous
+    var startDeg = startFace * 180, endDeg = startDeg + addHalf * 180;
+    var lp = parseFloat(getComputedStyle(arenaEl).getPropertyValue("--lift")) || 140;
+
+    coin.classList.remove("is-idle");
+    coin.classList.add("is-flipping");
+    coin.style.transform = "rotateY(" + startDeg + "deg)";
+
+    coin.animate([
+      { transform:"rotateY(" + startDeg + "deg)", filter:"blur(0px)", easing:EASE.standard },
+      { transform:"rotateY(" + (startDeg + (endDeg - startDeg) * 0.5) + "deg)", filter:"blur(.5px)", offset:0.42, easing:EASE.settle },
+      { transform:"rotateY(" + endDeg + "deg)", filter:"blur(0px)", offset:0.72 },
+      { transform:"rotateY(" + endDeg + "deg)", filter:"blur(0px)" }
+    ], { duration:TOTAL, fill:"forwards" });
+
+    lift.animate([
+      { transform:"translateY(0) scaleY(1)", easing:EASE.anticip },
+      { transform:"translateY(8px) scaleY(.94)", offset:0.11, easing:EASE.standard },
+      { transform:"translateY(" + (-lp) + "px) scaleY(1.02)", offset:0.42, easing:EASE.settle },
+      { transform:"translateY(0) scaleY(.86)", offset:0.72, easing:EASE.spring },
+      { transform:"translateY(0) scaleY(1.07)", offset:0.86, easing:EASE.settle },
+      { transform:"translateY(0) scaleY(1)" }
+    ], { duration:TOTAL, fill:"forwards" });
+
+    // grounding shadow scales INVERSELY with coin height — the trick that sells "airborne".
+    shadow.animate([
+      { transform:"translateX(-50%) scale(1)",   opacity:0.5,  filter:"blur(6px)"  },
+      { transform:"translateX(-50%) scale(1.55)", opacity:0.16, filter:"blur(15px)", offset:0.42 },
+      { transform:"translateX(-50%) scale(.82)", opacity:0.62, filter:"blur(4px)",  offset:0.72 },
+      { transform:"translateX(-50%) scale(1)",   opacity:0.5,  filter:"blur(6px)"  }
+    ], { duration:TOTAL, fill:"forwards" });
+
+    setTimeout(function(){ coin.classList.remove("is-flipping"); }, TOTAL);
+    return LAND;
+  }
+
+  /* ---- non-tumbling reveal for the overflow coins at large N ---- */
+  function fadeCoin(slot, endFace){
+    var coin = slot._coin;
+    coin.style.transform = "rotateY(" + (endFace * 180) + "deg)";
+    coin.animate([
+      { opacity:0, transform:"rotateY(" + (endFace * 180) + "deg) scale(.6)" },
+      { opacity:1, transform:"rotateY(" + (endFace * 180) + "deg) scale(1)" }
+    ], { duration:220, easing:EASE.settle, fill:"forwards" });
+  }
+
+  /* ---- tally UI ---- */
+  function showTally(on){ tallyEl.hidden = !on; }
+  function setTally(def, h, t, total){
+    tHeadsEl.textContent = h; tTailsEl.textContent = t;
+    barAEl.style.background = def.a.color;
+    barBEl.style.background = def.b.color;
+    var pct = total ? (h / total) * 100 : 50;
+    barAEl.style.width = pct + "%";
+    tallyEl.querySelector(".cf-tally-side--a .cf-chip__dot").style.background = def.a.color;
+    tallyEl.querySelector(".cf-tally-side--b .cf-chip__dot").style.background = def.b.color;
+    tallyEl.querySelector(".cf-tally-side--a span").textContent = def.a.label;
+    tallyEl.querySelector(".cf-tally-side--b span").textContent = def.b.label;
+  }
+
+  function setResult(text, tone){
+    resultEl.textContent = text;
+    if (tone) resultEl.setAttribute("data-tone", tone); else resultEl.removeAttribute("data-tone");
+    taglineEl.hidden = true;
+  }
+
+  /* ---- finish a flip: announce, big result, re-arm button ---- */
+  function finishFlip(def, res, count){
+    if (count === 1){
+      var f = res.results[0];
+      lastSingleFace = f;
+      var lbl = faceLabel(def, f);
+      setResult(lbl);
+      PK.announce("Result: " + lbl, true);
+    } else {
+      var hL = def.a.label, tL = def.b.label, c0 = res.counts[0], c1 = res.counts[1], verdict;
+      if (res.majority === -1){
+        setResult("Tie");
+        verdict = "Tie — " + c0 + " each";
+      } else {
+        var win = faceLabel(def, res.majority);
+        setResult(win + " wins");
+        verdict = hL + " " + c0 + " · " + tL + " " + c1 + " — " + win + " wins";
+      }
+      verdictEl.textContent = verdict;
+      PK.announce(verdict, true);
+    }
+    PK.buzz(15);
+    flipping = false;
+    ui.primary.disabled = false;
+    ui.primary.textContent = "Flip Again";
+  }
+
+  /* ---- main action ---- */
+  function doFlip(){
+    if (flipping) return;
+    flipping = true;
+    ui.primary.disabled = true;
+
+    var def = coinDef(currentType);
+    var count = clampCount(currentCount);
+    currentCount = count;
+    var reduced = PK.motion.reduced;
+
+    // DECIDE EVERYTHING FIRST (commit-then-reveal) — crypto RNG, never Math.random.
+    var res = flipMany(count, PK.rand.int);
+
+    renderArena();
+    var slots = arenaEl._slots;
+    showTally(count > 1);
+    verdictEl.textContent = "";
+    setTally(def, 0, 0, count);
+    resultEl.textContent = "";
+    resultEl.removeAttribute("data-tone");
+    taglineEl.hidden = true;
+
+    PK.sound.play("coinFlip");                       // launch whoosh
+
+    if (reduced){
+      // cross-fade to the decided face(s); tally jumps to final; result identical.
+      for (var i = 0; i < count; i++){
+        var c = slots[i]._coin;
+        c.style.transition = "transform " + 120 + "ms " + EASE.settle;
+        c.style.transform = "rotateY(" + (res.results[i] * 180) + "deg) scale(1.03)";
+      }
+      setTally(def, res.counts[0], res.counts[1], count);
+      setTimeout(function(){
+        for (var j = 0; j < slots.length; j++) slots[j]._coin.style.transform = "rotateY(" + (res.results[j] * 180) + "deg)";
+        PK.sound.play("coinLand");
+        finishFlip(def, res, count);
+      }, 130);
+      return;
+    }
+
+    // Full motion. Small N: everyone tumbles (staggered cascade). Large N (>24): only ~12 tumble.
+    var stg = count <= 1 ? 0 : count <= 8 ? 70 : count <= 24 ? 42 : 20;
+    var TUMBLE_MAX = count <= 24 ? count : 12;
+    var landedH = 0, landedT = 0, landedN = 0, soundBudget = 8;
+
+    function coinLanded(idx){
+      if (res.results[idx] === 0) landedH++; else landedT++;
+      if (count > 1) setTally(def, landedH, landedT, count);
+      if (soundBudget > 0){ PK.sound.play("coinLand"); soundBudget--; }
+      landedN++;
+      if (landedN === count) finishFlip(def, res, count);
+    }
+
+    for (var k = 0; k < count; k++){
+      (function(idx){
+        var delay = idx * stg;
+        setTimeout(function(){
+          if (idx < TUMBLE_MAX){
+            var landAt = tossCoin(slots[idx], 0, res.results[idx]);
+            setTimeout(function(){ coinLanded(idx); }, landAt);
+          } else {
+            fadeCoin(slots[idx], res.results[idx]);
+            setTimeout(function(){ coinLanded(idx); }, 140);
+          }
+        }, delay);
+      })(k);
+    }
+  }
+
+  /* ---- coin-type chips ---- */
+  function renderChips(){
+    chipsEl.innerHTML = "";
+    var ids = ["gold", "silver", "copper"];
+    ids.forEach(function(id){ chipsEl.appendChild(makeTypeChip(coinDef(id), false)); });
+    customs.forEach(function(cu){ chipsEl.appendChild(makeTypeChip(cu, true)); });
+    var add = PK.el("button", { "class":"pk-chip cf-chip", "aria-label":"Create a custom coin",
+      onClick: function(){ openEditor(); } }, []);
+    add.innerHTML = "＋ Custom";
+    chipsEl.appendChild(add);
+  }
+  function makeTypeChip(def, removable){
+    var chip = document.createElement("button");
+    chip.className = "pk-chip cf-chip";
+    chip.setAttribute("aria-pressed", String(def.id === currentType));
+    var dot = '<span class="cf-chip__dot" style="background:' + def.a.color + '"></span>';
+    chip.innerHTML = dot + "<span>" + escapeHtml(def.name || def.a.label) + "</span>";
+    chip.addEventListener("click", function(){ selectType(def.id); });
+    if (removable){
+      var x = document.createElement("button");
+      x.className = "cf-chip__x"; x.setAttribute("aria-label", "Delete " + (def.name || "custom coin"));
+      x.innerHTML = "×";
+      x.addEventListener("click", function(e){ e.stopPropagation(); deleteCustom(def.id); });
+      chip.appendChild(x);
+    }
+    return chip;
+  }
+  function selectType(id){
+    currentType = id; PK.store.set(STORE.type, id);
+    renderChips(); renderArena();
+    resultEl.textContent = ""; resultEl.removeAttribute("data-tone");
+    taglineEl.hidden = false; showTally(false);
+    if (ui.primary){ ui.primary.textContent = "Flip"; }
+    PK.sound.play("click");
+  }
+  function deleteCustom(id){
+    customs = customs.filter(function(c){ return c.id !== id; });
+    PK.store.set(STORE.customs, customs);
+    if (currentType === id){ currentType = "gold"; PK.store.set(STORE.type, "gold"); renderArena(); }
+    renderChips();
+    PK.toast("Custom coin removed");
+  }
+  function escapeHtml(s){ return String(s).replace(/[&<>"]/g, function(c){
+    return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]; }); }
+
+  /* ---- count stepper ---- */
+  function setCount(n){
+    currentCount = clampCount(n);
+    PK.store.set(STORE.count, currentCount);
+    if (stepValEl) stepValEl.firstChild.nodeValue = String(currentCount);
+    renderArena();
+    resultEl.textContent = ""; resultEl.removeAttribute("data-tone");
+    taglineEl.hidden = false; showTally(false);
+    if (ui.primary) ui.primary.textContent = "Flip";
+  }
+
+  /* ---- custom-coin editor (sheet) ---- */
+  function openEditor(){
+    edState = { a:{ label:"Heads", color:"#D9A441" }, b:{ label:"Tails", color:"#C9CCD1" }, edge:"#A9761F" };
+    if (!edBackdrop) buildEditor();
+    syncEditor();
+    edBackdrop.classList.add("is-open");
+    var f = edBackdrop.querySelector("input"); if (f) f.focus();
+  }
+  function closeEditor(){ if (edBackdrop) edBackdrop.classList.remove("is-open"); }
+
+  function buildEditor(){
+    edBackdrop = document.createElement("div");
+    edBackdrop.className = "pk-sheet-backdrop";
+    edBackdrop.innerHTML =
+      '<div class="pk-sheet" role="dialog" aria-modal="true" aria-label="Custom coin editor">' +
+        '<h2>Custom coin</h2>' +
+        '<div class="cf-ed-preview"><div class="cf-arena is-single" id="cf-ed-arena"></div></div>' +
+        '<div class="cf-ed-grid">' +
+          '<div class="cf-ed-face">' +
+            '<label for="cf-ed-a">Face A label</label>' +
+            '<input class="pk-input" id="cf-ed-a" maxlength="8" autocomplete="off" placeholder="Heads">' +
+            '<div class="cf-swatches" id="cf-ed-a-sw"></div>' +
+          '</div>' +
+          '<div class="cf-ed-face">' +
+            '<label for="cf-ed-b">Face B label</label>' +
+            '<input class="pk-input" id="cf-ed-b" maxlength="8" autocomplete="off" placeholder="Tails">' +
+            '<div class="cf-swatches" id="cf-ed-b-sw"></div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="cf-ed-actions">' +
+          '<button class="pk-btn pk-btn--ghost" id="cf-ed-cancel" style="flex:1">Cancel</button>' +
+          '<button class="pk-btn" id="cf-ed-save" style="flex:1">Save coin</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(edBackdrop);
+
+    var aIn = edBackdrop.querySelector("#cf-ed-a"), bIn = edBackdrop.querySelector("#cf-ed-b");
+    aIn.addEventListener("input", function(){ edState.a.label = aIn.value; syncPreview(); });
+    bIn.addEventListener("input", function(){ edState.b.label = bIn.value; syncPreview(); });
+
+    buildSwatches(edBackdrop.querySelector("#cf-ed-a-sw"), "a");
+    buildSwatches(edBackdrop.querySelector("#cf-ed-b-sw"), "b");
+
+    edBackdrop.querySelector("#cf-ed-cancel").addEventListener("click", closeEditor);
+    edBackdrop.querySelector("#cf-ed-save").addEventListener("click", saveCustom);
+    edBackdrop.addEventListener("click", function(e){ if (e.target === edBackdrop) closeEditor(); });
+    edBackdrop.addEventListener("keydown", function(e){ if (e.key === "Escape") closeEditor(); });
+  }
+  function buildSwatches(wrap, side){
+    COLORS.forEach(function(c){
+      var b = document.createElement("button");
+      b.className = "cf-sw"; b.type = "button"; b.style.background = c[1];
+      b.setAttribute("aria-label", c[0]); b.setAttribute("data-color", c[1]);
+      b.addEventListener("click", function(){
+        edState[side].color = c[1];
+        if (side === "a") edState.edge = c[1];
+        paintSwatches(wrap, c[1]); syncPreview();
+      });
+      wrap.appendChild(b);
+    });
+  }
+  function paintSwatches(wrap, val){
+    wrap.querySelectorAll(".cf-sw").forEach(function(b){
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-color") === val));
+    });
+  }
+  function syncEditor(){
+    edBackdrop.querySelector("#cf-ed-a").value = edState.a.label;
+    edBackdrop.querySelector("#cf-ed-b").value = edState.b.label;
+    paintSwatches(edBackdrop.querySelector("#cf-ed-a-sw"), edState.a.color);
+    paintSwatches(edBackdrop.querySelector("#cf-ed-b-sw"), edState.b.color);
+    syncPreview();
+  }
+  function syncPreview(){
+    var arena = edBackdrop.querySelector("#cf-ed-arena");
+    arena.innerHTML = "";
+    var def = { a:{ label: edState.a.label || "A", color: edState.a.color },
+                b:{ label: edState.b.label || "B", color: edState.b.color }, edge: edState.edge };
+    arena.appendChild(buildCoin(def, 0));
+  }
+  function graphemes(s){ return Array.from(String(s).trim()); }
+  function saveCustom(){
+    var a = String(edState.a.label).trim(), b = String(edState.b.label).trim();
+    if (!a || !b){ PK.toast("Both faces need a label"); return; }
+    if (graphemes(a).length > 8 || graphemes(b).length > 8){ PK.toast("Labels: 8 characters max"); return; }
+    var def = { id:"custom-" + Date.now().toString(36),
+      a:{ label:a, color:edState.a.color }, b:{ label:b, color:edState.b.color },
+      edge: edState.edge, name: a };
+    customs.push(def); PK.store.set(STORE.customs, customs);
+    closeEditor();
+    selectType(def.id);
+    PK.toast("Saved — " + a + " / " + b);
+  }
+
+  /* ---- boot ---- */
+  function boot(){
+    ui = PK.app({ title:"Coin Flip", slug:"coin-flip", accent:"amber",
+      action:{ label:"Flip", onFire:doFlip, key:" " } });
+
+    ui.stage.innerHTML =
+      '<div class="cf-chips" id="cf-chips" role="group" aria-label="Coin type"></div>' +
+      '<div class="cf-arena" id="cf-arena" aria-hidden="true"></div>' +
+      '<div class="pk-result" id="cf-result" aria-hidden="true"></div>' +
+      '<p class="cf-tagline" id="cf-tagline">' + TAGLINE + '</p>' +
+      '<div class="cf-tally" id="cf-tally" hidden>' +
+        '<div class="cf-tally-row">' +
+          '<span class="cf-tally-side cf-tally-side--a"><span class="cf-chip__dot"></span><span>Heads</span> <b id="cf-th">0</b></span>' +
+          '<span class="cf-tally-side cf-tally-side--b"><b id="cf-tt">0</b> <span>Tails</span><span class="cf-chip__dot"></span></span>' +
+        '</div>' +
+        '<div class="cf-bar"><div class="cf-bar__a" id="cf-bara"></div><div class="cf-bar__b" id="cf-barb"></div></div>' +
+        '<div class="cf-verdict" id="cf-verdict"></div>' +
+      '</div>';
+
+    arenaEl   = document.getElementById("cf-arena");
+    resultEl  = document.getElementById("cf-result");
+    taglineEl = document.getElementById("cf-tagline");
+    tallyEl   = document.getElementById("cf-tally");
+    tHeadsEl  = document.getElementById("cf-th");
+    tTailsEl  = document.getElementById("cf-tt");
+    barAEl    = document.getElementById("cf-bara");
+    barBEl    = document.getElementById("cf-barb");
+    verdictEl = document.getElementById("cf-verdict");
+    chipsEl   = document.getElementById("cf-chips");
+
+    // count stepper -> action bar (left of the primary Flip button)
+    var stepper = document.createElement("div");
+    stepper.className = "cf-stepper"; stepper.setAttribute("role", "group");
+    stepper.setAttribute("aria-label", "Number of coins");
+    var minus = PK.el("button", { "class":"pk-icon-btn", "aria-label":"Fewer coins", type:"button",
+      onClick:function(){ setCount(currentCount - 1); PK.sound.play("tick"); } }, []);
+    minus.innerHTML = "−";
+    var plus = PK.el("button", { "class":"pk-icon-btn", "aria-label":"More coins", type:"button",
+      onClick:function(){ setCount(currentCount + 1); PK.sound.play("tick"); } }, []);
+    plus.innerHTML = "＋";
+    stepValEl = document.createElement("div");
+    stepValEl.className = "cf-stepper__val";
+    stepValEl.appendChild(document.createTextNode(String(currentCount)));
+    var cap = document.createElement("small"); cap.textContent = "coins"; stepValEl.appendChild(cap);
+    stepValEl.setAttribute("aria-live", "polite");
+    stepper.appendChild(minus); stepper.appendChild(stepValEl); stepper.appendChild(plus);
+    ui.actions.insertBefore(stepper, ui.primary);
+
+    renderChips();
+    renderArena();
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+}
+
+/* =====================================================================
+   Export the pure, testable surface for node bot_test.js (no DOM in Node).
+   ===================================================================== */
+if (HEADLESS && typeof globalThis !== "undefined") {
+  globalThis.COINFLIP = { flip: flip, flipMany: flipMany, clampCount: clampCount, halfTurns: halfTurns };
+}
+</script>
+<!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:10px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Get the monthly letter</a></footer><!-- /ep:ca-foot -->
+</body></html>

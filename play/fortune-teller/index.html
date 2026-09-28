@@ -1,0 +1,848 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="stylesheet" href="../_kit/play-kit.css">
+<title>Fortune Teller</title>
+<style>
+  /* ============================================================ fortune-teller
+     A folded-paper cootie-catcher. All styling builds on --pk-* tokens only
+     (colour swatches use the user's stored hex — the only non-token colour).
+     Light + dark + reduced-motion inherit from the kit. Accent: plum. */
+
+  /* -- mode toggle -- */
+  .ft-mode{ margin:0 auto; }
+
+  /* -- prompt line above the catcher -- */
+  .ft-prompt{
+    font-family:var(--pk-font-display); font-weight:600;
+    font-size:var(--pk-fs-title); line-height:1.15; min-height:1.3em;
+    letter-spacing:.01em; color:var(--pk-ink); word-break:break-word;
+  }
+
+  /* -- the scene + catcher (3D) -- */
+  .ft-scene{ perspective:900px; width:100%; display:flex; justify-content:center;
+    min-height:calc(var(--ft-size) + 24px); align-items:center; }
+  :root{ --ft-size:min(300px, 78vw); }
+  .ft-catcher{
+    position:relative; width:var(--ft-size); height:var(--ft-size);
+    transform-style:preserve-3d; will-change:transform;
+    filter:drop-shadow(0 18px 26px rgba(40,30,15,.28));
+  }
+  :root[data-theme="dark"] .ft-catcher,
+  :root:not([data-theme="light"]) .ft-catcher{ filter:drop-shadow(0 18px 26px rgba(0,0,0,.5)); }
+  .ft-catcher.is-idle{ animation:ft-sway 3s ease-in-out infinite; }
+  @keyframes ft-sway{ 0%,100%{ transform:rotateZ(-2deg);} 50%{ transform:rotateZ(2deg);} }
+
+  /* the two stacked faces: colour petals (closed) + number petals (open) */
+  .ft-face{ position:absolute; inset:0; transition:opacity var(--pk-t-base) var(--pk-ease-standard); }
+  .ft-face[hidden]{ display:none; }
+
+  /* a petal is a full-size triangular button pointing at the centre */
+  .ft-petal{
+    position:absolute; inset:0; border:0; padding:0; margin:0; cursor:default;
+    background:transparent; color:inherit; -webkit-tap-highlight-color:transparent;
+    display:block;
+  }
+  .ft-petal > .ft-tri{
+    position:absolute; inset:0;
+    background:var(--pk-mat-ivory);
+    box-shadow:inset 0 0 0 1px color-mix(in srgb, var(--pk-ink) 12%, transparent);
+    transition:transform 400ms var(--pk-ease-spring), filter var(--pk-t-quick) var(--pk-ease-standard);
+    backface-visibility:hidden;
+  }
+  :root[data-theme="dark"] .ft-petal > .ft-tri,
+  :root:not([data-theme="light"]) .ft-petal > .ft-tri{ background:var(--pk-mat-ivory-dk); }
+  .ft-petal > .ft-lbl{
+    position:absolute; z-index:2; font-family:var(--pk-font-display); font-weight:700;
+    letter-spacing:.01em; pointer-events:none; text-align:center; line-height:1;
+  }
+  /* clip each petal into a centre-pointing triangle + place its label near the outer edge */
+  .ft-n .ft-tri{ clip-path:polygon(0 0,100% 0,50% 50%); }
+  .ft-e .ft-tri{ clip-path:polygon(100% 0,100% 100%,50% 50%); }
+  .ft-s .ft-tri{ clip-path:polygon(100% 100%,0 100%,50% 50%); }
+  .ft-w .ft-tri{ clip-path:polygon(0 100%,0 0,50% 50%); }
+  .ft-n .ft-lbl{ top:9%; left:0; right:0; }
+  .ft-e .ft-lbl{ right:8%; top:0; bottom:0; display:flex; align-items:center; justify-content:flex-end; }
+  .ft-s .ft-lbl{ bottom:9%; left:0; right:0; }
+  .ft-w .ft-lbl{ left:8%; top:0; bottom:0; display:flex; align-items:center; justify-content:flex-start; }
+
+  /* colour petals fill with the user's hex; label auto-contrasts */
+  .ft-colors .ft-petal > .ft-tri{ background:var(--fc); box-shadow:inset 0 0 0 1.5px rgba(0,0,0,.18); }
+  .ft-colors .ft-petal > .ft-lbl{ font-size:calc(var(--ft-size) * .066); text-transform:uppercase;
+    color:var(--fk); text-shadow:0 1px 2px rgba(0,0,0,.28); }
+  .ft-colors .ft-petal{ cursor:pointer; }
+  .ft-colors .ft-petal:hover > .ft-tri{ filter:brightness(1.06); }
+  .ft-colors .ft-petal:active > .ft-tri{ filter:brightness(.94); }
+
+  /* number petals — paper faces with a printed number */
+  .ft-nums .ft-petal > .ft-lbl{ font-size:calc(var(--ft-size) * .085); color:var(--pk-ink);
+    font-family:var(--pk-font-num); font-variant-numeric:tabular-nums; font-weight:700; }
+  .ft-nums .ft-petal > .ft-tri{ background:var(--pk-mat-ivory);
+    background-image:linear-gradient(135deg, color-mix(in srgb, var(--pk-mat-ivory) 92%, #fff) 0%, var(--pk-mat-ivory) 60%); }
+  :root[data-theme="dark"] .ft-nums .ft-petal > .ft-tri,
+  :root:not([data-theme="light"]) .ft-nums .ft-petal > .ft-tri{ background:var(--pk-mat-ivory-dk);
+    background-image:none; }
+
+  /* a pickable number petal gets a plum pulse ring + pointer */
+  .ft-nums .ft-petal.is-pick{ cursor:pointer; }
+  .ft-nums .ft-petal.is-pick > .ft-tri{ box-shadow:inset 0 0 0 2px var(--pk-accent),
+    inset 0 0 0 1px color-mix(in srgb, var(--pk-ink) 12%, transparent); animation:ft-pulse 1.6s ease-in-out infinite; }
+  @keyframes ft-pulse{ 0%,100%{ filter:brightness(1);} 50%{ filter:brightness(1.08);} }
+  .ft-nums .ft-petal:not(.is-pick) > .ft-tri{ filter:brightness(.9) saturate(.8); }
+  .ft-nums .ft-petal.is-pick:hover > .ft-tri{ filter:brightness(1.05); }
+
+  /* the lifted flap on reveal (swings up about its outer edge) */
+  .ft-petal.is-lift{ z-index:4; }
+  .ft-petal.is-lift > .ft-tri{ filter:drop-shadow(0 12px 14px rgba(30,20,5,.35)); }
+  .ft-n.is-lift > .ft-tri{ transform-origin:50% 0; transform:rotateX(152deg); }
+  .ft-e.is-lift > .ft-tri{ transform-origin:100% 50%; transform:rotateY(152deg); }
+  .ft-s.is-lift > .ft-tri{ transform-origin:50% 100%; transform:rotateX(-152deg); }
+  .ft-w.is-lift > .ft-tri{ transform-origin:0 50%; transform:rotateY(-152deg); }
+
+  /* centre fortune, revealed under the lifted flap */
+  .ft-fortune{
+    position:absolute; z-index:3; inset:16%; display:flex; align-items:center; justify-content:center;
+    text-align:center; padding:6px; border-radius:12px;
+    background:var(--pk-surface); box-shadow:var(--pk-shadow-2);
+    font-family:var(--pk-font-display); font-weight:600; line-height:1.2;
+    font-size:calc(var(--ft-size) * .062); color:var(--pk-ink);
+    opacity:0; transform:scale(.82); pointer-events:none;
+  }
+  .ft-fortune.is-on{ opacity:1; transform:scale(1);
+    transition:opacity 200ms var(--pk-ease-settle), transform 200ms var(--pk-ease-settle); }
+
+  /* confetti burst */
+  .ft-confetti{ position:absolute; inset:0; pointer-events:none; z-index:5; }
+  .ft-confetti i{ position:absolute; top:50%; left:50%; width:8px; height:12px; border-radius:2px; will-change:transform,opacity; }
+
+  /* ------------------------------------------------------------------- edit mode */
+  .ft-edit{ width:100%; max-width:460px; display:flex; flex-direction:column; gap:var(--pk-gap); }
+  .ft-edit[hidden]{ display:none; }
+  .ft-tabs{ align-self:center; }
+  .ft-presets{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+  .ft-tabpanel{ display:flex; flex-direction:column; gap:10px; }
+  .ft-tabpanel[hidden]{ display:none; }
+  .ft-erow{ display:flex; align-items:center; gap:10px; }
+  .ft-erow label{ font-size:var(--pk-fs-sm); color:var(--pk-ink-soft); min-width:52px; text-align:right; }
+  .ft-erow .pk-input{ flex:1; min-width:0; }
+  .ft-erow input[type="color"]{ width:44px; height:44px; padding:2px; border:1.5px solid var(--pk-line);
+    border-radius:var(--pk-radius-sm); background:var(--pk-surface); cursor:pointer; flex:0 0 auto; }
+  .ft-count{ font-size:var(--pk-fs-xs); color:var(--pk-ink-faint); text-align:right; }
+  .ft-errors{ color:var(--pk-bad); font-size:var(--pk-fs-sm); text-align:left; }
+  .ft-errors ul{ margin:4px 0 0; padding-left:18px; }
+  .ft-preview{ display:flex; justify-content:center; }
+  .ft-preview .ft-scene{ min-height:0; }
+  .ft-preview{ --ft-size:150px; }
+
+  .ft-appset{ display:flex; flex-direction:column; gap:6px; }
+
+  @media (max-width:380px){
+    :root{ --ft-size:min(300px, 82vw); }
+    .ft-erow label{ min-width:44px; }
+  }
+</style>
+<link rel="canonical" href="https://epeters.ca/play/fortune-teller/">
+</head><body>
+
+<script src="../_kit/play-kit.js"></script>
+
+<script>
+var HEADLESS = (typeof document === "undefined");
+
+/* =====================================================================
+   PURE LOGIC — no DOM, injectable rng. Exported as globalThis.FORTUNE.
+   Normal play is DETERMINISTIC: resolve() is a pure function of content
+   + picks. rng(n)->[0,n) is passed ONLY to surprise(). See SPEC §6.
+   ===================================================================== */
+
+var CONFIG = { NUM_COLORS:4, NUM_FLAPS:8, LAYER_SIZE:4, MAX_FORTUNE:80, COUNT_CAP:20 };
+
+var DEFAULT_CONTENT = {
+  colors: [ {name:"RED", hex:"#e5484d"}, {name:"BLUE", hex:"#3b82f6"},
+            {name:"GREEN", hex:"#22c55e"}, {name:"YELLOW", hex:"#eab308"} ],
+  numbers: [1,2,3,4,5,6,7,8],
+  fortunes: [
+    "You will have a great day.",   "Say yes to the next invitation.",
+    "A surprise is coming.",        "Trust your gut on this one.",
+    "Call an old friend today.",    "The answer is: absolutely.",
+    "Take the risk.",               "Good news arrives soon."
+  ]
+};
+
+// fold parity: which layer of 4 flaps is face-up after `chomps` chomps
+function layerOf(chomps){ return ((Math.floor(chomps) % 2) + 2) % 2; }
+
+// the 4 flap positions face-up in a given layer: 0 -> [0,1,2,3], 1 -> [4,5,6,7]
+function visible(content, layerParity){
+  var base = (layerParity ? 1 : 0) * CONFIG.LAYER_SIZE, a = [], i;
+  for (i = 0; i < CONFIG.LAYER_SIZE; i++) a.push(base + i);
+  return a;
+}
+
+// chomps to spell a colour = its name length
+function spellCount(content, colorIndex){
+  var c = content.colors[colorIndex];
+  return c && c.name != null ? String(c.name).length : 0;
+}
+
+// integer count for a number label: positive integer -> itself, else label
+// length; clamped to [1, COUNT_CAP] so edited labels still count meaningfully.
+function countValue(label){
+  var s = String(label == null ? "" : label);
+  var n = Number(s);
+  var v = (isFinite(n) && Math.floor(n) === n && n > 0) ? n : s.length;
+  if (!(v >= 1)) v = 1;
+  if (v > CONFIG.COUNT_CAP) v = CONFIG.COUNT_CAP;
+  return v;
+}
+
+// the deterministic outcome (the whole point). Pure; no RNG.
+function resolve(content, colorIndex, pick1, pick2){
+  var L = spellCount(content, colorIndex);
+  var spellLayer = layerOf(L);
+  var C = countValue(content.numbers[pick1]);
+  var countLayer = layerOf(L + C);
+  var vis1 = visible(content, spellLayer), vis2 = visible(content, countLayer);
+  var ok = vis1.indexOf(pick1) !== -1 && vis2.indexOf(pick2) !== -1;
+  return { ok: ok, fortuneIndex: pick2, spellLayer: spellLayer, countLayer: countLayer, spellCount: L, count: C };
+}
+
+// auto-play (the ONLY random path). Always returns a legal path.
+function surprise(content, rng){
+  var colorIndex = rng(content.colors.length);
+  var L = spellCount(content, colorIndex);
+  var spellLayer = layerOf(L);
+  var vis1 = visible(content, spellLayer);
+  var pick1 = vis1[rng(vis1.length)];
+  var C = countValue(content.numbers[pick1]);
+  var countLayer = layerOf(L + C);
+  var vis2 = visible(content, countLayer);
+  var pick2 = vis2[rng(vis2.length)];
+  return { colorIndex: colorIndex, pick1: pick1, pick2: pick2, fortuneIndex: pick2,
+           spellLayer: spellLayer, countLayer: countLayer };
+}
+
+// content validation for the editor
+function validate(content){
+  var errors = [];
+  if (!content || typeof content !== "object") return { ok:false, errors:["Content is missing."] };
+  var colors = content.colors, numbers = content.numbers, fortunes = content.fortunes;
+
+  if (!Array.isArray(colors) || colors.length !== CONFIG.NUM_COLORS) {
+    errors.push("Need exactly " + CONFIG.NUM_COLORS + " colours.");
+  } else {
+    colors.forEach(function(c, i){
+      var name = c && c.name != null ? String(c.name) : "";
+      if (!name.trim()) errors.push("Colour " + (i+1) + " needs a name.");
+      else if (name.length > 12 || !/^[A-Za-z ]+$/.test(name)) errors.push("Colour " + (i+1) + " name: 1-12 letters/spaces.");
+      if (!c || !/^#[0-9a-fA-F]{6}$/.test(String(c && c.hex))) errors.push("Colour " + (i+1) + " needs a valid #rrggbb hex.");
+    });
+  }
+  if (!Array.isArray(numbers) || numbers.length !== CONFIG.NUM_FLAPS) {
+    errors.push("Need exactly " + CONFIG.NUM_FLAPS + " numbers.");
+  } else {
+    numbers.forEach(function(n, i){
+      var s = String(n == null ? "" : n).trim();
+      if (!s) errors.push("Number " + (i+1) + " cannot be empty.");
+      else if (s.length > 3) errors.push("Number " + (i+1) + " must be 3 characters or fewer.");
+    });
+  }
+  if (!Array.isArray(fortunes) || fortunes.length !== CONFIG.NUM_FLAPS) {
+    errors.push("Need exactly " + CONFIG.NUM_FLAPS + " fortunes.");
+  } else {
+    fortunes.forEach(function(f, i){
+      var s = String(f == null ? "" : f);
+      if (!s.trim()) errors.push("Fortune " + (i+1) + " cannot be empty.");
+      else if (s.length > CONFIG.MAX_FORTUNE) errors.push("Fortune " + (i+1) + " must be " + CONFIG.MAX_FORTUNE + " characters or fewer.");
+    });
+  }
+  return { ok: errors.length === 0, errors: errors };
+}
+
+// URL-safe base64 of JSON; works in browser AND Node (feature-detected), UTF-8 safe.
+function encode(content){
+  var json = JSON.stringify(content), b64;
+  if (typeof btoa === "function") b64 = btoa(unescape(encodeURIComponent(json)));
+  else b64 = Buffer.from(json, "utf8").toString("base64");
+  return b64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+}
+function decode(str){
+  if (!str || typeof str !== "string") return null;
+  try {
+    var b64 = str.replace(/-/g, "+").replace(/_/g, "/");
+    while (b64.length % 4) b64 += "=";
+    var json;
+    if (typeof atob === "function") json = decodeURIComponent(escape(atob(b64)));
+    else json = Buffer.from(b64, "base64").toString("utf8");
+    var obj = JSON.parse(json);
+    if (!validate(obj).ok) return null;
+    return obj;
+  } catch (e) { return null; }
+}
+
+/* =====================================================================
+   BROWSER WIRING — everything below touches the DOM / PK, so it is fully
+   guarded behind !HEADLESS and is never reached by node bot_test.js.
+   ===================================================================== */
+if (!HEADLESS) {
+
+  var STORE_KEY = "play.fortune-teller.content";
+
+  var PRESETS = {
+    classic: { name:"Classic", content: clone(DEFAULT_CONTENT) },
+    decision: { name:"Decision maker", content: {
+      colors: clone(DEFAULT_CONTENT.colors), numbers:[1,2,3,4,5,6,7,8],
+      fortunes:["Yes","No","Maybe","Ask again","Definitely","Not now","Go for it","Sleep on it"] } },
+    date: { name:"Date night", content: {
+      colors: clone(DEFAULT_CONTENT.colors), numbers:[1,2,3,4,5,6,7,8],
+      fortunes:["Cook dinner together tonight.","Watch a film you both love.","Take a walk under the stars.",
+        "Try a brand-new restaurant.","Plan a weekend away.","Dance in the kitchen.",
+        "Share three things you love.","Breakfast in bed tomorrow."] } },
+    kids: { name:"Kids", content: {
+      colors: clone(DEFAULT_CONTENT.colors), numbers:[1,2,3,4,5,6,7,8],
+      fortunes:["You will ace it today!","You will make a new friend.","Try your best and smile.",
+        "A fun surprise is coming.","Be kind to someone today.","An adventure awaits you.",
+        "You are awesome.","Today is going to be great."] } }
+  };
+
+  function clone(o){ return JSON.parse(JSON.stringify(o)); }
+
+  /* -- pick initial content: ?f= shared -> stored -> default -- */
+  var content, sharedToast = false;
+  (function initContent(){
+    var f = null;
+    try { f = new URLSearchParams(location.search).get("f"); } catch (e) {}
+    if (f) {
+      var dec = decode(f);
+      if (dec) { content = dec; sharedToast = true; return; }
+    }
+    var stored = PK.store.get(STORE_KEY, null);
+    content = (stored && validate(stored).ok) ? stored : clone(DEFAULT_CONTENT);
+  })();
+
+  /* -- play state -- */
+  var mode = "play";                 // play | edit
+  var phase = "idle";                // idle | spelling | pick1 | counting | pick2 | reveal
+  var busy = false;                  // true while animating (picks + primary disabled)
+  var chompsDone = 0;                // chomps completed this play (parity = current layer)
+  var currentLayer = 0;
+  var run = null;                    // { colorIndex, L, pick1 } accumulated across the play
+  var draft = null;                  // edit-mode working copy
+
+  var ui, promptEl, catcherEl, colorsEl, numsEl, resultEl, fortuneEl, confettiEl, editEl,
+      shareBtn, saveBtn, resetBtn, numBtns = [], colorBtns = [];
+
+  /* ------------------------------------------------------------- helpers */
+  function luminanceInk(hex){
+    var h = String(hex).replace("#",""); if (h.length !== 6) return "#111";
+    var r = parseInt(h.slice(0,2),16)/255, g = parseInt(h.slice(2,4),16)/255, b = parseInt(h.slice(4,6),16)/255;
+    function lin(c){ return c <= 0.03928 ? c/12.92 : Math.pow((c+0.055)/1.055, 2.4); }
+    var Y = 0.2126*lin(r) + 0.7152*lin(g) + 0.0722*lin(b);
+    return Y > 0.42 ? "#1c140a" : "#ffffff";
+  }
+  var SLOT = ["ft-n","ft-e","ft-s","ft-w"];   // slot i -> quadrant class
+
+  /* ---- build the two catcher faces ---- */
+  function buildCatcher(){
+    colorsEl.innerHTML = ""; numsEl.innerHTML = ""; colorBtns = []; numBtns = [];
+    var i, btn, tri, lbl;
+    for (i = 0; i < 4; i++){
+      // colour petal
+      btn = document.createElement("button");
+      btn.className = "ft-petal " + SLOT[i]; btn.type = "button";
+      btn.setAttribute("data-slot", i);
+      tri = document.createElement("span"); tri.className = "ft-tri";
+      lbl = document.createElement("span"); lbl.className = "ft-lbl";
+      btn.appendChild(tri); btn.appendChild(lbl);
+      (function(idx){ btn.addEventListener("click", function(){ onColorTap(idx); }); })(i);
+      colorsEl.appendChild(btn); colorBtns.push(btn);
+
+      // number petal
+      btn = document.createElement("button");
+      btn.className = "ft-petal " + SLOT[i]; btn.type = "button";
+      btn.setAttribute("data-slot", i);
+      tri = document.createElement("span"); tri.className = "ft-tri";
+      lbl = document.createElement("span"); lbl.className = "ft-lbl";
+      btn.appendChild(tri); btn.appendChild(lbl);
+      (function(idx){ btn.addEventListener("click", function(){ onNumberTap(idx); }); })(i);
+      numsEl.appendChild(btn); numBtns.push(btn);
+    }
+  }
+
+  function renderColors(){
+    for (var i = 0; i < 4; i++){
+      var c = content.colors[i];
+      colorBtns[i].style.setProperty("--fc", c.hex);
+      colorBtns[i].style.setProperty("--fk", luminanceInk(c.hex));
+      colorBtns[i].querySelector(".ft-lbl").textContent = c.name;
+      colorBtns[i].setAttribute("aria-label", "Pick " + c.name);
+    }
+  }
+  // show the 4 flaps of `parity` in the number face; mark pickable if `pick`
+  function renderNums(parity, pick){
+    currentLayer = parity;
+    var vis = visible(content, parity);
+    for (var i = 0; i < 4; i++){
+      var pos = vis[i];
+      numBtns[i].setAttribute("data-pos", pos);
+      numBtns[i].querySelector(".ft-lbl").textContent = content.numbers[pos];
+      numBtns[i].classList.remove("is-lift");
+      var t = numBtns[i].querySelector(".ft-tri"); t.style.transform = ""; t.style.filter = "";
+      if (pick){ numBtns[i].classList.add("is-pick"); numBtns[i].setAttribute("aria-label", "Pick number " + content.numbers[pos]); }
+      else { numBtns[i].classList.remove("is-pick"); numBtns[i].removeAttribute("aria-label"); }
+    }
+  }
+
+  function showFace(which){ // "colors" | "nums"
+    colorsEl.hidden = (which !== "colors");
+    numsEl.hidden = (which !== "nums");
+  }
+  function setPrompt(t){ promptEl.textContent = t; }
+  function setIdleAnim(on){ catcherEl.classList.toggle("is-idle", !!on && !PK.motion.reduced); }
+
+  /* ------------------------------------------------------------- one chomp */
+  var DUR0 = 340;
+  function chompDur(i){ return Math.max(200, Math.round(DUR0 * Math.pow(0.95, i))); }
+
+  function animateChomp(onDone){
+    var i = chompsDone;                 // 0-based index of THIS chomp
+    var ns = (i % 2 === 0);             // chomp 0 opens N-S, chomp 1 E-W, ...
+    if (PK.motion.reduced){
+      chompsDone++; renderNums(chompsDone % 2, false); onDone();
+      return;
+    }
+    var dur = chompDur(i);
+    var pinch = ns ? "scaleY(0.6) scaleX(1.06)" : "scaleX(0.6) scaleY(1.06)";
+    PK.sound.play("cardFlip"); PK.buzz(8);
+    setIdleAnim(false);
+    catcherEl.animate([
+      { transform:"scale(1)", easing:"var(--pk-ease-standard)" },
+      { transform:pinch, offset:0.44, easing:"linear" },
+      { transform:pinch, offset:0.56, easing:"var(--pk-ease-spring)" },
+      { transform:"scale(1)" }
+    ], { duration:dur, fill:"none" });
+    // swap the visible layer at the closed moment -> the OTHER set reads open
+    setTimeout(function(){ chompsDone++; renderNums(chompsDone % 2, false); }, Math.round(dur * 0.5));
+    setTimeout(onDone, dur);
+  }
+
+  // run `n` chomps, revealing tokens[k] above the catcher each chomp
+  function runChomps(n, tokens, onDone){
+    if (n <= 0){ onDone(); return; }
+    if (PK.motion.reduced){
+      var k = 0;
+      (function step(){
+        if (k >= n){ onDone(); return; }
+        setPrompt(tokens.slice(0, k+1).join(" · "));
+        PK.sound.play("tick");
+        chompsDone++; renderNums(chompsDone % 2, false);
+        k++; setTimeout(step, 110);
+      })();
+      return;
+    }
+    var i = 0;
+    (function step(){
+      if (i >= n){ onDone(); return; }
+      setPrompt(tokens.slice(0, i+1).join(" · "));
+      PK.sound.play("tick");
+      animateChomp(function(){ i++; step(); });
+    })();
+  }
+
+  /* ------------------------------------------------------------- the play */
+  function startColor(colorIndex, auto){
+    if (busy || phase !== "idle" || mode !== "play") return;
+    busy = true; ui.primary.disabled = true;
+    setIdleAnim(false);
+    resultEl.textContent = ""; resultEl.removeAttribute("data-tone");
+    fortuneEl.classList.remove("is-on"); fortuneEl.textContent = "";
+    chompsDone = 0;
+    run = { colorIndex: colorIndex, L: spellCount(content, colorIndex) };
+    phase = "spelling";
+
+    showFace("nums");
+    renderNums(0, false);
+    var name = String(content.colors[colorIndex].name);
+    var letters = name.split("");
+    runChomps(letters.length, letters, function(){
+      // catcher rests OPEN on layerOf(L) == currentLayer
+      phase = "pick1";
+      renderNums(currentLayer, true);
+      setPrompt("Pick a number");
+      busy = false; ui.primary.disabled = false;
+      if (auto) setTimeout(function(){ doPick1(auto.pick1, auto); }, 480);
+    });
+  }
+
+  function onColorTap(slot){
+    if (busy || phase !== "idle" || mode !== "play") return;
+    PK.sound.play("click");
+    startColor(slot, null);
+  }
+
+  function doPick1(pos, auto){
+    if (busy || phase !== "pick1") return;
+    // legality: pos must be visible in the current (spell) layer
+    if (visible(content, currentLayer).indexOf(pos) === -1) return;
+    busy = true; ui.primary.disabled = true;
+    run.pick1 = pos;
+    phase = "counting";
+    for (var i = 0; i < 4; i++) numBtns[i].classList.remove("is-pick");
+    var C = countValue(content.numbers[pos]);
+    var tokens = []; for (var k = 1; k <= C; k++) tokens.push(String(k));
+    runChomps(C, tokens, function(){
+      phase = "pick2";
+      renderNums(currentLayer, true);
+      setPrompt("Pick a number");
+      busy = false; ui.primary.disabled = false;
+      if (auto) setTimeout(function(){ doPick2(auto.pick2); }, 480);
+    });
+  }
+
+  function onNumberTap(slot){
+    if (busy) return;
+    var pos = parseInt(numBtns[slot].getAttribute("data-pos"), 10);
+    if (phase === "pick1"){ PK.sound.play("click"); doPick1(pos, null); }
+    else if (phase === "pick2"){ PK.sound.play("click"); doPick2(pos); }
+  }
+
+  function doPick2(pos){
+    if (busy || phase !== "pick2") return;
+    if (visible(content, currentLayer).indexOf(pos) === -1) return;
+    busy = true; ui.primary.disabled = true;
+    phase = "reveal";
+    var res = resolve(content, run.colorIndex, run.pick1, pos);
+    var fortune = content.fortunes[res.fortuneIndex];
+
+    // find the slot showing this pos, mark all others non-pick, lift the chosen
+    var slot = -1;
+    for (var i = 0; i < 4; i++){
+      numBtns[i].classList.remove("is-pick");
+      if (parseInt(numBtns[i].getAttribute("data-pos"),10) === pos) slot = i;
+    }
+    setPrompt("Your fortune");
+
+    function land(){
+      resultEl.textContent = fortune; resultEl.setAttribute("data-tone", "good");
+      fortuneEl.textContent = fortune; fortuneEl.classList.add("is-on");
+      PK.sound.play("reveal");
+      setTimeout(function(){ PK.sound.play("win"); }, 120);
+      PK.buzz(40);
+      PK.announce(fortune, true);
+      if (!PK.motion.reduced) confettiBurst();
+      busy = false;
+      ui.primary.disabled = false;
+      ui.primary.textContent = "Play again";
+    }
+
+    if (PK.motion.reduced){
+      if (slot >= 0){ numBtns[slot].querySelector(".ft-tri").style.filter = "brightness(1.1)"; }
+      setTimeout(land, 130);
+    } else {
+      if (slot >= 0) numBtns[slot].classList.add("is-lift");
+      setTimeout(land, 320);
+    }
+  }
+
+  function confettiBurst(){
+    confettiEl.innerHTML = "";
+    var colors = [getAccent(), content.colors[0].hex, content.colors[1].hex, content.colors[2].hex, content.colors[3].hex];
+    for (var i = 0; i < 14; i++){
+      var p = document.createElement("i");
+      p.style.background = colors[i % colors.length];
+      confettiEl.appendChild(p);
+      var ang = (Math.PI * 2 * i) / 14 + Math.random() * 0.4;
+      var dist = 80 + Math.random() * 70;
+      var dx = Math.cos(ang) * dist, dy = Math.sin(ang) * dist;
+      p.animate([
+        { transform:"translate(-50%,-50%) rotate(0deg)", opacity:1 },
+        { transform:"translate(calc(-50% + " + dx + "px), calc(-50% + " + dy + "px)) rotate(" + (Math.random()*540-270) + "deg)", opacity:0 }
+      ], { duration:700 + Math.random()*250, easing:"cubic-bezier(.16,1,.3,1)", fill:"forwards" });
+    }
+    setTimeout(function(){ confettiEl.innerHTML = ""; }, 1100);
+  }
+  function getAccent(){ return getComputedStyle(document.documentElement).getPropertyValue("--pk-accent").trim() || "#7A4CB0"; }
+
+  /* ------------------------------------------------------------- reset / surprise */
+  function resetPlay(){
+    phase = "idle"; busy = false; chompsDone = 0; run = null;
+    ui.primary.disabled = false; ui.primary.textContent = "Surprise me";
+    showFace("colors");
+    for (var i = 0; i < 4; i++){ numBtns[i].classList.remove("is-lift","is-pick"); numBtns[i].querySelector(".ft-tri").style.transform=""; }
+    fortuneEl.classList.remove("is-on"); fortuneEl.textContent = "";
+    resultEl.textContent = ""; resultEl.removeAttribute("data-tone");
+    setPrompt("Pick a colour");
+    setIdleAnim(true);
+  }
+
+  function primaryFire(){
+    if (mode !== "play") return;
+    if (phase === "reveal"){ resetPlay(); return; }
+    if (busy || phase !== "idle") return;
+    // Surprise me — the ONLY random path (crypto)
+    var s = surprise(content, PK.rand.int);
+    startColor(s.colorIndex, { pick1:s.pick1, pick2:s.pick2 });
+  }
+
+  /* ------------------------------------------------------------- keyboard */
+  document.addEventListener("keydown", function(e){
+    if (mode !== "play" || busy) return;
+    var tag = (e.target && e.target.tagName) || "";
+    if (/INPUT|TEXTAREA|SELECT/.test(tag) || e.target.isContentEditable) return;
+    if (phase !== "pick1" && phase !== "pick2") return;
+    if (!/^[0-9]$/.test(e.key)) return;
+    var vis = visible(content, currentLayer);
+    for (var i = 0; i < vis.length; i++){
+      if (String(content.numbers[vis[i]]) === e.key){
+        e.preventDefault();
+        // slot index i maps directly to numBtns[i] (renderNums fills in vis order)
+        onNumberTap(i);
+        return;
+      }
+    }
+  });
+
+  /* ------------------------------------------------------------- share */
+  function doShare(){
+    var active = (mode === "edit" && draft) ? draft : content;
+    var v = validate(active);
+    if (!v.ok){ PK.toast("Fix the content before sharing"); return; }
+    var url = location.origin + location.pathname + "?f=" + encode(active);
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(url).then(function(){ PK.toast("Share link copied"); },
+        function(){ PK.toast("Copy failed — link in address bar"); promptCopy(url); });
+    } else { promptCopy(url); }
+    PK.sound.play("click");
+  }
+  function promptCopy(url){ try { history.replaceState(null, "", url); PK.toast("Link set in the address bar"); } catch (e) { PK.toast("Copy the URL to share"); } }
+
+  /* ------------------------------------------------------------- edit mode */
+  function enterEdit(){
+    mode = "edit";
+    draft = clone(content);
+    setIdleAnim(false);
+    document.getElementById("ft-play").hidden = true;
+    editEl.hidden = false;
+    shareBtn.hidden = false; saveBtn.hidden = false; resetBtn.hidden = false;
+    ui.primary.disabled = true; ui.primary.style.display = "none";
+    renderEdit();
+  }
+  function enterPlay(){
+    mode = "play";
+    editEl.hidden = true;
+    document.getElementById("ft-play").hidden = false;
+    saveBtn.hidden = true; resetBtn.hidden = true;
+    ui.primary.style.display = ""; ui.primary.disabled = false;
+    renderColors();
+    resetPlay();
+  }
+
+  var editTab = "colors";
+  function renderEdit(){
+    editEl.querySelectorAll(".ft-tabpanel").forEach(function(p){ p.hidden = (p.getAttribute("data-tab") !== editTab); });
+    editEl.querySelectorAll("#ft-tabs button").forEach(function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-tab") === editTab)); });
+    renderPreview();
+  }
+  function renderPreview(){
+    // mini closed catcher reflecting draft colours
+    var host = editEl.querySelector("#ft-prev-colors");
+    host.innerHTML = "";
+    for (var i = 0; i < 4; i++){
+      var btn = document.createElement("span");
+      btn.className = "ft-petal " + SLOT[i];
+      var tri = document.createElement("span"); tri.className = "ft-tri";
+      var lbl = document.createElement("span"); lbl.className = "ft-lbl";
+      var c = draft.colors[i];
+      btn.style.setProperty("--fc", c.hex); btn.style.setProperty("--fk", luminanceInk(c.hex));
+      lbl.textContent = c.name;
+      btn.appendChild(tri); btn.appendChild(lbl); host.appendChild(btn);
+    }
+  }
+
+  function buildEdit(){
+    var html = "";
+    html += '<div class="pk-seg ft-tabs" id="ft-tabs" role="tablist">';
+    html += '<button data-tab="colors">Colours</button><button data-tab="numbers">Numbers</button><button data-tab="fortunes">Fortunes</button></div>';
+    html += '<div class="ft-preview"><div class="ft-scene"><div class="ft-catcher"><div class="ft-face ft-colors" id="ft-prev-colors"></div></div></div></div>';
+
+    // colours panel
+    html += '<div class="ft-tabpanel" data-tab="colors">';
+    for (var i = 0; i < 4; i++){
+      html += '<div class="ft-erow"><label for="ft-cn'+i+'">Colour '+(i+1)+'</label>'+
+        '<input class="pk-input" id="ft-cn'+i+'" maxlength="12" autocomplete="off" data-ci="'+i+'">'+
+        '<input type="color" id="ft-ch'+i+'" data-ci="'+i+'" aria-label="Colour '+(i+1)+' hex"></div>';
+    }
+    html += '</div>';
+    // numbers panel
+    html += '<div class="ft-tabpanel" data-tab="numbers" hidden>';
+    for (i = 0; i < 8; i++){
+      html += '<div class="ft-erow"><label for="ft-nn'+i+'">Flap '+(i+1)+'</label>'+
+        '<input class="pk-input" id="ft-nn'+i+'" maxlength="3" autocomplete="off" data-ni="'+i+'"></div>';
+    }
+    html += '</div>';
+    // fortunes panel
+    html += '<div class="ft-tabpanel" data-tab="fortunes" hidden>';
+    for (i = 0; i < 8; i++){
+      html += '<div class="ft-erow"><label for="ft-ff'+i+'">Fortune '+(i+1)+'</label>'+
+        '<input class="pk-input" id="ft-ff'+i+'" maxlength="80" autocomplete="off" data-fi="'+i+'"></div>';
+    }
+    html += '</div>';
+    // presets + errors
+    html += '<div class="ft-presets" id="ft-presets" role="group" aria-label="Presets"></div>';
+    html += '<div class="ft-errors" id="ft-errors" aria-live="polite"></div>';
+    editEl.innerHTML = html;
+
+    // tab switching
+    editEl.querySelector("#ft-tabs").addEventListener("click", function(e){
+      var b = e.target.closest("button"); if (!b) return;
+      editTab = b.getAttribute("data-tab"); PK.sound.play("click"); renderEdit();
+    });
+    // colour inputs
+    for (i = 0; i < 4; i++){
+      var cn = editEl.querySelector("#ft-cn"+i), ch = editEl.querySelector("#ft-ch"+i);
+      cn.value = draft.colors[i].name; ch.value = normHex(draft.colors[i].hex);
+      cn.addEventListener("input", function(){ draft.colors[+this.getAttribute("data-ci")].name = this.value; renderPreview(); });
+      ch.addEventListener("input", function(){ draft.colors[+this.getAttribute("data-ci")].hex = this.value; renderPreview(); });
+    }
+    // number inputs
+    for (i = 0; i < 8; i++){
+      var nn = editEl.querySelector("#ft-nn"+i);
+      nn.value = draft.numbers[i];
+      nn.addEventListener("input", function(){ draft.numbers[+this.getAttribute("data-ni")] = this.value; });
+    }
+    // fortune inputs
+    for (i = 0; i < 8; i++){
+      var ff = editEl.querySelector("#ft-ff"+i);
+      ff.value = draft.fortunes[i];
+      ff.addEventListener("input", function(){ draft.fortunes[+this.getAttribute("data-fi")] = this.value; });
+    }
+    // presets
+    var pr = editEl.querySelector("#ft-presets");
+    Object.keys(PRESETS).forEach(function(key){
+      var b = document.createElement("button"); b.className = "pk-btn pk-btn--soft pk-btn--sm";
+      b.textContent = PRESETS[key].name; b.type = "button";
+      b.addEventListener("click", function(){ draft = clone(PRESETS[key].content); buildEdit(); renderEdit(); PK.toast(PRESETS[key].name + " loaded"); });
+      pr.appendChild(b);
+    });
+    renderPreview();
+  }
+  function normHex(hex){ var h = String(hex); return /^#[0-9a-fA-F]{6}$/.test(h) ? h : "#000000"; }
+
+  function saveEdit(){
+    // coerce numbers that are pure integers back to numbers for a clean model
+    draft.numbers = draft.numbers.map(function(n){
+      var s = String(n).trim(); return /^-?\d+$/.test(s) ? parseInt(s,10) : s; });
+    var v = validate(draft);
+    var errBox = editEl.querySelector("#ft-errors");
+    if (!v.ok){
+      errBox.innerHTML = "<strong>Can't save yet:</strong><ul>" +
+        v.errors.map(function(e){ return "<li>" + esc(e) + "</li>"; }).join("") + "</ul>";
+      PK.toast("Fix the highlighted items"); return;
+    }
+    errBox.innerHTML = "";
+    content = clone(draft);
+    PK.store.set(STORE_KEY, content);
+    PK.sound.play("reveal");
+    PK.toast("Saved");
+    enterPlay();
+  }
+  function resetDefault(){
+    draft = clone(DEFAULT_CONTENT);
+    buildEdit(); renderEdit();
+    PK.toast("Reset to default");
+  }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+
+  /* ------------------------------------------------------------- boot */
+  function boot(){
+    ui = PK.app({ title:"Fortune Teller", slug:"fortune-teller", accent:"plum",
+      action:{ label:"Surprise me", onFire:primaryFire, key:" " } });
+
+    ui.stage.innerHTML =
+      '<div class="pk-seg ft-mode" id="ft-modeseg" role="tablist" aria-label="Mode">' +
+        '<button data-mode="play" aria-pressed="true">Play</button>' +
+        '<button data-mode="edit" aria-pressed="false">Edit</button>' +
+      '</div>' +
+      '<div id="ft-play">' +
+        '<p class="ft-prompt" id="ft-prompt">Pick a colour</p>' +
+        '<div class="ft-scene"><div class="ft-catcher" id="ft-catcher">' +
+          '<div class="ft-face ft-colors" id="ft-colors"></div>' +
+          '<div class="ft-face ft-nums" id="ft-nums" hidden></div>' +
+          '<div class="ft-fortune" id="ft-fortune" aria-hidden="true"></div>' +
+          '<div class="ft-confetti" id="ft-confetti" aria-hidden="true"></div>' +
+        '</div></div>' +
+        '<div class="pk-result" id="ft-result" aria-hidden="true"></div>' +
+      '</div>' +
+      '<div class="ft-edit" id="ft-edit" hidden></div>';
+
+    promptEl   = document.getElementById("ft-prompt");
+    catcherEl  = document.getElementById("ft-catcher");
+    colorsEl   = document.getElementById("ft-colors");
+    numsEl     = document.getElementById("ft-nums");
+    resultEl   = document.getElementById("ft-result");
+    fortuneEl  = document.getElementById("ft-fortune");
+    confettiEl = document.getElementById("ft-confetti");
+    editEl     = document.getElementById("ft-edit");
+
+    // secondary action buttons
+    shareBtn = mkBtn("Share", "pk-btn--ghost", doShare);
+    saveBtn  = mkBtn("Save", "", saveEdit); saveBtn.hidden = true;
+    resetBtn = mkBtn("Reset", "pk-btn--ghost", resetDefault); resetBtn.hidden = true;
+    ui.actions.appendChild(shareBtn);
+    ui.actions.appendChild(saveBtn);
+    ui.actions.appendChild(resetBtn);
+
+    // mode toggle
+    document.getElementById("ft-modeseg").addEventListener("click", function(e){
+      var b = e.target.closest("button"); if (!b) return;
+      var m = b.getAttribute("data-mode");
+      document.querySelectorAll("#ft-modeseg button").forEach(function(x){ x.setAttribute("aria-pressed", String(x === b)); });
+      if (m === "edit") enterEdit(); else enterPlay();
+    });
+
+    // app-specific settings note (fairness / how it works)
+    var note = document.createElement("div"); note.className = "ft-appset";
+    note.innerHTML = '<p class="pk-subtle" style="margin:0">How it works: normal play is <b>deterministic</b> — the same colour and number picks always land on the same fortune, just like the real paper toy. Only <b>Surprise me</b> uses your device\'s cryptographic random generator to auto-pick a path.</p>';
+    PK.settings.register(note);
+
+    buildCatcher();
+    renderColors();
+    buildEdit();
+    resetPlay();
+
+    if (sharedToast) setTimeout(function(){ PK.toast("Loaded a shared fortune teller"); }, 300);
+  }
+
+  function mkBtn(label, extra, fn){
+    var b = document.createElement("button");
+    b.className = "pk-btn" + (extra ? " " + extra : "");
+    b.type = "button"; b.textContent = label;
+    b.addEventListener("click", fn);
+    return b;
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+}
+
+/* =====================================================================
+   Export the pure, testable surface for node bot_test.js (no DOM in Node).
+   ===================================================================== */
+if (HEADLESS && typeof globalThis !== "undefined") {
+  globalThis.FORTUNE = {
+    DEFAULT_CONTENT: DEFAULT_CONTENT,
+    CONFIG: CONFIG,
+    layerOf: layerOf,
+    visible: visible,
+    spellCount: spellCount,
+    countValue: countValue,
+    resolve: resolve,
+    surprise: surprise,
+    validate: validate,
+    encode: encode,
+    decode: decode
+  };
+}
+</script>
+<!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:10px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Get the monthly letter</a></footer><!-- /ep:ca-foot -->
+</body></html>

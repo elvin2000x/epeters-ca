@@ -1,0 +1,1178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Liar's Cup</title>
+<meta name="description" content="Liar's Cup — a hidden-dice bluffing game for 2 to 6 players. Five dice under every cup, escalating bids over the whole table, and one call that lifts them all.">
+<meta property="og:title" content="Liar's Cup">
+<meta property="og:description" content="Five dice under every cup. Bid, bluff, or call it — then every cup lifts at once.">
+<link rel="stylesheet" href="../_kit/play-kit.css">
+<style>
+  /* ---- app-scoped OBJECT materials, derived from the kit's --pk-mat-* ramp.
+         Chrome colour still comes from --pk-accent / --pk-ink (plum). ---- */
+  :root{
+    --lc-leather:    color-mix(in srgb, var(--pk-mat-kraft-dk) 76%, var(--pk-accent) 24%);
+    --lc-leather-hi: color-mix(in srgb, var(--pk-mat-kraft) 80%, var(--pk-accent) 20%);
+    --lc-leather-lo: color-mix(in srgb, var(--pk-mat-kraft-dk) 52%, black);
+    --lc-rim:        color-mix(in srgb, var(--pk-mat-kraft-dk) 34%, black);
+    --lc-felt:       var(--pk-mat-felt);
+    --lc-felt-dk:    var(--pk-mat-felt-dk);
+    --lc-bone:       var(--pk-mat-ivory);
+    --lc-bone-hi:    color-mix(in srgb, var(--pk-mat-ivory) 72%, white);
+    --lc-bone-dk:    var(--pk-mat-ivory-dk);
+    --lc-pip:        color-mix(in srgb, var(--pk-mat-kraft-dk) 24%, black);
+    --lc-die:        46px;
+  }
+  :root[data-theme="dark"]{
+    --lc-leather-hi: color-mix(in srgb, var(--pk-mat-kraft) 66%, var(--pk-accent) 34%);
+    --lc-pip:        color-mix(in srgb, var(--pk-mat-kraft-dk) 30%, black);
+  }
+
+  .lc-wrap{ width:100%; display:flex; flex-direction:column; gap:14px; align-items:stretch; }
+  .lc-wrap.hushed{ filter:saturate(.85); transition:filter var(--pk-t-quick) var(--pk-ease-standard); }
+
+  /* ------------------------------------------------------- turn indicator */
+  .turnbar{ text-align:center; min-height:2.2em; }
+  .turnbar .t{ font-family:var(--pk-font-display); font-size:var(--pk-fs-lg); font-weight:700; }
+  .turnbar .sub{ color:var(--pk-ink-soft); font-size:var(--pk-fs-sm); min-height:1.2em; }
+  .think::after{ content:""; display:inline-block; width:.5em; height:.5em; margin-left:.45em;
+    border-radius:50%; background:var(--pk-accent); animation:lcPulse 1s ease-in-out infinite;
+    vertical-align:middle; }
+  @keyframes lcPulse{ 0%,100%{opacity:.25;transform:scale(.8);} 50%{opacity:1;transform:scale(1.15);} }
+
+  /* ------------------------------------------------------------ the table */
+  .felt{ background:
+      repeating-linear-gradient(45deg,transparent 0 3px,rgba(0,0,0,.05) 3px 6px),
+      repeating-linear-gradient(-45deg,transparent 0 3px,rgba(255,255,255,.035) 3px 6px),
+      radial-gradient(120% 90% at 50% 0%, var(--lc-felt), var(--lc-felt-dk));
+    border-radius:var(--pk-radius-lg); padding:14px 10px 12px;
+    box-shadow:inset 0 2px 16px rgba(0,0,0,.42); }
+  .ring{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:flex-end; }
+
+  .seat{ width:96px; display:flex; flex-direction:column; align-items:center; gap:4px;
+    padding:6px 4px 8px; border-radius:var(--pk-radius); border:1.5px solid transparent; }
+  .seat.is-turn{ border-color:var(--pk-accent);
+    background:color-mix(in srgb, var(--pk-accent) 18%, transparent); }
+  .seat.is-out{ opacity:.55; }
+  .seat .nm{ font-size:var(--pk-fs-xs); font-weight:700; color:#fff; max-width:92px;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-shadow:0 1px 2px rgba(0,0,0,.5); }
+  .seat .tag{ font-size:9px; letter-spacing:.14em; text-transform:uppercase; font-weight:800;
+    color:rgba(255,255,255,.72); }
+  .seat .pips{ display:flex; gap:3px; }
+  .seat .pips i{ width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,.18);
+    box-shadow:inset 0 1px 1px rgba(0,0,0,.45); }
+  .seat .pips i.on{ background:var(--lc-bone); box-shadow:0 1px 2px rgba(0,0,0,.5); }
+
+  .cupzone{ position:relative; width:92px; height:76px; display:flex; align-items:flex-end;
+    justify-content:center; }
+  .cupzone .dicerow{ display:flex; flex-wrap:wrap; gap:2px; justify-content:center; align-items:flex-end;
+    max-width:92px; opacity:0; transition:opacity var(--pk-t-quick) var(--pk-ease-settle); }
+  .cupzone.open .dicerow{ opacity:1; }
+  .cupzone.open .cup{ opacity:.4; }
+
+  /* the cup: a tapered leather cylinder, tipped mouth-down over the dice */
+  .cup{ position:absolute; left:50%; bottom:0; width:58px; height:64px; margin-left:-29px;
+    pointer-events:none; transform-origin:50% 100%; }
+  .cup .body{ position:absolute; inset:0;
+    background:
+      repeating-linear-gradient(104deg, rgba(255,255,255,.06) 0 3px, rgba(0,0,0,.05) 3px 8px),
+      repeating-linear-gradient(-16deg, rgba(0,0,0,.07) 0 6px, rgba(255,255,255,.045) 6px 13px),
+      linear-gradient(166deg, var(--lc-leather-hi), var(--lc-leather) 54%, var(--lc-leather-lo));
+    clip-path:polygon(21% 0%, 79% 0%, 100% 90%, 0% 90%);
+    box-shadow:inset 0 2px 0 rgba(255,255,255,.2); }
+  .cup .rim{ position:absolute; left:-2%; right:-2%; bottom:0; height:19%; border-radius:50%;
+    background:linear-gradient(180deg, var(--lc-rim), color-mix(in srgb, var(--lc-rim) 55%, black));
+    box-shadow:0 4px 9px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.16); }
+  .cup .seam{ position:absolute; left:50%; top:8%; bottom:14%; width:2px; margin-left:-1px;
+    background:linear-gradient(180deg, rgba(255,255,255,.20), rgba(0,0,0,.30)); }
+  .cup.sm{ width:48px; height:54px; margin-left:-24px; }
+  .cup.tipped{ transform:rotate(78deg) translateY(6px); }
+  .seat.is-turn .cup{ animation:lcBreathe 2.8s ease-in-out infinite; }
+  @keyframes lcBreathe{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-2px);} }
+
+  /* --------------------------------------------------------------- a die */
+  .die{ position:relative; width:var(--lc-die); height:var(--lc-die); border-radius:24%;
+    background:linear-gradient(152deg, var(--lc-bone-hi), var(--lc-bone) 62%, var(--lc-bone-dk));
+    border:1px solid var(--lc-bone-dk); flex:0 0 auto;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.7), inset 0 -3px 4px rgba(0,0,0,.16), var(--pk-shadow-2);
+    transition:transform var(--pk-t-quick) var(--pk-ease-spring), opacity var(--pk-t-quick),
+      box-shadow var(--pk-t-quick); }
+  .die::after{ content:""; position:absolute; inset:7%; border-radius:20%;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.35); pointer-events:none; }
+  .die .pg{ position:absolute; inset:15%; display:grid; grid-template:repeat(3,1fr)/repeat(3,1fr); }
+  .die .pg i{ align-self:center; justify-self:center; }
+  .die .pg i.p{ width:20%; min-width:5px; aspect-ratio:1/1; border-radius:50%; background:var(--lc-pip);
+    box-shadow:inset 0 1px 1px rgba(0,0,0,.55), 0 1px 0 rgba(255,255,255,.35); }
+  .die .pg i.p{ width:7px; height:7px; }
+  .die.sm{ --lc-die:22px; width:22px; height:22px; border-radius:26%; }
+  .die.sm .pg i.p{ width:4px; height:4px; }
+  .die.md{ width:30px; height:30px; }
+  .die.md .pg i.p{ width:5px; height:5px; }
+  /* ones read as WILD: one larger accent pip. Obliga strips the accent (honest tell). */
+  .die.ace .pg i.p{ background:var(--pk-accent); width:32%; height:32%; min-width:9px; min-height:9px;
+    box-shadow:inset 0 1px 2px rgba(0,0,0,.35); }
+  .die.sm.ace .pg i.p{ min-width:7px; min-height:7px; }
+  .die.down{ background:linear-gradient(152deg, var(--lc-leather-hi), var(--lc-leather-lo));
+    border-color:var(--lc-rim); display:grid; place-items:center; color:rgba(255,255,255,.8);
+    font-weight:800; font-family:var(--pk-font-num); }
+  .die.lit{ transform:scale(1.12); box-shadow:0 0 0 3px var(--pk-accent), var(--pk-shadow-3); z-index:2; }
+  .die.dim{ opacity:.55; }
+  .die.gone{ opacity:0; transform:scale(0) rotate(180deg); }
+
+  /* -------------------------------------------------------- obliga banner */
+  .obliga{ text-align:center; font-size:var(--pk-fs-sm); font-weight:700;
+    color:var(--pk-accent-press); background:var(--pk-accent-soft);
+    border:1.5px solid var(--pk-accent); border-radius:var(--pk-radius-pill); padding:6px 12px; }
+  .blindtag{ font-size:9px; letter-spacing:.12em; text-transform:uppercase; font-weight:800;
+    color:var(--pk-accent-press); }
+
+  /* ----------------------------------------------------------- bid ladder */
+  .ladderwrap{ max-height:132px; overflow-y:auto; }
+  ol.ladder{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column;
+    gap:5px; align-items:center; }
+  ol.ladder li{ display:flex; align-items:center; gap:7px; padding:4px 12px 4px 10px;
+    border-radius:var(--pk-radius-pill); background:var(--pk-surface); border:1.5px solid var(--pk-line);
+    font-size:var(--pk-fs-sm); font-weight:600; }
+  ol.ladder li .q{ font-family:var(--pk-font-num); font-weight:800; font-size:1.05rem; }
+  ol.ladder li .who{ color:var(--pk-ink-soft); font-size:var(--pk-fs-xs); }
+  ol.ladder li.standing{ border-color:var(--pk-accent); background:var(--pk-accent-soft);
+    color:var(--pk-accent-press); transform:scale(1.04); }
+  ol.ladder li.hot{ box-shadow:0 0 12px color-mix(in srgb, var(--pk-warn) 60%, transparent); }
+  .ladder-empty{ color:var(--pk-ink-faint); font-size:var(--pk-fs-sm); }
+
+  /* --------------------------------------------------------- tally / mat */
+  .tallybox{ text-align:center; }
+  .tallybox .bidline{ color:var(--pk-ink-soft); font-size:var(--pk-fs-sm); display:flex; gap:6px;
+    align-items:center; justify-content:center; }
+  .tallybox .count{ font-family:var(--pk-font-num); font-variant-numeric:tabular-nums;
+    font-weight:800; font-size:clamp(2.4rem,10vw,3.4rem); line-height:1.05; }
+  .tallybox .count.good{ color:var(--pk-good); } .tallybox .count.bad{ color:var(--pk-bad); }
+
+  .mymat{ display:flex; flex-direction:column; align-items:center; gap:6px; }
+  .mymat .dice{ display:flex; gap:8px; flex-wrap:wrap; justify-content:center;
+    background:linear-gradient(180deg, var(--lc-felt), var(--lc-felt-dk));
+    border-radius:var(--pk-radius); padding:10px 12px; box-shadow:inset 0 2px 10px rgba(0,0,0,.4); }
+  .mymat .cap{ font-size:var(--pk-fs-xs); color:var(--pk-ink-faint); letter-spacing:.1em;
+    text-transform:uppercase; font-weight:800; }
+
+  /* ------------------------------------------------------------- builder */
+  .builder{ display:flex; flex-direction:column; gap:10px; align-items:center; }
+  .qrow{ display:flex; align-items:center; gap:12px; }
+  .qrow .qbtn{ width:44px; height:44px; border-radius:50%; border:1.5px solid var(--pk-line);
+    background:var(--pk-surface); cursor:pointer; font-size:1.5rem; font-weight:700; line-height:1;
+    display:grid; place-items:center; }
+  .qrow .qbtn:disabled{ opacity:.4; cursor:not-allowed; }
+  .qrow .qval{ font-family:var(--pk-font-num); font-variant-numeric:tabular-nums; font-weight:800;
+    font-size:2.2rem; min-width:2.2ch; text-align:center; }
+  .facerow{ display:flex; gap:6px; flex-wrap:wrap; justify-content:center; }
+  .facebtn{ padding:5px; border-radius:var(--pk-radius-sm); border:1.5px solid var(--pk-line);
+    background:var(--pk-surface); cursor:pointer; line-height:0; }
+  .facebtn[aria-pressed="true"]{ border-color:var(--pk-accent); background:var(--pk-accent-soft);
+    box-shadow:0 0 0 2px color-mix(in srgb, var(--pk-accent) 40%, transparent); }
+  .facebtn:disabled{ opacity:.32; cursor:not-allowed; }
+  .helper{ font-size:var(--pk-fs-sm); color:var(--pk-ink-soft); text-align:center; min-height:1.3em;
+    max-width:34ch; }
+  .helper b{ color:var(--pk-accent-press); }
+  .shake{ animation:lcShake .18s linear; }
+  @keyframes lcShake{ 0%,100%{transform:translateX(0);} 25%{transform:translateX(-5px);}
+    75%{transform:translateX(5px);} }
+  .outstrip{ text-align:center; padding:10px 14px; border-radius:var(--pk-radius);
+    background:var(--pk-surface-sunk); color:var(--pk-ink-soft); font-weight:600;
+    font-size:var(--pk-fs-sm); }
+
+  /* --------------------------------------------------- mode select / invite */
+  .modecard{ width:100%; max-width:420px; text-align:left; display:flex; gap:12px; align-items:center;
+    padding:16px; margin:0 auto; cursor:pointer; }
+  .modecard h3{ font-family:var(--pk-font-display); font-size:1.1rem; margin:0 0 2px; }
+  .modecard p{ margin:0; color:var(--pk-ink-soft); font-size:var(--pk-fs-sm); }
+  .modecard .ic{ font-size:1.7rem; flex:0 0 auto; width:2rem; text-align:center; }
+  .opts{ width:100%; max-width:420px; margin:0 auto; display:flex; flex-direction:column; gap:12px;
+    text-align:left; }
+  .optrow{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .optrow .lbl{ font-size:var(--pk-fs-sm); font-weight:700; }
+  .optrow .lbl small{ display:block; font-weight:400; color:var(--pk-ink-faint);
+    font-size:var(--pk-fs-xs); max-width:26ch; }
+  .code{ font-family:var(--pk-font-num); font-size:clamp(1.8rem,9vw,2.4rem); letter-spacing:.28em;
+    font-weight:800; color:var(--pk-accent); background:var(--pk-surface-sunk);
+    border-radius:var(--pk-radius); padding:10px 10px 10px 24px; display:inline-block; }
+  .banner{ text-align:center; color:var(--pk-ink-soft); min-height:1.4em; font-weight:600; }
+
+  /* ---------------------------------------------------- curtain / overlay */
+  .curtain{ position:fixed; inset:0; z-index:150; background:var(--pk-bg); display:grid;
+    place-items:center; text-align:center; padding:24px; }
+  .curtain h2{ font-family:var(--pk-font-display); font-size:clamp(1.6rem,7vw,2.2rem); }
+  .overlay{ position:fixed; inset:0; z-index:150; background:rgba(20,15,8,.58); display:grid;
+    place-items:center; padding:24px; }
+  .overlay .card{ background:var(--pk-surface); border-radius:var(--pk-radius-lg);
+    box-shadow:var(--pk-shadow-3); padding:28px; max-width:420px; width:100%; text-align:center; }
+  .overlay h2{ font-family:var(--pk-font-display); font-size:1.7rem; margin-bottom:6px; }
+
+  @media (max-width:400px){
+    :root{ --lc-die:40px; }
+    .seat{ width:84px; }
+    .cupzone{ width:84px; height:70px; }
+    .code{ letter-spacing:.2em; padding-left:16px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .seat.is-turn .cup{ animation:none; }
+    .think::after{ animation:none; opacity:.85; }
+  }
+  :root[data-motion="reduce"] .seat.is-turn .cup{ animation:none; }
+  :root[data-motion="reduce"] .think::after{ animation:none; opacity:.85; }
+</style>
+<link rel="canonical" href="https://epeters.ca/play/liars-cup/">
+</head>
+<body>
+<script src="../_kit/play-kit.js"></script>
+<script src="../_kit/net-kit.js"></script>
+<script src="rules.js"></script>
+<script>
+var HEADLESS = (typeof document === "undefined");
+
+if (!HEADLESS) (function () {
+  "use strict";
+  var R = window.LIARS_CUP_RULES;
+
+  var ui = PK.app({
+    title: "Liar's Cup", slug: "liars-cup", accent: "plum", board: true,
+    action: { label: "Raise", onFire: firePrimary, key: null }   // the builder owns Space/Enter
+  });
+  var stage = ui.stage, actions = ui.actions, primary = ui.primary;
+
+  /* ----------------------------------------------------------- app state */
+  var net = null, view = null, pending = null;
+  var myMode = "hotseat";                 // hotseat | ai | online
+  var busy = false, extras = [], roomInfo = null, resultShown = false;
+  var revealDone = null, nextSent = false, autoNextT = null;
+  var lastShown = null, curtainUp = false, screen = "menu", wantFocus = null;
+  var selQty = 1, selFace = 6, seenAce = PK.store.get("play.liars-cup.seenAce", false);
+
+  var BOTS = ["Kes", "Mara", "Ovid", "Rune", "Tova"];
+  var FACE_WORD = ["", "ones", "twos", "threes", "fours", "fives", "sixes"];
+
+  var cfg = {
+    players: R.clampPlayers(PK.store.get("play.liars-cup.players", 4)),
+    variant: (function () {
+      var v = PK.store.get("play.liars-cup.variant", null) || {};
+      return { wildOnes: v.wildOnes === undefined ? true : !!v.wildOnes,
+               obliga: !!v.obliga, paloCiego: !!v.paloCiego };
+    })(),
+    name: PK.store.get("play.liars-cup.name", PK.store.get("play.name", "Guest"))
+  };
+
+  function reduced() { return PK.motion.reduced; }
+  function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+  function btn(label, cls, on) { var b = document.createElement("button"); b.type = "button"; b.className = "pk-btn " + (cls || ""); b.textContent = label; b.onclick = on; return b; }
+  function setExtras(list) {
+    extras.forEach(function (b) { if (b.parentNode) b.parentNode.removeChild(b); });
+    extras = list || [];
+    extras.forEach(function (b) { actions.appendChild(b); });
+  }
+  function hidePrimary() { if (primary) primary.style.display = "none"; }
+  function showPrimary(label, enabled) {
+    if (!primary) return;
+    primary.style.display = ""; primary.textContent = label; primary.disabled = !enabled;
+  }
+
+  function nameOf(seat) {
+    if (seat === null || seat === undefined) return "Nobody";
+    if (myMode === "ai") return seat === 0 ? "You" : BOTS[(seat - 1) % BOTS.length];
+    if (myMode === "hotseat") return "Player " + (seat + 1);
+    var p = ((net && net.players) || []).filter(function (x) { return x.seat === seat; })[0];
+    var n = (p && p.name) || ("Player " + (seat + 1));
+    if (net && seat === net.seat) n += " (you)";
+    return n;
+  }
+  function isSpectator() { return !!(net && net.isSpectator); }
+  function myTurn() {
+    return !!(view && !view.over && view.phase === "bidding" && !isSpectator() &&
+      view.yourSeat !== null && view.alive && view.turn === view.yourSeat);
+  }
+  function bidOpts() { return { wildOnes: view.wildOnes, totalDice: view.totalDice }; }
+
+  /* -------------------------------------------------------- die + cup DOM */
+  var PIPMAP = { 1: [4], 2: [0, 8], 3: [0, 4, 8], 4: [0, 2, 6, 8], 5: [0, 2, 4, 6, 8], 6: [0, 2, 3, 5, 6, 8] };
+  function dieEl(v, o) {
+    o = o || {};
+    var e = el("div", "die" + (o.size ? " " + o.size : ""));
+    if (o.faceDown) {
+      e.className += " down"; e.textContent = "?";
+      e.setAttribute("role", "img"); e.setAttribute("aria-label", "Hidden die");
+      return e;
+    }
+    if (v === 1 && o.wild) e.classList.add("ace");
+    var g = el("div", "pg");
+    for (var i = 0; i < 9; i++) { var c = el("i"); if (PIPMAP[v].indexOf(i) >= 0) c.className = "p"; g.appendChild(c); }
+    e.appendChild(g);
+    e.setAttribute("role", "img");
+    e.setAttribute("aria-label", v === 1 ? (o.wild ? "one, wild" : "one") : String(v));
+    return e;
+  }
+  function cupEl(small) {
+    var c = el("div", "cup" + (small ? " sm" : ""));
+    c.innerHTML = '<span class="body"></span><span class="seam"></span><span class="rim"></span>';
+    c.setAttribute("aria-hidden", "true");
+    return c;
+  }
+
+  /* ------------------------------------------------------- variant panel */
+  function variantPanel() {
+    var box = el("div", "opts");
+    var rows = [
+      ["wildOnes", "Wild ones", "Ones count as any face — and a bid in ones halves the quantity."],
+      ["obliga", "Obliga", "When someone drops to one die, ones stop being wild for one round."],
+      ["paloCiego", "Palo ciego", "A player on their last die plays that round without seeing it."]
+    ];
+    rows.forEach(function (r) {
+      var row = el("div", "optrow");
+      row.appendChild(el("span", "lbl", r[1] + "<small>" + r[2] + "</small>"));
+      var sw = el("span", "pk-switch");
+      var inp = document.createElement("input"); inp.type = "checkbox"; inp.checked = !!cfg.variant[r[0]];
+      inp.setAttribute("aria-label", r[1]);
+      inp.onchange = function () {
+        cfg.variant[r[0]] = inp.checked;
+        PK.store.set("play.liars-cup.variant", cfg.variant);
+        PK.sound.play("click");
+      };
+      sw.appendChild(inp); sw.appendChild(el("span"));
+      row.appendChild(sw); box.appendChild(row);
+    });
+    return box;
+  }
+  PK.settings.register((function () {
+    var w = el("div");
+    w.appendChild(el("h2", "", "Table rules")).style.cssText =
+      "font-family:var(--pk-font-display);font-size:var(--pk-fs-lg);margin:16px 0 4px";
+    w.appendChild(el("p", "pk-subtle", "Applies to the next game you start."));
+    w.appendChild(variantPanel());
+    return w;
+  })());
+
+  /* --------------------------------------------------------- mode select */
+  function openModeSelect() {
+    if (net && net.disconnect) { try { net.disconnect(); } catch (e) {} }
+    net = null; view = null; pending = null; busy = false; roomInfo = null;
+    resultShown = false; revealDone = null; lastShown = null; curtainUp = false; screen = "menu";
+    clearTimeout(autoNextT);
+    var o = document.querySelector(".overlay"); if (o) o.remove();
+    var c = document.querySelector(".curtain"); if (c) c.remove();
+    setExtras([]); hidePrimary();
+    stage.innerHTML = "";
+
+    var wrap = el("div", "lc-wrap"); wrap.style.alignItems = "center"; wrap.style.gap = "14px";
+    var h = el("h2", "", "Five dice under every cup"); h.style.cssText =
+      "font-family:var(--pk-font-display);font-size:var(--pk-fs-lg)";
+    wrap.appendChild(h);
+    wrap.appendChild(el("p", "pk-subtle",
+      "Bid on what the <b>whole table</b> is holding. Raise, or call <b>Dudo</b> and lift every cup."));
+
+    function card(ic, title, desc, fn) {
+      var b = el("button", "pk-panel modecard");
+      b.type = "button";
+      b.innerHTML = '<span class="ic" aria-hidden="true">' + ic + '</span><span><h3>' + title + '</h3><p>' + desc + '</p></span>';
+      b.onclick = fn; return b;
+    }
+    wrap.appendChild(card("&#127920;", "Local hotseat", "Two to six players passing one device.", function () { start("hotseat"); }));
+    wrap.appendChild(card("&#129302;", "Vs computer", "One to five probability bots.", function () { start("ai"); }));
+    wrap.appendChild(card("&#128279;", "Play a friend", "Get a 4-character room code and a link.", function () { start("online"); }));
+    var jr = el("div", "pk-row");
+    jr.appendChild(btn("Have a code? Join a room", "pk-btn--ghost pk-btn--sm", openJoinPrompt));
+    wrap.appendChild(jr);
+
+    // player count
+    var opts = el("div", "opts pk-well");
+    var prow = el("div", "optrow");
+    prow.appendChild(el("span", "lbl", "Players<small>Hotseat and vs computer</small>"));
+    var qr = el("div", "qrow");
+    var minus = el("button", "qbtn", "&minus;"); minus.type = "button"; minus.setAttribute("aria-label", "Fewer players");
+    var val = el("span", "qval"); val.id = "plval"; val.textContent = String(cfg.players);
+    val.setAttribute("role", "status"); val.setAttribute("aria-live", "polite");
+    var plus = el("button", "qbtn", "+"); plus.type = "button"; plus.setAttribute("aria-label", "More players");
+    function setPl(n) {
+      cfg.players = R.clampPlayers(n); val.textContent = String(cfg.players);
+      PK.store.set("play.liars-cup.players", cfg.players);
+      minus.disabled = cfg.players <= 2; plus.disabled = cfg.players >= 6;
+      PK.sound.play("tick");
+    }
+    minus.onclick = function () { setPl(cfg.players - 1); };
+    plus.onclick = function () { setPl(cfg.players + 1); };
+    qr.appendChild(minus); qr.appendChild(val); qr.appendChild(plus);
+    prow.appendChild(qr); opts.appendChild(prow);
+    minus.disabled = cfg.players <= 2; plus.disabled = cfg.players >= 6;
+    opts.appendChild(variantPanel());
+    wrap.appendChild(opts);
+
+    // name (used online)
+    var nrow = el("div", "opts");
+    var ni = document.createElement("input");
+    ni.className = "pk-input"; ni.value = cfg.name === "Guest" ? "" : cfg.name;
+    ni.placeholder = "Your name (optional)"; ni.maxLength = 14;
+    ni.setAttribute("aria-label", "Your name");
+    ni.oninput = function () { cfg.name = ni.value.trim() || "Guest"; PK.store.set("play.liars-cup.name", cfg.name); };
+    nrow.appendChild(ni); wrap.appendChild(nrow);
+
+    stage.appendChild(wrap);
+  }
+
+  function openJoinPrompt() {
+    setExtras([]); hidePrimary();
+    stage.innerHTML = "";
+    var wrap = el("div", "lc-wrap"); wrap.style.alignItems = "center"; wrap.style.gap = "14px";
+    var h = el("h2", "", "Join a table"); h.style.fontFamily = "var(--pk-font-display)";
+    wrap.appendChild(h);
+    var inp = document.createElement("input");
+    inp.className = "pk-input"; inp.maxLength = 4; inp.placeholder = "CODE"; inp.autocapitalize = "characters";
+    inp.style.cssText = "text-transform:uppercase;letter-spacing:.3em;text-align:center;width:9em;font-family:var(--pk-font-num)";
+    inp.setAttribute("aria-label", "Room code");
+    wrap.appendChild(inp);
+    var row = el("div", "pk-row");
+    function go() { var c = inp.value.trim().toUpperCase(); if (c.length >= 3) joinOnline(c, false); }
+    row.appendChild(btn("Join", "", go));
+    row.appendChild(btn("Back", "pk-btn--ghost", openModeSelect));
+    wrap.appendChild(row);
+    stage.appendChild(wrap); inp.focus();
+    inp.onkeydown = function (e) { if (e.key === "Enter") { e.preventDefault(); go(); } };
+  }
+
+  /* ---------------------------------------------------------------- start */
+  function start(mode) {
+    myMode = mode; screen = "game";
+    view = null; pending = null; busy = false; resultShown = false;
+    revealDone = null; lastShown = null; roomInfo = null; curtainUp = false;
+    clearTimeout(autoNextT);
+
+    var options = { variant: { wildOnes: cfg.variant.wildOnes, obliga: cfg.variant.obliga, paloCiego: cfg.variant.paloCiego } };
+
+    if (mode === "hotseat") {
+      net = new LocalNet({ gameId: "liars-cup", mode: "hotseat", rules: R, seats: cfg.players,
+        rng: PK.rand.int, options: options });
+      wire(); net.connect();
+      return;
+    }
+    if (mode === "ai") {
+      net = makeBotNet(cfg.players, options);
+      wire(); net.connect();
+      return;
+    }
+    // online
+    net = new Net({ gameId: "liars-cup", name: cfg.name, rules: R });
+    wire();
+    stage.innerHTML = '<p class="banner">Connecting&hellip;</p>';
+    setExtras([btn("Cancel", "pk-btn--ghost pk-btn--sm", openModeSelect)]); hidePrimary();
+    var live = net;
+    var giveUp = setTimeout(function () {
+      if (net === live && !roomInfo) { PK.toast("Game server unreachable — hotseat and vs computer still work"); openModeSelect(); }
+    }, 7000);
+    net.connect().then(function () {
+      return net.createRoom({ options: { variant: options.variant, players: cfg.players, numPlayers: cfg.players } });
+    }).then(function (room) {
+      if (net !== live) return;
+      clearTimeout(giveUp); roomInfo = room; inviteScreen(room);
+    }).catch(function () {
+      clearTimeout(giveUp);
+      if (net === live) { PK.toast("Could not reach the game server"); openModeSelect(); }
+    });
+  }
+
+  /* LocalNet in hotseat mode, re-pointed so seat 0 is the human and every other
+     seat is driven by R.bidAI on a think delay. Instance-level overrides only —
+     the shared kit is never touched. The view is ALWAYS filtered for the human,
+     so a bot's dice never enter the page. */
+  function makeBotNet(seats, options) {
+    var n = new LocalNet({ gameId: "liars-cup", mode: "hotseat", rules: R, seats: seats,
+      rng: PK.rand.int, options: options });
+    n.humanSeat = 0;
+    n._emitState = function () {
+      var raw = this._raw;
+      this.seat = this.humanSeat;
+      this.state = this.rules.publicView(raw, this.humanSeat);
+      this.emit("state", { state: this.state, turn: raw.turn, seq: 0 });
+      var t = this.rules.isTerminal(raw);
+      if (t && t.over) this.emit("gameOver", { result: t.result, reason: t.reason });
+    };
+    n._maybeAI = function () {
+      var self = this;
+      if (self._aiT) return;
+      if (!self._raw || self._raw.over) return;
+      if (self._raw.phase !== "bidding") return;
+      if (self._raw.turn === self.humanSeat) return;
+      self._aiT = setTimeout(function () {
+        self._aiT = null;
+        if (!self._raw || self._raw.over || self._raw.phase !== "bidding" || self._raw.turn === self.humanSeat) return;
+        var mv = R.bidAI(self.rules.publicView(self._raw, self._raw.turn), PK.rand.int);
+        self.sendMove(mv);
+      }, 650 + PK.rand.int(650));
+    };
+    return n;
+  }
+
+  function joinOnline(code, spectate) {
+    myMode = "online"; screen = "game";
+    resultShown = false; roomInfo = null; view = null; pending = null; lastShown = null;
+    net = new Net({ gameId: "liars-cup", name: cfg.name, rules: R });
+    wire();
+    var live = net;
+    var giveUp = setTimeout(function () {
+      if (net === live && !view) { PK.toast("Game server unreachable"); openModeSelect(); }
+    }, 7000);
+    net.connect().then(function () { return net.joinRoom(code, { asSpectator: !!spectate }); })
+      .then(function () { clearTimeout(giveUp); })
+      .catch(function () { clearTimeout(giveUp); if (net === live) { PK.toast("Could not reach the game server"); openModeSelect(); } });
+    stage.innerHTML = '<p class="banner">Joining table ' + String(code).toUpperCase() + '&hellip;</p>';
+    setExtras([btn("Cancel", "pk-btn--ghost pk-btn--sm", openModeSelect)]); hidePrimary();
+  }
+
+  function inviteScreen(room) {
+    screen = "invite"; setExtras([]); hidePrimary();
+    stage.innerHTML = "";
+    var wrap = el("div", "lc-wrap"); wrap.style.alignItems = "center"; wrap.style.gap = "16px";
+    var h = el("h2", "", "Share to start"); h.style.fontFamily = "var(--pk-font-display)";
+    wrap.appendChild(h);
+    wrap.appendChild(el("div", "code", room.roomId || "----"));
+    wrap.appendChild(el("p", "pk-subtle", "Send the link or read out the code. The table starts when everyone is seated."));
+    var row = el("div", "pk-row");
+    row.appendChild(btn("Copy link", "", function () {
+      net.copyInvite().then(function () { PK.toast("Link copied"); }, function () { PK.toast("Copy failed — read out the code"); });
+    }));
+    if (navigator.share) row.appendChild(btn("Share", "pk-btn--soft", function () { net.share(); }));
+    row.appendChild(btn("Cancel", "pk-btn--ghost", openModeSelect));
+    wrap.appendChild(row);
+    var qr = el("div");
+    wrap.appendChild(qr);
+    if (net.qrDataUrl) net.qrDataUrl().then(function (u) {
+      if (!u) return;
+      var img = document.createElement("img"); img.src = u; img.alt = "Invite QR code";
+      img.style.cssText = "width:150px;height:150px;image-rendering:pixelated;border-radius:8px;background:#fff;padding:6px";
+      qr.appendChild(img);
+    }, function () {});
+    var b = el("p", "banner", "Waiting for players&hellip;"); b.id = "bn"; wrap.appendChild(b);
+    stage.appendChild(wrap);
+    PK.announce("Room code " + (room.roomId || "") + ". Waiting for players.");
+  }
+
+  /* --------------------------------------------------------------- render */
+  function activePlayers() {
+    return ((net && net.players) || []).filter(function (p) { return p.status !== "disconnected"; }).length;
+  }
+
+  function render() {
+    if (!view || curtainUp) return;
+
+    // online: hold on the invite/waiting screen until every seat is filled
+    if (myMode === "online" && !view.over && !isSpectator() && activePlayers() < view.numPlayers) {
+      var wb = document.getElementById("bn");
+      if (wb) { wb.textContent = "Waiting for players… (" + activePlayers() + "/" + view.numPlayers + ")"; return; }
+      if (roomInfo) { inviteScreen(roomInfo); return; }
+    }
+    screen = "game";
+
+    stage.innerHTML = "";
+    var wrap = el("div", "lc-wrap");
+
+    /* turn bar */
+    var tb = el("div", "turnbar");
+    var tt = el("div", "t"); tt.id = "tt"; tb.appendChild(tt);
+    var ts = el("div", "sub"); ts.id = "ts"; tb.appendChild(ts);
+    wrap.appendChild(tb);
+
+    /* the felt table */
+    var felt = el("div", "felt");
+    var ring = el("div", "ring");
+    ring.setAttribute("role", "list"); ring.setAttribute("aria-label", "The table");
+    var revealing = (view.phase === "reveal" || view.over) && view.reveal;
+    for (var s = 0; s < view.numPlayers; s++) ring.appendChild(seatEl(s, revealing));
+    felt.appendChild(ring); wrap.appendChild(felt);
+
+    if (view.obligaRound) wrap.appendChild(el("div", "obliga", "Obliga — ones are <b>not</b> wild this round"));
+
+    /* tally + verdict (reveal only) */
+    if (revealing) {
+      wrap.appendChild(tallyEl());
+      var res = el("div", "pk-result"); res.id = "res";
+      res.style.fontSize = "clamp(1.1rem,4.4vw,1.6rem)";
+      res.setAttribute("aria-live", "polite");
+      wrap.appendChild(res);
+    }
+
+    /* the bid ladder */
+    var lw = el("div", "ladderwrap");
+    if (view.history.length) {
+      var ol = el("ol", "ladder");
+      view.history.forEach(function (b, i) {
+        var li = el("li", i === view.history.length - 1 ? "standing" : "");
+        var q = el("b", "q", String(b.quantity));
+        li.appendChild(q);
+        li.appendChild(el("span", "", "&times;"));
+        li.appendChild(dieEl(b.face, { size: "sm", wild: view.wildOnes }));
+        li.appendChild(el("span", "who", nameOf(b.seat)));
+        if (isReach(b)) li.classList.add("hot");
+        li.setAttribute("aria-label", nameOf(b.seat) + " bid " + b.quantity + " " + FACE_WORD[b.face]);
+        ol.appendChild(li);
+      });
+      lw.appendChild(ol);
+    } else {
+      lw.appendChild(el("p", "ladder-empty", "No bid yet — " + nameOf(view.starter) + " opens."));
+    }
+    wrap.appendChild(lw);
+
+    /* your cup + dice (the table itself shows every die during the reveal) */
+    if (!revealing && !isSpectator() && view.yourSeat !== null) wrap.appendChild(myMatEl());
+
+    /* the builder */
+    if (view.over) { /* the overlay handles it */ }
+    else if (isSpectator()) wrap.appendChild(el("div", "outstrip", "Watching — dice stay hidden until the reveal."));
+    else if (view.yourSeat !== null && !view.alive) wrap.appendChild(el("div", "outstrip", "You're out — watching every reveal to the end."));
+    else if (view.phase === "bidding" && myTurn()) wrap.appendChild(builderEl());
+
+    stage.appendChild(wrap);
+    paintStatus();
+    paintActions();
+    if (wantFocus) {
+      var f = document.querySelector(wantFocus);
+      wantFocus = null;
+      if (f && !f.disabled) f.focus();
+    }
+  }
+
+  function seatEl(s, revealing) {
+    var wrapS = el("div", "seat" + (view.turn === s && !view.over && view.phase === "bidding" ? " is-turn" : "") +
+      (view.aliveFlags[s] ? "" : " is-out"));
+    wrapS.dataset.seat = String(s);
+    wrapS.setAttribute("role", "listitem");
+
+    var zone = el("div", "cupzone"); zone.dataset.seat = String(s);
+    var row = el("div", "dicerow");
+    if (revealing && view.reveal.dice[s]) {
+      view.reveal.dice[s].forEach(function (v, i) {
+        var d = dieEl(v, { size: "md", wild: view.reveal.wildOnes });
+        d.dataset.seat = String(s); d.dataset.idx = String(i); d.dataset.val = String(v);
+        row.appendChild(d);
+      });
+    }
+    zone.appendChild(row);
+    if (view.aliveFlags[s]) {
+      var cup = cupEl(view.diceCounts[s] <= 2);
+      zone.appendChild(cup);
+    } else {
+      var tip = cupEl(true); tip.classList.add("tipped"); zone.appendChild(tip);
+    }
+    wrapS.appendChild(zone);
+
+    var label = nameOf(s);
+    wrapS.appendChild(el("div", "nm", label));
+    if (!view.aliveFlags[s]) wrapS.appendChild(el("div", "tag", "out"));
+    else if (view.blindSeats.indexOf(s) >= 0) wrapS.appendChild(el("div", "tag", "blind"));
+
+    var pips = el("div", "pips");
+    for (var i = 0; i < view.dicePerPlayer; i++) pips.appendChild(el("i", i < view.diceCounts[s] ? "on" : ""));
+    pips.setAttribute("aria-label", view.diceCounts[s] + " dice left");
+    wrapS.appendChild(pips);
+    return wrapS;
+  }
+
+  function tallyEl() {
+    var rev = view.reveal;
+    var box = el("div", "tallybox");
+    var line = el("div", "bidline");
+    line.appendChild(el("span", "", "Bid: <b>" + rev.bid.quantity + "</b> &times;"));
+    line.appendChild(dieEl(rev.bid.face, { size: "sm", wild: rev.wildOnes }));
+    line.appendChild(el("span", "", "&nbsp;· " + nameOf(rev.bid.seat)));
+    box.appendChild(line);
+    var c = el("div", "count"); c.id = "tally"; c.textContent = "0";
+    c.setAttribute("role", "status");
+    box.appendChild(c);
+    return box;
+  }
+
+  function myMatEl() {
+    var box = el("div", "mymat");
+    var cap = el("div", "cap", view.blind ? "Your cup — blind" : "Your cup");
+    box.appendChild(cap);
+    var dice = el("div", "dice");
+    if (view.blind) {
+      for (var i = 0; i < view.diceCounts[view.yourSeat]; i++) dice.appendChild(dieEl(0, { faceDown: true }));
+      box.appendChild(dice);
+      box.appendChild(el("div", "blindtag", "palo ciego — you bid without looking"));
+      return box;
+    }
+    if (!view.alive) {
+      box.appendChild(el("div", "outstrip", "No dice left."));
+      return box;
+    }
+    if (!view.yourDice.length) {
+      box.appendChild(el("div", "outstrip", "Dice are hidden right now."));
+      return box;
+    }
+    view.yourDice.slice().sort(function (a, b) { return a - b; }).forEach(function (v) {
+      dice.appendChild(dieEl(v, { wild: view.wildOnes }));
+    });
+    box.appendChild(dice);
+    return box;
+  }
+
+  /* --------------------------------------------------------- bid builder */
+  function minQtyMap() {
+    var m = {};
+    for (var f = 1; f <= 6; f++) m[f] = R.minQuantityFor(view.bid, f, bidOpts());
+    return m;
+  }
+
+  function builderEl() {
+    var mins = minQtyMap();
+    var anyLegal = false;
+    for (var f = 1; f <= 6; f++) if (mins[f] !== null) anyLegal = true;
+
+    // keep the selection legal
+    if (!anyLegal) { selFace = view.bid ? view.bid.face : 6; }
+    else {
+      if (mins[selFace] === null) { for (var g = 6; g >= 1; g--) if (mins[g] !== null) { selFace = g; break; } }
+      if (selQty < mins[selFace]) selQty = mins[selFace];
+      if (selQty > view.totalDice) selQty = view.totalDice;
+    }
+
+    var box = el("div", "builder"); box.id = "builder";
+    box.setAttribute("role", "group"); box.setAttribute("aria-label", "Build your bid");
+
+    /* quantity */
+    var qrow = el("div", "qrow");
+    var minus = el("button", "qbtn", "&minus;"); minus.type = "button"; minus.id = "qminus";
+    minus.setAttribute("aria-label", "Fewer dice");
+    var val = el("span", "qval pk-num"); val.id = "qval"; val.textContent = String(selQty);
+    val.setAttribute("role", "status"); val.setAttribute("aria-live", "polite");
+    val.setAttribute("aria-label", selQty + " " + FACE_WORD[selFace]);
+    var plus = el("button", "qbtn", "+"); plus.type = "button"; plus.id = "qplus";
+    plus.setAttribute("aria-label", "More dice");
+    minus.disabled = !anyLegal || selQty <= mins[selFace];
+    plus.disabled = !anyLegal || selQty >= view.totalDice;
+    minus.onclick = function () { stepQty(-1); };
+    plus.onclick = function () { stepQty(1); };
+    qrow.appendChild(minus); qrow.appendChild(val); qrow.appendChild(plus);
+    box.appendChild(qrow);
+
+    /* faces */
+    var frow = el("div", "facerow");
+    frow.setAttribute("role", "group"); frow.setAttribute("aria-label", "Face");
+    for (var f2 = 1; f2 <= 6; f2++) {
+      (function (f) {
+        var b = el("button", "facebtn"); b.type = "button";
+        b.appendChild(dieEl(f, { size: "md", wild: view.wildOnes }));
+        b.setAttribute("aria-pressed", String(f === selFace));
+        b.setAttribute("aria-label", FACE_WORD[f] + (mins[f] === null ? " (no legal bid)" : ", from " + mins[f]));
+        b.disabled = (mins[f] === null);
+        b.dataset.face = String(f);
+        b.onclick = function () { pickFace(f); };
+        frow.appendChild(b);
+      })(f2);
+    }
+    box.appendChild(frow);
+
+    box.appendChild(el("div", "helper", helperText(mins, anyLegal)));
+    box.addEventListener("keydown", onBuilderKey);
+    return box;
+  }
+
+  function helperText(mins, anyLegal) {
+    if (!anyLegal) return "No raise is possible — <b>Dudo</b> is your only move.";
+    var bid = view.bid;
+    if (!bid) return "Open the round — bid what you think the <b>whole table</b> is holding.";
+    if (view.wildOnes && bid.face !== 1 && selFace === 1) {
+      if (!seenAce) { seenAce = true; PK.store.set("play.liars-cup.seenAce", true); }
+      return "Going to ones <b>halves</b> the quantity — " + mins[1] + " or more.";
+    }
+    if (view.wildOnes && bid.face === 1 && selFace !== 1) {
+      return "Leaving ones <b>doubles</b> it — " + mins[selFace] + " or more " + FACE_WORD[selFace] + ".";
+    }
+    if (!view.wildOnes) return "Ones are ordinary this round — raise the quantity, or the face.";
+    return "Raise the quantity, or keep it and raise the face.";
+  }
+
+  function isReach(b) {
+    // a technically legal but wildly optimistic bid gets a faint heat shimmer
+    var p = (view.wildOnes && b.face !== 1) ? 2 / 6 : 1 / 6;
+    return b.quantity > 1.5 * (view.totalDice * p);
+  }
+
+  function stepQty(d) {
+    if (!myTurn()) return;
+    var mins = minQtyMap();
+    var lo = mins[selFace] === null ? 1 : mins[selFace];
+    var n = Math.min(view.totalDice, Math.max(lo, selQty + d));
+    if (n === selQty) { shake(); return; }
+    selQty = n; PK.sound.play("tick");
+    wantFocus = inBuilder() ? (d > 0 ? "#qplus" : "#qminus") : null;
+    render();
+  }
+  function pickFace(f) {
+    if (!myTurn()) return;
+    var mins = minQtyMap();
+    if (mins[f] === null) { shake(); return; }
+    selFace = f;
+    if (selQty < mins[f]) selQty = mins[f];
+    if (selQty > view.totalDice) selQty = view.totalDice;
+    PK.sound.play("click");
+    wantFocus = inBuilder() ? '.facebtn[data-face="' + f + '"]' : null;
+    render();
+  }
+  function inBuilder() {
+    var a = document.activeElement;
+    return !!(a && a.closest && a.closest("#builder"));
+  }
+  function shake() {
+    var b = document.getElementById("builder");
+    if (!b) return;
+    b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake");
+    PK.sound.play("tick");
+  }
+  function onBuilderKey(e) {
+    var k = e.key;
+    if (k === "ArrowUp") { e.preventDefault(); stepQty(1); }
+    else if (k === "ArrowDown") { e.preventDefault(); stepQty(-1); }
+    else if (k === "ArrowRight") { e.preventDefault(); nudgeFace(1); }
+    else if (k === "ArrowLeft") { e.preventDefault(); nudgeFace(-1); }
+    else if (k === "Enter") { e.preventDefault(); doRaise(); }
+  }
+  function nudgeFace(d) {
+    var mins = minQtyMap();
+    for (var i = 1; i <= 6; i++) {
+      var f = ((selFace - 1 + d * i) % 6 + 6) % 6 + 1;
+      if (mins[f] !== null) { pickFace(f); return; }
+    }
+    shake();
+  }
+
+  /* -------------------------------------------------------------- actions */
+  function paintActions() {
+    var list = [];
+    if (view.over) {
+      hidePrimary();
+    } else if (view.phase === "reveal") {
+      if (canSendNext()) showPrimary("Next round", !nextSent); else hidePrimary();
+    } else if (myTurn()) {
+      var legal = R.isBidLegal(view.bid, { quantity: selQty, face: selFace }, bidOpts());
+      showPrimary("Raise to " + selQty + " " + FACE_WORD[selFace], legal);
+      var d = btn("Dudo", "pk-btn--soft", doDudo);
+      d.disabled = !view.bid;
+      d.title = view.bid ? "Call the standing bid" : "Nothing to call yet";
+      list.push(d);
+    } else {
+      hidePrimary();
+    }
+    if (myMode === "online") list.push(btn("Leave", "pk-btn--ghost pk-btn--sm", function () { net.leave(); openModeSelect(); }));
+    else list.push(btn("Menu", "pk-btn--ghost pk-btn--sm", openModeSelect));
+    setExtras(list);
+  }
+
+  function firePrimary() {
+    if (!view) return;
+    if (view.phase === "reveal") { sendNext(); return; }
+    doRaise();
+  }
+  function doRaise() {
+    if (!myTurn()) return;
+    if (!R.isBidLegal(view.bid, { quantity: selQty, face: selFace }, bidOpts())) { shake(); return; }
+    PK.sound.play("click"); PK.buzz(12);
+    net.sendMove({ type: "bid", quantity: selQty, face: selFace });
+  }
+  function doDudo() {
+    if (!myTurn() || !view.bid) { shake(); return; }
+    PK.sound.play("diceClack", { pitch: 0.8 }); PK.buzz(16);
+    net.sendMove({ type: "dudo" });
+  }
+  function canSendNext() {
+    if (!view || view.phase !== "reveal" || view.over) return false;
+    if (net && net.isLocal) return true;
+    return !isSpectator() && view.yourSeat !== null && view.alive && view.turn === view.yourSeat;
+  }
+  function sendNext() {
+    if (nextSent || !canSendNext()) return;
+    nextSent = true; clearTimeout(autoNextT);
+    hidePrimary();
+    net.sendMove({ type: "next" });
+  }
+
+  function paintStatus() {
+    var t = document.getElementById("tt"), s = document.getElementById("ts");
+    if (!t) return;
+    var txt = "", sub = "";
+    if (view.over) {
+      txt = nameOf(view.result ? view.result.winner : null) + " takes the table";
+    } else if (view.phase === "reveal") {
+      txt = "Cups up";
+      sub = "Round " + view.round + " · " + view.totalDice + " dice were on the table";
+    } else if (isSpectator()) {
+      txt = nameOf(view.turn) + " to bid"; sub = "Watching";
+    } else if (view.yourSeat !== null && !view.alive) {
+      txt = nameOf(view.turn) + " to bid"; sub = "You're out — still watching";
+    } else if (myTurn()) {
+      txt = "Your turn";
+      sub = view.bid
+        ? ("Standing: <b>" + view.bid.quantity + " " + FACE_WORD[view.bid.face] + "</b> by " + nameOf(view.bid.seat))
+        : "You open the round";
+    } else {
+      txt = nameOf(view.turn) + (myMode === "ai" && view.turn !== 0 ? " is thinking" : " to bid");
+      if (myMode === "ai" && view.turn !== 0) t.className = "t think";
+      sub = view.bid ? ("Standing: <b>" + view.bid.quantity + " " + FACE_WORD[view.bid.face] + "</b>") : "";
+    }
+    t.textContent = txt;
+    if (myMode === "ai" && !view.over && view.phase === "bidding" && view.turn !== 0) t.className = "t think";
+    s.innerHTML = sub;
+  }
+
+  /* ------------------------------------------------- the reveal (signature) */
+  function revealKey(v) { return v.round + ":" + v.reveal.loserSeat + ":" + v.reveal.actual; }
+
+  function runReveal(done) {
+    var rev = view.reveal;
+    var wrap = document.querySelector(".lc-wrap");
+    var tally = document.getElementById("tally");
+    var res = document.getElementById("res");
+    var slow = !reduced();
+    var finished = false, watchdog = null;
+
+    function seatZone(s) { return document.querySelector('.cupzone[data-seat="' + s + '"]'); }
+    function openSeat(s, i) {
+      var z = seatZone(s); if (!z) return;
+      z.classList.add("open");
+      var cup = z.querySelector(".cup");
+      if (cup && slow) {
+        cup.animate([{ transform: "translateY(0) rotate(0deg)", opacity: 1 },
+                     { transform: "translateY(-34px) rotate(-6deg)", opacity: .4 }],
+          { duration: 260, easing: "cubic-bezier(.7,-0.4,.4,1)", fill: "forwards" });
+        var row = z.querySelector(".dicerow");
+        if (row) row.animate([{ transform: "translateY(-4px) scale(1.05)" }, { transform: "translateY(0) scale(1)" }],
+          { duration: 180, easing: "cubic-bezier(.16,1,.3,1)" });
+      }
+      PK.sound.play("diceClack", { pitch: 1.05 - i * 0.06 });
+    }
+
+    // ignite order: wild ones first (so "oh, the ones count" lands on its own), then exact matches
+    function matchList() {
+      var wilds = [], exact = [], dim = [];
+      for (var s = 0; s < view.numPlayers; s++) {
+        var arr = rev.dice[s] || [];
+        for (var i = 0; i < arr.length; i++) {
+          var node = document.querySelector('.die[data-seat="' + s + '"][data-idx="' + i + '"]');
+          if (!node) continue;
+          var v = arr[i];
+          if (v === rev.bid.face) exact.push(node);
+          else if (rev.wildOnes && rev.bid.face !== 1 && v === 1) wilds.push(node);
+          else dim.push(node);
+        }
+      }
+      return { order: wilds.concat(exact), dim: dim };
+    }
+
+    function finish() {
+      if (finished) return;
+      finished = true; clearTimeout(watchdog);
+      if (wrap) wrap.classList.remove("hushed");
+      done();
+    }
+
+    if (slow && wrap) wrap.classList.add("hushed");
+
+    var order = [];
+    for (var k = 0; k < view.numPlayers; k++) order.push((rev.challengerSeat + k) % view.numPlayers);
+
+    var t = slow ? 180 : 0;
+    order.forEach(function (s, i) {
+      setTimeout(function () { openSeat(s, i); }, slow ? t + i * 90 : 0);
+    });
+
+    var liftEnd = slow ? t + order.length * 90 + 200 : 40;
+
+    setTimeout(function () {
+      var m = matchList();
+      m.dim.forEach(function (n) { n.classList.add("dim"); });
+      var stagger = m.order.length ? Math.min(60, Math.max(18, Math.round(700 / m.order.length))) : 0;
+
+      if (!slow) {
+        m.order.forEach(function (n) { n.classList.add("lit"); });
+        if (tally) tally.textContent = String(rev.actual);
+        verdict();
+        return;
+      }
+      m.order.forEach(function (n, i) {
+        setTimeout(function () {
+          n.classList.add("lit");
+          if (tally) tally.textContent = String(i + 1);
+          PK.sound.play("tick");
+        }, i * stagger);
+      });
+      setTimeout(verdict, m.order.length * stagger + 60);
+    }, liftEnd);
+
+    function verdict() {
+      if (tally) {
+        tally.textContent = String(rev.actual);
+        tally.classList.add(rev.bidMet ? "good" : "bad");
+        if (slow) tally.animate([{ transform: "scale(1.25)" }, { transform: "scale(1)" }],
+          { duration: 220, easing: "cubic-bezier(.34,1.56,.64,1)" });
+      }
+      var line = "Bid " + rev.bid.quantity + " " + FACE_WORD[rev.bid.face] + " · actual " + rev.actual +
+        " — " + nameOf(rev.loserSeat) + " loses a die";
+      if (res) {
+        res.textContent = line;
+        res.setAttribute("data-tone", (view.yourSeat !== null && rev.loserSeat === view.yourSeat) ? "bad" : "good");
+      }
+      PK.sound.play("reveal");
+      PK.announce(line, true);
+
+      setTimeout(function () {
+        // the losing seat's last die leaves the table
+        var lose = document.querySelector('.die[data-seat="' + rev.loserSeat + '"][data-idx="' +
+          ((rev.dice[rev.loserSeat] || []).length - 1) + '"]');
+        if (lose) lose.classList.add("gone");
+        PK.sound.play("lose"); PK.buzz(24);
+        if (rev.eliminated !== null && rev.eliminated !== undefined) {
+          PK.announce(nameOf(rev.eliminated) + " is out — still watching.");
+          PK.toast(nameOf(rev.eliminated) + " is out");
+        }
+        finish();
+      }, slow ? 220 : 60);
+    }
+
+    watchdog = setTimeout(finish, slow ? 6000 : 900);
+  }
+
+  function afterReveal() {
+    if (view.over) { showResult(); return; }
+    nextSent = false;
+    paintActions();
+    if (canSendNext()) {
+      clearTimeout(autoNextT);
+      autoNextT = setTimeout(function () { sendNext(); }, 3200);
+    }
+  }
+
+  /* ------------------------------------------------------ hotseat curtain */
+  function needCurtain() {
+    if (myMode !== "hotseat" || !view || view.over) return false;
+    if (view.phase !== "bidding") return false;
+    if (!lastShown) return false;
+    return lastShown.turn !== view.turn || lastShown.round !== view.round;
+  }
+  function showCurtain() {
+    curtainUp = true; setExtras([]); hidePrimary();
+    var nm = nameOf(view.turn);
+    var c = el("div", "curtain");
+    c.innerHTML = '<div><h2>Pass to ' + nm + '</h2>' +
+      '<p class="pk-subtle">Cover the cup. Tap when ' + nm + ' is holding the device.</p><br></div>';
+    var b = btn("I'm ready", "", function () {
+      curtainUp = false; c.remove();
+      lastShown = { turn: view.turn, round: view.round };
+      render();
+      var mat = document.querySelector(".mymat");
+      if (mat && !reduced()) mat.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 140 });
+    });
+    c.firstChild.appendChild(b);
+    document.body.appendChild(c);
+    b.focus();
+    PK.announce("Pass the device to " + nm);
+  }
+
+  /* --------------------------------------------------------------- result */
+  function showResult() {
+    if (resultShown) return; resultShown = true;
+    var winner = view.result ? view.result.winner : null;
+    var iWon = (view.yourSeat !== null && winner === view.yourSeat);
+    if (myMode === "hotseat" || isSpectator()) PK.sound.play("win");
+    else PK.sound.play(iWon ? "win" : "lose");
+    var title = (myMode === "hotseat" || isSpectator() || view.yourSeat === null)
+      ? nameOf(winner) + " takes the table"
+      : (iWon ? "You take the table" : nameOf(winner) + " takes the table");
+    PK.announce(title, true);
+
+    // the winner's cup stays lifted, dice glowing
+    var z = document.querySelector('.cupzone[data-seat="' + winner + '"]');
+    if (z) { z.classList.add("open"); z.querySelectorAll(".die").forEach(function (d) { d.classList.add("lit"); }); }
+
+    var o = el("div", "overlay");
+    var card = el("div", "card");
+    card.appendChild(el("h2", "", title));
+    card.appendChild(el("p", "pk-subtle", "Last cup standing after " + view.round + " round" + (view.round === 1 ? "" : "s") + "."));
+    var row = el("div", "pk-row"); row.style.marginTop = "16px";
+    row.appendChild(btn(myMode === "online" ? "Rematch" : "New game", "", function () {
+      o.remove(); resultShown = false;
+      if (myMode === "online") { net.rematch(); revealDone = null; lastShown = null; }
+      else start(myMode);
+    }));
+    row.appendChild(btn("Menu", "pk-btn--ghost", function () { o.remove(); openModeSelect(); }));
+    card.appendChild(row); o.appendChild(card); document.body.appendChild(o);
+    row.querySelector("button").focus();
+  }
+
+  /* ----------------------------------------------------------------- pump */
+  function pump() {
+    if (busy || curtainUp) return;
+    if (!pending) return;
+    var prev = view;
+    view = pending; pending = null;
+
+    // a fresh round (no standing bid) resets the builder; otherwise the selection persists
+    if (!prev || !view.bid) { selQty = 1; selFace = 6; }
+
+    if (needCurtain()) { showCurtain(); return; }
+    lastShown = { turn: view.turn, round: view.round };
+
+    render();
+
+    if ((view.phase === "reveal" || (view.over && view.reveal)) && revealDone !== revealKey(view)) {
+      revealDone = revealKey(view);
+      nextSent = false;
+      busy = true; hidePrimary();
+      runReveal(function () { busy = false; afterReveal(); pump(); });
+      return;
+    }
+    if (view.over) showResult();
+    if (pending) pump();
+  }
+
+  /* --------------------------------------------------------------- wiring */
+  function wire() {
+    net.on("state", function (d) { pending = d.state; pump(); });
+    net.on("move", function (d) {
+      var m = d.move || {};
+      if (m.type === "bid") { PK.sound.play("click"); }
+    });
+    net.on("rejected", function (d) {
+      PK.toast(({ not_your_turn: "Not your turn", bid_too_low: "That bid is too low",
+        no_bid: "Nothing to call yet", wrong_phase: "Not right now", eliminated: "You're out",
+        own_bid: "You can't call your own bid" })[d.reason] || "Illegal move");
+      shake();
+      if (view) render();
+    });
+    net.on("presence", function (d) {
+      if (d.players) net.players = d.players;
+      if (myMode === "online") {
+        if ((d.players || []).some(function (p) { return p.status === "disconnected"; })) PK.toast("Player reconnecting…");
+        if (d.spectators) PK.announce(d.spectators + " watching");
+      }
+      if (view && !busy && !curtainUp) render();
+      else if (pending) pump();
+    });
+    net.on("gameOver", function () { pump(); });
+    net.on("reconnecting", function () { PK.toast("Reconnecting…"); });
+    net.on("reconnected", function () { PK.toast("Back online"); });
+    net.on("error", function (d) {
+      PK.toast(d.message || d.code || "Error");
+      if (d.code === "not_found" || d.code === "room_full") openModeSelect();
+    });
+    net.on("room", function (r) { roomInfo = r; });
+  }
+
+  /* ----------------------------------------------------------------- boot */
+  (function boot() {
+    var params = new URL(location.href).searchParams;
+    var code = params.get("r");
+    if (code) { joinOnline(code, params.get("spectate") === "1"); return; }
+    openModeSelect();
+  })();
+
+  window.addEventListener("resize", function () { if (view && !busy && !curtainUp && screen === "game") render(); });
+})();
+</script>
+<!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:10px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Get the monthly letter</a></footer><!-- /ep:ca-foot -->
+</body>
+</html>

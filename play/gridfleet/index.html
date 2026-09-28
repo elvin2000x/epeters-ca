@@ -1,0 +1,1264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gridfleet</title>
+<meta name="description" content="Gridfleet — deploy a fleet on a private 10 by 10 chart and call coordinates until one fleet is gone. Hotseat, vs computer, or online.">
+<link rel="stylesheet" href="../_kit/play-kit.css">
+<style>
+  /* ---------------------------------------------------------- structure */
+  .gf-wrap{ width:100%; display:flex; flex-direction:column; gap:var(--pk-gap); align-items:stretch; }
+  .gf-center{ align-items:center; }
+
+  /* ------------------------------------------------------- the seat rail */
+  .seatrail{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
+  .seat{ display:flex; align-items:center; gap:8px; padding:6px 12px; border-radius:var(--pk-radius-pill);
+    background:var(--pk-surface); border:1.5px solid var(--pk-line); font-size:var(--pk-fs-sm);
+    font-weight:600; position:relative; }
+  .seat.is-turn{ border-color:var(--pk-accent); background:var(--pk-accent-soft); color:var(--pk-accent-ink); }
+  .seat.is-turn::after{ content:""; position:absolute; left:14px; right:14px; bottom:-1.5px; height:2px;
+    background:var(--pk-accent); border-radius:2px; }
+  .seat.is-off{ opacity:.55; }
+  .seat .dot{ width:8px; height:8px; border-radius:50%; background:var(--pk-line); flex:0 0 auto; }
+  .seat.is-turn .dot{ background:var(--pk-accent); }
+  .pips{ display:flex; gap:3px; }
+  .pips i{ width:10px; height:5px; border-radius:3px; background:var(--pk-accent); display:block; }
+  .pips i.gone{ background:transparent; box-shadow:inset 0 0 0 1.5px var(--pk-ink-faint); }
+
+  /* ------------------------------------------------------------ the chart */
+  .chart{ width:100%; max-width:min(520px, 92vw); margin:0 auto; }
+  .chart.mini{ max-width:min(300px, 78vw); }
+  .chartgrid{ display:grid; grid-template-columns:1.5em 1fr; grid-template-rows:1.35em 1fr; gap:3px; }
+  .chartgrid .corner{ }
+  .cols, .rows{ display:flex; font-family:var(--pk-font-num); font-size:var(--pk-fs-xs);
+    color:var(--pk-ink-faint); user-select:none; }
+  .cols{ }
+  .cols span, .rows span{ flex:1; display:grid; place-items:center; line-height:1; transition:color var(--pk-t-quick); }
+  .rows{ flex-direction:column; }
+  .cols span.hi, .rows span.hi{ color:var(--pk-accent); font-weight:700; }
+
+  .gridarea{ position:relative; aspect-ratio:1/1; border-radius:var(--pk-radius-sm);
+    background:var(--pk-surface); box-shadow:inset 0 0 0 1.5px var(--pk-line), var(--pk-shadow-1);
+    overflow:hidden; }
+  .grid{ position:absolute; inset:0; display:flex; flex-direction:column; }
+  .gf-row{ display:flex; flex:1; }
+  .gf-cell{ flex:1; position:relative; margin:0; padding:0; border:0; background:transparent;
+    display:grid; place-items:center; cursor:default; color:inherit;
+    box-shadow:inset -1px -1px 0 0 var(--pk-line); min-width:0; }
+  .gf-cell:last-child{ box-shadow:inset 0 -1px 0 0 var(--pk-line); }
+  .gf-row:last-child .gf-cell{ box-shadow:inset -1px 0 0 0 var(--pk-line); }
+  .gf-row:last-child .gf-cell:last-child{ box-shadow:none; }
+  .gf-cell:focus-visible{ outline:3px solid var(--pk-focus); outline-offset:-3px; z-index:6; }
+  .grid.live .gf-cell.open{ cursor:pointer; }
+  .grid.live .gf-cell.open:hover{ background:color-mix(in srgb, var(--pk-accent) 9%, transparent); }
+  .gf-cell.cursor{ box-shadow:inset 0 0 0 2px color-mix(in srgb, var(--pk-accent) 45%, transparent); }
+
+  /* the marker vocabulary — distinguishable by SHAPE, never by colour alone */
+  .m-miss{ width:46%; aspect-ratio:1/1; border-radius:50%; box-sizing:border-box;
+    border:2px solid var(--pk-ink-soft); opacity:.85; }
+  .m-hit{ width:52%; aspect-ratio:1/1; background:var(--pk-accent); transform:rotate(45deg);
+    border-radius:2px; display:grid; place-items:center; }
+  .m-hit::after{ content:""; width:34%; aspect-ratio:1/1; border-radius:1px; background:var(--pk-accent-press); }
+  .gf-cell.dead{ background:color-mix(in srgb, var(--pk-ink) 8%, transparent); }
+  .gf-cell.dead .m-hit{ background:var(--pk-ink-soft); filter:saturate(.15); }
+  .gf-cell.dead .m-hit::after{ background:var(--pk-ink); }
+  .gf-cell.near{ background:color-mix(in srgb, var(--pk-ink) 4%, transparent); transition:background 400ms linear; }
+
+  /* salvo selection + the reticle */
+  .gf-cell.sel{ background:color-mix(in srgb, var(--pk-accent) 14%, transparent); }
+  .gf-cell .selno{ position:absolute; font-family:var(--pk-font-num); font-size:.62em; font-weight:800;
+    color:var(--pk-accent-ink); }
+  .gf-cell.retic::before, .gf-cell.retic::after{ content:""; position:absolute; width:32%; height:32%;
+    border:2px solid var(--pk-accent); }
+  .gf-cell.retic::before{ top:8%; left:8%; border-right:0; border-bottom:0; }
+  .gf-cell.retic::after{ bottom:8%; right:8%; border-left:0; border-top:0; }
+
+  /* ghost preview while deploying */
+  .gf-cell.ghost{ background:color-mix(in srgb, var(--pk-accent) 22%, transparent); }
+  .gf-cell.ghostbad{ background:color-mix(in srgb, var(--pk-bad) 20%, transparent);
+    box-shadow:inset 0 0 0 2px var(--pk-bad); }
+
+  .ovl{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+  .ovl .hull{ fill:none; stroke:var(--pk-accent); stroke-width:.055; opacity:.9; }
+  .ovl .hull.own{ fill:color-mix(in srgb, var(--pk-accent) 18%, transparent); }
+  .ovl .hull.wreck{ stroke:var(--pk-ink-soft); stroke-dasharray:.001 0; opacity:.75; }
+  .ovl .hull.faint{ stroke:var(--pk-ink-faint); stroke-dasharray:.22 .16; opacity:.85; }
+  .ovl .lbl{ fill:var(--pk-ink-faint); font-size:.30px; font-family:var(--pk-font-num); }
+
+  /* the sonar idle — only on your turn, never under reduced motion */
+  .sonar{ position:absolute; inset:-25%; pointer-events:none; opacity:0;
+    background:conic-gradient(from 0deg, color-mix(in srgb,var(--pk-accent) 55%, transparent) 0deg,
+      transparent 42deg, transparent 360deg); }
+  .gridarea.mine .sonar{ opacity:.06; animation:gfSweep 12s linear infinite; }
+
+  /* -------------------------------------------------------- deploy tray */
+  .tray{ display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+  .chip{ display:flex; align-items:center; gap:8px; padding:7px 12px; border-radius:var(--pk-radius-pill);
+    border:1.5px solid var(--pk-line); background:var(--pk-surface); font-size:var(--pk-fs-sm);
+    font-weight:600; cursor:pointer; touch-action:none; box-shadow:var(--pk-shadow-1); }
+  .chip[aria-pressed="true"]{ border-color:var(--pk-accent); background:var(--pk-accent-soft); color:var(--pk-accent-ink); }
+  .chip.done{ opacity:.42; }
+  .chip .hull{ display:flex; gap:2px; }
+  .chip .hull i{ width:7px; height:12px; border-radius:2px; background:var(--pk-accent); display:block; }
+  .chip .n{ font-family:var(--pk-font-num); color:var(--pk-ink-soft); }
+  .why{ text-align:center; min-height:1.3em; font-size:var(--pk-fs-sm); color:var(--pk-bad); font-weight:600; }
+  .hint{ text-align:center; color:var(--pk-ink-faint); font-size:var(--pk-fs-xs); }
+
+  /* ---------------------------------------------------------- shot log */
+  .log{ display:flex; flex-direction:column; gap:2px; font-size:var(--pk-fs-xs);
+    color:var(--pk-ink-soft); max-width:520px; margin:0 auto; width:100%; }
+  .log div{ display:flex; gap:6px; align-items:baseline; }
+  .log .co{ font-family:var(--pk-font-num); font-weight:700; color:var(--pk-ink); }
+  .log .sunkline{ text-decoration:line-through; opacity:.75; }
+  .banner{ text-align:center; color:var(--pk-ink-soft); min-height:1.4em; font-weight:600; }
+  .think::after{ content:""; display:inline-block; width:.5em; height:.5em; margin-left:.45em;
+    border-radius:50%; background:var(--pk-accent); animation:gfPulse 1s ease-in-out infinite;
+    vertical-align:middle; }
+
+  .minihdr{ display:flex; align-items:center; justify-content:center; gap:8px; }
+  .minihdr h3{ font-size:var(--pk-fs-sm); color:var(--pk-ink-soft); font-weight:700; margin:0; }
+
+  /* --------------------------------------------- mode select / invite */
+  .modecard{ width:100%; max-width:420px; text-align:left; display:flex; gap:12px; align-items:center;
+    padding:16px; margin:0 auto; cursor:pointer; }
+  .modecard h3{ font-family:var(--pk-font-display); font-size:1.1rem; margin:0 0 2px; }
+  .modecard p{ margin:0; color:var(--pk-ink-soft); font-size:var(--pk-fs-sm); }
+  .modecard .ic{ font-size:1.6rem; flex:0 0 auto; width:2rem; text-align:center; }
+  .opts{ width:100%; max-width:420px; margin:0 auto; display:flex; flex-direction:column; gap:10px; }
+  .optrow{ display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+  .optrow > span{ font-size:var(--pk-fs-sm); font-weight:600; color:var(--pk-ink-soft); }
+  .code{ font-family:var(--pk-font-num); font-size:clamp(1.7rem,9vw,2.3rem); letter-spacing:.28em;
+    font-weight:800; color:var(--pk-accent); background:var(--pk-surface-sunk);
+    border-radius:var(--pk-radius); padding:10px 10px 10px 24px; display:inline-block; }
+
+  /* ------------------------------------------------- curtain + overlay */
+  .curtain{ position:fixed; inset:0; z-index:150; background:var(--pk-bg); display:grid;
+    place-items:center; text-align:center; padding:24px; }
+  .curtain h2{ font-family:var(--pk-font-display); font-size:clamp(1.5rem,7vw,2rem); margin-bottom:8px; }
+  .overlay{ position:fixed; inset:0; z-index:150; background:color-mix(in srgb, var(--pk-ink) 55%, transparent);
+    display:grid; place-items:center; padding:20px; overflow:auto; }
+  .overlay .card{ background:var(--pk-surface); border-radius:var(--pk-radius-lg); box-shadow:var(--pk-shadow-3);
+    padding:24px; max-width:420px; width:100%; text-align:center; }
+  .overlay h2{ font-family:var(--pk-font-display); font-size:1.55rem; margin-bottom:4px; }
+  .statrow{ display:flex; gap:14px; justify-content:center; margin:14px 0 4px; flex-wrap:wrap; }
+  .stat{ display:flex; flex-direction:column; gap:2px; min-width:64px; }
+  .stat b{ font-family:var(--pk-font-num); font-size:1.35rem; color:var(--pk-accent); }
+  .stat span{ font-size:var(--pk-fs-xs); color:var(--pk-ink-soft); text-transform:uppercase; letter-spacing:.06em; }
+
+  /* --------------------------------------------------------- animation */
+  @keyframes gfSweep{ to{ transform:rotate(360deg); } }
+  @keyframes gfPulse{ 0%,100%{ opacity:.25; transform:scale(.8);} 50%{ opacity:1; transform:scale(1.15);} }
+  @keyframes gfStamp{ from{ transform:rotate(45deg) scale(1.5); opacity:.3; } to{ transform:rotate(45deg) scale(1); opacity:1; } }
+  @keyframes gfSettle{ from{ transform:scale(.9); opacity:0; } to{ transform:scale(1); opacity:.85; } }
+  @keyframes gfRipple{ from{ transform:scale(.35); opacity:.75; } to{ transform:scale(1.25); opacity:0; } }
+  @keyframes gfFade{ from{ opacity:0; } to{ opacity:1; } }
+  @keyframes gfShake{ 0%,100%{ transform:translateX(0);} 25%{ transform:translateX(-3px);} 75%{ transform:translateX(3px);} }
+  .is-new .m-hit{ animation:gfStamp 140ms var(--pk-ease-spring) both; }
+  .is-new .m-miss{ animation:gfSettle 220ms var(--pk-ease-settle) both; }
+  .ripple{ position:absolute; width:60%; aspect-ratio:1/1; border-radius:50%; box-sizing:border-box;
+    border:2px solid var(--pk-ink-soft); pointer-events:none; animation:gfRipple 220ms var(--pk-ease-settle) both; }
+  .splash{ position:absolute; width:70%; aspect-ratio:1/1; border-radius:50%; box-sizing:border-box;
+    border:2px solid var(--pk-accent); pointer-events:none; animation:gfRipple 200ms var(--pk-ease-spring) both; }
+  .shake{ animation:gfShake 180ms var(--pk-ease-standard); }
+  .revealed .hull.faint{ animation:gfFade 500ms var(--pk-ease-settle) both; }
+
+  @media (prefers-reduced-motion: reduce){
+    .gridarea.mine .sonar{ animation:none; opacity:0; }
+    .is-new .m-hit, .is-new .m-miss{ animation:gfFade 120ms linear both; }
+    .ripple, .splash{ display:none; }
+    .think::after{ animation:none; opacity:.85; }
+    .revealed .hull.faint{ animation:none; }
+  }
+  :root[data-motion="reduce"] .gridarea.mine .sonar{ animation:none; opacity:0; }
+  :root[data-motion="reduce"] .is-new .m-hit,
+  :root[data-motion="reduce"] .is-new .m-miss{ animation:gfFade 120ms linear both; }
+  :root[data-motion="reduce"] .ripple,
+  :root[data-motion="reduce"] .splash{ display:none; }
+  :root[data-motion="reduce"] .think::after{ animation:none; opacity:.85; }
+  :root[data-motion="reduce"] .revealed .hull.faint{ animation:none; }
+
+  @media (max-width:480px){
+    .chart{ max-width:100%; }
+    .miniwrap:not(.open) .chart{ display:none; }
+    .chartgrid{ grid-template-columns:1.2em 1fr; grid-template-rows:1.15em 1fr; }
+  }
+  @media (min-width:481px){ .minihdr button.expand{ display:none; } }
+</style>
+<link rel="canonical" href="https://epeters.ca/play/gridfleet/">
+</head>
+<body>
+<script src="../_kit/play-kit.js"></script>
+<script src="../_kit/net-kit.js"></script>
+<script src="rules.js"></script>
+<script>
+var HEADLESS = (typeof document === "undefined");
+
+if (!HEADLESS) (function () {
+  "use strict";
+  var R = window.GRIDFLEET_RULES;
+  var SIZE = R.SIZE;
+
+  var ui = PK.app({
+    title: "Gridfleet", slug: "gridfleet", accent: "teal", board: true,
+    action: { label: "New match", onFire: onPrimary, key: null }
+  });
+  var stage = ui.stage, actions = ui.actions, primary = ui.primary;
+
+  /* ------------------------------------------------------------- config */
+  var cfg = {
+    name: PK.store.get("play.gridfleet.name", "Guest"),
+    salvo: !!PK.store.get("play.gridfleet.salvo", false),
+    touching: PK.store.get("play.gridfleet.touching", true) !== false,
+    ai: PK.store.get("play.gridfleet.ai", "sharp") === "casual" ? "casual" : "sharp"
+  };
+  function saveCfg() {
+    PK.store.set("play.gridfleet.name", cfg.name);
+    PK.store.set("play.gridfleet.salvo", cfg.salvo);
+    PK.store.set("play.gridfleet.touching", cfg.touching);
+    PK.store.set("play.gridfleet.ai", cfg.ai);
+  }
+
+  /* -------------------------------------------------------- app state */
+  var net = null, view = null, myMode = "hotseat";
+  var screen = "menu";                 // menu | invite | join | deploy | fight
+  var roomInfo = null, resultShown = false, busy = false;
+  var curtainSeat = null, lastSeatShown = null;
+  var draft = { ships: [], held: null, dir: "h", cursor: 0 };
+  var sel = [];                        // salvo / single selection on the target grid
+  var cursor = 0;                      // roving focus index on the active grid
+  var seen = [0, 0];                   // incoming entries already painted, per board
+  var logLines = [], extras = [], miniOpen = false;
+
+  /* ------------------------------------------------------------ helpers */
+  function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+  function btn(label, cls, on) { var b = document.createElement("button"); b.type = "button"; b.className = "pk-btn " + (cls || ""); b.textContent = label; b.onclick = on; return b; }
+  function setExtras(list) {
+    extras.forEach(function (b) { if (b.parentNode) b.parentNode.removeChild(b); });
+    extras = list || [];
+    extras.forEach(function (b) { actions.appendChild(b); });
+  }
+  function reduced() { return PK.motion.reduced; }
+  function rowLabel(r) { return String.fromCharCode(65 + r); }
+  function coord(r, c) { return rowLabel(r) + (c + 1); }
+  function idx(r, c) { return r * SIZE + c; }
+  function rowOf(i) { return Math.floor(i / SIZE); }
+  function colOf(i) { return i % SIZE; }
+  function specName(id) { for (var i = 0; i < R.FLEET.length; i++) if (R.FLEET[i].id === id) return R.FLEET[i].name; return id; }
+  function mySeat() { return view ? view.yourSeat : null; }
+  function isSpectator() { return !!(net && net.isSpectator) || (view && view.yourSeat === null); }
+  function myTurn() { return !!(view && !view.over && view.phase === "firing" && !isSpectator() && view.turn === view.yourSeat); }
+  function seatName(s) {
+    if (myMode === "ai") return s === mySeat() ? (cfg.name || "You") : "Computer";
+    if (myMode === "hotseat") return "Player " + (s + 1);
+    var p = (net && net.players || []).filter(function (x) { return x.seat === s; })[0];
+    return (p && p.name) || ("Player " + (s + 1));
+  }
+
+  /* =====================================================================
+     The local driver.
+     LocalNet drives games whose seat pointer is always `state.turn`. This
+     game has a placing phase where `turn` is null and BOTH seats owe a move,
+     so the instance gets a gridfleet-shaped seat pointer. The shared kit is
+     untouched; the renderer still only ever sees publicView snapshots.
+     =================================================================== */
+  function localDriver(opts) {
+    var n = new LocalNet(opts);
+    var human = opts.mode === "ai" ? (1 - n.aiSeat) : null;
+    var lastSeat = 0;
+
+    n.actorSeat = function () {
+      var s = n._raw;
+      if (!s || s.over) return null;
+      if (s.phase === "placing") {
+        if (opts.mode === "ai") return s.ready[human] ? null : human;
+        return s.ready[0] ? (s.ready[1] ? null : 1) : 0;
+      }
+      return s.turn;
+    };
+    n._emitState = function () {
+      var s = n._raw;
+      var viewSeat = opts.mode === "ai" ? human : n.actorSeat();
+      if (viewSeat === null || viewSeat === undefined) viewSeat = lastSeat;
+      lastSeat = viewSeat; n.seat = viewSeat;
+      // The ONLY thing the renderer ever receives — never the raw state.
+      n.state = n.rules.publicView(s, viewSeat);
+      n.emit("state", { state: n.state, turn: s.turn, seq: 0 });
+      var term = n.rules.isTerminal(s);
+      if (term && term.over) n.emit("gameOver", { result: term.result, reason: term.reason });
+    };
+    n.sendMove = function (move) {
+      var s = n._raw;
+      if (!s || s.over) return;
+      var seat = n.actorSeat();
+      if (seat === null) { n.emit("rejected", { reason: "not_your_turn", move: move }); return; }
+      var res = n.rules.applyMove(s, seat, move, n.rng);
+      if (!res.ok) { n.emit("rejected", { reason: res.reason, move: move }); return; }
+      n._raw = res.state;
+      n.emit("move", { by: seat, move: move, turn: n._raw.turn, seq: 0, events: res.events || [] });
+      n._emitState();
+      n._maybeAI();
+    };
+    n._maybeAI = function () {
+      if (opts.mode !== "ai" || !n.ai) return;
+      var s = n._raw;
+      if (!s || s.over) return;
+      var owes = (s.phase === "placing" && !s.ready[n.aiSeat]) || (s.phase === "firing" && s.turn === n.aiSeat);
+      if (!owes) return;
+      var wait = s.phase === "placing" ? 380 : (600 + n.rng(300));   // paced, never instant
+      n.aiBusy = true;
+      setTimeout(function () {
+        var cur = n._raw;
+        if (!cur || cur.over) { n.aiBusy = false; return; }
+        var still = (cur.phase === "placing" && !cur.ready[n.aiSeat]) || (cur.phase === "firing" && cur.turn === n.aiSeat);
+        if (!still) { n.aiBusy = false; return; }
+        // the bot reads a FILTERED view — the same information a human seat has
+        var mv = n.ai(n.rules.publicView(cur, n.aiSeat));
+        var res = n.rules.applyMove(cur, n.aiSeat, mv, n.rng);
+        n.aiBusy = false;
+        if (!res.ok) { n.emit("rejected", { reason: res.reason, move: mv }); return; }
+        n._raw = res.state;
+        n.emit("move", { by: n.aiSeat, move: mv, turn: n._raw.turn, seq: 0, events: res.events || [] });
+        n._emitState();
+        n._maybeAI();
+      }, wait);
+    };
+    return n;
+  }
+
+  /* =====================================================================
+     Mode select
+     =================================================================== */
+  function openModeSelect() {
+    if (net && net.disconnect) { try { net.disconnect(); } catch (e) {} }
+    net = null; view = null; roomInfo = null; resultShown = false; busy = false;
+    lastSeatShown = null; curtainSeat = null; sel = []; logLines = []; seen = [0, 0];
+    screen = "menu";
+    var o = document.querySelector(".overlay"); if (o) o.remove();
+    var c = document.querySelector(".curtain"); if (c) c.remove();
+    setExtras([]); stage.innerHTML = "";
+
+    var wrap = el("div", "gf-wrap gf-center"); wrap.style.gap = "14px";
+    var h = el("h2", "", "Naval grid duel");
+    h.style.cssText = "font-family:var(--pk-font-display);font-size:var(--pk-fs-lg)";
+    wrap.appendChild(h);
+    wrap.appendChild(el("p", "pk-subtle", "Deploy five ships on a private 10&times;10 chart, then call squares until one fleet is gone."));
+
+    function card(ic, title, desc, fn) {
+      var b = el("button", "pk-panel modecard");
+      b.type = "button";
+      b.innerHTML = '<span class="ic" aria-hidden="true">' + ic + '</span><span><h3>' + title + '</h3><p>' + desc + '</p></span>';
+      b.onclick = fn; return b;
+    }
+    wrap.appendChild(card("&#9878;", "Local hotseat", "Two players, one device, a hand-off curtain between turns.", function () { start("hotseat"); }));
+    wrap.appendChild(card("&#129302;", "Vs computer", "A hunt-and-target opponent with two strengths.", function () { start("ai"); }));
+    wrap.appendChild(card("&#128279;", "Play a friend", "Get a 4-character room code and a link.", function () { start("online"); }));
+    var jr = el("div", "pk-row");
+    jr.appendChild(btn("Have a code? Join a room", "pk-btn--ghost pk-btn--sm", openJoinPrompt));
+    wrap.appendChild(jr);
+
+    wrap.appendChild(buildOptions(false));
+    stage.appendChild(wrap);
+    if (primary) { primary.textContent = "Local hotseat"; primary.disabled = false; }
+  }
+
+  function buildOptions(compact) {
+    var box = el("div", "opts pk-well");
+
+    var r0 = el("div", "optrow");
+    r0.appendChild(el("span", "", "Your name"));
+    var nameIn = document.createElement("input");
+    nameIn.className = "pk-input"; nameIn.value = cfg.name; nameIn.maxLength = 16;
+    nameIn.setAttribute("aria-label", "Your display name");
+    nameIn.style.maxWidth = "11em";
+    nameIn.oninput = function () { cfg.name = nameIn.value.slice(0, 16) || "Guest"; saveCfg(); };
+    r0.appendChild(nameIn); box.appendChild(r0);
+
+    function sw(label, sub, get, set) {
+      var row = el("div", "optrow");
+      var lab = el("span", "", label + (sub ? '<br><small class="pk-subtle" style="font-weight:400">' + sub + "</small>" : ""));
+      row.appendChild(lab);
+      var s = el("span", "pk-switch");
+      var i = document.createElement("input"); i.type = "checkbox"; i.checked = get();
+      i.setAttribute("aria-label", label);
+      i.onchange = function () { set(i.checked); saveCfg(); PK.sound.play("click"); };
+      s.appendChild(i); s.appendChild(document.createElement("span"));
+      row.appendChild(s); return row;
+    }
+    box.appendChild(sw("Salvo fire", "one shot per surviving ship",
+      function () { return cfg.salvo; }, function (v) { cfg.salvo = v; }));
+    box.appendChild(sw("Ships may touch", "off = no shared edge or corner",
+      function () { return cfg.touching; }, function (v) { cfg.touching = v; }));
+
+    var r3 = el("div", "optrow"); r3.appendChild(el("span", "", "Computer strength"));
+    var seg = el("div", "pk-seg");
+    [["casual", "Casual"], ["sharp", "Sharp"]].forEach(function (d) {
+      var b = document.createElement("button"); b.type = "button"; b.dataset.v = d[0]; b.textContent = d[1];
+      seg.appendChild(b);
+    });
+    function paint() { seg.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.v === cfg.ai)); }); }
+    seg.onclick = function (e) { var b = e.target.closest("button"); if (!b) return; cfg.ai = b.dataset.v; saveCfg(); paint(); PK.sound.play("click"); };
+    paint(); r3.appendChild(seg); box.appendChild(r3);
+
+    if (compact) box.appendChild(el("p", "hint", "Changes apply to the next match."));
+    return box;
+  }
+  PK.settings.register(buildOptions(true));
+
+  function openJoinPrompt() {
+    screen = "join"; setExtras([]); stage.innerHTML = "";
+    var wrap = el("div", "gf-wrap gf-center"); wrap.style.gap = "14px";
+    var h = el("h2", "", "Join a game"); h.style.fontFamily = "var(--pk-font-display)";
+    wrap.appendChild(h);
+    var inp = document.createElement("input");
+    inp.className = "pk-input"; inp.maxLength = 4; inp.placeholder = "CODE"; inp.autocapitalize = "characters";
+    inp.setAttribute("aria-label", "Room code");
+    inp.style.cssText = "text-transform:uppercase;letter-spacing:.3em;text-align:center;width:9em;font-family:var(--pk-font-num)";
+    wrap.appendChild(inp);
+    var row = el("div", "pk-row");
+    function go() { var c = inp.value.trim().toUpperCase(); if (c.length >= 3) joinOnline(c, false); }
+    row.appendChild(btn("Join", "", go));
+    row.appendChild(btn("Back", "pk-btn--ghost", openModeSelect));
+    wrap.appendChild(row); stage.appendChild(wrap); inp.focus();
+    inp.onkeydown = function (e) { if (e.key === "Enter") { e.preventDefault(); go(); } };
+    if (primary) { primary.textContent = "Join"; primary.disabled = false; }
+  }
+
+  /* =====================================================================
+     Starting a match
+     =================================================================== */
+  function resetMatch() {
+    view = null; resultShown = false; busy = false; sel = []; logLines = [];
+    seen = [0, 0]; lastSeatShown = null; curtainSeat = null; cursor = 0;
+    draft = { ships: [], held: null, dir: "h", cursor: 0 };
+    var o = document.querySelector(".overlay"); if (o) o.remove();
+    var c = document.querySelector(".curtain"); if (c) c.remove();
+  }
+
+  function start(mode) {
+    myMode = mode; resetMatch();
+    var options = { salvo: cfg.salvo, allowTouching: cfg.touching };
+
+    if (mode === "hotseat") {
+      net = localDriver({ gameId: "gridfleet", mode: "hotseat", rules: R, seats: 2, rng: PK.rand.int, options: options });
+      wire(); net.connect();
+    } else if (mode === "ai") {
+      var level = cfg.ai;
+      net = localDriver({
+        gameId: "gridfleet", mode: "ai", rules: R, seats: 2, rng: PK.rand.int, options: options, aiSeat: 1,
+        ai: function (v) { return R.aiMove(v, PK.rand.int, level); }
+      });
+      wire(); net.connect();
+    } else {
+      net = new Net({ gameId: "gridfleet", name: cfg.name, rules: R });
+      wire();
+      screen = "invite";
+      stage.innerHTML = '<p class="banner">Connecting&hellip;</p>';
+      setExtras([btn("Cancel", "pk-btn--ghost pk-btn--sm", openModeSelect)]);
+      if (primary) { primary.textContent = "Waiting"; primary.disabled = true; }
+      var live = net;
+      var giveUp = setTimeout(function () {
+        if (net === live && !roomInfo) { PK.toast("Game server unreachable — hotseat and vs-computer still work"); openModeSelect(); }
+      }, 7000);
+      net.connect().then(function () {
+        return net.createRoom({ options: options });
+      }).then(function (room) {
+        if (net !== live) return;
+        clearTimeout(giveUp); roomInfo = room; inviteScreen(room);
+      }).catch(function () {
+        clearTimeout(giveUp);
+        if (net === live) { PK.toast("Could not reach the game server"); openModeSelect(); }
+      });
+    }
+  }
+
+  function joinOnline(code, spectate) {
+    myMode = "online"; resetMatch(); roomInfo = null; screen = "invite";
+    net = new Net({ gameId: "gridfleet", name: cfg.name, rules: R });
+    wire();
+    var live = net;
+    var giveUp = setTimeout(function () {
+      if (net === live && !view) { PK.toast("Game server unreachable — hotseat and vs-computer still work"); openModeSelect(); }
+    }, 7000);
+    net.connect().then(function () { return net.joinRoom(code, { asSpectator: !!spectate }); })
+      .then(function () { clearTimeout(giveUp); })
+      .catch(function () { clearTimeout(giveUp); if (net === live) { PK.toast("Could not reach the game server"); openModeSelect(); } });
+    stage.innerHTML = '<p class="banner">Joining room ' + String(code).toUpperCase() + "&hellip;</p>";
+    setExtras([btn("Cancel", "pk-btn--ghost pk-btn--sm", openModeSelect)]);
+    if (primary) { primary.textContent = "Joining"; primary.disabled = true; }
+  }
+
+  function inviteScreen(room) {
+    screen = "invite"; setExtras([]); stage.innerHTML = "";
+    var wrap = el("div", "gf-wrap gf-center"); wrap.style.gap = "16px";
+    var h = el("h2", "", "Share to start"); h.style.fontFamily = "var(--pk-font-display)";
+    wrap.appendChild(h);
+    wrap.appendChild(el("div", "code", room.roomId || "----"));
+    wrap.appendChild(el("p", "pk-subtle", "Send the link or read out the code. You both deploy as soon as they join."));
+    var row = el("div", "pk-row");
+    row.appendChild(btn("Copy link", "", function () {
+      net.copyInvite().then(function () { PK.toast("Link copied"); }, function () { PK.toast("Copy failed — read out the code"); });
+    }));
+    if (navigator.share) row.appendChild(btn("Share", "pk-btn--soft", function () { net.share(); }));
+    row.appendChild(btn("Cancel", "pk-btn--ghost", openModeSelect));
+    wrap.appendChild(row);
+    var qrBox = el("div", ""); wrap.appendChild(qrBox);
+    if (net.qrDataUrl) net.qrDataUrl().then(function (u) {
+      if (!u) return;
+      var img = document.createElement("img"); img.src = u; img.alt = "Invite QR code";
+      img.style.cssText = "width:150px;height:150px;image-rendering:pixelated;border-radius:8px;background:#fff;padding:6px";
+      qrBox.appendChild(img);
+    }, function () {});
+    var b = el("p", "banner", "Waiting for an opponent&hellip;"); b.id = "bn"; wrap.appendChild(b);
+    stage.appendChild(wrap);
+    if (primary) { primary.textContent = "Waiting"; primary.disabled = true; }
+    PK.announce("Room code " + (room.roomId || "") + ". Waiting for an opponent.");
+  }
+
+  /* =====================================================================
+     Chart rendering (one builder, both grids, all three modes)
+     =================================================================== */
+  function chartEl(o) {
+    // o: { board, own, live, marks, hulls, dead, mini, onCell, id }
+    var chart = el("div", "chart" + (o.mini ? " mini" : ""));
+    var g = el("div", "chartgrid");
+    g.appendChild(el("div", "corner"));
+    var cols = el("div", "cols");
+    for (var c = 0; c < SIZE; c++) cols.appendChild(el("span", "", String(c + 1)));
+    g.appendChild(cols);
+    var rows = el("div", "rows");
+    for (var r = 0; r < SIZE; r++) rows.appendChild(el("span", "", rowLabel(r)));
+    g.appendChild(rows);
+
+    var area = el("div", "gridarea" + (o.sonar ? " mine" : "") + (o.revealed ? " revealed" : ""));
+    if (o.sonar) area.appendChild(el("div", "sonar"));
+    var grid = el("div", "grid" + (o.live ? " live" : ""));
+    grid.setAttribute("role", "grid");
+    grid.setAttribute("aria-label", o.label || "Chart");
+    for (var rr = 0; rr < SIZE; rr++) {
+      var rowEl = el("div", "gf-row"); rowEl.setAttribute("role", "row");
+      for (var cc = 0; cc < SIZE; cc++) {
+        var b = document.createElement("button");
+        b.type = "button"; b.className = "gf-cell"; b.dataset.i = String(idx(rr, cc));
+        b.setAttribute("role", "gridcell");
+        b.tabIndex = -1;
+        o.paint(b, rr, cc);
+        rowEl.appendChild(b);
+      }
+      grid.appendChild(rowEl);
+    }
+    area.appendChild(grid);
+
+    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("class", "ovl"); svg.setAttribute("viewBox", "0 0 10 10");
+    svg.setAttribute("preserveAspectRatio", "none"); svg.setAttribute("aria-hidden", "true");
+    svg.innerHTML = (o.hulls || []).join("");
+    area.appendChild(svg);
+    g.appendChild(area);
+    chart.appendChild(g);
+
+    // the crosshair rule: hovering / focusing a square lights its coordinates
+    function hi(i) {
+      cols.querySelectorAll("span").forEach(function (s, k) { s.classList.toggle("hi", i !== null && k === colOf(i)); });
+      rows.querySelectorAll("span").forEach(function (s, k) { s.classList.toggle("hi", i !== null && k === rowOf(i)); });
+    }
+    grid.addEventListener("pointerover", function (e) { var b = e.target.closest(".gf-cell"); hi(b ? +b.dataset.i : null); });
+    grid.addEventListener("pointerleave", function () { hi(null); });
+    grid.addEventListener("focusin", function (e) { var b = e.target.closest(".gf-cell"); if (b) hi(+b.dataset.i); });
+    chart._grid = grid; chart._area = area;
+    return chart;
+  }
+
+  function capsule(r, c, len, dir, cls) {
+    var x = c + 0.13, y = r + 0.13;
+    var w = (dir === "v" ? 1 : len) - 0.26, h = (dir === "v" ? len : 1) - 0.26;
+    return '<rect class="hull ' + cls + '" x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="0.4" ry="0.4"/>';
+  }
+
+  // Wreck derivation for the TARGET chart: uses only cells we actually hit.
+  function wreckInfo(board, fleetSpec) {
+    var inc = board.incoming || [], hits = [], hitSet = {}, i;
+    for (i = 0; i < inc.length; i++) if (inc[i].result === "hit") { hits.push([inc[i].r, inc[i].c]); hitSet[inc[i].r + "," + inc[i].c] = 1; }
+    var compOf = {}, comps = [], id = 0;
+    for (i = 0; i < hits.length; i++) {
+      var k0 = hits[i][0] + "," + hits[i][1];
+      if (compOf[k0] !== undefined) continue;
+      var stack = [hits[i]], cells = []; compOf[k0] = id;
+      while (stack.length) {
+        var cur = stack.pop(); cells.push(cur);
+        [[-1, 0], [1, 0], [0, -1], [0, 1]].forEach(function (d) {
+          var nk = (cur[0] + d[0]) + "," + (cur[1] + d[1]);
+          if (hitSet[nk] && compOf[nk] === undefined) { compOf[nk] = id; stack.push([cur[0] + d[0], cur[1] + d[1]]); }
+        });
+      }
+      comps.push(cells); id++;
+    }
+    var lens = {}; (fleetSpec || []).forEach(function (s) { lens[s.id] = s.len; });
+    var acc = comps.map(function () { return 0; });
+    for (i = 0; i < inc.length; i++) {
+      if (!inc[i].sunk) continue;
+      var ci = compOf[inc[i].r + "," + inc[i].c];
+      if (ci !== undefined) acc[ci] += (lens[inc[i].sunk] || 0);
+    }
+    var deadSet = {}, hulls = [];
+    comps.forEach(function (cells, n) {
+      if (cells.length > acc[n]) return;                     // still alive somewhere
+      cells.forEach(function (x) { deadSet[x[0] + "," + x[1]] = 1; });
+      var rs = cells.map(function (x) { return x[0]; }), cs = cells.map(function (x) { return x[1]; });
+      var minR = Math.min.apply(null, rs), maxR = Math.max.apply(null, rs);
+      var minC = Math.min.apply(null, cs), maxC = Math.max.apply(null, cs);
+      if (minR === maxR) hulls.push(capsule(minR, minC, maxC - minC + 1, "h", "wreck"));
+      else if (minC === maxC) hulls.push(capsule(minR, minC, maxR - minR + 1, "v", "wreck"));
+    });
+    return { dead: deadSet, hulls: hulls };
+  }
+
+  function markFor(entry) {
+    return el("span", entry.result === "hit" ? "m-hit" : "m-miss");
+  }
+
+  /* =====================================================================
+     Deploy screen
+     =================================================================== */
+  function draftOccupancy(exceptId) {
+    var occ = {};
+    draft.ships.forEach(function (s) {
+      if (s.id === exceptId) return;
+      R.cellsFor(s).forEach(function (x) { occ[x[0] + "," + x[1]] = s.id; });
+    });
+    return occ;
+  }
+  function ghostCheck(ship) {
+    var cells = R.cellsFor(ship), i, occ = draftOccupancy(ship.id);
+    for (i = 0; i < cells.length; i++) if (!R.inBounds(cells[i][0], cells[i][1])) return { ok: false, why: "runs off the chart" };
+    for (i = 0; i < cells.length; i++) {
+      var o = occ[cells[i][0] + "," + cells[i][1]];
+      if (o) return { ok: false, why: "overlaps " + specName(o) };
+    }
+    if (!view.variant.allowTouching) {
+      for (i = 0; i < cells.length; i++) {
+        for (var dr = -1; dr <= 1; dr++) for (var dc = -1; dc <= 1; dc++) {
+          var t = occ[(cells[i][0] + dr) + "," + (cells[i][1] + dc)];
+          if (t) return { ok: false, why: "touches " + specName(t) };
+        }
+      }
+    }
+    return { ok: true };
+  }
+  function draftComplete() {
+    if (draft.ships.length !== R.FLEET.length) return false;
+    return R.validatePlacement(draft.ships, view.variant).ok;
+  }
+  function saveDraft() { PK.store.set("play.gridfleet.draft", { mode: myMode, seat: mySeat(), ships: draft.ships }); }
+  function loadDraft() {
+    var d = PK.store.get("play.gridfleet.draft", null);
+    if (d && d.mode === myMode && d.seat === mySeat() && Array.isArray(d.ships)) {
+      var kept = d.ships.filter(function (s) { return R.FLEET.some(function (f) { return f.id === s.id; }); });
+      draft.ships = kept.map(function (s) { return { id: s.id, r: s.r, c: s.c, dir: s.dir }; });
+    }
+  }
+  function clearDraft() { PK.store.set("play.gridfleet.draft", null); }
+
+  function renderDeploy() {
+    screen = "deploy";
+    stage.innerHTML = "";
+    var wrap = el("div", "gf-wrap");
+
+    var head = el("div", "banner");
+    head.innerHTML = view.ready[mySeat()]
+      ? "Fleet committed &mdash; waiting for " + seatName(1 - mySeat()) + "&hellip;"
+      : "Deploy your fleet &mdash; " + (R.FLEET.length - draft.ships.length) + " to place";
+    wrap.appendChild(head);
+
+    var placedIds = {}; draft.ships.forEach(function (s) { placedIds[s.id] = s; });
+    var hulls = draft.ships.map(function (s) {
+      var spec = R.FLEET.filter(function (f) { return f.id === s.id; })[0];
+      return capsule(s.r, s.c, spec.len, s.dir, "own");
+    });
+
+    var committed = view.ready[mySeat()];
+    var ownFleet = view.boards[mySeat()].fleet;
+    if (committed) {
+      hulls = ownFleet.filter(function (f) { return typeof f.r === "number"; })
+        .map(function (f) { return capsule(f.r, f.c, f.len, f.dir, "own"); });
+    }
+
+    var occ = {}; draft.ships.forEach(function (s) { R.cellsFor(s).forEach(function (x) { occ[x[0] + "," + x[1]] = s.id; }); });
+    if (committed) ownFleet.forEach(function (f) {
+      if (typeof f.r !== "number") return;
+      R.cellsFor(f).forEach(function (x) { occ[x[0] + "," + x[1]] = f.id; });
+    });
+
+    var chart = chartEl({
+      label: "Your waters — deploy",
+      live: !committed,
+      hulls: hulls,
+      paint: function (b, r, c) {
+        var o = occ[r + "," + c];
+        b.setAttribute("aria-label", coord(r, c) + (o ? ", " + specName(o) : ", empty water"));
+        if (idx(r, c) === draft.cursor) { b.tabIndex = 0; b.classList.add("cursor"); }
+        if (committed) { b.disabled = true; return; }
+        b.onclick = function () { deployTap(r, c); };
+      }
+    });
+    wrap.appendChild(chart);
+    var grid = chart._grid;
+    if (!committed) {
+      grid.addEventListener("pointerover", function (e) {
+        var b = e.target.closest(".gf-cell"); if (!b) return;
+        previewAt(grid, rowOf(+b.dataset.i), colOf(+b.dataset.i));
+      });
+      grid.addEventListener("pointerleave", function () { clearPreview(grid); document.getElementById("why").textContent = ""; });
+      grid.addEventListener("keydown", deployKey);
+      grid.addEventListener("pointerup", function (e) {
+        var b = e.target.closest(".gf-cell");
+        if (b && draft.dragging) { draft.dragging = false; deployTap(rowOf(+b.dataset.i), colOf(+b.dataset.i)); }
+      });
+    }
+
+    var why = el("p", "why"); why.id = "why"; wrap.appendChild(why);
+
+    if (!committed) {
+      var tray = el("div", "tray");
+      R.FLEET.forEach(function (spec) {
+        var chip = el("button", "chip" + (placedIds[spec.id] ? " done" : ""));
+        chip.type = "button";
+        chip.setAttribute("aria-pressed", String(draft.held === spec.id));
+        var pips = "";
+        for (var i = 0; i < spec.len; i++) pips += "<i></i>";
+        chip.innerHTML = '<span class="hull">' + pips + '</span>' + spec.name + ' <span class="n">' + spec.len + "</span>";
+        chip.onpointerdown = function () { draft.held = spec.id; draft.dragging = true; PK.sound.play("click"); renderDeploy(); };
+        chip.onclick = function () { if (draft.held !== spec.id) { draft.held = spec.id; renderDeploy(); } };
+        tray.appendChild(chip);
+      });
+      wrap.appendChild(tray);
+      wrap.appendChild(el("p", "hint", "Tap a ship then a square (or drag it across). <b>R</b> rotates. Arrow keys move, Enter places."));
+    }
+    stage.appendChild(wrap);
+
+    var list = [];
+    if (!committed) {
+      list.push(btn("Rotate", "pk-btn--ghost pk-btn--sm", rotateHeld));
+      list.push(btn("Randomize", "pk-btn--soft pk-btn--sm", randomizeDraft));
+      list.push(btn("Clear", "pk-btn--ghost pk-btn--sm", function () { draft.ships = []; saveDraft(); renderDeploy(); }));
+    }
+    if (myMode !== "hotseat") list.push(btn(myMode === "online" ? "Leave" : "Menu", "pk-btn--ghost pk-btn--sm", leaveMatch));
+    setExtras(list);
+
+    if (primary) {
+      if (committed) { primary.textContent = "Waiting…"; primary.disabled = true; }
+      else {
+        var left = R.FLEET.length - draft.ships.length;
+        primary.textContent = left ? left + " ship" + (left === 1 ? "" : "s") + " left" : "Confirm fleet";
+        primary.disabled = !draftComplete();
+      }
+    }
+  }
+
+  function heldShip(r, c) {
+    if (!draft.held) return null;
+    return { id: draft.held, r: r, c: c, dir: draft.dir };
+  }
+  function previewAt(grid, r, c) {
+    clearPreview(grid);
+    var ship = heldShip(r, c); if (!ship) return;
+    var chk = ghostCheck(ship);
+    R.cellsFor(ship).forEach(function (x) {
+      if (!R.inBounds(x[0], x[1])) return;
+      var b = grid.querySelector('.gf-cell[data-i="' + idx(x[0], x[1]) + '"]');
+      if (b) b.classList.add(chk.ok ? "ghost" : "ghostbad");
+    });
+    var w = document.getElementById("why");
+    if (w) w.textContent = chk.ok ? "" : chk.why;
+  }
+  function clearPreview(grid) {
+    grid.querySelectorAll(".ghost,.ghostbad").forEach(function (b) { b.classList.remove("ghost", "ghostbad"); });
+  }
+  function deployTap(r, c) {
+    // tapping a placed ship picks it back up
+    var occ = draftOccupancy(null), hit = occ[r + "," + c];
+    if (hit && draft.held !== hit) {
+      var s = draft.ships.filter(function (x) { return x.id === hit; })[0];
+      draft.ships = draft.ships.filter(function (x) { return x.id !== hit; });
+      draft.held = hit; draft.dir = s.dir; draft.cursor = idx(r, c);
+      PK.sound.play("click"); saveDraft(); renderDeploy(); return;
+    }
+    if (!draft.held) { PK.toast("Pick a ship from the tray first"); return; }
+    var ship = heldShip(r, c), chk = ghostCheck(ship);
+    if (!chk.ok) {
+      PK.sound.play("tick");
+      var w = document.getElementById("why"); if (w) w.textContent = chk.why;
+      return;
+    }
+    draft.ships = draft.ships.filter(function (x) { return x.id !== ship.id; }).concat([ship]);
+    draft.cursor = idx(r, c);
+    var next = R.FLEET.filter(function (f) { return !draft.ships.some(function (s2) { return s2.id === f.id; }); })[0];
+    draft.held = next ? next.id : null;
+    PK.sound.play("click"); PK.buzz(8); saveDraft(); renderDeploy();
+  }
+  function rotateHeld() {
+    draft.dir = draft.dir === "h" ? "v" : "h";
+    PK.sound.play("tick");
+    renderDeploy();
+  }
+  function randomizeDraft() {
+    draft.ships = R.randomPlacement(PK.rand.int, view.variant).map(function (s) { return { id: s.id, r: s.r, c: s.c, dir: s.dir }; });
+    draft.held = null; PK.sound.play("reveal"); saveDraft(); renderDeploy();
+  }
+  function deployKey(e) {
+    var k = e.key, n = draft.cursor;
+    if (k === "r" || k === "R") { e.preventDefault(); rotateHeld(); return; }
+    if (k === "ArrowRight") n = draft.cursor + (colOf(draft.cursor) < SIZE - 1 ? 1 : 0);
+    else if (k === "ArrowLeft") n = draft.cursor - (colOf(draft.cursor) > 0 ? 1 : 0);
+    else if (k === "ArrowDown") n = draft.cursor + (rowOf(draft.cursor) < SIZE - 1 ? SIZE : 0);
+    else if (k === "ArrowUp") n = draft.cursor - (rowOf(draft.cursor) > 0 ? SIZE : 0);
+    else if (k === "Enter" || k === " ") { e.preventDefault(); deployTap(rowOf(draft.cursor), colOf(draft.cursor)); return; }
+    else return;
+    e.preventDefault();
+    if (n === draft.cursor) return;
+    draft.cursor = n;
+    var grid = e.currentTarget;
+    grid.querySelectorAll(".cursor").forEach(function (b) { b.classList.remove("cursor"); b.tabIndex = -1; });
+    var nb = grid.querySelector('.gf-cell[data-i="' + n + '"]');
+    if (nb) { nb.classList.add("cursor"); nb.tabIndex = 0; nb.focus(); }
+    previewAt(grid, rowOf(n), colOf(n));
+  }
+  function confirmFleet() {
+    if (!draftComplete()) { PK.toast("Place all five ships first"); return; }
+    clearDraft();
+    net.sendMove({ type: "place", ships: draft.ships });
+  }
+
+  /* =====================================================================
+     Firing screen
+     =================================================================== */
+  function renderFight() {
+    screen = "fight";
+    stage.innerHTML = "";
+    var me = mySeat(), enemy = me === null ? 1 : 1 - me;
+    var wrap = el("div", "gf-wrap");
+
+    // seat rail
+    var rail = el("div", "seatrail");
+    [0, 1].forEach(function (s) {
+      var d = el("div", "seat" + (view.turn === s && !view.over ? " is-turn" : ""));
+      var p = (net && net.players || []).filter(function (x) { return x.seat === s; })[0];
+      if (myMode === "online" && p && p.status === "disconnected") d.className += " is-off";
+      var nm = seatName(s) + (s === me && myMode !== "hotseat" ? " (you)" : "");
+      var pips = "";
+      var fl = view.boards[s].fleet;
+      for (var i = 0; i < fl.length; i++) pips += '<i class="' + (fl[i].sunk ? "gone" : "") + '"></i>';
+      d.innerHTML = '<span class="dot"></span>' + nm + '<span class="pips" aria-label="' +
+        view.boards[s].shipsRemaining + ' ships afloat">' + pips + "</span>" +
+        (myMode === "online" && p && p.status === "disconnected" ? " ⟳" : "");
+      rail.appendChild(d);
+    });
+    wrap.appendChild(rail);
+
+    // ---- target chart (enemy waters as you know them) ----
+    var eb = view.boards[enemy];
+    var wreck = wreckInfo(eb, view.fleetSpec);
+    var eHulls = wreck.hulls.slice();
+    if (view.revealed) {
+      eb.fleet.forEach(function (f) {
+        if (typeof f.r !== "number") return;
+        if (!f.sunk) eHulls.push(capsule(f.r, f.c, f.len, f.dir, "faint"));
+      });
+    }
+    var eMap = {}; eb.incoming.forEach(function (e, i) { eMap[e.r + "," + e.c] = { e: e, i: i }; });
+    var live = myTurn() && !busy;
+
+    var target = chartEl({
+      label: "Enemy waters",
+      live: live, sonar: live && !reduced(), revealed: view.revealed,
+      hulls: eHulls,
+      paint: function (b, r, c) {
+        var k = r + "," + c, rec = eMap[k];
+        var lbl = coord(r, c) + ", ";
+        if (rec) {
+          var m = markFor(rec.e); b.appendChild(m);
+          if (rec.i >= seen[enemy]) b.classList.add("is-new");
+          if (wreck.dead[k]) { b.classList.add("dead"); lbl += "sunk ship"; }
+          else lbl += rec.e.result === "hit" ? "hit" : "miss";
+          b.setAttribute("aria-disabled", "true");
+          b.onclick = function () { b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake"); PK.sound.play("tick"); };
+        } else {
+          lbl += "unexplored";
+          b.classList.add("open");
+          var s = sel.indexOf(idx(r, c));
+          if (s >= 0) {
+            b.classList.add("sel");
+            b.setAttribute("aria-pressed", "true");
+            if (view.variant.salvo) b.appendChild(el("span", "selno", String(s + 1)));
+          }
+          if (live) b.onclick = function () { pickCell(r, c); };
+          else b.setAttribute("aria-disabled", "true");
+        }
+        b.setAttribute("aria-label", lbl);
+        if (idx(r, c) === cursor) { b.tabIndex = 0; b.classList.add("cursor"); }
+      }
+    });
+    wrap.appendChild(target);
+    target._grid.addEventListener("keydown", fightKey);
+    seen[enemy] = eb.incoming.length;
+    if (!reduced()) splashNew(target._grid, eb, eMap);
+
+    // ---- your waters ----
+    var mb = view.boards[me === null ? 0 : me];
+    var myHulls = mb.fleet.filter(function (f) { return typeof f.r === "number"; })
+      .map(function (f) { return capsule(f.r, f.c, f.len, f.dir, f.sunk ? "wreck" : "own"); });
+    var mMap = {}; mb.incoming.forEach(function (e, i) { mMap[e.r + "," + e.c] = { e: e, i: i }; });
+    var mini = el("div", "miniwrap" + (miniOpen ? " open" : ""));
+    var mh = el("div", "minihdr");
+    mh.appendChild(el("h3", "", me === null ? "Seat 1 waters" : "Your waters"));
+    var exp = btn(miniOpen ? "Hide" : "Show", "pk-btn--ghost pk-btn--sm expand", function () { miniOpen = !miniOpen; renderFight(); });
+    mh.appendChild(exp);
+    mini.appendChild(mh);
+    mini.appendChild(chartEl({
+      label: "Your waters", live: false, mini: true, hulls: myHulls, revealed: view.revealed,
+      paint: function (b, r, c) {
+        var k = r + "," + c, rec = mMap[k];
+        b.disabled = true;
+        var lbl = coord(r, c) + ", ";
+        if (rec) { b.appendChild(markFor(rec.e)); if (rec.i >= seen[me === null ? 0 : me]) b.classList.add("is-new"); lbl += rec.e.result === "hit" ? "your ship hit" : "enemy miss"; }
+        else lbl += "clear";
+        b.setAttribute("aria-label", lbl);
+      }
+    }));
+    wrap.appendChild(mini);
+    seen[me === null ? 0 : me] = mb.incoming.length;
+
+    // ---- shot log ----
+    var log = el("div", "log");
+    logLines.slice(-6).forEach(function (L) {
+      var d = el("div", L.sunk ? "sunkline" : "");
+      d.innerHTML = L.who + ' <span class="co">' + L.co + "</span> &middot; " + L.what;
+      log.appendChild(d);
+    });
+    wrap.appendChild(log);
+
+    var banner = el("p", "banner"); banner.id = "bn"; wrap.appendChild(banner);
+    stage.appendChild(wrap);
+    paintBanner();
+
+    var list = [];
+    if (!view.over && !isSpectator()) list.push(btn("Resign", "pk-btn--ghost pk-btn--sm", doResign));
+    list.push(btn(myMode === "online" ? "Leave" : "Menu", "pk-btn--ghost pk-btn--sm", leaveMatch));
+    setExtras(list);
+    paintPrimary();
+  }
+
+  function splashNew(grid, board, map) {
+    board.incoming.forEach(function (e, i) {
+      if (i < seen[board.seat]) return;
+    });
+  }
+
+  function paintBanner() {
+    var b = document.getElementById("bn"); if (!b) return;
+    if (!view || view.over) { b.textContent = ""; b.className = "banner"; return; }
+    if (isSpectator()) { b.textContent = "Watching — " + seatName(view.turn) + " to call"; return; }
+    if (myTurn()) {
+      b.className = "banner";
+      b.textContent = view.variant.salvo
+        ? "Your turn — select " + view.shotsAllowed + " square" + (view.shotsAllowed === 1 ? "" : "s")
+        : "Your turn — call a square";
+    } else if (myMode === "ai") {
+      b.className = "banner think"; b.textContent = "Scanning";
+    } else {
+      b.className = "banner"; b.textContent = "Waiting for " + seatName(view.turn) + "…";
+    }
+  }
+
+  function paintPrimary() {
+    if (!primary) return;
+    if (!view) { primary.textContent = "…"; primary.disabled = true; return; }
+    if (view.over) { primary.textContent = myMode === "online" ? "Rematch" : "New match"; primary.disabled = false; return; }
+    if (view.phase === "placing") { primary.textContent = "Confirm fleet"; primary.disabled = !draftComplete(); return; }
+    if (isSpectator()) { primary.textContent = "Watching"; primary.disabled = true; return; }
+    if (!myTurn()) { primary.textContent = "Waiting…"; primary.disabled = true; return; }
+    var need = view.shotsAllowed;
+    if (need > 1) {
+      primary.textContent = sel.length === need ? "Fire " + need + " shots" : "Select " + (need - sel.length) + " more";
+      primary.disabled = sel.length !== need;
+    } else {
+      primary.textContent = sel.length ? "Fire " + coord(rowOf(sel[0]), colOf(sel[0])) : "Call a square";
+      primary.disabled = sel.length !== 1;
+    }
+  }
+
+  function pickCell(r, c) {
+    if (!myTurn() || busy) return;
+    var i = idx(r, c), at = sel.indexOf(i);
+    var need = view.shotsAllowed;
+    if (at >= 0) { sel.splice(at, 1); }
+    else if (need === 1) { sel = [i]; }
+    else if (sel.length < need) { sel.push(i); }
+    else { PK.toast("That is already " + need + " squares — tap one to drop it"); return; }
+    cursor = i;
+    PK.sound.play("click");
+    renderFight();
+    if (need === 1 && sel.length === 1) fireSelection();
+  }
+
+  function fireSelection() {
+    if (busy || !myTurn()) return;
+    var need = view.shotsAllowed;
+    if (sel.length !== need) { PK.toast("Select " + need + " square" + (need === 1 ? "" : "s")); return; }
+    var shots = sel.map(function (i) { return { r: rowOf(i), c: colOf(i) }; });
+    busy = true;
+    // Lock + the held-breath beat. The engine decides the answer only after
+    // this — the pause is theatre, never a source of the outcome.
+    var grid = stage.querySelector(".grid.live");
+    if (grid) shots.forEach(function (s) {
+      var b = grid.querySelector('.gf-cell[data-i="' + idx(s.r, s.c) + '"]');
+      if (b) b.classList.add("retic");
+    });
+    PK.sound.play("click");
+    var beat = reduced() ? 0 : 290;
+    setTimeout(function () {
+      sel = []; busy = false;
+      net.sendMove({ type: "fire", shots: shots });
+    }, beat);
+  }
+
+  function fightKey(e) {
+    var k = e.key, n = cursor;
+    if (k === "Escape") { if (sel.length) { sel = []; PK.sound.play("tick"); renderFight(); } return; }
+    if (k === "ArrowRight") n = cursor + (colOf(cursor) < SIZE - 1 ? 1 : 0);
+    else if (k === "ArrowLeft") n = cursor - (colOf(cursor) > 0 ? 1 : 0);
+    else if (k === "ArrowDown") n = cursor + (rowOf(cursor) < SIZE - 1 ? SIZE : 0);
+    else if (k === "ArrowUp") n = cursor - (rowOf(cursor) > 0 ? SIZE : 0);
+    else if (k === "Enter" || k === " ") { e.preventDefault(); pickCell(rowOf(cursor), colOf(cursor)); return; }
+    else return;
+    e.preventDefault();
+    if (n === cursor) return;
+    cursor = n;
+    var grid = e.currentTarget;
+    grid.querySelectorAll(".cursor").forEach(function (b) { b.classList.remove("cursor"); b.tabIndex = -1; });
+    var nb = grid.querySelector('.gf-cell[data-i="' + n + '"]');
+    if (nb) { nb.classList.add("cursor"); nb.tabIndex = 0; nb.focus(); }
+  }
+
+  function doResign() {
+    if (!view || view.over) return;
+    if (!window.confirm("Resign this match?")) return;
+    net.sendMove({ type: "resign" });
+  }
+  function leaveMatch() {
+    if (myMode === "online" && net) { try { net.leave(); } catch (e) {} }
+    openModeSelect();
+  }
+  function onPrimary() {
+    if (!view) { if (screen === "menu") start("hotseat"); return; }
+    if (view.over) { rematch(); return; }
+    if (view.phase === "placing") { confirmFleet(); return; }
+    fireSelection();
+  }
+  function rematch() {
+    var o = document.querySelector(".overlay"); if (o) o.remove();
+    resetMatch();
+    if (myMode === "online") { net.rematch(); }
+    else { start(myMode); }
+  }
+
+  /* =====================================================================
+     Hand-off curtain (hotseat) — the offline equivalent of per-seat filtering
+     =================================================================== */
+  function showCurtain(seat, what) {
+    curtainSeat = seat;
+    setExtras([]);
+    if (primary) { primary.textContent = "Pass the device"; primary.disabled = true; }
+    var c = el("div", "curtain");
+    var inner = el("div", "");
+    inner.innerHTML = '<h2>Pass to ' + seatName(seat) + '</h2>' +
+      '<p class="pk-subtle">' + what + '</p><br>';
+    var go = btn("I’m ready", "", function () {
+      c.remove(); curtainSeat = null; lastSeatShown = seat; render();
+    });
+    inner.appendChild(go);
+    c.appendChild(inner);
+    document.body.appendChild(c);
+    go.focus();
+    PK.announce("Pass the device to " + seatName(seat));
+  }
+
+  /* =====================================================================
+     Render dispatch
+     =================================================================== */
+  function activePlayers() {
+    return (net && net.players ? net.players : []).filter(function (p) { return p.status !== "disconnected" && p.status !== "open"; }).length;
+  }
+
+  function render() {
+    if (!view) return;
+    if (curtainSeat !== null) return;
+
+    // online: hold on the invite / waiting screen until both seats are filled
+    if (myMode === "online" && !view.over && !isSpectator() && activePlayers() < 2) {
+      var wb = document.getElementById("bn");
+      if (wb) { wb.textContent = "Waiting for opponent… (" + activePlayers() + "/2)"; return; }
+      if (roomInfo) { inviteScreen(roomInfo); return; }
+      return;
+    }
+
+    // hotseat: curtain whenever the device changes hands
+    if (myMode === "hotseat" && !view.over && view.yourSeat !== lastSeatShown) {
+      if (lastSeatShown !== null) {
+        showCurtain(view.yourSeat, view.phase === "placing" ? "Deploy your fleet in private." : "Your turn to call a square.");
+        return;
+      }
+      lastSeatShown = view.yourSeat;
+    }
+
+    if (view.phase === "placing") {
+      if (!view.ready[mySeat()] && !draft.ships.length) loadDraft();
+      renderDeploy();
+    } else {
+      renderFight();
+    }
+    if (view.over && !resultShown) showResult();
+  }
+
+  /* =====================================================================
+     Result + reveal
+     =================================================================== */
+  function showResult() {
+    if (resultShown || !view || !view.over) return;
+    resultShown = true;
+    var me = mySeat(), res = view.result || {};
+    var winner = res.winner;
+    var title;
+    if (myMode === "hotseat" || isSpectator()) title = seatName(winner) + " wins";
+    else title = winner === me ? "You win" : "You lose";
+    var sub = res.reason === "resign" ? seatName(1 - winner) + " resigned." : "Enemy fleet destroyed.";
+    PK.announce(title + ". " + sub, true);
+    if (myMode === "hotseat" || isSpectator()) PK.sound.play("win");
+    else PK.sound.play(winner === me ? "win" : "lose");
+
+    var statSeat = (me === null) ? 0 : me;
+    var shots = view.boards[1 - statSeat].incoming.length;
+    var hits = view.boards[1 - statSeat].incoming.filter(function (e) { return e.result === "hit"; }).length;
+    var acc = shots ? hits / shots : 0;
+
+    var o = el("div", "overlay");
+    var card = el("div", "card");
+    card.appendChild(el("h2", "", title));
+    card.appendChild(el("p", "pk-subtle", sub));
+    var row = el("div", "statrow");
+    function stat(label, val, suffix) {
+      var s = el("div", "stat");
+      var b = el("b", "pk-num", "0"); b.dataset.to = String(val); b.dataset.sfx = suffix || "";
+      s.appendChild(b); s.appendChild(el("span", "", label)); return s;
+    }
+    row.appendChild(stat("Shots", shots, ""));
+    row.appendChild(stat("Hits", hits, ""));
+    row.appendChild(stat("Accuracy", Math.round(acc * 100), "%"));
+    row.appendChild(stat("Turns", view.turnNo, ""));
+    card.appendChild(row);
+    if (acc > 0.4 && shots > 4) card.appendChild(el("p", "pk-subtle", "Sharp shooting."));
+    var btns = el("div", "pk-row"); btns.style.marginTop = "16px";
+    btns.appendChild(btn(myMode === "online" ? "Rematch" : "New match", "", rematch));
+    btns.appendChild(btn("Menu", "pk-btn--ghost", function () { o.remove(); openModeSelect(); }));
+    card.appendChild(btns);
+    o.appendChild(card); document.body.appendChild(o);
+    btns.querySelector("button").focus();
+    countUp(row);
+    paintPrimary();
+  }
+
+  function countUp(row) {
+    var els = row.querySelectorAll("b");
+    if (reduced()) {
+      els.forEach(function (b) { b.textContent = b.dataset.to + b.dataset.sfx; });
+      return;
+    }
+    var t0 = performance.now(), dur = 600;
+    (function step(t) {
+      var k = Math.min(1, (t - t0) / dur);
+      els.forEach(function (b) { b.textContent = Math.round(+b.dataset.to * k) + b.dataset.sfx; });
+      if (k < 1) requestAnimationFrame(step);
+    })(t0);
+  }
+
+  /* =====================================================================
+     Wiring — identical for all three drivers
+     =================================================================== */
+  function describe(ev, byMe) {
+    var who = byMe ? "You" : seatName(ev.seat);
+    var what = ev.result === "hit" ? "hit" : "miss";
+    if (ev.sunk) what += " &middot; " + specName(ev.sunk) + " down";
+    return { who: who + " →", co: coord(ev.r, ev.c), what: what, sunk: !!ev.sunk };
+  }
+
+  function wire() {
+    net.on("state", function (d) { view = d.state; render(); });
+
+    net.on("move", function (d) {
+      var evs = (d.events || []).filter(function (e) { return e.type === "shot"; });
+      var sunks = (d.events || []).filter(function (e) { return e.type === "sunk"; });
+      if ((d.events || []).some(function (e) { return e.type === "placed"; })) PK.sound.play("reveal");
+      evs.forEach(function (ev, i) {
+        var byMe = view && ev.seat === view.yourSeat;
+        logLines.push(describe(ev, byMe));
+        var delay = reduced() ? 0 : i * 140;
+        setTimeout(function () {
+          if (ev.result === "hit") { PK.sound.play("diceClack"); PK.buzz(18); }
+          else { PK.sound.play("tick"); }
+          if (ev.sunk) { PK.sound.play("reveal"); PK.buzz(30); }
+        }, delay);
+      });
+      if (evs.length) {
+        var last = evs[evs.length - 1];
+        var line = evs.map(function (e) { return coord(e.r, e.c) + " — " + (e.result === "hit" ? "hit" : "miss"); }).join(". ");
+        if (sunks.length) line += ". " + sunks.map(function (s) { return specName(s.shipId) + " down"; }).join(". ");
+        PK.announce(line + ".");
+      }
+    });
+
+    net.on("rejected", function (d) {
+      sel = []; busy = false;
+      var msg = ({
+        not_your_turn: "Not your turn", already_fired: "You already called that square",
+        out_of_bounds: "Off the chart", bad_shot_count: "Wrong number of shots",
+        duplicate_shot: "The same square twice", already_placed: "Your fleet is already committed",
+        overlap: "Ships overlap", touching: "Ships may not touch", out_of_bounds_place: "Off the chart",
+        bad_fleet: "That is not a full fleet", game_over: "The match is over"
+      })[d.reason] || ("Illegal move" + (d.reason ? " (" + d.reason + ")" : ""));
+      PK.toast(msg);
+      render();
+    });
+
+    net.on("presence", function (d) {
+      if (d.players) net.players = d.players;
+      if (myMode === "online") {
+        if ((d.players || []).some(function (p) { return p.status === "disconnected"; })) PK.toast("Opponent reconnecting…");
+        if (d.spectators) PK.announce(d.spectators + " watching");
+      }
+      if (view) render();
+    });
+
+    net.on("gameOver", function () { setTimeout(function () { if (view && view.over) showResult(); }, 450); });
+    net.on("reconnecting", function () { PK.toast("Reconnecting…"); });
+    net.on("reconnected", function () { PK.toast("Back online"); });
+    net.on("room", function (r) { roomInfo = r; });
+    net.on("error", function (d) {
+      PK.toast(d.message || d.code || "Error");
+      if (d.code === "not_found" || d.code === "room_full" || d.code === "bad_game") openModeSelect();
+    });
+  }
+
+  /* --------------------------------------------------------------- boot */
+  (function boot() {
+    var params = new URL(location.href).searchParams;
+    var code = params.get("r");
+    if (code) { joinOnline(code, params.get("spectate") === "1"); return; }
+    openModeSelect();
+  })();
+
+  window.addEventListener("resize", function () { if (view && !busy && curtainSeat === null && screen === "fight") renderFight(); });
+})();
+</script>
+<!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:10px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Get the monthly letter</a></footer><!-- /ep:ca-foot -->
+</body>
+</html>

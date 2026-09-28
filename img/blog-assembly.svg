@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="Four short repeating context climbs, each ending well below the ceiling">
+  <rect width="480" height="300" fill="#15171A"/>
+  <g stroke="#2A2D31" stroke-width="1">
+    <line x1="0" y1="75" x2="480" y2="75"/>
+    <line x1="0" y1="140" x2="480" y2="140"/>
+    <line x1="0" y1="205" x2="480" y2="205"/>
+  </g>
+  <line x1="0" y1="128" x2="480" y2="128" stroke="#3A3E44" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <g fill="none" stroke="#7CB984" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+    <polyline points="14,270 52,206 90,178"/>
+    <polyline points="126,270 164,200 202,172"/>
+    <polyline points="238,270 276,208 314,180"/>
+    <polyline points="350,270 388,198 426,170"/>
+  </g>
+  <text x="18" y="42" font-family="Consolas,monospace" font-size="19" font-weight="700" fill="#EAEBE6">one task, one session</text>
+  <text x="18" y="120" font-family="Consolas,monospace" font-size="13" fill="#A3AAB4">purge line</text>
+</svg>

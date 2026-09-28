@@ -1,0 +1,208 @@
+<style>
+/* Post-specific modules only. Shell, type, neutrals and the shared module
+   library live in /css/post.css. Accent: good (set on the wrapper). */
+.trp .step{background:var(--card);border:1px solid var(--grid);border-radius:6px;padding:20px 22px;margin:16px 0;}
+.trp .step h3{margin:0 0 .3em;}
+.trp .step .why{font-family:var(--disp);font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:.6em;}
+</style>
+<div class="trp accent-good">
+<div class="wrap">
+<div class="col"><a class="trp-back" href="/writing/">&larr; Blog</a></div>
+<header class="col" style="padding-top:56px;">
+  <div class="eyebrow">Playbook · Part two of three</div>
+  <h1>Building the Assembly&nbsp;Line</h1>
+  <p class="dek">The default session shape, in detail. The folder layout, the search commands, the prompts I paste, and the two hooks that keep me honest.</p>
+  <div class="byline">Elvin Peters · August 2026</div>
+</header>
+
+<div class="series"><a href="/writing/token-efficiency/">Part one</a> measured the problem: three months of my sessions, 16.2 billion tokens, and the discovery that 86% of the bill was context I kept re-sending. This part is the fix for ordinary work. <a href="/writing/studio-session/">Part three</a> covers the sessions where a big window is the actual point.</div>
+
+<div class="col">
+<h2>What the shape is</h2>
+<p>An assembly line session does one job and then ends. It opens with a brief, keeps its window small on purpose, sends anything exploratory out to a subagent, and closes with a checkpoint. My median session already looked like this, roughly 36 million tokens, about one percent of what my worst marathon cost. The shape wasn't the discovery. Making it the reflex was.</p>
+<p>Four moving parts do all the work. A brief that fits on a screen, a search-before-read reflex, delegated investigation, and a hard boundary at the end. Everything below is those four things with the actual commands attached.</p>
+<div class="pull">A session that ends cleanly is worth more than a session that knows everything.</div>
+
+<h2>Part 1: the folder is the memory</h2>
+<p>The reason a fresh session is cheap to start is that the last one wrote things down. If your project state lives in the transcript, every new session has to rebuild it by re-reading, which is exactly the cost we're trying to kill. So each project gets a small, boring set of files that any new session can read in about 2,000 tokens and be fully oriented.</p>
+</div>
+
+<div class="col">
+<div class="plabel">Folder layout per project</div>
+<pre class="tree"><code>project-name/
+├── PURPOSE.md        one paragraph: what this is, who it's for, done means what
+├── STATUS.md         living state. Updated at every boundary. Newest at top.
+├── DECISIONS.md      choices made and why, so nobody relitigates them
+├── notes/            agent output, audits, research. Read on demand, never by default
+│   └── 2026-08-07-scraper-audit.md
+├── src/              the actual work
+└── .claude/
+    └── settings.json hooks and permissions for this project</code></pre>
+
+<p>STATUS.md carries the weight. It's the file that makes "start a new session" a cheap move rather than a painful one. Mine follows the same three headings every time so a new session can parse it instantly.</p>
+
+<div class="plabel">STATUS.md template</div>
+<pre><code># Status
+
+## Now
+One line: what is actively being worked on, and the next concrete step.
+
+## Recent (newest first)
+- 2026-08-07: Fixed date parsing in scraper. Root cause: two formats in the
+  feed since June. Added a fallback. Tests green. See notes/2026-08-07-scraper-audit.md
+- 2026-08-05: Deployed v2 to the VPS. Caddy needed a+rX on the new folder.
+
+## Open threads
+- Rate limiting still unhandled if the feed 429s. Not urgent, no traffic yet.
+- The retry loop swallows exceptions. Worth a look before this scales.</code></pre>
+
+<h2>Part 2: the opening brief</h2>
+<p>Starting a session with "hey can you look at the scraper" invites the model to go read everything, and now you own all of it for the rest of the session. Starting with a scoped brief gets you the same work with a tenth of the intake. I keep this as a snippet and fill in three blanks.</p>
+
+<div class="plabel">Session-opening prompt</div>
+<pre class="prompt">Read PURPOSE.md and STATUS.md, nothing else yet.
+
+TASK: fix the date parsing bug in the feed scraper.
+DONE MEANS: mixed-format dates parse correctly and the existing tests pass.
+SCOPE: src/scraper/ only. Don't touch the deploy config or the templates.
+
+Before you open any file over ~300 lines, search first and tell me
+which section you plan to read. If you need to understand something
+across multiple files, use an agent and report the findings rather
+than reading them all into this session.</pre>
+
+<p>That last paragraph is doing most of the work. It sets the two habits as standing instructions for the session instead of things you have to remember to enforce turn by turn.</p>
+
+<h2>Part 3: search before you read</h2>
+<p>File reads were 87% of everything that entered my contexts. Nearly all of that was avoidable, because the fix is just finding the line number before opening the file. Here's the cookbook I actually use. It's ripgrep, which ships with most modern tooling.</p>
+
+<div class="plabel">Locate, then read a window</div>
+<pre><code># find the definition, with line numbers
+rg -n "def parse_date|DATE_FORMATS" src/
+
+# same thing but show 5 lines of context around each hit
+rg -n -C5 "parse_date" src/scraper/feed.py
+
+# which files even mention this? (paths only, no content)
+rg -l "parse_date" src/
+
+# then read only what you need
+sed -n '140,205p' src/scraper/feed.py</code></pre>
+
+<div class="plabel">Reconnaissance without pulling content in</div>
+<pre><code># shape of the codebase: file sizes, biggest first
+find src -name "*.py" -exec wc -l {} + | sort -rn | head -20
+
+# every function name in a file, no bodies
+rg -n "^(def|class) " src/scraper/feed.py
+
+# what changed recently, which is usually where the bug lives
+git log --oneline -15 -- src/scraper/
+
+# who touched these exact lines
+git blame -L 140,205 src/scraper/feed.py</code></pre>
+
+<p>That <code>wc -l</code> sorted list is my favourite trick. It tells you in about 200 tokens which files are dangerous to open casually, and it's the cheapest orientation available.</p>
+
+<div class="note"><b>The 300-line rule.</b> Under 300 lines, just read it, the search overhead isn't worth it. Over 300 lines, always locate first. Over 1,000 lines, locate first and read a window even if you feel sure you'll need more, because you can always read again and you can never un-read.</div>
+
+<h2>Part 4: delegate the investigating</h2>
+<p>This is the highest-value habit and the one I used least. An investigation means opening several files, most of which turn out to be irrelevant, and all of which stay in your window afterward. Handing that to a subagent means it burns tokens in a context that gets thrown away, and only the answer comes home.</p>
+<p>Three prompt shapes cover almost everything I delegate.</p>
+
+<div class="plabel">A. Locate (find where something happens)</div>
+<pre class="prompt">Use an agent: find every place this codebase validates uploaded file types.
+Return file paths, line numbers, and which validator each site uses.
+Do not paste file contents back, just the findings and a one-line summary
+of whether they're consistent.</pre>
+
+<div class="plabel">B. Audit (assess something across many files)</div>
+<pre class="prompt">Use an agent to audit error handling across src/api/.
+For each endpoint: does it catch, does it log, does it leak internals to the
+client? Write the full table to notes/2026-08-07-error-audit.md.
+In chat, give me only the endpoints that fail on the third question.</pre>
+
+<div class="plabel">C. Verify (check work without re-reading it here)</div>
+<pre class="prompt">Use an agent to verify the migration I just wrote: run the test suite,
+check the rollback path exists, and confirm no other module imports the
+old column name. Report pass or fail per check, with the failing output
+only if something fails.</pre>
+
+<p>The pattern is identical every time. Say what to find, say what to hand back, and say explicitly what not to paste. That last clause is the one people leave off, and it's the one that keeps the window clean.</p>
+
+<h2>Part 5: the boundary ritual</h2>
+<p>Auto-compaction is a summary written at the worst moment, mid-task, with no idea which threads still matter. Compacting yourself right after something ships gives the summariser a clean seam to cut on. The ritual is three steps and takes about thirty seconds.</p>
+
+<div class="step">
+  <div class="why">Step one</div>
+  <h3>Write the state down</h3>
+  <p>Before you purge anything, the session's knowledge has to land in a file, or you'll just pay to rebuild it tomorrow.</p>
+  <pre class="prompt">Update STATUS.md: move what we just finished into Recent with today's date
+and the root cause in one line. Update Now with the next concrete step.
+Add anything we discovered but didn't act on to Open threads.</pre>
+</div>
+
+<div class="step">
+  <div class="why">Step two</div>
+  <h3>Purge</h3>
+  <p>Compact if the next task is related and you want the thread of reasoning. Clear if it's a different job entirely, which is more often than you'd think.</p>
+  <pre><code>/compact     keeps a summary, good for the next task in the same area
+/clear       full reset, correct for an unrelated task
+/context     shows what's actually eating the window right now</code></pre>
+</div>
+
+<div class="step">
+  <div class="why">Step three</div>
+  <h3>Re-brief</h3>
+  <p>Start the next task with a fresh scoped brief, the same way you opened the session. A purge without a new brief just means the model reconstructs context by reading, and you're back where you started.</p>
+</div>
+
+<h2>Part 6: two hooks that do the nagging</h2>
+<p>Habits slip when you're deep in something, which is exactly when they matter most. Two pieces of automation cover the gap. Neither one makes decisions, they just refuse to let a problem stay invisible.</p>
+
+<p><b>A context watcher.</b> This reads the session transcript on every prompt, tracks how big the window has gotten, and warns once per threshold. Mine fires at 300K, 600K and 850K. The first warning is the useful one, because that's when stopping is still cheap.</p>
+
+<div class="plabel">.claude/settings.json</div>
+<pre><code>{
+  "autoCompactWindow": 250000,
+  "precomputeCompactionEnabled": true,
+  "hooks": {
+    "UserPromptSubmit": [
+      { "hooks": [ {
+          "type": "command",
+          "command": "python ~/tools/contextwatch.py",
+          "timeout": 20
+      } ] }
+    ]
+  }
+}</code></pre>
+
+<p>The <code>autoCompactWindow</code> line matters as much as the hook. It moves the forced purge from the million-token ceiling down to 250K, which turns that ugly sawtooth into something much closer to flat. Set it once and it applies to every session.</p>
+
+<p><b>A stop hook that asks about the checkpoint.</b> Fires when the session goes idle, checks whether STATUS.md was touched, and reminds you if it wasn't. Ten lines of script, and it's the difference between state living on disk and state living in a transcript you're about to purge.</p>
+
+<div class="plabel">The logic, in pseudocode</div>
+<pre><code>on stop:
+    if git status shows changes in src/ but STATUS.md untouched today:
+        print "You shipped something but didn't checkpoint. Update STATUS.md."</code></pre>
+
+<h2>What this is worth</h2>
+<table>
+  <thead><tr><th>Move</th><th>What it kills</th><th style="text-align:right">Rough saving</th></tr></thead>
+  <tbody>
+    <tr><td>One task, one session</td><td>Small jobs paying a big job's rent</td><td class="n">largest single win</td></tr>
+    <tr><td>Search before read</td><td>The 87% Read line</td><td class="n">50 to 80% of intake</td></tr>
+    <tr><td>Delegate investigations</td><td>Exploration becoming permanent</td><td class="n">whole categories of reads</td></tr>
+    <tr><td>Purge at boundaries</td><td>The sawtooth, and bad summaries</td><td class="n">caps the worst case</td></tr>
+    <tr><td>250K auto-purge</td><td>Riding at the ceiling unnoticed</td><td class="n">automatic, always on</td></tr>
+  </tbody>
+</table>
+
+<p>Put together, the same work comes in around half the tokens, and the model spends the whole time thinking with a window that isn't stuffed with things it stopped needing an hour ago. The cost saving is nice. The quality difference is the part that surprised me.</p>
+
+<p><b>Next in the series:</b> <a href="/writing/studio-session/">the studio session</a>, for the work that genuinely wants a huge window. Different discipline, different rules, and a few places where everything above is exactly the wrong advice.</p>
+
+<div class="foot">Part two of three. <a href="/writing/token-efficiency/">Part one</a> covered the data behind all of this, and <a href="/writing/studio-session/">part three</a> covers the studio session. Commands shown are ripgrep and git, both standard. The hook format is Claude Code's <code>settings.json</code>, though the idea ports to any agent harness that lets you run something on each turn.</div>
+</div>
+</div>
+</div>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="Four horizontal bars of very different lengths, the shortest and longest in the same amber color">
+  <rect width="480" height="300" fill="#15171A"/>
+  <g stroke="#2A2D31" stroke-width="1">
+    <line x1="120" y1="30" x2="120" y2="270"/>
+    <line x1="220" y1="30" x2="220" y2="270"/>
+    <line x1="320" y1="30" x2="320" y2="270"/>
+    <line x1="420" y1="30" x2="420" y2="270"/>
+  </g>
+  <g>
+    <rect x="52" y="52" width="82" height="34" rx="3" fill="#EFA43A"/>
+    <rect x="52" y="112" width="92" height="34" rx="3" fill="#6FA3D8"/>
+    <rect x="52" y="172" width="130" height="34" rx="3" fill="#3A3E44"/>
+    <rect x="52" y="232" width="376" height="34" rx="3" fill="#EFA43A"/>
+  </g>
+  <g fill="#EAEBE6" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15">
+    <text x="144" y="75">52,062</text>
+    <text x="154" y="135">58,471</text>
+    <text x="192" y="195">82,996</text>
+    <text x="288" y="255" fill="#15171A">273,147</text>
+  </g>
+  <circle cx="30" cy="69" r="7" fill="#EFA43A"/>
+  <circle cx="30" cy="129" r="7" fill="#6FA3D8"/>
+  <circle cx="30" cy="189" r="7" fill="#3A3E44"/>
+  <circle cx="30" cy="249" r="7" fill="#EFA43A"/>
+</svg>

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CLZ7N26J1Q');
+    gtag('config', 'AW-637214471');   /* Google Ads: remarketing + conversions */
+  </script>
+  <!-- X (Twitter) pixel base code -->
+  <script>!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+  },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+  a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');twq('config','re26u');</script>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1699232654449762');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1699232654449762&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  <!-- TikTok Pixel Code Start -->
+  <script>
+  !function (w, d, t) {
+    w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+    ttq.load('D93C3IRC77U4775FLNR0');
+    ttq.page();
+  }(window, document, 'ttq');
+  </script>
+  <!-- TikTok Pixel Code End -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What's Your AI Style? — 60-Second Quiz</title>
+  <meta name="description" content="Take the 60-second quiz to discover your AI style, get a personalized toolkit for your workflow, and see exactly how to get more out of AI at work." />
+<link rel="canonical" href="https://epeters.ca/quiz/">
+  <meta property="og:title" content="What's Your AI Style?" />
+  <meta property="og:description" content="A 60-second quiz that diagnoses how you use AI and hands you a personalized toolkit for your workflow." />
+  <meta property="og:image" content="https://elvinpeters.com/cover.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+/* Deliberate styling island: the quiz funnel family shares its own always-dark
+   palette. NOT a drifted copy of the system palette; do not migrate. */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black:#060f1a; --dark:#0a1828; --card:#0f2035; --border:#1a3248;
+      --accent:#c9a250; --accent2:#4fb3f0; --white:#f0f5fa; --muted:#6a8faa; --text:#b8d0e4;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: radial-gradient(140% 100% at 50% 0%, #0a1e35 0%, #060f1a 60%);
+      min-height: 100vh; color: var(--text);
+      font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .wrap { width: 100%; max-width: 640px; padding: 24px; margin: 0 auto; }
+
+    /* top bar */
+    .topbar { display:flex; align-items:center; justify-content:space-between; padding: 8px 4px 0; margin-bottom: 28px; }
+    .brand { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+    .brand a { color: var(--accent); text-decoration: none; }
+    .topbar .skip { font-size: 12px; color: var(--muted); text-decoration: none; padding: 12px 0 12px 14px; }
+    .topbar .skip:hover { color: var(--accent); }
+
+    /* progress */
+    .progress-wrap { height: 4px; background: var(--border); border-radius: 99px; overflow: hidden; margin-bottom: 28px; }
+    .progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent2), var(--accent)); transition: width 0.35s ease; }
+
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 36px 32px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+    .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    h1, h2.as-h1 { font-family: 'EB Garamond', Georgia, serif; font-weight: 600; color: var(--white); line-height: 1.12; letter-spacing: -0.01em; }
+    .intro h1 { font-size: clamp(32px, 6vw, 48px); margin-bottom: 18px; }
+    .intro p { font-size: 18px; color: var(--text); margin-bottom: 14px; }
+    .intro .meta { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
+    .intro .meta b { color: var(--text); }
+
+    .qnum { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+    .qtext { font-family: 'EB Garamond', serif; font-size: clamp(24px, 4.5vw, 32px); font-weight: 600; color: var(--white); line-height: 1.2; margin-bottom: 26px; }
+
+    .options { display: flex; flex-direction: column; gap: 12px; }
+    .opt {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--dark); border: 1px solid var(--border); border-radius: 10px;
+      padding: 18px 20px; cursor: pointer; transition: border-color 0.15s, background 0.15s, transform 0.1s;
+      font-size: 16px; color: var(--text); text-align: left; width: 100%; font-family: 'Inter', sans-serif;
+    }
+    .opt:hover { border-color: var(--accent); background: #11263f; }
+    .opt.sel { border-color: var(--accent); background: rgba(201,162,80,0.10); color: var(--white); }
+    .opt .dot {
+      width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--muted); flex-shrink: 0;
+      position: relative; transition: border-color 0.15s;
+    }
+    .opt.sel .dot { border-color: var(--accent); }
+    .opt.sel .dot::after { content:""; position:absolute; inset: 3px; border-radius: 50%; background: var(--accent); }
+
+    .btn {
+      display: inline-block; background: var(--accent); color: var(--black);
+      font-size: 16px; font-weight: 700; padding: 16px 32px; border-radius: 8px;
+      text-decoration: none; border: none; cursor: pointer; font-family: 'Inter', sans-serif;
+      letter-spacing: 0.01em; transition: opacity 0.15s, transform 0.12s;
+      box-shadow: 0 6px 24px rgba(201,162,80,0.22);
+    }
+    .btn:hover { opacity: 0.92; transform: translateY(-1px); }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+    .btn.full { width: 100%; }
+    .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--border); box-shadow: none; font-weight: 500; font-size: 14px; padding: 12px 20px; }
+    .btn.ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    .nav-row { display: flex; align-items: center; justify-content: space-between; margin-top: 26px; }
+    .back { background: none; border: none; color: var(--muted); font-size: 14px; cursor: pointer; font-family: 'Inter', sans-serif; padding: 8px; ;min-height:44px;display:inline-flex;align-items:center}
+    .back:hover { color: var(--accent); }
+    .back:disabled { opacity: 0; pointer-events: none; }
+
+    /* email gate */
+    .gate label { display:block; font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+    .gate input {
+      width: 100%; background: var(--dark); border: 1px solid var(--border); border-radius: 8px;
+      padding: 15px 16px; color: var(--white); font-size: 16px; font-family: 'Inter', sans-serif; margin-bottom: 16px;
+    }
+    .gate input:focus { outline: none; border-color: var(--accent); }
+    .gate .fineprint { font-size: 12px; color: var(--muted); margin-top: 14px; text-align: center; }
+    .gate .err { color: #e07a7a; font-size: 13px; margin-bottom: 12px; display: none; }
+
+    /* result */
+    .result .type-eyebrow { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .result h1, .result h2.as-h1 { font-size: clamp(30px, 6vw, 46px); margin-bottom: 8px; }
+    .result .tagline { font-size: 18px; color: var(--text); margin-bottom: 24px; font-style: italic; font-family: 'EB Garamond', serif; }
+    .gauge { margin: 4px 0 26px; }
+    .gauge .label { display:flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .gauge .track { height: 10px; background: var(--dark); border:1px solid var(--border); border-radius: 99px; overflow: hidden; }
+    .gauge .fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent2), var(--accent)); transition: width 0.9s ease; }
+    .block { margin-bottom: 26px; }
+    .block h3 { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent2); margin-bottom: 14px; }
+    .block p { font-size: 16px; color: var(--text); line-height: 1.7; }
+    .tools { display: flex; flex-direction: column; gap: 10px; }
+    .tool { display:flex; gap: 12px; align-items: flex-start; background: var(--dark); border:1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+    .tool .tn { font-weight: 600; color: var(--white); }
+    .tool .td { font-size: 14px; color: var(--muted); }
+    .book-cta { background: linear-gradient(160deg, #112a47 0%, #0a1828 100%); border:1px solid var(--border); border-radius: 12px; padding: 28px 26px; text-align: center; margin-top: 8px; }
+    .book-cta .why { font-size: 16px; color: var(--text); line-height: 1.7; margin-bottom: 20px; }
+    .book-cta .why b { color: var(--white); }
+    .book-cta .price { font-size: 13px; color: var(--muted); margin-top: 12px; }
+    .share { text-align: center; margin-top: 22px; font-size: 14px; }
+    .share a { color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--border); }
+    .share a:hover { color: var(--accent); border-color: var(--accent); }
+
+    .hidden { display: none !important; }
+    .fade { animation: fade 0.32s ease; }
+    @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+    footer { font-size: 12px; color: var(--muted); text-align: center; padding: 30px 24px 40px; }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+    @media (max-width: 640px) { .card { padding: 28px 22px; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <span class="brand"><a href="https://elvinpeters.com/?utm_source=epeters.ca&utm_medium=link&utm_campaign=quizzes">The Artificial Advantage</a></span>
+      <a class="skip" href="https://elvinpeters.com/?utm_source=epeters.ca&utm_medium=link&utm_campaign=quizzes" id="skipLink">Skip to the book →</a>
+    </div>
+    <div class="progress-wrap"><div class="progress-bar" id="bar"></div></div>
+    <div id="stage"></div>
+  </div>
+  <footer>© 2026 Elvin M. Peters · <a href="https://elvinpeters.com/?utm_source=epeters.ca&utm_medium=link&utm_campaign=quizzes">elvinpeters.com</a></footer>
+
+<script>
+/* =========================================================================
+   QUIZ FUNNEL — config-driven.
+   Content now lives in https://ultimateaidirectory.com/quiz-config.json
+   (edit it in Empire Studio → /studio/quiz). The inline QUIZ object below
+   is the OFFLINE FALLBACK only — if the remote fetch fails, the quiz still
+   runs from this copy. Keep it valid.
+   ========================================================================= */
+var QUIZ = {
+  bookUrl: "https://www.amazon.com/dp/B0H4X2S2JD",
+  salesUrl: "https://elvinpeters.com/",
+  leadApi: "https://ultimateaidirectory.com/api/lead", // owned lead DB (HTTPS, CORS-enabled)
+
+  intro: {
+    eyebrow: "60-Second Quiz",
+    title: "What's your AI style?",
+    body: [
+      "Most people use AI the same way: type a question, get a generic answer, shrug.",
+      "Answer 6 quick questions and you'll get your AI style, a personalized toolkit for your exact workflow, and the one shift that will get you more out of AI at work."
+    ],
+    meta: "6 questions · about 60 seconds · free personalized result",
+    cta: "Start the quiz →"
+  },
+
+  // Each option carries archetype weights (a/b/c/d) + a fluency score (0..3).
+  // Archetypes: skeptic, dabbler, operator, builder.
+  questions: [
+    {
+      q: "How often do you actually use AI for work?",
+      opts: [
+        { t: "Rarely, or I gave up on it", w:{skeptic:3,dabbler:1}, f:0 },
+        { t: "A few times a month", w:{dabbler:3,skeptic:1}, f:1 },
+        { t: "Most weeks", w:{operator:3,dabbler:1}, f:2 },
+        { t: "Every single day", w:{builder:3,operator:1}, f:3 }
+      ]
+    },
+    {
+      q: "What do you mainly reach for AI to do?",
+      opts: [
+        { t: "Honestly, I haven't found a real use yet", w:{skeptic:3}, f:0 },
+        { t: "Writing and email", w:{dabbler:2,operator:1}, f:1 },
+        { t: "Research, analysis, summarizing", w:{operator:2,builder:1}, f:2 },
+        { t: "Brainstorming, planning, building things", w:{builder:3}, f:3 }
+      ]
+    },
+    {
+      q: "What's your biggest frustration with AI?",
+      opts: [
+        { t: "The output is generic and soulless", w:{skeptic:3}, f:1 },
+        { t: "Results are inconsistent, hit or miss", w:{dabbler:3}, f:1 },
+        { t: "I know it can do more, I just can't get it out", w:{operator:3}, f:2 },
+        { t: "None really, I just want more leverage", w:{builder:3}, f:3 }
+      ]
+    },
+    {
+      q: "Do you have a system, or do you wing it?",
+      opts: [
+        { t: "Totally wing it, every time is from scratch", w:{skeptic:2,dabbler:2}, f:0 },
+        { t: "A few go-to prompts I reuse", w:{dabbler:3}, f:1 },
+        { t: "A loose system that mostly works", w:{operator:3}, f:2 },
+        { t: "A deliberate method I keep refining", w:{builder:3}, f:3 }
+      ]
+    },
+    {
+      q: "Which sounds most like your role?",
+      opts: [
+        { t: "Individual contributor / specialist", w:{operator:1,dabbler:1}, f:1 },
+        { t: "Manager or team lead", w:{builder:1,operator:1}, f:2 },
+        { t: "Founder, freelancer, or solo operator", w:{builder:2}, f:2 },
+        { t: "Student or early in my career", w:{dabbler:1,skeptic:1}, f:1 }
+      ]
+    },
+    {
+      q: "If AI worked perfectly for you, what would you want from it?",
+      opts: [
+        { t: "Get my time back", w:{dabbler:1,operator:1}, f:1 },
+        { t: "Look brilliant at work", w:{operator:2}, f:2 },
+        { t: "Get promoted / win more clients", w:{operator:1,builder:1}, f:2 },
+        { t: "Run circles around everyone with it", w:{builder:2}, f:3 }
+      ]
+    }
+  ],
+
+  archetypes: {
+    skeptic: {
+      name: "The Skeptic",
+      tagline: "You tried AI, weren't impressed, and quietly suspect the hype is overblown.",
+      summary: "Almost nobody told you this: the people getting astonishing results are typing into the same box you are. They are not smarter or more technical. They learned to direct the tool instead of just asking it. That is a learnable skill, and it is the entire gap between your results and theirs.",
+      tools: [
+        { n:"Claude", d:"The most natural for thoughtful, professional writing. Start here to feel the difference." },
+        { n:"ChatGPT", d:"The all-rounder. Great once you learn to give it real direction." },
+        { n:"Perplexity", d:"Answers with sources. Rebuilds trust when you've been burned by made-up facts." }
+      ],
+      angle: "You're exactly who this was written for. <b>The Artificial Advantage</b> opens with the skeptic's problem and hands you the directing framework that turns generic output into work that impresses."
+    },
+    dabbler: {
+      name: "The Dabbler",
+      tagline: "You use AI here and there, but the results are inconsistent and you're not sure why.",
+      summary: "You're getting flashes of value with no system underneath, so every session starts from scratch and the quality swings wildly. The fix isn't more tools or more practice. It's a repeatable structure for how you ask, so good results stop being luck and start being the default.",
+      tools: [
+        { n:"ChatGPT", d:"Your daily driver. Save your best prompts so wins repeat." },
+        { n:"Claude", d:"Reach for it on longer writing and judgment-heavy tasks." },
+        { n:"NotebookLM", d:"Turn your own docs into a source you can question. Kills the inconsistency." }
+      ],
+      angle: "<b>The Artificial Advantage</b> replaces scattered instinct with a system. The CLEAR framework and the prompt library mean you stop guessing and start getting the same high quality every time."
+    },
+    operator: {
+      name: "The Operator",
+      tagline: "You use AI regularly and get real value, but you know you're leaving leverage on the table.",
+      summary: "You're past the basics and into the frustrating middle: AI clearly can do more, you just can't get it out consistently. The next level isn't harder prompts. It's constraint architecture and meta-prompting, the skills that separate good output from exceptional, and that make your results compound week over week.",
+      tools: [
+        { n:"Claude", d:"Best-in-class for high-stakes writing and reasoning." },
+        { n:"ChatGPT", d:"Pair it with custom instructions to match your standard automatically." },
+        { n:"Perplexity", d:"For fast, cited research that feeds your real work." },
+        { n:"Gemini", d:"Strong when your workflow lives in Google Workspace." }
+      ],
+      angle: "You don't need convincing that AI works. You need the advanced layer. <b>The Artificial Advantage</b> teaches constraint architecture, meta-prompting and template thinking, the exact skills that take you from good to the person everyone asks how you move so fast."
+    },
+    builder: {
+      name: "The Power User",
+      tagline: "AI is already woven into how you work. Now you want to compound and scale it.",
+      summary: "You're in the top tier of how AI gets used, which means your edge now comes from systematizing what works and, if you lead people, making it teachable. The frontier for you is template thinking and a repeatable method you can hand to a team without it falling apart.",
+      tools: [
+        { n:"Claude", d:"Deep work, long context, and building reusable systems." },
+        { n:"ChatGPT", d:"Custom GPTs and projects to templatize your best workflows." },
+        { n:"NotebookLM", d:"Turn your knowledge base into an on-demand expert." },
+        { n:"Gemini", d:"Workspace-native automation across docs, sheets and mail." }
+      ],
+      angle: "You're past the basics, so the value here is the framework you can teach. <b>The Artificial Advantage</b> gives you one framework simple enough to hand to a whole team, plus the template thinking that turns your best results into repeatable ones. It's the language to scale what you already do well."
+    }
+  }
+};
+
+/* ===================== ENGINE (no edits needed) ===================== */
+function startQuizEngine() {
+  var stageEl = document.getElementById("stage");
+  var barEl = document.getElementById("bar");
+  var answers = [];      // index -> {optIndex, text}
+  var cur = 0;           // 0..N-1 questions; then gate; then result
+  var N = QUIZ.questions.length;
+  var lead = { email:"", name:"" };
+
+  // Ad conversion ids for THIS funnel (quiz lead). X is armed; the Google Ads
+  // "Quiz Lead" conversion goes here as "AW-637214471/<label>" once created.
+  var ADS_QUIZ = { x: "tw-re26u-re279", g: "AW-637214471/AKwFCNHut9UcEIe-7K8C" };
+
+  function setBar(p){ barEl.style.width = p + "%"; }
+  function quizHit(e){ if (e !== "quiz_start" && e !== "quiz_lead" && e !== "quiz_result") return; try{ navigator.sendBeacon("https://studio.elvinpeters.com/s/api/quiz/ai-style/hit", new Blob([e], {type:"text/plain"})); }catch(x){} } /* QUIZ STUDIO PATCH: start/lead/result counts, no personal data */
+  function track(name, params){ quizHit(name); try{ gtag('event', name, params||{}); }catch(e){} }
+
+  function render(html){ stageEl.innerHTML = html; stageEl.firstElementChild && stageEl.firstElementChild.classList.add('fade'); }
+
+  function showIntro(){
+    cur = 0; setBar(0);
+    var i = QUIZ.intro;
+    render(
+      '<div class="card intro">' +
+        '<div class="eyebrow">'+i.eyebrow+'</div>' +
+        '<h1>'+i.title+'</h1>' +
+        i.body.map(function(p){return '<p>'+p+'</p>';}).join('') +
+        '<div class="meta">'+i.meta+'</div>' +
+        '<button class="btn full" id="startBtn">'+i.cta+'</button>' +
+      '</div>'
+    );
+    document.getElementById("startBtn").onclick = function(){ track('quiz_start'); cur=0; showQuestion(); };
+  }
+
+  function showQuestion(){
+    var L = QUIZ.labels || {};
+    var Q = QUIZ.questions[cur];
+    setBar(Math.round((cur)/(N+1)*100));
+    var picked = answers[cur] ? answers[cur].optIndex : -1;
+    var opts = Q.opts.map(function(o, idx){
+      return '<button class="opt'+(idx===picked?' sel':'')+'" data-i="'+idx+'">' +
+               '<span class="dot"></span><span>'+o.t+'</span>' +
+             '</button>';
+    }).join('');
+    render(
+      '<div class="card">' +
+        '<div class="qnum">Question '+(cur+1)+' of '+N+'</div>' +
+        '<div class="qtext">'+Q.q+'</div>' +
+        '<div class="options">'+opts+'</div>' +
+        '<div class="nav-row">' +
+          '<button class="back" id="backBtn"'+(cur===0?' disabled':'')+'>← Back</button>' +
+          '<button class="btn" id="nextBtn"'+(picked<0?' disabled':'')+'>'+(cur===N-1?(L.last||"See my result →"):'Next →')+'</button>' +
+        '</div>' +
+      '</div>'
+    );
+    Array.prototype.forEach.call(document.querySelectorAll(".opt"), function(b){
+      b.onclick = function(){
+        var idx = +b.getAttribute("data-i");
+        answers[cur] = { optIndex: idx, text: Q.opts[idx].t };
+        Array.prototype.forEach.call(document.querySelectorAll(".opt"), function(x){x.classList.remove("sel");});
+        b.classList.add("sel");
+        document.getElementById("nextBtn").disabled = false;
+      };
+    });
+    document.getElementById("backBtn").onclick = function(){ if(cur>0){ cur--; showQuestion(); } };
+    document.getElementById("nextBtn").onclick = function(){
+      if(!answers[cur]) return;
+      if(cur < N-1){ cur++; showQuestion(); } else { showGate(); }
+    };
+  }
+
+  function showGate(){
+    var G = QUIZ.gate || {};
+    setBar(Math.round(N/(N+1)*100));
+    render(
+      '<div class="card gate">' +
+        '<div class="eyebrow">'+(G.eyebrow||"Almost there")+'</div>' +
+        '<h2 class=\"as-h1\" style=\"font-size:30px;margin-bottom:10px;\">'+(G.title||"One step before your result")+'</h2>' +
+        '<p style="color:var(--muted);margin-bottom:22px;">'+(G.body||"Your personalized AI toolkit and result, plus one short email a week with AI workflows that actually work. No spam, unsubscribe any time.")+'</p>' +
+        '<div class="err" id="gateErr">Please enter a valid email.</div>' +
+        '<label for="qname">First name (optional)</label>' +
+        '<input id="qname" type="text" autocomplete="given-name" placeholder="Alex" />' +
+        '<label for="qemail">Email</label>' +
+        '<input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off" /><input id="qemail" type="email" autocomplete="email" placeholder="you@work.com" />' +
+        '<button class="btn full" id="seeBtn">'+(G.button||"Show me my AI style →")+'</button>' +
+        '<div class="fineprint">'+(G.fineprint||"Instant result on this page. We also send the free starter kit by email.")+'</div>' +
+        '<div class="nav-row"><button class="back" id="backBtn2">← Back</button><span></span></div>' +
+      '</div>'
+    );
+    document.getElementById("backBtn2").onclick = function(){ cur = N-1; showQuestion(); };
+    document.getElementById("seeBtn").onclick = function(){
+      var email = document.getElementById("qemail").value.trim();
+      var name = document.getElementById("qname").value.trim();
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ document.getElementById("gateErr").style.display="block"; return; }
+      lead.email = email; lead.name = name;
+      track('quiz_lead', {});
+      try{ fbq('track','Lead',{content_name:'AI Style Quiz'}); }catch(e){}
+      submitLead();
+      showResult();
+    };
+  }
+
+  function scoreArchetype(){
+    var sc = {}; Object.keys(QUIZ.archetypes).forEach(function(k){ sc[k] = 0; });
+    var fluency = 0, maxF = 0;
+    answers.forEach(function(a, qi){
+      var o = QUIZ.questions[qi].opts[a.optIndex];
+      for(var k in o.w){ sc[k] += o.w[k]; }
+      fluency += o.f; maxF += 3;
+    });
+    var best = "dabbler", bestv = -1;
+    for(var k in sc){ if(sc[k] > bestv){ bestv = sc[k]; best = k; } }
+    return { key: best, score: Math.round(fluency/maxF*100), scores: sc };
+  }
+
+  function submitLead(){
+    var res = scoreArchetype();
+    var summary = answers.map(function(a, qi){ return (qi+1)+". "+QUIZ.questions[qi].q+" -> "+a.text; }).join("  |  ");
+    var payload = {
+      name: lead.name || "Quiz lead",
+      email: lead.email,
+      message: "[AI STYLE: "+QUIZ.archetypes[res.key].name+" · fluency "+res.score+"/100]  "+summary,
+      source: "ai-style-quiz" + (location.search || ""),
+      website: (document.querySelector('input[name=website]')||{value:''}).value || ''
+    };
+    // Fire-and-forget. Funnel never blocks on this.
+    try {
+      var body = new URLSearchParams(payload).toString();
+      fetch(QUIZ.leadApi, {
+        method: "POST", mode: "cors", keepalive: true,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body
+      }).catch(function(){});
+    } catch(e){}
+    // Ad conversions: quiz lead captured. Fire-and-forget, never blocks the funnel.
+    try{ if(lead.email && typeof gtag==='function') gtag('set','user_data',{email:lead.email}); }catch(e){} // enhanced conversions
+    try{ if(typeof twq==='function') twq('event', ADS_QUIZ.x, {}); }catch(e){}
+    try{ if(ADS_QUIZ.g && typeof gtag==='function') gtag('event','conversion',{send_to:ADS_QUIZ.g}); }catch(e){}
+  }
+
+  function showResult(){
+    var C = QUIZ.cta || {}, L = QUIZ.labels || {};
+    setBar(100);
+    var res = scoreArchetype();
+    var A = QUIZ.archetypes[res.key];
+    track('quiz_result', { archetype: A.name, fluency: res.score });
+    var tools = A.tools.map(function(t){
+      return '<div class="tool"><span class="dot" style="margin-top:3px;"></span><div><div class="tn">'+t.n+'</div><div class="td">'+t.d+'</div></div></div>';
+    }).join('');
+    render(
+      '<div class="card result">' +
+        '<div class="type-eyebrow">'+(L.eyebrow||"Your AI style")+'</div>' +
+        '<h2 class=\"as-h1\">'+A.name+'</h2>' +
+        '<div class="tagline">'+A.tagline+'</div>' +
+        '<div class="gauge"><div class="label"><span>Your AI fluency</span><span>'+res.score+'/100</span></div><div class="track"><div class="fill" id="gfill"></div></div></div>' +
+        '<div class="block"><h3>What this means</h3><p>'+A.summary+'</p></div>' +
+        '<div class="block"><h3>Your personalized toolkit</h3><div class="tools">'+tools+'</div></div>' +
+        '<div class="book-cta">' +
+          '<div class="why">'+A.angle+'</div>' +
+          '<a class="btn" href="'+QUIZ.bookUrl+'" id="bookBtn">'+(C.button||"Get the book on Amazon →")+'</a>' +
+          (C.price ? '<div class="price">'+C.price+'</div>' : '') +
+        '</div>' +
+        (C.more ? '<div class="share"><a href="'+QUIZ.salesUrl+'">'+C.more+'</a></div>' : '') +
+      '</div>'
+    );
+    setTimeout(function(){ var f=document.getElementById("gfill"); if(f) f.style.width = res.score + "%"; }, 120);
+    var bb = document.getElementById("bookBtn");
+    if(bb) bb.onclick = function(){ track('system_click', {event_label:'quiz_result'}); };
+  }
+
+  // boot
+  showIntro();
+}
+
+/* ===================== BOOT: remote config with inline fallback ============
+   Tries the published config first so quiz content can be edited without a
+   site deploy. Any failure (offline, CORS, bad JSON, slow network) falls
+   back to the inline QUIZ object above. The quiz can never be blocked.
+   QUIZ STUDIO PATCH: Quiz Studio publishes this file (studio.elvinpeters.com/studio/quizzes/ai-style). */
+(function () {
+  var CONFIG_URL = "https://ultimateaidirectory.com/quiz-config.json";
+  var started = false;
+  function start(){ if (!started) { started = true; startQuizEngine(); } }
+  var timer = setTimeout(start, 2500); // never hold the page hostage
+  try {
+    fetch(CONFIG_URL, { mode: "cors", cache: "no-cache" })
+      .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(function (cfg) {
+        if (!started && cfg && cfg.intro && cfg.questions && cfg.questions.length && cfg.archetypes) {
+          QUIZ = cfg;
+        }
+        clearTimeout(timer); start();
+      })
+      .catch(function () { clearTimeout(timer); start(); });
+  } catch (e) { clearTimeout(timer); start(); }
+})();
+</script>
+<!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:10px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=quizzes">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=quizzes">Get the monthly letter</a></footer><!-- /ep:ca-foot -->
+</body>
+</html>

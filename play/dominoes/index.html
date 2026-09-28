@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dominoes</title>
+<link rel="stylesheet" href="../_kit/play-kit.css">
+<style>
+  .dom-wrap{ width:100%; display:flex; flex-direction:column; gap:var(--pk-gap); align-items:stretch; }
+  .seatrail{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
+  .seat{ display:flex; align-items:center; gap:8px; padding:6px 12px; border-radius:var(--pk-radius-pill);
+    background:var(--pk-surface); border:1.5px solid var(--pk-line); font-size:var(--pk-fs-sm); font-weight:600; }
+  .seat.is-turn{ border-color:var(--pk-accent); background:var(--pk-accent-soft); color:var(--pk-accent-press); }
+  .seat.is-off{ opacity:.5; }
+  .seat .cnt{ font-family:var(--pk-font-num); background:var(--pk-surface-sunk); border-radius:999px; padding:1px 8px; }
+  .board{ background:var(--pk-mat-felt); border-radius:var(--pk-radius-lg); box-shadow:inset 0 2px 12px rgba(0,0,0,.25);
+    padding:14px; min-height:150px; display:flex; align-items:center; gap:10px; overflow-x:auto; }
+  .board .line{ display:flex; align-items:center; gap:6px; margin:auto; }
+  .endchip{ min-width:34px; height:34px; padding:0 6px; display:grid; place-items:center; border-radius:8px; flex:0 0 auto;
+    background:rgba(255,255,255,.14); color:#fff; font-family:var(--pk-font-num); font-weight:700; border:2px solid transparent; cursor:default; }
+  .endchip.is-target{ border-color:#fff; background:rgba(255,255,255,.30); cursor:pointer; animation:pulse 1s infinite; }
+  @keyframes pulse{ 50%{ box-shadow:0 0 0 4px rgba(255,255,255,.25);} }
+  .hand{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; padding:4px; }
+  .tile{ position:relative; display:inline-flex; flex-direction:column; background:var(--pk-mat-ivory);
+    border:1px solid var(--pk-mat-ivory-dk); border-radius:8px; box-shadow:var(--pk-shadow-2); }
+  .tile.h{ flex-direction:row; } /* horizontal (played) */
+  .tile .half{ position:relative; }
+  .tile .div{ background:var(--pk-mat-ivory-dk); }
+  .tile.v{ width:44px; } .tile.v .half{ width:44px; height:44px; } .tile.v .div{ height:2px; }
+  .tile.h .half{ width:40px; height:40px; } .tile.h .div{ width:2px; }
+  .pipgrid{ position:absolute; inset:5px; display:grid; grid-template:repeat(3,1fr)/repeat(3,1fr); }
+  .pip{ width:7px; height:7px; border-radius:50%; background:#3a2c1a; align-self:center; justify-self:center; }
+  .tile.dbl{ outline:2px solid var(--pk-mat-gold); }
+  .hand .tile{ cursor:default; transition:transform var(--pk-t-quick) var(--pk-ease-spring), box-shadow var(--pk-t-quick); }
+  .hand .tile.legal{ cursor:pointer; outline:2px solid var(--pk-good); }
+  .hand .tile.legal:hover{ transform:translateY(-6px); box-shadow:var(--pk-shadow-3); }
+  .hand .tile.illegal{ opacity:.45; }
+  .hand .tile.sel{ transform:translateY(-8px); outline:2px solid var(--pk-accent); }
+  .modecard{ width:100%; max-width:420px; text-align:left; display:flex; gap:12px; align-items:center;
+    padding:16px; margin:0 auto; }
+  .modecard h3{ font-family:var(--pk-font-display); font-size:1.1rem; margin:0 0 2px; }
+  .modecard p{ margin:0; color:var(--pk-ink-soft); font-size:var(--pk-fs-sm); }
+  .modecard .ic{ font-size:1.8rem; }
+  .invitebox{ text-align:center; }
+  .code{ font-family:var(--pk-font-num); font-size:2.4rem; letter-spacing:.3em; font-weight:800; color:var(--pk-accent);
+    background:var(--pk-surface-sunk); border-radius:var(--pk-radius); padding:10px 18px; display:inline-block; }
+  .scoreb{ display:flex; gap:16px; justify-content:center; font-size:var(--pk-fs-sm); color:var(--pk-ink-soft); }
+  .scoreb b{ color:var(--pk-ink); font-family:var(--pk-font-num); }
+  .curtain{ position:fixed; inset:0; z-index:150; background:var(--pk-bg); display:grid; place-items:center; text-align:center; padding:24px; }
+  .banner{ text-align:center; color:var(--pk-ink-soft); min-height:1.4em; font-weight:600; }
+  .overlay{ position:fixed; inset:0; z-index:150; background:rgba(20,15,8,.55); display:grid; place-items:center; padding:24px; }
+  .overlay .card{ background:var(--pk-surface); border-radius:var(--pk-radius-lg); box-shadow:var(--pk-shadow-3);
+    padding:28px; max-width:420px; text-align:center; }
+  @media (prefers-reduced-motion: reduce){ .endchip.is-target{ animation:none; } }
+</style>
+<link rel="canonical" href="https://epeters.ca/play/dominoes/">
+</head>
+<body>
+<script src="../_kit/play-kit.js"></script>
+<script src="../_kit/net-kit.js"></script>
+<script src="rules.js"></script>
+<script>
+var HEADLESS = (typeof document === "undefined");
+if (!HEADLESS) (function(){
+  var R = window.DOMINOES_RULES;
+  var ui = PK.app({ title:"Dominoes", slug:"dominoes", accent:"forest", board:true });
+  var stage = ui.stage, actions = ui.actions;
+  var net = null, view = null, myMode = "hotseat", pending = null, lastTurnShown = -1, curtainUp = false;
+  var cfg = { players: PK.store.get("play.dominoes.players", 2), variant: PK.store.get("play.dominoes.variant","draw"),
+              name: PK.store.get("play.dominoes.name","Guest") };
+
+  // ---------- pip rendering ----------
+  var PIPMAP = { 0:[], 1:[4], 2:[0,8], 3:[0,4,8], 4:[0,2,6,8], 5:[0,2,4,6,8], 6:[0,2,3,5,6,8] };
+  function half(v){
+    var h = document.createElement("div"); h.className="half";
+    var g = document.createElement("div"); g.className="pipgrid";
+    for (var i=0;i<9;i++){ var c=document.createElement("div"); if (PIPMAP[v].indexOf(i)>=0){ var p=document.createElement("div"); p.className="pip"; c.appendChild(p);} g.appendChild(c); }
+    h.appendChild(g); return h;
+  }
+  function tileEl(t, horizontal){
+    var el = document.createElement("div"); el.className = "tile " + (horizontal?"h":"v") + (t[0]===t[1]?" dbl":"");
+    var d = document.createElement("div"); d.className="div";
+    el.appendChild(half(t[0])); el.appendChild(d); el.appendChild(half(t[1]));
+    return el;
+  }
+
+  // ---------- screens ----------
+  function clearActions(){ actions.innerHTML=""; }
+  function btn(label, cls, on){ var b=document.createElement("button"); b.className="pk-btn "+(cls||""); b.textContent=label; b.onclick=on; return b; }
+
+  function modeSelect(){
+    clearActions(); lastTurnShown=-1;
+    stage.innerHTML =
+      '<h2 class="pk-subtle" style="font-size:var(--pk-fs-lg);color:var(--pk-ink)">Double-six dominoes</h2>';
+    var mk = function(ic,title,desc,fn){ var c=document.createElement("button"); c.className="pk-panel modecard";
+      c.innerHTML='<span class="ic">'+ic+'</span><span><h3>'+title+'</h3><p>'+desc+'</p></span>'; c.onclick=fn; return c; };
+    var wrap = document.createElement("div"); wrap.className="dom-wrap"; wrap.style.alignItems="center";
+    // player count + variant controls
+    var opts = document.createElement("div"); opts.className="pk-row"; opts.style.margin="6px 0 10px";
+    opts.innerHTML =
+      '<label class="pk-subtle">Players '+
+        '<select class="pk-select" id="pl"><option>2</option><option>3</option><option>4</option></select></label>'+
+      '<div class="pk-seg" id="var"><button data-v="draw">Draw</button><button data-v="block">Block</button></div>';
+    wrap.appendChild(opts);
+    wrap.appendChild(mk("🁫","Pass &amp; play","Two-plus players sharing this one device.", function(){ start("hotseat"); }));
+    wrap.appendChild(mk("🤖","Vs computer","Play a quick hand against a greedy AI.", function(){ start("ai"); }));
+    wrap.appendChild(mk("🔗","Play a friend","Get a room code &amp; link to share.", function(){ start("online"); }));
+    stage.appendChild(wrap);
+    var pl = opts.querySelector("#pl"); pl.value = String(cfg.players);
+    pl.onchange = function(){ cfg.players = R.clampPlayers(+pl.value); PK.store.set("play.dominoes.players", cfg.players); };
+    var seg = opts.querySelector("#var");
+    function paint(){ seg.querySelectorAll("button").forEach(function(b){ b.setAttribute("aria-pressed", String(b.dataset.v===cfg.variant)); }); }
+    seg.onclick = function(e){ var b=e.target.closest("button"); if(!b)return; cfg.variant=b.dataset.v; PK.store.set("play.dominoes.variant",cfg.variant); paint(); };
+    paint();
+  }
+
+  function start(mode){
+    myMode = mode;
+    if (mode === "hotseat") { net = new LocalNet({ gameId:"dominoes", mode:"hotseat", rules:R, seats:cfg.players, options:{ variant:cfg.variant } }); wire(); net.connect(); }
+    else if (mode === "ai") { net = new LocalNet({ gameId:"dominoes", mode:"ai", rules:R, ai:R.greedyAI, options:{ variant:cfg.variant } }); wire(); net.connect(); }
+    else { net = new Net({ gameId:"dominoes", name:cfg.name, rules:R }); wire(); net.connect().then(function(){
+        net.createRoom({ options:{ variant:cfg.variant, players:cfg.players } }).then(function(room){ inviteScreen(room); });
+      }); }
+  }
+
+  function inviteScreen(room){
+    clearActions();
+    stage.innerHTML =
+      '<div class="invitebox dom-wrap" style="align-items:center;gap:16px">'+
+      '<h2 style="font-family:var(--pk-font-display)">Share to start</h2>'+
+      '<div class="code">'+room.roomId+'</div>'+
+      '<p class="pk-subtle">Send the link or read them the code. The game starts when they join.</p>'+
+      '<div class="pk-row"></div>'+
+      '<p class="banner" id="bn">Waiting for an opponent…</p></div>';
+    var row = stage.querySelector(".pk-row");
+    row.appendChild(btn("Copy link","pk-btn", function(){ net.copyInvite().then(function(){ PK.toast("Link copied"); }); }));
+    if (navigator.share) row.appendChild(btn("Share","pk-btn--soft", function(){ net.share(); }));
+    row.appendChild(btn("Cancel","pk-btn--ghost", function(){ net.leave(); net.disconnect&&net.disconnect(); modeSelect(); }));
+  }
+
+  // ---------- gameplay render ----------
+  function myTurn(){ return view && !view.over && !net.isSpectator && view.turn === view.yourSeat; }
+
+  function render(){
+    if (!view) return;
+    if (curtainUp) return;
+    // online: stay on the invite/waiting screen until every seat is filled
+    if (myMode === "online" && !view.over){
+      var active = (net.players||[]).filter(function(p){ return p.status==="active"; }).length;
+      if (active < (view.numPlayers||2)){ var wb=document.getElementById("bn"); if(wb) wb.textContent="Waiting for opponent… ("+active+"/"+(view.numPlayers||2)+")"; return; }
+    }
+    // hotseat: show a hand-off curtain when the turn moves to a new seat
+    if (myMode==="hotseat" && !view.over && view.turn !== lastTurnShown && lastTurnShown !== -1){ showCurtain(); return; }
+    lastTurnShown = view.turn;
+    clearActions();
+    var wrap = document.createElement("div"); wrap.className="dom-wrap";
+
+    // seat rail
+    var rail = document.createElement("div"); rail.className="seatrail";
+    (net.players||[]).forEach(function(p){
+      var cnt = view.handCounts ? view.handCounts[p.seat] : "";
+      var s = document.createElement("div"); s.className="seat"+(p.seat===view.turn && !view.over?" is-turn":"")+(p.status==="disconnected"?" is-off":"");
+      var label = p.name || ("Player "+(p.seat+1)); if (p.seat===view.yourSeat && myMode!=="hotseat") label += " (you)";
+      s.innerHTML = label + ' <span class="cnt">'+cnt+'</span>' + (p.status==="disconnected"?" ⟳":"");
+      rail.appendChild(s);
+    });
+    wrap.appendChild(rail);
+
+    // scoreboard
+    if (view.scores){ var sb=document.createElement("div"); sb.className="scoreb";
+      view.scores.forEach(function(sc,i){ var e=document.createElement("span"); e.innerHTML=(view.players&&view.players[i]?"":"")+"P"+(i+1)+": <b>"+sc+"</b>"; sb.appendChild(e); });
+      var tg=document.createElement("span"); tg.innerHTML="target <b>"+view.target+"</b>"; sb.appendChild(tg); wrap.appendChild(sb); }
+
+    // the board / line
+    var board = document.createElement("div"); board.className="board";
+    var line = document.createElement("div"); line.className="line";
+    if (view.ends){
+      var l = endChip(view.ends[0],"left"); line.appendChild(l);
+      (view.layout||[]).forEach(function(cell){ var el=tileEl(cell.tile, true); if(cell.double){ el.classList.remove("h"); el.classList.add("v"); } line.appendChild(el); });
+      var r = endChip(view.ends[1],"right"); line.appendChild(r);
+    } else {
+      var hint = document.createElement("div"); hint.style.color="rgba(255,255,255,.8)"; hint.style.margin="auto";
+      hint.textContent = (view.turn===view.yourSeat? "You open" : "Opening…") + " with the "+view.opening[0]+"-"+view.opening[1];
+      line.appendChild(hint);
+    }
+    board.appendChild(line); wrap.appendChild(board);
+
+    // banner + your hand
+    var banner = document.createElement("div"); banner.className="banner"; banner.id="bn"; wrap.appendChild(banner);
+    var hand = document.createElement("div"); hand.className="hand";
+    var legal = R.legalPlays(view.yourHand||[], view.ends, view.ends===null?view.opening:null);
+    (view.yourHand||[]).forEach(function(t){
+      var el = tileEl(t, false);
+      var ends = legalEndsFor(t, legal);
+      if (myTurn() && ends.length){ el.classList.add("legal"); el.tabIndex=0; el.onclick=function(){ pickTile(t, ends, el); }; el.onkeydown=function(e){ if(e.key==="Enter"||e.key===" "){e.preventDefault(); pickTile(t,ends,el);} }; }
+      else if (myTurn()) el.classList.add("illegal");
+      hand.appendChild(el);
+    });
+    wrap.appendChild(hand);
+
+    stage.innerHTML=""; stage.appendChild(wrap);
+
+    // status + action buttons
+    setBanner();
+    if (myTurn()){
+      if (!legal.length){
+        if (view.variant==="draw" && view.boneyardCount>0) actions.appendChild(btn("Draw a tile ("+view.boneyardCount+")","pk-btn", function(){ net.sendMove({type:"draw"}); }));
+        else actions.appendChild(btn("Pass","pk-btn", function(){ net.sendMove({type:"pass"}); }));
+      }
+    }
+    if (myMode==="online"){ actions.appendChild(btn("Leave","pk-btn--ghost pk-btn--sm", function(){ net.leave(); net.disconnect(); modeSelect(); })); }
+    else { actions.appendChild(btn("Menu","pk-btn--ghost pk-btn--sm", function(){ modeSelect(); })); }
+  }
+
+  function setBanner(){ var b=document.getElementById("bn"); if(!b)return;
+    if (view.over) return;
+    if (net.isSpectator){ b.textContent="Watching"; return; }
+    if (myTurn()){
+      var legal = R.legalPlays(view.yourHand||[], view.ends, view.ends===null?view.opening:null);
+      b.textContent = view.ends===null ? "Your turn — play the opening double" : (legal.length? "Your turn — tap a tile to play" : (view.variant==="draw"&&view.boneyardCount>0?"No play — draw a tile":"No play — you must pass"));
+    } else {
+      var nm = (net.players[view.turn]&&net.players[view.turn].name)||("Player "+(view.turn+1));
+      b.textContent = (myMode==="hotseat"? "":"") + nm + " to play…";
+    }
+  }
+
+  function endChip(val, side){
+    var c=document.createElement("div"); c.className="endchip"; c.textContent=val; c.dataset.side=side;
+    if (pending){ var ends=legalEndsFor(pending, R.legalPlays([pending], view.ends, null)); if (ends.indexOf(side)>=0){ c.classList.add("is-target"); c.onclick=function(){ playTile(pending, side); }; } }
+    return c;
+  }
+  function legalEndsFor(t, legal){ var e=[]; legal.forEach(function(p){ if (p.tile[0]===t[0]&&p.tile[1]===t[1]||p.tile[0]===t[1]&&p.tile[1]===t[0]){ if(e.indexOf(p.end)<0)e.push(p.end); } }); return e; }
+  function pickTile(t, ends, el){
+    if (view.ends===null){ playTile(t,"right"); return; }
+    if (ends.length===1){ playTile(t, ends[0]); return; }
+    pending = t; document.querySelectorAll(".hand .tile").forEach(function(x){x.classList.remove("sel");}); el.classList.add("sel");
+    render(); // re-render so the two end chips light up as targets
+  }
+  function playTile(t, side){ pending=null; net.sendMove({ type:"play", tile:t, end:side }); }
+
+  function showCurtain(){
+    curtainUp = true; clearActions();
+    var nm = (net.players[view.turn]&&net.players[view.turn].name)||("Player "+(view.turn+1));
+    var c = document.createElement("div"); c.className="curtain";
+    c.innerHTML='<div><h2 style="font-family:var(--pk-font-display);font-size:2rem">Pass to '+nm+'</h2><p class="pk-subtle">Tap when '+nm+' is holding the device.</p><br><button class="pk-btn">I\'m ready</button></div>';
+    c.querySelector("button").onclick=function(){ curtainUp=false; c.remove(); lastTurnShown=view.turn; render(); };
+    document.body.appendChild(c);
+  }
+
+  function handOver(){
+    var res = view.result || {}; var card=document.createElement("div");
+    var title, sub;
+    if (res.kind==="domino"){ title = nameOf(res.winner)+" went out!"; }
+    else if (res.kind==="blocked"){ title = "Blocked — "+nameOf(res.winner)+" wins the hand"; }
+    else { title = "Blocked — dead hand (tie)"; }
+    sub = (res.points? "+"+res.points+" points":"no score");
+    if (res.matchOver){ title = nameOf(res.matchWinner)+" wins the match!"; }
+    PK.sound.play(res.matchOver?"win":"reveal"); PK.announce(title);
+    var o=document.createElement("div"); o.className="overlay";
+    o.innerHTML='<div class="card"><h2 style="font-family:var(--pk-font-display);font-size:1.6rem;margin-bottom:6px">'+title+'</h2><p class="pk-subtle">'+sub+'</p><div class="pk-row" style="margin-top:16px"></div></div>';
+    var row=o.querySelector(".pk-row");
+    if (res.matchOver){ row.appendChild(btn(myMode==="online"?"Rematch":"New match","pk-btn", function(){ o.remove(); if(myMode==="online"){ net.rematch(); } else { start(myMode); } })); }
+    else { row.appendChild(btn("Next hand","pk-btn", function(){ o.remove(); if(myMode==="online"){ net.rematch(); } else { net.rematch(); } })); }
+    row.appendChild(btn("Menu","pk-btn--ghost", function(){ o.remove(); if(net.disconnect)net.disconnect(); modeSelect(); }));
+    document.body.appendChild(o);
+  }
+  function nameOf(seat){ if(seat==null) return "Nobody"; return (net.players[seat]&&net.players[seat].name)||("Player "+(seat+1)); }
+
+  // ---------- wiring ----------
+  function wire(){
+    net.on("state", function(d){ view = d.state; render(); });
+    net.on("move", function(d){ PK.sound.play(d.move&&d.move.type==="play"?"diceClack":"click"); PK.buzz(10); });
+    net.on("rejected", function(d){ PK.toast("Illegal: "+d.reason); });
+    net.on("presence", function(d){ net.players = d.players||net.players; var b=document.getElementById("bn"); if(b && !view) b.textContent = (d.players.filter(function(p){return p.status==="active";}).length)+" here…"; if(view) render(); });
+    net.on("gameOver", function(){ setTimeout(handOver, 400); });
+    net.on("reconnecting", function(){ PK.toast("Reconnecting…"); });
+    net.on("error", function(d){ PK.toast(d.message||"Error"); if(d.code==="not_found"){ modeSelect(); } });
+  }
+
+  // boot: a room link jumps straight into the online game
+  var params = new URL(location.href).searchParams;
+  if (params.get("r")){ myMode="online"; net = new Net({ gameId:"dominoes", name:cfg.name, rules:R }); wire();
+    net.connect().then(function(){ net.joinRoom(params.get("r"), { asSpectator: params.get("spectate")==="1" }); }); }
+  else modeSelect();
+})();
+</script>
+<!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:10px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=play">Get the monthly letter</a></footer><!-- /ep:ca-foot -->
+</body>
+</html>

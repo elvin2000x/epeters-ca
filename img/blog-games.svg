@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="A grid of thirteen shipped tiles, each carrying a passing check">
+  <rect width="480" height="300" fill="#15171A"/>
+  <g id="t" fill="#1D2025" stroke="#2A2D31" stroke-width="2"/>
+  <g fill="#1D2025" stroke="#7CB984" stroke-width="2.5">
+    <rect x="26" y="96" width="72" height="56" rx="6"/><rect x="114" y="96" width="72" height="56" rx="6"/>
+    <rect x="202" y="96" width="72" height="56" rx="6"/><rect x="290" y="96" width="72" height="56" rx="6"/>
+    <rect x="378" y="96" width="72" height="56" rx="6"/>
+    <rect x="26" y="166" width="72" height="56" rx="6"/><rect x="114" y="166" width="72" height="56" rx="6"/>
+    <rect x="202" y="166" width="72" height="56" rx="6"/><rect x="290" y="166" width="72" height="56" rx="6"/>
+    <rect x="378" y="166" width="72" height="56" rx="6"/>
+    <rect x="114" y="236" width="72" height="40" rx="6"/><rect x="202" y="236" width="72" height="40" rx="6"/>
+    <rect x="290" y="236" width="72" height="40" rx="6"/>
+  </g>
+  <g stroke="#7CB984" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <polyline points="50,124 58,133 74,115"/><polyline points="138,124 146,133 162,115"/>
+    <polyline points="226,124 234,133 250,115"/><polyline points="314,124 322,133 338,115"/>
+    <polyline points="402,124 410,133 426,115"/>
+    <polyline points="50,194 58,203 74,185"/><polyline points="138,194 146,203 162,185"/>
+    <polyline points="226,194 234,203 250,185"/><polyline points="314,194 322,203 338,185"/>
+    <polyline points="402,194 410,203 426,185"/>
+    <polyline points="138,258 146,267 162,249"/><polyline points="226,258 234,267 250,249"/>
+    <polyline points="314,258 322,267 338,249"/>
+  </g>
+  <text x="26" y="62" font-family="Consolas,monospace" font-size="19" font-weight="700" fill="#EAEBE6">13 shipped, 0 hand-tested</text>
+</svg>
