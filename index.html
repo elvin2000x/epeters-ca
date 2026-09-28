@@ -16,38 +16,70 @@
 :root{--bg:#0a1524;--panel:#131f33;--line:#2b405c;--ink:#e9eff7;--ink-2:#b7c6d9;--muted:#8ba2bd;--gold:#e0bd6b}
 *{box-sizing:border-box}html,body{margin:0}
 body{background:var(--bg);color:var(--ink);font:400 17px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
-main{max-width:860px;width:100%;margin:0 auto;padding:40px 16px 48px;flex:1}
-h1{font-family:'EB Garamond',Georgia,serif;font-weight:400;font-size:clamp(2.4rem,7vw,3.6rem);line-height:1.05;margin:0 0 14px;color:var(--gold)}
-.lede{color:var(--ink-2);font-size:1.1rem;margin:0 0 32px;max-width:620px}
-.doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;list-style:none;padding:0;margin:0}
-.door{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}
-.door h2{font-family:'EB Garamond',Georgia,serif;font-weight:600;font-size:1.5rem;margin:0 0 6px}
-.door h2 a{color:var(--ink);text-decoration:none}.door h2 a:hover{color:var(--gold)}
-.door p{color:var(--ink-2);font-size:15px;margin:0}
-.door ul{margin:10px 0 0;padding:0;list-style:none}
-.door li a{color:var(--gold);text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:6px 0;font-size:15px}
-a:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+main{max-width:1040px;width:100%;margin:0 auto;padding:0 16px 56px;flex:1}
+body{overflow-x:clip}
+.hero{position:relative;padding:56px 0 36px;isolation:isolate}
+.hero::before{content:"";position:absolute;z-index:-1;inset:-40px -16px auto;height:420px;pointer-events:none;
+  background:radial-gradient(40% 55% at 22% 35%,rgba(224,189,107,.20),transparent 70%),radial-gradient(38% 50% at 78% 20%,rgba(94,140,255,.20),transparent 70%)}
+.kicker{display:inline-flex;align-items:center;gap:8px;font:600 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);background:rgba(224,189,107,.10);border:1px solid rgba(224,189,107,.28);padding:8px 12px;border-radius:999px;margin:0 0 20px}
+.kicker i{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(224,189,107,.18)}
+h1{font-family:'EB Garamond',Georgia,serif;font-weight:400;font-size:clamp(2.8rem,10vw,4.6rem);line-height:1;letter-spacing:-.01em;margin:0 0 16px;
+  background:linear-gradient(100deg,#f4dfa6 0%,var(--gold) 45%,#c9a24e 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{color:var(--ink-2);font-size:clamp(1.02rem,2.6vw,1.15rem);margin:0;max-width:600px}
+.doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px;list-style:none;padding:0;margin:0}
+.door{position:relative;display:flex;flex-direction:column;gap:10px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,0)) ,var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+.door:hover,.door:focus-within{transform:translateY(-3px);border-color:var(--c,var(--gold));box-shadow:0 14px 34px -18px var(--c,var(--gold))}
+.door .top{display:flex;align-items:center;gap:14px}
+.ico{flex:none;width:48px;height:48px;border-radius:14px;display:grid;place-items:center;color:var(--c);background:color-mix(in srgb,var(--c) 16%,transparent);border:1px solid color-mix(in srgb,var(--c) 38%,transparent)}
+.ico svg{width:24px;height:24px}
+.door h2{font-family:'EB Garamond',Georgia,serif;font-weight:600;font-size:1.65rem;line-height:1.1;margin:0}
+.door h2 a{color:var(--ink);text-decoration:none}
+.door h2 a::after{content:"";position:absolute;inset:0;border-radius:18px}
+.door p{color:var(--ink-2);font-size:15px;line-height:1.55;margin:0}
+.meta{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:6px;font:500 13px/1 Inter,sans-serif;color:var(--muted)}
+.chip{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--line)}
+.go{color:var(--c);font-size:20px;transition:transform .18s ease}.door:hover .go{transform:translateX(4px)}
+.door ul{margin:4px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+.door li a{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:46px;padding:10px 14px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--ink);text-decoration:none;font-size:15px}
+.door li a:hover{border-color:var(--c);color:var(--c)}
+.door li a span{color:var(--c)}
+.w{--c:#e0bd6b}.p{--c:#6ee7b7}.a{--c:#7aa7ff}.q{--c:#f59eb6}.j{--c:#c4a5ff}
+.door.q{grid-row:span 2}
+a:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:6px}
+@media (prefers-reduced-motion:reduce){.door,.go{transition:none}.door:hover,.door:focus-within{transform:none}}
 </style>
 </head>
 <body>
-<!-- ep:ca-bar --><style>.rhbar{background:#0a1524;border-bottom:1px solid #2b405c;font:500 14px/1.4 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;position:relative;z-index:50}.rhbar .rhin{max-width:1120px;margin:0 auto;padding:0 16px;min-height:52px;display:flex;align-items:center;gap:6px 18px;flex-wrap:wrap}.rhbar a{color:#b7c6d9;text-decoration:none;padding:13px 2px;display:inline-block}.rhbar a:hover{color:#e0bd6b}.rhbar .rhbrand{color:#e0bd6b;font-family:'EB Garamond',Georgia,serif;font-size:18px;margin-right:auto}.rhbar .rhlk{display:flex;gap:16px;flex-wrap:wrap}.rhbar a:focus-visible,.rhfoot a:focus-visible{outline:2px solid #e0bd6b;outline-offset:2px}</style><nav class="rhbar" aria-label="The Rabbit Hole"><div class="rhin"><a class="rhbrand" href="/">The Rabbit Hole</a><span class="rhlk"><a href="/writing/">Writing</a><a href="/play/">Play</a><a href="/#quizzes">Quizzes</a><a href="/projects/">Projects</a></span></div></nav><!-- /ep:ca-bar -->
+<!-- ep:ca-bar --><style>.rhbar{background:#0a1524;border-bottom:1px solid #2b405c;font:500 14px/1.4 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;position:relative;z-index:50}.rhbar .rhin{max-width:1120px;margin:0 auto;padding:0 16px;min-height:52px;display:flex;align-items:center;gap:6px 18px;flex-wrap:wrap}.rhbar a{color:#b7c6d9;text-decoration:none;padding:13px 2px;display:inline-block}.rhbar a:hover{color:#e0bd6b}.rhbar .rhbrand{color:#e0bd6b;font-family:'EB Garamond',Georgia,serif;font-size:18px;margin-right:auto}.rhbar .rhlk{display:flex;gap:16px;flex-wrap:wrap}.rhbar a:focus-visible,.rhfoot a:focus-visible{outline:2px solid #e0bd6b;outline-offset:2px}@media (max-width:480px){.rhbar .rhin{flex-wrap:nowrap;gap:10px}.rhbar .rhbrand{font-size:16px;flex:none}.rhbar .rhlk{flex-wrap:nowrap;gap:12px;font-size:13px;overflow-x:auto;scrollbar-width:none;min-width:0}.rhbar .rhlk::-webkit-scrollbar{display:none}.rhbar .rhlk a{white-space:nowrap}}</style><nav class="rhbar" aria-label="The Rabbit Hole"><div class="rhin"><a class="rhbrand" href="/">The Rabbit Hole</a><span class="rhlk"><a href="/writing/">Writing</a><a href="/play/">Play</a><a href="/#quizzes">Quizzes</a><a href="/projects/">Projects</a></span></div></nav><!-- /ep:ca-bar -->
 <main>
-  <h1>The Rabbit Hole</h1>
-  <p class="lede">Everything I've made while learning to build with AI lives here: the blog, games to play with friends, quizzes, free calculators and a few side projects. Pick a door and fall in.</p>
+  <header class="hero">
+    <p class="kicker"><i></i>Elvin's playground</p>
+    <h1>The Rabbit Hole</h1>
+    <p class="lede">Everything I've made while learning to build with AI lives here: the blog, games to play with friends, quizzes, free calculators and a few side projects. Pick a door and fall in.</p>
+  </header>
   <ul class="doors">
-    <li class="door"><h2><a href="/writing/">Writing</a></h2><p>Notes on how I build: the harness around the AI, the zero-dependency habit, and what broke along the way.</p></li>
-    <li class="door"><h2><a href="/play/">Play</a></h2><p>Browser games and quick decision-makers. Play classics with friends in a shared lobby, or settle an argument with a coin flip.</p></li>
-    <li class="door"><h2><a href="/apps/calculators/">Apps</a></h2><p>Free Canadian money calculators for mortgages, debt payoff, rent versus buy and eight more.</p></li>
-    <li class="door" id="quizzes"><h2>Quizzes</h2><p>Four 60-second quizzes on how you use AI at work.</p>
+    <li class="door w"><div class="top"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span><h2><a href="/writing/">Writing</a></h2></div>
+      <p>Notes on how I build: the harness around the AI, the zero-dependency habit, and what broke along the way.</p>
+      <div class="meta"><span class="chip">10 posts</span><span class="go" aria-hidden="true">&rarr;</span></div></li>
+    <li class="door p"><div class="top"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="6"/><path d="M6 12h4M8 10v4"/><circle cx="15.5" cy="11" r=".9" fill="currentColor"/><circle cx="17.5" cy="13.5" r=".9" fill="currentColor"/></svg></span><h2><a href="/play/">Play</a></h2></div>
+      <p>Browser games and quick decision-makers. Play classics with friends in a shared lobby, or settle an argument with a coin flip.</p>
+      <div class="meta"><span class="chip">Play with friends</span><span class="go" aria-hidden="true">&rarr;</span></div></li>
+    <li class="door q" id="quizzes"><div class="top"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></span><h2>Quizzes</h2></div>
+      <p>Four 60-second quizzes on how you use AI at work.</p>
       <ul>
-        <li><a href="https://elvinpeters.com/quiz/?utm_source=epeters.ca&amp;utm_medium=link&amp;utm_campaign=quizzes">What's your AI style?</a></li>
-        <li><a href="/quiz-ai-risk/">What's your AI risk score?</a></li>
-        <li><a href="/quiz-time-waste/">The AI time-waste calculator</a></li>
-        <li><a href="/quiz-tool-picker/">Which AI tool should you use?</a></li>
+        <li><a href="https://elvinpeters.com/quiz/?utm_source=epeters.ca&amp;utm_medium=link&amp;utm_campaign=quizzes">What's your AI style? <span aria-hidden="true">&rarr;</span></a></li>
+        <li><a href="/quiz-ai-risk/">What's your AI risk score? <span aria-hidden="true">&rarr;</span></a></li>
+        <li><a href="/quiz-time-waste/">The AI time-waste calculator <span aria-hidden="true">&rarr;</span></a></li>
+        <li><a href="/quiz-tool-picker/">Which AI tool should you use? <span aria-hidden="true">&rarr;</span></a></li>
       </ul></li>
-    <li class="door"><h2><a href="/projects/">Projects</a></h2><p>The bigger builds, including Colour Match and a 3D anatomy sandbox you can pose and peel back.</p></li>
+    <li class="door a"><div class="top"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="3"/><path d="M8 6h8"/><path d="M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h4"/></svg></span><h2><a href="/apps/calculators/">Apps</a></h2></div>
+      <p>Free Canadian money calculators for mortgages, debt payoff, rent versus buy and nine more.</p>
+      <div class="meta"><span class="chip">12 calculators</span><span class="go" aria-hidden="true">&rarr;</span></div></li>
+    <li class="door j"><div class="top"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/></svg></span><h2><a href="/projects/">Projects</a></h2></div>
+      <p>The bigger builds, including Colour Match and a 3D anatomy sandbox you can pose and peel back.</p>
+      <div class="meta"><span class="chip">Colour Match &middot; Anatomy Sandbox</span><span class="go" aria-hidden="true">&rarr;</span></div></li>
   </ul>
 </main>
-<!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:12px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=home">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=home">Get the monthly letter</a></footer><!-- /ep:ca-foot -->
+<!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:12px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}@media (max-width:480px){.rhfoot{display:flex;flex-direction:column;align-items:center;gap:2px}.rhfoot .rhsep{display:none}.rhfoot>span:first-child{padding-bottom:4px}}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=home">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=home">Get the monthly letter</a></footer><!-- /ep:ca-foot -->
 </body>
 </html>

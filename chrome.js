@@ -27,7 +27,10 @@ const BAR_CSS = `.rhbar{background:#0a1524;border-bottom:1px solid #2b405c;font:
   `.rhbar .rhin{max-width:1120px;margin:0 auto;padding:0 16px;min-height:52px;display:flex;align-items:center;gap:6px 18px;flex-wrap:wrap}` +
   `.rhbar a{color:#b7c6d9;text-decoration:none;padding:13px 2px;display:inline-block}.rhbar a:hover{color:#e0bd6b}` +
   `.rhbar .rhbrand{color:#e0bd6b;font-family:'EB Garamond',Georgia,serif;font-size:18px;margin-right:auto}` +
-  `.rhbar .rhlk{display:flex;gap:16px;flex-wrap:wrap}.rhbar a:focus-visible,.rhfoot a:focus-visible{outline:2px solid #e0bd6b;outline-offset:2px}`;
+  `.rhbar .rhlk{display:flex;gap:16px;flex-wrap:wrap}.rhbar a:focus-visible,.rhfoot a:focus-visible{outline:2px solid #e0bd6b;outline-offset:2px}` +
+  // Phones: one row, the links scroll sideways if a long label ever pushes them over.
+  `@media (max-width:480px){.rhbar .rhin{flex-wrap:nowrap;gap:10px}.rhbar .rhbrand{font-size:16px;flex:none}` +
+  `.rhbar .rhlk{flex-wrap:nowrap;gap:12px;font-size:13px;overflow-x:auto;scrollbar-width:none;min-width:0}.rhbar .rhlk::-webkit-scrollbar{display:none}.rhbar .rhlk a{white-space:nowrap}}`;
 
 function bar(section) {
   return `<!-- ep:ca-bar --><style>${BAR_CSS}</style><nav class="rhbar" aria-label="The Rabbit Hole"><div class="rhin">` +
@@ -37,7 +40,9 @@ function bar(section) {
 }
 
 const FOOT_CSS = `.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}` +
-  `.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:12px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}`;
+  `.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:12px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}` +
+  // Phones: stack the three items instead of leaving dots at line ends.
+  `@media (max-width:480px){.rhfoot{display:flex;flex-direction:column;align-items:center;gap:2px}.rhfoot .rhsep{display:none}.rhfoot>span:first-child{padding-bottom:4px}}`;
 
 function foot(section) {
   const f = NAVC.footer;
