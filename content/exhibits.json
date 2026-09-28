@@ -24,7 +24,7 @@
     { "id": "timewaste","branch": "money",  "title": "The AI time-waste calculator",  "line": null, "kind": "quiz", "depth": 5, "cta": "Open", "href": "/quiz-time-waste/", "thumb": "/img/ex/timewaste.webp", "checked": "2026-09-28" },
     { "id": "picker",   "branch": "money",  "title": "Which AI tool should you use?", "line": null, "kind": "quiz", "depth": 5, "cta": "Open", "href": "/quiz-tool-picker/", "thumb": "/img/ex/picker.webp", "checked": "2026-09-28" },
 
-    { "id": "anatomy",  "branch": "people", "title": "Anatomy Sandbox", "line": "Turn it, pose it, make it walk. Tap any muscle to see the exercises that work it.", "kind": "tool", "depth": 7, "cta": "Open", "href": "/projects/anatomy-sandbox/", "thumb": "/img/ex/anatomy.webp", "checked": "2026-09-28", "star": true, "rule": "56" },
+    { "id": "anatomy",  "branch": "people", "title": "Anatomy Sandbox", "line": "Turn it, pose it, make it walk. Tap any muscle to see the exercises that work it.", "kind": "tool", "depth": 7, "cta": "Open", "href": "https://elvinpeters.com/projects/anatomy-sandbox/?utm_source=epeters.ca&utm_medium=link&utm_campaign=home", "thumb": "/img/ex/anatomy.webp", "checked": "2026-09-28", "star": true, "rule": "56" },
     { "id": "colour",   "branch": "people", "title": "Colour Match",    "line": "One selfie in, a seasonal colour profile out. Built for Justine.", "kind": "tool", "depth": 7, "cta": "Open", "href": "/projects/colour/", "thumb": "/img/ex/colour.webp", "checked": "2026-09-28" },
     { "id": "lyrics",   "branch": "people", "title": "Lyrics Wall",     "line": null, "kind": "tool", "depth": 6, "cta": "Open", "href": "https://github.com/elvin2000x/lyrics-wall", "thumb": "/img/ex/lyrics.webp", "checked": "2026-09-28" },
 
