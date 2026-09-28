@@ -417,9 +417,9 @@ if (!HEADLESS) (function () {
     PK.sound.play("cardFlip"); PK.buzz(8);
     setIdleAnim(false);
     catcherEl.animate([
-      { transform:"scale(1)", easing:"var(--pk-ease-standard)" },
+      { transform:"scale(1)", easing:"cubic-bezier(.2,0,0,1)" },
       { transform:pinch, offset:0.44, easing:"linear" },
-      { transform:pinch, offset:0.56, easing:"var(--pk-ease-spring)" },
+      { transform:pinch, offset:0.56, easing:"cubic-bezier(.34,1.56,.64,1)" },
       { transform:"scale(1)" }
     ], { duration:dur, fill:"none" });
     // swap the visible layer at the closed moment -> the OTHER set reads open
@@ -808,6 +808,7 @@ if (!HEADLESS) (function () {
 
     buildCatcher();
     renderColors();
+    draft = clone(content);   // the edit form reads draft, so seed it before the first build
     buildEdit();
     resetPlay();
 
