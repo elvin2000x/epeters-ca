@@ -150,12 +150,82 @@ for (const f of TEXT) if (!STUBS.includes(f) && /(?:href|src)\s*[=:]\s*\\?["']\/
   for (const e of posts) if (!idx.includes(`href="/blog/${e.slug}/"`)) FAIL('blog/index.html', `no card for ${e.slug}`);
 }
 
+// #356: the Rabbit Hole homepage. One exhibit list (content/exhibits.json) feeds Story, Map and Scan.
+// Link gates: every shown exhibit lands somewhere real and tagged. Denylist gates: the brief's
+// "No Google name, no CoachingConnect, no Shutterstock, Flask or doc tool, Justine only on
+// Colour Match, and private tools named but never linked."
+const EX = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'exhibits.json'), 'utf8'));
+const LIVE_HREFS = [];
+{
+  const J = 'content/exhibits.json', bIds = new Set(EX.branches.map(b => b.id)), ids = new Set();
+  const back = EX.backstage || [];
+  if (!back.every(n => typeof n === 'string')) FAIL(J, 'backstage entries must be names only (strings)');
+  const backLc = new Set(back.map(n => String(n).toLowerCase()));
+  for (const e of EX.exhibits) {
+    const at = `${J} ${e.id}`;
+    for (const k of ['id', 'branch', 'title', 'kind', ...(e.checked ? ['cta', 'href', 'thumb'] : [])]) if (!e[k] || typeof e[k] !== 'string') FAIL(at, `missing ${k}`);
+    if (ids.has(e.id)) FAIL(at, 'duplicate id'); ids.add(e.id);
+    if (!bIds.has(e.branch)) FAIL(at, `unknown branch ${e.branch}`);
+    if (backLc.has(String(e.title).toLowerCase())) FAIL(at, 'a Backstage tool is linked as an exhibit');
+    if (!e.checked) continue; // hidden until checked; '#' placeholders only ever live here
+    const h = e.href || '';
+    if (h.startsWith('#')) FAIL(at, 'a checked exhibit has a # placeholder href');
+    else if (h.startsWith('/')) { if (!exists(h)) FAIL(at, `local href missing: ${h}`); }
+    else if (!h.startsWith('https://')) FAIL(at, `external href is not https: ${h}`);
+    else {
+      LIVE_HREFS.push([at, h]);
+      if (/^https:\/\/(www\.)?elvinpeters\.com/.test(h) && !/utm_source=epeters\.ca/.test(h)) FAIL(at, `untagged link to .com: ${h}`);
+    }
+    if (e.kind === 'game' && !/^https:\/\/play\.elvinpeters\.com\/[^/]+\/$|^\/play\//.test(h)) FAIL(at, `game href is not absolute play.elvinpeters.com or /play/: ${h}`);
+    if (!exists(e.thumb)) FAIL(at, `thumb missing: ${e.thumb}`);
+    else if (!/\.webp$/.test(e.thumb)) FAIL(at, 'thumb is not WebP');
+    const txt = JSON.stringify(e);
+    if (/justine/i.test(txt) && e.id !== 'colour') FAIL(at, 'Justine named outside Colour Match');
+  }
+  if (!EX.exhibits.some(e => e.checked)) FAIL(J, 'no checked exhibits');
+
+  const HOME = ['index.html', J, 'js/home.js', 'js/home-map.js', 'css/home.css'];
+  for (const f of HOME) {
+    if (!fs.existsSync(path.join(DIR, f))) { FAIL(f, 'home file missing'); continue; }
+    let s = fs.readFileSync(path.join(DIR, f), 'utf8');
+    if (f === J) { const o = JSON.parse(s); delete o._comment; s = JSON.stringify(o); }
+    // Font and analytics hosts are infrastructure, not a named employer.
+    s = s.replace(/fonts\.googleapis\.com|fonts\.gstatic\.com|www\.googletagmanager\.com/g, '');
+    const deny = s.match(/google|coaching ?connect|shutterstock|flask|document intelligence|docengine|paralegal|api\.elvinpeters\.com\/docs/i);
+    if (deny) FAIL(f, `denylisted name: ${deny[0]}`);
+    // Private tools are named in Backstage, never linked or addressed.
+    const priv = s.match(/(?:qr|admin|studio|hub|mc|mission-control|empire|dashboard)\.elvinpeters\.com|elvinpeters\.com\/(?:record|studio|admin|hub)\b|mission-control|empire-01|:87\d\d/i);
+    if (priv) FAIL(f, `private tool addressed: ${priv[0]}`);
+    if (f !== J && /justine/i.test(s)) FAIL(f, 'Justine named outside the Colour Match exhibit');
+  }
+  const idx = fs.readFileSync(path.join(DIR, 'index.html'), 'utf8'), hj = fs.readFileSync(path.join(DIR, 'js/home.js'), 'utf8');
+  if (!/gtag\('config','G-CLZ7N26J1Q'\)/.test(idx)) FAIL('index.html', 'GA4 G-CLZ7N26J1Q missing');
+  if (!hj.includes("'variant_switch'")) FAIL('js/home.js', 'no variant_switch event');
+  if (!hj.includes("'newsletter | epeters-home-'")) FAIL('js/home.js', "newsletter source is not 'newsletter | epeters-home-<view>'");
+  for (const v of ['story', 'map', 'scan']) if (!new RegExp(`id="v-${v}"`).test(idx)) FAIL('index.html', `no #v-${v} view`);
+  if (!/id="sw-story" value="story" checked/.test(idx)) FAIL('index.html', 'Story is not the default view');
+  if (!/data-go="map">See everything</.test(idx)) FAIL('index.html', 'no See everything button');
+  notes.push(`${EX.exhibits.filter(e => e.checked).length} exhibits shown`);
+}
+
 // CNAME only arrives with Phase B (the DNS flip needs Elvin's go).
 if (fs.existsSync(path.join(DIR, 'CNAME'))) {
   const c = fs.readFileSync(path.join(DIR, 'CNAME'), 'utf8').trim();
   if (c !== 'epeters.ca') FAIL('CNAME', `expected epeters.ca, found ${c}`); else notes.push('CNAME present (Phase B)');
 } else notes.push('CNAME absent (Phase A)');
 
-console.log(`${PAGES.length} pages, ${locs.length} sitemap locs, ${TEXT.length} text files checked. ${notes.join('; ')}`);
-if (fails.length) { console.log(`FAIL (${fails.length})`); fails.slice(0, 60).forEach(x => console.log('  ' + x)); process.exit(1); }
-console.log('GREEN');
+// --live: every checked external exhibit href answers 200 right now (the `checked` promise).
+(async () => {
+  if (process.argv.includes('--live')) {
+    await Promise.all(LIVE_HREFS.map(async ([at, h]) => {
+      try {
+        const r = await fetch(h, { redirect: 'follow', headers: { 'user-agent': 'epeters.ca verify' } });
+        if (r.status !== 200) FAIL(at, `live ${r.status}: ${h}`);
+      } catch (err) { FAIL(at, `live error ${err.message}: ${h}`); }
+    }));
+    notes.push(`${LIVE_HREFS.length} external hrefs live-checked`);
+  }
+  console.log(`${PAGES.length} pages, ${locs.length} sitemap locs, ${TEXT.length} text files checked. ${notes.join('; ')}`);
+  if (fails.length) { console.log(`FAIL (${fails.length})`); fails.slice(0, 60).forEach(x => console.log('  ' + x)); process.exit(1); }
+  console.log('GREEN');
+})();

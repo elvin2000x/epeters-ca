@@ -10,7 +10,7 @@ const fs = require('fs'), path = require('path');
 const DIR = __dirname;
 const ORIGIN = 'https://epeters.ca';
 const { mdToHtml } = require('./md.js');
-const { prepare, essayPage, blogIndex } = require('./essay-page.js');
+const { esc, prepare, essayPage, blogIndex } = require('./essay-page.js');
 const CH = require('./chrome.js');
 
 /* ---- 1. the blog --------------------------------------------------------- */
@@ -55,6 +55,21 @@ for (const e of published) {
   fs.writeFileSync(path.join(DIR, 'writing', e.slug, 'index.html'), stub(`${ORIGIN}/blog/${e.slug}/`));
 }
 console.log(`writing/: ${published.length + 1} redirect stubs -> blog/`);
+
+/* ---- the home page's Story reads the exhibit list too (card #356) --------- */
+// content/exhibits.json is the one list behind Story, Map and Scan. The Story's quiz door is
+// rendered from it here (static, so crawlers and no-JS visitors get it); Map and Scan read it
+// in the browser (js/home.js).
+{
+  const EX = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'exhibits.json'), 'utf8'));
+  const quizzes = EX.exhibits.filter(e => e.kind === 'quiz' && e.checked);
+  const block = '<!-- ep:quizzes --><ul>\n' + quizzes.map(e =>
+    `        <li><a href="${esc(e.href)}">${esc(e.title)} <span aria-hidden="true">&rarr;</span></a></li>`).join('\n') +
+    '\n      </ul><!-- /ep:quizzes -->';
+  const f = path.join(DIR, 'index.html');
+  fs.writeFileSync(f, fs.readFileSync(f, 'utf8').replace(/<!-- ep:quizzes -->[\s\S]*?<!-- \/ep:quizzes -->/, () => block));
+  console.log(`index.html: ${quizzes.length} quizzes from content/exhibits.json`);
+}
 
 /* ---- 2 + 3. chrome regions and canonicals on the hand-built pages -------- */
 const SKIP_DIRS = new Set(['.git', 'node_modules', 'scripts', 'content', 'css', 'js', 'img', 'tools']);

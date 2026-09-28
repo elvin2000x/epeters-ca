@@ -1,0 +1,43 @@
+{
+  "_comment": "The Rabbit Hole homepage: ONE exhibit list for Story, Map and Scan (card #356). Add or hide an exhibit here only. An exhibit shows only when `checked` is set, and `checked` means that exact href answered 200 (node verify.js --live re-checks every one). `line` is null unless the line is in COPY.md (Rule 25: new lines need a copy pass first). kind 'story' = a Story depth demo, hidden until RH-4 builds the fall. Backstage = private tools, names only: never an href, a thumb or a hostname. Justine appears only in the Colour Match entry.",
+  "rulesHidden": 3,
+  "rulesTotal": 69,
+  "branches": [
+    { "id": "games",  "name": "Games",           "hue": "mint" },
+    { "id": "money",  "name": "Money tools",     "hue": "gold" },
+    { "id": "people", "name": "People and home", "hue": "pink" },
+    { "id": "ai",     "name": "AI and the book", "hue": "lilac" },
+    { "id": "adtech", "name": "Ad-tech career",  "hue": "coral" },
+    { "id": "dirs",   "name": "Directories",     "hue": "blue" }
+  ],
+  "exhibits": [
+    { "id": "prism",    "branch": "games",  "title": "Prism Defense",  "line": null, "kind": "game", "depth": 4, "cta": "Play", "href": "https://play.elvinpeters.com/prism-defense/", "thumb": "/img/ex/prism.webp", "checked": "2026-09-28", "star": true, "rule": "03" },
+    { "id": "forest",   "branch": "games",  "title": "Forest Defense", "line": null, "kind": "game", "depth": 4, "cta": "Play", "href": "https://play.elvinpeters.com/forest-defense/", "thumb": "/img/ex/forest.webp", "checked": "2026-09-28" },
+    { "id": "siege",    "branch": "games",  "title": "Siege",          "line": null, "kind": "game", "depth": 4, "cta": "Play", "href": "https://play.elvinpeters.com/siege/", "thumb": "/img/ex/siege.webp", "checked": "2026-09-28" },
+    { "id": "hegemon",  "branch": "games",  "title": "Hegemon",        "line": null, "kind": "game", "depth": 5, "cta": "Play", "href": "https://play.elvinpeters.com/hegemon/", "thumb": "/img/ex/hegemon.webp", "checked": "2026-09-28" },
+    { "id": "dominoes", "branch": "games",  "title": "Dominoes",       "line": null, "kind": "game", "depth": 5, "cta": "Play", "href": "/play/dominoes/", "thumb": "/img/ex/dominoes.webp", "checked": "2026-09-28" },
+    { "id": "toybox",   "branch": "games",  "title": "The toy box",    "line": null, "kind": "game", "depth": 5, "cta": "Open", "href": "/play/", "thumb": "/img/ex/toybox.webp", "checked": "2026-09-28" },
+
+    { "id": "calcs",    "branch": "money",  "title": "Money calculators",             "line": null, "kind": "tool", "depth": 5, "cta": "Open", "href": "/apps/calculators/", "thumb": "/img/ex/calcs.webp", "checked": "2026-09-28" },
+    { "id": "style",    "branch": "money",  "title": "What's your AI style?",         "line": null, "kind": "quiz", "depth": 5, "cta": "Open", "href": "https://elvinpeters.com/quiz/?utm_source=epeters.ca&utm_medium=link&utm_campaign=quizzes", "thumb": "/img/ex/style.webp", "checked": "2026-09-28" },
+    { "id": "risk",     "branch": "money",  "title": "What's your AI risk score?",    "line": null, "kind": "quiz", "depth": 5, "cta": "Open", "href": "/quiz-ai-risk/", "thumb": "/img/ex/risk.webp", "checked": "2026-09-28" },
+    { "id": "timewaste","branch": "money",  "title": "The AI time-waste calculator",  "line": null, "kind": "quiz", "depth": 5, "cta": "Open", "href": "/quiz-time-waste/", "thumb": "/img/ex/timewaste.webp", "checked": "2026-09-28" },
+    { "id": "picker",   "branch": "money",  "title": "Which AI tool should you use?", "line": null, "kind": "quiz", "depth": 5, "cta": "Open", "href": "/quiz-tool-picker/", "thumb": "/img/ex/picker.webp", "checked": "2026-09-28" },
+
+    { "id": "anatomy",  "branch": "people", "title": "Anatomy Sandbox", "line": "Turn it, pose it, make it walk. Tap any muscle to see the exercises that work it.", "kind": "tool", "depth": 7, "cta": "Open", "href": "/projects/anatomy-sandbox/", "thumb": "/img/ex/anatomy.webp", "checked": "2026-09-28", "star": true, "rule": "56" },
+    { "id": "colour",   "branch": "people", "title": "Colour Match",    "line": "One selfie in, a seasonal colour profile out. Built for Justine.", "kind": "tool", "depth": 7, "cta": "Open", "href": "/projects/colour/", "thumb": "/img/ex/colour.webp", "checked": "2026-09-28" },
+    { "id": "lyrics",   "branch": "people", "title": "Lyrics Wall",     "line": null, "kind": "tool", "depth": 6, "cta": "Open", "href": "https://github.com/elvin2000x/lyrics-wall", "thumb": "/img/ex/lyrics.webp", "checked": "2026-09-28" },
+
+    { "id": "blog",     "branch": "ai",     "title": "Blog",            "line": null, "kind": "read", "depth": 7, "cta": "Open", "href": "/blog/", "thumb": "/img/ex/blog.webp", "checked": "2026-09-28", "star": true },
+    { "id": "book",     "branch": "ai",     "title": "The Artificial Advantage", "line": "The Artificial Advantage teaches you to direct AI the way I do: you set the vision, it does the work, and the result stays yours.", "kind": "book", "depth": 3, "cta": "Get the book", "href": "https://elvinpeters.com/?utm_source=epeters.ca&utm_medium=link&utm_campaign=home", "thumb": "/img/ex/book.webp", "checked": "2026-09-28" },
+    { "id": "letter",   "branch": "ai",     "title": "The Owner-Operator", "line": "My newsletter on AI, marketing and systems for people who run the whole show themselves, with the next question I'm digging into.", "kind": "newsletter", "depth": 6, "cta": "Send me the next one", "href": "https://elvinpeters.com/newsletter/?utm_source=epeters.ca&utm_medium=link&utm_campaign=home", "thumb": "/img/ex/letter.webp", "checked": "2026-09-28" },
+    { "id": "convo",    "branch": "ai",     "title": "Convo",           "line": null, "kind": "tool", "depth": 5, "cta": "Open", "href": "https://chat.elvinpeters.com/", "thumb": "/img/ex/convo.webp", "checked": "2026-09-28" },
+    { "id": "scraper",  "branch": "ai",     "title": "Run the scraper", "line": "A replay of the script I ran, using the public toronto.ca list. Press Run and watch the table fill.", "kind": "story", "depth": 1, "cta": "Open", "href": "#depth-1", "checked": null },
+    { "id": "trust",    "branch": "ai",     "title": "Trust or Don't",  "line": "Three real messages the AI sent me, one at a time. Tap Trust or Don't, then see what happened.", "kind": "story", "depth": 5, "cta": "Open", "href": "#depth-5", "checked": null, "rule": "13" },
+
+    { "id": "gap",      "branch": "adtech", "title": "Find the gap",    "line": "A demo on a made-up sample catalog, and no client in it. Match each product to a campaign, then run the AI pass.", "kind": "story", "depth": 2, "cta": "Open", "href": "#depth-2", "checked": null },
+
+    { "id": "umbrella", "branch": "dirs",   "title": "The directory",   "line": "Pick a city and a trade, then search the live directory.", "kind": "tool", "depth": 6, "cta": "Open", "href": "https://ultimateonlinedirectory.com/", "thumb": "/img/ex/umbrella.webp", "checked": "2026-09-28", "star": true }
+  ],
+  "backstage": ["Empire Studio", "Mission Control", "The Hub", "QR Studio", "Record Studio"]
+}
