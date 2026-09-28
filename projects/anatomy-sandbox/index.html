@@ -1109,36 +1109,54 @@ function updateClipWorld() { if (state.cut !== 'off') clipWorld.copy(clipLocal).
 
 // ---------- picking (GPU id buffer, works with skinning, hiding and cuts) ----------
 const pickRT = new THREE.WebGLRenderTarget(1, 1);
-const pickPx = new Uint8Array(4);
-function pickAt(clientX, clientY) {
+let pickPx = new Uint8Array(4);
+function pickRender(clientX, clientY, r) {  // draws the pick ids of the (2r+1)-pixel square around a point; returns its side, or 0 off the canvas
   const loaded = LAYERS.filter((L) => L.loaded);
-  if (!loaded.length) return null;
+  if (!loaded.length) return 0;
   const rect = canvas.getBoundingClientRect();
   const dpr = renderer.getPixelRatio();
   const w = Math.floor(rect.width * dpr), h = Math.floor(rect.height * dpr);
   const x = Math.floor((clientX - rect.left) * dpr), y = Math.floor((clientY - rect.top) * dpr);
-  if (x < 0 || y < 0 || x >= w || y >= h) return null;
+  if (x < 0 || y < 0 || x >= w || y >= h) return 0;
+  const s = 2 * r + 1;
+  if (pickRT.width !== s) { pickRT.setSize(s, s); pickPx = new Uint8Array(s * s * 4); }
   const saved = loaded.map((L) => [L, L.mesh.material, L.mesh.visible]);
   for (const L of loaded) { L.mesh.material = L.pickMaterial; L.mesh.visible = L.visible && L.opacity >= 0.5; }
   const extras = [floor, tcHelper];
   const vis = extras.map((o) => o.visible);
   extras.forEach((o) => { o.visible = false; });
   updateClipWorld();
-  camera.setViewOffset(w, h, x, y, 1, 1);
+  camera.setViewOffset(w, h, x - r, y - r, s, s);
   renderer.setRenderTarget(pickRT);
   renderer.setClearColor(0x000000, 0);
   renderer.clear();
   renderer.render(scene, camera);
-  renderer.readRenderTargetPixels(pickRT, 0, 0, 1, 1, pickPx);
+  renderer.readRenderTargetPixels(pickRT, 0, 0, s, s, pickPx);
   renderer.setRenderTarget(null);
   renderer.setClearColor(theme.stage, 1);
   camera.clearViewOffset();
   saved.forEach(([L, m, v]) => { L.mesh.material = m; L.mesh.visible = v; });
   extras.forEach((o, i) => { o.visible = vis[i]; });
-  const id = pickPx[0] + pickPx[1] * 256;
-  if (!id || !pickPx[2]) return null;
-  const L = LAYERS[pickPx[2] - 1];
+  return s;
+}
+function pickedPart(o) {
+  const id = pickPx[o] + pickPx[o + 1] * 256;
+  if (!id || !pickPx[o + 2]) return null;
+  const L = LAYERS[pickPx[o + 2] - 1];
   return L ? L.parts[id - 1] || null : null;
+}
+function pickAt(clientX, clientY) { return pickRender(clientX, clientY, 0) ? pickedPart(0) : null; }
+function pickNear(clientX, clientY, r) {  // the part under the point, plus every part within r CSS pixels, nearest first (one render)
+  const rp = Math.round(r * renderer.getPixelRatio()), s = pickRender(clientX, clientY, rp);
+  if (!s) return { center: null, near: [] };
+  const best = new Map();
+  for (let j = 0; j < s; j++) for (let i = 0; i < s; i++) {
+    const d = (i - rp) ** 2 + (j - rp) ** 2;
+    if (d > rp * rp) continue;
+    const p = pickedPart((j * s + i) * 4);
+    if (p && !(best.get(p) <= d)) best.set(p, d);
+  }
+  return { center: pickedPart((rp * s + rp) * 4), near: [...best].sort((a, b) => a[1] - b[1]).map(([p]) => p) };
 }
 const raycaster = new THREE.Raycaster();
 const groundPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
@@ -1607,18 +1625,10 @@ addEventListener('pointerdown', (e) => {
     tc.pointerHover({ x: ((e.clientX - rect.left) / rect.width) * 2 - 1, y: -((e.clientY - rect.top) / rect.height) * 2 + 1, button: 0 });
     if (tc.axis !== null) return;
   }
-  // a phone shows a hand a few pixels wide, so a finger (or a narrow screen) searches rings around the press point
-  const reach = e.pointerType === 'touch' || isNarrow() ? [0, 8, 16, 24] : [0, 5];
-  let hit = null, end = null;
-  search: for (const r of reach) {
-    for (let k = 0; k < (r ? 8 : 1); k++) {
-      const p = pickAt(e.clientX + r * Math.cos(k * Math.PI / 4), e.clientY + r * Math.sin(k * Math.PI / 4));
-      const en = p && DRAG_END[rig.segments[segOfPart(p)]?.name];
-      if (!r) hit = p;
-      if (en) { hit = p; end = en; break search; }
-    }
-    if (!r && hit) break;  // pressed squarely on another part (the trunk, a thigh): that press orbits, as before
-  }
+  // a skeleton hand is a few gappy pixels wide, so a press searches a small disc around itself (wider for a finger)
+  const { center, near } = pickNear(e.clientX, e.clientY, e.pointerType === 'touch' || isNarrow() ? 24 : 14);
+  const limbOf = (p) => p && DRAG_END[rig.segments[segOfPart(p)]?.name];
+  const hit = center || near.find(limbOf) || null, end = limbOf(hit);  // pressed squarely on another part (the trunk, a thigh): that press orbits, as before
   if (!end) return;
   e.stopImmediatePropagation();  // OrbitControls and the gizmo never see this press
   e.preventDefault();
