@@ -77,7 +77,12 @@
   }
 
   function writeURL(def, v) {
+    // Keep campaign tags (utm_*, gclid, fbclid) and the #hash: GA4 and ads attribution
+    // read them, and a shared link should land on the same anchor (#342 Gate 3).
     var q = new URLSearchParams();
+    new URLSearchParams(location.search).forEach(function (val, key) {
+      if (/^(utm_|gclid$|fbclid$)/.test(key)) q.set(key, val);
+    });
     def.inputs.forEach(function (inp) {
       var val = v[inp.id];
       if (inp.type === 'debtlist') { q.set(inp.id, JSON.stringify(val)); return; }
@@ -85,7 +90,7 @@
       q.set(inp.id, inp.type === 'toggle' ? (val ? '1' : '0') : val);
     });
     var s = q.toString();
-    history.replaceState(null, '', s ? '?' + s : location.pathname);
+    history.replaceState(null, '', (s ? '?' + s : location.pathname) + location.hash);
   }
 
   /* ---------------- form ---------------- */
