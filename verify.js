@@ -19,10 +19,13 @@ function files(rel = '') {
 const ALL = files();
 // Build code is not served content (md.js carries example paths in its comments).
 const TEXT = ALL.filter(f => /\.(html|js|css|json|xml|txt)$/.test(f) && !['verify.js', 'build.js', 'chrome.js', 'md.js'].includes(f));
-const PAGES = ALL.filter(f => f.endsWith('.html') && !CH.NAVC.noChrome.some(p => f.startsWith(p)));
+const isStub = f => f.endsWith('.html') && fs.readFileSync(path.join(DIR, f), 'utf8').includes('<!-- ep:moved-stub -->');
+const STUBS = ALL.filter(isStub);
+const PAGES = ALL.filter(f => f.endsWith('.html') && !CH.NAVC.noChrome.some(p => f.startsWith(p)) && !STUBS.includes(f));
 const urlOf = r => `https://epeters.ca/${r.replace(/(^|\/)index\.html$/, '$1')}`;
 // Decision 2026-09-25: the Anatomy Sandbox is shared by link and stays noindex.
-const NOINDEX_OK = new Set(['projects/anatomy-sandbox/index.html']);
+// 404.html is the not-found page GitHub Pages serves at any missing address (#367).
+const NOINDEX_OK = new Set(['projects/anatomy-sandbox/index.html', '404.html']);
 const exists = p => {
   const f = path.join(DIR, decodeURI(p.split(/[?#]/)[0]));
   return fs.existsSync(f) && (fs.statSync(f).isFile() || fs.existsSync(path.join(f, 'index.html')));
@@ -52,9 +55,9 @@ for (const f of PAGES) {
   const noindex = /<meta name="robots" content="[^"]*noindex/i.test(s);
   if (noindex && !NOINDEX_OK.has(f)) FAIL(f, 'noindex (pages on epeters.ca are indexable)');
   const canon = (s.match(/<link rel="canonical" href="([^"]+)"/i) || [])[1];
-  if (!canon) FAIL(f, 'no canonical');
+  if (!canon) { if (f !== '404.html') FAIL(f, 'no canonical'); }
   else if (!canon.startsWith('https://epeters.ca/')) FAIL(f, `canonical off-site: ${canon}`);
-  if (f.startsWith('writing/') && f !== 'writing/index.html' && !s.includes(`source:'${CH.newsletterSource('writing')}'`)) FAIL(f, 'newsletter form not tagged ' + CH.newsletterSource('writing'));
+  if (f.startsWith('blog/') && f !== 'blog/index.html' && !s.includes(`source:'${CH.newsletterSource('blog')}'`)) FAIL(f, 'newsletter form not tagged ' + CH.newsletterSource('blog'));
 }
 
 // Sitemap: every loc is a real, indexable page on this site; the calculators are in it.
@@ -72,10 +75,36 @@ if (!/Sitemap: https:\/\/epeters\.ca\/sitemap\.xml/.test(fs.readFileSync(path.jo
 
 // Own copy stays in voice (Rule 02): no em dashes in the home page or the chrome.
 // The blog moved here from .com, so its voice check moved with it: the source (essays.json,
-// essays/ bodies) and the built writing/ pages.
+// essays/ bodies) and the built blog/ pages, plus the 404.
 const VOICE = ['index.html', 'content/nav.json', 'content/essays.json',
-  ...ALL.filter(f => (f.startsWith('essays/') || f.startsWith('writing/')) && f.endsWith('.html'))];
+  '404.html', ...ALL.filter(f => (f.startsWith('essays/') || f.startsWith('blog/')) && f.endsWith('.html'))];
 for (const f of VOICE) if (/—/.test(fs.readFileSync(path.join(DIR, f), 'utf8'))) FAIL(f, 'em dash');
+
+// #367: the blog moved from writing/ to blog/. Every old address is a moved stub that
+// lands on a real blog/ page in one hop (query + hash kept), and nothing links the old path.
+const oldSlugs = ALL.filter(f => f.startsWith('writing/') && f.endsWith('.html'));
+for (const f of oldSlugs) {
+  const s = fs.readFileSync(path.join(DIR, f), 'utf8');
+  if (!STUBS.includes(f)) { FAIL(f, 'writing/ page is not a moved stub'); continue; }
+  const to = `https://epeters.ca/blog/${f.slice('writing/'.length).replace(/(^|\/)index\.html$/, '$1')}`;
+  if (!/<meta name="robots" content="noindex, follow">/.test(s)) FAIL(f, 'stub not noindex, follow');
+  if (!s.includes(`<link rel="canonical" href="${to}">`)) FAIL(f, `stub canonical is not ${to}`);
+  if (!s.includes(`location.replace('${to}' + location.search + location.hash)`)) FAIL(f, 'stub JS redirect drops ?query or #hash');
+  if (!s.includes(`<meta http-equiv="refresh" content="0; url=${to}">`)) FAIL(f, 'stub has no meta refresh');
+  if (!exists(to.slice('https://epeters.ca'.length))) FAIL(f, `stub target missing: ${to}`);
+}
+if (oldSlugs.length < 11) FAIL('writing/', `expected 11 redirect stubs (10 posts + index), found ${oldSlugs.length}`);
+for (const f of TEXT) if (!STUBS.includes(f) && /(?:href|src)\s*[=:]\s*\\?["']\/writing\//.test(fs.readFileSync(path.join(DIR, f), 'utf8'))) FAIL(f, 'links /writing/ (use /blog/)');
+
+// #367: the site-styled 404. Served at any depth, so no relative paths; the four doors are there.
+{
+  const s = fs.readFileSync(path.join(DIR, '404.html'), 'utf8');
+  if (!/<meta name="robots" content="noindex/.test(s)) FAIL('404.html', 'not noindex');
+  for (const h of ['/', '/blog/', '/play/', '/apps/']) if (!s.includes(`href="${h}"`)) FAIL('404.html', `no link to ${h}`);
+  const rel = /\b(?:href|src)="(?!https?:|\/|#|data:|mailto:)([^"]*)"/g; let m;
+  while ((m = rel.exec(s))) FAIL('404.html', `relative path ${m[1]} breaks below the root`);
+  if (locs.includes('https://epeters.ca/404.html')) FAIL('sitemap.xml', '404.html listed');
+}
 
 // CNAME only arrives with Phase B (the DNS flip needs Elvin's go).
 if (fs.existsSync(path.join(DIR, 'CNAME'))) {

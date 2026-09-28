@@ -1,121 +1,13 @@
-<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>The Harness Beats the Prompt: How I Get Claude to Build Like a Reliable Co-Worker · Elvin Peters</title>
-<meta name="description" content="You don't fix an unreliable AI by trusting it more. You fix it with three scripts that make its failures loud, caught, and impossible to ship.">
-<link rel="canonical" href="https://epeters.ca/writing/the-harness/">
-<meta property="og:type" content="article"><meta property="og:title" content="The Harness Beats the Prompt: How I Get Claude to Build Like a Reliable Co-Worker"><meta property="og:description" content="You don't fix an unreliable AI by trusting it more. You fix it with three scripts that make its failures loud, caught, and impossible to ship."><meta property="og:image" content="https://epeters.ca/img/og.jpg"><meta property="og:url" content="https://epeters.ca/writing/the-harness/">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:creator" content="@elvin_peters">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 5v14M6 5h9M6 12h7M6 19h9' stroke='%23c9a250' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='19.5' cy='18.6' r='1.9' fill='%23c9a250'/%3E%3C/svg%3E">
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CLZ7N26J1Q');</script>
-<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1699232654449762');fbq('track','PageView');</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"><style>
-:root{--bg:#e6ebf1;--bg-2:#dde4ec;--panel:#ffffff;--panel-2:#f3f6fa;--line:#c3cedd;--line-soft:#d3dce8;--ink:#0e1a2b;--ink-2:#3d4d63;--muted:#4f6076;--gold:#9c761f;--gold-2:#7a5a12;--cyan:#1c6ea8;--glow:rgba(156,118,31,.14);--shadow:0 18px 40px -24px rgba(14,26,43,.45);--serif:'EB Garamond',Georgia,'Times New Roman',serif;--sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif}
-@media(prefers-color-scheme:dark){:root{--bg:#0a1524;--bg-2:#060d18;--panel:#1b2c45;--panel-2:#131f33;--line:#2b405c;--line-soft:#223351;--ink:#e9eff7;--ink-2:#b7c6d9;--muted:#8ba2bd;--gold:#c9a250;--gold-2:#e0bd6b;--cyan:#4fb3f0;--glow:rgba(201,162,80,.16);--shadow:0 24px 50px -28px rgba(0,0,0,.7)}}
-:root[data-theme="light"]{--bg:#e6ebf1;--bg-2:#dde4ec;--panel:#ffffff;--panel-2:#f3f6fa;--line:#c3cedd;--line-soft:#d3dce8;--ink:#0e1a2b;--ink-2:#3d4d63;--muted:#4f6076;--gold:#9c761f;--gold-2:#7a5a12;--cyan:#1c6ea8;--shadow:0 18px 40px -24px rgba(14,26,43,.45)}
-:root[data-theme="dark"]{--bg:#0a1524;--bg-2:#060d18;--panel:#1b2c45;--panel-2:#131f33;--line:#2b405c;--line-soft:#223351;--ink:#e9eff7;--ink-2:#b7c6d9;--muted:#8ba2bd;--gold:#c9a250;--gold-2:#e0bd6b;--cyan:#4fb3f0;--shadow:0 24px 50px -28px rgba(0,0,0,.7)}
-*{box-sizing:border-box}html,body{margin:0}
-body{background:linear-gradient(180deg,var(--bg),var(--bg-2));color:var(--ink);font-family:var(--sans);line-height:1.7;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
-.nav{position:sticky;top:0;z-index:40;backdrop-filter:blur(10px);background:color-mix(in srgb,var(--bg) 80%,transparent);border-bottom:1px solid var(--line-soft)}
-.nav .in{max-width:1120px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:20px}
-.brandmark{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-size:18px}
-.brandmark .sig{width:32px;height:32px;border:1px solid var(--line);border-radius:9px;display:grid;place-items:center;background:var(--panel)}
-.nav .lk{margin-left:auto;display:flex;gap:24px;align-items:center}
-.nav .lk a{font-size:14px;color:var(--ink-2)}.nav .lk a:hover{color:var(--ink)}
-.themebtn{width:44px;height:44px;padding:0;display:inline-flex;align-items:center;justify-content:center;background:none;border:1px solid var(--line);border-radius:10px;color:var(--ink-2);cursor:pointer;font-size:15px;line-height:1}
-.nav .lk a.cta{border:1px solid var(--gold);color:var(--gold-2);padding:11px 16px;border-radius:999px;font-weight:600;display:inline-flex;align-items:center;min-height:44px}
-.eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-2);font-weight:600}
-article{max-width:720px;margin:0 auto;padding:44px 24px 40px}
-.arthead .cover{width:100%;aspect-ratio:16/8;object-fit:cover;border-radius:16px;border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:26px}
-article h1{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,4.6vw,3rem);line-height:1.08;letter-spacing:-.015em;margin:14px 0 0;text-wrap:balance}
-.dek{font-size:1.2rem;color:var(--ink-2);margin:16px 0 0;font-family:var(--serif);font-style:italic}
-.byline{display:flex;gap:14px;align-items:center;margin:22px 0 0;padding-bottom:26px;border-bottom:1px solid var(--line-soft);font-size:14px;color:var(--muted)}
-.byline b{color:var(--ink-2);font-weight:600}
-.body{font-size:18px;color:var(--ink)}
-.body h2{font-family:var(--serif);font-weight:600;font-size:1.6rem;letter-spacing:-.01em;margin:38px 0 12px;line-height:1.2}
-.body p{margin:0 0 20px}
-.body ul{margin:0 0 20px;padding-left:22px}.body li{margin:0 0 8px}
-.body blockquote{margin:26px 0;padding:4px 0 4px 22px;border-left:3px solid var(--gold);font-family:var(--serif);font-style:italic;font-size:1.25rem;color:var(--ink-2)}
-.body strong{color:var(--ink);font-weight:700}
-.body code{font-family:ui-monospace,Consolas,monospace;font-size:.9em;background:var(--panel-2);border:1px solid var(--line-soft);border-radius:5px;padding:1px 6px}
-.endcta{max-width:720px;margin:10px auto 0;padding:0 24px}
-.endcta .card{background:linear-gradient(160deg,var(--panel),var(--panel-2));border:1px solid var(--line);border-radius:16px;padding:28px;text-align:center}
-.endcta h3{font-family:var(--serif);font-weight:400;font-size:1.6rem;margin:0}
-.endcta p{color:var(--ink-2);margin:10px 0 18px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:600;font-size:14px;border:1px solid transparent;cursor:pointer;font-family:var(--sans);background:transparent}
-.btn.primary{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#1b1304}
-.btn.ghost{border-color:var(--line);color:var(--ink);min-height:44px}
-.backlink{display:inline-flex;gap:8px;align-items:center;color:var(--muted);font-size:14px;margin-bottom:8px}
-footer{border-top:1px solid var(--line-soft);padding:30px 24px;color:var(--muted);font-size:13px;margin-top:56px}
-footer .in{max-width:1120px;margin:0 auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-footer a{padding:10px 4px;margin:-10px -4px}
-footer a:hover{color:var(--gold-2)}
-:focus-visible{outline:2px solid var(--gold-2);outline-offset:3px;border-radius:4px}
-@media(max-width:640px){.nav .lk a:not(.cta){display:none}}
-
-.nlrow{display:flex;gap:10px;max-width:440px;margin:18px auto 0;flex-wrap:wrap;justify-content:center}
-.nlrow input{flex:1;min-width:210px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:16px;font-family:var(--sans)}
-.nlmsg{font-size:14px;color:var(--muted);margin:10px 0 0;min-height:18px}
-.ctarow{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px}
-</style><link rel="stylesheet" href="/css/nav-drawer.css"><script src="/js/site.js"></script><link rel="stylesheet" href="/css/post.css"></head><body><nav class="nav"><div class="in">
-  <a class="brandmark" href="/"><span class="sig"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg></span>The Rabbit Hole</a>
-  <div class="lk"><a href="/writing/">Writing</a><a href="/play/">Play</a><a href="/#quizzes">Quizzes</a><a href="/projects/">Projects</a><a class="cta" href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=nav&amp;utm_campaign=writing">Get the monthly letter</a></div>
-</div></nav><div class="trp accent-good"><div class="wrap"><div class="col"><a class="trp-back" href="/writing/">&larr; Blog</a></div><header class="col" style="padding-top:26px"><div class="eyebrow">Playbook · Reliability</div><h1>The Harness Beats the Prompt: How I Get Claude to Build Like a Reliable Co-Worker</h1><p class="dek">You don't fix an unreliable AI by trusting it more. You fix it with three scripts that make its failures loud, caught, and impossible to ship.</p><div class="byline">Elvin Peters &middot; Jul 8, 2026 &middot; 6 min read</div></header><div class="col"><p>Most people treat an AI model like a vending machine. Prompt in, answer out, assume the answer is right because it reads like it's right. Then one day it hands back a confident wrong number, they act on it, and they write the whole thing off as a toy. I get the reaction. I think the diagnosis is backwards.</p>
-
-<p>The model is fallible. You can't prompt that away, and it isn't a reason to walk. A good human teammate is fallible too. What makes one reliable isn't a clean record, it's that they work inside a system that catches mistakes before those mistakes cost anything: code review, a staging environment, a checklist for the step everyone forgets. You don't repair an unreliable worker by trusting them harder. You build the checks around them.</p>
-
-<p>So that's what I did with Claude. I stopped chasing a perfect model and started building a harness. The core idea lines up with what Anthropic has said about long-running agents: an unreliable agent gets repaired by making its failures loud and caught instead of silent and compounding. The model will occasionally forget something and confabulate. Design for that, and it behaves like a reliable co-worker. Ignore it, and you get burned exactly once before you quit.</p>
-
-<h2>The three ways it fails, and the catch for each</h2>
-
-<p>I watched my own setup break enough times to name the patterns. There are three of them. Each one now has a mechanical catch written into my CLAUDE.md as a binding rule, not a polite suggestion.</p>
-
-<p><strong>Amnesia.</strong> The model forgets a system already exists and cheerfully rebuilds it. Mine once forgot an entire outreach engine and started duplicating a file map it had never bothered to read. The catch is a rule I call orient before acting. At the start of every session, read the status file and the generated index, then grep for existing work before building anything new. The model doesn't get to assume the codebase is empty. It has to go look.</p>
-
-<p><strong>Fabrication.</strong> The model invents a fact that sounds plausible and states it with full confidence. Mine once produced a "95% of founders" statistic out of thin air, and on another job it invented a fake radiologist persona to make content feel authoritative. Neither thing existed. The rule is blunt: never invent numbers, stats, or rankings. Cite a real source, or say "I don't have a benchmark." Admitting you don't know is a correct answer. Making one up is the only wrong one.</p>
-
-<p><strong>Drift.</strong> The same fact quietly disagrees with itself across a project. The paperback status of my book was recorded five different ways in five different files, and every one of them was sure it was right. The rule is one source of truth per fact. One file owns it, everything else links to that file. A fact that lives in five places will eventually contradict itself in four of them.</p>
-
-<p>There's a fourth habit sitting on top of these three, and it's the one I lean on hardest: verify before asserting. Read the actual output for its content, don't trust the summary of it. Eyeball the actual image. Load the real interface and click the real button. A summary of a thing is not the thing, and the gap between them is exactly where confident wrong answers live.</p>
-
-<h2>The catch has to be a script, not a mood</h2>
-
-<p>Rules in a config file are only as good as your discipline in following them, and discipline is the first thing to go at 11pm when you just want the thing to ship. So the catches aren't vibes. They're three scripts I run at every checkpoint and every session start.</p>
-
-<ul>
-<li><strong>empire_smoke.py</strong> answers "is everything actually live?" It runs 26 checks across the web properties, the server, and the scheduled tasks. If something went dark, I hear about it now, not from a user later.</li>
-<li><strong>build_index.py</strong> answers "what actually exists?" It generates a sitemap of the real codebase. This is the anti-amnesia file. The model reads it at session start so it can't pretend a system is missing when it's sitting right there.</li>
-<li><strong>consistency_check.py</strong> answers "what is quietly broken?" It hunts for dead links, duplicate documents, and unsourced statistics. It also has an em-dash detector, because zero em-dashes is a voice rule on everything I publish and I don't trust myself to catch every one by eye.</li>
-</ul>
-
-<p>The detail I care about most is that last script's exit code. It returns the count of high-severity problems as its exit code, which means it plugs straight into automation. A script that fails loudly with a number is a script a machine can act on. A report you have to read and interpret is a report you'll skip.</p>
-
-<blockquote><p>The first time I ran the consistency check, it caught em-dashes in content that was one click from shipping, three dead paths, and unsourced stats. All of it was about to go out the door.</p></blockquote>
-
-<p>That single run paid for the whole system. Those weren't hypothetical failures I was guarding against in theory. They were live problems in finished work, invisible to me, surfaced in seconds.</p>
-
-<h2>Steering, from weakest to strongest</h2>
-
-<p>Once you accept the model is fallible, the real question is how hard you can lean on any given instruction. I think of control as a ladder. The weakest rung is a chat message, which the model might honour or might forget by the next turn. Above that sits a file it reads, which persists but still depends on the model choosing to open it. Above that are the CLAUDE.md rules, which load every session. Above those are hooks. At the top sit permissions, the hard walls.</p>
-
-<p>Hooks are where reliability stops depending on the model's good intentions. A hook is code the harness runs automatically at a fixed moment, no goodwill required. I have a Stop hook that enforces my checkpoint ritual when a session ends, and a SessionStart hook that briefs the new session on where things stand. The model doesn't have to remember to do either. The machine does it. That's the whole trick: move the thing that matters from "the model will probably remember" to "the system does it every time, whether the model remembers or not."</p>
-
-<h2>Memory: one bootloader, one store</h2>
-
-<p>The same principle governs how the model remembers across sessions. One bootloader file, one memory store. Durable facts live as small individual files. Working state lives in a single status file. Nothing gets duplicated across layers.</p>
-
-<p>I learned this the expensive way. I once had my memory store triplicated, three copies that were supposed to stay identical. They didn't. The copies drifted, and that drift was the single biggest source of the contradiction problem across my whole setup. Three sources of truth is just three ways to be wrong at once. Now there's one, and when a fact changes I change it in one place.</p>
-
-<h2>The leverage is the harness</h2>
-
-<p>People keep asking me for the magic prompt. There isn't one, and if there were, it would still be one confident wrong answer away from letting you down. The leverage was never in the prompt. It's in everything wrapped around the prompt: the rules that name the failure modes, the scripts that catch them with an exit code, the hooks that fire whether or not the model remembers, and the one clean source for every fact.</p>
-
-<p>Build that, and the model stops being a clever thing you have to babysit. It becomes what a good co-worker already is. Fallible, checked, and reliable anyway.</p></div></div></div><section class="endcta"><div class="card">
-<h3>Liked this? The book goes deeper.</h3>
-<p>The Artificial Advantage: the frameworks behind everything here, written for professionals, not programmers.</p>
-<div class="ctarow"><a class="btn primary" href="https://elvinpeters.com/?utm_source=epeters.ca&utm_medium=endcta&utm_campaign=writing">Read The Artificial Advantage</a><a class="btn ghost" href="https://elvinpeters.com/free/?utm_source=epeters.ca&utm_medium=endcta&utm_campaign=writing">Get the Free Toolkit</a></div>
-<form id="nlform" class="nlrow" novalidate><input type="text" name="website" value="" style="position:absolute;left:-5000px" tabindex="-1" autocomplete="off" aria-hidden="true"><input id="nlemail" type="email" name="email" required placeholder="you@work.com" aria-label="Email address"><button class="btn ghost" type="submit">Get the newsletter</button></form>
-<p class="nlmsg" id="nlmsg"></p>
-<script>(function(){var f=document.getElementById('nlform'),m=document.getElementById('nlmsg');if(!f)return;f.addEventListener('submit',function(ev){ev.preventDefault();var em=document.getElementById('nlemail').value.trim();if(!em){m.textContent='Enter your email first.';return}m.textContent='One sec…';fetch('https://ultimateaidirectory.com/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,source:'newsletter | epeters-writing',website:f.website.value})}).then(function(r){return r.json().catch(function(){return{}})}).then(function(){m.textContent='Done. Watch your inbox.';f.reset()}).catch(function(){m.textContent='That did not go through. Try again in a minute.'})})})();</script>
-</div></section><!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:12px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}@media (max-width:480px){.rhfoot{display:flex;flex-direction:column;align-items:center;gap:2px}.rhfoot .rhsep{display:none}.rhfoot>span:first-child{padding-bottom:4px}}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=writing">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=writing">Get the monthly letter</a></footer><!-- /ep:ca-foot --><script>(function(){var r=document.documentElement;document.addEventListener('click',function(e){if(e.target.closest('#tg')){var d=r.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');r.setAttribute('data-theme',d==='dark'?'light':'dark')}})})();</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- ep:moved-stub -->
+<title>This page moved to the blog</title>
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://epeters.ca/blog/the-harness/">
+<script>location.replace('https://epeters.ca/blog/the-harness/' + location.search + location.hash);</script>
+<meta http-equiv="refresh" content="0; url=https://epeters.ca/blog/the-harness/">
+</head>
+<body><p>This page moved. <a href="https://epeters.ca/blog/the-harness/">Go to the new page</a>.</p></body>
+</html>

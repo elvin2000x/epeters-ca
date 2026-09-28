@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://epeters.ca/</loc></url>
+  <url><loc>https://epeters.ca/blog/</loc></url>
   <url><loc>https://epeters.ca/play/</loc></url>
-  <url><loc>https://epeters.ca/writing/</loc></url>
   <url><loc>https://epeters.ca/projects/</loc></url>
   <url><loc>https://epeters.ca/play/lobby/</loc></url>
   <url><loc>https://epeters.ca/quiz-ai-risk/</loc></url>
@@ -18,24 +18,24 @@
   <url><loc>https://epeters.ca/projects/colour/</loc></url>
   <url><loc>https://epeters.ca/quiz-time-waste/</loc></url>
   <url><loc>https://epeters.ca/apps/calculators/</loc></url>
+  <url><loc>https://epeters.ca/blog/context-cap/</loc></url>
+  <url><loc>https://epeters.ca/blog/the-harness/</loc></url>
   <url><loc>https://epeters.ca/play/dice-roller/</loc></url>
   <url><loc>https://epeters.ca/play/draw-straws/</loc></url>
   <url><loc>https://epeters.ca/quiz-tool-picker/</loc></url>
   <url><loc>https://epeters.ca/play/movie-picker/</loc></url>
   <url><loc>https://epeters.ca/play/office-reset/</loc></url>
+  <url><loc>https://epeters.ca/blog/assembly-line/</loc></url>
+  <url><loc>https://epeters.ca/blog/studio-session/</loc></url>
   <url><loc>https://epeters.ca/play/fortune-teller/</loc></url>
-  <url><loc>https://epeters.ca/writing/context-cap/</loc></url>
-  <url><loc>https://epeters.ca/writing/the-harness/</loc></url>
-  <url><loc>https://epeters.ca/writing/assembly-line/</loc></url>
-  <url><loc>https://epeters.ca/writing/studio-session/</loc></url>
-  <url><loc>https://epeters.ca/writing/token-efficiency/</loc></url>
-  <url><loc>https://epeters.ca/writing/zero-dependencies/</loc></url>
-  <url><loc>https://epeters.ca/writing/automation-is-easy/</loc></url>
-  <url><loc>https://epeters.ca/writing/thirteen-games-solo/</loc></url>
+  <url><loc>https://epeters.ca/blog/token-efficiency/</loc></url>
+  <url><loc>https://epeters.ca/blog/zero-dependencies/</loc></url>
+  <url><loc>https://epeters.ca/blog/automation-is-easy/</loc></url>
+  <url><loc>https://epeters.ca/blog/thirteen-games-solo/</loc></url>
+  <url><loc>https://epeters.ca/blog/best-deal-washington/</loc></url>
+  <url><loc>https://epeters.ca/blog/same-song-four-bills/</loc></url>
   <url><loc>https://epeters.ca/apps/calculators/debt-payoff/</loc></url>
   <url><loc>https://epeters.ca/apps/calculators/rent-vs-buy/</loc></url>
-  <url><loc>https://epeters.ca/writing/best-deal-washington/</loc></url>
-  <url><loc>https://epeters.ca/writing/same-song-four-bills/</loc></url>
   <url><loc>https://epeters.ca/apps/calculators/ad-spend-roi/</loc></url>
   <url><loc>https://epeters.ca/apps/calculators/loan-payment/</loc></url>
   <url><loc>https://epeters.ca/apps/calculators/savings-goal/</loc></url>

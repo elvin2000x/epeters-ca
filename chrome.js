@@ -19,8 +19,9 @@ function utm(href, medium, section) {
 // Which section a page belongs to, from its path ('quiz-ai-risk/index.html' -> 'quizzes').
 function sectionOf(rel) {
   const s = rel.split('/')[0];
+  if (rel === '404.html') return 'notfound';
   if (!rel.includes('/')) return 'home';
-  return s === 'essays' ? 'writing' : s.startsWith('quiz') ? 'quizzes' : s;
+  return s === 'essays' ? 'blog' : s.startsWith('quiz') ? 'quizzes' : s;
 }
 
 const BAR_CSS = `.rhbar{background:#0a1524;border-bottom:1px solid #2b405c;font:500 14px/1.4 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;position:relative;z-index:50}` +
@@ -51,6 +52,6 @@ function foot(section) {
     `</footer><!-- /ep:ca-foot -->`;
 }
 
-const newsletterSource = section => NAVC.newsletterSource.replace('{section}', section);
+const newsletterSource = section => NAVC.newsletterSource.replace('{section}', (NAVC.newsletterAlias || {})[section] || section);
 
 module.exports = { NAVC, esc, utm, sectionOf, bar, foot, newsletterSource };

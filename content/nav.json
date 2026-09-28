@@ -1,14 +1,14 @@
 {
-  "_comment": "epeters.ca site chrome. build.js renders the top bar and footer line from this file; edit here, never in the pages. {section} is filled per page (writing, play, apps, quizzes, projects, home).",
+  "_comment": "epeters.ca site chrome. build.js renders the top bar and footer line from this file; edit here, never in the pages. {section} is filled per page (blog, play, apps, quizzes, projects, home).",
   "brand": { "label": "The Rabbit Hole", "href": "/" },
   "menu": [
-    { "label": "Writing", "href": "/writing/" },
+    { "label": "Blog", "href": "/blog/" },
     { "label": "Play", "href": "/play/" },
     { "label": "Quizzes", "href": "/#quizzes" },
     { "label": "Projects", "href": "/projects/" }
   ],
   "_barPages": "Hand-built pages that get the top bar. Games, quizzes and calculators keep their own header (their layouts are full-screen or have back links); the blog gets the menu from essay-page.js.",
-  "barPages": ["index.html", "play/index.html", "apps/index.html", "apps/calculators/index.html", "projects/index.html"],
+  "barPages": ["index.html", "404.html","play/index.html", "apps/index.html", "apps/calculators/index.html", "projects/index.html"],
   "footer": {
     "lead": "Elvin's playground",
     "links": [
@@ -18,6 +18,8 @@
   },
   "utm": "utm_source=epeters.ca&utm_medium={medium}&utm_campaign={section}",
   "newsletterSource": "newsletter | epeters-{section}",
+  "_newsletterAlias": "Email-list tag per section when it differs from the section name. The blog moved from /writing/ to /blog/ (#367); its sign-ups keep the epeters-writing tag until Elvin says otherwise.",
+  "newsletterAlias": { "blog": "writing" },
   "_noChrome": "Files that are inputs to the build (post bodies), not pages.",
   "noChrome": ["essays/"]
 }

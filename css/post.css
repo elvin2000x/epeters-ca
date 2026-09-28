@@ -1,6 +1,6 @@
 /* post.css: the blog post design system.
    Canonical spec: Brain/01 Command/deliverables/token-efficiency-report/BLOG-DESIGN-SYSTEM.md
-   Loaded only by pages under /writing/. Everything that styles post content is
+   Loaded only by pages under /blog/. Everything that styles post content is
    scoped under .trp so it can never reach the site's global stylesheet.
 
    LOCKED here: shell widths, type stacks and scale, dark neutrals, header

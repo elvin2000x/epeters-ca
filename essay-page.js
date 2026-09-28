@@ -68,10 +68,10 @@ const X = l => (l.ext ? ' target="_blank" rel="noopener"' : '');
 const LETTER = NAVC.footer.links[NAVC.footer.links.length - 1];
 const NAV = `<nav class="nav"><div class="in">
   <a class="brandmark" href="/"><span class="sig"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg></span>${CH.esc(NAVC.brand.label)}</a>
-  <div class="lk">${NAVC.menu.map(l => `<a href="${l.href}"${X(l)}>${l.label}</a>`).join('')}<a class="cta" href="${CH.esc(CH.utm(LETTER.href, 'nav', 'writing'))}">${CH.esc(LETTER.label)}</a></div>
+  <div class="lk">${NAVC.menu.map(l => `<a href="${l.href}"${X(l)}>${l.label}</a>`).join('')}<a class="cta" href="${CH.esc(CH.utm(LETTER.href, 'nav', 'blog'))}">${CH.esc(LETTER.label)}</a></div>
 </div></nav>`;
 
-const FOOT = CH.foot('writing');
+const FOOT = CH.foot('blog');
 
 const THEME = `<script>(function(){var r=document.documentElement;document.addEventListener('click',function(e){if(e.target.closest('#tg')){var d=r.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');r.setAttribute('data-theme',d==='dark'?'light':'dark')}})})();</script>`;
 
@@ -99,10 +99,10 @@ ${GA}${FONTS}<style>${CSS}${NLCSS}</style><link rel="stylesheet" href="/css/nav-
 const ENDCTA = `<section class="endcta"><div class="card">
 <h3>Liked this? The book goes deeper.</h3>
 <p>The Artificial Advantage: the frameworks behind everything here, written for professionals, not programmers.</p>
-<div class="ctarow"><a class="btn primary" href="${CH.utm('https://elvinpeters.com/', 'endcta', 'writing')}">Read The Artificial Advantage</a><a class="btn ghost" href="${CH.utm('https://elvinpeters.com/free/', 'endcta', 'writing')}">Get the Free Toolkit</a></div>
+<div class="ctarow"><a class="btn primary" href="${CH.utm('https://elvinpeters.com/', 'endcta', 'blog')}">Read The Artificial Advantage</a><a class="btn ghost" href="${CH.utm('https://elvinpeters.com/free/', 'endcta', 'blog')}">Get the Free Toolkit</a></div>
 <form id="nlform" class="nlrow" novalidate><input type="text" name="website" value="" style="position:absolute;left:-5000px" tabindex="-1" autocomplete="off" aria-hidden="true"><input id="nlemail" type="email" name="email" required placeholder="you@work.com" aria-label="Email address"><button class="btn ghost" type="submit">Get the newsletter</button></form>
 <p class="nlmsg" id="nlmsg"></p>
-<script>(function(){var f=document.getElementById('nlform'),m=document.getElementById('nlmsg');if(!f)return;f.addEventListener('submit',function(ev){ev.preventDefault();var em=document.getElementById('nlemail').value.trim();if(!em){m.textContent='Enter your email first.';return}m.textContent='One sec…';fetch('https://ultimateaidirectory.com/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,source:${JSON.stringify(CH.newsletterSource('writing')).replace(/"/g, "'")},website:f.website.value})}).then(function(r){return r.json().catch(function(){return{}})}).then(function(){m.textContent='Done. Watch your inbox.';f.reset()}).catch(function(){m.textContent='That did not go through. Try again in a minute.'})})})();</script>
+<script>(function(){var f=document.getElementById('nlform'),m=document.getElementById('nlmsg');if(!f)return;f.addEventListener('submit',function(ev){ev.preventDefault();var em=document.getElementById('nlemail').value.trim();if(!em){m.textContent='Enter your email first.';return}m.textContent='One sec…';fetch('https://ultimateaidirectory.com/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,source:${JSON.stringify(CH.newsletterSource('blog')).replace(/"/g, "'")},website:f.website.value})}).then(function(r){return r.json().catch(function(){return{}})}).then(function(){m.textContent='Done. Watch your inbox.';f.reset()}).catch(function(){m.textContent='That did not go through. Try again in a minute.'})})})();</script>
 </div></section>`;
 
 // The blog post design system. Spec: BLOG-DESIGN-SYSTEM.md (canonical 2026-08-07).
@@ -115,7 +115,7 @@ const POSTCSS = `<link rel="stylesheet" href="/css/post.css">`;
 // rendered by md.js. Optional fields (seo_title, seo_description, tags) change the
 // page only when set, so posts that never use them build exactly as before.
 function essayPage(e, body){
-  const canon = `https://epeters.ca/writing/${e.slug}/`;
+  const canon = `https://epeters.ca/blog/${e.slug}/`;
   const img = `/img/${e.image}`;
   const og = e.og ? `/img/${e.og}` : img;
   const title = e.seo_title || e.title, desc = e.seo_description || e.dek;
@@ -130,7 +130,7 @@ function essayPage(e, body){
     // the essay's own HTML. Content is never rewritten here, only skinned.
     page = head(title, desc, og, canon) + NAV +
     `<div class="trp accent-${accent}"><div class="wrap">`+
-      `<div class="col"><a class="trp-back" href="/writing/">&larr; Blog</a></div>`+
+      `<div class="col"><a class="trp-back" href="/blog/">&larr; Blog</a></div>`+
       `<header class="col" style="padding-top:26px">`+
         `<div class="eyebrow">${esc(e.kicker||'Playbook')}</div>`+
         `<h1>${esc(e.title)}</h1>`+

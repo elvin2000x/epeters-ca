@@ -1,119 +1,13 @@
-<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>How I Ship Thirteen Games Without Hand-Testing Any of Them · Elvin Peters</title>
-<meta name="description" content="Shipping a lot alone is a tooling problem, and the tool that matters most is the one that checks your work while you sleep.">
-<link rel="canonical" href="https://epeters.ca/writing/thirteen-games-solo/">
-<meta property="og:type" content="article"><meta property="og:title" content="How I Ship Thirteen Games Without Hand-Testing Any of Them"><meta property="og:description" content="Shipping a lot alone is a tooling problem, and the tool that matters most is the one that checks your work while you sleep."><meta property="og:image" content="https://epeters.ca/img/og.jpg"><meta property="og:url" content="https://epeters.ca/writing/thirteen-games-solo/">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:creator" content="@elvin_peters">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 5v14M6 5h9M6 12h7M6 19h9' stroke='%23c9a250' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='19.5' cy='18.6' r='1.9' fill='%23c9a250'/%3E%3C/svg%3E">
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CLZ7N26J1Q');</script>
-<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1699232654449762');fbq('track','PageView');</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"><style>
-:root{--bg:#e6ebf1;--bg-2:#dde4ec;--panel:#ffffff;--panel-2:#f3f6fa;--line:#c3cedd;--line-soft:#d3dce8;--ink:#0e1a2b;--ink-2:#3d4d63;--muted:#4f6076;--gold:#9c761f;--gold-2:#7a5a12;--cyan:#1c6ea8;--glow:rgba(156,118,31,.14);--shadow:0 18px 40px -24px rgba(14,26,43,.45);--serif:'EB Garamond',Georgia,'Times New Roman',serif;--sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif}
-@media(prefers-color-scheme:dark){:root{--bg:#0a1524;--bg-2:#060d18;--panel:#1b2c45;--panel-2:#131f33;--line:#2b405c;--line-soft:#223351;--ink:#e9eff7;--ink-2:#b7c6d9;--muted:#8ba2bd;--gold:#c9a250;--gold-2:#e0bd6b;--cyan:#4fb3f0;--glow:rgba(201,162,80,.16);--shadow:0 24px 50px -28px rgba(0,0,0,.7)}}
-:root[data-theme="light"]{--bg:#e6ebf1;--bg-2:#dde4ec;--panel:#ffffff;--panel-2:#f3f6fa;--line:#c3cedd;--line-soft:#d3dce8;--ink:#0e1a2b;--ink-2:#3d4d63;--muted:#4f6076;--gold:#9c761f;--gold-2:#7a5a12;--cyan:#1c6ea8;--shadow:0 18px 40px -24px rgba(14,26,43,.45)}
-:root[data-theme="dark"]{--bg:#0a1524;--bg-2:#060d18;--panel:#1b2c45;--panel-2:#131f33;--line:#2b405c;--line-soft:#223351;--ink:#e9eff7;--ink-2:#b7c6d9;--muted:#8ba2bd;--gold:#c9a250;--gold-2:#e0bd6b;--cyan:#4fb3f0;--shadow:0 24px 50px -28px rgba(0,0,0,.7)}
-*{box-sizing:border-box}html,body{margin:0}
-body{background:linear-gradient(180deg,var(--bg),var(--bg-2));color:var(--ink);font-family:var(--sans);line-height:1.7;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
-.nav{position:sticky;top:0;z-index:40;backdrop-filter:blur(10px);background:color-mix(in srgb,var(--bg) 80%,transparent);border-bottom:1px solid var(--line-soft)}
-.nav .in{max-width:1120px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:20px}
-.brandmark{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-size:18px}
-.brandmark .sig{width:32px;height:32px;border:1px solid var(--line);border-radius:9px;display:grid;place-items:center;background:var(--panel)}
-.nav .lk{margin-left:auto;display:flex;gap:24px;align-items:center}
-.nav .lk a{font-size:14px;color:var(--ink-2)}.nav .lk a:hover{color:var(--ink)}
-.themebtn{width:44px;height:44px;padding:0;display:inline-flex;align-items:center;justify-content:center;background:none;border:1px solid var(--line);border-radius:10px;color:var(--ink-2);cursor:pointer;font-size:15px;line-height:1}
-.nav .lk a.cta{border:1px solid var(--gold);color:var(--gold-2);padding:11px 16px;border-radius:999px;font-weight:600;display:inline-flex;align-items:center;min-height:44px}
-.eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-2);font-weight:600}
-article{max-width:720px;margin:0 auto;padding:44px 24px 40px}
-.arthead .cover{width:100%;aspect-ratio:16/8;object-fit:cover;border-radius:16px;border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:26px}
-article h1{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,4.6vw,3rem);line-height:1.08;letter-spacing:-.015em;margin:14px 0 0;text-wrap:balance}
-.dek{font-size:1.2rem;color:var(--ink-2);margin:16px 0 0;font-family:var(--serif);font-style:italic}
-.byline{display:flex;gap:14px;align-items:center;margin:22px 0 0;padding-bottom:26px;border-bottom:1px solid var(--line-soft);font-size:14px;color:var(--muted)}
-.byline b{color:var(--ink-2);font-weight:600}
-.body{font-size:18px;color:var(--ink)}
-.body h2{font-family:var(--serif);font-weight:600;font-size:1.6rem;letter-spacing:-.01em;margin:38px 0 12px;line-height:1.2}
-.body p{margin:0 0 20px}
-.body ul{margin:0 0 20px;padding-left:22px}.body li{margin:0 0 8px}
-.body blockquote{margin:26px 0;padding:4px 0 4px 22px;border-left:3px solid var(--gold);font-family:var(--serif);font-style:italic;font-size:1.25rem;color:var(--ink-2)}
-.body strong{color:var(--ink);font-weight:700}
-.body code{font-family:ui-monospace,Consolas,monospace;font-size:.9em;background:var(--panel-2);border:1px solid var(--line-soft);border-radius:5px;padding:1px 6px}
-.endcta{max-width:720px;margin:10px auto 0;padding:0 24px}
-.endcta .card{background:linear-gradient(160deg,var(--panel),var(--panel-2));border:1px solid var(--line);border-radius:16px;padding:28px;text-align:center}
-.endcta h3{font-family:var(--serif);font-weight:400;font-size:1.6rem;margin:0}
-.endcta p{color:var(--ink-2);margin:10px 0 18px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:600;font-size:14px;border:1px solid transparent;cursor:pointer;font-family:var(--sans);background:transparent}
-.btn.primary{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#1b1304}
-.btn.ghost{border-color:var(--line);color:var(--ink);min-height:44px}
-.backlink{display:inline-flex;gap:8px;align-items:center;color:var(--muted);font-size:14px;margin-bottom:8px}
-footer{border-top:1px solid var(--line-soft);padding:30px 24px;color:var(--muted);font-size:13px;margin-top:56px}
-footer .in{max-width:1120px;margin:0 auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-footer a{padding:10px 4px;margin:-10px -4px}
-footer a:hover{color:var(--gold-2)}
-:focus-visible{outline:2px solid var(--gold-2);outline-offset:3px;border-radius:4px}
-@media(max-width:640px){.nav .lk a:not(.cta){display:none}}
-
-.nlrow{display:flex;gap:10px;max-width:440px;margin:18px auto 0;flex-wrap:wrap;justify-content:center}
-.nlrow input{flex:1;min-width:210px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:16px;font-family:var(--sans)}
-.nlmsg{font-size:14px;color:var(--muted);margin:10px 0 0;min-height:18px}
-.ctarow{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px}
-</style><link rel="stylesheet" href="/css/nav-drawer.css"><script src="/js/site.js"></script><link rel="stylesheet" href="/css/post.css"></head><body><nav class="nav"><div class="in">
-  <a class="brandmark" href="/"><span class="sig"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg></span>The Rabbit Hole</a>
-  <div class="lk"><a href="/writing/">Writing</a><a href="/play/">Play</a><a href="/#quizzes">Quizzes</a><a href="/projects/">Projects</a><a class="cta" href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=nav&amp;utm_campaign=writing">Get the monthly letter</a></div>
-</div></nav><div class="trp accent-good"><div class="wrap"><div class="col"><a class="trp-back" href="/writing/">&larr; Blog</a></div><header class="col" style="padding-top:26px"><div class="eyebrow">Playbook · Tooling</div><h1>How I Ship Thirteen Games Without Hand-Testing Any of Them</h1><p class="dek">Shipping a lot alone is a tooling problem, and the tool that matters most is the one that checks your work while you sleep.</p><div class="byline">Elvin Peters &middot; Jul 22, 2026 &middot; 6 min read</div></header><div class="col"><p>I have thirteen original browser games running right now. Strategy on a spinning 3D globe, a stack of tower defense games, a last-tower survivor, a castle siege, a monster-taming RPG, a couple of shooters. Each one is a single file of vanilla JavaScript drawing to a canvas. No framework, no build step, no CDN, no dependency I have to trust or update. One person made all of them, and that person is not a fast typist.</p>
-
-<p>People assume the trick is speed. It is not. I cannot hand-playtest thirteen games across four difficulties and an endless mode every time I nudge a number, and neither can anyone else. What makes it work is dull and it is the whole point of this post: I built the tools that let me trust the games without checking every case by hand, and I reuse an engine instead of starting from a blank file. The games are the part you see. The tooling is the part that turned three into thirteen.</p>
-
-<h2>The engine I refuse to rewrite</h2>
-
-<p>Several of the games live on a 3D globe. You drag to spin the planet, click a region, watch arcs travel between cities. It looks like it needs WebGL or three.js. It needs neither. It is a hand-rolled orthographic globe drawn in plain 2D canvas, and the math that sells it fits in a paragraph.</p>
-
-<p>One function turns latitude and longitude into a unit vector on a sphere. A rotation applies your drag as a view angle. Then you project each point to the screen. The trick that makes a flat circle read as a solid ball is back-face culling: you only draw a point if its rotated z is positive, so the far side of the planet stays hidden behind the near side. The flight paths that curve along the surface are great-circle arcs, and they come from spherical interpolation (slerp) between two unit vectors, sampled and drawn only where the segment faces you. That is the whole engine. I lift the same math into every globe game rather than reinventing it.</p>
-
-<p>It graduated once. Hand-drawn continent polygons read as a board game, and a globe that is supposed to be Earth has to actually look like Earth. So the current version vendors a local copy of d3 and a world-atlas file for real country borders and coastlines. Same idea, better data. I own the whole stack locally, so there is still no runtime call to anyone else's server.</p>
-
-<h2>Two lessons the globe beat into me</h2>
-
-<p>The first cost nothing to fix and everything to notice. Do not auto-spin the globe. An idle rotation looks great in a demo and turns miserable the moment the core interaction is clicking a region. You reach for a city, the planet drifts, you miss. A globe should sit still until the user grabs it. You spin it. It does not spin itself. Every globe game now ships with idle spin set to zero and drag-to-spin left on.</p>
-
-<p>The second: a real globe needs real coastlines. I tried to shortcut it with hand-drawn land and it always looked cheap. The fix was vendoring actual geographic data. Some things you cannot fake with clever code. You just need the right file.</p>
-
-<h2>The bot that actually makes solo shipping work</h2>
-
-<p>The engine saves me from rewriting. The thing that lets me sleep is a different file. Every game has a <code>bot_test.js</code> I run with node. It loads the real <code>index.html</code>, the exact code that ships, under a set of permissive headless stubs, and drives the game with no browser anywhere in sight.</p>
-
-<p>The stubs are where it earns its keep. Canvas games touch <code>document</code>, the canvas, <code>localStorage</code>, and the animation loop the instant they load, so I hand them stand-ins. Every DOM element is a JavaScript Proxy whose every property is a harmless no-op, which means any draw call the game makes quietly does nothing. A plain Map backs <code>localStorage</code>. The important one is <code>requestAnimationFrame</code>, which I set to a no-op so the game's own loop never starts. That detail carries more than it looks. With the auto-loop dead, the bot calls the game's <code>update</code> function itself, one tick at a time, and owns the passage of game time completely. It can play a full match in milliseconds because nothing waits for a frame.</p>
-
-<p>There are two tiers. The first is a full play-sim: a bot actually plays, places towers, survives waves, and reports where it dies at each difficulty. Single runs lie to you, because the games have randomness, so the bot runs many trials and I read the win-rate and the median wave instead of one lucky result. A ladder like easy clears every time, hard clears most of the time, extreme is a wall is what a healthy game looks like in the numbers.</p>
-
-<p>The second tier is one game-agnostic smoke-and-integrity file I drop into every folder. It does three cheap, high-value things:</p>
-
-<ul>
-<li>Loads the script, which catches crash-on-load. After a config tweak that is the number-one way to ship something broken, and it takes one second to catch.</li>
-<li>Drives 1200 ticks of the update loop to surface runtime crashes that only show up deep into a session.</li>
-<li>Cross-checks the wave tables against the enemy tables, so endless mode can never try to summon an enemy that does not exist in the data.</li>
-</ul>
-
-<p>One file works across every game because of a reflection bridge: an <code>eval</code> running inside the game's own scope can read or run any in-scope name by string. I never write a bespoke harness per game. I write one, and it inspects whatever the game happens to define.</p>
-
-<h2>Suspect the ruler before you plane the leg</h2>
-
-<p>Here is the lesson that outlives the games. Early on, my tower-defense bot reported a game as flatly unwinnable. Zero wins out of twelve trials at the easiest difficulty. My first instinct was to go rebalance it.</p>
-
-<p>The game was fine. The bot was broken. It played the dumbest possible strategy, spamming the cheapest tower, which is a useless floor no real player would ever sit on. A test that measures a game with an idiot only tells you about the idiot. I taught it to build a few strong, upgraded towers, the way a person actually plays, and a false 0-out-of-12 became a true 12-out-of-12. Nothing about the game changed.</p>
-
-<blockquote><p>When your measurement says the thing is broken, check the measurement first. A bad ruler will happily report that a straight table is crooked, and you can waste a week planing a leg that was never bent.</p></blockquote>
-
-<h2>Verification is the multiplier</h2>
-
-<p>I cannot hand-test thirteen games across four difficulties and an endless mode. There is one of me and the hours do not stretch. The bots can, on every change, in seconds. That gap is the whole distance between shipping three games and shipping thirteen. I do not move faster than other people. I just do not move twice, because the thing that checks the work never gets bored, never gets sloppy on the two-hundredth run, and never tells me a game is fine when it crashes on load.</p>
-
-<p>If you want to ship a lot alone, that is where the effort goes. Not into being superhuman at the craft itself, but into building the small, unglamorous machine that verifies it, so one person can move like more than one. Reuse the engine. Build the bot. Then trust the numbers, once you have checked that the bot is not the fool.</p></div></div></div><section class="endcta"><div class="card">
-<h3>Liked this? The book goes deeper.</h3>
-<p>The Artificial Advantage: the frameworks behind everything here, written for professionals, not programmers.</p>
-<div class="ctarow"><a class="btn primary" href="https://elvinpeters.com/?utm_source=epeters.ca&utm_medium=endcta&utm_campaign=writing">Read The Artificial Advantage</a><a class="btn ghost" href="https://elvinpeters.com/free/?utm_source=epeters.ca&utm_medium=endcta&utm_campaign=writing">Get the Free Toolkit</a></div>
-<form id="nlform" class="nlrow" novalidate><input type="text" name="website" value="" style="position:absolute;left:-5000px" tabindex="-1" autocomplete="off" aria-hidden="true"><input id="nlemail" type="email" name="email" required placeholder="you@work.com" aria-label="Email address"><button class="btn ghost" type="submit">Get the newsletter</button></form>
-<p class="nlmsg" id="nlmsg"></p>
-<script>(function(){var f=document.getElementById('nlform'),m=document.getElementById('nlmsg');if(!f)return;f.addEventListener('submit',function(ev){ev.preventDefault();var em=document.getElementById('nlemail').value.trim();if(!em){m.textContent='Enter your email first.';return}m.textContent='One sec…';fetch('https://ultimateaidirectory.com/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,source:'newsletter | epeters-writing',website:f.website.value})}).then(function(r){return r.json().catch(function(){return{}})}).then(function(){m.textContent='Done. Watch your inbox.';f.reset()}).catch(function(){m.textContent='That did not go through. Try again in a minute.'})})})();</script>
-</div></section><!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:12px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}@media (max-width:480px){.rhfoot{display:flex;flex-direction:column;align-items:center;gap:2px}.rhfoot .rhsep{display:none}.rhfoot>span:first-child{padding-bottom:4px}}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=writing">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=writing">Get the monthly letter</a></footer><!-- /ep:ca-foot --><script>(function(){var r=document.documentElement;document.addEventListener('click',function(e){if(e.target.closest('#tg')){var d=r.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');r.setAttribute('data-theme',d==='dark'?'light':'dark')}})})();</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- ep:moved-stub -->
+<title>This page moved to the blog</title>
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://epeters.ca/blog/thirteen-games-solo/">
+<script>location.replace('https://epeters.ca/blog/thirteen-games-solo/' + location.search + location.hash);</script>
+<meta http-equiv="refresh" content="0; url=https://epeters.ca/blog/thirteen-games-solo/">
+</head>
+<body><p>This page moved. <a href="https://epeters.ca/blog/thirteen-games-solo/">Go to the new page</a>.</p></body>
+</html>
