@@ -39,7 +39,7 @@ window.APPS_REGISTRY = {
     },
     {
       slug: 'quiz', name: 'Quiz Funnel', cat: 'tools', status: 'live',
-      href: 'https://epeters.ca/quiz/',
+      href: 'https://elvinpeters.com/quiz/?utm_source=epeters.ca&utm_medium=link&utm_campaign=apps',
       blurb: 'A config-driven quiz engine — questions, scoring and result pages all come from one file. Answers post straight into a lead database I own.',
       stat: 'Config-driven',
       tags: ['Lead capture', 'Self-hosted']

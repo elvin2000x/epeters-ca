@@ -33,7 +33,7 @@ for (const f of TEXT) {
   // The public address is elvin@elvinpeters.com; epeters.ca mail is private routing.
   if (/elvin@epeters\.ca/i.test(s)) FAIL(f, 'contains elvin@epeters.ca');
   // A moved section still addressed on .com means a missed rewrite.
-  const m = s.match(/https?:\/\/(www\.)?elvinpeters\.com\/(writing|essays|play|apps|quiz|quiz-ai-risk|quiz-time-waste|quiz-tool-picker|projects|colour)(?=[\/"'?#\s<)\\]|$)/);
+  const m = s.match(/https?:\/\/(www\.)?elvinpeters\.com\/(writing|essays|play|apps|quiz-ai-risk|quiz-time-waste|quiz-tool-picker|projects|colour)(?=[\/"'?#\s<)\\]|$)/);
   if (m) FAIL(f, `links a moved section on .com: ${m[0]}`);
   // Every link back to elvinpeters.com is UTM-tagged (plan blindspot 1).
   const re = /(?:<a\b[^>]*?href=|href\s*:\s*)\\?["'](https?:\/\/(?:www\.)?elvinpeters\.com[^"'\\\s]*)/g; let a;

@@ -30,7 +30,7 @@ if (fs.readFileSync(path.join(SRC, 'play', 'index.html'), 'utf8').includes('ep:m
 // source folder -> folder on epeters.ca
 const MOVED = {
   'writing': 'writing', 'essays': 'essays', 'play': 'play', 'apps': 'apps',
-  'quiz': 'quiz', 'quiz-ai-risk': 'quiz-ai-risk', 'quiz-time-waste': 'quiz-time-waste',
+  'quiz-ai-risk': 'quiz-ai-risk', 'quiz-time-waste': 'quiz-time-waste',
   'quiz-tool-picker': 'quiz-tool-picker', 'projects': 'projects', 'colour': 'projects/colour',
 };
 // Shared files the moved pages load (found by a reference scan of every moved page,
