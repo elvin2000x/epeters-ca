@@ -25,7 +25,7 @@ function sectionOf(rel) {
 
 const BAR_CSS = `.rhbar{background:#0a1524;border-bottom:1px solid #2b405c;font:500 14px/1.4 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;position:relative;z-index:50}` +
   `.rhbar .rhin{max-width:1120px;margin:0 auto;padding:0 16px;min-height:52px;display:flex;align-items:center;gap:6px 18px;flex-wrap:wrap}` +
-  `.rhbar a{color:#b7c6d9;text-decoration:none;padding:12px 2px;display:inline-block}.rhbar a:hover{color:#e0bd6b}` +
+  `.rhbar a{color:#b7c6d9;text-decoration:none;padding:13px 2px;display:inline-block}.rhbar a:hover{color:#e0bd6b}` +
   `.rhbar .rhbrand{color:#e0bd6b;font-family:'EB Garamond',Georgia,serif;font-size:18px;margin-right:auto}` +
   `.rhbar .rhlk{display:flex;gap:16px;flex-wrap:wrap}.rhbar a:focus-visible,.rhfoot a:focus-visible{outline:2px solid #e0bd6b;outline-offset:2px}`;
 
@@ -37,7 +37,7 @@ function bar(section) {
 }
 
 const FOOT_CSS = `.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}` +
-  `.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:10px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}`;
+  `.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:12px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}`;
 
 function foot(section) {
   const f = NAVC.footer;

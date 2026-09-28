@@ -241,7 +241,9 @@
       '<main class="pk-stage" id="pk-stage" tabindex="-1"></main>' +
       '<div class="pk-actions" id="pk-actions"></div>' +
       '<div class="pk-sr" id="pk-live" aria-live="polite" role="status"></div>';
-    d.body.appendChild(root);
+    // Mount above the site footer line (epeters.ca build), not after it.
+    var siteFoot = d.querySelector(".rhfoot");
+    if (siteFoot) d.body.insertBefore(root, siteFoot); else d.body.appendChild(root);
     liveEl = root.querySelector("#pk-live");
 
     muteBtn = root.querySelector("#pk-mute"); muteBtn.addEventListener("click", function () { PK.sound.toggle(); reflectMute(); if (PK.sound.enabled) PK.sound.play("click"); }); reflectMute();

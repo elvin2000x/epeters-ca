@@ -71,7 +71,11 @@ if (calc !== 12) FAIL('sitemap.xml', `expected 12 calculator locs, found ${calc}
 if (!/Sitemap: https:\/\/epeters\.ca\/sitemap\.xml/.test(fs.readFileSync(path.join(DIR, 'robots.txt'), 'utf8'))) FAIL('robots.txt', 'no sitemap line');
 
 // Own copy stays in voice (Rule 02): no em dashes in the home page or the chrome.
-for (const f of ['index.html', 'content/nav.json']) if (/—/.test(fs.readFileSync(path.join(DIR, f), 'utf8'))) FAIL(f, 'em dash');
+// The blog moved here from .com, so its voice check moved with it: the source (essays.json,
+// essays/ bodies) and the built writing/ pages.
+const VOICE = ['index.html', 'content/nav.json', 'content/essays.json',
+  ...ALL.filter(f => (f.startsWith('essays/') || f.startsWith('writing/')) && f.endsWith('.html'))];
+for (const f of VOICE) if (/—/.test(fs.readFileSync(path.join(DIR, f), 'utf8'))) FAIL(f, 'em dash');
 
 // CNAME only arrives with Phase B (the DNS flip needs Elvin's go).
 if (fs.existsSync(path.join(DIR, 'CNAME'))) {

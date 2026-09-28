@@ -19,6 +19,13 @@ const fs = require('fs'), path = require('path');
 const SRC = path.resolve(process.argv[2] || '');
 const DEST = path.resolve(__dirname, '..');
 if (!fs.existsSync(path.join(SRC, 'CNAME'))) { console.error('usage: node scripts/import-from-com.js <.com checkout>'); process.exit(1); }
+// Once .com carries the redirect stubs (scripts/epca-stubs.js there), this repo is the
+// source of truth for these sections and has its own fixes (play-kit mount, game scopes).
+// Importing again would copy stubs over real pages, so it refuses.
+if (fs.readFileSync(path.join(SRC, 'play', 'index.html'), 'utf8').includes('ep:moved-stub')) {
+  console.error('That checkout already has the moved-section stubs: epeters-ca owns these pages now. Edit them here.');
+  process.exit(1);
+}
 
 // source folder -> folder on epeters.ca
 const MOVED = {
