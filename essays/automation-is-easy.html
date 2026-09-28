@@ -1,61 +1,25 @@
-<style>
-/* Post-specific modules only. Shell, type, neutrals and the shared module
-   library live in /css/post.css. Accent: blue (set on the wrapper). */
-.trp .doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:1.8rem 0;}
-.trp .door{background:var(--card);border:1px solid var(--grid);border-radius:6px;padding:20px 20px 16px;display:flex;flex-direction:column;}
-.trp .door .num{font-family:var(--mono);font-size:.74rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
-.trp .door h3{margin:.35em 0 .3em;font-size:1.1rem;}
-.trp .door p{font-size:.96rem;margin:.5em 0;}
-.trp .door .cost{font-family:var(--disp);font-size:.8rem;border-top:1px dashed var(--rule);padding-top:.65em;margin-top:auto;color:var(--muted);}
-.trp .door .cost b{color:var(--blue);}
-.trp .ledger{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--rule);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:2.4rem 0;}
-.trp .lcell{background:var(--paper);padding:18px 16px;}
-.trp .lcell b{display:block;font-family:var(--mono);font-size:1.6rem;font-weight:600;font-variant-numeric:tabular-nums;}
-.trp .lcell span{font-family:var(--disp);font-size:.78rem;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;}
-.trp .thenow{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;margin:1.7rem 0;}
-.trp .tn{border:1px solid var(--grid);border-radius:6px;padding:18px 20px;}
-.trp .tn .tag{font-family:var(--disp);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 9px;border-radius:99px;}
-.trp .tn.was{background:var(--card);}
-.trp .tn.was .tag{background:color-mix(in srgb,var(--bad) 14%,transparent);color:var(--bad);}
-.trp .tn.is{background:var(--blue-soft);}
-.trp .tn.is .tag{background:color-mix(in srgb,var(--blue) 16%,transparent);color:var(--blue);}
-.trp .tn h3{margin:.5em 0 .3em;font-size:1.05rem;}
-.trp .tn ul{padding-left:1.1em;margin:.5em 0;font-size:.95rem;}
-.trp .tn li{margin:.3em 0;}
-</style>
-<div class="trp accent-blue">
-<div class="wrap">
-<div class="col"><a class="trp-back" href="/blog/">&larr; Blog</a></div>
-<header class="col" style="padding-top:56px;">
-  <div class="eyebrow">Field notes &middot; SEO</div>
-  <h1>It Took Me Months to Build 258 Pages by Hand. In 2026, AI Did It in&nbsp;Seconds.</h1>
-  <p class="dek">The script would have taken an afternoon. Nobody was available to write it. Here is what that taught me about why large companies cannot automate simple things, and what AI actually changed.</p>
-  <div class="byline">Elvin Peters &middot; September 2026 &middot; Programmatic SEO, in-house, at a regulated lender</div>
-</header>
-
-<div class="col">
 <p>A large publicly traded Canadian lender had a page on its website that said it served Canada. Which was true, and which was useless to a person in a town of eighteen thousand people typing the name of their town into Google at eleven at night.</p>
-<p>That person was not asking whether the company existed. They were asking a much smaller and much more specific question: <b>does this apply to me, here?</b> The national page never answered it. So Google, quite correctly, sent them somewhere that did.</p>
+<p>That person was not asking whether the company existed. They were asking a much smaller and much more specific question: <strong>does this apply to me, here?</strong> The national page never answered it. So Google, quite correctly, sent them somewhere that did.</p>
 <p>The fix is one of the most boring ideas in search. Give the question its own page. Do it for every town. This is called programmatic SEO, and the technical work involved is close to nothing.</p>
 
 <h2>The bet, which was that small places add up</h2>
 <p>Pages for Toronto, Ottawa and Montreal already existed, and they worked. They ranked and they produced volume, which is the outcome everybody expects, because those are the places everybody builds for.</p>
 <p>The bet was that the long tail would match them in aggregate. Take the top five percent of Canadian municipalities by population, roughly two hundred and fifty eight of them, give each one a page, and the sum of all those small towns would rival the handful of big cities. Individually each page is a rounding error. Collectively they are a channel.</p>
 <p>The bet was right, and the reason it was right is not sophisticated. Nobody competes for Sarnia. Every agency in the country is fighting over Toronto, and the search results for a town of eighteen thousand are frequently a directory listing and a map. A page that genuinely answers the question wins that page one almost by default.</p>
-<div class="pull">You just make the pages. People who need the thing you have end up getting served it. That is the whole mechanism.</div>
+<blockquote class="pull"><p>You just make the pages. People who need the thing you have end up getting served it. That is the whole mechanism.</p></blockquote>
 
 <h2>What is actually happening when this works</h2>
 <p>It is worth being precise about the machinery, because the ambient understanding of SEO is mystical and the reality is plumbing.</p>
 <p>A crawler is a program that fetches a page, reads the links on it, and adds those links to a list of pages to fetch next. That is the entire concept. It runs continuously, forever, across the public web. When you publish a page and reference it from a sitemap, you are adding a line to that list.</p>
 <p>The index is what gets built from the crawl. For every meaningful word, the search engine keeps a record of which pages contain it and how those pages relate to each other. When someone searches, nothing is being searched in real time. The answer was computed in advance and is being looked up.</p>
-<p>Which means the whole game is this: <b>be the page that already exists for the question somebody is about to ask.</b> Ranking well for "loan in Sarnia" is not a trick. It is having bothered to write something for a person in Sarnia when no competitor did.</p>
+<p>Which means the whole game is this: <strong>be the page that already exists for the question somebody is about to ask.</strong> Ranking well for "loan in Sarnia" is not a trick. It is having bothered to write something for a person in Sarnia when no competitor did.</p>
 <p>I want to sit on that for one more second, because it is easy to be cynical about search engines and I think that is a mistake. There is a free, globally distributed index that will take a person in a small town, at midnight, with a specific and slightly embarrassing question, and route them to the one page on earth written for exactly them. No introduction, no fee, no permission. That is an absurd piece of public infrastructure to simply have available, and most of the people using it have no idea it is there.</p>
 
 <h2>How the pages actually got built</h2>
 <p>Here is the part I used to leave out of this story.</p>
 <p>I did not generate them. I rebuilt the same template roughly two hundred and fifty times, by hand, one page at a time.</p>
 <p>To be clear about what the alternative looks like, this is genuinely the shape of the code. Read a list of places, loop over it, write a file:</p>
-<pre><code>import csv, pathlib
+<div class="code"><pre><code>import csv, pathlib
 
 tpl = pathlib.Path("template.html").read_text(encoding="utf-8")
 
@@ -64,21 +28,23 @@ for row in csv.DictReader(open("municipalities.csv", encoding="utf-8")):
     out = pathlib.Path(f"loans/{slug}/index.html")
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(tpl.format(**row), encoding="utf-8")
-</code></pre>
+</code></pre></div>
 <p>Eight lines. The list of municipalities is a free download from the government census tables. It runs in under a second.</p>
 <p>I did it by hand instead, and the reason is not interesting in a dramatic way. There was no SEO team. There had never been an SEO team. The company had paid for me to take an SEO course, I took it, and the work was sitting there unowned, so I picked it up. Every engineer who could have written those eight lines was committed to an internal CRM build that cost millions of dollars and was eventually shut down.</p>
 <p>Nobody blocked me. That is worth saying plainly, because the version of this story where a villain protects their turf is a more satisfying story and it is not what happened. Everyone was busy with something that seemed more important at the time. The pages were not anyone's job, which is exactly why they were available to become mine.</p>
-<div class="note"><b>The thing that vacuum gives you.</b> Work that nobody owns is work that nobody has to approve. There was no roadmap to get on and no committee to convince, because there was no process for a thing that had never been done. The same emptiness that stops the work from happening is what lets one person walk in and do it.</div>
+<div class="note"><span class="lab">The thing that vacuum gives you.</span><p>Work that nobody owns is work that nobody has to approve. There was no roadmap to get on and no committee to convince, because there was no process for a thing that had never been done. The same emptiness that stops the work from happening is what lets one person walk in and do it.</p></div>
 
 <h2>Results took six months, and almost nothing survives that</h2>
 <p>People wanted numbers, and I did not have them for a while.</p>
 <p>A few hundred small pages do not arrive, they accumulate. Each one has to be crawled, indexed, and then slowly earn trust for a term nobody was competing on anyway. The curve is flat and then it is not.</p>
-<div class="ledger">
-  <div class="lcell"><b>258</b><span>pages, top 5% of municipalities</span></div>
-  <div class="lcell"><b>~250</b><span>manual template rebuilds</span></div>
-  <div class="lcell"><b>6 mo</b><span>before the number was real</span></div>
-  <div class="lcell"><b>$74K</b><span>attributed organic revenue at that mark</span></div>
-</div>
+<div class="tbl" role="region" tabindex="0" aria-label="The project in four numbers"><table>
+<tbody>
+<tr><td class="num"><strong>258</strong></td><td>pages, top 5% of municipalities</td></tr>
+<tr><td class="num"><strong>~250</strong></td><td>manual template rebuilds</td></tr>
+<tr><td class="num"><strong>6 mo</strong></td><td>before the number was real</td></tr>
+<tr><td class="num"><strong>$74K</strong></td><td>attributed organic revenue at that mark</td></tr>
+</tbody>
+</table></div>
 <p>Seventy four thousand dollars in directly attributed sales from organic traffic, six months in, growing after that. Anyone auditing the project at week six would have found a person clicking save two hundred times and no revenue, and they would have been completely reasonable to kill it.</p>
 <p>Budget the patience before you start. The work is cheap and the wait is not.</p>
 
@@ -86,35 +52,24 @@ for row in csv.DictReader(open("municipalities.csv", encoding="utf-8")):
 <p>I was going to industry events through this period and meeting people who specialised in exactly this, including agencies with real programmatic capability. They were not hard to find and they were not bluffing. Firms like <a href="https://www.dacgroup.com/tech-platforms/local-optimization/location-pages/" rel="nofollow">DAC</a> run location pages as a product, off their own platform and their own listings database, at a scale no in-house team improvises.</p>
 <p>So the obvious question is why a company with money would let a marketer do this by hand. The answer is that there were three doors, and every one of them is expensive in a different currency.</p>
 
-<div class="doors">
-  <div class="door">
-    <span class="num">Door one</span>
-    <h3>Build it by hand on the CMS you already have</h3>
-    <p>Change nothing, buy nothing, integrate nothing. Somebody just does the work, repeatedly, for weeks.</p>
-    <p class="cost">Cheapest to approve. Most expensive in human time. <b>This is the door I walked through, because it was the only one that needed nobody's permission.</b></p>
-  </div>
-  <div class="door">
-    <span class="num">Door two</span>
-    <h3>Rent the agency platform</h3>
-    <p>They already have the generator, the data, the templates and the track record. Pages typically live on their system, often on a subdomain or a hosted path.</p>
-    <p class="cost">Fast and proven. You are renting. The platform, the pipeline and a good deal of the domain equity sit with the vendor, and Google treats a subdomain as substantially <b>separate from your main site</b>.</p>
-  </div>
-  <div class="door">
-    <span class="num">Door three</span>
-    <h3>Have them build it properly on your CMS</h3>
-    <p>The technically correct answer. It is also the one that wakes up procurement, legal, security review, and whoever owns the platform roadmap.</p>
-    <p class="cost">Right answer, enterprise timeline. Mid-market replatforms run <b>three to six months</b> and enterprise ones <b>six to twelve</b>, and roughly <b>seventy percent</b> of replatforming projects exceed budget.</p>
-  </div>
-</div>
+<h3>Door one: Build it by hand on the CMS you already have</h3>
+<p>Change nothing, buy nothing, integrate nothing. Somebody just does the work, repeatedly, for weeks.</p>
+<p>Cheapest to approve. Most expensive in human time. <strong>This is the door I walked through, because it was the only one that needed nobody's permission.</strong></p>
 
-<p class="foot">Timelines and overrun rates via <a href="https://www.coredna.com/help/question/how-long-does-a-cms-migration-take" rel="nofollow">Core dna</a> and <a href="https://focusreactive.com/blog/why-70-of-website-replatforming-projects-go-over-budget-and-how-to-prevent/" rel="nofollow">Focus Reactive</a>, which puts average migration overrun in the region of $315,000.</p>
+<h3>Door two: Rent the agency platform</h3>
+<p>They already have the generator, the data, the templates and the track record. Pages typically live on their system, often on a subdomain or a hosted path.</p>
+<p>Fast and proven. You are renting. The platform, the pipeline and a good deal of the domain equity sit with the vendor, and Google treats a subdomain as substantially <strong>separate from your main site</strong>.</p>
+
+<h3>Door three: Have them build it properly on your CMS</h3>
+<p>The technically correct answer. It is also the one that wakes up procurement, legal, security review, and whoever owns the platform roadmap.</p>
+<p>Right answer, enterprise timeline. Mid-market replatforms run <strong>three to six months</strong> and enterprise ones <strong>six to twelve</strong>, and roughly <strong>seventy percent</strong> of replatforming projects exceed budget.</p>
 
 <h2>Greenfield is a different sport from bolted on</h2>
 <p>Here is the thing I did not understand at the time and consider the actual lesson.</p>
 <p>When an agency builds programmatic SEO, or when I build it now on my own properties, it is programmatic from the first commit. There is a data source, a template, a generator, a canonical strategy and a sitemap, and all five exist before page one. The system assumes there will be thousands of pages, because that is what it was designed to produce.</p>
 <p>Retrofitting that onto a mature company means installing all five into a stack built on the opposite assumption, which is that a page is a thing a human creates in an interface. That system may have no usable write API. It may have one behind a vendor contract. Adding a new directory of URLs may touch IT, brand, legal and web in the same week.</p>
 <p>None of that is about the difficulty of generating a page. The generation was never the hard part. The hard part is that the write path belongs to something old, and nobody in the building has done this before, so there is no precedent to point at and nobody who can estimate it honestly.</p>
-<div class="pull">There are as many reasons a simple thing does not ship as there are technical ones. Usually more.</div>
+<blockquote class="pull"><p>There are as many reasons a simple thing does not ship as there are technical ones. Usually more.</p></blockquote>
 <p>Ambition makes it worse in a way I have watched repeatedly. A small good idea gets attention, and attention turns it into a program, and the program needs a business case and an owner and a steering committee, and it collapses under weight it did not need. Two hundred and fifty eight pages did not need a program. They needed one afternoon and one approval.</p>
 <p>On approvals: the compliance review was real and I want to defend it. Those pages were financial services copy in a regulated market, and a regulated lender reviewing hundreds of pages of consumer lending language is doing its job. The way through was to make it one review instead of two hundred and fifty eight. Get the template approved. The pages are a consequence of the template.</p>
 
@@ -122,28 +77,16 @@ for row in csv.DictReader(open("municipalities.csv", encoding="utf-8")):
 <p>Everything I have described was a resourcing problem. Somebody who could write eight lines of Python was not available to write eight lines of Python, and that turned an afternoon into months of clicking.</p>
 <p>That constraint is gone, and I do not think most people have updated for it.</p>
 
-<div class="thenow">
-  <div class="tn was">
-    <span class="tag">Then</span>
-    <h3>What the work required</h3>
-    <ul>
-      <li>A developer with spare capacity, which meant a roadmap slot</li>
-      <li>Somebody who had built a generator before</li>
-      <li>Hand-managed canonicals, sitemaps and internal links, each a place the whole thing quietly breaks</li>
-      <li>Months, or a vendor</li>
-    </ul>
-  </div>
-  <div class="tn is">
-    <span class="tag">Now</span>
-    <h3>What it requires</h3>
-    <ul>
-      <li>A dataset and a template</li>
-      <li>One person who can describe what they want built</li>
-      <li>Self-referencing canonicals, sitemaps that update on publish and internal linking handled by default</li>
-      <li>An afternoon</li>
-    </ul>
-  </div>
-</div>
+<div class="tbl" role="region" tabindex="0" aria-label="What programmatic pages required then and what they require now"><table>
+<thead><tr><th scope="col">Then</th><th scope="col">Now</th></tr></thead>
+<tbody>
+<tr><td><strong>What the work required</strong></td><td><strong>What it requires</strong></td></tr>
+<tr><td>A developer with spare capacity, which meant a roadmap slot</td><td>A dataset and a template</td></tr>
+<tr><td>Somebody who had built a generator before</td><td>One person who can describe what they want built</td></tr>
+<tr><td>Hand-managed canonicals, sitemaps and internal links, each a place the whole thing quietly breaks</td><td>Self-referencing canonicals, sitemaps that update on publish and internal linking handled by default</td></tr>
+<tr><td>Months, or a vendor</td><td>An afternoon</td></tr>
+</tbody>
+</table></div>
 
 <p>I build this way now. The pages on my own properties are generated, the sitemaps rebuild themselves on every run, and the thing that took me months at a company with a real budget takes me a single sitting. That is not a story about me getting smarter. The floor moved.</p>
 <p>So the honest advice to anyone sitting on work like this inside a large organisation is to stop scoping it as a project. Bring it built. The ask is much smaller than the objection when the answer to "how long will this take" is that it is already done and needs a review.</p>
@@ -155,7 +98,5 @@ for row in csv.DictReader(open("municipalities.csv", encoding="utf-8")):
 <p>Which is the actual point, and it is the one worth leaving with.</p>
 <p>The technical path just got extremely cheap. Two hundred and fifty eight pages is an afternoon now, and it will be less than that next year. The political path costs exactly what it cost in 2019. Nobody owning the work, no precedent to point at, a write path controlled by a system nobody wants to touch, and a good idea inflating into a program that dies of its own weight.</p>
 <p>Plan for both. Budget the second one with the same seriousness you budget the first, because you will pay for both, and from here on the second one is the expensive half.</p>
-</div>
 
-</div>
-</div>
+<footer class="foot"><p>Timelines and overrun rates via <a href="https://www.coredna.com/help/question/how-long-does-a-cms-migration-take" rel="nofollow">Core dna</a> and <a href="https://focusreactive.com/blog/why-70-of-website-replatforming-projects-go-over-budget-and-how-to-prevent/" rel="nofollow">Focus Reactive</a>, which puts average migration overrun in the region of $315,000.</p></footer>

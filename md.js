@@ -1,7 +1,7 @@
 /* md.js: the blog's Markdown to HTML converter. Zero dependencies, on purpose.
 
    It deliberately supports a small language: exactly the modules the blog design
-   system defines in css/post.css, and nothing else. Anything it does not
+   system defines in css/blog.css, and nothing else. Anything it does not
    recognise comes out as an ordinary paragraph, so a post can never render as
    half-parsed markup.
 

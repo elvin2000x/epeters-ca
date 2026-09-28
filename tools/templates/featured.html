@@ -1,0 +1,40 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=EB+Garamond:wght@500;600&display=block" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+html,body{width:1600px;height:900px;overflow:hidden}
+body{background:#0A1524;color:#E9EFF7;font:400 26px/1.4 Inter,sans-serif;position:relative;padding:96px 104px;display:grid;grid-template-columns:1.05fr .95fr;gap:72px;align-items:center}
+body::before{content:"";position:absolute;inset:0;background:radial-gradient(40% 55% at 18% 30%,rgba(224,189,107,.22),transparent 70%),radial-gradient(38% 50% at 85% 20%,rgba(94,140,255,.20),transparent 70%);z-index:-1}
+body::after{content:"";position:absolute;inset:0;background-image:linear-gradient(#2B405C33 1px,transparent 1px),linear-gradient(90deg,#2B405C33 1px,transparent 1px);background-size:64px 64px;z-index:-1;mask-image:radial-gradient(70% 70% at 50% 50%,#000,transparent)}
+.kick{display:inline-flex;align-items:center;gap:12px;font:600 20px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#E0BD6B;background:rgba(224,189,107,.10);border:1.5px solid rgba(224,189,107,.30);padding:14px 20px;border-radius:999px;margin-bottom:44px}
+.kick i{width:10px;height:10px;border-radius:50%;background:#E0BD6B}
+.big{font:500 128px/1 'EB Garamond',serif;letter-spacing:-.01em;background:linear-gradient(100deg,#F4DFA6 0%,#E0BD6B 45%,#C9A24E 100%);-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+.big small{font-size:.5em}
+.lab{margin-top:28px;color:#B7C6D9;font-size:30px;line-height:1.35;max-width:680px}
+.mark{position:absolute;left:104px;bottom:56px;font:500 26px/1 'EB Garamond',serif;color:#8BA2BD}
+.mark b{color:#E0BD6B;font-weight:500}
+ol{list-style:none;padding:0;display:grid;gap:14px}
+li{display:grid;grid-template-columns:52px 1fr auto;align-items:center;gap:18px;background:#131F33;border:1.5px solid #2B405C;border-radius:14px;padding:18px 22px;font-size:25px}
+li .n{width:52px;height:52px;border-radius:12px;display:grid;place-items:center;font:600 24px/1 Inter,sans-serif;color:#0A1524;background:#E0BD6B}
+li .t{color:#8BA2BD;font-size:19px;letter-spacing:.06em;text-transform:uppercase}
+li.hosted{border-style:dashed;opacity:.85}
+li.hosted .n{background:#2B405C;color:#E9EFF7}
+.dh{font:600 19px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8BA2BD;margin-bottom:20px}
+/* Typographic fallback (no headline number): the title carries the image. No diagram: one column. */
+.ttl{display:none;font:500 88px/1.06 'EB Garamond',serif;letter-spacing:-.01em;color:#F4EAD0;text-wrap:balance;max-width:1250px}
+body.nobig .big,body.nobig .lab:empty{display:none}
+body.nobig .ttl{display:block}
+body.nodiagram{grid-template-columns:1fr}
+body.nodiagram>div:nth-of-type(2){display:none}
+</style></head>
+<body class="{{mode}}">
+<div>
+  <div class="kick"><i></i>{{eyebrow}}</div>
+  <div class="ttl">{{title}}</div>
+  <div class="big">{{big}}</div>
+  <div class="lab">{{big_label}}</div>
+</div>
+<div>{{diagram}}</div>
+<div class="mark"><b>The Rabbit Hole</b> · epeters.ca</div>
+</body></html>

@@ -1,0 +1,49 @@
+<p>I have thirteen original browser games running right now. Strategy on a spinning 3D globe, a stack of tower defense games, a last-tower survivor, a castle siege, a monster-taming RPG, a couple of shooters. Each one is a single file of vanilla JavaScript drawing to a canvas. No framework, no build step, no CDN, no dependency I have to trust or update. One person made all of them, and that person is not a fast typist.</p>
+
+<p>People assume the trick is speed. It is not. I cannot hand-playtest thirteen games across four difficulties and an endless mode every time I nudge a number, and neither can anyone else. What makes it work is dull and it is the whole point of this post: I built the tools that let me trust the games without checking every case by hand, and I reuse an engine instead of starting from a blank file. The games are the part you see. The tooling is the part that turned three into thirteen.</p>
+
+<h2>The engine I refuse to rewrite</h2>
+
+<p>Several of the games live on a 3D globe. You drag to spin the planet, click a region, watch arcs travel between cities. It looks like it needs WebGL or three.js. It needs neither. It is a hand-rolled orthographic globe drawn in plain 2D canvas, and the math that sells it fits in a paragraph.</p>
+
+<p>One function turns latitude and longitude into a unit vector on a sphere. A rotation applies your drag as a view angle. Then you project each point to the screen. The trick that makes a flat circle read as a solid ball is back-face culling: you only draw a point if its rotated z is positive, so the far side of the planet stays hidden behind the near side. The flight paths that curve along the surface are great-circle arcs, and they come from spherical interpolation (slerp) between two unit vectors, sampled and drawn only where the segment faces you. That is the whole engine. I lift the same math into every globe game rather than reinventing it.</p>
+
+<p>It graduated once. Hand-drawn continent polygons read as a board game, and a globe that is supposed to be Earth has to actually look like Earth. So the current version vendors a local copy of d3 and a world-atlas file for real country borders and coastlines. Same idea, better data. I own the whole stack locally, so there is still no runtime call to anyone else's server.</p>
+
+<h2>Two lessons the globe beat into me</h2>
+
+<p>The first cost nothing to fix and everything to notice. Do not auto-spin the globe. An idle rotation looks great in a demo and turns miserable the moment the core interaction is clicking a region. You reach for a city, the planet drifts, you miss. A globe should sit still until the user grabs it. You spin it. It does not spin itself. Every globe game now ships with idle spin set to zero and drag-to-spin left on.</p>
+
+<p>The second: a real globe needs real coastlines. I tried to shortcut it with hand-drawn land and it always looked cheap. The fix was vendoring actual geographic data. Some things you cannot fake with clever code. You just need the right file.</p>
+
+<h2>The bot that actually makes solo shipping work</h2>
+
+<p>The engine saves me from rewriting. The thing that lets me sleep is a different file. Every game has a <code>bot_test.js</code> I run with node. It loads the real <code>index.html</code>, the exact code that ships, under a set of permissive headless stubs, and drives the game with no browser anywhere in sight.</p>
+
+<p>The stubs are where it earns its keep. Canvas games touch <code>document</code>, the canvas, <code>localStorage</code>, and the animation loop the instant they load, so I hand them stand-ins. Every DOM element is a JavaScript Proxy whose every property is a harmless no-op, which means any draw call the game makes quietly does nothing. A plain Map backs <code>localStorage</code>. The important one is <code>requestAnimationFrame</code>, which I set to a no-op so the game's own loop never starts. That detail carries more than it looks. With the auto-loop dead, the bot calls the game's <code>update</code> function itself, one tick at a time, and owns the passage of game time completely. It can play a full match in milliseconds because nothing waits for a frame.</p>
+
+<p>There are two tiers. The first is a full play-sim: a bot actually plays, places towers, survives waves, and reports where it dies at each difficulty. Single runs lie to you, because the games have randomness, so the bot runs many trials and I read the win-rate and the median wave instead of one lucky result. A ladder like easy clears every time, hard clears most of the time, extreme is a wall is what a healthy game looks like in the numbers.</p>
+
+<p>The second tier is one game-agnostic smoke-and-integrity file I drop into every folder. It does three cheap, high-value things:</p>
+
+<ul>
+<li>Loads the script, which catches crash-on-load. After a config tweak that is the number-one way to ship something broken, and it takes one second to catch.</li>
+<li>Drives 1200 ticks of the update loop to surface runtime crashes that only show up deep into a session.</li>
+<li>Cross-checks the wave tables against the enemy tables, so endless mode can never try to summon an enemy that does not exist in the data.</li>
+</ul>
+
+<p>One file works across every game because of a reflection bridge: an <code>eval</code> running inside the game's own scope can read or run any in-scope name by string. I never write a bespoke harness per game. I write one, and it inspects whatever the game happens to define.</p>
+
+<h2>Suspect the ruler before you plane the leg</h2>
+
+<p>Here is the lesson that outlives the games. Early on, my tower-defense bot reported a game as flatly unwinnable. Zero wins out of twelve trials at the easiest difficulty. My first instinct was to go rebalance it.</p>
+
+<p>The game was fine. The bot was broken. It played the dumbest possible strategy, spamming the cheapest tower, which is a useless floor no real player would ever sit on. A test that measures a game with an idiot only tells you about the idiot. I taught it to build a few strong, upgraded towers, the way a person actually plays, and a false 0-out-of-12 became a true 12-out-of-12. Nothing about the game changed.</p>
+
+<blockquote class="pull"><p>When your measurement says the thing is broken, check the measurement first. A bad ruler will happily report that a straight table is crooked, and you can waste a week planing a leg that was never bent.</p></blockquote>
+
+<h2>Verification is the multiplier</h2>
+
+<p>I cannot hand-test thirteen games across four difficulties and an endless mode. There is one of me and the hours do not stretch. The bots can, on every change, in seconds. That gap is the whole distance between shipping three games and shipping thirteen. I do not move faster than other people. I just do not move twice, because the thing that checks the work never gets bored, never gets sloppy on the two-hundredth run, and never tells me a game is fine when it crashes on load.</p>
+
+<p>If you want to ship a lot alone, that is where the effort goes. Not into being superhuman at the craft itself, but into building the small, unglamorous machine that verifies it, so one person can move like more than one. Reuse the engine. Build the bot. Then trust the numbers, once you have checked that the bot is not the fool.</p>

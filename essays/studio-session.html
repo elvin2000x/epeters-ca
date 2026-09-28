@@ -1,59 +1,26 @@
-<style>
-/* Post-specific modules only. Shell, type, neutrals and the shared module
-   library live in /css/post.css. Accent: amber (set on the wrapper). */
-.trp .test{background:var(--card);border:1px solid var(--grid);border-radius:6px;padding:18px 22px;margin:14px 0;}
-.trp .test h3{margin:0 0 .2em;font-size:1.08rem;}
-.trp .test .verdict{font-family:var(--disp);font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
-.trp .v-yes{color:var(--amber);}
-.trp .v-no{color:var(--muted);}
-.trp .phase{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:1.6rem 0;}
-.trp .ph{background:var(--card);border:1px solid var(--grid);border-radius:6px;padding:16px 18px;}
-.trp .ph b{font-family:var(--disp);display:block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:.4em;}
-.trp .ph p{font-size:.95rem;margin:.3em 0;}
-</style>
-<div class="trp accent-amber">
-<div class="wrap">
-<div class="col"><a class="trp-back" href="/blog/">&larr; Blog</a></div>
-<header class="col" style="padding-top:56px;">
-  <div class="eyebrow">Playbook · Part three of three</div>
-  <h1>Running a Studio&nbsp;Session</h1>
-  <p class="dek">Sometimes the enormous window is the entire point. Here's how to spend that money deliberately instead of leaking it, and where the cheap-session advice becomes actively wrong.</p>
-  <div class="byline">Elvin Peters · August 2026</div>
-</header>
+<div class="note"><span class="lab">This series</span><p><a href="/blog/token-efficiency/">Part one</a> measured three months of my sessions and found 86% of the cost was context. <a href="/blog/assembly-line/">Part two</a> built the cheap default. This part is about the sessions where you want the expensive shape on purpose, and how to keep them from turning into marathons.</p></div>
 
-<div class="series"><a href="/blog/token-efficiency/">Part one</a> measured three months of my sessions and found 86% of the cost was context. <a href="/blog/assembly-line/">Part two</a> built the cheap default. This part is about the sessions where you want the expensive shape on purpose, and how to keep them from turning into marathons.</div>
 
-<div class="col">
 <h2>The work that justifies it</h2>
 <p>Some jobs genuinely need everything in the room at once. Editing chapter nine so it doesn't repeat a callback from chapter four means the model has to know chapter four. Deciding where a new service belongs means holding the architecture in mind, not a grep result from it. Doing a consistency pass across forty pages of copy means all forty pages, together.</p>
 <p>For that work, a lean window produces confidently wrong answers. The model will happily tell you chapter nine reads fine, because it never saw chapter four. That's a worse outcome than a bigger bill.</p>
 <p>The distinction that matters is between context you loaded on purpose and context that accumulated while you weren't looking. Same token count, completely different value. A studio session is the first kind, kept honest by a few rules.</p>
-<div class="pull">Paying for a big window is fine. Paying for one you didn't choose is the leak.</div>
+<blockquote class="pull"><p>Paying for a big window is fine. Paying for one you didn't choose is the leak.</p></blockquote>
 
 <h2>The three-question test</h2>
 <p>Before committing to the expensive shape, three quick checks. Any "no" and this is assembly line work wearing a costume.</p>
 
-<div class="test">
-  <div class="verdict v-yes">Question one</div>
-  <h3>Does the answer change based on material outside the file I'm editing?</h3>
-  <p>Voice consistency, repeated arguments, architectural fit: yes, obviously. Fixing a date parser: no, that's one file and its tests.</p>
-</div>
-<div class="test">
-  <div class="verdict v-yes">Question two</div>
-  <h3>Would a summary of that material be good enough?</h3>
-  <p>If a two-paragraph digest of chapter four would do, send an agent and stay lean. If you need the actual prose, because rhythm and phrasing are the thing you're judging, that's a real studio session.</p>
-</div>
-<div class="test">
-  <div class="verdict v-no">Question three</div>
-  <h3>Is this one continuous job, or several jobs I'm bundling?</h3>
-  <p>The killer. My worst session was legitimate studio work with five unrelated errands stuffed inside it. The errands paid the studio's rent on every call, for nothing.</p>
-</div>
+<ol class="list">
+  <li><strong>Does the answer change based on material outside the file I'm editing?</strong> Voice consistency, repeated arguments, architectural fit: yes, obviously. Fixing a date parser: no, that's one file and its tests.</li>
+  <li><strong>Would a summary of that material be good enough?</strong> If a two-paragraph digest of chapter four would do, send an agent and stay lean. If you need the actual prose, because rhythm and phrasing are the thing you're judging, that's a real studio session.</li>
+  <li><strong>Is this one continuous job, or several jobs I'm bundling?</strong> The killer. My worst session was legitimate studio work with five unrelated errands stuffed inside it. The errands paid the studio's rent on every call, for nothing.</li>
+</ol>
 
 <h2>Rule 1: declare it, and write down the corpus</h2>
 <p>A studio session starts by saying what it is out loud and listing exactly what belongs in the window. Writing the list down does something subtle: it makes additions later feel like a decision rather than a reflex, which is precisely the discipline that keeps the plateau flat.</p>
 
-<div class="plabel">CORPUS.md, sitting in the project folder</div>
-<pre><code># Corpus: Book 3 voice and consistency pass
+<p class="plab">CORPUS.md, sitting in the project folder</p>
+<div class="code"><pre><code># Corpus: Book 3 voice and consistency pass
 
 ## Load at session start, in this order
 1. STYLE-BIBLE.md            voice rules, banned constructions, cadence
@@ -68,21 +35,22 @@
 
 ## Budget
 Expect ~400K after load. Ceiling for this session: 700K. At 700K: finish
-the current chapter, checkpoint, close.</code></pre>
+the current chapter, checkpoint, close.</code></pre></div>
 
-<div class="note"><b>Load order isn't cosmetic.</b> Caching works on a prefix, so whatever sits earliest and changes least gets cached most effectively across turns. Stable reference material first, the thing you're actively editing last. Load it the other way round and you re-pay more of the window every time the working file changes.</div>
+<div class="note"><span class="lab">Load order isn't cosmetic</span><p>Caching works on a prefix, so whatever sits earliest and changes least gets cached most effectively across turns. Stable reference material first, the thing you're actively editing last. Load it the other way round and you re-pay more of the window every time the working file changes.</p></div>
 
 <h2>Rule 2: the plateau, and holding it</h2>
 <p>The shape you want looks like a hill followed by a long flat table. One climb during loading, then dead flat for the rest of the session. What turns a studio into a marathon is the drift: one more file, one more log, one more screenshot, each individually reasonable, together fatal.</p>
 
-<div class="phase">
-  <div class="ph"><b>Phase 1 · Load</b><p>Read the corpus in the declared order. This is the only part of the session where the window is allowed to grow.</p></div>
-  <div class="ph"><b>Phase 2 · Work</b><p>The window holds flat. Facts come in via agents as short answers. Output goes out to disk. Nothing new gets read in.</p></div>
-  <div class="ph"><b>Phase 3 · Close</b><p>Checkpoint at the declared ceiling. End the session. Don't extend it because you're on a roll.</p></div>
-</div>
+<h3>Phase 1 · Load</h3>
+<p>Read the corpus in the declared order. This is the only part of the session where the window is allowed to grow.</p>
+<h3>Phase 2 · Work</h3>
+<p>The window holds flat. Facts come in via agents as short answers. Output goes out to disk. Nothing new gets read in.</p>
+<h3>Phase 3 · Close</h3>
+<p>Checkpoint at the declared ceiling. End the session. Don't extend it because you're on a roll.</p>
 
-<div class="plabel">The prompt that sets the plateau</div>
-<pre class="prompt">This is a studio session for the chapter 9 voice pass.
+<p class="plab">The prompt that sets the plateau</p>
+<div class="code"><pre class="prose"><code>This is a studio session for the chapter 9 voice pass.
 
 Load, in this order: STYLE-BIBLE.md, CHARACTERS.md, chapters/ch01-ch08.md,
 then chapters/ch09.md. Tell me the context size once loaded.
@@ -90,7 +58,7 @@ then chapters/ch09.md. Tell me the context size once loaded.
 For the rest of this session: don't read any new files into our conversation.
 If you need a fact from research/ or anywhere else, use an agent and bring
 back the answer only. Write all drafts to files. Keep replies here short,
-since every turn re-pays this whole window.</pre>
+since every turn re-pays this whole window.</code></pre></div>
 
 <p>That final sentence changes the model's behaviour more than you'd expect. Told that each turn is expensive, it consolidates: fewer, denser replies instead of a stream of chatty ones.</p>
 
@@ -98,21 +66,21 @@ since every turn re-pays this whole window.</pre>
 <p>In a 400K window every message you send re-pays 400K. Four questions asked separately cost four times what the same four cost bundled. This is the single biggest behavioural difference between a studio session and normal chatting, and it's the one that feels most unnatural.</p>
 <p>I keep a scratch file open and let questions accumulate until I've got three or four, then send them as one turn.</p>
 
-<div class="plabel">Batched, not drip-fed</div>
-<pre class="prompt">Four things on chapter 9, answer all of them then stop:
+<p class="plab">Batched, not drip-fed</p>
+<div class="code"><pre class="prose"><code>Four things on chapter 9, answer all of them then stop:
 
 1. Does the Dmitri callback on page 3 land, or does it just repeat ch4?
 2. The pricing anecdote runs long. Cut it, or is the detail earning its space?
 3. Any voice-bible violations, quoted with line references?
-4. Better title for the middle section than "Getting Started"?</pre>
+4. Better title for the middle section than "Getting Started"?</code></pre></div>
 
-<div class="warn"><b>The interruption tax is real.</b> One quick unrelated question in a 400K studio session costs about as much as twenty questions in a lean one. If something unrelated occurs to you mid-session, write it on a note and open a separate session for it later. That's the whole discipline in one sentence.</div>
+<div class="warn"><span class="lab">The interruption tax is real</span><p>One quick unrelated question in a 400K studio session costs about as much as twenty questions in a lean one. If something unrelated occurs to you mid-session, write it on a note and open a separate session for it later. That's the whole discipline in one sentence.</p></div>
 
 <h2>Rule 4: rules live in files, not in the chat</h2>
 <p>If you find yourself re-explaining your voice rules, your naming conventions or your architectural constraints every session, those belong in a file the corpus loads. Stated once at the top of a session, they're part of the cached prefix. Re-explained in message twelve, they're a permanent addition to a window that's already expensive.</p>
 
-<div class="plabel">STYLE-BIBLE.md, abbreviated</div>
-<pre><code># Voice rules
+<p class="plab">STYLE-BIBLE.md, abbreviated</p>
+<div class="code"><pre><code># Voice rules
 
 ## Never
 - Em-dashes. Use commas, colons, or a full stop.
@@ -126,37 +94,38 @@ since every turn re-pays this whole window.</pre>
 
 ## Cadence
 Vary sentence length. A long one that carries the argument, then a short one
-that lands it. Never three short ones in a row.</code></pre>
+that lands it. Never three short ones in a row.</code></pre></div>
 
 <p>The bonus is that the same file works for the agents you spawn. Hand a subagent the style bible path and its output comes back in voice, instead of you rewriting it afterwards.</p>
 
 <h2>Rule 5: raise the purge line on purpose</h2>
 <p>My default forces a purge at 250K, which is right for ordinary work and wrong here, because a studio session's whole value is the material staying loaded. So the ceiling gets raised deliberately for these sessions and only these.</p>
 
-<div class="plabel">Project settings for the writing folder</div>
-<pre><code>{
+<p class="plab">Project settings for the writing folder</p>
+<div class="code"><pre><code>{
   "autoCompactWindow": 700000,
   "precomputeCompactionEnabled": true
-}</code></pre>
+}</code></pre></div>
 
 <p>Two things to keep straight. This is a per-project override, so it applies where the book lives and nowhere else. And 700K is a ceiling you intend never to reach, since the plan is to checkpoint and close before it fires. If auto-compaction is firing in a studio session, the corpus was too big for the job, or errands crept in.</p>
 
 <h2>Rule 6: close it properly</h2>
 <p>Studio sessions are the ones you're most tempted to keep alive, because reloading the corpus tomorrow costs real money and it's right there, already warm. That temptation is exactly how my 3.5 billion token session happened. The corpus reload is a fixed one-time cost. Extending a full session is a cost you pay on every single call for the rest of its life.</p>
 
-<div class="plabel">Exit ritual</div>
-<pre class="prompt">We're closing this session. Before we do:
+<p class="plab">Exit ritual</p>
+<div class="code"><pre class="prose"><code>We're closing this session. Before we do:
 
 1. Write the chapter 9 edits to disk if anything is still unsaved.
 2. Append to STATUS.md: what changed in ch9, what's still open, and anything
    we noticed about other chapters that needs its own pass later.
 3. Add any new voice rules we discovered to STYLE-BIBLE.md.
 
-Then stop. Next session reloads the corpus fresh.</pre>
+Then stop. Next session reloads the corpus fresh.</code></pre></div>
 
 <h2>Where part two's advice is wrong here</h2>
+<div class="tbl" role="region" tabindex="0" aria-label="Assembly line rules in a studio session">
 <table>
-  <thead><tr><th>Assembly line rule</th><th>In a studio session</th></tr></thead>
+  <thead><tr><th scope="col">Assembly line rule</th><th scope="col">In a studio session</th></tr></thead>
   <tbody>
     <tr><td>Grep, then read a section</td><td>Wrong for the corpus. Judging rhythm and consistency needs whole chapters. Right for everything outside the corpus.</td></tr>
     <tr><td>Delegate reading to agents</td><td>Half right. Delegate fact-fetching, never the material you're judging. An agent's summary of your prose isn't your prose.</td></tr>
@@ -164,10 +133,12 @@ Then stop. Next session reloads the corpus fresh.</pre>
     <tr><td>One task, one session</td><td>Still true, and matters more here. This is the shape that punishes bundling hardest.</td></tr>
   </tbody>
 </table>
+</div>
 
 <h2>What good looks like</h2>
+<div class="tbl" role="region" tabindex="0" aria-label="Healthy studio versus marathon in disguise">
 <table>
-  <thead><tr><th>Signal</th><th>Healthy studio</th><th>Marathon in disguise</th></tr></thead>
+  <thead><tr><th scope="col">Signal</th><th scope="col">Healthy studio</th><th scope="col">Marathon in disguise</th></tr></thead>
   <tbody>
     <tr><td>Context shape</td><td>One climb, then flat</td><td>Sawtooth, repeated compactions</td></tr>
     <tr><td>Files read after loading</td><td>Zero</td><td>Steady trickle all session</td></tr>
@@ -175,10 +146,8 @@ Then stop. Next session reloads the corpus fresh.</pre>
     <tr><td>Ending</td><td>Checkpoint, then closed</td><td>Still open two days later</td></tr>
   </tbody>
 </table>
+</div>
 
 <p>Done well, a studio session is one of the most valuable things you can run. The model holds the whole picture, catches the contradiction on page 200 that you'd forgotten about, and does work that a lean window genuinely cannot. It just has to be a decision you made, with a shape you're holding on purpose, and an ending you actually reach.</p>
 
-<div class="foot">Part three of three. <a href="/blog/token-efficiency/">Part one</a> has the data, <a href="/blog/assembly-line/">part two</a> has the cheap default. Settings shown are Claude Code's <code>settings.json</code>, though the discipline ports to any assistant that carries conversation context.</div>
-</div>
-</div>
-</div>
+<footer class="foot"><p>Part three of three. <a href="/blog/token-efficiency/">Part one</a> has the data, <a href="/blog/assembly-line/">part two</a> has the cheap default. Settings shown are Claude Code's <code>settings.json</code>, though the discipline ports to any assistant that carries conversation context.</p></footer>

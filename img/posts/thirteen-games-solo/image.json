@@ -1,0 +1,8 @@
+{
+  "eyebrow": "Playbook · Tooling",
+  "title": "How I Ship Thirteen Games Without Hand-Testing Any of Them",
+  "big": "12-out-of-12",
+  "big_label": "Teaching the test bot to play like a person turned a false 0-out-of-12 into a true 12-out-of-12.",
+  "headshot": "../../headshot.jpg",
+  "diagram": "<div class=\"dh\">The smoke-and-integrity file</div><ol><li><span class=\"n\">1</span>Load the script<span class=\"t\">crash-on-load</span></li><li><span class=\"n\">2</span>Drive 1200 update ticks<span class=\"t\">runtime crashes</span></li><li><span class=\"n\">3</span>Cross-check wave tables<span class=\"t\">endless mode</span></li><li class=\"hosted\"><span class=\"n\">4</span>One file for every game<span class=\"t\">reflection bridge</span></li></ol>"
+}

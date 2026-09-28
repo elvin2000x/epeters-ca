@@ -7,7 +7,7 @@ const CH = require('./chrome.js');
 const fails = [], notes = [];
 const FAIL = (f, m) => fails.push(`${f}: ${m}`);
 
-const SKIP_DIRS = new Set(['.git', 'node_modules', 'scripts']);
+const SKIP_DIRS = new Set(['.git', 'node_modules', 'scripts', 'tools']); // tools/: the blog image renderer and its templates, not pages
 function files(rel = '') {
   const out = [];
   for (const e of fs.readdirSync(path.join(DIR, rel), { withFileTypes: true })) {
@@ -104,6 +104,50 @@ for (const f of TEXT) if (!STUBS.includes(f) && /(?:href|src)\s*[=:]\s*\\?["']\/
   const rel = /\b(?:href|src)="(?!https?:|\/|#|data:|mailto:)([^"]*)"/g; let m;
   while ((m = rel.exec(s))) FAIL('404.html', `relative path ${m[1]} breaks below the root`);
   if (locs.includes('https://epeters.ca/404.html')) FAIL('sitemap.xml', '404.html listed');
+}
+
+// #361: one blog template. Posts carry no styles of their own, every image has alt text,
+// titles and deks fit search results, and each post ships its featured image, share card,
+// read time and valid JSON-LD. BLOG-DESIGN.md is the spec.
+{
+  const TYPES = new Set(['Field report', 'Playbook', 'Field notes', 'Column']);
+  const BODY_CLASSES = new Set(['stats', 'pull', 'foot', 'tbl', 'num', 'fig', 'chart', 'note', 'warn', 'lab', 'code', 'plab', 'prose', 'wrap',
+    'list', 'legend', 'k1', 'k2', 'k3', 'km', 's1', 's2', 's3', 'sm', 'l1', 'l2', 'l3', 'lm', 'grid', 'axis', 'ink', 'on', 'bad', 'lbad', 'lbl', 'big']);
+  const J = JSON.parse(fs.readFileSync(path.join(DIR, 'content/essays.json'), 'utf8'));
+  const posts = (J.posts || J).filter(e => !e.draft);
+  const noChrome = s => s.replace(/<!-- ep:ca-(bar|foot) -->[\s\S]*?<!-- \/ep:ca-\1 -->/g, '');
+  for (const e of posts) {
+    const id = `essays.json ${e.slug}`;
+    if (e.title.length > 60) FAIL(id, `title ${e.title.length} characters (60 max)`);
+    if (e.dek.length > 155) FAIL(id, `dek ${e.dek.length} characters (155 max)`);
+    if (!TYPES.has(e.type)) FAIL(id, `type "${e.type}" is not one of ${[...TYPES].join(', ')}`);
+    for (const k of ['featured_alt', 'featured_caption', 'og_alt']) if (!e[k] || e[k] === 'TODO') FAIL(id, `${k} missing`);
+    for (const k of ['featured_alt', 'og_alt']) if (e[k] && e[k].length > 125) FAIL(id, `${k} over 125 characters`);
+    for (const f of ['featured-1600.webp', 'featured-800.webp', 'og.png', 'image.json'])
+      if (!fs.existsSync(path.join(DIR, 'img/posts', e.slug, f))) FAIL(id, `img/posts/${e.slug}/${f} missing (python tools/render_images.py img/posts/${e.slug})`);
+    const body = fs.readFileSync(path.join(DIR, e.file), 'utf8');
+    if (/<style|\sstyle="/i.test(body)) FAIL(e.file, 'carries its own styles (blog.css is the only stylesheet)');
+    if (/<script/i.test(body)) FAIL(e.file, '<script> in a post body (charts are static SVG)');
+    for (const m of body.matchAll(/class="([^"]+)"/g)) for (const c of m[1].split(/\s+/)) if (!BODY_CLASSES.has(c)) FAIL(e.file, `class "${c}" is not in blog.css`);
+    const page = path.join(DIR, 'blog', e.slug, 'index.html');
+    if (!fs.existsSync(page)) { FAIL(id, 'not built'); continue; }
+    const s = fs.readFileSync(page, 'utf8'), f = `blog/${e.slug}/index.html`;
+    if (/<style|\sstyle="/i.test(noChrome(s))) FAIL(f, 'inline styles outside the shared chrome');
+    if (!s.includes('href="/css/blog.css"')) FAIL(f, 'does not load /css/blog.css');
+    if (!s.includes('<!-- ep:ca-bar -->') || /<nav class="nav"/.test(s)) FAIL(f, 'not on the .ca bar (the old nav.nav header is gone, #342)');
+    if (!/\d+ min read/.test(s)) FAIL(f, 'no read time');
+    if (!s.includes(`<meta property="og:image" content="https://epeters.ca/img/posts/${e.slug}/og.png">`)) FAIL(f, 'og:image is not its og.png');
+    if (!s.includes(`<link rel="canonical" href="https://epeters.ca/blog/${e.slug}/">`)) FAIL(f, 'canonical is not its /blog/ URL');
+    if (/[–]/.test(s)) FAIL(f, 'en dash');
+    for (const m of s.matchAll(/<img\b[^>]*>/g)) if (!/\balt="/.test(m[0])) FAIL(f, 'img without alt');
+    const ld = [...s.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
+    if (!ld.length) FAIL(f, 'no JSON-LD');
+    for (const m of ld) { try { const o = JSON.parse(m[1]); if (o['@type'] !== 'BlogPosting' || !o.headline || !o.datePublished || !o.image) FAIL(f, 'JSON-LD is not a complete BlogPosting'); } catch (x) { FAIL(f, 'JSON-LD does not parse: ' + x.message); } }
+  }
+  const idx = fs.readFileSync(path.join(DIR, 'blog/index.html'), 'utf8');
+  if (/<style|\sstyle="/i.test(noChrome(idx))) FAIL('blog/index.html', 'inline styles outside the shared chrome');
+  if (/<nav class="nav"/.test(idx)) FAIL('blog/index.html', 'old nav.nav header (#342)');
+  for (const e of posts) if (!idx.includes(`href="/blog/${e.slug}/"`)) FAIL('blog/index.html', `no card for ${e.slug}`);
 }
 
 // CNAME only arrives with Phase B (the DNS flip needs Elvin's go).

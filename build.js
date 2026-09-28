@@ -10,27 +10,26 @@ const fs = require('fs'), path = require('path');
 const DIR = __dirname;
 const ORIGIN = 'https://epeters.ca';
 const { mdToHtml } = require('./md.js');
-const { NAV, FOOT, THEME, esc, head, essayPage } = require('./essay-page.js');
+const { prepare, essayPage, blogIndex } = require('./essay-page.js');
 const CH = require('./chrome.js');
 
 /* ---- 1. the blog --------------------------------------------------------- */
+// One template for every post (BLOG-DESIGN.md, card #361). essays.json holds each post's
+// facts (title, dek, type, topic, dates, image text); the body is a file in essays/ (HTML,
+// or Markdown when it ends in .md). Read time, h2 ids, the TOC and related posts are derived.
 const essaysRaw = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'essays.json'), 'utf8'));
-const published = (Array.isArray(essaysRaw) ? essaysRaw : essaysRaw.posts).filter(e => !e.draft);
+const published = (Array.isArray(essaysRaw) ? essaysRaw : essaysRaw.posts).filter(e => !e.draft).map(e => {
+  const src = fs.readFileSync(path.join(DIR, e.file), 'utf8');
+  return prepare({ ...e }, e.file.endsWith('.md') ? mdToHtml(src) : src);
+});
 fs.mkdirSync(path.join(DIR, 'blog'), { recursive: true });
 for (const e of published) {
-  const body = e.file ? fs.readFileSync(path.join(DIR, e.file), 'utf8')
-    : e.body_format === 'markdown' ? mdToHtml(e.body) : e.html;
   fs.mkdirSync(path.join(DIR, 'blog', e.slug), { recursive: true });
-  fs.writeFileSync(path.join(DIR, 'blog', e.slug, 'index.html'), essayPage(e, body));
+  fs.writeFileSync(path.join(DIR, 'blog', e.slug, 'index.html'), essayPage(e, published));
 }
-const list = head('Blog', 'Posts on building software, games, and a company of one with AI as a co-worker.', '/img/og.jpg', `${ORIGIN}/blog/`) + NAV +
-  `<article style="max-width:820px"><span class="eyebrow">Blog</span><h1 style="margin-bottom:6px">Notes from a workshop of one.</h1><p class="dek" style="margin-bottom:30px">How I actually build: the harness around the AI, the zero-dependency habit, the tools that let one person ship like a team.</p>` +
-  published.map(e => `<a href="/blog/${e.slug}/" style="display:grid;grid-template-columns:150px 1fr;gap:18px;padding:18px 0;border-top:1px solid var(--line-soft);align-items:center">` +
-    `<img src="/img/${e.image}" alt="" width="150" height="94" loading="lazy" style="aspect-ratio:16/10;object-fit:cover;border-radius:10px;border:1px solid var(--line)">` +
-    `<span><span class="eyebrow">Post${e.date ? ' &middot; ' + e.date : ''} &middot; ${e.readmins || 8} min</span><h2 style="font-family:var(--serif);font-weight:600;font-size:1.35rem;margin:6px 0 4px">${esc(e.title)}</h2><span style="color:var(--ink-2);font-size:14px">${esc(e.dek)}</span></span></a>`).join('') +
-  `</article>` + FOOT + THEME + `</body></html>`;
-fs.writeFileSync(path.join(DIR, 'blog', 'index.html'), list);
-console.log(`Built ${published.length} posts -> blog/<slug>/ + blog/ index`);
+fs.writeFileSync(path.join(DIR, 'blog', 'index.html'), blogIndex(published));
+console.log(`Built ${published.length} posts -> blog/<slug>/ + blog/ index (` +
+  published.map(e => `${e.slug} ${e.words}w ${e.readmins}m`).join(', ') + ')');
 
 // The blog lived at writing/ until #367 (Elvin, 2026-09-28: "make it epeters.ca/blog").
 // Each old address stays as a redirect stub, the same pattern elvinpeters.com uses for
@@ -58,7 +57,7 @@ for (const e of published) {
 console.log(`writing/: ${published.length + 1} redirect stubs -> blog/`);
 
 /* ---- 2 + 3. chrome regions and canonicals on the hand-built pages -------- */
-const SKIP_DIRS = new Set(['.git', 'node_modules', 'scripts', 'content', 'css', 'js', 'img']);
+const SKIP_DIRS = new Set(['.git', 'node_modules', 'scripts', 'content', 'css', 'js', 'img', 'tools']);
 function pages(rel = '') {
   const out = [];
   for (const e of fs.readdirSync(path.join(DIR, rel), { withFileTypes: true })) {

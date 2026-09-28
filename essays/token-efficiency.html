@@ -1,319 +1,177 @@
-<style>
-/* Post-specific modules only. Shell, type, neutrals and the shared module
-   library live in /css/post.css. Accent: amber (set on the wrapper). */
-.trp .statstrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--rule);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:2.5rem 0;}
-.trp .stat{background:var(--paper);padding:18px 16px;}
-.trp .stat b{display:block;font-family:var(--mono);font-size:1.7rem;font-weight:600;font-variant-numeric:tabular-nums;}
-.trp .stat span{font-family:var(--disp);font-size:.78rem;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;}
-.trp .modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:1.8rem 0;}
-.trp .mode{background:var(--card);border:1px solid var(--grid);border-radius:6px;padding:20px 20px 14px;}
-.trp .mode h3{margin:.1em 0 .2em;}
-.trp .mode .tag{font-family:var(--disp);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 9px;border-radius:99px;}
-.trp .tag.bad{background:color-mix(in srgb,var(--bad) 14%,transparent);color:var(--bad);}
-.trp .tag.good{background:color-mix(in srgb,var(--good) 14%,transparent);color:var(--good);}
-.trp .tag.amber{background:var(--amber-soft);color:var(--amber);}
-.trp .mode ul{padding-left:1.15em;margin:.6em 0;font-size:.95rem;}
-.trp .mode li{margin:.35em 0;}
-.trp .mode .verdict{font-family:var(--disp);font-size:.85rem;border-top:1px dashed var(--rule);padding-top:.6em;margin-top:.8em;color:var(--muted);}
-.trp .habit{background:var(--card);border:1px solid var(--grid);border-radius:6px;padding:18px 20px;margin:14px 0;}
-.trp .habit h3{margin:0 0 .1em;font-size:1.12rem;}
-.trp .habit .costs{font-family:var(--disp);font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--bad);margin-bottom:.7em;}
-.trp .habit p{font-size:1rem;margin:.6em 0;}
-.trp .habit .do{background:var(--blue-soft);border-radius:4px;padding:10px 14px;font-family:var(--mono);font-size:.86rem;margin-top:.9em;overflow-x:auto;white-space:pre-wrap;}
-.trp .habit .do b{font-family:var(--disp);display:block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:.4em;}
-</style>
-<div class="trp accent-amber">
-<div class="wrap">
-<div class="col"><a class="trp-back" href="/blog/">&larr; Blog</a></div>
-<header class="col" style="padding-top:56px;">
-  <div class="eyebrow">Field report · AI operations</div>
-  <h1>The Rent You Pay Every&nbsp;Turn</h1>
-  <p class="dek">I pulled the logs on three months of my own AI sessions. Every call, every token. The bill wasn't where I assumed it was, and the fix has nothing to do with typing less.</p>
-  <div class="byline">Elvin Peters · August 2026 · Data: 95 sessions, 43,373 API calls, parsed from raw transcripts</div>
-</header>
+<ul class="stats" aria-label="The numbers">
+  <li><b>16.2B</b><span>tokens in 3 months</span></li>
+  <li><b>$16.7K</b><span>API-equivalent cost</span></li>
+  <li><b>86%</b><span>of cost was context, not output</span></li>
+  <li><b>500K</b><span>avg context per call, big sessions</span></li>
+</ul>
 
-<div class="statstrip">
-  <div class="stat"><b>16.2B</b><span>tokens in 3 months</span></div>
-  <div class="stat"><b>$16.7K</b><span>API-equivalent cost</span></div>
-  <div class="stat"><b>86%</b><span>of cost was context, not output</span></div>
-  <div class="stat"><b>500K</b><span>avg context per call, big sessions</span></div>
-  <div class="stat"><b>8×</b><span>compactions in one session</span></div>
-</div>
-
-<div class="col">
 <h2>Nobody's remembering anything. You're re-sending it.</h2>
-<p>Here's the thing that took me embarrassingly long to internalize: <b>the API is stateless</b>. There's no conversation sitting on a server somewhere that the model can glance back at. Every single call re-transmits the whole pile: your chat history, every file it's read, every screenshot you took, every command's output. Caching makes that re-send about ten times cheaper per token, and it's still the biggest line on the bill, because the volume is enormous.</p>
-<p>So I've started thinking about context as <b>rent</b>. When you pull a file into a session, you haven't paid for it once. You've signed a tenant. It sits in the window and you re-pay for it on every call that follows, right up until the session ends or the context gets purged. Read a 50,000-token file early in a session that runs a thousand calls, and you'll have paid roughly <b>50 million</b> tokens for it by the end.</p>
-<div class="pull">Output was 13% of my bill. The other 86% was re-reading stuff I'd already read.</div>
-</div>
+<p>Here's the thing that took me embarrassingly long to internalize: <strong>the API is stateless</strong>. There's no conversation sitting on a server somewhere that the model can glance back at. Every single call re-transmits the whole pile: your chat history, every file it's read, every screenshot you took, every command's output. Caching makes that re-send about ten times cheaper per token, and it's still the biggest line on the bill, because the volume is enormous.</p>
+<p>So I've started thinking about context as <strong>rent</strong>. When you pull a file into a session, you haven't paid for it once. You've signed a tenant. It sits in the window and you re-pay for it on every call that follows, right up until the session ends or the context gets purged. Read a 50,000-token file early in a session that runs a thousand calls, and you'll have paid roughly <strong>50 million</strong> tokens for it by the end.</p>
+<blockquote class="pull"><p>Output was 13% of my bill. The other 86% was re-reading stuff I'd already read.</p></blockquote>
 
-<figure>
-  <div class="chart"><svg id="anatomy" viewBox="0 0 900 150" role="img" aria-label="Stacked bar: cache reads 55%, cache writes 31%, output 13%, fresh input under 1% of total cost"></svg></div>
+
+<figure class="fig">
+  <div class="chart"><svg id="anatomy" viewBox="0 0 900 150" role="img" aria-label="Stacked bar: cache reads 55%, cache writes 31%, output 13%, fresh input under 1% of total cost"><rect x="20" y="40" width="475.3" height="44" rx="2" class="s2"/><text class="lbl big on" x="28" y="66">55.5%</text><circle cx="25" cy="106" r="4" class="s2"/><text x="34" y="110">Cache reads</text><rect x="497.3" y="40" width="268.04" height="44" rx="2" class="s1"/><text class="lbl big on" x="505.3" y="66">31.4%</text><circle cx="502.3" cy="106" r="4" class="s1"/><text x="511.3" y="110">Cache writes</text><rect x="767.34" y="40" width="108.94" height="44" rx="2" class="s3"/><text class="lbl big on" x="775.34" y="66">12.9%</text><circle cx="772.34" cy="106" r="4" class="s3"/><text x="781.34" y="110">Output</text><rect x="878.28" y="40" width="2" height="44" rx="2" class="sm"/><line x1="879.28" y1="86" x2="879.28" y2="122" stroke-width="1" class="lm"/><circle cx="785" cy="130" r="4" class="sm"/><text x="794" y="134">Fresh input</text><text class="lbl" x="20" y="24">$16.7K API-equivalent, by billing category</text></svg></div>
   <figcaption>Where $16.7K went. Cache reads get billed at a tenth of list price and still dominate, because a big session re-reads about 500K tokens on every one of hundreds of calls.</figcaption>
 </figure>
 
-<div class="col">
+
 <h2>The sawtooth, or what a marathon session really looks like</h2>
 <p>My biggest session ran 6,940 API calls and burned 3.56 billion tokens. Book editing, builds, scrapes, quick fixes, all of it living in one window that never ended. The chart below is that session's actual per-call context, pulled straight from the transcript. Watch it climb to the million-token ceiling, hit auto-compaction (where the tool summarizes old history to make room), and then climb right back up. Eight times.</p>
-<p>Every tooth tells the same story. Rent compounds until the landlord forces a reset. The average call in there was hauling around <b>500K tokens</b> of context, and most of it was stale tool output and files whose moment had passed hours earlier.</p>
-</div>
+<p>Every tooth tells the same story. Rent compounds until the landlord forces a reset. The average call in there was hauling around <strong>500K tokens</strong> of context, and most of it was stale tool output and files whose moment had passed hours earlier.</p>
 
-<figure>
-  <div class="chart"><svg id="saw" viewBox="0 0 900 300" role="img" aria-label="Sawtooth chart of context per call across 6,940 calls, peaking near 1 million tokens eight times, with a dashed line marking the 250K purge threshold"></svg></div>
+
+<figure class="fig">
+  <div class="chart"><svg id="saw" viewBox="-12 0 912 300" role="img" aria-label="Sawtooth chart of context per call across 6,940 calls, peaking near 1 million tokens eight times, with a dashed line marking the 250K purge threshold"><line x1="56" y1="258" x2="880" y2="258" stroke-width="1" class="grid"/><text x="48" y="262" text-anchor="end">0K</text><line x1="56" y1="200.38095238095238" x2="880" y2="200.38095238095238" stroke-width="1" class="grid"/><text x="48" y="204.38095238095238" text-anchor="end">250K</text><line x1="56" y1="142.76190476190476" x2="880" y2="142.76190476190476" stroke-width="1" class="grid"/><text x="48" y="146.76190476190476" text-anchor="end">500K</text><line x1="56" y1="85.14285714285714" x2="880" y2="85.14285714285714" stroke-width="1" class="grid"/><text x="48" y="89.14285714285714" text-anchor="end">750K</text><line x1="56" y1="27.52380952380952" x2="880" y2="27.52380952380952" stroke-width="1" class="grid"/><text x="48" y="31.52380952380952" text-anchor="end">1000K</text><path d="M56 243.01904761904763 L61.46167146974064 227.57714285714286 L66.92334293948127 220.89333333333332 L72.3850144092219 206.37333333333333 L77.84668587896253 190.93142857142857 L83.30835734870317 180.79047619047617 L88.7700288184438 169.49714285714288 L94.23170028818444 157.97333333333333 L99.69337175792506 147.37142857142857 L105.15504322766571 141.84 L110.61671469740634 132.85142857142858 L116.07838616714697 124.09333333333333 L121.54005763688761 113.26095238095238 L127.00172910662825 104.73333333333332 L132.46340057636888 93.90095238095239 L137.9250720461095 83.29904761904763 L143.38674351585013 72.92761904761906 L148.84841498559078 63.47809523809525 L154.31008645533143 52.1847619047619 L159.77175792507205 40.89142857142858 L165.23342939481267 29.36761904761906 L170.6951008645533 227.34666666666666 L176.15677233429395 211.21333333333334 L181.6184438040346 200.38095238095238 L187.08011527377522 183.0952380952381 L192.54178674351584 168.5752380952381 L198.0034582132565 150.36761904761903 L203.46512968299712 145.29714285714286 L208.92680115273774 126.39809523809524 L214.3884726224784 106.80761904761906 L219.850144092219 85.37333333333333 L225.31181556195966 66.9352380952381 L230.77348703170028 57.2552380952381 L236.23515850144094 45.500952380952384 L241.69682997118156 30.059047619047618 L247.15850144092218 231.4952380952381 L252.62017291066283 222.2761904761905 L258.0818443804035 216.5142857142857 L263.5435158501441 210.0609523809524 L269.0051873198847 199.68952380952382 L274.46685878962535 195.07999999999998 L279.92853025936597 186.32190476190476 L285.3902017291066 174.79809523809524 L290.8518731988473 161.2 L296.3135446685879 151.51999999999998 L301.7752161383285 145.06666666666666 L307.2368876080692 131.23809523809524 L312.6985590778098 118.33142857142857 L318.16023054755044 139.5352380952381 L323.62190201729106 134.9257142857143 L329.0835734870317 131.00761904761904 L334.5452449567723 121.32761904761904 L340.006916426513 115.10476190476192 L345.4685878962536 109.11238095238096 L350.93025936599423 104.73333333333332 L356.39193083573485 93.2095238095238 L361.8536023054755 86.75619047619048 L367.31527377521616 80.76380952380953 L372.7769452449568 77.30666666666667 L378.2386167146974 53.79809523809524 L383.700288184438 37.203809523809525 L389.1619596541787 30.52000000000001 L394.6236311239193 235.18285714285713 L400.08530259365995 226.8857142857143 L405.54697406340057 216.5142857142857 L411.0086455331412 209.13904761904763 L416.47031700288187 199.68952380952382 L421.9319884726225 190.93142857142857 L427.3936599423631 180.56 L432.85533141210374 169.72761904761904 L438.31700288184436 160.96952380952382 L443.77867435158504 147.1409523809524 L449.24034582132566 137.69142857142856 L454.7020172910663 128.01142857142858 L460.1636887608069 110.95619047619047 L465.6253602305475 98.28 L471.0870317002882 81.91619047619048 L476.54870317002883 69.70095238095237 L482.01037463976945 51.723809523809535 L487.4720461095101 37.66476190476192 L492.9337175792507 233.33904761904762 L498.3953890489914 224.3504761904762 L503.857060518732 216.05333333333334 L509.3187319884726 127.55047619047619 L514.7804034582132 112.33904761904762 L520.2420749279538 91.82666666666665 L525.7037463976945 84.68190476190478 L531.1654178674352 73.15809523809523 L536.6270893371758 62.0952380952381 L542.0887608069164 48.727619047619044 L547.550432276657 30.52000000000001 L553.0121037463978 236.10476190476192 L558.4737752161384 225.27238095238096 L563.935446685879 215.59238095238095 L569.3971181556196 207.5257142857143 L574.8587896253603 200.15047619047618 L580.3204610951009 190.0095238095238 L585.7821325648415 179.17714285714285 L591.2438040345821 166.50095238095238 L596.7054755043227 157.51238095238097 L602.1671469740634 149.67619047619047 L607.628818443804 138.61333333333334 L613.0904899135446 131.00761904761904 L618.5521613832854 120.40571428571428 L624.013832853026 108.1904761904762 L629.4755043227666 95.5142857142857 L634.9371757925072 81.45523809523809 L640.3988472622478 64.16952380952381 L645.8605187319885 48.727619047619044 L651.3221902017291 33.05523809523808 L656.7838616714697 233.56952380952382 L662.2455331412103 222.96761904761905 L667.707204610951 216.7447619047619 L673.1688760806917 206.37333333333333 L678.6305475504323 200.84190476190477 L684.0922190201729 193.46666666666667 L689.5538904899136 187.7047619047619 L695.0155619596542 175.25904761904764 L700.4772334293948 166.50095238095238 L705.9389048991354 151.7504761904762 L711.400576368876 137.92190476190476 L716.8622478386167 129.3942857142857 L722.3239193083574 123.40190476190477 L727.785590778098 110.26476190476191 L733.2472622478386 95.28380952380954 L738.7089337175793 80.07238095238094 L744.1706051873199 69.93142857142857 L749.6322766570605 59.7904761904762 L755.0939481268011 49.188571428571436 L760.5556195965418 40.19999999999999 L766.0172910662824 238.64 L771.478962536023 230.57333333333332 L776.9406340057637 218.35809523809525 L782.4023054755044 207.98666666666668 L787.863976945245 201.76380952380953 L793.3256484149856 192.5447619047619 L798.7873198847262 182.4038095238095 L804.2489913544669 172.95428571428573 L809.7106628242075 162.58285714285714 L815.1723342939481 152.90285714285716 L820.6340057636887 145.52761904761905 L826.0956772334293 136.7695238095238 L831.5573487031701 127.78095238095239 L837.0190201729107 114.64380952380952 L842.4806916426513 103.58095238095237 L847.942363112392 86.52571428571429 L853.4040345821326 70.39238095238096 L858.8657060518732 56.56380952380951 L864.3273775216138 41.35238095238094 L869.7890489913544 237.94857142857143 L875.250720461095 229.1904761904762 L875.250720461095 258 L56 258 Z" opacity="0.12" class="s2"/><path d="M56 243.01904761904763 L61.46167146974064 227.57714285714286 L66.92334293948127 220.89333333333332 L72.3850144092219 206.37333333333333 L77.84668587896253 190.93142857142857 L83.30835734870317 180.79047619047617 L88.7700288184438 169.49714285714288 L94.23170028818444 157.97333333333333 L99.69337175792506 147.37142857142857 L105.15504322766571 141.84 L110.61671469740634 132.85142857142858 L116.07838616714697 124.09333333333333 L121.54005763688761 113.26095238095238 L127.00172910662825 104.73333333333332 L132.46340057636888 93.90095238095239 L137.9250720461095 83.29904761904763 L143.38674351585013 72.92761904761906 L148.84841498559078 63.47809523809525 L154.31008645533143 52.1847619047619 L159.77175792507205 40.89142857142858 L165.23342939481267 29.36761904761906 L170.6951008645533 227.34666666666666 L176.15677233429395 211.21333333333334 L181.6184438040346 200.38095238095238 L187.08011527377522 183.0952380952381 L192.54178674351584 168.5752380952381 L198.0034582132565 150.36761904761903 L203.46512968299712 145.29714285714286 L208.92680115273774 126.39809523809524 L214.3884726224784 106.80761904761906 L219.850144092219 85.37333333333333 L225.31181556195966 66.9352380952381 L230.77348703170028 57.2552380952381 L236.23515850144094 45.500952380952384 L241.69682997118156 30.059047619047618 L247.15850144092218 231.4952380952381 L252.62017291066283 222.2761904761905 L258.0818443804035 216.5142857142857 L263.5435158501441 210.0609523809524 L269.0051873198847 199.68952380952382 L274.46685878962535 195.07999999999998 L279.92853025936597 186.32190476190476 L285.3902017291066 174.79809523809524 L290.8518731988473 161.2 L296.3135446685879 151.51999999999998 L301.7752161383285 145.06666666666666 L307.2368876080692 131.23809523809524 L312.6985590778098 118.33142857142857 L318.16023054755044 139.5352380952381 L323.62190201729106 134.9257142857143 L329.0835734870317 131.00761904761904 L334.5452449567723 121.32761904761904 L340.006916426513 115.10476190476192 L345.4685878962536 109.11238095238096 L350.93025936599423 104.73333333333332 L356.39193083573485 93.2095238095238 L361.8536023054755 86.75619047619048 L367.31527377521616 80.76380952380953 L372.7769452449568 77.30666666666667 L378.2386167146974 53.79809523809524 L383.700288184438 37.203809523809525 L389.1619596541787 30.52000000000001 L394.6236311239193 235.18285714285713 L400.08530259365995 226.8857142857143 L405.54697406340057 216.5142857142857 L411.0086455331412 209.13904761904763 L416.47031700288187 199.68952380952382 L421.9319884726225 190.93142857142857 L427.3936599423631 180.56 L432.85533141210374 169.72761904761904 L438.31700288184436 160.96952380952382 L443.77867435158504 147.1409523809524 L449.24034582132566 137.69142857142856 L454.7020172910663 128.01142857142858 L460.1636887608069 110.95619047619047 L465.6253602305475 98.28 L471.0870317002882 81.91619047619048 L476.54870317002883 69.70095238095237 L482.01037463976945 51.723809523809535 L487.4720461095101 37.66476190476192 L492.9337175792507 233.33904761904762 L498.3953890489914 224.3504761904762 L503.857060518732 216.05333333333334 L509.3187319884726 127.55047619047619 L514.7804034582132 112.33904761904762 L520.2420749279538 91.82666666666665 L525.7037463976945 84.68190476190478 L531.1654178674352 73.15809523809523 L536.6270893371758 62.0952380952381 L542.0887608069164 48.727619047619044 L547.550432276657 30.52000000000001 L553.0121037463978 236.10476190476192 L558.4737752161384 225.27238095238096 L563.935446685879 215.59238095238095 L569.3971181556196 207.5257142857143 L574.8587896253603 200.15047619047618 L580.3204610951009 190.0095238095238 L585.7821325648415 179.17714285714285 L591.2438040345821 166.50095238095238 L596.7054755043227 157.51238095238097 L602.1671469740634 149.67619047619047 L607.628818443804 138.61333333333334 L613.0904899135446 131.00761904761904 L618.5521613832854 120.40571428571428 L624.013832853026 108.1904761904762 L629.4755043227666 95.5142857142857 L634.9371757925072 81.45523809523809 L640.3988472622478 64.16952380952381 L645.8605187319885 48.727619047619044 L651.3221902017291 33.05523809523808 L656.7838616714697 233.56952380952382 L662.2455331412103 222.96761904761905 L667.707204610951 216.7447619047619 L673.1688760806917 206.37333333333333 L678.6305475504323 200.84190476190477 L684.0922190201729 193.46666666666667 L689.5538904899136 187.7047619047619 L695.0155619596542 175.25904761904764 L700.4772334293948 166.50095238095238 L705.9389048991354 151.7504761904762 L711.400576368876 137.92190476190476 L716.8622478386167 129.3942857142857 L722.3239193083574 123.40190476190477 L727.785590778098 110.26476190476191 L733.2472622478386 95.28380952380954 L738.7089337175793 80.07238095238094 L744.1706051873199 69.93142857142857 L749.6322766570605 59.7904761904762 L755.0939481268011 49.188571428571436 L760.5556195965418 40.19999999999999 L766.0172910662824 238.64 L771.478962536023 230.57333333333332 L776.9406340057637 218.35809523809525 L782.4023054755044 207.98666666666668 L787.863976945245 201.76380952380953 L793.3256484149856 192.5447619047619 L798.7873198847262 182.4038095238095 L804.2489913544669 172.95428571428573 L809.7106628242075 162.58285714285714 L815.1723342939481 152.90285714285716 L820.6340057636887 145.52761904761905 L826.0956772334293 136.7695238095238 L831.5573487031701 127.78095238095239 L837.0190201729107 114.64380952380952 L842.4806916426513 103.58095238095237 L847.942363112392 86.52571428571429 L853.4040345821326 70.39238095238096 L858.8657060518732 56.56380952380951 L864.3273775216138 41.35238095238094 L869.7890489913544 237.94857142857143 L875.250720461095 229.1904761904762" fill="none" stroke-width="1.8" class="l2"/><line x1="56" y1="200.38095238095238" x2="880" y2="200.38095238095238" stroke-width="2" stroke-dasharray="7 5" class="lbad"/><text class="lbl bad" x="876" y="193.38095238095238" text-anchor="end">purge line, 250K</text><text class="lbl sm" x="234.09798270893373" y="29.52380952380952">1M window ceiling: 8 compactions up here</text><text x="56" y="274" text-anchor="middle">call 1</text><text x="293.46397694524495" y="274" text-anchor="middle">2,000</text><text x="530.9279538904899" y="274" text-anchor="middle">4,000</text><text x="768.3919308357349" y="274" text-anchor="middle">6,000</text></svg></div>
   <figcaption>Context carried into each of 6,940 calls in one real session. The dashed line is where my window gets force-purged now, at 250K. Everything above it was rent I didn't need to pay.</figcaption>
 </figure>
 
-<div class="col">
-<p>Now for the sneaky part. Plot that session cumulatively and you get a beautiful straight line, which reads as "all good here." A straight line just means the per-call cost pinned itself at the maximum and stayed there. An efficient session draws a straight line too, five to ten times shallower. <b>The slope is the whole diagnosis.</b></p>
+
+<p>Now for the sneaky part. Plot that session cumulatively and you get a beautiful straight line, which reads as "all good here." A straight line just means the per-call cost pinned itself at the maximum and stayed there. An efficient session draws a straight line too, five to ten times shallower. <strong>The slope is the whole diagnosis.</strong></p>
 
 <h2>Three shapes a session can take</h2>
 <p>What clicked for me is that "use fewer tokens" isn't a real instruction. Different work wants a differently shaped session, and the money leaks when you mix the shapes without noticing. Almost everything I do fits one of these three.</p>
-</div>
 
-<div class="modes">
-  <div class="mode">
-    <span class="tag bad">Anti-pattern</span>
-    <h3>The Marathon</h3>
-    <svg viewBox="0 0 260 70" aria-hidden="true"><polyline points="5,62 40,38 75,14 80,54 115,30 150,10 155,56 190,32 225,12 230,58 255,40" fill="none" stroke="var(--bad)" stroke-width="2.5"/><line x1="5" y1="8" x2="255" y2="8" stroke="var(--rule)" stroke-dasharray="3 3"/></svg>
-    <ul>
-      <li>One window for everything: edits, builds, scrapes, random questions</li>
-      <li>Context rides at 500K to 990K and compaction keeps firing at the ceiling</li>
-      <li>Your two-minute questions end up paying the big task's rent</li>
-    </ul>
-    <div class="verdict">My Jul 16 session: 3.56B tokens. Same work, split across five sessions, would've cost a fraction.</div>
-  </div>
-  <div class="mode">
-    <span class="tag good">Default</span>
-    <h3>The Assembly Line</h3>
-    <svg viewBox="0 0 260 70" aria-hidden="true"><g fill="none" stroke="var(--good)" stroke-width="2.5"><polyline points="5,62 30,44 55,36"/><polyline points="70,62 95,42 120,34"/><polyline points="135,62 160,46 185,38"/><polyline points="200,62 225,44 250,34"/></g><line x1="5" y1="26" x2="255" y2="26" stroke="var(--rule)" stroke-dasharray="3 3"/></svg>
-    <ul>
-      <li><b>One task, one session.</b> Ship it, checkpoint it, start fresh</li>
-      <li>Agents do the reading and hand back conclusions</li>
-      <li>Grep to find the spot, then read the section instead of the file</li>
-      <li>Purge when a task ends, not when the window fills up</li>
-    </ul>
-    <div class="verdict">My median session: 36M tokens, about 1% of a marathon. The shape already worked. It just wasn't the habit.</div>
-  </div>
-  <div class="mode">
-    <span class="tag amber">Declared, deliberate</span>
-    <h3>The Studio</h3>
-    <svg viewBox="0 0 260 70" aria-hidden="true"><polyline points="5,62 30,24 60,20 100,18 140,20 180,18 220,20 250,18" fill="none" stroke="var(--amber)" stroke-width="2.5"/><line x1="5" y1="10" x2="255" y2="10" stroke="var(--rule)" stroke-dasharray="3 3"/></svg>
-    <ul>
-      <li>For judgment work that genuinely needs the whole corpus in the room: a manuscript's voice, a system's architecture</li>
-      <li>Load exactly that corpus up front, then <b>quit adding to it</b></li>
-      <li>Batch your questions, since every turn re-pays the full window</li>
-      <li>Near the ceiling you stop, checkpoint and close it rather than pushing on</li>
-    </ul>
-    <div class="verdict">Big context on purpose is money well spent. Big context by accident is a leak. The trick is knowing which one you're in.</div>
-  </div>
-</div>
 
-<div class="col">
+<h3>The Marathon</h3>
+<p><strong>Anti-pattern</strong></p>
+<ul>
+  <li>One window for everything: edits, builds, scrapes, random questions</li>
+  <li>Context rides at 500K to 990K and compaction keeps firing at the ceiling</li>
+  <li>Your two-minute questions end up paying the big task's rent</li>
+</ul>
+<p><em>My Jul 16 session: 3.56B tokens. Same work, split across five sessions, would've cost a fraction.</em></p>
+
+<h3>The Assembly Line</h3>
+<p><strong>Default</strong></p>
+<ul>
+  <li><strong>One task, one session.</strong> Ship it, checkpoint it, start fresh</li>
+  <li>Agents do the reading and hand back conclusions</li>
+  <li>Grep to find the spot, then read the section instead of the file</li>
+  <li>Purge when a task ends, not when the window fills up</li>
+</ul>
+<p><em>My median session: 36M tokens, about 1% of a marathon. The shape already worked. It just wasn't the habit.</em></p>
+
+<h3>The Studio</h3>
+<p><strong>Declared, deliberate</strong></p>
+<ul>
+  <li>For judgment work that genuinely needs the whole corpus in the room: a manuscript's voice, a system's architecture</li>
+  <li>Load exactly that corpus up front, then <strong>quit adding to it</strong></li>
+  <li>Batch your questions, since every turn re-pays the full window</li>
+  <li>Near the ceiling you stop, checkpoint and close it rather than pushing on</li>
+</ul>
+<p><em>Big context on purpose is money well spent. Big context by accident is a leak. The trick is knowing which one you're in.</em></p>
+
+
+
 <h2>Where the tokens sneak in: the Read multiplier</h2>
-<p>Across 20,487 tool calls, one humble tool accounted for <b>87% of everything</b> that entered my contexts: plain old file reads. 2,733 of them pushed about 37M tokens of file text into sessions, and every one of those then sat in the window collecting rent for hundreds of calls afterward. The tool built to prevent exactly this, handing the reading to a subagent whose context gets thrown away, got used 451 times in three months. My least-used lever was my highest-value one.</p>
-</div>
+<p>Across 20,487 tool calls, one humble tool accounted for <strong>87% of everything</strong> that entered my contexts: plain old file reads. 2,733 of them pushed about 37M tokens of file text into sessions, and every one of those then sat in the window collecting rent for hundreds of calls afterward. The tool built to prevent exactly this, handing the reading to a subagent whose context gets thrown away, got used 451 times in three months. My least-used lever was my highest-value one.</p>
 
-<figure>
-  <div class="chart"><svg id="tools" viewBox="0 0 900 240" role="img" aria-label="Bar chart of content injected by tool: Read 37.2M tokens dwarfs screenshots 1.9M, Bash 1.3M and all others"></svg></div>
+
+<figure class="fig">
+  <div class="chart"><svg id="tools" viewBox="0 0 900 240" role="img" aria-label="Bar chart of content injected by tool: Read 37.2M tokens dwarfs screenshots 1.9M, Bash 1.3M and all others"><text class="lbl" x="190" y="33" text-anchor="end">Read (2,733 calls)</text><rect x="200" y="18" width="610" height="20" rx="2" class="s1"/><text x="818" y="33">37.2M tok</text><text class="lbl" x="190" y="65" text-anchor="end">Screenshots (121)</text><rect x="200" y="50" width="31.155913978494624" height="20" rx="2" opacity="0.75" class="s2"/><text x="239.15591397849462" y="65">1.9M tok</text><text class="lbl" x="190" y="97" text-anchor="end">Bash (5,646)</text><rect x="200" y="82" width="21.317204301075265" height="20" rx="2" opacity="0.75" class="s2"/><text x="229.31720430107526" y="97">1.3M tok</text><text class="lbl" x="190" y="129" text-anchor="end">PowerShell (2,304)</text><rect x="200" y="114" width="6.55913978494624" height="20" rx="2" opacity="0.75" class="s2"/><text x="214.55913978494624" y="129">0.4M tok</text><text class="lbl" x="190" y="161" text-anchor="end">Subagents (451)</text><rect x="200" y="146" width="4.9193548387096655" height="20" rx="2" opacity="0.75" class="s2"/><text x="212.91935483870967" y="161">0.3M tok</text><text class="lbl" x="190" y="193" text-anchor="end">All others (~9,200)</text><rect x="200" y="178" width="24.596774193548384" height="20" rx="2" opacity="0.75" class="s2"/><text x="232.59677419354838" y="193">1.5M tok</text><text class="lbl sm" x="200" y="228">Content injected into context by tool. Read alone is 87% of it.</text></svg></div>
   <figcaption>Tokens injected into context by tool over three months. Honorable mention to browser screenshots, sitting at number two on a tiny call count, because each one costs about 16K tokens. That's why "API first, DOM second, pixels last" is a standing rule around here.</figcaption>
 </figure>
 
-<div class="col">
+
 <h2>The eight habits, and what each one actually fixes</h2>
 <p>I run automated guardrails now: a hook that warns me when context crosses 300K, 600K and 850K, plus a forced purge at 250K instead of riding to the million-token ceiling. Automation caps the damage. It doesn't do the work. Every real saving below comes from a decision a human makes at one of three moments: before a session starts, before a file gets read, and after something ships.</p>
 
-<div class="habit">
-  <h3>1. Pick the shape before you type a word</h3>
-  <div class="costs">Fixes: small tasks inheriting a big task's rent</div>
-  <p>This is the one that cost me the most. My marathon session was doing careful book editing, which legitimately needs a huge window, and then in the same window I'd run a build, debug a scraper, ask a quick question about an invoice. Each of those little jobs got charged the book's 500K context, on every call, for no benefit whatsoever. The book work wasn't the problem. Hosting the other five jobs inside it was.</p>
-  <p>So now there's a ten-second decision at the top: is this assembly line work or studio work, and does the session I'm currently in actually serve it? If the context in front of me doesn't earn its keep for the new task, that task gets its own session. "While I've got you here" is the single most expensive phrase in this whole game.</p>
-  <div class="do"><b>What it looks like</b>Before starting: "New task, new session. This one is assembly line: fix the scraper's date parsing, nothing else."</div>
-</div>
+<h3>1. Pick the shape before you type a word</h3>
+<p><strong>Fixes:</strong> small tasks inheriting a big task's rent</p>
+<p>This is the one that cost me the most. My marathon session was doing careful book editing, which legitimately needs a huge window, and then in the same window I'd run a build, debug a scraper, ask a quick question about an invoice. Each of those little jobs got charged the book's 500K context, on every call, for no benefit whatsoever. The book work wasn't the problem. Hosting the other five jobs inside it was.</p>
+<p>So now there's a ten-second decision at the top: is this assembly line work or studio work, and does the session I'm currently in actually serve it? If the context in front of me doesn't earn its keep for the new task, that task gets its own session. "While I've got you here" is the single most expensive phrase in this whole game.</p>
+<p class="plab">What it looks like</p>
+<div class="code"><pre class="prose"><code>Before starting: "New task, new session. This one is assembly line: fix the scraper's date parsing, nothing else."</code></pre></div>
 
-<div class="habit">
-  <h3>2. Grep first, then read the part you need</h3>
-  <div class="costs">Fixes: the 87% Read line, directly</div>
-  <p>Reading a whole 2,000-line file to change one function is the most common way people quietly torch a budget. The file lands in context at maybe 25K tokens, you use 40 lines of it, and then you pay for all 2,000 lines again on every subsequent call. Searching first turns that into a couple hundred tokens of match output plus a 60-line read.</p>
-  <p>The rule I use: any file over about 300 lines gets located before it gets opened. Search for the symbol, get line numbers back, read a window around them. If it turns out you need more, you can always read more. You can't un-read.</p>
-  <div class="do"><b>Instead of "read src/parser.py"</b>rg -n "def parse_date|DATE_FMT" src/parser.py
+<h3>2. Grep first, then read the part you need</h3>
+<p><strong>Fixes:</strong> the 87% Read line, directly</p>
+<p>Reading a whole 2,000-line file to change one function is the most common way people quietly torch a budget. The file lands in context at maybe 25K tokens, you use 40 lines of it, and then you pay for all 2,000 lines again on every subsequent call. Searching first turns that into a couple hundred tokens of match output plus a 60-line read.</p>
+<p>The rule I use: any file over about 300 lines gets located before it gets opened. Search for the symbol, get line numbers back, read a window around them. If it turns out you need more, you can always read more. You can't un-read.</p>
+<p class="plab">Instead of "read src/parser.py"</p>
+<div class="code"><pre><code>rg -n "def parse_date|DATE_FMT" src/parser.py
 # then read only around the hits
-sed -n '140,205p' src/parser.py</div>
-</div>
+sed -n '140,205p' src/parser.py</code></pre></div>
 
-<div class="habit">
-  <h3>3. Send an agent to do the looking</h3>
-  <div class="costs">Fixes: exploration becoming a permanent tenant</div>
-  <p>Investigations are where context goes to die. "Where is X handled?" means opening six files, five of which turn out to be irrelevant, and all six stay in your window for the rest of the session. A subagent runs that same search in its own throwaway context and hands back the two sentences you actually wanted. The six files never touch your main window at all.</p>
-  <p>My rule of thumb is anything spanning more than two or three files gets delegated. My data says I did this 451 times in three months when it should have been thousands. If you change one habit off this list, make it this one.</p>
-  <div class="do"><b>The prompt shape</b>"Use an agent to find every place we validate uploaded file types.
+<h3>3. Send an agent to do the looking</h3>
+<p><strong>Fixes:</strong> exploration becoming a permanent tenant</p>
+<p>Investigations are where context goes to die. "Where is X handled?" means opening six files, five of which turn out to be irrelevant, and all six stay in your window for the rest of the session. A subagent runs that same search in its own throwaway context and hands back the two sentences you actually wanted. The six files never touch your main window at all.</p>
+<p>My rule of thumb is anything spanning more than two or three files gets delegated. My data says I did this 451 times in three months when it should have been thousands. If you change one habit off this list, make it this one.</p>
+<p class="plab">The prompt shape</p>
+<div class="code"><pre class="prose"><code>"Use an agent to find every place we validate uploaded file types.
 Report back: file paths, line numbers, and which validator each one uses.
-Don't paste the file contents, just the findings."</div>
-</div>
+Don't paste the file contents, just the findings."</code></pre></div>
 
-<div class="habit">
-  <h3>4. Purge on your schedule, not the window's</h3>
-  <div class="costs">Fixes: the sawtooth, and bad summaries</div>
-  <p>Auto-compaction fires when the window is full, which means it's summarizing at the worst possible moment: mid-task, with no idea which threads still matter. You get a summary that keeps whatever fits. Compacting yourself right after something ships gives you a summary built around a natural boundary, when the finished work is genuinely finished and safe to compress.</p>
-  <p>Milestone lands, write the state to a file, purge, start the next thing. That single sequence is what turns the sawtooth into the flat assembly line pattern.</p>
-  <div class="do"><b>The boundary ritual</b>1. "Update SESSION_STATUS.md with what we just shipped."
+<h3>4. Purge on your schedule, not the window's</h3>
+<p><strong>Fixes:</strong> the sawtooth, and bad summaries</p>
+<p>Auto-compaction fires when the window is full, which means it's summarizing at the worst possible moment: mid-task, with no idea which threads still matter. You get a summary that keeps whatever fits. Compacting yourself right after something ships gives you a summary built around a natural boundary, when the finished work is genuinely finished and safe to compress.</p>
+<p>Milestone lands, write the state to a file, purge, start the next thing. That single sequence is what turns the sawtooth into the flat assembly line pattern.</p>
+<p class="plab">The boundary ritual</p>
+<div class="code"><pre class="prose"><code>1. "Update SESSION_STATUS.md with what we just shipped."
 2. /compact  (or /clear if the next task is unrelated)
-3. Start the next task with a fresh brief</div>
-</div>
+3. Start the next task with a fresh brief</code></pre></div>
 
-<div class="habit">
-  <h3>5. Batch your questions when the window is heavy</h3>
-  <div class="costs">Fixes: paying full freight for one-line questions</div>
-  <p>In a studio session carrying 600K of context, every message you send re-pays that whole 600K. Five drive-by questions asked one at a time cost five times what the same five questions cost bundled into one turn. It feels chattier to fire them off as they occur to you, and it's the most expensive kind of chatty there is.</p>
-  <p>I keep a scratch note open during heavy sessions and let questions pile up until I have three or four, then send them together. Same answers, one fifth the cost.</p>
-  <div class="do"><b>One turn, four questions</b>"Three things on chapter 9: (1) does the Dmitri callback land or repeat ch4?
+<h3>5. Batch your questions when the window is heavy</h3>
+<p><strong>Fixes:</strong> paying full freight for one-line questions</p>
+<p>In a studio session carrying 600K of context, every message you send re-pays that whole 600K. Five drive-by questions asked one at a time cost five times what the same five questions cost bundled into one turn. It feels chattier to fire them off as they occur to you, and it's the most expensive kind of chatty there is.</p>
+<p>I keep a scratch note open during heavy sessions and let questions pile up until I have three or four, then send them together. Same answers, one fifth the cost.</p>
+<p class="plab">One turn, four questions</p>
+<div class="code"><pre class="prose"><code>"Three things on chapter 9: (1) does the Dmitri callback land or repeat ch4?
 (2) is the pricing anecdote too long? (3) name a better section title.
-Answer all three, then wait."</div>
-</div>
+Answer all three, then wait."</code></pre></div>
 
-<div class="habit">
-  <h3>6. Results go to disk, not into the chat</h3>
-  <div class="costs">Fixes: using the transcript as a filing cabinet</div>
-  <p>Anything an agent produces, any report, any draft, belongs in a file. Then the main session reads back the two-paragraph synthesis rather than the twelve pages that produced it. The full output is still there when you want it, sitting on disk where it costs nothing per call instead of in a window where it costs on every call.</p>
-  <p>There's a second payoff. Saved state is exactly what makes the next fresh session cheap to start, which is what makes habit one affordable in the first place. The two habits hold each other up.</p>
-  <div class="do"><b>Standing instruction</b>"Write the full analysis to notes/audit-2026-08.md.
-In chat, give me the three findings that change what I do next."</div>
-</div>
+<h3>6. Results go to disk, not into the chat</h3>
+<p><strong>Fixes:</strong> using the transcript as a filing cabinet</p>
+<p>Anything an agent produces, any report, any draft, belongs in a file. Then the main session reads back the two-paragraph synthesis rather than the twelve pages that produced it. The full output is still there when you want it, sitting on disk where it costs nothing per call instead of in a window where it costs on every call.</p>
+<p>There's a second payoff. Saved state is exactly what makes the next fresh session cheap to start, which is what makes habit one affordable in the first place. The two habits hold each other up.</p>
+<p class="plab">Standing instruction</p>
+<div class="code"><pre class="prose"><code>"Write the full analysis to notes/audit-2026-08.md.
+In chat, give me the three findings that change what I do next."</code></pre></div>
 
-<div class="habit">
-  <h3>7. Match the model to the job</h3>
-  <div class="costs">Fixes: paying scalpel prices for chopping vegetables</div>
-  <p>Renaming variables, reformatting a file, tagging a list, running a bulk edit: none of that needs the top tier. Blended across my three months, the cheap tier ran about $0.38 per million tokens and the frontier tier ran $1.77. Same job, four and a half times the price. Subagents take a model setting, so the cheap tier can do the grunt work inside a session that's otherwise on the good model.</p>
-  <p>Where it pays to spend up is judgment: architecture, debugging something genuinely weird, writing that has to be good. The chart below shows how the tiers actually shook out for me.</p>
-  <div class="do"><b>Tiering in practice</b>Mechanical (rename, reformat, categorize, bulk edit) → cheapest current tier
+<h3>7. Match the model to the job</h3>
+<p><strong>Fixes:</strong> paying scalpel prices for chopping vegetables</p>
+<p>Renaming variables, reformatting a file, tagging a list, running a bulk edit: none of that needs the top tier. Blended across my three months, the cheap tier ran about $0.38 per million tokens and the frontier tier ran $1.77. Same job, four and a half times the price. Subagents take a model setting, so the cheap tier can do the grunt work inside a session that's otherwise on the good model.</p>
+<p>Where it pays to spend up is judgment: architecture, debugging something genuinely weird, writing that has to be good. The chart below shows how the tiers actually shook out for me.</p>
+<p class="plab">Tiering in practice</p>
+<div class="code"><pre class="prose"><code>Mechanical (rename, reformat, categorize, bulk edit) → cheapest current tier
 Daily driver (features, fixes, research) → newest mid tier
-Hard judgment (architecture, prose, weird bugs) → frontier tier, sparingly</div>
-</div>
+Hard judgment (architecture, prose, weird bugs) → frontier tier, sparingly</code></pre></div>
 
-<div class="habit">
-  <h3>8. Prune whatever loads automatically</h3>
-  <div class="costs">Fixes: overhead charged on call one of every session forever</div>
-  <p>Your project instructions file, your memory index, every connected tool's schema: all of it gets injected before you've typed anything. It's small per session and you have hundreds of sessions, so it compounds quietly in the background. Mine had accumulated a year of one-off notes that no longer described anything true.</p>
-  <p>Once a month I read the instruction file top to bottom and cut anything that isn't still load-bearing, then check which connected tools are actually earning their schema. Fifteen minutes, and it pays out on every session I run after it.</p>
-  <div class="do"><b>Monthly, on a Friday</b>Re-read CLAUDE.md and the memory index. Cut anything stale.
-Audit connected tools: disconnect what you haven't used this month.</div>
-</div>
+<h3>8. Prune whatever loads automatically</h3>
+<p><strong>Fixes:</strong> overhead charged on call one of every session forever</p>
+<p>Your project instructions file, your memory index, every connected tool's schema: all of it gets injected before you've typed anything. It's small per session and you have hundreds of sessions, so it compounds quietly in the background. Mine had accumulated a year of one-off notes that no longer described anything true.</p>
+<p>Once a month I read the instruction file top to bottom and cut anything that isn't still load-bearing, then check which connected tools are actually earning their schema. Fifteen minutes, and it pays out on every session I run after it.</p>
+<p class="plab">Monthly, on a Friday</p>
+<div class="code"><pre class="prose"><code>Re-read CLAUDE.md and the memory index. Cut anything stale.
+Audit connected tools: disconnect what you haven't used this month.</code></pre></div>
 
 <h2>Model choice, and why the newest one usually wins</h2>
 <p>Three months of blended cost, meaning what my tokens genuinely cost per million across cache reads, writes and output, makes this part simple. Within any given tier the newer generation comes out ahead: same or lower effective price, plus it's smarter, and the smart part compounds in a way the price tag never shows. A sharper model finishes in fewer calls, wanders down fewer dead ends and re-reads less, so you're buying efficiency alongside the intelligence.</p>
-</div>
 
-<figure>
-  <div class="chart"><svg id="models" viewBox="0 0 900 240" role="img" aria-label="Bar chart of blended cost per million tokens: Sonnet 5 $0.38, Sonnet 4.6 $0.57, Opus 5 $0.73, Opus 4.8 $0.86, Fable 5 $1.77"></svg></div>
+
+<figure class="fig">
+  <div class="chart"><svg id="models" viewBox="-20 0 920 240" role="img" aria-label="Bar chart of blended cost per million tokens: Sonnet 5 $0.38, Sonnet 4.6 $0.57, Opus 5 $0.73, Opus 4.8 $0.86, Fable 5 $1.77"><line x1="40" y1="190" x2="860" y2="190" class="grid"/><text x="34" y="194" text-anchor="end">$0.00</text><line x1="40" y1="147.89473684210526" x2="860" y2="147.89473684210526" class="grid"/><text x="34" y="151.89473684210526" text-anchor="end">$0.50</text><line x1="40" y1="105.78947368421052" x2="860" y2="105.78947368421052" class="grid"/><text x="34" y="109.78947368421052" text-anchor="end">$1.00</text><line x1="40" y1="63.68421052631578" x2="860" y2="63.68421052631578" class="grid"/><text x="34" y="67.68421052631578" text-anchor="end">$1.50</text><rect x="70" y="158" width="110" height="32" rx="3" class="s3"/><text class="lbl big" x="125" y="150" text-anchor="middle">$0.38</text><text class="lbl" x="125" y="208" text-anchor="middle">Sonnet 5</text><text x="125" y="224" text-anchor="middle" class="s3">newest</text><rect x="234" y="142" width="110" height="48" rx="3" opacity="0.6" class="s2"/><text class="lbl big" x="289" y="134" text-anchor="middle">$0.57</text><text class="lbl" x="289" y="208" text-anchor="middle">Sonnet 4.6</text><rect x="398" y="128.5263157894737" width="110" height="61.4736842105263" rx="3" class="s3"/><text class="lbl big" x="453" y="120.5263157894737" text-anchor="middle">$0.73</text><text class="lbl" x="453" y="208" text-anchor="middle">Opus 5</text><text x="453" y="224" text-anchor="middle" class="s3">newest</text><rect x="562" y="117.57894736842105" width="110" height="72.42105263157895" rx="3" opacity="0.6" class="s2"/><text class="lbl big" x="617" y="109.57894736842105" text-anchor="middle">$0.86</text><text class="lbl" x="617" y="208" text-anchor="middle">Opus 4.8</text><rect x="726" y="40.94736842105263" width="110" height="149.05263157894737" rx="3" class="s1"/><text class="lbl big" x="781" y="32.94736842105263" text-anchor="middle">$1.77</text><text class="lbl" x="781" y="208" text-anchor="middle">Fable 5</text><text x="781" y="224" text-anchor="middle" class="s1">frontier tier</text></svg></div>
   <figcaption>Blended effective dollars per million tokens by model, drawn from my own three-month mix. Newer beats older inside each tier: Opus 5 under Opus 4.8, Sonnet 5 under Sonnet 4.6.</figcaption>
 </figure>
 
-<div class="col">
-<div class="note"><b>One nuance worth keeping:</b> treat the frontier tier as a scalpel rather than a bad deal. At 2.4 times the blended cost of the mid tier, it earns every penny on genuinely hard judgment work and wastes them on a marathon of routine tasks. The ladder I run now: newest cheap tier for mechanical work, newest mid tier as the daily driver, frontier tier pointed at the handful of problems that deserve it.</div>
+
+<div class="note"><span class="lab">One nuance worth keeping</span><p>treat the frontier tier as a scalpel rather than a bad deal. At 2.4 times the blended cost of the mid tier, it earns every penny on genuinely hard judgment work and wastes them on a marathon of routine tasks. The ladder I run now: newest cheap tier for mechanical work, newest mid tier as the daily driver, frontier tier pointed at the handful of problems that deserve it.</p></div>
 
 <h2>The scoreboard</h2>
+<div class="tbl" role="region" tabindex="0" aria-label="Measured before numbers and targets for five session metrics">
 <table>
-  <thead><tr><th>Metric</th><th style="text-align:right">Before (measured)</th><th style="text-align:right">Target</th></tr></thead>
+  <thead><tr><th scope="col">Metric</th><th scope="col" class="num">Before (measured)</th><th scope="col" class="num">Target</th></tr></thead>
   <tbody>
-    <tr><td>Median context per call</td><td class="n">317K</td><td class="n">under 150K</td></tr>
-    <tr><td>Sessions over 500M tokens</td><td class="n">8 in 3 months</td><td class="n">0 to 1 a month, declared</td></tr>
-    <tr><td>Multi-file reads delegated to agents</td><td class="n">roughly 0%</td><td class="n">most of them</td></tr>
-    <tr><td>Compactions per session</td><td class="n">up to 8</td><td class="n">0 to 1</td></tr>
-    <tr><td>Monthly tokens, same workload</td><td class="n">10B to 17B</td><td class="n">5B to 8B</td></tr>
+    <tr><td>Median context per call</td><td class="num">317K</td><td class="num">under 150K</td></tr>
+    <tr><td>Sessions over 500M tokens</td><td class="num">8 in 3 months</td><td class="num">0 to 1 a month, declared</td></tr>
+    <tr><td>Multi-file reads delegated to agents</td><td class="num">roughly 0%</td><td class="num">most of them</td></tr>
+    <tr><td>Compactions per session</td><td class="num">up to 8</td><td class="num">0 to 1</td></tr>
+    <tr><td>Monthly tokens, same workload</td><td class="num">10B to 17B</td><td class="num">5B to 8B</td></tr>
   </tbody>
 </table>
+</div>
 <p>None of this asks you to be less ambitious or work shorter days. The same three months of output, shaped properly, runs about half the cost, and the model gets to think with a cleaner window the entire time. That second part might matter more than the money.</p>
-<p><b>Coming next:</b> two follow-ups that get specific. <a href="/blog/assembly-line/">Building the assembly line</a>, with the folder structure, the search commands and the exact prompts I use. Then <a href="/blog/studio-session/">running a studio session</a> properly, which is a different discipline entirely.</p>
+<p><strong>Coming next:</strong> two follow-ups that get specific. <a href="/blog/assembly-line/">Building the assembly line</a>, with the folder structure, the search commands and the exact prompts I use. Then <a href="/blog/studio-session/">running a studio session</a> properly, which is a different discipline entirely.</p>
 
-<div class="foot">Method: every figure parsed from raw session transcripts (JSONL), May 4 to Aug 7 2026. Costs are API list-price equivalents (cache read 0.1×, write 1.25×). Charts render the actual per-call data, downsampled for display. Further reading: Anthropic's <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Effective context engineering for AI agents</a> and the <a href="https://code.claude.com/docs/en/best-practices">Claude Code best practices</a>.</div>
-</div>
-</div>
-
-<script>
-(function(){
-const css = n => getComputedStyle(document.querySelector('.trp')).getPropertyValue(n).trim();
-function draw(){
-const AMBER=css('--amber'), BLUE=css('--blue'), GRID=css('--grid'), MUTED=css('--muted'), INK=css('--ink'), BAD=css('--bad'), GOOD=css('--good'), RULE=css('--rule');
-const S=(id)=>document.getElementById(id);
-
-/* 1. cost anatomy stacked bar */
-{
-const svg=S('anatomy'); svg.innerHTML='';
-const parts=[["Cache reads",55.5,BLUE],["Cache writes",31.4,AMBER],["Output",12.9,GOOD],["Fresh input",0.3,MUTED]];
-let x=20,W=860,y=40,h=44,out='';
-parts.forEach(function(p){
-  const w=W*p[1]/100;
-  out+='<rect x="'+x+'" y="'+y+'" width="'+Math.max(w-2,2)+'" height="'+h+'" rx="2" fill="'+p[2]+'"/>';
-  if(w>70) out+='<text class="lbl big" x="'+(x+8)+'" y="'+(y+h/2+4)+'" fill="#15171A" style="fill:#15171A">'+p[1]+'%</text>';
-  const ly=y+h+26;
-  out+='<circle cx="'+(x+5)+'" cy="'+(ly-4)+'" r="4" fill="'+p[2]+'"/><text x="'+(x+14)+'" y="'+ly+'">'+p[0]+'</text>';
-  x+=w;
-});
-out+='<text class="lbl" x="20" y="24">$16.7K API-equivalent, by billing category</text>';
-svg.innerHTML=out;
-}
-
-/* 2. sawtooth from real data */
-{
-const P=[[0,65],[46,132],[92,161],[138,224],[184,291],[230,335],[276,384],[322,434],[368,480],[414,504],[460,543],[506,581],[552,628],[598,665],[644,712],[690,758],[736,803],[782,844],[828,893],[874,942],[920,992],[966,133],[1012,203],[1058,250],[1104,325],[1150,388],[1196,467],[1242,489],[1288,571],[1334,656],[1380,749],[1426,829],[1472,871],[1518,922],[1564,989],[1610,115],[1656,155],[1702,180],[1748,208],[1794,253],[1840,273],[1886,311],[1932,361],[1978,420],[2024,462],[2070,490],[2116,550],[2162,606],[2208,514],[2254,534],[2300,551],[2346,593],[2392,620],[2438,646],[2484,665],[2530,715],[2576,743],[2622,769],[2668,784],[2714,886],[2760,958],[2806,987],[2852,99],[2898,135],[2944,180],[2990,212],[3036,253],[3082,291],[3128,336],[3174,383],[3220,421],[3266,481],[3312,522],[3358,564],[3404,638],[3450,693],[3496,764],[3542,817],[3588,895],[3634,956],[3680,107],[3726,146],[3772,182],[3818,566],[3864,632],[3910,721],[3956,752],[4002,802],[4048,850],[4094,908],[4140,987],[4186,95],[4232,142],[4278,184],[4324,219],[4370,251],[4416,295],[4462,342],[4508,397],[4554,436],[4600,470],[4646,518],[4692,551],[4738,597],[4784,650],[4830,705],[4876,766],[4922,841],[4968,908],[5014,976],[5060,106],[5106,152],[5152,179],[5198,224],[5244,248],[5290,280],[5336,305],[5382,359],[5428,397],[5474,461],[5520,521],[5566,558],[5612,584],[5658,641],[5704,706],[5750,772],[5796,816],[5842,860],[5888,906],[5934,945],[5980,84],[6026,119],[6072,172],[6118,217],[6164,244],[6210,284],[6256,328],[6302,369],[6348,414],[6394,456],[6440,488],[6486,526],[6532,565],[6578,622],[6624,670],[6670,744],[6716,814],[6762,874],[6808,940],[6854,87],[6900,125]];
-const svg=S('saw'); svg.innerHTML='';
-const L=56,R=880,T=16,B=258, X=c=>L+(R-L)*c/6940, Y=k=>B-(B-T)*k/1050;
-let out='';
-[0,250,500,750,1000].forEach(function(g){
-  out+='<line x1="'+L+'" y1="'+Y(g)+'" x2="'+R+'" y2="'+Y(g)+'" stroke="'+GRID+'" stroke-width="1"/>';
-  out+='<text x="'+(L-8)+'" y="'+(Y(g)+4)+'" text-anchor="end">'+g+'K</text>';
-});
-let path='M'+X(P[0][0])+' '+Y(P[0][1]);
-for(let i=1;i<P.length;i++) path+=' L'+X(P[i][0])+' '+Y(P[i][1]);
-out+='<path d="'+path+' L'+X(6900)+' '+B+' L'+X(0)+' '+B+' Z" fill="'+BLUE+'" opacity="0.12"/>';
-out+='<path d="'+path+'" fill="none" stroke="'+BLUE+'" stroke-width="1.8"/>';
-out+='<line x1="'+L+'" y1="'+Y(250)+'" x2="'+R+'" y2="'+Y(250)+'" stroke="'+BAD+'" stroke-width="2" stroke-dasharray="7 5"/>';
-out+='<text class="lbl" x="'+(R-4)+'" y="'+(Y(250)-7)+'" text-anchor="end" style="fill:'+BAD+'">purge line, 250K</text>';
-out+='<text class="lbl" x="'+X(1500)+'" y="'+(Y(1000)+2)+'" style="fill:'+MUTED+'">1M window ceiling: 8 compactions up here</text>';
-[0,2000,4000,6000].forEach(function(c){out+='<text x="'+X(c)+'" y="'+(B+16)+'" text-anchor="middle">'+(c?c.toLocaleString():'call 1')+'</text>';});
-svg.setAttribute('viewBox','0 0 900 280');
-svg.innerHTML=out;
-}
-
-/* 3. tool injection bars */
-{
-const svg=S('tools'); svg.innerHTML='';
-const data=[["Read (2,733 calls)",37.2],["Screenshots (121)",1.9],["Bash (5,646)",1.3],["PowerShell (2,304)",0.4],["Subagents (451)",0.3],["All others (~9,200)",1.5]];
-const L=200,R=880,rowH=32,T=18; let out='';
-const max=37.2, X=v=>L+(R-L-70)*v/max;
-data.forEach(function(d,i){
-  const y=T+i*rowH;
-  const w=Math.max(X(d[1])-L,3);
-  const col = i===0?AMBER:BLUE;
-  out+='<text class="lbl" x="'+(L-10)+'" y="'+(y+15)+'" text-anchor="end">'+d[0]+'</text>';
-  out+='<rect x="'+L+'" y="'+y+'" width="'+w+'" height="20" rx="2" fill="'+col+'"'+(i===0?'':' opacity="0.75"')+'/>';
-  out+='<text x="'+(L+w+8)+'" y="'+(y+15)+'">'+d[1]+'M tok</text>';
-});
-out+='<text class="lbl" x="'+L+'" y="'+(T+6*rowH+18)+'" style="fill:'+MUTED+'">Content injected into context by tool. Read alone is 87% of it.</text>';
-svg.innerHTML=out;
-}
-
-/* 4. blended $/M by model */
-{
-const svg=S('models'); svg.innerHTML='';
-const data=[["Sonnet 5",0.38,"newest"],["Sonnet 4.6",0.57,""],["Opus 5",0.73,"newest"],["Opus 4.8",0.86,""],["Fable 5",1.77,"frontier tier"]];
-const L=40,W=860,T=30,B=190, bw=110, gap=(W-L-5*bw)/5;
-const max=1.9, Y=v=>B-(B-T)*v/max; let out='';
-[0,0.5,1.0,1.5].forEach(function(g){
-  out+='<line x1="'+L+'" y1="'+Y(g)+'" x2="'+(L+W-40)+'" y2="'+Y(g)+'" stroke="'+GRID+'"/>';
-  out+='<text x="'+(L-6)+'" y="'+(Y(g)+4)+'" text-anchor="end">$'+g.toFixed(2)+'</text>';
-});
-data.forEach(function(d,i){
-  const x=L+30+i*(bw+gap);
-  const col = d[2]==="frontier tier"?AMBER:(d[2]==="newest"?GOOD:BLUE);
-  out+='<rect x="'+x+'" y="'+Y(d[1])+'" width="'+bw+'" height="'+(B-Y(d[1]))+'" rx="3" fill="'+col+'"'+(d[2]?'':' opacity="0.6"')+'/>';
-  out+='<text class="lbl big" x="'+(x+bw/2)+'" y="'+(Y(d[1])-8)+'" text-anchor="middle">$'+d[1].toFixed(2)+'</text>';
-  out+='<text class="lbl" x="'+(x+bw/2)+'" y="'+(B+18)+'" text-anchor="middle">'+d[0]+'</text>';
-  if(d[2]) out+='<text x="'+(x+bw/2)+'" y="'+(B+34)+'" text-anchor="middle" style="fill:'+(d[2]==="frontier tier"?AMBER:GOOD)+'">'+d[2]+'</text>';
-});
-svg.innerHTML=out;
-}
-}
-draw();
-})();
-</script>
-</div>
+<footer class="foot"><p>Method: every figure parsed from raw session transcripts (JSONL), May 4 to Aug 7 2026. Costs are API list-price equivalents (cache read 0.1×, write 1.25×). Charts render the actual per-call data, downsampled for display. Further reading: Anthropic's <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Effective context engineering for AI agents</a> and the <a href="https://code.claude.com/docs/en/best-practices">Claude Code best practices</a>.</p></footer>

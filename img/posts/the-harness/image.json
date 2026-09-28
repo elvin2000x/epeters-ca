@@ -1,0 +1,8 @@
+{
+  "eyebrow": "Playbook · Reliability",
+  "title": "The Harness Beats the Prompt",
+  "big": "26",
+  "big_label": "empire_smoke.py runs 26 checks across the web properties, the server, and the scheduled tasks.",
+  "headshot": "../../headshot.jpg",
+  "diagram": "<div class=\"dh\">Three failures, and the catch</div><ol><li><span class=\"n\">1</span>Amnesia<span class=\"t\">orient before acting</span></li><li><span class=\"n\">2</span>Fabrication<span class=\"t\">never invent numbers</span></li><li><span class=\"n\">3</span>Drift<span class=\"t\">one source of truth</span></li><li class=\"hosted\"><span class=\"n\">4</span>Verify before asserting<span class=\"t\">the fourth habit</span></li></ol>"
+}

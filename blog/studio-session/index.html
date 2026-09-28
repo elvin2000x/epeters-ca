@@ -1,122 +1,96 @@
-<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Running a Studio Session · Elvin Peters</title>
 <meta name="description" content="Sometimes the enormous window is the point. How to spend that deliberately instead of leaking it.">
+<meta name="author" content="Elvin Peters">
 <link rel="canonical" href="https://epeters.ca/blog/studio-session/">
-<meta property="og:type" content="article"><meta property="og:title" content="Running a Studio Session"><meta property="og:description" content="Sometimes the enormous window is the point. How to spend that deliberately instead of leaking it."><meta property="og:image" content="https://epeters.ca/img/og.jpg"><meta property="og:url" content="https://epeters.ca/blog/studio-session/">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:creator" content="@elvin_peters">
+<meta name="theme-color" content="#0A1524">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Rabbit Hole">
+<meta property="og:title" content="Running a Studio Session">
+<meta property="og:description" content="Sometimes the enormous window is the point. How to spend that deliberately instead of leaking it.">
+<meta property="og:url" content="https://epeters.ca/blog/studio-session/">
+<meta property="og:image" content="https://epeters.ca/img/posts/studio-session/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Running a Studio Session: load the corpus, hold the window flat, close at the 700K ceiling.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@elvin_peters">
+<meta name="twitter:image" content="https://epeters.ca/img/posts/studio-session/og.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 5v14M6 5h9M6 12h7M6 19h9' stroke='%23c9a250' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='19.5' cy='18.6' r='1.9' fill='%23c9a250'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/blog.css">
+<script>try{if(localStorage.getItem('rh-mode')==='dark')document.documentElement.setAttribute('data-mode','dark')}catch(e){}</script>
+<meta property="article:published_time" content="2026-08-19">
+<meta property="article:modified_time" content="2026-08-19">
+<meta property="article:author" content="Elvin Peters">
+
+<link rel="preload" as="image" href="/img/posts/studio-session/featured-1600.webp" imagesrcset="/img/posts/studio-session/featured-800.webp 800w, /img/posts/studio-session/featured-1600.webp 1600w" imagesizes="(min-width:1088px) 1040px, 100vw">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Running a Studio Session","description":"Sometimes the enormous window is the point. How to spend that deliberately instead of leaking it.","image":["https://epeters.ca/img/posts/studio-session/featured-1600.webp","https://epeters.ca/img/posts/studio-session/og.png"],"datePublished":"2026-08-19","dateModified":"2026-08-19","author":{"@type":"Person","name":"Elvin Peters","url":"https://elvinpeters.com/","sameAs":["https://www.linkedin.com/in/elvinmpeters"]},"publisher":{"@type":"Organization","name":"The Rabbit Hole","url":"https://epeters.ca/"},"mainEntityOfPage":"https://epeters.ca/blog/studio-session/","wordCount":1258,"timeRequired":"PT6M","inLanguage":"en-CA"}</script>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CLZ7N26J1Q');</script>
-<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1699232654449762');fbq('track','PageView');</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"><style>
-:root{--bg:#e6ebf1;--bg-2:#dde4ec;--panel:#ffffff;--panel-2:#f3f6fa;--line:#c3cedd;--line-soft:#d3dce8;--ink:#0e1a2b;--ink-2:#3d4d63;--muted:#4f6076;--gold:#9c761f;--gold-2:#7a5a12;--cyan:#1c6ea8;--glow:rgba(156,118,31,.14);--shadow:0 18px 40px -24px rgba(14,26,43,.45);--serif:'EB Garamond',Georgia,'Times New Roman',serif;--sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif}
-@media(prefers-color-scheme:dark){:root{--bg:#0a1524;--bg-2:#060d18;--panel:#1b2c45;--panel-2:#131f33;--line:#2b405c;--line-soft:#223351;--ink:#e9eff7;--ink-2:#b7c6d9;--muted:#8ba2bd;--gold:#c9a250;--gold-2:#e0bd6b;--cyan:#4fb3f0;--glow:rgba(201,162,80,.16);--shadow:0 24px 50px -28px rgba(0,0,0,.7)}}
-:root[data-theme="light"]{--bg:#e6ebf1;--bg-2:#dde4ec;--panel:#ffffff;--panel-2:#f3f6fa;--line:#c3cedd;--line-soft:#d3dce8;--ink:#0e1a2b;--ink-2:#3d4d63;--muted:#4f6076;--gold:#9c761f;--gold-2:#7a5a12;--cyan:#1c6ea8;--shadow:0 18px 40px -24px rgba(14,26,43,.45)}
-:root[data-theme="dark"]{--bg:#0a1524;--bg-2:#060d18;--panel:#1b2c45;--panel-2:#131f33;--line:#2b405c;--line-soft:#223351;--ink:#e9eff7;--ink-2:#b7c6d9;--muted:#8ba2bd;--gold:#c9a250;--gold-2:#e0bd6b;--cyan:#4fb3f0;--shadow:0 24px 50px -28px rgba(0,0,0,.7)}
-*{box-sizing:border-box}html,body{margin:0}
-body{background:linear-gradient(180deg,var(--bg),var(--bg-2));color:var(--ink);font-family:var(--sans);line-height:1.7;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
-.nav{position:sticky;top:0;z-index:40;backdrop-filter:blur(10px);background:color-mix(in srgb,var(--bg) 80%,transparent);border-bottom:1px solid var(--line-soft)}
-.nav .in{max-width:1120px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:20px}
-.brandmark{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-size:18px}
-.brandmark .sig{width:32px;height:32px;border:1px solid var(--line);border-radius:9px;display:grid;place-items:center;background:var(--panel)}
-.nav .lk{margin-left:auto;display:flex;gap:24px;align-items:center}
-.nav .lk a{font-size:14px;color:var(--ink-2)}.nav .lk a:hover{color:var(--ink)}
-.themebtn{width:44px;height:44px;padding:0;display:inline-flex;align-items:center;justify-content:center;background:none;border:1px solid var(--line);border-radius:10px;color:var(--ink-2);cursor:pointer;font-size:15px;line-height:1}
-.nav .lk a.cta{border:1px solid var(--gold);color:var(--gold-2);padding:11px 16px;border-radius:999px;font-weight:600;display:inline-flex;align-items:center;min-height:44px}
-.eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-2);font-weight:600}
-article{max-width:720px;margin:0 auto;padding:44px 24px 40px}
-.arthead .cover{width:100%;aspect-ratio:16/8;object-fit:cover;border-radius:16px;border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:26px}
-article h1{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,4.6vw,3rem);line-height:1.08;letter-spacing:-.015em;margin:14px 0 0;text-wrap:balance}
-.dek{font-size:1.2rem;color:var(--ink-2);margin:16px 0 0;font-family:var(--serif);font-style:italic}
-.byline{display:flex;gap:14px;align-items:center;margin:22px 0 0;padding-bottom:26px;border-bottom:1px solid var(--line-soft);font-size:14px;color:var(--muted)}
-.byline b{color:var(--ink-2);font-weight:600}
-.body{font-size:18px;color:var(--ink)}
-.body h2{font-family:var(--serif);font-weight:600;font-size:1.6rem;letter-spacing:-.01em;margin:38px 0 12px;line-height:1.2}
-.body p{margin:0 0 20px}
-.body ul{margin:0 0 20px;padding-left:22px}.body li{margin:0 0 8px}
-.body blockquote{margin:26px 0;padding:4px 0 4px 22px;border-left:3px solid var(--gold);font-family:var(--serif);font-style:italic;font-size:1.25rem;color:var(--ink-2)}
-.body strong{color:var(--ink);font-weight:700}
-.body code{font-family:ui-monospace,Consolas,monospace;font-size:.9em;background:var(--panel-2);border:1px solid var(--line-soft);border-radius:5px;padding:1px 6px}
-.endcta{max-width:720px;margin:10px auto 0;padding:0 24px}
-.endcta .card{background:linear-gradient(160deg,var(--panel),var(--panel-2));border:1px solid var(--line);border-radius:16px;padding:28px;text-align:center}
-.endcta h3{font-family:var(--serif);font-weight:400;font-size:1.6rem;margin:0}
-.endcta p{color:var(--ink-2);margin:10px 0 18px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:600;font-size:14px;border:1px solid transparent;cursor:pointer;font-family:var(--sans);background:transparent}
-.btn.primary{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#1b1304}
-.btn.ghost{border-color:var(--line);color:var(--ink);min-height:44px}
-.backlink{display:inline-flex;gap:8px;align-items:center;color:var(--muted);font-size:14px;margin-bottom:8px}
-footer{border-top:1px solid var(--line-soft);padding:30px 24px;color:var(--muted);font-size:13px;margin-top:56px}
-footer .in{max-width:1120px;margin:0 auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-footer a{padding:10px 4px;margin:-10px -4px}
-footer a:hover{color:var(--gold-2)}
-:focus-visible{outline:2px solid var(--gold-2);outline-offset:3px;border-radius:4px}
-@media(max-width:640px){.nav .lk a:not(.cta){display:none}}
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1699232654449762');fbq('track','PageView');</script>
+</head>
+<body>
+<!-- ep:ca-bar --><style>.rhbar{background:#0a1524;border-bottom:1px solid #2b405c;font:500 14px/1.4 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;position:relative;z-index:50}.rhbar .rhin{max-width:1120px;margin:0 auto;padding:0 16px;min-height:52px;display:flex;align-items:center;gap:6px 18px;flex-wrap:wrap}.rhbar a{color:#b7c6d9;text-decoration:none;padding:13px 2px;display:inline-block}.rhbar a:hover{color:#e0bd6b}.rhbar .rhbrand{color:#e0bd6b;font-family:'EB Garamond',Georgia,serif;font-size:18px;margin-right:auto}.rhbar .rhlk{display:flex;gap:16px;flex-wrap:wrap}.rhbar a:focus-visible,.rhfoot a:focus-visible{outline:2px solid #e0bd6b;outline-offset:2px}@media (max-width:480px){.rhbar .rhin{flex-wrap:nowrap;gap:10px}.rhbar .rhbrand{font-size:16px;flex:none}.rhbar .rhlk{flex-wrap:nowrap;gap:12px;font-size:13px;overflow-x:auto;scrollbar-width:none;min-width:0}.rhbar .rhlk::-webkit-scrollbar{display:none}.rhbar .rhlk a{white-space:nowrap}}</style><nav class="rhbar" aria-label="The Rabbit Hole"><div class="rhin"><a class="rhbrand" href="/">The Rabbit Hole</a><span class="rhlk"><a href="/blog/">Blog</a><a href="/play/">Play</a><a href="/#quizzes">Quizzes</a><a href="/projects/">Projects</a></span></div></nav><!-- /ep:ca-bar -->
+<div class="progress" aria-hidden="true"><i id="prog"></i></div>
 
-.nlrow{display:flex;gap:10px;max-width:440px;margin:18px auto 0;flex-wrap:wrap;justify-content:center}
-.nlrow input{flex:1;min-width:210px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:16px;font-family:var(--sans)}
-.nlmsg{font-size:14px;color:var(--muted);margin:10px 0 0;min-height:18px}
-.ctarow{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px}
-</style><link rel="stylesheet" href="/css/nav-drawer.css"><script src="/js/site.js"></script><link rel="stylesheet" href="/css/post.css"></head><body><nav class="nav"><div class="in">
-  <a class="brandmark" href="/"><span class="sig"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg></span>The Rabbit Hole</a>
-  <div class="lk"><a href="/blog/">Blog</a><a href="/play/">Play</a><a href="/#quizzes">Quizzes</a><a href="/projects/">Projects</a><a class="cta" href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=nav&amp;utm_campaign=blog">Get the monthly letter</a></div>
-</div></nav><style>
-/* Post-specific modules only. Shell, type, neutrals and the shared module
-   library live in /css/post.css. Accent: amber (set on the wrapper). */
-.trp .test{background:var(--card);border:1px solid var(--grid);border-radius:6px;padding:18px 22px;margin:14px 0;}
-.trp .test h3{margin:0 0 .2em;font-size:1.08rem;}
-.trp .test .verdict{font-family:var(--disp);font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
-.trp .v-yes{color:var(--amber);}
-.trp .v-no{color:var(--muted);}
-.trp .phase{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:1.6rem 0;}
-.trp .ph{background:var(--card);border:1px solid var(--grid);border-radius:6px;padding:16px 18px;}
-.trp .ph b{font-family:var(--disp);display:block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:.4em;}
-.trp .ph p{font-size:.95rem;margin:.3em 0;}
-</style>
-<div class="trp accent-amber">
-<div class="wrap">
-<div class="col"><a class="trp-back" href="/blog/">&larr; Blog</a></div>
-<header class="col" style="padding-top:56px;">
-  <div class="eyebrow">Playbook · Part three of three</div>
-  <h1>Running a Studio&nbsp;Session</h1>
-  <p class="dek">Sometimes the enormous window is the entire point. Here's how to spend that money deliberately instead of leaking it, and where the cheap-session advice becomes actively wrong.</p>
-  <div class="byline">Elvin Peters · August 2026</div>
+<header class="band">
+  <div class="band-in">
+    <div class="top">
+      <p class="crumb"><a href="/blog/">Blog</a><span aria-hidden="true">/</span>Playbook</p>
+      <button class="mode" id="mode" type="button" aria-label="Switch to dark reading mode" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    </div>
+    <p class="kicker"><i aria-hidden="true"></i>Playbook · Part three of three</p>
+    <h1>Running a Studio Session</h1>
+    <p class="dek">Sometimes the enormous window is the point. How to spend that deliberately instead of leaking it.</p>
+    <div class="byline">
+      <img src="/img/headshot.jpg" alt="" width="40" height="40">
+      <b>Elvin Peters</b><span class="dot" aria-hidden="true">·</span>
+      <time datetime="2026-08-19">Aug 19, 2026</time><span class="dot" aria-hidden="true">·</span>
+      <span>6 min read</span>
+    </div>
+  </div>
 </header>
 
-<div class="series"><a href="/blog/token-efficiency/">Part one</a> measured three months of my sessions and found 86% of the cost was context. <a href="/blog/assembly-line/">Part two</a> built the cheap default. This part is about the sessions where you want the expensive shape on purpose, and how to keep them from turning into marathons.</div>
+<figure class="featured">
+  <img src="/img/posts/studio-session/featured-1600.webp" srcset="/img/posts/studio-session/featured-800.webp 800w, /img/posts/studio-session/featured-1600.webp 1600w" sizes="(min-width:1088px) 1040px, 100vw" width="1600" height="900" alt="Three phases of a studio session, load, work and close, beside a 700K context ceiling." fetchpriority="high">
+  <figcaption>The three phases of a studio session and its 700K ceiling, from this playbook.</figcaption>
+</figure>
 
-<div class="col">
-<h2>The work that justifies it</h2>
+<div class="layout">
+
+  <article class="article" id="post">
+
+
+<div class="note"><span class="lab">This series</span><p><a href="/blog/token-efficiency/">Part one</a> measured three months of my sessions and found 86% of the cost was context. <a href="/blog/assembly-line/">Part two</a> built the cheap default. This part is about the sessions where you want the expensive shape on purpose, and how to keep them from turning into marathons.</p></div>
+
+
+<h2 id="the-work-that-justifies-it">The work that justifies it</h2>
 <p>Some jobs genuinely need everything in the room at once. Editing chapter nine so it doesn't repeat a callback from chapter four means the model has to know chapter four. Deciding where a new service belongs means holding the architecture in mind, not a grep result from it. Doing a consistency pass across forty pages of copy means all forty pages, together.</p>
 <p>For that work, a lean window produces confidently wrong answers. The model will happily tell you chapter nine reads fine, because it never saw chapter four. That's a worse outcome than a bigger bill.</p>
 <p>The distinction that matters is between context you loaded on purpose and context that accumulated while you weren't looking. Same token count, completely different value. A studio session is the first kind, kept honest by a few rules.</p>
-<div class="pull">Paying for a big window is fine. Paying for one you didn't choose is the leak.</div>
+<blockquote class="pull"><p>Paying for a big window is fine. Paying for one you didn't choose is the leak.</p></blockquote>
 
-<h2>The three-question test</h2>
+<h2 id="the-three-question-test">The three-question test</h2>
 <p>Before committing to the expensive shape, three quick checks. Any "no" and this is assembly line work wearing a costume.</p>
 
-<div class="test">
-  <div class="verdict v-yes">Question one</div>
-  <h3>Does the answer change based on material outside the file I'm editing?</h3>
-  <p>Voice consistency, repeated arguments, architectural fit: yes, obviously. Fixing a date parser: no, that's one file and its tests.</p>
-</div>
-<div class="test">
-  <div class="verdict v-yes">Question two</div>
-  <h3>Would a summary of that material be good enough?</h3>
-  <p>If a two-paragraph digest of chapter four would do, send an agent and stay lean. If you need the actual prose, because rhythm and phrasing are the thing you're judging, that's a real studio session.</p>
-</div>
-<div class="test">
-  <div class="verdict v-no">Question three</div>
-  <h3>Is this one continuous job, or several jobs I'm bundling?</h3>
-  <p>The killer. My worst session was legitimate studio work with five unrelated errands stuffed inside it. The errands paid the studio's rent on every call, for nothing.</p>
-</div>
+<ol class="list">
+  <li><strong>Does the answer change based on material outside the file I'm editing?</strong> Voice consistency, repeated arguments, architectural fit: yes, obviously. Fixing a date parser: no, that's one file and its tests.</li>
+  <li><strong>Would a summary of that material be good enough?</strong> If a two-paragraph digest of chapter four would do, send an agent and stay lean. If you need the actual prose, because rhythm and phrasing are the thing you're judging, that's a real studio session.</li>
+  <li><strong>Is this one continuous job, or several jobs I'm bundling?</strong> The killer. My worst session was legitimate studio work with five unrelated errands stuffed inside it. The errands paid the studio's rent on every call, for nothing.</li>
+</ol>
 
-<h2>Rule 1: declare it, and write down the corpus</h2>
+<h2 id="rule-1-declare-it-and-write-down-the-corpus">Rule 1: declare it, and write down the corpus</h2>
 <p>A studio session starts by saying what it is out loud and listing exactly what belongs in the window. Writing the list down does something subtle: it makes additions later feel like a decision rather than a reflex, which is precisely the discipline that keeps the plateau flat.</p>
 
-<div class="plabel">CORPUS.md, sitting in the project folder</div>
-<pre><code># Corpus: Book 3 voice and consistency pass
+<p class="plab">CORPUS.md, sitting in the project folder</p>
+<div class="code"><pre><code># Corpus: Book 3 voice and consistency pass
 
 ## Load at session start, in this order
 1. STYLE-BIBLE.md            voice rules, banned constructions, cadence
@@ -131,21 +105,22 @@ footer a:hover{color:var(--gold-2)}
 
 ## Budget
 Expect ~400K after load. Ceiling for this session: 700K. At 700K: finish
-the current chapter, checkpoint, close.</code></pre>
+the current chapter, checkpoint, close.</code></pre></div>
 
-<div class="note"><b>Load order isn't cosmetic.</b> Caching works on a prefix, so whatever sits earliest and changes least gets cached most effectively across turns. Stable reference material first, the thing you're actively editing last. Load it the other way round and you re-pay more of the window every time the working file changes.</div>
+<div class="note"><span class="lab">Load order isn't cosmetic</span><p>Caching works on a prefix, so whatever sits earliest and changes least gets cached most effectively across turns. Stable reference material first, the thing you're actively editing last. Load it the other way round and you re-pay more of the window every time the working file changes.</p></div>
 
-<h2>Rule 2: the plateau, and holding it</h2>
+<h2 id="rule-2-the-plateau-and-holding-it">Rule 2: the plateau, and holding it</h2>
 <p>The shape you want looks like a hill followed by a long flat table. One climb during loading, then dead flat for the rest of the session. What turns a studio into a marathon is the drift: one more file, one more log, one more screenshot, each individually reasonable, together fatal.</p>
 
-<div class="phase">
-  <div class="ph"><b>Phase 1 · Load</b><p>Read the corpus in the declared order. This is the only part of the session where the window is allowed to grow.</p></div>
-  <div class="ph"><b>Phase 2 · Work</b><p>The window holds flat. Facts come in via agents as short answers. Output goes out to disk. Nothing new gets read in.</p></div>
-  <div class="ph"><b>Phase 3 · Close</b><p>Checkpoint at the declared ceiling. End the session. Don't extend it because you're on a roll.</p></div>
-</div>
+<h3>Phase 1 · Load</h3>
+<p>Read the corpus in the declared order. This is the only part of the session where the window is allowed to grow.</p>
+<h3>Phase 2 · Work</h3>
+<p>The window holds flat. Facts come in via agents as short answers. Output goes out to disk. Nothing new gets read in.</p>
+<h3>Phase 3 · Close</h3>
+<p>Checkpoint at the declared ceiling. End the session. Don't extend it because you're on a roll.</p>
 
-<div class="plabel">The prompt that sets the plateau</div>
-<pre class="prompt">This is a studio session for the chapter 9 voice pass.
+<p class="plab">The prompt that sets the plateau</p>
+<div class="code"><pre class="prose"><code>This is a studio session for the chapter 9 voice pass.
 
 Load, in this order: STYLE-BIBLE.md, CHARACTERS.md, chapters/ch01-ch08.md,
 then chapters/ch09.md. Tell me the context size once loaded.
@@ -153,29 +128,29 @@ then chapters/ch09.md. Tell me the context size once loaded.
 For the rest of this session: don't read any new files into our conversation.
 If you need a fact from research/ or anywhere else, use an agent and bring
 back the answer only. Write all drafts to files. Keep replies here short,
-since every turn re-pays this whole window.</pre>
+since every turn re-pays this whole window.</code></pre></div>
 
 <p>That final sentence changes the model's behaviour more than you'd expect. Told that each turn is expensive, it consolidates: fewer, denser replies instead of a stream of chatty ones.</p>
 
-<h2>Rule 3: batch your questions</h2>
+<h2 id="rule-3-batch-your-questions">Rule 3: batch your questions</h2>
 <p>In a 400K window every message you send re-pays 400K. Four questions asked separately cost four times what the same four cost bundled. This is the single biggest behavioural difference between a studio session and normal chatting, and it's the one that feels most unnatural.</p>
 <p>I keep a scratch file open and let questions accumulate until I've got three or four, then send them as one turn.</p>
 
-<div class="plabel">Batched, not drip-fed</div>
-<pre class="prompt">Four things on chapter 9, answer all of them then stop:
+<p class="plab">Batched, not drip-fed</p>
+<div class="code"><pre class="prose"><code>Four things on chapter 9, answer all of them then stop:
 
 1. Does the Dmitri callback on page 3 land, or does it just repeat ch4?
 2. The pricing anecdote runs long. Cut it, or is the detail earning its space?
 3. Any voice-bible violations, quoted with line references?
-4. Better title for the middle section than "Getting Started"?</pre>
+4. Better title for the middle section than "Getting Started"?</code></pre></div>
 
-<div class="warn"><b>The interruption tax is real.</b> One quick unrelated question in a 400K studio session costs about as much as twenty questions in a lean one. If something unrelated occurs to you mid-session, write it on a note and open a separate session for it later. That's the whole discipline in one sentence.</div>
+<div class="warn"><span class="lab">The interruption tax is real</span><p>One quick unrelated question in a 400K studio session costs about as much as twenty questions in a lean one. If something unrelated occurs to you mid-session, write it on a note and open a separate session for it later. That's the whole discipline in one sentence.</p></div>
 
-<h2>Rule 4: rules live in files, not in the chat</h2>
+<h2 id="rule-4-rules-live-in-files-not-in-the-chat">Rule 4: rules live in files, not in the chat</h2>
 <p>If you find yourself re-explaining your voice rules, your naming conventions or your architectural constraints every session, those belong in a file the corpus loads. Stated once at the top of a session, they're part of the cached prefix. Re-explained in message twelve, they're a permanent addition to a window that's already expensive.</p>
 
-<div class="plabel">STYLE-BIBLE.md, abbreviated</div>
-<pre><code># Voice rules
+<p class="plab">STYLE-BIBLE.md, abbreviated</p>
+<div class="code"><pre><code># Voice rules
 
 ## Never
 - Em-dashes. Use commas, colons, or a full stop.
@@ -189,37 +164,38 @@ since every turn re-pays this whole window.</pre>
 
 ## Cadence
 Vary sentence length. A long one that carries the argument, then a short one
-that lands it. Never three short ones in a row.</code></pre>
+that lands it. Never three short ones in a row.</code></pre></div>
 
 <p>The bonus is that the same file works for the agents you spawn. Hand a subagent the style bible path and its output comes back in voice, instead of you rewriting it afterwards.</p>
 
-<h2>Rule 5: raise the purge line on purpose</h2>
+<h2 id="rule-5-raise-the-purge-line-on-purpose">Rule 5: raise the purge line on purpose</h2>
 <p>My default forces a purge at 250K, which is right for ordinary work and wrong here, because a studio session's whole value is the material staying loaded. So the ceiling gets raised deliberately for these sessions and only these.</p>
 
-<div class="plabel">Project settings for the writing folder</div>
-<pre><code>{
+<p class="plab">Project settings for the writing folder</p>
+<div class="code"><pre><code>{
   "autoCompactWindow": 700000,
   "precomputeCompactionEnabled": true
-}</code></pre>
+}</code></pre></div>
 
 <p>Two things to keep straight. This is a per-project override, so it applies where the book lives and nowhere else. And 700K is a ceiling you intend never to reach, since the plan is to checkpoint and close before it fires. If auto-compaction is firing in a studio session, the corpus was too big for the job, or errands crept in.</p>
 
-<h2>Rule 6: close it properly</h2>
+<h2 id="rule-6-close-it-properly">Rule 6: close it properly</h2>
 <p>Studio sessions are the ones you're most tempted to keep alive, because reloading the corpus tomorrow costs real money and it's right there, already warm. That temptation is exactly how my 3.5 billion token session happened. The corpus reload is a fixed one-time cost. Extending a full session is a cost you pay on every single call for the rest of its life.</p>
 
-<div class="plabel">Exit ritual</div>
-<pre class="prompt">We're closing this session. Before we do:
+<p class="plab">Exit ritual</p>
+<div class="code"><pre class="prose"><code>We're closing this session. Before we do:
 
 1. Write the chapter 9 edits to disk if anything is still unsaved.
 2. Append to STATUS.md: what changed in ch9, what's still open, and anything
    we noticed about other chapters that needs its own pass later.
 3. Add any new voice rules we discovered to STYLE-BIBLE.md.
 
-Then stop. Next session reloads the corpus fresh.</pre>
+Then stop. Next session reloads the corpus fresh.</code></pre></div>
 
-<h2>Where part two's advice is wrong here</h2>
+<h2 id="where-part-twos-advice-is-wrong-here">Where part two's advice is wrong here</h2>
+<div class="tbl" role="region" tabindex="0" aria-label="Assembly line rules in a studio session">
 <table>
-  <thead><tr><th>Assembly line rule</th><th>In a studio session</th></tr></thead>
+  <thead><tr><th scope="col">Assembly line rule</th><th scope="col">In a studio session</th></tr></thead>
   <tbody>
     <tr><td>Grep, then read a section</td><td>Wrong for the corpus. Judging rhythm and consistency needs whole chapters. Right for everything outside the corpus.</td></tr>
     <tr><td>Delegate reading to agents</td><td>Half right. Delegate fact-fetching, never the material you're judging. An agent's summary of your prose isn't your prose.</td></tr>
@@ -227,10 +203,12 @@ Then stop. Next session reloads the corpus fresh.</pre>
     <tr><td>One task, one session</td><td>Still true, and matters more here. This is the shape that punishes bundling hardest.</td></tr>
   </tbody>
 </table>
+</div>
 
-<h2>What good looks like</h2>
+<h2 id="what-good-looks-like">What good looks like</h2>
+<div class="tbl" role="region" tabindex="0" aria-label="Healthy studio versus marathon in disguise">
 <table>
-  <thead><tr><th>Signal</th><th>Healthy studio</th><th>Marathon in disguise</th></tr></thead>
+  <thead><tr><th scope="col">Signal</th><th scope="col">Healthy studio</th><th scope="col">Marathon in disguise</th></tr></thead>
   <tbody>
     <tr><td>Context shape</td><td>One climb, then flat</td><td>Sawtooth, repeated compactions</td></tr>
     <tr><td>Files read after loading</td><td>Zero</td><td>Steady trickle all session</td></tr>
@@ -238,18 +216,89 @@ Then stop. Next session reloads the corpus fresh.</pre>
     <tr><td>Ending</td><td>Checkpoint, then closed</td><td>Still open two days later</td></tr>
   </tbody>
 </table>
+</div>
 
 <p>Done well, a studio session is one of the most valuable things you can run. The model holds the whole picture, catches the contradiction on page 200 that you'd forgotten about, and does work that a lean window genuinely cannot. It just has to be a decision you made, with a shape you're holding on purpose, and an ending you actually reach.</p>
 
-<div class="foot">Part three of three. <a href="/blog/token-efficiency/">Part one</a> has the data, <a href="/blog/assembly-line/">part two</a> has the cheap default. Settings shown are Claude Code's <code>settings.json</code>, though the discipline ports to any assistant that carries conversation context.</div>
+<footer class="foot"><p>Part three of three. <a href="/blog/token-efficiency/">Part one</a> has the data, <a href="/blog/assembly-line/">part two</a> has the cheap default. Settings shown are Claude Code's <code>settings.json</code>, though the discipline ports to any assistant that carries conversation context.</p></footer>
+
+    <aside class="author" aria-label="About the author">
+      <img src="/img/headshot.jpg" alt="Elvin Peters" width="72" height="72" loading="lazy">
+      <div>
+        <div class="nm">Elvin Peters</div>
+        <div class="rl">Author of the AI Fluency Series · Toronto</div>
+        <p>A marketer who taught himself to build with AI. His book is <a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=author&amp;utm_campaign=blog">The Artificial Advantage</a>.</p>
+        <a href="https://www.linkedin.com/in/elvinmpeters" rel="me noopener" target="_blank">Follow on LinkedIn →</a>
+      </div>
+    </aside>
+
+    <div class="share" aria-label="Share this post">
+      <span class="lab">Share</span>
+      <button type="button" id="copylink">Copy link</button>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fepeters.ca%2Fblog%2Fstudio-session%2F" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://x.com/intent/post?url=https%3A%2F%2Fepeters.ca%2Fblog%2Fstudio-session%2F&amp;text=Running%20a%20Studio%20Session" target="_blank" rel="noopener">X</a>
+    </div>
+  </article>
 </div>
-</div>
-</div>
-<section class="endcta"><div class="card">
-<h3>Liked this? The book goes deeper.</h3>
-<p>The Artificial Advantage: the frameworks behind everything here, written for professionals, not programmers.</p>
-<div class="ctarow"><a class="btn primary" href="https://elvinpeters.com/?utm_source=epeters.ca&utm_medium=endcta&utm_campaign=blog">Read The Artificial Advantage</a><a class="btn ghost" href="https://elvinpeters.com/free/?utm_source=epeters.ca&utm_medium=endcta&utm_campaign=blog">Get the Free Toolkit</a></div>
-<form id="nlform" class="nlrow" novalidate><input type="text" name="website" value="" style="position:absolute;left:-5000px" tabindex="-1" autocomplete="off" aria-hidden="true"><input id="nlemail" type="email" name="email" required placeholder="you@work.com" aria-label="Email address"><button class="btn ghost" type="submit">Get the newsletter</button></form>
-<p class="nlmsg" id="nlmsg"></p>
-<script>(function(){var f=document.getElementById('nlform'),m=document.getElementById('nlmsg');if(!f)return;f.addEventListener('submit',function(ev){ev.preventDefault();var em=document.getElementById('nlemail').value.trim();if(!em){m.textContent='Enter your email first.';return}m.textContent='One sec…';fetch('https://ultimateaidirectory.com/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,source:'newsletter | epeters-writing',website:f.website.value})}).then(function(r){return r.json().catch(function(){return{}})}).then(function(){m.textContent='Done. Watch your inbox.';f.reset()}).catch(function(){m.textContent='That did not go through. Try again in a minute.'})})})();</script>
-</div></section><!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:12px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}@media (max-width:480px){.rhfoot{display:flex;flex-direction:column;align-items:center;gap:2px}.rhfoot .rhsep{display:none}.rhfoot>span:first-child{padding-bottom:4px}}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=blog">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=blog">Get the monthly letter</a></footer><!-- /ep:ca-foot --><script>(function(){var r=document.documentElement;document.addEventListener('click',function(e){if(e.target.closest('#tg')){var d=r.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');r.setAttribute('data-theme',d==='dark'?'light':'dark')}})})();</script></body></html>
+
+<section class="endcta" aria-labelledby="endh">
+  <div class="endcta-in">
+    <div>
+      <p class="kicker"><i aria-hidden="true"></i>The monthly letter</p>
+      <h2 id="endh">Liked this? Get the next one first.</h2>
+      <p>One letter a month with what I built, what it cost and what I measured. The book goes deeper on the frameworks behind all of it.</p>
+      <form class="nl" id="nlform" novalidate>
+        <input class="hp" type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input id="nlemail" type="email" name="email" required placeholder="you@work.com" aria-label="Email address" autocomplete="email">
+        <button class="btn" type="submit">Get the monthly letter</button>
+      </form>
+      <p class="nlmsg" id="nlmsg" role="status"></p>
+    </div>
+    <div class="acts">
+      <a class="btn" href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=endcta&amp;utm_campaign=blog">Elvin's book: The Artificial Advantage</a>
+      <a class="txt" href="https://elvinpeters.com/free/?utm_source=epeters.ca&amp;utm_medium=endcta&amp;utm_campaign=blog">Get the Free Toolkit →</a>
+    </div>
+  </div>
+</section>
+<script>(function(){var f=document.getElementById('nlform'),m=document.getElementById('nlmsg');if(!f)return;f.addEventListener('submit',function(ev){ev.preventDefault();var em=document.getElementById('nlemail');if(!em.value.trim()||!em.checkValidity()){m.textContent='Enter a valid email first.';em.focus();return}m.textContent='One sec…';fetch('https://ultimateaidirectory.com/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em.value.trim(),source:'newsletter | epeters-writing',website:f.website.value})}).then(function(r){return r.json().catch(function(){return{}})}).then(function(){m.textContent='Done. Watch your inbox.';f.reset()}).catch(function(){m.textContent='That did not go through. Try again in a minute.'})})})();</script>
+
+<section class="related" aria-labelledby="relh">
+  <h2 id="relh">Keep reading</h2>
+  <ul class="cards">
+    <li class="rcard">
+      <div class="thumb"><img src="/img/posts/assembly-line/featured-800.webp" alt="" width="800" height="450" loading="lazy"></div>
+      <div class="body"><span class="k">Playbook · Part two of three</span><h3><a href="/blog/assembly-line/">Building the Assembly Line</a></h3><span class="m">Aug 12, 2026 · 6 min read</span></div>
+    </li>
+    <li class="rcard">
+      <div class="thumb"><img src="/img/posts/thirteen-games-solo/featured-800.webp" alt="" width="800" height="450" loading="lazy"></div>
+      <div class="body"><span class="k">Playbook · Tooling</span><h3><a href="/blog/thirteen-games-solo/">How I Ship Thirteen Games Without Hand-Testing Any of Them</a></h3><span class="m">Jul 22, 2026 · 6 min read</span></div>
+    </li>
+    <li class="rcard">
+      <div class="thumb"><img src="/img/posts/the-harness/featured-800.webp" alt="" width="800" height="450" loading="lazy"></div>
+      <div class="body"><span class="k">Playbook · Reliability</span><h3><a href="/blog/the-harness/">The Harness Beats the Prompt</a></h3><span class="m">Jul 8, 2026 · 6 min read</span></div>
+    </li>
+  </ul>
+</section>
+
+<!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:12px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}@media (max-width:480px){.rhfoot{display:flex;flex-direction:column;align-items:center;gap:2px}.rhfoot .rhsep{display:none}.rhfoot>span:first-child{padding-bottom:4px}}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=blog">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=blog">Get the monthly letter</a></footer><!-- /ep:ca-foot -->
+<script>
+(function(){
+  var root=document.documentElement,post=document.getElementById('post');
+  var mb=document.getElementById('mode');
+  function sync(){var d=root.getAttribute('data-mode')==='dark';mb.setAttribute('aria-pressed',d);mb.setAttribute('aria-label',d?'Switch to light reading mode':'Switch to dark reading mode')}
+  mb.addEventListener('click',function(){var d=root.getAttribute('data-mode')==='dark';if(d)root.removeAttribute('data-mode');else root.setAttribute('data-mode','dark');try{localStorage.setItem('rh-mode',d?'light':'dark')}catch(e){}sync()});
+  sync();
+  if(!post)return;
+  var rail=[].slice.call(document.querySelectorAll('#toc a'));
+  if(rail.length&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){rail.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'0px 0px -70% 0px'});[].forEach.call(post.querySelectorAll('h2[id]'),function(h){io.observe(h)})}
+  var tp=document.querySelector('.toc-phone');if(tp)tp.addEventListener('click',function(e){if(e.target.closest('a'))this.removeAttribute('open')});
+  var bar=document.getElementById('prog'),tick=false;
+  function prog(){var r=post.getBoundingClientRect(),t=r.height-innerHeight;bar.style.transform='scaleX('+Math.max(0,Math.min(1,t>0?-r.top/t:1))+')';tick=false}
+  if(bar){addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(prog)}},{passive:true});prog()}
+  [].forEach.call(document.querySelectorAll('.code'),function(b){var btn=document.createElement('button');btn.type='button';btn.className='copy';btn.textContent='Copy';btn.setAttribute('aria-label','Copy this code');btn.addEventListener('click',function(){var t=b.querySelector('pre').innerText;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){btn.textContent='Copied'},function(){btn.textContent='Select and copy'});setTimeout(function(){btn.textContent='Copy'},1800)});b.appendChild(btn)});
+  var cl=document.getElementById('copylink'),url=document.querySelector('link[rel=canonical]').href;
+  if(cl)cl.addEventListener('click',function(){(navigator.clipboard?navigator.clipboard.writeText(url):Promise.reject()).then(function(){cl.textContent='Link copied'},function(){cl.textContent=url});setTimeout(function(){cl.textContent='Copy link'},2000)});
+})();
+</script>
+</body>
+</html>

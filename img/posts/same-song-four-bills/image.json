@@ -1,0 +1,8 @@
+{
+  "eyebrow": "Field report · AI operations",
+  "title": "Same Song, Four Different Bills",
+  "big": "5.25x",
+  "big_label": "Two runs of the same model on the same task produced 52,062 and 273,147 model-controlled tokens (Aug. 27, 2026).",
+  "headshot": "../../headshot.jpg",
+  "diagram": "<div class=\"dh\">Model-controlled tokens per run</div><ol><li><span class=\"n\">1</span>Opus (run 2)<span class=\"t\">52,062</span></li><li><span class=\"n\">2</span>Sonnet (run 3)<span class=\"t\">58,471</span></li><li><span class=\"n\">3</span>Haiku (run 4)<span class=\"t\">82,996</span></li><li class=\"hosted\"><span class=\"n\">4</span>Opus (run 1)<span class=\"t\">273,147</span></li></ol>"
+}

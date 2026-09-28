@@ -1,0 +1,8 @@
+{
+  "eyebrow": "Playbook · Part three of three",
+  "title": "Running a Studio Session",
+  "big": "700K",
+  "big_label": "700K is a ceiling you intend never to reach, since the plan is to checkpoint and close before it fires.",
+  "headshot": "../../headshot.jpg",
+  "diagram": "<div class=\"dh\">The studio plateau</div><ol><li><span class=\"n\">1</span>Load the corpus in order<span class=\"t\">window grows</span></li><li><span class=\"n\">2</span>Work with the window flat<span class=\"t\">nothing new read</span></li><li><span class=\"n\">3</span>Checkpoint at the ceiling<span class=\"t\">then close</span></li></ol>"
+}

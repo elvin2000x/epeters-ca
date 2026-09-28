@@ -1,0 +1,51 @@
+<p>Most people treat an AI model like a vending machine. Prompt in, answer out, assume the answer is right because it reads like it's right. Then one day it hands back a confident wrong number, they act on it, and they write the whole thing off as a toy. I get the reaction. I think the diagnosis is backwards.</p>
+
+<p>The model is fallible. You can't prompt that away, and it isn't a reason to walk. A good human teammate is fallible too. What makes one reliable isn't a clean record, it's that they work inside a system that catches mistakes before those mistakes cost anything: code review, a staging environment, a checklist for the step everyone forgets. You don't repair an unreliable worker by trusting them harder. You build the checks around them.</p>
+
+<p>So that's what I did with Claude. I stopped chasing a perfect model and started building a harness. The core idea lines up with what Anthropic has said about long-running agents: an unreliable agent gets repaired by making its failures loud and caught instead of silent and compounding. The model will occasionally forget something and confabulate. Design for that, and it behaves like a reliable co-worker. Ignore it, and you get burned exactly once before you quit.</p>
+
+<h2>The three ways it fails, and the catch for each</h2>
+
+<p>I watched my own setup break enough times to name the patterns. There are three of them. Each one now has a mechanical catch written into my CLAUDE.md as a binding rule, not a polite suggestion.</p>
+
+<p><strong>Amnesia.</strong> The model forgets a system already exists and cheerfully rebuilds it. Mine once forgot an entire outreach engine and started duplicating a file map it had never bothered to read. The catch is a rule I call orient before acting. At the start of every session, read the status file and the generated index, then grep for existing work before building anything new. The model doesn't get to assume the codebase is empty. It has to go look.</p>
+
+<p><strong>Fabrication.</strong> The model invents a fact that sounds plausible and states it with full confidence. Mine once produced a "95% of founders" statistic out of thin air, and on another job it invented a fake radiologist persona to make content feel authoritative. Neither thing existed. The rule is blunt: never invent numbers, stats, or rankings. Cite a real source, or say "I don't have a benchmark." Admitting you don't know is a correct answer. Making one up is the only wrong one.</p>
+
+<p><strong>Drift.</strong> The same fact quietly disagrees with itself across a project. The paperback status of my book was recorded five different ways in five different files, and every one of them was sure it was right. The rule is one source of truth per fact. One file owns it, everything else links to that file. A fact that lives in five places will eventually contradict itself in four of them.</p>
+
+<p>There's a fourth habit sitting on top of these three, and it's the one I lean on hardest: verify before asserting. Read the actual output for its content, don't trust the summary of it. Eyeball the actual image. Load the real interface and click the real button. A summary of a thing is not the thing, and the gap between them is exactly where confident wrong answers live.</p>
+
+<h2>The catch has to be a script, not a mood</h2>
+
+<p>Rules in a config file are only as good as your discipline in following them, and discipline is the first thing to go at 11pm when you just want the thing to ship. So the catches aren't vibes. They're three scripts I run at every checkpoint and every session start.</p>
+
+<ul>
+<li><strong>empire_smoke.py</strong> answers "is everything actually live?" It runs 26 checks across the web properties, the server, and the scheduled tasks. If something went dark, I hear about it now, not from a user later.</li>
+<li><strong>build_index.py</strong> answers "what actually exists?" It generates a sitemap of the real codebase. This is the anti-amnesia file. The model reads it at session start so it can't pretend a system is missing when it's sitting right there.</li>
+<li><strong>consistency_check.py</strong> answers "what is quietly broken?" It hunts for dead links, duplicate documents, and unsourced statistics. It also has an em-dash detector, because zero em-dashes is a voice rule on everything I publish and I don't trust myself to catch every one by eye.</li>
+</ul>
+
+<p>The detail I care about most is that last script's exit code. It returns the count of high-severity problems as its exit code, which means it plugs straight into automation. A script that fails loudly with a number is a script a machine can act on. A report you have to read and interpret is a report you'll skip.</p>
+
+<blockquote class="pull"><p>The first time I ran the consistency check, it caught em-dashes in content that was one click from shipping, three dead paths, and unsourced stats. All of it was about to go out the door.</p></blockquote>
+
+<p>That single run paid for the whole system. Those weren't hypothetical failures I was guarding against in theory. They were live problems in finished work, invisible to me, surfaced in seconds.</p>
+
+<h2>Steering, from weakest to strongest</h2>
+
+<p>Once you accept the model is fallible, the real question is how hard you can lean on any given instruction. I think of control as a ladder. The weakest rung is a chat message, which the model might honour or might forget by the next turn. Above that sits a file it reads, which persists but still depends on the model choosing to open it. Above that are the CLAUDE.md rules, which load every session. Above those are hooks. At the top sit permissions, the hard walls.</p>
+
+<p>Hooks are where reliability stops depending on the model's good intentions. A hook is code the harness runs automatically at a fixed moment, no goodwill required. I have a Stop hook that enforces my checkpoint ritual when a session ends, and a SessionStart hook that briefs the new session on where things stand. The model doesn't have to remember to do either. The machine does it. That's the whole trick: move the thing that matters from "the model will probably remember" to "the system does it every time, whether the model remembers or not."</p>
+
+<h2>Memory: one bootloader, one store</h2>
+
+<p>The same principle governs how the model remembers across sessions. One bootloader file, one memory store. Durable facts live as small individual files. Working state lives in a single status file. Nothing gets duplicated across layers.</p>
+
+<p>I learned this the expensive way. I once had my memory store triplicated, three copies that were supposed to stay identical. They didn't. The copies drifted, and that drift was the single biggest source of the contradiction problem across my whole setup. Three sources of truth is just three ways to be wrong at once. Now there's one, and when a fact changes I change it in one place.</p>
+
+<h2>The leverage is the harness</h2>
+
+<p>People keep asking me for the magic prompt. There isn't one, and if there were, it would still be one confident wrong answer away from letting you down. The leverage was never in the prompt. It's in everything wrapped around the prompt: the rules that name the failure modes, the scripts that catch them with an exit code, the hooks that fire whether or not the model remembers, and the one clean source for every fact.</p>
+
+<p>Build that, and the model stops being a clever thing you have to babysit. It becomes what a good co-worker already is. Fallible, checked, and reliable anyway.</p>

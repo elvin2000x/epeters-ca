@@ -1,0 +1,8 @@
+{
+  "eyebrow": "Field report · AI operations",
+  "title": "The Rent You Pay Every Turn",
+  "big": "86%",
+  "big_label": "of my $16.7K API-equivalent AI bill was context, not output (May 4 to Aug 7 2026).",
+  "headshot": "../../headshot.jpg",
+  "diagram": "<div class=\"dh\">Where $16.7K went</div><ol><li><span class=\"n\">1</span>Cache reads<span class=\"t\">55.5%</span></li><li><span class=\"n\">2</span>Cache writes<span class=\"t\">31.4%</span></li><li class=\"hosted\"><span class=\"n\">3</span>Output<span class=\"t\">12.9%</span></li><li><span class=\"n\">4</span>Fresh input<span class=\"t\">0.3%</span></li></ol>"
+}

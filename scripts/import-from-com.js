@@ -29,7 +29,7 @@ if (fs.readFileSync(path.join(SRC, 'play', 'index.html'), 'utf8').includes('ep:m
 
 // source folder -> folder on epeters.ca
 const MOVED = {
-  'writing': 'writing', 'essays': 'essays', 'play': 'play', 'apps': 'apps',
+  'writing': 'writing', 'play': 'play', 'apps': 'apps',
   'quiz-ai-risk': 'quiz-ai-risk', 'quiz-time-waste': 'quiz-time-waste',
   'quiz-tool-picker': 'quiz-tool-picker', 'projects': 'projects', 'colour': 'projects/colour',
 };
@@ -38,11 +38,8 @@ const MOVED = {
 // that is missing, so a new reference on .com shows up there.
 const ASSETS = [
   '.nojekyll', 'favicon.ico', 'favicon.png', 'apple-touch-icon.png',
-  'css/site.css', 'css/post.css', 'css/nav-drawer.css', 'css/contact-modal.css',
+  'css/site.css', 'css/nav-drawer.css', 'css/contact-modal.css',
   'js/site.js', 'js/contact-modal.js', 'img/og.jpg',
-  'img/blog-assembly.svg', 'img/blog-context-cap.svg', 'img/blog-games.svg', 'img/blog-harness.svg',
-  'img/blog-municipalities.svg', 'img/blog-song-bench.svg', 'img/blog-studio.svg', 'img/blog-tokens.svg',
-  'img/blog-washington.svg', 'img/blog-zerodep.svg',
 ];
 // The Anatomy Sandbox is shared by link and kept noindex (decision 2026-09-25); the
 // move does not change that.
@@ -111,11 +108,8 @@ for (const a of ASSETS) {
   fs.mkdirSync(path.dirname(path.join(DEST, a)), { recursive: true });
   fs.copyFileSync(path.join(SRC, a), path.join(DEST, a));
 }
-// The blog's source data + Markdown renderer (build.js generates writing/ from these).
-fs.mkdirSync(path.join(DEST, 'content'), { recursive: true });
-fs.copyFileSync(path.join(SRC, 'content/essays.json'), path.join(DEST, 'content/essays.json'));
-fs.copyFileSync(path.join(SRC, 'md.js'), path.join(DEST, 'md.js'));
-copied.push('content/essays.json');
+// The blog is not imported any more: since #361 (2026-09-28) epeters-ca owns it (content/essays.json,
+// essays/, md.js, css/blog.css, img/posts/), so a re-run never overwrites the one-template blog.
 
 let changed = 0;
 for (const f of copied) {

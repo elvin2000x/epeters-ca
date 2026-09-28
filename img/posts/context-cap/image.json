@@ -1,0 +1,8 @@
+{
+  "eyebrow": "Field report · AI operations · Part 2",
+  "title": "What Happened When I Capped Claude's Context Window at 250K",
+  "big": "-54%",
+  "big_label": "Cost per working day at list prices after the 250K cap, $249 then $114, in matched fortnights either side of August 7.",
+  "headshot": "../../headshot.jpg",
+  "diagram": "<div class=\"dh\">Per working day, before and after the cap</div><ol><li class=\"hosted\"><span class=\"n\">1</span>Output produced +3%<span class=\"t\">878K then 901K</span></li><li><span class=\"n\">2</span>Tokens consumed -67%<span class=\"t\">241M then 79M</span></li><li><span class=\"n\">3</span>Cost at list prices -54%<span class=\"t\">$249 then $114</span></li><li><span class=\"n\">4</span>Context per call -59%<span class=\"t\">323K then 133K</span></li></ol>"
+}

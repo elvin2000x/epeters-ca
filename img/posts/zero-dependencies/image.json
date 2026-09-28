@@ -1,0 +1,8 @@
+{
+  "eyebrow": "Field notes · Architecture",
+  "title": "Zero dependencies on purpose",
+  "big": "one file",
+  "big_label": "All the SQL lives in lib/db.ts, so the blast radius of swapping the database layer is one file.",
+  "headshot": "../../headshot.jpg",
+  "diagram": "<div class=\"dh\">When SQLite graduates to Postgres</div><ol><li><span class=\"n\">1</span>Real money starts flowing<span class=\"t\">backups</span></li><li><span class=\"n\">2</span>More than one server<span class=\"t\">shared data</span></li><li><span class=\"n\">3</span>Concurrent writes show up<span class=\"t\">staff, systems</span></li><li><span class=\"n\">4</span>Someone else queries the data<span class=\"t\">outside access</span></li></ol>"
+}
