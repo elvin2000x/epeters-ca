@@ -177,7 +177,7 @@ window.APPS_REGISTRY = {
     },
     {
       slug: 'niche-directories', name: 'Niche Directory Network', cat: 'sites', status: 'live',
-      href: 'https://cleaners-directory.vercel.app',
+      href: 'https://ultimateonlinedirectory.com/house-cleaning',
       blurb: 'Fifteen local trade directories generated from one repeatable recipe. Roughly ten minutes from picking a niche to a deployed, indexable site.',
       stat: '15 directories',
       tags: ['Programmatic SEO', 'Vercel']
