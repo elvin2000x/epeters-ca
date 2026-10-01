@@ -1,0 +1,293 @@
+{
+ "about": "Build-time downloads read to write web/molecules/parts.json (the part lines in the tap panel). Saved under .refs/parts, never served. Fetched by tools/fetch_parts.py.",
+ "files": {
+  "up-P69905.json": {
+   "what": "Hemoglobin subunit alpha, human (4HHB chains A, C)",
+   "url": "https://rest.uniprot.org/uniprotkb/P69905.json",
+   "path": ".refs/parts/up-P69905.json",
+   "bytes": 271287,
+   "gzip": 35890,
+   "licence": "UniProt, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "up-P68871.json": {
+   "what": "Hemoglobin subunit beta, human (4HHB chains B, D)",
+   "url": "https://rest.uniprot.org/uniprotkb/P68871.json",
+   "path": ".refs/parts/up-P68871.json",
+   "bytes": 342422,
+   "gzip": 45510,
+   "licence": "UniProt, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "up-P42212.json": {
+   "what": "Green fluorescent protein, Aequorea victoria (1EMA)",
+   "url": "https://rest.uniprot.org/uniprotkb/P42212.json",
+   "path": ".refs/parts/up-P42212.json",
+   "bytes": 244843,
+   "gzip": 20522,
+   "licence": "UniProt, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "up-P47865.json": {
+   "what": "Aquaporin-1, cow (1J4N)",
+   "url": "https://rest.uniprot.org/uniprotkb/P47865.json",
+   "path": ".refs/parts/up-P47865.json",
+   "bytes": 31569,
+   "gzip": 5837,
+   "licence": "UniProt, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "up-P00698.json": {
+   "what": "Lysozyme C, chicken (1LYZ)",
+   "url": "https://rest.uniprot.org/uniprotkb/P00698.json",
+   "path": ".refs/parts/up-P00698.json",
+   "bytes": 384043,
+   "gzip": 23384,
+   "licence": "UniProt, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "up-P0A334.json": {
+   "what": "pH-gated potassium channel KcsA, Streptomyces lividans (1BL8)",
+   "url": "https://rest.uniprot.org/uniprotkb/P0A334.json",
+   "path": ".refs/parts/up-P0A334.json",
+   "bytes": 38975,
+   "gzip": 6087,
+   "licence": "UniProt, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "up-P10719.json": {
+   "what": "ATP synthase subunit beta, mitochondrial, rat (1MAB chain B)",
+   "url": "https://rest.uniprot.org/uniprotkb/P10719.json",
+   "path": ".refs/parts/up-P10719.json",
+   "bytes": 56022,
+   "gzip": 9242,
+   "licence": "UniProt, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "up-P15999.json": {
+   "what": "ATP synthase subunit alpha, mitochondrial, rat (1MAB chain A)",
+   "url": "https://rest.uniprot.org/uniprotkb/P15999.json",
+   "path": ".refs/parts/up-P15999.json",
+   "bytes": 53841,
+   "gzip": 9135,
+   "licence": "UniProt, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "up-P04058.json": {
+   "what": "Acetylcholinesterase, Torpedo californica (1ACJ)",
+   "url": "https://rest.uniprot.org/uniprotkb/P04058.json",
+   "path": ".refs/parts/up-P04058.json",
+   "bytes": 74319,
+   "gzip": 10155,
+   "licence": "UniProt, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "up-P00875.json": {
+   "what": "Ribulose bisphosphate carboxylase large chain, spinach (8RUC)",
+   "url": "https://rest.uniprot.org/uniprotkb/P00875.json",
+   "path": ".refs/parts/up-P00875.json",
+   "bytes": 46025,
+   "gzip": 7585,
+   "licence": "UniProt, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "up-P02699.json": {
+   "what": "Rhodopsin, cow (1F88)",
+   "url": "https://rest.uniprot.org/uniprotkb/P02699.json",
+   "path": ".refs/parts/up-P02699.json",
+   "bytes": 128494,
+   "gzip": 15913,
+   "licence": "UniProt, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "up-P02185.json": {
+   "what": "Myoglobin, sperm whale (1MBN)",
+   "url": "https://rest.uniprot.org/uniprotkb/P02185.json",
+   "path": ".refs/parts/up-P02185.json",
+   "bytes": 105093,
+   "gzip": 8569,
+   "licence": "UniProt, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "up-P00791.json": {
+   "what": "Pepsin A, pig (4PEP)",
+   "url": "https://rest.uniprot.org/uniprotkb/P00791.json",
+   "path": ".refs/parts/up-P00791.json",
+   "bytes": 35858,
+   "gzip": 6350,
+   "licence": "UniProt, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "up-P01315.json": {
+   "what": "Insulin, pig (4INS)",
+   "url": "https://rest.uniprot.org/uniprotkb/P01315.json",
+   "path": ".refs/parts/up-P01315.json",
+   "bytes": 43552,
+   "gzip": 7048,
+   "licence": "UniProt, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "up-P03989.json": {
+   "what": "HLA class I antigen B-27, human (1HSA)",
+   "url": "https://rest.uniprot.org/uniprotkb/P03989.json",
+   "path": ".refs/parts/up-P03989.json",
+   "bytes": 330006,
+   "gzip": 37386,
+   "licence": "UniProt, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "up-P04585.json": {
+   "what": "Gag-Pol polyprotein, HIV-1 (1HXW protease part)",
+   "url": "https://rest.uniprot.org/uniprotkb/P04585.json",
+   "path": ".refs/parts/up-P04585.json",
+   "bytes": 288173,
+   "gzip": 36171,
+   "licence": "UniProt, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "up-P68135.json": {
+   "what": "Actin, alpha skeletal muscle, rabbit (1J6Z)",
+   "url": "https://rest.uniprot.org/uniprotkb/P68135.json",
+   "path": ".refs/parts/up-P68135.json",
+   "bytes": 133864,
+   "gzip": 12549,
+   "licence": "UniProt, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "motm-1.txt": {
+   "what": "Molecule of the Month: Myoglobin",
+   "url": "https://pdb101.rcsb.org/motm/1",
+   "path": ".refs/parts/motm-1.txt",
+   "bytes": 9465,
+   "gzip": 3920,
+   "licence": "RCSB PDB-101 Molecule of the Month, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "motm-6.txt": {
+   "what": "Molecule of the Month: HIV-1 Protease",
+   "url": "https://pdb101.rcsb.org/motm/6",
+   "path": ".refs/parts/motm-6.txt",
+   "bytes": 8737,
+   "gzip": 3511,
+   "licence": "RCSB PDB-101 Molecule of the Month, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "motm-9.txt": {
+   "what": "Molecule of the Month: Lysozyme",
+   "url": "https://pdb101.rcsb.org/motm/9",
+   "path": ".refs/parts/motm-9.txt",
+   "bytes": 8784,
+   "gzip": 3736,
+   "licence": "RCSB PDB-101 Molecule of the Month, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "motm-11.txt": {
+   "what": "Molecule of the Month: Rubisco",
+   "url": "https://pdb101.rcsb.org/motm/11",
+   "path": ".refs/parts/motm-11.txt",
+   "bytes": 8630,
+   "gzip": 3536,
+   "licence": "RCSB PDB-101 Molecule of the Month, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "motm-12.txt": {
+   "what": "Molecule of the Month: Pepsin",
+   "url": "https://pdb101.rcsb.org/motm/12",
+   "path": ".refs/parts/motm-12.txt",
+   "bytes": 10115,
+   "gzip": 4269,
+   "licence": "RCSB PDB-101 Molecule of the Month, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "motm-14.txt": {
+   "what": "Molecule of the Month: Insulin",
+   "url": "https://pdb101.rcsb.org/motm/14",
+   "path": ".refs/parts/motm-14.txt",
+   "bytes": 9494,
+   "gzip": 4003,
+   "licence": "RCSB PDB-101 Molecule of the Month, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "motm-38.txt": {
+   "what": "Molecule of the Month: Potassium Channels",
+   "url": "https://pdb101.rcsb.org/motm/38",
+   "path": ".refs/parts/motm-38.txt",
+   "bytes": 11534,
+   "gzip": 4685,
+   "licence": "RCSB PDB-101 Molecule of the Month, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "motm-41.txt": {
+   "what": "Molecule of the Month: Hemoglobin",
+   "url": "https://pdb101.rcsb.org/motm/41",
+   "path": ".refs/parts/motm-41.txt",
+   "bytes": 13174,
+   "gzip": 5289,
+   "licence": "RCSB PDB-101 Molecule of the Month, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "motm-42.txt": {
+   "what": "Molecule of the Month: Green Fluorescent Protein",
+   "url": "https://pdb101.rcsb.org/motm/42",
+   "path": ".refs/parts/motm-42.txt",
+   "bytes": 10030,
+   "gzip": 4146,
+   "licence": "RCSB PDB-101 Molecule of the Month, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "motm-54.txt": {
+   "what": "Molecule of the Month: Acetylcholinesterase",
+   "url": "https://pdb101.rcsb.org/motm/54",
+   "path": ".refs/parts/motm-54.txt",
+   "bytes": 10172,
+   "gzip": 4128,
+   "licence": "RCSB PDB-101 Molecule of the Month, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "motm-72.txt": {
+   "what": "Molecule of the Month: ATP Synthase",
+   "url": "https://pdb101.rcsb.org/motm/72",
+   "path": ".refs/parts/motm-72.txt",
+   "bytes": 11038,
+   "gzip": 4506,
+   "licence": "RCSB PDB-101 Molecule of the Month, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "motm-147.txt": {
+   "what": "Molecule of the Month: Rhodopsin",
+   "url": "https://pdb101.rcsb.org/motm/147",
+   "path": ".refs/parts/motm-147.txt",
+   "bytes": 8495,
+   "gzip": 3498,
+   "licence": "RCSB PDB-101 Molecule of the Month, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "motm-173.txt": {
+   "what": "Molecule of the Month: Aquaporin",
+   "url": "https://pdb101.rcsb.org/motm/173",
+   "path": ".refs/parts/motm-173.txt",
+   "bytes": 9171,
+   "gzip": 3842,
+   "licence": "RCSB PDB-101 Molecule of the Month, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "motm-62.txt": {
+   "what": "Molecule of the Month: Major Histocompatibility Complex",
+   "url": "https://pdb101.rcsb.org/motm/62",
+   "path": ".refs/parts/motm-62.txt",
+   "bytes": 10734,
+   "gzip": 4248,
+   "licence": "RCSB PDB-101 Molecule of the Month, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  },
+  "motm-64.txt": {
+   "what": "Molecule of the Month: Kinesin",
+   "url": "https://pdb101.rcsb.org/motm/64",
+   "path": ".refs/parts/motm-64.txt",
+   "bytes": 9094,
+   "gzip": 3685,
+   "licence": "RCSB PDB-101 Molecule of the Month, CC BY 4.0 (reference only, read, not published)",
+   "fetched": "2026-10-01"
+  }
+ }
+}

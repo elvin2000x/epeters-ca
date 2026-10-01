@@ -1,0 +1,66 @@
+{
+ "id": "hemoglobin",
+ "structure": "4HHB",
+ "tour": [
+  {"id": "four-chains", "title": "Four chains, one team", "focus": {"chains": ["A", "B", "C", "D"], "residues": null, "ligands": null, "whole": true}, "view": "cartoon",
+   "text": [{"t": "Hemoglobin is four protein chains packed together: two alpha chains and two beta chains.", "s": ["motm-hemoglobin", "os-40-2"]},
+            {"t": "This is the protein that makes blood red and carries oxygen around your body.", "s": ["motm-hemoglobin", "os-40-2"]}]},
+  {"id": "alpha-chains", "title": "The two alpha chains", "focus": {"chains": ["A", "C"], "residues": null, "ligands": null, "whole": false}, "view": "cartoon",
+   "text": [{"t": "Chains A and C are the alpha chains, each 141 amino acids long in this file.", "s": ["rcsb-4HHB"]}]},
+  {"id": "heme", "title": "A heme in every chain", "focus": {"chains": ["A"], "residues": null, "ligands": ["HEM"], "whole": false}, "view": "ball-and-stick",
+   "text": [{"t": "Each chain holds a flat, ring-shaped heme group with one iron atom at its centre.", "s": ["motm-hemoglobin", "rcsb-4HHB"]},
+            {"t": "Oxygen binds to that iron, so one hemoglobin can carry four oxygen molecules.", "s": ["motm-hemoglobin", "os-40-2"]}]},
+  {"id": "histidine", "title": "The histidine that holds the iron", "focus": {"chains": ["A"], "residues": [[87, 87]], "ligands": ["HEM"], "whole": false}, "view": "ball-and-stick",
+   "text": [{"t": "Histidine 87 reaches up from below the heme and bonds to the iron.", "s": ["rcsb-4HHB", "paper-fermi-1984"]},
+            {"t": "When oxygen lands on the iron it pulls this histidine, and the shift spreads to the other chains so they grab oxygen more easily.", "s": ["motm-hemoglobin"]}]},
+  {"id": "sickle-site", "title": "One letter, a different disease", "focus": {"chains": ["B", "D"], "residues": [[6, 6]], "ligands": null, "whole": false}, "view": "spacefill",
+   "text": [{"t": "Position 6 of each beta chain is glutamate in normal hemoglobin.", "s": ["rcsb-4HHB", "motm-hemoglobin"]},
+            {"t": "In sickle cell hemoglobin it is valine, and that one change lets the molecules stick together into stiff fibers.", "s": ["motm-hemoglobin", "os-3-4"]}]},
+  {"id": "no-oxygen", "title": "The empty form", "focus": {"chains": ["A", "B", "C", "D"], "residues": null, "ligands": ["HEM"], "whole": true}, "view": "surface",
+   "text": [{"t": "This structure is deoxyhemoglobin, the form with no oxygen bound.", "s": ["rcsb-4HHB", "paper-fermi-1984"]}]}
+ ],
+ "sections": {
+  "does": [
+   {"t": "Hemoglobin picks up oxygen in the lungs and carries it through the blood to the rest of the body.", "s": ["motm-hemoglobin", "os-40-2"]},
+   {"t": "Each molecule binds up to four oxygen molecules, one at each iron.", "s": ["os-40-2"]},
+   {"t": "It also carries some carbon dioxide away from the tissues.", "s": ["os-40-2"]}
+  ],
+  "shape": [
+   {"t": "The four chains work as a team: the first oxygen is hard to add, then the second, third and fourth bind more and more easily.", "s": ["motm-hemoglobin"]},
+   {"t": "When oxygen binds to one iron, it pulls a histidine and shifts a helix, and that motion rocks the neighbouring chains into a shape that grabs oxygen faster.", "s": ["motm-hemoglobin"]},
+   {"t": "The same teamwork works in reverse in the tissues, so once one oxygen drops off the rest are released quickly.", "s": ["motm-hemoglobin"]}
+  ],
+  "lives": {
+   "text": [
+    {"t": "Hemoglobin lives inside red blood cells, about 250 million molecules in each cell.", "s": ["os-40-2"]},
+    {"t": "Mammal red blood cells have no organelles, which leaves more room for hemoglobin.", "s": ["os-40-2"]}
+   ],
+   "links": [{"type": "cell", "id": "rbc"}, {"type": "part", "id": "rbc-hb"}, {"type": "element", "id": "Fe"}]
+  },
+  "wrong": [
+   {"t": "In sickle cell disease, glutamate 6 of the beta chain is replaced by valine.", "s": ["motm-hemoglobin"]},
+   {"t": "Without oxygen these hemoglobins stick together into long fibers that bend red blood cells into a sickle shape and can clog blood vessels.", "s": ["motm-hemoglobin", "os-3-4"]},
+   {"t": "Carbon monoxide is dangerous because it takes oxygen's place on the heme and is hard to remove.", "s": ["motm-hemoglobin"]}
+  ],
+  "history": {
+   "year": 1984, "who": "G. Fermi, M.F. Perutz, B. Shaanan and R. Fourme", "method": "X-ray", "resolution_A": 1.74,
+   "text": [
+    {"t": "This human deoxyhemoglobin structure was refined at 1.74 angstroms using X-rays from a synchrotron.", "s": ["paper-fermi-1984", "rcsb-4HHB"]},
+    {"t": "Max Perutz had earlier solved the groundbreaking structure of horse hemoglobin, which is also in the Protein Data Bank.", "s": ["motm-hemoglobin"]}
+   ]
+  },
+  "size": {
+   "nm": 7.0,
+   "compare": [
+    {"t": "From its farthest atom to its farthest atom, this hemoglobin measures about 7 nm.", "s": ["rcsb-4HHB"]},
+    {"t": "About 250 million of them fit inside a single red blood cell.", "s": ["os-40-2"]}
+   ]
+  }
+ },
+ "highlights": [
+  {"chain": "B", "residue": 6, "comp": "GLU", "label": "Sickle cell site (Glu6)", "text": [{"t": "Glutamate 6 of the beta chain becomes valine in sickle cell hemoglobin.", "s": ["motm-hemoglobin", "rcsb-4HHB"]}]},
+  {"chain": "A", "residue": 87, "comp": "HIS", "label": "Iron-holding histidine (His87)", "text": [{"t": "This histidine bonds to the heme iron from below.", "s": ["rcsb-4HHB", "paper-fermi-1984"]}]},
+  {"chain": "B", "residue": 92, "comp": "HIS", "label": "Iron-holding histidine (His92)", "text": [{"t": "In the beta chains the histidine that bonds to the iron is number 92.", "s": ["rcsb-4HHB"]}]}
+ ],
+ "review": "pending"
+}

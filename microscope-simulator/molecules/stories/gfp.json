@@ -1,0 +1,58 @@
+{
+ "id": "gfp",
+ "structure": "1EMA",
+ "tour": [
+  {"id": "can", "title": "A glowing can", "focus": {"chains": ["A"], "residues": null, "ligands": null, "whole": true}, "view": "cartoon",
+   "text": [{"t": "Green fluorescent protein folds into a barrel of 11 strands, like a tin can.", "s": ["paper-ormo-1996", "motm-gfp"]},
+            {"t": "It comes from a jellyfish that lives in the cold waters of the north Pacific.", "s": ["motm-gfp", "rcsb-1EMA"]}]},
+  {"id": "chromophore", "title": "The part that glows", "focus": {"chains": ["A"], "residues": null, "ligands": ["CRO"], "whole": false}, "view": "ball-and-stick",
+   "text": [{"t": "Right in the middle of the can sits the chromophore, the part that absorbs light and glows green.", "s": ["motm-gfp", "rcsb-1EMA"]},
+            {"t": "The protein around it shields it from water molecules that would otherwise steal its energy.", "s": ["motm-gfp"]}]},
+  {"id": "made-from-three", "title": "Built from three amino acids", "focus": {"chains": ["A"], "residues": [[64, 64], [68, 68]], "ligands": ["CRO"], "whole": false}, "view": "ball-and-stick",
+   "text": [{"t": "The chromophore forms by itself from three amino acids in the chain, here threonine 65, tyrosine 66 and glycine 67.", "s": ["paper-ormo-1996", "uniprot-P42212"]},
+            {"t": "The file shows them as one fused group, joined to phenylalanine 64 on one side and valine 68 on the other.", "s": ["rcsb-1EMA"]}]},
+  {"id": "central-helix", "title": "A thread through the middle", "focus": {"chains": ["A"], "residues": null, "ligands": ["CRO"], "whole": true}, "view": "surface",
+   "text": [{"t": "One stretch of the chain runs straight through the centre of the can, and the chromophore forms from that central helix.", "s": ["motm-gfp", "paper-ormo-1996"]}]},
+  {"id": "thr203", "title": "A colour dial", "focus": {"chains": ["A"], "residues": [[203, 203]], "ligands": ["CRO"], "whole": false}, "view": "ball-and-stick",
+   "text": [{"t": "Threonine 203 sits next to the chromophore.", "s": ["paper-ormo-1996", "rcsb-1EMA"]},
+            {"t": "Changing it to tyrosine or histidine shifts the light toward red, one way scientists made new colours.", "s": ["paper-ormo-1996", "motm-gfp"]}]}
+ ],
+ "sections": {
+  "does": [
+   {"t": "In the jellyfish, GFP takes blue light from another protein, aequorin, and turns it into green light.", "s": ["motm-gfp", "uniprot-P42212"]},
+   {"t": "Shine ultraviolet light on GFP and it glows bright green.", "s": ["motm-gfp"]},
+   {"t": "Scientists attach GFP to other proteins or viruses so they can watch them move inside living cells.", "s": ["motm-gfp"]}
+  ],
+  "shape": [
+   {"t": "Most light-handling proteins need a special molecule added, but GFP builds its own chromophore using only amino acids.", "s": ["motm-gfp"]},
+   {"t": "The chromophore needs the folded protein to form and to glow, and oxygen from the surroundings finishes it.", "s": ["paper-ormo-1996", "uniprot-P42212"]},
+   {"t": "Because it makes its own glow, a cell only needs the gene for GFP to start shining.", "s": ["motm-gfp"]}
+  ],
+  "lives": {
+   "text": [
+    {"t": "GFP comes from light-making cells of the jellyfish Aequorea victoria.", "s": ["uniprot-P42212", "rcsb-1EMA"]},
+    {"t": "Scientists have added it to mice, frogs, flies, worms and many other living things.", "s": ["motm-gfp"]}
+   ],
+   "links": [{"type": "element", "id": "Se"}, {"type": "process", "id": "dna-to-protein"}]
+  },
+  "history": {
+   "year": 1996, "who": "M. Ormo, A.B. Cubitt, K. Kallio, L.A. Gross, R.Y. Tsien and S.J. Remington", "method": "X-ray", "resolution_A": 1.9,
+   "text": [
+    {"t": "This X-ray structure of a GFP with threonine at position 65 was solved at 1.9 angstroms.", "s": ["paper-ormo-1996", "rcsb-1EMA"]},
+    {"t": "It revealed the 11-strand barrel and showed how one change near the chromophore shifts the colour.", "s": ["paper-ormo-1996"]}
+   ]
+  },
+  "size": {
+   "nm": 5.3,
+   "compare": [
+    {"t": "GFP measures about 5.3 nm from end to end.", "s": ["rcsb-1EMA"]},
+    {"t": "That is a little bigger than lysozyme in this gallery, which measures about 4.9 nm.", "s": ["rcsb-1EMA", "rcsb-1LYZ"]}
+   ]
+  }
+ },
+ "highlights": [
+  {"chain": "A", "residue": 66, "comp": "CRO", "label": "Chromophore (residues 65 to 67)", "text": [{"t": "The glowing group, made from three amino acids of the chain.", "s": ["paper-ormo-1996", "rcsb-1EMA"]}]},
+  {"chain": "A", "residue": 203, "comp": "THR", "label": "Thr203", "text": [{"t": "Changing this amino acid shifts GFP's colour toward red.", "s": ["paper-ormo-1996"]}]}
+ ],
+ "review": "pending"
+}

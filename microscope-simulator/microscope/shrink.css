@@ -1,0 +1,27 @@
+/* Shrink yourself: additions on top of microscope.css (same tokens, light and dark). */
+#viewport { cursor: default; touch-action: auto; }
+#c2d { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+a.btn { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; color: var(--ink); }
+a.btn[aria-current="page"] { background: var(--accent-soft); border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.verdict { font-size: 18px; font-weight: 600; margin: 0 0 8px; }
+.nums { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; margin: 0 0 8px; font-size: 15px; }
+.nums dt { color: var(--muted); }
+.nums dd { margin: 0; text-align: right; font-family: var(--font-data); font-weight: 600; }
+.nums dd small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; }
+.maths { font-family: var(--font-data); font-size: 13px; overflow-wrap: anywhere; }
+.maths p { margin: 6px 0; }
+.live details > summary { cursor: pointer; font-weight: 600; min-height: 28px; }
+#deeper h3 { margin: 12px 0 4px; font-size: 16px; }
+#deeper h3:first-child { margin-top: 0; }
+#deeper p { margin: 0 0 6px; }
+.myths { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.myths p { margin: 0; }
+.myths b { display: inline-block; min-width: 3.2em; }
+.vocab dt { font-weight: 600; margin-top: 8px; }
+.vocab dd { margin: 0; }
+.consts { margin: 6px 0 0; padding-left: 18px; font-size: 14px; }
+sup a { color: var(--accent); font-family: var(--font-data); font-size: 11px; text-decoration: none; margin-left: 2px; }
+.shrink .badge { max-width: calc(100% - 24px); }
+.shrink .readout { top: calc(10px + var(--top)); bottom: auto; }
+body.cme-shell.shrink .readout { top: 12px; }
+@media (max-width: 559px) { .shrink .readout { bottom: auto; } }

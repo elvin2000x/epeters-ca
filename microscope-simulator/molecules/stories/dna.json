@@ -1,0 +1,60 @@
+{
+ "id": "dna",
+ "structure": "1BNA",
+ "tour": [
+  {"id": "double-helix", "title": "The double helix", "focus": {"chains": ["A", "B"], "residues": null, "ligands": null, "whole": true}, "view": "cartoon",
+   "text": [{"t": "Two strands of DNA wind around each other into the famous double helix.", "s": ["motm-dna", "os-3-5"]},
+            {"t": "This piece is 12 base pairs long, slightly more than one full turn of the helix.", "s": ["paper-drew-1981", "rcsb-1BNA"]}]},
+  {"id": "one-strand", "title": "Strand one", "focus": {"chains": ["A"], "residues": null, "ligands": null, "whole": false}, "view": "ball-and-stick",
+   "text": [{"t": "Read one strand from end to end and you get the code C G C G A A T T C G C G.", "s": ["rcsb-1BNA", "paper-drew-1981"]},
+            {"t": "Its sugar and phosphate backbone runs along the outside, with the bases pointing in.", "s": ["os-3-5"]}]},
+  {"id": "at-pairs", "title": "A meets T", "focus": {"chains": ["A", "B"], "residues": [[5, 8, "A"], [17, 20, "B"]], "ligands": null, "whole": false}, "view": "ball-and-stick",
+   "text": [{"t": "In the middle, adenine on one strand pairs with thymine on the other.", "s": ["os-3-5", "motm-dna"]},
+            {"t": "These A and T pairs are propeller twisted, not perfectly flat, which helps the bases stack.", "s": ["paper-drew-1981", "motm-dna"]}]},
+  {"id": "gc-pairs", "title": "G meets C", "focus": {"chains": ["A", "B"], "residues": [[1, 4, "A"], [9, 12, "A"], [13, 16, "B"], [21, 24, "B"]], "ligands": null, "whole": false}, "view": "ball-and-stick",
+   "text": [{"t": "At both ends, guanine pairs with cytosine, held by hydrogen bonds across the middle of the helix.", "s": ["os-3-5", "motm-dna"]}]},
+  {"id": "grooves", "title": "Grooves that proteins read", "focus": {"chains": ["A", "B"], "residues": null, "ligands": null, "whole": true}, "view": "spacefill",
+   "text": [{"t": "The helix has a wide major groove and a narrow minor groove.", "s": ["motm-dna"]},
+            {"t": "Proteins read the chemical patterns in these grooves to find their spot without unwinding the DNA.", "s": ["motm-dna"]}]}
+ ],
+ "sections": {
+  "does": [
+   {"t": "DNA is the genetic material of all living things.", "s": ["os-3-5"]},
+   {"t": "Its code is read one base at a time, A, T, C or G, to build proteins.", "s": ["motm-dna"]},
+   {"t": "Each cell in your body carries about 1.5 gigabytes of genetic information.", "s": ["motm-dna"]}
+  ],
+  "shape": [
+   {"t": "A always pairs with T and G with C, forming a matching set of hydrogen bonds across the helix.", "s": ["os-3-5", "motm-dna"]},
+   {"t": "A purine always pairs with a pyrimidine, which keeps the helix the same width all the way along.", "s": ["os-14-2"]},
+   {"t": "Real DNA is not perfectly smooth: this piece is bent by 19 degrees by the way it packs in the crystal.", "s": ["paper-drew-1981", "motm-dna"]}
+  ],
+  "lives": {
+   "text": [
+    {"t": "In animal and plant cells DNA is kept in the nucleus; in bacteria it sits in a region called the nucleoid.", "s": ["os-3-5", "os-22-2"]}
+   ],
+   "links": [{"type": "part", "id": "nucleus"}, {"type": "part", "id": "nucleoid"}, {"type": "process", "id": "dna-to-protein"}, {"type": "process", "id": "mitosis"}, {"type": "element", "id": "P"}]
+  },
+  "wrong": [
+   {"t": "Chemicals and radiation can damage DNA, and cells build repair proteins to fix the corrupted information.", "s": ["motm-dna"]}
+  ],
+  "history": {
+   "year": 1981, "who": "H.R. Drew, R.M. Wing, T. Takano, C. Broka, S. Tanaka, K. Itakura and R.E. Dickerson", "method": "X-ray", "resolution_A": 1.9,
+   "text": [
+    {"t": "Watson and Crick worked out how DNA's base pairs store information in the 1950s.", "s": ["motm-dna"]},
+    {"t": "This 1981 X-ray structure of a synthetic 12 base-pair DNA showed the B form, the shape DNA takes in cells, in atomic detail.", "s": ["paper-drew-1981", "motm-dna"]}
+   ]
+  },
+  "size": {
+   "nm": 4.4,
+   "compare": [
+    {"t": "This 12 base-pair piece is about 4.4 nm from end to end, and the helix is 2 nm wide.", "s": ["rcsb-1BNA", "os-14-2"]},
+    {"t": "Each base pair adds 0.34 nm, so one turn of 10 base pairs is 3.4 nm long.", "s": ["os-14-2"]}
+   ]
+  }
+ },
+ "highlights": [
+  {"chain": "A", "residue": 5, "comp": "DA", "label": "Adenine (A5)", "text": [{"t": "Pairs with thymine on the other strand.", "s": ["os-3-5", "rcsb-1BNA"]}]},
+  {"chain": "A", "residue": 1, "comp": "DC", "label": "Cytosine (C1)", "text": [{"t": "Pairs with guanine on the other strand.", "s": ["os-3-5", "rcsb-1BNA"]}]}
+ ],
+ "review": "pending"
+}

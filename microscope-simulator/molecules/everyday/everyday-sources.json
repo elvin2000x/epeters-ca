@@ -1,0 +1,376 @@
+{
+ "_note": "Sources for the Everyday molecules collection, same shape as library-sources.json. Pages read on 2026-10-01; raw copies in .refs/everyday/ (not published), downloads logged in fetch-log.json.",
+ "sources": {
+  "ccd-HDZ": {
+   "type": "database",
+   "cite": "RCSB PDB Chemical Component Dictionary, HDZ (nitrogen molecule).",
+   "url": "https://www.rcsb.org/ligand/HDZ",
+   "file": "https://files.rcsb.org/ligands/download/HDZ.cif",
+   "licence": "CC0 1.0 (wwPDB archive files, including the Chemical Component Dictionary)",
+   "checked": "2026-10-01: name NITROGEN MOLECULE, formula N2, ideal coordinates used."
+  },
+  "ccd-OXY": {
+   "type": "database",
+   "cite": "RCSB PDB Chemical Component Dictionary, OXY (oxygen molecule).",
+   "url": "https://www.rcsb.org/ligand/OXY",
+   "file": "https://files.rcsb.org/ligands/download/OXY.cif",
+   "licence": "CC0 1.0 (wwPDB archive files, including the Chemical Component Dictionary)",
+   "checked": "2026-10-01: name OXYGEN MOLECULE, formula O2, ideal coordinates used."
+  },
+  "ccd-CO2": {
+   "type": "database",
+   "cite": "RCSB PDB Chemical Component Dictionary, CO2 (carbon dioxide).",
+   "url": "https://www.rcsb.org/ligand/CO2",
+   "file": "https://files.rcsb.org/ligands/download/CO2.cif",
+   "licence": "CC0 1.0 (wwPDB archive files, including the Chemical Component Dictionary)",
+   "checked": "2026-10-01: name CARBON DIOXIDE, formula C O2, ideal coordinates used."
+  },
+  "ccd-AR": {
+   "type": "database",
+   "cite": "RCSB PDB Chemical Component Dictionary, AR (argon).",
+   "url": "https://www.rcsb.org/ligand/AR",
+   "file": "https://files.rcsb.org/ligands/download/AR.cif",
+   "licence": "CC0 1.0 (wwPDB archive files, including the Chemical Component Dictionary)",
+   "checked": "2026-10-01: name ARGON, formula Ar, ideal coordinates used."
+  },
+  "ccd-ACY": {
+   "type": "database",
+   "cite": "RCSB PDB Chemical Component Dictionary, ACY (acetic acid).",
+   "url": "https://www.rcsb.org/ligand/ACY",
+   "file": "https://files.rcsb.org/ligands/download/ACY.cif",
+   "licence": "CC0 1.0 (wwPDB archive files, including the Chemical Component Dictionary)",
+   "checked": "2026-10-01: name ACETIC ACID, formula C2 H4 O2, ideal coordinates used."
+  },
+  "ccd-CIT": {
+   "type": "database",
+   "cite": "RCSB PDB Chemical Component Dictionary, CIT (citric acid).",
+   "url": "https://www.rcsb.org/ligand/CIT",
+   "file": "https://files.rcsb.org/ligands/download/CIT.cif",
+   "licence": "CC0 1.0 (wwPDB archive files, including the Chemical Component Dictionary)",
+   "checked": "2026-10-01: name CITRIC ACID, formula C6 H8 O7, ideal coordinates used."
+  },
+  "ccd-BCT": {
+   "type": "database",
+   "cite": "RCSB PDB Chemical Component Dictionary, BCT (bicarbonate ion).",
+   "url": "https://www.rcsb.org/ligand/BCT",
+   "file": "https://files.rcsb.org/ligands/download/BCT.cif",
+   "licence": "CC0 1.0 (wwPDB archive files, including the Chemical Component Dictionary)",
+   "checked": "2026-10-01: name BICARBONATE ION, formula C H O3, ideal coordinates used."
+  },
+  "ccd-EOH": {
+   "type": "database",
+   "cite": "RCSB PDB Chemical Component Dictionary, EOH (ethanol).",
+   "url": "https://www.rcsb.org/ligand/EOH",
+   "file": "https://files.rcsb.org/ligands/download/EOH.cif",
+   "licence": "CC0 1.0 (wwPDB archive files, including the Chemical Component Dictionary)",
+   "checked": "2026-10-01: name ETHANOL, formula C2 H6 O, ideal coordinates used."
+  },
+  "ccd-V55": {
+   "type": "database",
+   "cite": "RCSB PDB Chemical Component Dictionary, V55 (4-hydroxy-3-methoxybenzaldehyde, vanillin).",
+   "url": "https://www.rcsb.org/ligand/V55",
+   "file": "https://files.rcsb.org/ligands/download/V55.cif",
+   "licence": "CC0 1.0 (wwPDB archive files, including the Chemical Component Dictionary)",
+   "checked": "2026-10-01: name 4-hydroxy-3-methoxybenzaldehyde, formula C8 H8 O3, ideal coordinates used."
+  },
+  "ccd-NH3": {
+   "type": "database",
+   "cite": "RCSB PDB Chemical Component Dictionary, NH3 (ammonia).",
+   "url": "https://www.rcsb.org/ligand/NH3",
+   "file": "https://files.rcsb.org/ligands/download/NH3.cif",
+   "licence": "CC0 1.0 (wwPDB archive files, including the Chemical Component Dictionary)",
+   "checked": "2026-10-01: name AMMONIA, formula H3 N, ideal coordinates used."
+  },
+  "ccd-PEO": {
+   "type": "database",
+   "cite": "RCSB PDB Chemical Component Dictionary, PEO (hydrogen peroxide).",
+   "url": "https://www.rcsb.org/ligand/PEO",
+   "file": "https://files.rcsb.org/ligands/download/PEO.cif",
+   "licence": "CC0 1.0 (wwPDB archive files, including the Chemical Component Dictionary)",
+   "checked": "2026-10-01: name HYDROGEN PEROXIDE, formula H2 O2, ideal coordinates used."
+  },
+  "ccd-TME": {
+   "type": "database",
+   "cite": "RCSB PDB Chemical Component Dictionary, TME (propane).",
+   "url": "https://www.rcsb.org/ligand/TME",
+   "file": "https://files.rcsb.org/ligands/download/TME.cif",
+   "licence": "CC0 1.0 (wwPDB archive files, including the Chemical Component Dictionary)",
+   "checked": "2026-10-01: name PROPANE, formula C3 H8, ideal coordinates used."
+  },
+  "ccd-STE": {
+   "type": "database",
+   "cite": "RCSB PDB Chemical Component Dictionary, STE (stearic acid).",
+   "url": "https://www.rcsb.org/ligand/STE",
+   "file": "https://files.rcsb.org/ligands/download/STE.cif",
+   "licence": "CC0 1.0 (wwPDB archive files, including the Chemical Component Dictionary)",
+   "checked": "2026-10-01: name STEARIC ACID, formula C18 H36 O2, ideal coordinates used."
+  },
+  "ccd-AIN": {
+   "type": "database",
+   "cite": "RCSB PDB Chemical Component Dictionary, AIN (2-(acetyloxy)benzoic acid, aspirin).",
+   "url": "https://www.rcsb.org/ligand/AIN",
+   "file": "https://files.rcsb.org/ligands/download/AIN.cif",
+   "licence": "CC0 1.0 (wwPDB archive files, including the Chemical Component Dictionary)",
+   "checked": "2026-10-01: name 2-(ACETYLOXY)BENZOIC ACID, formula C9 H8 O4, ideal coordinates used."
+  },
+  "ccd-XUQ": {
+   "type": "database",
+   "cite": "RCSB PDB Chemical Component Dictionary, XUQ ((1R,2S,5R)-5-methyl-2-(propan-2-yl)cyclohexan-1-ol, (-)-menthol).",
+   "url": "https://www.rcsb.org/ligand/XUQ",
+   "file": "https://files.rcsb.org/ligands/download/XUQ.cif",
+   "licence": "CC0 1.0 (wwPDB archive files, including the Chemical Component Dictionary)",
+   "checked": "2026-10-01: name (1R,2S,5R)-5-methyl-2-(propan-2-yl)cyclohexan-1-ol, formula C10 H20 O, ideal coordinates used."
+  },
+  "pubchem3d-24823": {
+   "type": "database",
+   "cite": "PubChem CID 24823, Ozone: computed 3D conformer (SDF).",
+   "url": "https://pubchem.ncbi.nlm.nih.gov/compound/24823",
+   "file": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/24823/record/SDF?record_type=3d",
+   "licence": "NCBI Molecular Data Usage policy: NCBI itself places no restrictions on the use or distribution of the data (some original submitters may claim rights). The conformer is computed by PubChem.",
+   "checked": "2026-10-01: 3D SDF downloaded and converted to the CCD layout for this page; atoms, bonds and charges kept as PubChem gives them."
+  },
+  "pubchem3d-313": {
+   "type": "database",
+   "cite": "PubChem CID 313, Hydrochloric Acid (hydrogen chloride): computed 3D conformer (SDF).",
+   "url": "https://pubchem.ncbi.nlm.nih.gov/compound/313",
+   "file": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/313/record/SDF?record_type=3d",
+   "licence": "NCBI Molecular Data Usage policy: NCBI itself places no restrictions on the use or distribution of the data (some original submitters may claim rights). The conformer is computed by PubChem.",
+   "checked": "2026-10-01: 3D SDF downloaded and converted to the CCD layout for this page; atoms, bonds and charges kept as PubChem gives them."
+  },
+  "pubchem3d-297": {
+   "type": "database",
+   "cite": "PubChem CID 297, Methane: computed 3D conformer (SDF).",
+   "url": "https://pubchem.ncbi.nlm.nih.gov/compound/297",
+   "file": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/297/record/SDF?record_type=3d",
+   "licence": "NCBI Molecular Data Usage policy: NCBI itself places no restrictions on the use or distribution of the data (some original submitters may claim rights). The conformer is computed by PubChem.",
+   "checked": "2026-10-01: 3D SDF downloaded and converted to the CCD layout for this page; atoms, bonds and charges kept as PubChem gives them."
+  },
+  "pubchem-947": {
+   "type": "database",
+   "cite": "PubChem CID 947, Nitrogen (record description and Use and Manufacturing sections).",
+   "url": "https://pubchem.ncbi.nlm.nih.gov/compound/947",
+   "checked": "2026-10-01 (PUG REST description, PUG View Uses): dinitrogen, an elemental molecule of two nitrogen atoms; role as a food packaging gas (ChEBI)."
+  },
+  "pubchem-977": {
+   "type": "database",
+   "cite": "PubChem CID 977, Oxygen (record description and Use and Manufacturing sections).",
+   "url": "https://pubchem.ncbi.nlm.nih.gov/compound/977",
+   "checked": "2026-10-01 (PUG REST description, PUG View Uses): dioxygen, a gas molecular entity and diatomic oxygen (ChEBI)."
+  },
+  "pubchem-280": {
+   "type": "database",
+   "cite": "PubChem CID 280, Carbon Dioxide (record description and Use and Manufacturing sections).",
+   "url": "https://pubchem.ncbi.nlm.nih.gov/compound/280",
+   "checked": "2026-10-01 (PUG REST description, PUG View Uses): carbon attached to each oxygen by a double bond; colourless, odourless gas; produced during respiration by all animals, fungi and microorganisms that depend on living or decaying plants for food; member of greenhouse gas (ChEBI)."
+  },
+  "pubchem-23968": {
+   "type": "database",
+   "cite": "PubChem CID 23968, Argon (record description and Use and Manufacturing sections).",
+   "url": "https://pubchem.ncbi.nlm.nih.gov/compound/23968",
+   "checked": "2026-10-01 (PUG REST description, PUG View Uses): argon(0) is a monoatomic argon (ChEBI)."
+  },
+  "pubchem-24823": {
+   "type": "database",
+   "cite": "PubChem CID 24823, Ozone (record description and Use and Manufacturing sections).",
+   "url": "https://pubchem.ncbi.nlm.nih.gov/compound/24823",
+   "checked": "2026-10-01 (PUG REST description, PUG View Uses): elemental molecule O3; pale blue gas with a pungent odour, continuously produced in the upper atmosphere by solar ultraviolet radiation acting on oxygen; used as an antimicrobial agent and disinfectant (ChEBI, HSDB)."
+  },
+  "pubchem-5234": {
+   "type": "database",
+   "cite": "PubChem CID 5234, Sodium Chloride (record description and Use and Manufacturing sections).",
+   "url": "https://pubchem.ncbi.nlm.nih.gov/compound/5234",
+   "checked": "2026-10-01 (PUG REST description, PUG View Uses): inorganic chloride salt with sodium(1+) as counterion (ChEBI); used for food flavouring; produced from salt mines or by evaporating seawater or mineral-rich spring water (T3DB)."
+  },
+  "pubchem-176": {
+   "type": "database",
+   "cite": "PubChem CID 176, Acetic Acid (record description and Use and Manufacturing sections).",
+   "url": "https://pubchem.ncbi.nlm.nih.gov/compound/176",
+   "checked": "2026-10-01 (PUG REST description, PUG View Uses): simple monocarboxylic acid containing two carbons; food acidity regulator and antimicrobial food preservative (ChEBI); gives vinegar its sour taste and pungent smell (Uses)."
+  },
+  "pubchem-311": {
+   "type": "database",
+   "cite": "PubChem CID 311, Citric Acid (record description and Use and Manufacturing sections).",
+   "url": "https://pubchem.ncbi.nlm.nih.gov/compound/311",
+   "checked": "2026-10-01 (PUG REST description, PUG View Uses): a compound from citrus fruits that is an intermediate in the tricarboxylic acid (Krebs) cycle, used as an acidifying agent in foods, beverages and pharmaceuticals (Dorland via ChemIDplus); important metabolite in the pathway of all aerobic organisms; propane-1,2,3-tricarboxylic acid with a hydroxy group at position 2 (ChEBI)."
+  },
+  "pubchem-516892": {
+   "type": "database",
+   "cite": "PubChem CID 516892, Sodium Bicarbonate (record description and Use and Manufacturing sections).",
+   "url": "https://pubchem.ncbi.nlm.nih.gov/compound/516892",
+   "checked": "2026-10-01 (PUG REST description, PUG View Uses): organic sodium salt containing a hydrogencarbonate; role as an antacid (ChEBI); source of carbon dioxide, ingredient of baking powder (HSDB); JECFA classes leavening agent and raising agent."
+  },
+  "pubchem-702": {
+   "type": "database",
+   "cite": "PubChem CID 702, Ethanol (record description and Use and Manufacturing sections).",
+   "url": "https://pubchem.ncbi.nlm.nih.gov/compound/702",
+   "checked": "2026-10-01 (PUG REST description, PUG View Uses): ethane with one hydrogen replaced by a hydroxy group (ChEBI); primary ingredient in alcoholic beverages and used as a topical disinfectant for its bactericidal activity (ChemIDplus); solvent in household products and pharmaceuticals; octane booster in gasoline and a fuel (HSDB)."
+  },
+  "pubchem-1183": {
+   "type": "database",
+   "cite": "PubChem CID 1183, Vanillin (record description and Use and Manufacturing sections).",
+   "url": "https://pubchem.ncbi.nlm.nih.gov/compound/1183",
+   "checked": "2026-10-01 (PUG REST description, PUG View Uses): benzaldehyde with methoxy and hydroxy groups at positions 3 and 4, flavouring agent (ChEBI); flavouring agent in confectionery, beverages and foods (Merck Index); major commercial source of natural vanillin is vanilla bean extract, also occurs in orchids and clove bud oil (HSDB, Natural occurrence)."
+  },
+  "pubchem-313": {
+   "type": "database",
+   "cite": "PubChem CID 313, Hydrochloric Acid (record description and Use and Manufacturing sections).",
+   "url": "https://pubchem.ncbi.nlm.nih.gov/compound/313",
+   "checked": "2026-10-01 (PUG REST description, PUG View Uses): hydrochloric acid is found naturally in gastric acid; most hydrogen chloride gas is used to make hydrochloric acid (T3DB, Uses)."
+  },
+  "pubchem-222": {
+   "type": "database",
+   "cite": "PubChem CID 222, Ammonia (record description and Use and Manufacturing sections).",
+   "url": "https://pubchem.ncbi.nlm.nih.gov/compound/222",
+   "checked": "2026-10-01 (PUG REST description, PUG View Uses): one nitrogen atom covalently bonded to three hydrogen atoms, a gas (ChEBI); about 80 percent is used in fertilizers (ATSDR); used directly on farm crops and found in many household and industrial cleaners (Uses)."
+  },
+  "pubchem-784": {
+   "type": "database",
+   "cite": "PubChem CID 784, Hydrogen Peroxide (record description and Use and Manufacturing sections).",
+   "url": "https://pubchem.ncbi.nlm.nih.gov/compound/784",
+   "checked": "2026-10-01 (PUG REST description, PUG View Uses): used for bleaching and disinfecting, including in hairdressing (ACGIH via Haz-Map); used in antiseptics and to bleach hair (HSDB)."
+  },
+  "pubchem-297": {
+   "type": "database",
+   "cite": "PubChem CID 297, Methane (record description and Use and Manufacturing sections).",
+   "url": "https://pubchem.ncbi.nlm.nih.gov/compound/297",
+   "checked": "2026-10-01 (PUG REST description, PUG View Uses): carbon attached by single bonds to four hydrogen atoms; colourless, odourless, non-toxic but flammable gas; fossil fuel and greenhouse gas (ChEBI); major component of natural gas, piped into homes for heating and cooking (T3DB)."
+  },
+  "pubchem-6334": {
+   "type": "database",
+   "cite": "PubChem CID 6334, Propane (record description and Use and Manufacturing sections).",
+   "url": "https://pubchem.ncbi.nlm.nih.gov/compound/6334",
+   "checked": "2026-10-01 (PUG REST description, PUG View Uses): gas molecular entity and alkane (ChEBI); used as a fuel, solvent, refrigerant and propellant (Hawley); component of liquid petroleum gas; household and industrial fuel; aerosol propellant (HSDB)."
+  },
+  "pubchem-2724691": {
+   "type": "database",
+   "cite": "PubChem CID 2724691, Sodium Stearate (record description and Use and Manufacturing sections).",
+   "url": "https://pubchem.ncbi.nlm.nih.gov/compound/2724691",
+   "checked": "2026-10-01 (PUG REST description, PUG View Uses): organic sodium salt of equal numbers of sodium and stearate ions, role as a detergent (ChEBI); most common ingredient in soap (CHEMINFO)."
+  },
+  "pubchem-5281": {
+   "type": "database",
+   "cite": "PubChem CID 5281, Stearic Acid (record description and Use and Manufacturing sections).",
+   "url": "https://pubchem.ncbi.nlm.nih.gov/compound/5281",
+   "checked": "2026-10-01 (PUG REST description, PUG View Uses): C18 straight-chain saturated fatty acid found in many animal and vegetable lipids; used in hardening soaps (ChEBI)."
+  },
+  "pubchem-2244": {
+   "type": "database",
+   "cite": "PubChem CID 2244, Aspirin (record description and Use and Manufacturing sections).",
+   "url": "https://pubchem.ncbi.nlm.nih.gov/compound/2244",
+   "checked": "2026-10-01 (PUG REST description, PUG View Uses): acetylsalicylic acid, a non-steroidal anti-inflammatory drug with cyclooxygenase inhibitor activity (ChEBI); relieves pain, reduces fever and prevents blood from clotting quickly; not recommended for children because of a link to Reye syndrome, a serious liver disease (Consumer Product Information Database)."
+  },
+  "pubchem-16666": {
+   "type": "database",
+   "cite": "PubChem CID 16666, (-)-Menthol (record description and Use and Manufacturing sections).",
+   "url": "https://pubchem.ncbi.nlm.nih.gov/compound/16666",
+   "checked": "2026-10-01 (PUG REST description, PUG View Uses): (1R,2S,5R) stereochemistry, the most common naturally occurring enantiomer (ChEBI); found in peppermint oil and other mint oils, used as a flavour in confectionery, cough drops and nasal inhalers and as a topical antipruritic (Merck Index); primarily activates the cold-sensitive TRPM8 receptors in the skin, causing a feeling of coolness (Pharmacology)."
+  },
+  "osc-2-6": {
+   "type": "textbook",
+   "cite": "OpenStax Chemistry 2e, section 2.6 Ionic and Molecular Compounds.",
+   "url": "https://openstax.org/books/chemistry-2e/pages/2-6-molecular-and-ionic-compounds",
+   "licence": "CC BY 4.0",
+   "checked": "2026-10-01: compounds are ionic or molecular; a sodium cation has lost an electron; each sodium atom gives up one electron and each chlorine atom accepts one, so NaCl has one Na+ for each Cl-; ionic bonds are electrostatic attractions between ions of opposite charge; an ionic compound is not made of discrete molecules; sodium chloride melts at 801 C while water melts at 0 C; H2O2, the bleach and disinfectant, is molecular (Example 2.12)."
+  },
+  "osc-10-6": {
+   "type": "textbook",
+   "cite": "OpenStax Chemistry 2e, section 10.6 Lattice Structures in Crystalline Solids.",
+   "url": "https://openstax.org/books/chemistry-2e/pages/10-6-lattice-structures-in-crystalline-solids",
+   "licence": "CC BY 4.0",
+   "checked": "2026-10-01: NaCl: Na+ and Cl- radii 102 pm and 181 pm; all octahedral holes filled; an octahedral hole is at the centre of six anions; the unit cell holds four sodium and four chloride ions; anions much larger than cations, such as NaCl, usually form an FCC structure."
+  },
+  "osc-11-5": {
+   "type": "textbook",
+   "cite": "OpenStax Chemistry 2e, section 11.5 Colloids.",
+   "url": "https://openstax.org/books/chemistry-2e/pages/11-5-colloids",
+   "licence": "CC BY 4.0",
+   "checked": "2026-10-01: salts of fatty acids are called soaps; sodium stearate, C17H35CO2Na, has an uncharged nonpolar hydrocarbon chain and an ionic carboxylate group; the hydrocarbon end dissolves in or is attracted to oil, grease or dirt; the ionic end is attracted by water; soap acts as a bridge between nonpolar and polar matter and emulsifies oil drops in water."
+  },
+  "osc-14-1": {
+   "type": "textbook",
+   "cite": "OpenStax Chemistry 2e, section 14.1 Bronsted-Lowry Acids and Bases.",
+   "url": "https://openstax.org/books/chemistry-2e/pages/14-1-bronsted-lowry-acids-and-bases",
+   "licence": "CC BY 4.0",
+   "checked": "2026-10-01: a compound that donates a proton is a Bronsted-Lowry acid and one that accepts a proton is a base; an acid-base reaction is the transfer of a proton; ammonia accepts a proton from water and becomes ammonium ion."
+  },
+  "osc-14-2": {
+   "type": "textbook",
+   "cite": "OpenStax Chemistry 2e, section 14.2 pH and pOH.",
+   "url": "https://openstax.org/books/chemistry-2e/pages/14-2-ph-and-poh",
+   "licence": "CC BY 4.0",
+   "checked": "2026-10-01: at 25 C acidic pH < 7, neutral pH = 7, basic pH > 7; Figure 14.3: gastric juices about pH 1.5, lime juice about 2, pure water 7, household ammonia just under 12; Example 14.4 treats stomach acid as a solution of HCl."
+  },
+  "osc-14-3": {
+   "type": "textbook",
+   "cite": "OpenStax Chemistry 2e, section 14.3 Relative Strengths of Acids and Bases.",
+   "url": "https://openstax.org/books/chemistry-2e/pages/14-3-relative-strengths-of-acids-and-bases",
+   "licence": "CC BY 4.0",
+   "checked": "2026-10-01: acetic acid is the principal ingredient in vinegar and provides its sour taste; vinegar contains acetic acid, a weak acid (Figure 14.9); strong acids such as hydrogen chloride are completely ionized in water, weak acids only partly (Figure 14.6, 14.7); hydrogen carbonate ion appears among the bases."
+  },
+  "osc-18-9": {
+   "type": "textbook",
+   "cite": "OpenStax Chemistry 2e, section 18.9 Occurrence, Preparation, and Compounds of Oxygen.",
+   "url": "https://openstax.org/books/chemistry-2e/pages/18-9-occurrence-preparation-and-compounds-of-oxygen",
+   "licence": "CC BY 4.0",
+   "checked": "2026-10-01: oxygen occurs as O2 and, to a limited extent, O3 in air; ozone forms in the upper atmosphere by ultraviolet light on oxygen; most atmospheric ozone is in the stratosphere, about 10 to 50 km up, where it absorbs harmful ultraviolet light; stratospheric ozone decreases the frequency of skin cancer; the bent O3 molecule (Figure 18.42); ozone has a distinctive, sharp odour; photosynthesis turns carbon dioxide and water into glucose and oxygen and replenishes atmospheric oxygen."
+  },
+  "osc-18-12": {
+   "type": "textbook",
+   "cite": "OpenStax Chemistry 2e, section 18.12 Occurrence, Preparation, and Properties of the Noble Gases.",
+   "url": "https://openstax.org/books/chemistry-2e/pages/18-12-occurrence-preparation-and-properties-of-the-noble-gases",
+   "licence": "CC BY 4.0",
+   "checked": "2026-10-01: noble gases were assumed nonreactive because they have filled valence shells; argon is the third most abundant gas in dry air and comes from fractional distillation of liquid air; argon was used in gas-filled light bulbs to slow the vaporization of the tungsten filament."
+  },
+  "osc-20-1": {
+   "type": "textbook",
+   "cite": "OpenStax Chemistry 2e, section 20.1 Hydrocarbons.",
+   "url": "https://openstax.org/books/chemistry-2e/pages/20-1-hydrocarbons",
+   "licence": "CC BY 4.0",
+   "checked": "2026-10-01: methane, CH4, is the principal component of natural gas; hydrocarbons are used every day as fuels such as natural gas and propane; Table 20.1: propane C3H8 is a gas at STP, boiling point -42.1 C."
+  },
+  "osap-23-4": {
+   "type": "textbook",
+   "cite": "OpenStax Anatomy and Physiology 2e, section 23.4 The Stomach.",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-4-the-stomach",
+   "licence": "CC BY 4.0",
+   "checked": "2026-10-01: parietal cells produce hydrochloric acid; HCl gives the stomach contents a pH of 1.5 to 3.5 and is needed to activate pepsin, the protein-digesting enzyme; mucus bicarbonate ions neutralize acid."
+  },
+  "nasa-earthfact": {
+   "type": "database",
+   "cite": "NASA Goddard Space Flight Center, Earth Fact Sheet (atmospheric composition).",
+   "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html",
+   "licence": "US government work",
+   "checked": "2026-10-01: dry air by volume: nitrogen 78.08 percent, oxygen 20.95 percent, argon 9340 ppm, carbon dioxide 420 ppm, neon 18.18 ppm, helium 5.24 ppm, methane 1.94 ppm; water highly variable, typically about 1 percent."
+  },
+  "noaa-co2": {
+   "type": "database",
+   "cite": "NOAA Global Monitoring Laboratory, global annual mean carbon dioxide (co2_annmean_gl.txt).",
+   "url": "https://gml.noaa.gov/ccgg/trends/global.html",
+   "file": "https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_annmean_gl.txt",
+   "licence": "US government work",
+   "checked": "2026-10-01: 2025 global annual mean 425.62 ppm (mole fraction in dry air); the yearly mean rises every year from 1979 (336.85) to 2025."
+  },
+  "eia-natgas": {
+   "type": "government",
+   "cite": "US Energy Information Administration, Natural gas explained.",
+   "url": "https://www.eia.gov/energyexplained/natural-gas/",
+   "licence": "US government work",
+   "checked": "2026-10-01: the largest component of natural gas is methane, one carbon atom and four hydrogen atoms (CH4)."
+  },
+  "epa-methane": {
+   "type": "government",
+   "cite": "US Environmental Protection Agency, Importance of Methane (Global Methane Initiative).",
+   "url": "https://www.epa.gov/gmi/importance-methane",
+   "licence": "US government work",
+   "checked": "2026-10-01: methane is more than 28 times as potent as carbon dioxide at trapping heat; the largest US human sources are oil and gas systems, livestock enteric fermentation and landfills."
+  },
+  "cod-9003308": {
+   "type": "database",
+   "cite": "Crystallography Open Database entry 9003308, halite (NaCl): Walker, Verma, Cranswick and others, American Mineralogist 89, 204 (2004).",
+   "url": "https://www.crystallography.net/cod/9003308.html",
+   "file": "https://www.crystallography.net/cod/9003308.cif",
+   "licence": "COD data are in the public domain (CC0)",
+   "checked": "2026-10-01: mineral halite, cell edge a = 5.6401 angstroms, space group F m -3 m, 25 C and 0 kbar. Used to place the ions in the salt piece (nearest Na to Cl distance a/2 = 2.82 angstroms)."
+  }
+ }
+}

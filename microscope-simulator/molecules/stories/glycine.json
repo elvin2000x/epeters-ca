@@ -1,0 +1,49 @@
+{
+ "id": "glycine",
+ "structure": "GLY",
+ "tour": [
+  {"id": "whole", "title": "The simplest amino acid", "focus": {"atoms": ["N", "CA", "C", "O", "OXT"]}, "view": "ball-and-stick",
+   "text": [{"t": "Glycine is one of the 20 common amino acids that make up proteins.", "s": ["os-3-4"]},
+            {"t": "Its formula is C2H5NO2, just ten atoms in all.", "s": ["pubchem-glycine", "ccd-GLY"]}]},
+  {"id": "alpha-carbon", "title": "The central carbon", "focus": {"atoms": ["CA"]}, "view": "ball-and-stick",
+   "text": [{"t": "Every amino acid is built around a central carbon, called the alpha carbon.", "s": ["os-3-4"]}]},
+  {"id": "amino", "title": "The amino group", "focus": {"atoms": ["N", "H", "H2"]}, "view": "ball-and-stick",
+   "text": [{"t": "On one side is the amino group, a nitrogen with hydrogens, which gives amino acids the first half of their name.", "s": ["os-3-4", "ccd-GLY"]}]},
+  {"id": "carboxyl", "title": "The acid group", "focus": {"atoms": ["C", "O", "OXT", "HXT"]}, "view": "ball-and-stick",
+   "text": [{"t": "On the other side is the carboxyl group, COOH, the acid part of the name.", "s": ["os-3-4", "ccd-GLY"]}]},
+  {"id": "r-group", "title": "A side chain of one atom", "focus": {"atoms": ["HA2", "HA3"]}, "view": "spacefill",
+   "text": [{"t": "Each amino acid has its own side chain, the R group, and glycine's R group is just a single hydrogen atom.", "s": ["os-3-4"]},
+            {"t": "That is why the central carbon here carries two hydrogens.", "s": ["ccd-GLY", "os-3-4"]}]}
+ ],
+ "sections": {
+  "does": [
+   {"t": "Amino acids like glycine are the building blocks of proteins.", "s": ["os-3-4"]},
+   {"t": "Cells link them together with peptide bonds, releasing a water molecule each time.", "s": ["os-3-4"]}
+  ],
+  "shape": [
+   {"t": "With only a hydrogen for a side chain, glycine is small, which lets it fit inside the tight collagen helix.", "s": ["os-3-4", "motm-collagen"]},
+   {"t": "In collagen, glycine fills every third position, tucked into the crowded centre of the triple helix.", "s": ["motm-collagen"]}
+  ],
+  "lives": {
+   "text": [
+    {"t": "Glycine is one of the 20 amino acids that make up all proteins, and collagen uses it at every third position.", "s": ["os-3-4", "motm-collagen"]}
+   ],
+   "links": [{"type": "molecule", "id": "collagen"}, {"type": "process", "id": "dna-to-protein"}, {"type": "element", "id": "N"}, {"type": "element", "id": "C"}]
+  },
+  "wrong": [
+   {"t": "In collagen, a glycine swapped for another amino acid can untwist the triple helix, a change linked to diseases such as osteogenesis imperfecta.", "s": ["paper-bella-1994"]}
+  ],
+  "size": {
+   "nm": 0.5,
+   "compare": [
+    {"t": "From its farthest atom to its farthest atom, glycine measures about 0.5 nm.", "s": ["ccd-GLY"]},
+    {"t": "Glucose, also in this gallery, measures about 0.8 nm.", "s": ["ccd-GLC"]}
+   ]
+  }
+ },
+ "highlights": [
+  {"atoms": ["HA2", "HA3"], "label": "The R group is a hydrogen", "text": [{"t": "Glycine's whole side chain is one hydrogen atom.", "s": ["os-3-4"]}]},
+  {"atoms": ["CA"], "label": "Alpha carbon", "text": [{"t": "The central carbon every amino acid is built around.", "s": ["os-3-4"]}]}
+ ],
+ "review": "pending"
+}

@@ -1,0 +1,158 @@
+{
+  "_note": "Every number and fact in heat.json points at keys here. 'checked' says what was read and when. Raw pages were saved by tools/heat_fetch.py into the git-ignored .refs/heat/ and read with tools/heat_read.py. Values computed by the page (RT, kT, multiples, odds, the ion pair in water) show their formula on the page and cite the constants they use.",
+  "sources": {
+    "nist-k": {
+      "type": "reference data",
+      "cite": "NIST CODATA recommended values: Boltzmann constant k.",
+      "url": "https://physics.nist.gov/cgi-bin/cuu/Value?k",
+      "checked": "2026-10-01, page read: k = 1.380 649 x 10^-23 J/K, exact."
+    },
+    "nist-r": {
+      "type": "reference data",
+      "cite": "NIST CODATA recommended values: molar gas constant R.",
+      "url": "https://physics.nist.gov/cgi-bin/cuu/Value?r",
+      "checked": "2026-10-01, page read: R = 8.314 462 618... J/(mol K), exact (R is k times the Avogadro constant)."
+    },
+    "nist-na": {
+      "type": "reference data",
+      "cite": "NIST CODATA recommended values: Avogadro constant.",
+      "url": "https://physics.nist.gov/cgi-bin/cuu/Value?na",
+      "checked": "2026-10-01, page read: N_A = 6.022 140 76 x 10^23 per mol, exact."
+    },
+    "nist-e": {
+      "type": "reference data",
+      "cite": "NIST CODATA recommended values: elementary charge e.",
+      "url": "https://physics.nist.gov/cgi-bin/cuu/Value?e",
+      "checked": "2026-10-01, page read: e = 1.602 176 634 x 10^-19 C, exact."
+    },
+    "nist-ep0": {
+      "type": "reference data",
+      "cite": "NIST CODATA recommended values: vacuum electric permittivity.",
+      "url": "https://physics.nist.gov/cgi-bin/cuu/Value?ep0",
+      "checked": "2026-10-01, page read: epsilon_0 = 8.854 187 8188 x 10^-12 F/m."
+    },
+    "os-chem-7-5": {
+      "type": "textbook",
+      "cite": "OpenStax Chemistry 2e, section 7.5 Strengths of Ionic and Covalent Bonds.",
+      "url": "https://openstax.org/books/chemistry-2e/pages/7-5-strengths-of-ionic-and-covalent-bonds",
+      "checked": "2026-10-01, Table 7.2 read: C-C 345, H-O 464, C-H 415, C=C 611 kJ/mol; bond energy is the energy needed to break a bond in one mole of gas molecules; 769 kJ separates one mole of solid NaCl into gaseous ions."
+    },
+    "os-chem-10-1": {
+      "type": "textbook",
+      "cite": "OpenStax Chemistry 2e, section 10.1 Intermolecular Forces.",
+      "url": "https://openstax.org/books/chemistry-2e/pages/10-1-intermolecular-forces",
+      "checked": "2026-10-01, page read: hydrogen bonds are much weaker than covalent bonds, only about 5 to 10% as strong; hydrogen bonds are intermolecular, not covalent; van der Waals forces are all attractive forces between neutral atoms and molecules; dispersion forces are very weak but add up (geckos); A-T share two hydrogen bonds and C-G three; DNA strands unzip relatively easily because hydrogen bonds are weak compared with covalent bonds; boiling liquid HCl takes about 17 kJ/mol, breaking its covalent bonds about 430."
+    },
+    "os-chem-9-5": {
+      "type": "textbook",
+      "cite": "OpenStax Chemistry 2e, section 9.5 The Kinetic-Molecular Theory.",
+      "url": "https://openstax.org/books/chemistry-2e/pages/9-5-the-kinetic-molecular-theory",
+      "checked": "2026-10-01, page read: the average kinetic energy of a mole of gas molecules is KE_avg = (3/2)RT, directly proportional to kelvin temperature; raising the temperature raises the average speed and kinetic energy."
+    },
+    "os-chem-12-5": {
+      "type": "textbook",
+      "cite": "OpenStax Chemistry 2e, section 12.5 Collision Theory.",
+      "url": "https://openstax.org/books/chemistry-2e/pages/12-5-collision-theory",
+      "checked": "2026-10-01, page read: Arrhenius equation k = A e^(-Ea/RT); the term e^(-Ea/RT) describes the effect of the energy barrier; a higher temperature gives a greater fraction of molecules with enough energy to cross it."
+    },
+    "os-chem-10-3": {
+      "type": "textbook",
+      "cite": "OpenStax Chemistry 2e, section 10.3 Phase Transitions.",
+      "url": "https://openstax.org/books/chemistry-2e/pages/10-3-phase-transitions",
+      "checked": "2026-10-01, page read: enthalpy of fusion of ice 6.01 kJ/mol at 0 C; enthalpy of vaporization of water 40.67 kJ/mol at its boiling point, 44.01 kJ/mol at 25 C, 43.46 kJ/mol at 37 C (normal body temperature); while water boils its temperature stays constant."
+    },
+    "os-up2-8-5": {
+      "type": "textbook",
+      "cite": "OpenStax University Physics Volume 2, section 8.5 Molecular Model of a Dielectric (Table 8.1).",
+      "url": "https://openstax.org/books/university-physics-volume-2/pages/8-5-molecular-model-of-a-dielectric",
+      "checked": "2026-10-01, Table 8.1 read: dielectric constant of water 80, of vacuum 1."
+    },
+    "os-bio-2-1": {
+      "type": "textbook",
+      "cite": "OpenStax Biology 2e, section 2.1 Atoms, Isotopes, Ions, and Molecules: The Building Blocks.",
+      "url": "https://openstax.org/books/biology-2e/pages/2-1-atoms-isotopes-ions-and-molecules-the-building-blocks",
+      "checked": "2026-10-01, page read: hydrogen bonds and van der Waals interactions are two weak bonds that occur often; single hydrogen bonds are weak and easily broken but occur in very large numbers; they zip the DNA double helix together; ionic bonds are not as strong as covalent; these bonds together give proteins their 3D shape."
+    },
+    "os-bio-2-2": {
+      "type": "textbook",
+      "cite": "OpenStax Biology 2e, section 2.2 Water.",
+      "url": "https://openstax.org/books/biology-2e/pages/2-2-water",
+      "checked": "2026-10-01, page read: in liquid water hydrogen bonds constantly form and break; at the boiling point of 100 C the heat breaks the hydrogen bonds and molecules escape as gas; in ice a crystal held by hydrogen bonds forms, less dense than liquid; hydrogen bonding gives water its high heat capacity."
+    },
+    "os-bio-3-4": {
+      "type": "textbook",
+      "cite": "OpenStax Biology 2e, section 3.4 Proteins.",
+      "url": "https://openstax.org/books/biology-2e/pages/3-4-proteins",
+      "checked": "2026-10-01, page read: changes in temperature, pH or chemicals can change a protein's shape without changing its primary sequence (denaturation); denaturation is often reversible but frying an egg is irreversible, the albumin in egg white denatures in a hot pan; not all proteins denature at high temperatures; alpha helices and beta sheets are held by hydrogen bonds."
+    },
+    "os-bio-6-5": {
+      "type": "textbook",
+      "cite": "OpenStax Biology 2e, section 6.5 Enzymes.",
+      "url": "https://openstax.org/books/biology-2e/pages/6-5-enzymes",
+      "checked": "2026-10-01, page read: warmer generally speeds reactions, but temperatures outside an enzyme's optimal range affect bonds in the active site, and high temperatures eventually denature enzymes."
+    },
+    "os-micro-10-2": {
+      "type": "textbook",
+      "cite": "OpenStax Microbiology, section 10.2 Structure and Function of DNA.",
+      "url": "https://openstax.org/books/microbiology/pages/10-2-structure-and-function-of-dna",
+      "checked": "2026-10-01, page read: heat or chemicals can denature the double helix into single strands; cooling lets the hydrogen bonds re-form (renaturing); because of the extra hydrogen bond in each C-G pair, DNA with high GC content is harder to denature."
+    },
+    "os-micro-12-2": {
+      "type": "textbook",
+      "cite": "OpenStax Microbiology, section 12.2 Visualizing and Characterizing DNA, RNA, and Protein.",
+      "url": "https://openstax.org/books/microbiology/pages/12-2-visualizing-and-characterizing-dna-rna-and-protein",
+      "checked": "2026-10-01, page read: in PCR, double-stranded DNA is denatured at approximately 95 C, then cooled to about 50 C, then held at 72 C for the heat-stable polymerase."
+    },
+    "hz1v-1982": {
+      "type": "primary paper",
+      "cite": "Huang, Y. S., Hedberg, M., Kawanishi, C. Y. (1982). Characterization of the DNA of a nonoccluded baculovirus, Hz-1V. Journal of Virology 43, 174-181.",
+      "doi": "10.1128/jvi.43.1.174-181.1982",
+      "url": "https://doi.org/10.1128/jvi.43.1.174-181.1982",
+      "checked": "2026-10-01, abstract read (Europe PMC, PMID 16789226): thermal denaturation showed a high G+C part (about 11% of the genome) melting at Tm 97 C and the rest (89%) at 86.5 C, corresponding to G+C contents of 67% and 42%. The page uses these two measured points for its illustrative melting map."
+    },
+    "gels-2025": {
+      "type": "primary paper",
+      "cite": "Wang, L., Li, R., Lv, S. et al. (2025). The Thermodynamic and Gelation Properties of Ovalbumin and Lysozyme. Gels 11, 470.",
+      "doi": "10.3390/gels11060470",
+      "url": "https://doi.org/10.3390/gels11060470",
+      "checked": "2026-10-01, abstract read (Europe PMC, PMID 40558770): ovalbumin and lysozyme are the main globular proteins of egg white; measured by differential scanning calorimetry in water (5% w/v, heated 5 C per minute) their denaturation temperatures were 80.22 C and 77.46 C; lysozyme refolded almost 100% on a second heating in water, while ovalbumin was completely denatured."
+    },
+    "anderson-1990": {
+      "type": "primary paper",
+      "cite": "Anderson, D. E., Becktel, W. J., Dahlquist, F. W. (1990). pH-induced denaturation of proteins: a single salt bridge contributes 3-5 kcal/mol to the free energy of folding of T4 lysozyme. Biochemistry 29, 2403-2408.",
+      "doi": "10.1021/bi00461a025",
+      "url": "https://doi.org/10.1021/bi00461a025",
+      "checked": "2026-10-01, abstract read (Europe PMC, PMID 2337607): one salt bridge between Asp70 and His31 stabilises the folded protein by 3 to 5 kcal/mol (12.6 to 20.9 kJ/mol at 4.184 kJ per kcal)."
+    },
+    "wiki-hbond": {
+      "type": "encyclopedia",
+      "cite": "Wikipedia, Hydrogen bond (section on strength, citing the IUPAC 2011 definition and textbook values).",
+      "url": "https://en.wikipedia.org/wiki/Hydrogen_bond",
+      "checked": "2026-10-01, page source read: typical hydrogen bond energies O-H...N 29 kJ/mol (water to ammonia), O-H...O 21 kJ/mol (water to water), N-H...N 13 kJ/mol, N-H...O 8 kJ/mol (water to amide); strength varies with geometry and surroundings. Used because the OpenStax pages give only the relative strength (5 to 10% of a covalent bond)."
+    },
+    "wiki-vdw": {
+      "type": "encyclopedia",
+      "cite": "Wikipedia, Van der Waals force (section on strength, citing force field papers in J. Chem. Theory Comput. 2021 and Langmuir 2013).",
+      "url": "https://en.wikipedia.org/wiki/Van_der_Waals_force",
+      "checked": "2026-10-01, page source read: pairwise van der Waals attraction between H atoms of different H2 molecules 0.06 kJ/mol, between O atoms of different O2 molecules 0.44 kJ/mol, for more polarizable S atoms more than 1 kJ/mol."
+    },
+    "wiki-saltbridge": {
+      "type": "encyclopedia",
+      "cite": "Wikipedia, Salt bridge (protein).",
+      "url": "https://en.wikipedia.org/wiki/Salt_bridge_(protein)",
+      "checked": "2026-10-01, page source read: in water at moderate ionic strength, a 1:1 ion pair associates with a free energy of about 5 to 6 kJ/mol, about 8 kJ/mol at zero ionic strength, almost independent of the kind of ion; the N to O distance in a salt bridge is less than 4 angstroms (0.4 nm)."
+    },
+    "os-ap-24-6": {
+      "type": "textbook",
+      "cite": "OpenStax Anatomy and Physiology 2e, section 24.6 Energy and Heat Balance.",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/24-6-energy-and-heat-balance",
+      "checked": "2026-10-01, page read: the core temperature of the body stays steady at around 36.5 to 37.5 C (97.7 to 99.5 F)."
+    },
+    "medline-fever": {
+      "type": "health reference",
+      "cite": "MedlinePlus Medical Encyclopedia (U.S. National Library of Medicine), Fever.",
+      "url": "https://medlineplus.gov/ency/article/003090.htm",
+      "checked": "2026-10-01, page read: an adult probably has a fever when the temperature in the mouth is above 37.2 to 37.5 C, depending on the time of day; a cold can cause a high fever of 38.9 to 40 C; brain damage from a fever generally will not occur unless the fever is over 42 C."
+    }
+  }
+}

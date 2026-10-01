@@ -1,0 +1,562 @@
+{
+ "ACY.cif": {
+  "url": "https://files.rcsb.org/ligands/download/ACY.cif",
+  "path": "web/molecules/everyday/structures/raw/ACY.cif",
+  "bytes": 4586,
+  "gzip": 1278,
+  "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)"
+ },
+ "AIN.cif": {
+  "url": "https://files.rcsb.org/ligands/download/AIN.cif",
+  "path": "web/molecules/everyday/structures/raw/AIN.cif",
+  "bytes": 6248,
+  "gzip": 1897,
+  "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)"
+ },
+ "AR.cif": {
+  "url": "https://files.rcsb.org/ligands/download/AR.cif",
+  "path": "web/molecules/everyday/structures/raw/AR.cif",
+  "bytes": 3430,
+  "gzip": 791,
+  "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)"
+ },
+ "BCT.cif": {
+  "url": "https://files.rcsb.org/ligands/download/BCT.cif",
+  "path": "web/molecules/everyday/structures/raw/BCT.cif",
+  "bytes": 4294,
+  "gzip": 1158,
+  "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)"
+ },
+ "CID24823.sdf": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/24823/record/SDF?record_type=3d",
+  "path": "web/molecules/everyday/structures/raw/CID24823.sdf",
+  "bytes": 1270,
+  "gzip": 510,
+  "licence": "PubChem 3D conformer computed by PubChem (NCBI). NCBI Molecular Data Usage policy (ncbi.nlm.nih.gov/home/about/policies): NCBI itself places no restrictions on the use or distribution of the data, though some original submitters may claim patent, copyright or other rights."
+ },
+ "CID297.sdf": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/297/record/SDF?record_type=3d",
+  "path": "web/molecules/everyday/structures/raw/CID297.sdf",
+  "bytes": 1359,
+  "gzip": 471,
+  "licence": "PubChem 3D conformer computed by PubChem (NCBI). NCBI Molecular Data Usage policy (ncbi.nlm.nih.gov/home/about/policies): NCBI itself places no restrictions on the use or distribution of the data, though some original submitters may claim patent, copyright or other rights."
+ },
+ "CID313.sdf": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/313/record/SDF?record_type=3d",
+  "path": "web/molecules/everyday/structures/raw/CID313.sdf",
+  "bytes": 1106,
+  "gzip": 443,
+  "licence": "PubChem 3D conformer computed by PubChem (NCBI). NCBI Molecular Data Usage policy (ncbi.nlm.nih.gov/home/about/policies): NCBI itself places no restrictions on the use or distribution of the data, though some original submitters may claim patent, copyright or other rights."
+ },
+ "CIT.cif": {
+  "url": "https://files.rcsb.org/ligands/download/CIT.cif",
+  "path": "web/molecules/everyday/structures/raw/CIT.cif",
+  "bytes": 7089,
+  "gzip": 1966,
+  "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)"
+ },
+ "CL.cif": {
+  "url": "https://files.rcsb.org/ligands/download/CL.cif",
+  "path": "web/molecules/everyday/structures/raw/CL.cif",
+  "bytes": 3700,
+  "gzip": 871,
+  "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)"
+ },
+ "CO2.cif": {
+  "url": "https://files.rcsb.org/ligands/download/CO2.cif",
+  "path": "web/molecules/everyday/structures/raw/CO2.cif",
+  "bytes": 3952,
+  "gzip": 1016,
+  "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)"
+ },
+ "EOH.cif": {
+  "url": "https://files.rcsb.org/ligands/download/EOH.cif",
+  "path": "web/molecules/everyday/structures/raw/EOH.cif",
+  "bytes": 4617,
+  "gzip": 1244,
+  "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)"
+ },
+ "HDZ.cif": {
+  "url": "https://files.rcsb.org/ligands/download/HDZ.cif",
+  "path": "web/molecules/everyday/structures/raw/HDZ.cif",
+  "bytes": 3916,
+  "gzip": 991,
+  "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)"
+ },
+ "NA.cif": {
+  "url": "https://files.rcsb.org/ligands/download/NA.cif",
+  "path": "web/molecules/everyday/structures/raw/NA.cif",
+  "bytes": 3415,
+  "gzip": 831,
+  "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)"
+ },
+ "NH3.cif": {
+  "url": "https://files.rcsb.org/ligands/download/NH3.cif",
+  "path": "web/molecules/everyday/structures/raw/NH3.cif",
+  "bytes": 4052,
+  "gzip": 1027,
+  "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)"
+ },
+ "OXY.cif": {
+  "url": "https://files.rcsb.org/ligands/download/OXY.cif",
+  "path": "web/molecules/everyday/structures/raw/OXY.cif",
+  "bytes": 3791,
+  "gzip": 965,
+  "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)"
+ },
+ "PEO.cif": {
+  "url": "https://files.rcsb.org/ligands/download/PEO.cif",
+  "path": "web/molecules/everyday/structures/raw/PEO.cif",
+  "bytes": 4134,
+  "gzip": 1080,
+  "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)"
+ },
+ "STE.cif": {
+  "url": "https://files.rcsb.org/ligands/download/STE.cif",
+  "path": "web/molecules/everyday/structures/raw/STE.cif",
+  "bytes": 11232,
+  "gzip": 3251,
+  "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)"
+ },
+ "TME.cif": {
+  "url": "https://files.rcsb.org/ligands/download/TME.cif",
+  "path": "web/molecules/everyday/structures/raw/TME.cif",
+  "bytes": 5415,
+  "gzip": 1437,
+  "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)"
+ },
+ "V55.cif": {
+  "url": "https://files.rcsb.org/ligands/download/V55.cif",
+  "path": "web/molecules/everyday/structures/raw/V55.cif",
+  "bytes": 7210,
+  "gzip": 2013,
+  "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)"
+ },
+ "XUQ.cif": {
+  "url": "https://files.rcsb.org/ligands/download/XUQ.cif",
+  "path": "web/molecules/everyday/structures/raw/XUQ.cif",
+  "bytes": 7815,
+  "gzip": 2357,
+  "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)"
+ },
+ "cod-9003308.cif": {
+  "url": "https://www.crystallography.net/cod/9003308.cif",
+  "path": ".refs/everyday/cod-9003308.cif",
+  "bytes": 4754,
+  "gzip": 1600,
+  "licence": "reference only (read, not published)"
+ },
+ "cod-nacl.csv": {
+  "url": "https://www.crystallography.net/cod/result?formula=Cl%20Na&format=csv",
+  "path": ".refs/everyday/cod-nacl.csv",
+  "bytes": 21526,
+  "gzip": 3268,
+  "licence": "reference only (read, not published)"
+ },
+ "eia-natural-gas.html": {
+  "url": "https://www.eia.gov/energyexplained/natural-gas/",
+  "path": ".refs/everyday/eia-natural-gas.html",
+  "bytes": 82762,
+  "gzip": 18610,
+  "licence": "reference only (read, not published)"
+ },
+ "epa-ghg-overview.html": {
+  "url": "https://www.epa.gov/ghgemissions/overview-greenhouse-gases",
+  "path": ".refs/everyday/epa-ghg-overview.html",
+  "bytes": 67992,
+  "gzip": 16427,
+  "licence": "reference only (read, not published)"
+ },
+ "epa-methane.html": {
+  "url": "https://www.epa.gov/gmi/importance-methane",
+  "path": ".refs/everyday/epa-methane.html",
+  "bytes": 59007,
+  "gzip": 14353,
+  "licence": "reference only (read, not published)"
+ },
+ "nasa-earth-fact.html": {
+  "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html",
+  "path": ".refs/everyday/nasa-earth-fact.html",
+  "bytes": 5490,
+  "gzip": 2304,
+  "licence": "reference only (read, not published)"
+ },
+ "ncbi-policies.html": {
+  "url": "https://www.ncbi.nlm.nih.gov/home/about/policies/",
+  "path": ".refs/everyday/ncbi-policies.html",
+  "bytes": 38936,
+  "gzip": 12128,
+  "licence": "reference only (read, not published)"
+ },
+ "noaa-co2-annmean-gl.txt": {
+  "url": "https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_annmean_gl.txt",
+  "path": ".refs/everyday/noaa-co2-annmean-gl.txt",
+  "bytes": 2914,
+  "gzip": 1269,
+  "licence": "reference only (read, not published)"
+ },
+ "os-ap-23-4.html": {
+  "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-4-the-stomach",
+  "path": ".refs/everyday/os-ap-23-4.html",
+  "bytes": 360645,
+  "gzip": 81981,
+  "licence": "reference only (read, not published)"
+ },
+ "os-chem-10-6.html": {
+  "url": "https://openstax.org/books/chemistry-2e/pages/10-6-lattice-structures-in-crystalline-solids",
+  "path": ".refs/everyday/os-chem-10-6.html",
+  "bytes": 426291,
+  "gzip": 86523,
+  "licence": "reference only (read, not published)"
+ },
+ "os-chem-11-5.html": {
+  "url": "https://openstax.org/books/chemistry-2e/pages/11-5-colloids",
+  "path": ".refs/everyday/os-chem-11-5.html",
+  "bytes": 323622,
+  "gzip": 74368,
+  "licence": "reference only (read, not published)"
+ },
+ "os-chem-14-1.html": {
+  "url": "https://openstax.org/books/chemistry-2e/pages/14-1-bronsted-lowry-acids-and-bases",
+  "path": ".refs/everyday/os-chem-14-1.html",
+  "bytes": 340914,
+  "gzip": 71243,
+  "licence": "reference only (read, not published)"
+ },
+ "os-chem-14-2.html": {
+  "url": "https://openstax.org/books/chemistry-2e/pages/14-2-ph-and-poh",
+  "path": ".refs/everyday/os-chem-14-2.html",
+  "bytes": 340798,
+  "gzip": 73364,
+  "licence": "reference only (read, not published)"
+ },
+ "os-chem-14-3.html": {
+  "url": "https://openstax.org/books/chemistry-2e/pages/14-3-relative-strengths-of-acids-and-bases",
+  "path": ".refs/everyday/os-chem-14-3.html",
+  "bytes": 490563,
+  "gzip": 86461,
+  "licence": "reference only (read, not published)"
+ },
+ "os-chem-18-10.html": {
+  "url": "https://openstax.org/books/chemistry-2e/pages/18-10-occurrence-preparation-and-properties-of-sulfur",
+  "path": ".refs/everyday/os-chem-18-10.html",
+  "bytes": 292806,
+  "gzip": 67141,
+  "licence": "reference only (read, not published)"
+ },
+ "os-chem-18-12.html": {
+  "url": "https://openstax.org/books/chemistry-2e/pages/18-12-occurrence-preparation-and-properties-of-the-noble-gases",
+  "path": ".refs/everyday/os-chem-18-12.html",
+  "bytes": 290635,
+  "gzip": 67520,
+  "licence": "reference only (read, not published)"
+ },
+ "os-chem-18-9.html": {
+  "url": "https://openstax.org/books/chemistry-2e/pages/18-9-occurrence-preparation-and-compounds-of-oxygen",
+  "path": ".refs/everyday/os-chem-18-9.html",
+  "bytes": 454730,
+  "gzip": 88948,
+  "licence": "reference only (read, not published)"
+ },
+ "os-chem-2-6.html": {
+  "url": "https://openstax.org/books/chemistry-2e/pages/2-6-molecular-and-ionic-compounds",
+  "path": ".refs/everyday/os-chem-2-6.html",
+  "bytes": 336519,
+  "gzip": 74485,
+  "licence": "reference only (read, not published)"
+ },
+ "os-chem-20-1.html": {
+  "url": "https://openstax.org/books/chemistry-2e/pages/20-1-hydrocarbons",
+  "path": ".refs/everyday/os-chem-20-1.html",
+  "bytes": 459716,
+  "gzip": 90516,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-1060-desc.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/1060/description/JSON",
+  "path": ".refs/everyday/pubchem-1060-desc.json",
+  "bytes": 605,
+  "gzip": 342,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-1183-desc.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/1183/description/JSON",
+  "path": ".refs/everyday/pubchem-1183-desc.json",
+  "bytes": 647,
+  "gzip": 359,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-1183-full.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/1183/JSON",
+  "path": ".refs/everyday/pubchem-1183-full.json",
+  "bytes": 1180164,
+  "gzip": 132245,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-1183-uses.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/1183/JSON?heading=Uses",
+  "path": ".refs/everyday/pubchem-1183-uses.json",
+  "bytes": 32787,
+  "gzip": 5885,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-1254-desc.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/1254/description/JSON",
+  "path": ".refs/everyday/pubchem-1254-desc.json",
+  "bytes": 552,
+  "gzip": 329,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-16666-desc.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/16666/description/JSON",
+  "path": ".refs/everyday/pubchem-16666-desc.json",
+  "bytes": 565,
+  "gzip": 332,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-16666-full.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/16666/JSON",
+  "path": ".refs/everyday/pubchem-16666-full.json",
+  "bytes": 784648,
+  "gzip": 97650,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-16666-uses.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/16666/JSON?heading=Uses",
+  "path": ".refs/everyday/pubchem-16666-uses.json",
+  "bytes": 33834,
+  "gzip": 5776,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-176-desc.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/176/description/JSON",
+  "path": ".refs/everyday/pubchem-176-desc.json",
+  "bytes": 552,
+  "gzip": 327,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-176-uses.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/176/JSON?heading=Uses",
+  "path": ".refs/everyday/pubchem-176-uses.json",
+  "bytes": 47328,
+  "gzip": 7928,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-222-desc.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/222/description/JSON",
+  "path": ".refs/everyday/pubchem-222-desc.json",
+  "bytes": 750,
+  "gzip": 426,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-222-uses.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/222/JSON?heading=Uses",
+  "path": ".refs/everyday/pubchem-222-uses.json",
+  "bytes": 41609,
+  "gzip": 7138,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-2244-desc.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/2244/description/JSON",
+  "path": ".refs/everyday/pubchem-2244-desc.json",
+  "bytes": 1540,
+  "gzip": 703,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-2244-uses.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/2244/JSON?heading=Uses",
+  "path": ".refs/everyday/pubchem-2244-uses.json",
+  "bytes": 26379,
+  "gzip": 5173,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-23968-desc.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/23968/description/JSON",
+  "path": ".refs/everyday/pubchem-23968-desc.json",
+  "bytes": 425,
+  "gzip": 262,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-24823-desc.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/24823/description/JSON",
+  "path": ".refs/everyday/pubchem-24823-desc.json",
+  "bytes": 967,
+  "gzip": 529,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-24823-uses.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/24823/JSON?heading=Uses",
+  "path": ".refs/everyday/pubchem-24823-uses.json",
+  "bytes": 20561,
+  "gzip": 4355,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-2724691-desc.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/2724691/description/JSON",
+  "path": ".refs/everyday/pubchem-2724691-desc.json",
+  "bytes": 492,
+  "gzip": 286,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-2724691-uses.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/2724691/JSON?heading=Uses",
+  "path": ".refs/everyday/pubchem-2724691-uses.json",
+  "bytes": 29850,
+  "gzip": 5978,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-280-desc.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/280/description/JSON",
+  "path": ".refs/everyday/pubchem-280-desc.json",
+  "bytes": 1010,
+  "gzip": 542,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-297-desc.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/297/description/JSON",
+  "path": ".refs/everyday/pubchem-297-desc.json",
+  "bytes": 714,
+  "gzip": 409,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-297-uses.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/297/JSON?heading=Uses",
+  "path": ".refs/everyday/pubchem-297-uses.json",
+  "bytes": 30218,
+  "gzip": 4505,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-311-desc.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/311/description/JSON",
+  "path": ".refs/everyday/pubchem-311-desc.json",
+  "bytes": 700,
+  "gzip": 395,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-311-uses.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/311/JSON?heading=Uses",
+  "path": ".refs/everyday/pubchem-311-uses.json",
+  "bytes": 38247,
+  "gzip": 7187,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-312-desc.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/312/description/JSON",
+  "path": ".refs/everyday/pubchem-312-desc.json",
+  "bytes": 584,
+  "gzip": 319,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-313-desc.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/313/description/JSON",
+  "path": ".refs/everyday/pubchem-313-desc.json",
+  "bytes": 386,
+  "gzip": 236,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-313-uses.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/313/JSON?heading=Uses",
+  "path": ".refs/everyday/pubchem-313-uses.json",
+  "bytes": 53057,
+  "gzip": 8686,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-516892-desc.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/516892/description/JSON",
+  "path": ".refs/everyday/pubchem-516892-desc.json",
+  "bytes": 499,
+  "gzip": 284,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-516892-uses.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/516892/JSON?heading=Uses",
+  "path": ".refs/everyday/pubchem-516892-uses.json",
+  "bytes": 35840,
+  "gzip": 6240,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-5234-desc.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5234/description/JSON",
+  "path": ".refs/everyday/pubchem-5234-desc.json",
+  "bytes": 556,
+  "gzip": 314,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-5234-uses.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/5234/JSON?heading=Uses",
+  "path": ".refs/everyday/pubchem-5234-uses.json",
+  "bytes": 37355,
+  "gzip": 6752,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-5281-desc.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5281/description/JSON",
+  "path": ".refs/everyday/pubchem-5281-desc.json",
+  "bytes": 846,
+  "gzip": 436,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-6334-desc.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/6334/description/JSON",
+  "path": ".refs/everyday/pubchem-6334-desc.json",
+  "bytes": 401,
+  "gzip": 244,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-6334-uses.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/6334/JSON?heading=Uses",
+  "path": ".refs/everyday/pubchem-6334-uses.json",
+  "bytes": 28532,
+  "gzip": 5403,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-702-desc.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/702/description/JSON",
+  "path": ".refs/everyday/pubchem-702-desc.json",
+  "bytes": 1288,
+  "gzip": 644,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-702-uses.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/702/JSON?heading=Uses",
+  "path": ".refs/everyday/pubchem-702-uses.json",
+  "bytes": 45313,
+  "gzip": 7843,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-784-desc.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/784/description/JSON",
+  "path": ".refs/everyday/pubchem-784-desc.json",
+  "bytes": 432,
+  "gzip": 267,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-784-uses.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/784/JSON?heading=Uses",
+  "path": ".refs/everyday/pubchem-784-uses.json",
+  "bytes": 33546,
+  "gzip": 6304,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-923-desc.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/923/description/JSON",
+  "path": ".refs/everyday/pubchem-923-desc.json",
+  "bytes": 539,
+  "gzip": 299,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-947-desc.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/947/description/JSON",
+  "path": ".refs/everyday/pubchem-947-desc.json",
+  "bytes": 591,
+  "gzip": 329,
+  "licence": "reference only (read, not published)"
+ },
+ "pubchem-977-desc.json": {
+  "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/977/description/JSON",
+  "path": ".refs/everyday/pubchem-977-desc.json",
+  "bytes": 641,
+  "gzip": 374,
+  "licence": "reference only (read, not published)"
+ }
+}

@@ -1,0 +1,28 @@
+{
+ "_note": "Keyed UI copy (final words) for molecules.json ui. {count} is filled by wire_everyday.py with the spelled-out number of molecules on the page.",
+ "ui": {
+  "copy.intro": "{count} molecules, from the air you breathe to the machines inside every cell. Pick one to turn it in 3D.",
+  "copy.metaDescription": "{count} molecules in 3D, from the air you breathe to the machines inside every cell, each with a plain-English description and the elements it contains.",
+  "copy.credits": "3D viewer: Mol* (molstar.org), MIT licence. Structures: RCSB Protein Data Bank (rcsb.org) and PubChem (pubchem.ncbi.nlm.nih.gov); salt crystal spacing from the Crystallography Open Database. Textbook facts: OpenStax Biology 2e and Chemistry 2e (CC BY 4.0).",
+  "coll.notesTitle": "Good to know",
+  "detail.pubchemLabel": "Computed model: PubChem compound {cid}",
+  "detail.badgePubchem": "Computed model: PubChem {cid}",
+  "detail.builtLabel": "Built model: ions placed at the spacing measured in real salt crystals",
+  "detail.badgeBuilt": "Built model: salt crystal piece",
+  "detail.formulaUnit": "Formula unit {formula}: one sodium ion for every chloride ion. Counted from the {n} ions in this piece.",
+  "alt.atom": "A single {name} atom shown as a ball. It is not bonded to any other atom. Drag to turn it, scroll or pinch to zoom.",
+  "alt.lattice": "A small cube cut from a {name} crystal: {list} ions in rows, each sodium ion surrounded by six chloride ions. The balls are drawn at the real sizes of the ions. Drag to turn it, scroll or pinch to zoom.",
+  "legend.ions": "Each ball is an ion, coloured by element and drawn at its real size: purple sodium ions (small) and green chloride ions (large). There are no sticks, because ions are held by the pull between charges, not by shared bonds.",
+  "legend.atom": "One ball: a single atom, coloured by element."
+ },
+ "elementColors": {
+  "NA": "#ab5cf2",
+  "CL": "#1ff01f",
+  "AR": "#80d1e3"
+ },
+ "elementNames": {
+  "NA": "Sodium",
+  "CL": "Chlorine",
+  "AR": "Argon"
+ }
+}

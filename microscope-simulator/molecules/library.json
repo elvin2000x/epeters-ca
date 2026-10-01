@@ -1,0 +1,2261 @@
+{
+ "_note": "Staged library expansion (Pimp My Molecules, section 4). Not wired into the page yet. Entries use the molecules.json shape plus collection, sizeGzip (bytes, gzip level 9) and review. Collections also list the 16 molecules already in molecules.json. Built by tools/build_library.py; checked by tools/check_library.py.",
+ "collections": [
+  {
+   "id": "machines",
+   "name": "Machines",
+   "molecules": [
+    "atp-synthase",
+    "myosin",
+    "actin",
+    "kinesin",
+    "potassium-channel",
+    "nucleosome",
+    "dna",
+    "atp",
+    "gfp"
+   ]
+  },
+  {
+   "id": "enzymes",
+   "name": "Enzymes",
+   "molecules": [
+    "lysozyme",
+    "rubisco",
+    "acetylcholinesterase",
+    "hiv-protease",
+    "pepsin"
+   ]
+  },
+  {
+   "id": "messengers",
+   "name": "Messengers",
+   "molecules": [
+    "insulin",
+    "adrenaline",
+    "dopamine",
+    "serotonin",
+    "oxytocin",
+    "acetylcholine"
+   ]
+  },
+  {
+   "id": "defence",
+   "name": "Defence",
+   "molecules": [
+    "antibody",
+    "virus-capsid",
+    "mhc"
+   ]
+  },
+  {
+   "id": "plants-food",
+   "name": "Plants and food",
+   "molecules": [
+    "rubisco",
+    "chlorophyll",
+    "caffeine",
+    "capsaicin",
+    "sucrose",
+    "vitamin-c",
+    "beta-carotene",
+    "glucose",
+    "palmitic-acid"
+   ]
+  },
+  {
+   "id": "body",
+   "name": "Body",
+   "molecules": [
+    "hemoglobin",
+    "myoglobin",
+    "collagen",
+    "keratin",
+    "aquaporin",
+    "rhodopsin",
+    "water",
+    "glycine",
+    "cholesterol"
+   ]
+  },
+  {
+   "id": "everyday",
+   "name": "Everyday",
+   "molecules": [
+    "nitrogen",
+    "oxygen",
+    "argon",
+    "carbon-dioxide",
+    "ozone",
+    "water",
+    "table-salt",
+    "sucrose",
+    "acetic-acid",
+    "citric-acid",
+    "baking-soda",
+    "ethanol",
+    "caffeine",
+    "vanillin",
+    "hydrochloric-acid",
+    "ammonia",
+    "hydrogen-peroxide",
+    "methane",
+    "propane",
+    "soap",
+    "aspirin",
+    "menthol"
+   ],
+   "notes": [
+    {
+     "id": "air",
+     "title": "What is air made of?",
+     "ids": [
+      "nitrogen",
+      "oxygen",
+      "argon",
+      "carbon-dioxide",
+      "water",
+      "ozone"
+     ],
+     "sentences": [
+      {
+       "t": "Yes, air is made of molecules, and dry air is mostly two of them: nitrogen (N2) at 78.08 percent and oxygen (O2) at 20.95 percent.",
+       "s": [
+        "nasa-earthfact"
+       ]
+      },
+      {
+       "t": "Next comes argon at about 0.93 percent, and argon is single atoms, not molecules.",
+       "s": [
+        "nasa-earthfact",
+        "pubchem-23968"
+       ]
+      },
+      {
+       "t": "Carbon dioxide is only about 0.04 percent, roughly 426 parts per million in 2025, and it has risen every year since 1979.",
+       "s": [
+        "noaa-co2"
+       ]
+      },
+      {
+       "t": "Real air also holds water vapour, typically about 1 percent but it changes a lot, plus traces of neon, helium, methane and ozone.",
+       "s": [
+        "nasa-earthfact",
+        "osc-18-9"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "acid-base",
+     "title": "Acids and bases",
+     "ids": [
+      "hydrochloric-acid",
+      "acetic-acid",
+      "citric-acid",
+      "water",
+      "baking-soda",
+      "ammonia"
+     ],
+     "sentences": [
+      {
+       "t": "An acid gives away a hydrogen ion (a proton) and a base takes one in, so when an acid meets a base, a proton changes hands.",
+       "s": [
+        "osc-14-1"
+       ]
+      },
+      {
+       "t": "The pH scale tells you which side a liquid is on: below 7 is acidic, 7 is neutral like pure water, and above 7 is basic.",
+       "s": [
+        "osc-14-2"
+       ]
+      },
+      {
+       "t": "Stomach juice sits around pH 1.5 to 3.5, lime juice near 2 and household ammonia near 12.",
+       "s": [
+        "osap-23-4",
+        "osc-14-2"
+       ]
+      },
+      {
+       "t": "Hydrochloric acid is a strong acid that gives away all its hydrogen ions in water, while the acetic acid in vinegar is a weak acid that gives away only some.",
+       "s": [
+        "osc-14-3"
+       ]
+      },
+      {
+       "t": "Baking soda's bicarbonate ion is a base that neutralizes acid, which is why it is sold as an antacid.",
+       "s": [
+        "pubchem-516892",
+        "osap-23-4"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "molecules": [
+  {
+   "id": "kinesin",
+   "aliases": [
+    "kinesin-motor",
+    "3kin"
+   ],
+   "name": "Kinesin",
+   "group": "big",
+   "kind": "pdb",
+   "code": "3KIN",
+   "file": "data/3KIN.cif",
+   "madeOf": "Two kinesin heavy chains from rat, each with ADP in its motor head. The file stores each chain as two pieces (amino acids 2 to 239, and 256 onward).",
+   "parts": [
+    {
+     "sel": {
+      "label_entity_id": "1"
+     },
+     "rep": "cartoon",
+     "color": "#d4577a",
+     "label": "Motor heads (2)"
+    },
+    {
+     "sel": {
+      "label_entity_id": "2"
+     },
+     "rep": "cartoon",
+     "color": "#3f7fd6",
+     "label": "Second piece of each chain (2)"
+    },
+    {
+     "sel": {
+      "label_comp_id": "ADP"
+     },
+     "rep": "ball_and_stick",
+     "element": true,
+     "label": "ADP"
+    }
+   ],
+   "description": [
+    {
+     "t": "Kinesin is a motor protein that carries cargo inside cells, crawling hand over hand along tracks called microtubules.",
+     "s": [
+      "motm-64"
+     ]
+    },
+    {
+     "t": "It is one of the cell's ATP-powered motors that move along protein filaments.",
+     "s": [
+      "motm-64"
+     ]
+    },
+    {
+     "t": "This entry is dimeric kinesin from rat, solved by X-ray at 3.1 angstroms: two chains whose two motor heads each hold an ADP.",
+     "s": [
+      "rcsb-3KIN",
+      "motm-64"
+     ]
+    }
+   ],
+   "collection": "machines",
+   "sizeGzip": 140410,
+   "review": "pending"
+  },
+  {
+   "id": "potassium-channel",
+   "aliases": [
+    "kcsa",
+    "k-channel",
+    "1bl8"
+   ],
+   "name": "Potassium channel (KcsA)",
+   "short": "Potassium channel",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1BL8",
+   "file": "data/1BL8.cif",
+   "madeOf": "Four identical protein chains around a central pore, with three potassium ions inside the pore.",
+   "parts": [
+    {
+     "sel": {
+      "label_entity_id": "1"
+     },
+     "rep": "cartoon",
+     "color": "#c9932b",
+     "label": "Channel chains (4)"
+    },
+    {
+     "sel": "ion",
+     "rep": "spacefill",
+     "element": true,
+     "label": "Potassium ions"
+    }
+   ],
+   "description": [
+    {
+     "t": "Potassium channels let potassium ions flow across a cell membrane while blocking other ions, letting only one sodium ion through for every ten thousand potassium ions.",
+     "s": [
+      "motm-38"
+     ]
+    },
+    {
+     "t": "Nerve cells depend on this: before sending a signal they concentrate potassium ions inside and pump sodium ions out.",
+     "s": [
+      "motm-38"
+     ]
+    },
+    {
+     "t": "This entry is KcsA from the bacterium Streptomyces lividans, four identical chains forming a pore down the centre, solved by X-ray at 3.2 angstroms.",
+     "s": [
+      "rcsb-1BL8",
+      "motm-38"
+     ]
+    }
+   ],
+   "collection": "machines",
+   "sizeGzip": 76691,
+   "review": "pending"
+  },
+  {
+   "id": "nucleosome",
+   "aliases": [
+    "histones",
+    "chromatin",
+    "1aoi"
+   ],
+   "name": "Nucleosome",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1AOI",
+   "file": "data/1AOI.cif",
+   "madeOf": "Eight histone proteins (two each of H3, H4, H2A and H2B) with two DNA strands of 146 bases wrapped around them.",
+   "parts": [
+    {
+     "sel": {
+      "label_entity_id": "1"
+     },
+     "rep": "cartoon",
+     "color": "#c9932b",
+     "label": "DNA (2 strands)"
+    },
+    {
+     "sel": {
+      "label_entity_id": "2"
+     },
+     "rep": "cartoon",
+     "color": "#d4577a",
+     "label": "Histone H3 (2)"
+    },
+    {
+     "sel": {
+      "label_entity_id": "3"
+     },
+     "rep": "cartoon",
+     "color": "#3f7fd6",
+     "label": "Histone H4 (2)"
+    },
+    {
+     "sel": {
+      "label_entity_id": "4"
+     },
+     "rep": "cartoon",
+     "color": "#4aa36c",
+     "label": "Histone H2A (2)"
+    },
+    {
+     "sel": {
+      "label_entity_id": "5"
+     },
+     "rep": "cartoon",
+     "color": "#8a63c9",
+     "label": "Histone H2B (2)"
+    }
+   ],
+   "description": [
+    {
+     "t": "A nucleosome is a spool for DNA: eight histone proteins bundled tightly together, with DNA wrapped around them in two loops.",
+     "s": [
+      "motm-7"
+     ]
+    },
+    {
+     "t": "Nucleosomes protect the delicate DNA strands in our cells from physical damage.",
+     "s": [
+      "motm-7"
+     ]
+    },
+    {
+     "t": "This entry is a nucleosome core particle solved by X-ray at 2.8 angstroms, with histones from the frog Xenopus laevis and a 146 base pair DNA sequence taken from the human X chromosome.",
+     "s": [
+      "rcsb-1AOI",
+      "motm-7"
+     ]
+    }
+   ],
+   "collection": "machines",
+   "sizeGzip": 301079,
+   "review": "pending"
+  },
+  {
+   "id": "acetylcholinesterase",
+   "aliases": [
+    "ache",
+    "1acj"
+   ],
+   "name": "Acetylcholinesterase",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1ACJ",
+   "file": "data/1ACJ.cif",
+   "madeOf": "One protein chain of 537 amino acids with one tacrine drug molecule bound.",
+   "parts": [
+    {
+     "sel": "polymer",
+     "rep": "cartoon",
+     "color": "#3f7fd6",
+     "label": "Enzyme chain"
+    },
+    {
+     "sel": {
+      "label_comp_id": "THA"
+     },
+     "rep": "ball_and_stick",
+     "element": true,
+     "label": "Tacrine (drug)"
+    }
+   ],
+   "description": [
+    {
+     "t": "Acetylcholinesterase ends nerve signals by breaking the messenger acetylcholine into acetic acid and choline, each one in about 80 microseconds.",
+     "s": [
+      "motm-54"
+     ]
+    },
+    {
+     "t": "Its active site sits at the bottom of a deep pocket, and some drugs for Alzheimer's disease work by partly blocking it.",
+     "s": [
+      "motm-54",
+      "os-35-2"
+     ]
+    },
+    {
+     "t": "This entry is the enzyme from the electric ray Torpedo californica with the drug tacrine bound in its active-site gorge, solved by X-ray at 2.8 angstroms.",
+     "s": [
+      "rcsb-1ACJ",
+      "motm-54"
+     ]
+    }
+   ],
+   "collection": "enzymes",
+   "sizeGzip": 118419,
+   "review": "pending"
+  },
+  {
+   "id": "hiv-protease",
+   "aliases": [
+    "hiv",
+    "ritonavir",
+    "protease",
+    "1hxw"
+   ],
+   "name": "HIV-1 protease with ritonavir",
+   "short": "HIV protease",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1HXW",
+   "file": "data/1HXW.cif",
+   "madeOf": "Two identical protein chains of 99 amino acids, with one ritonavir drug molecule bound between them.",
+   "parts": [
+    {
+     "sel": {
+      "label_entity_id": "1"
+     },
+     "rep": "cartoon",
+     "color": "#d4577a",
+     "label": "Protease chains (2)"
+    },
+    {
+     "sel": {
+      "label_comp_id": "RIT"
+     },
+     "rep": "ball_and_stick",
+     "element": true,
+     "label": "Ritonavir (drug)"
+    }
+   ],
+   "description": [
+    {
+     "t": "HIV-1 protease cuts the virus's long polyprotein into the protein-sized pieces the virus needs.",
+     "s": [
+      "motm-6"
+     ]
+    },
+    {
+     "t": "It is built from two identical chains of 99 amino acids that form a tunnel covered by two flexible flaps.",
+     "s": [
+      "motm-6"
+     ]
+    },
+    {
+     "t": "Drugs such as ritonavir mimic a protein chain but cannot be cut, so they jam the enzyme; this entry shows ritonavir bound, solved by X-ray at 1.8 angstroms.",
+     "s": [
+      "motm-6",
+      "rcsb-1HXW"
+     ]
+    }
+   ],
+   "collection": "enzymes",
+   "sizeGzip": 65213,
+   "review": "pending"
+  },
+  {
+   "id": "pepsin",
+   "aliases": [
+    "4pep"
+   ],
+   "name": "Pepsin",
+   "group": "big",
+   "kind": "pdb",
+   "code": "4PEP",
+   "file": "data/4PEP.cif",
+   "madeOf": "One protein chain of 326 amino acids.",
+   "parts": [
+    {
+     "sel": "polymer",
+     "rep": "cartoon",
+     "color": "#c9932b",
+     "label": "Pepsin chain"
+    }
+   ],
+   "description": [
+    {
+     "t": "Pepsin is a digestive enzyme: in the stomach, protein chains bind in its deep active-site groove and are broken into smaller pieces.",
+     "s": [
+      "motm-12",
+      "os-3-4-roles"
+     ]
+    },
+    {
+     "t": "It works best in strong hydrochloric acid, and it is made with an extra 44 amino acids that block the groove until they are clipped off in the stomach.",
+     "s": [
+      "motm-12"
+     ]
+    },
+    {
+     "t": "This entry is pig pepsin, one chain of 326 amino acids, refined by X-ray at 1.8 angstroms.",
+     "s": [
+      "rcsb-4PEP"
+     ]
+    }
+   ],
+   "collection": "enzymes",
+   "sizeGzip": 80409,
+   "review": "pending"
+  },
+  {
+   "id": "adrenaline",
+   "aliases": [
+    "epinephrine"
+   ],
+   "name": "Adrenaline",
+   "group": "small",
+   "kind": "ccd",
+   "code": "ALE",
+   "file": "data/ALE.cif",
+   "madeOf": "A ring of six carbons carrying two OH groups, joined to a short chain with an OH group and a nitrogen.",
+   "description": [
+    {
+     "t": "Adrenaline, also called epinephrine, is the hormone that readies the body for danger in the flight or fight response.",
+     "s": [
+      "motm-100",
+      "pubchem-5816"
+     ]
+    },
+    {
+     "t": "It is released into the blood from the adrenal glands on top of the kidneys, and it raises the heart rate and the sugar in the blood.",
+     "s": [
+      "motm-100",
+      "pubchem-5816"
+     ]
+    },
+    {
+     "t": "This model is L-epinephrine, formula C9 H13 N O3, from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-ALE"
+     ]
+    }
+   ],
+   "collection": "messengers",
+   "sizeGzip": 2216,
+   "review": "pending"
+  },
+  {
+   "id": "dopamine",
+   "aliases": [],
+   "name": "Dopamine",
+   "group": "small",
+   "kind": "ccd",
+   "code": "LDP",
+   "file": "data/LDP.cif",
+   "madeOf": "A ring of six carbons carrying two OH groups, joined to a two-carbon chain ending in an amine group.",
+   "description": [
+    {
+     "t": "Dopamine is one of the catecholamine neurotransmitters in the brain, and it is important in regulating movement.",
+     "s": [
+      "pubchem-681",
+      "os-35-2"
+     ]
+    },
+    {
+     "t": "Transporter proteins clear dopamine out of the gap between nerve cells, and cocaine works by blocking them.",
+     "s": [
+      "motm-171"
+     ]
+    },
+    {
+     "t": "The body makes dopamine from the amino acid tyrosine; this model, formula C8 H11 N O2, is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "pubchem-681",
+      "ccd-LDP"
+     ]
+    }
+   ],
+   "collection": "messengers",
+   "sizeGzip": 1958,
+   "review": "pending"
+  },
+  {
+   "id": "serotonin",
+   "aliases": [
+    "5-ht"
+   ],
+   "name": "Serotonin",
+   "group": "small",
+   "kind": "ccd",
+   "code": "SRO",
+   "file": "data/SRO.cif",
+   "madeOf": "A two-ring indole with an OH group, plus a two-carbon chain ending in an amine group.",
+   "description": [
+    {
+     "t": "Serotonin is a messenger molecule made from the amino acid tryptophan, and it helps control our moods, hunger and much more.",
+     "s": [
+      "motm-164",
+      "pubchem-5202"
+     ]
+    },
+    {
+     "t": "Most of the serotonin in the body is in the digestive system, where it helps control the motions of digestion.",
+     "s": [
+      "motm-164"
+     ]
+    },
+    {
+     "t": "This model is serotonin, formula C10 H12 N2 O, from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-SRO"
+     ]
+    }
+   ],
+   "collection": "messengers",
+   "sizeGzip": 2331,
+   "review": "pending"
+  },
+  {
+   "id": "oxytocin",
+   "aliases": [
+    "1npo"
+   ],
+   "name": "Oxytocin (with its carrier neurophysin)",
+   "short": "Oxytocin",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1NPO",
+   "file": "data/1NPO.cif",
+   "madeOf": "Two neurophysin carrier proteins of 95 amino acids, each holding one oxytocin, a chain of just 9 amino acids.",
+   "parts": [
+    {
+     "sel": {
+      "label_entity_id": "1"
+     },
+     "rep": "cartoon",
+     "color": "#3f7fd6",
+     "label": "Neurophysin"
+    },
+    {
+     "sel": {
+      "label_entity_id": "3"
+     },
+     "rep": "cartoon",
+     "color": "#3f7fd6",
+     "label": "Neurophysin"
+    },
+    {
+     "sel": {
+      "label_entity_id": "2"
+     },
+     "rep": "ball_and_stick",
+     "element": true,
+     "label": "Oxytocin (2)"
+    }
+   ],
+   "description": [
+    {
+     "t": "Oxytocin is a small peptide hormone made by nerve cells in the hypothalamus and carried along their axons to the posterior pituitary.",
+     "s": [
+      "os-37-5"
+     ]
+    },
+    {
+     "t": "It stimulates the contractions of the uterus during childbirth and the release of milk.",
+     "s": [
+      "os-37-5"
+     ]
+    },
+    {
+     "t": "This entry shows oxytocin bound to its carrier protein neurophysin, from cattle, solved by X-ray at 3.0 angstroms.",
+     "s": [
+      "rose-1996",
+      "rcsb-1NPO"
+     ]
+    }
+   ],
+   "collection": "messengers",
+   "sizeGzip": 44022,
+   "review": "pending"
+  },
+  {
+   "id": "acetylcholine",
+   "aliases": [],
+   "name": "Acetylcholine",
+   "group": "small",
+   "kind": "ccd",
+   "code": "ACH",
+   "file": "data/ACH.cif",
+   "madeOf": "Acetic acid joined to choline: a short chain with an ester group and a nitrogen carrying three methyl groups.",
+   "description": [
+    {
+     "t": "Acetylcholine is a neurotransmitter made of acetic acid joined to choline as an ester.",
+     "s": [
+      "pubchem-187"
+     ]
+    },
+    {
+     "t": "It is the main messenger between nerves and muscles: when it binds receptors on a muscle cell, their channel opens.",
+     "s": [
+      "pubchem-187",
+      "motm-71"
+     ]
+    },
+    {
+     "t": "The enzyme acetylcholinesterase ends the signal by splitting acetylcholine back into acetic acid and choline; this model is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "motm-54",
+      "ccd-ACH"
+     ]
+    }
+   ],
+   "collection": "messengers",
+   "sizeGzip": 2193,
+   "review": "pending"
+  },
+  {
+   "id": "antibody",
+   "aliases": [
+    "igg",
+    "immunoglobulin",
+    "1igt"
+   ],
+   "name": "Antibody (IgG)",
+   "short": "Antibody",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1IGT",
+   "file": "data/1IGT.cif",
+   "madeOf": "Two heavy chains of 444 amino acids and two light chains of 214, with sugar chains attached.",
+   "parts": [
+    {
+     "sel": {
+      "label_entity_id": "2"
+     },
+     "rep": "cartoon",
+     "color": "#d4577a",
+     "label": "Heavy chains (2)"
+    },
+    {
+     "sel": {
+      "label_entity_id": "1"
+     },
+     "rep": "cartoon",
+     "color": "#c9932b",
+     "label": "Light chains (2)"
+    },
+    {
+     "sel": {
+      "label_entity_id": "3"
+     },
+     "rep": "ball_and_stick",
+     "element": true,
+     "label": "Sugar chains"
+    }
+   ],
+   "description": [
+    {
+     "t": "Antibodies circulate in the blood, checking every object they touch, and help protect the body from foreign pathogens.",
+     "s": [
+      "motm-21",
+      "os-3-4-roles"
+     ]
+    },
+    {
+     "t": "Each is built from four chains, two long heavy chains and two shorter light chains, with a binding site at the tip of each of its two arms.",
+     "s": [
+      "motm-21"
+     ]
+    },
+    {
+     "t": "This entry is an intact mouse IgG2a antibody solved by X-ray at 2.8 angstroms.",
+     "s": [
+      "rcsb-1IGT",
+      "motm-21"
+     ]
+    }
+   ],
+   "collection": "defence",
+   "sizeGzip": 332072,
+   "review": "pending"
+  },
+  {
+   "id": "virus-capsid",
+   "aliases": [
+    "capsid",
+    "virus",
+    "stnv",
+    "2buk"
+   ],
+   "name": "Virus shell (satellite tobacco necrosis virus)",
+   "short": "Virus shell",
+   "group": "big",
+   "kind": "pdb",
+   "code": "2BUK",
+   "file": "data/2BUK.cif",
+   "assembly": "1",
+   "madeOf": "60 copies of one coat protein of 196 amino acids. The genome inside the shell is not in this entry.",
+   "note": "The file holds one coat protein; the 3D view builds the full shell of 60 copies from the file's own symmetry records, and the counts are for what the file holds.",
+   "parts": [
+    {
+     "sel": "polymer",
+     "rep": "cartoon",
+     "color": "#4aa36c",
+     "label": "Coat proteins (60)"
+    },
+    {
+     "sel": "ion",
+     "rep": "spacefill",
+     "element": true,
+     "label": "Calcium ions"
+    }
+   ],
+   "description": [
+    {
+     "t": "Every virus particle has its genome wrapped in a protective protein shell called a capsid, and the shell's proteins are encoded in the viral genome.",
+     "s": [
+      "os-21-1"
+     ]
+    },
+    {
+     "t": "Icosahedral viruses like this one have roughly spherical shells, and viruses can only copy themselves inside a host cell.",
+     "s": [
+      "os-21-1"
+     ]
+    },
+    {
+     "t": "This entry is the coat protein of satellite tobacco necrosis virus, solved by X-ray at 2.45 angstroms, and the view builds the full shell of 60 copies from the file's own symmetry records.",
+     "s": [
+      "rcsb-2BUK"
+     ]
+    }
+   ],
+   "collection": "defence",
+   "sizeGzip": 55476,
+   "review": "pending"
+  },
+  {
+   "id": "mhc",
+   "aliases": [
+    "hla",
+    "hla-b27",
+    "1hsa"
+   ],
+   "name": "MHC class I (HLA-B27)",
+   "short": "MHC",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1HSA",
+   "file": "data/1HSA.cif",
+   "assembly": "1",
+   "madeOf": "A heavy chain of 276 amino acids, a small beta 2-microglobulin chain of 99, and a bound peptide of 9 amino acids.",
+   "note": "The file holds two copies; the 3D view shows one, built from the file's own assembly record.",
+   "parts": [
+    {
+     "sel": {
+      "label_entity_id": "1"
+     },
+     "rep": "cartoon",
+     "color": "#d4577a",
+     "label": "Heavy chain"
+    },
+    {
+     "sel": {
+      "label_entity_id": "2"
+     },
+     "rep": "cartoon",
+     "color": "#3f7fd6",
+     "label": "Beta 2-microglobulin"
+    },
+    {
+     "sel": {
+      "label_entity_id": "3"
+     },
+     "rep": "ball_and_stick",
+     "element": true,
+     "label": "Peptide in the groove"
+    }
+   ],
+   "description": [
+    {
+     "t": "Class I MHC sits on the surface of most cells, where it displays pieces of the cell's own proteins and protects us from viral infection.",
+     "s": [
+      "motm-62"
+     ]
+    },
+    {
+     "t": "Each person has their own set of MHC types, which is why grafted tissue from someone else can trigger the immune system; in humans these molecules are called HLA.",
+     "s": [
+      "motm-62"
+     ]
+    },
+    {
+     "t": "This entry is human HLA-B27 with a peptide in its groove (modelled in the file as a chain of 9 amino acids), solved by X-ray at 2.1 angstroms.",
+     "s": [
+      "rcsb-1HSA"
+     ]
+    }
+   ],
+   "collection": "defence",
+   "sizeGzip": 178737,
+   "review": "pending"
+  },
+  {
+   "id": "rubisco",
+   "aliases": [
+    "rubp-carboxylase",
+    "8ruc"
+   ],
+   "name": "Rubisco",
+   "group": "big",
+   "kind": "pdb",
+   "code": "8RUC",
+   "file": "data/8RUC.cif",
+   "assembly": "1",
+   "madeOf": "Eight large chains of 475 amino acids and eight small chains of 123, with magnesium and a bound sugar phosphate in each active site.",
+   "note": "The file holds four large and four small chains; the 3D view builds the full enzyme from the file's own symmetry records, and the counts are for what the file holds.",
+   "parts": [
+    {
+     "sel": {
+      "label_entity_id": "1"
+     },
+     "rep": "cartoon",
+     "color": "#4aa36c",
+     "label": "Large chains (8)"
+    },
+    {
+     "sel": {
+      "label_entity_id": "2"
+     },
+     "rep": "cartoon",
+     "color": "#c9932b",
+     "label": "Small chains (8)"
+    },
+    {
+     "sel": {
+      "label_comp_id": "CAP"
+     },
+     "rep": "ball_and_stick",
+     "element": true,
+     "label": "Bound sugar phosphate (CABP)"
+    },
+    {
+     "sel": "ion",
+     "rep": "spacefill",
+     "element": true,
+     "label": "Magnesium ions"
+    }
+   ],
+   "description": [
+    {
+     "t": "Rubisco is the enzyme that captures carbon dioxide in photosynthesis, attaching it to ribulose bisphosphate, a sugar with five carbon atoms.",
+     "s": [
+      "motm-11"
+     ]
+    },
+    {
+     "t": "It is slow, fixing only about three carbon dioxide molecules per second, and it is the most plentiful single enzyme on Earth.",
+     "s": [
+      "motm-11"
+     ]
+    },
+    {
+     "t": "This entry is spinach rubisco with 2-carboxyarabinitol bisphosphate bound, solved by X-ray at 1.6 angstroms, and the view builds the full enzyme of eight large and eight small chains.",
+     "s": [
+      "rcsb-8RUC",
+      "motm-11"
+     ]
+    }
+   ],
+   "collection": "plants-food",
+   "sizeGzip": 505045,
+   "review": "pending"
+  },
+  {
+   "id": "chlorophyll",
+   "aliases": [
+    "chlorophyll-a"
+   ],
+   "name": "Chlorophyll a",
+   "short": "Chlorophyll",
+   "group": "small",
+   "kind": "ccd",
+   "code": "CLA",
+   "file": "data/CLA.cif",
+   "madeOf": "A large flat ring of carbon and nitrogen holding one magnesium atom, with a long carbon tail.",
+   "description": [
+    {
+     "t": "Chlorophyll absorbs blue and red light and leaves the green for us to see, which is why plants look green.",
+     "s": [
+      "motm-22"
+     ]
+    },
+    {
+     "t": "In photosynthesis, chlorophyll captures light, and the energy excites an electron into a higher energy state.",
+     "s": [
+      "motm-22"
+     ]
+    },
+    {
+     "t": "This model is chlorophyll a, formula C55 H72 Mg N4 O5, with one magnesium atom, from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-CLA",
+      "motm-22"
+     ]
+    }
+   ],
+   "collection": "plants-food",
+   "sizeGzip": 8097,
+   "review": "pending"
+  },
+  {
+   "id": "caffeine",
+   "aliases": [],
+   "name": "Caffeine",
+   "group": "small",
+   "kind": "ccd",
+   "code": "CFF",
+   "file": "data/CFF.cif",
+   "madeOf": "Two joined rings of carbon and nitrogen, with three methyl groups and two oxygens.",
+   "description": [
+    {
+     "t": "Caffeine is a major component of coffee, tea and chocolate, and in people it acts as a stimulant of the central nervous system.",
+     "s": [
+      "pubchem-2519"
+     ]
+    },
+    {
+     "t": "It is built much like the body's own molecule adenosine, and it works mainly by blocking adenosine receptors.",
+     "s": [
+      "pubchem-2519"
+     ]
+    },
+    {
+     "t": "Chemically it is a trimethylxanthine, formula C8 H10 N4 O2; this model is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "pubchem-2519",
+      "ccd-CFF"
+     ]
+    }
+   ],
+   "collection": "plants-food",
+   "sizeGzip": 2088,
+   "review": "pending"
+  },
+  {
+   "id": "capsaicin",
+   "aliases": [
+    "chili"
+   ],
+   "name": "Capsaicin",
+   "group": "small",
+   "kind": "ccd",
+   "code": "4DY",
+   "file": "data/4DY.cif",
+   "madeOf": "A six-carbon ring with OH and methoxy groups, linked through an amide to a long carbon tail.",
+   "description": [
+    {
+     "t": "Capsaicin is the main pungent compound in chili peppers, the fruits of plants in the genus Capsicum.",
+     "s": [
+      "pubchem-1548943",
+      "motm-250"
+     ]
+    },
+    {
+     "t": "It opens TRPV1, the same ion channel that opens when the temperature gets very hot, which is why spicy food and heat feel alike.",
+     "s": [
+      "motm-250"
+     ]
+    },
+    {
+     "t": "It is also used in pain-relief creams and patches; this model, formula C18 H27 N O3, is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "pubchem-1548943",
+      "ccd-4DY"
+     ]
+    }
+   ],
+   "collection": "plants-food",
+   "sizeGzip": 3142,
+   "review": "pending"
+  },
+  {
+   "id": "sucrose",
+   "aliases": [
+    "table-sugar"
+   ],
+   "name": "Sucrose",
+   "group": "small",
+   "kind": "ccd",
+   "code": "SUC",
+   "file": "data/SUC.cif",
+   "madeOf": "One glucose ring and one fructose ring joined through an oxygen atom.",
+   "description": [
+    {
+     "t": "Sucrose is table sugar: one glucose and one fructose joined by a glycosidic bond.",
+     "s": [
+      "os-3-2-sucrose",
+      "pubchem-5988"
+     ]
+    },
+    {
+     "t": "It is obtained commercially from sugarcane and sugar beet, and it is used widely as a food and a sweetener.",
+     "s": [
+      "pubchem-5988"
+     ]
+    },
+    {
+     "t": "This model, formula C12 H22 O11, is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-SUC"
+     ]
+    }
+   ],
+   "collection": "plants-food",
+   "sizeGzip": 3172,
+   "review": "pending"
+  },
+  {
+   "id": "vitamin-c",
+   "aliases": [
+    "ascorbic-acid"
+   ],
+   "name": "Vitamin C",
+   "group": "small",
+   "kind": "ccd",
+   "code": "ASC",
+   "file": "data/ASC.cif",
+   "madeOf": "A five-membered ring of four carbons and one oxygen, with a short side chain and four OH groups.",
+   "description": [
+    {
+     "t": "Vitamin C, or ascorbic acid, is a powerful antioxidant that keeps the enzyme that builds collagen working by restoring its iron atoms.",
+     "s": [
+      "motm-288"
+     ]
+    },
+    {
+     "t": "Our cells cannot make it, so we get it from food; centuries ago, sailors without it suffered scurvy, a disease caused by being unable to build collagen.",
+     "s": [
+      "motm-288"
+     ]
+    },
+    {
+     "t": "This model is ascorbic acid, formula C6 H8 O6, from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-ASC"
+     ]
+    }
+   ],
+   "collection": "plants-food",
+   "sizeGzip": 2075,
+   "review": "pending"
+  },
+  {
+   "id": "beta-carotene",
+   "aliases": [
+    "carotene"
+   ],
+   "name": "Beta-carotene",
+   "group": "small",
+   "kind": "ccd",
+   "code": "BCR",
+   "file": "data/BCR.cif",
+   "madeOf": "A long chain of 40 carbons with alternating single and double bonds, and a ring at each end.",
+   "description": [
+    {
+     "t": "Beta-carotene gives carrots and many other orange and yellow vegetables their bright colour.",
+     "s": [
+      "motm-66"
+     ]
+    },
+    {
+     "t": "It is a long, thin molecule with a string of carbon-carbon double bonds in a row, and those bonds absorb light.",
+     "s": [
+      "motm-66"
+     ]
+    },
+    {
+     "t": "Our cells break beta-carotene in half to make two molecules of retinal, the light-catching part of rhodopsin in the eye; this model, formula C40 H56, is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "motm-66",
+      "motm-147",
+      "ccd-BCR"
+     ]
+    }
+   ],
+   "collection": "plants-food",
+   "sizeGzip": 4123,
+   "review": "pending"
+  },
+  {
+   "id": "myoglobin",
+   "aliases": [
+    "1mbn"
+   ],
+   "name": "Myoglobin",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1MBN",
+   "file": "data/1MBN.cif",
+   "madeOf": "One protein chain of 153 amino acids holding one heme group with its iron atom.",
+   "parts": [
+    {
+     "sel": "polymer",
+     "rep": "cartoon",
+     "color": "#d4577a",
+     "label": "Myoglobin chain"
+    },
+    {
+     "sel": {
+      "label_comp_id": "HEM"
+     },
+     "rep": "ball_and_stick",
+     "element": true,
+     "label": "Heme group"
+    }
+   ],
+   "description": [
+    {
+     "t": "Myoglobin is a small, bright red protein that stores oxygen in muscle cells, and it gives meat much of its red colour.",
+     "s": [
+      "motm-1"
+     ]
+    },
+    {
+     "t": "It was the first protein to have its atomic structure determined, by John Kendrew and his coworkers.",
+     "s": [
+      "motm-1"
+     ]
+    },
+    {
+     "t": "This entry is sperm whale myoglobin, one chain of 153 amino acids holding one heme group, refined by X-ray at 2.0 angstroms.",
+     "s": [
+      "rcsb-1MBN"
+     ]
+    }
+   ],
+   "collection": "body",
+   "sizeGzip": 38337,
+   "review": "pending"
+  },
+  {
+   "id": "keratin",
+   "aliases": [
+    "3tnu"
+   ],
+   "name": "Keratin (keratin 5 and 14 coil)",
+   "short": "Keratin",
+   "group": "big",
+   "kind": "pdb",
+   "code": "3TNU",
+   "file": "data/3TNU.cif",
+   "madeOf": "Two protein pieces wound into a coiled coil: part of keratin 14 (131 amino acids) and part of keratin 5 (129 amino acids).",
+   "parts": [
+    {
+     "sel": {
+      "label_entity_id": "1"
+     },
+     "rep": "cartoon",
+     "color": "#c9932b",
+     "label": "Keratin 14 piece"
+    },
+    {
+     "sel": {
+      "label_entity_id": "2"
+     },
+     "rep": "cartoon",
+     "color": "#8a63c9",
+     "label": "Keratin 5 piece"
+    }
+   ],
+   "description": [
+    {
+     "t": "Keratin is a structural protein, and keratin filaments give vital mechanical support to the cells that line body surfaces such as the skin.",
+     "s": [
+      "lee-2012",
+      "os-3-4-roles"
+     ]
+    },
+    {
+     "t": "Keratin filaments are always built from two different keratins paired together; keratins 5 and 14 are made in the young cells of the outer skin.",
+     "s": [
+      "lee-2012"
+     ]
+    },
+    {
+     "t": "This entry is a small piece of each, the 2B regions of human keratins 5 and 14 wound around each other as a coiled coil, solved by X-ray at 3.0 angstroms.",
+     "s": [
+      "rcsb-3TNU",
+      "lee-2012"
+     ]
+    }
+   ],
+   "collection": "body",
+   "sizeGzip": 91331,
+   "review": "pending"
+  },
+  {
+   "id": "rhodopsin",
+   "aliases": [
+    "1f88"
+   ],
+   "name": "Rhodopsin",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1F88",
+   "file": "data/1F88.cif",
+   "assembly": "2",
+   "madeOf": "One protein chain of 348 amino acids with a retinal molecule bound inside, plus sugar chains.",
+   "note": "The file holds two copies; the 3D view shows one, built from the file's own assembly record.",
+   "parts": [
+    {
+     "sel": {
+      "label_entity_id": "1"
+     },
+     "rep": "cartoon",
+     "color": "#8a63c9",
+     "label": "Rhodopsin chain"
+    },
+    {
+     "sel": {
+      "label_comp_id": "RET"
+     },
+     "rep": "ball_and_stick",
+     "element": true,
+     "label": "Retinal"
+    }
+   ],
+   "description": [
+    {
+     "t": "Rhodopsin is the molecule in the eye that senses light, and our most sensitive eye cells, rod cells, can be triggered by a single photon.",
+     "s": [
+      "motm-147"
+     ]
+    },
+    {
+     "t": "When its retinal absorbs light, one bond flips from a bent to an extended shape, starting a G-protein signal that ends as a nerve signal to the brain.",
+     "s": [
+      "motm-147"
+     ]
+    },
+    {
+     "t": "This entry is cow rhodopsin with retinal bound, a G protein-coupled receptor, solved by X-ray at 2.8 angstroms.",
+     "s": [
+      "rcsb-1F88"
+     ]
+    }
+   ],
+   "collection": "body",
+   "sizeGzip": 145671,
+   "review": "pending"
+  },
+  {
+   "id": "nitrogen",
+   "aliases": [
+    "n2",
+    "dinitrogen",
+    "nitrogen-gas"
+   ],
+   "name": "Nitrogen gas",
+   "short": "Nitrogen",
+   "group": "small",
+   "kind": "ccd",
+   "code": "HDZ",
+   "file": "data/HDZ.cif",
+   "madeOf": "Two nitrogen atoms joined by a triple bond.",
+   "description": [
+    {
+     "t": "Nitrogen gas is a molecule of two nitrogen atoms, and it makes up 78.08 percent of dry air, more than any other gas.",
+     "s": [
+      "pubchem-947",
+      "nasa-earthfact"
+     ]
+    },
+    {
+     "t": "So most of every breath you take is nitrogen; food makers also fill packets with it to keep food fresh.",
+     "s": [
+      "nasa-earthfact",
+      "pubchem-947"
+     ]
+    },
+    {
+     "t": "This model, formula N2, is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-HDZ"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 991,
+   "review": "pending"
+  },
+  {
+   "id": "oxygen",
+   "aliases": [
+    "o2",
+    "dioxygen",
+    "oxygen-gas"
+   ],
+   "name": "Oxygen gas",
+   "short": "Oxygen",
+   "group": "small",
+   "kind": "ccd",
+   "code": "OXY",
+   "file": "data/OXY.cif",
+   "madeOf": "Two oxygen atoms joined by a double bond.",
+   "description": [
+    {
+     "t": "Oxygen gas is a molecule of two oxygen atoms, and it makes up 20.95 percent of dry air.",
+     "s": [
+      "pubchem-977",
+      "nasa-earthfact"
+     ]
+    },
+    {
+     "t": "Green plants keep refilling the air with it: photosynthesis turns carbon dioxide and water into sugar and oxygen.",
+     "s": [
+      "osc-18-9"
+     ]
+    },
+    {
+     "t": "This model, formula O2, is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-OXY"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 965,
+   "review": "pending"
+  },
+  {
+   "id": "argon",
+   "aliases": [
+    "ar"
+   ],
+   "name": "Argon (a single atom)",
+   "short": "Argon",
+   "group": "small",
+   "kind": "ccd",
+   "code": "AR",
+   "file": "data/AR.cif",
+   "madeOf": "One argon atom on its own, not bonded to anything.",
+   "description": [
+    {
+     "t": "Argon is the third most common gas in dry air, about 0.93 percent, after nitrogen and oxygen.",
+     "s": [
+      "osc-18-12",
+      "nasa-earthfact"
+     ]
+    },
+    {
+     "t": "It is not a molecule: argon floats around as single atoms, because as a noble gas its outer shell of electrons is already full.",
+     "s": [
+      "pubchem-23968",
+      "osc-18-12"
+     ]
+    },
+    {
+     "t": "It is collected from liquid air, and it has been used inside light bulbs to make the hot filament last longer.",
+     "s": [
+      "osc-18-12"
+     ]
+    },
+    {
+     "t": "This model is one argon atom from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-AR"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "model": {
+    "alt": "atom"
+   },
+   "sizeGzip": 787,
+   "review": "pending"
+  },
+  {
+   "id": "carbon-dioxide",
+   "aliases": [
+    "co2"
+   ],
+   "name": "Carbon dioxide",
+   "group": "small",
+   "kind": "ccd",
+   "code": "CO2",
+   "file": "data/CO2.cif",
+   "madeOf": "One carbon atom with an oxygen atom double bonded on each side, in a straight line.",
+   "description": [
+    {
+     "t": "Carbon dioxide is one carbon atom joined to two oxygen atoms by double bonds, a colourless gas with no smell.",
+     "s": [
+      "pubchem-280"
+     ]
+    },
+    {
+     "t": "Animals, fungi and many microbes breathe it out as they break down food, and plants take it in for photosynthesis.",
+     "s": [
+      "pubchem-280",
+      "osc-18-9"
+     ]
+    },
+    {
+     "t": "It is only about 0.04 percent of the air, about 426 parts per million in 2025, but it is a greenhouse gas and its level has gone up every year since 1979.",
+     "s": [
+      "noaa-co2",
+      "pubchem-280"
+     ]
+    },
+    {
+     "t": "This model, formula C O2, is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-CO2"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 1016,
+   "review": "pending"
+  },
+  {
+   "id": "ozone",
+   "aliases": [
+    "o3"
+   ],
+   "name": "Ozone",
+   "group": "small",
+   "kind": "ccd",
+   "code": "CID24823",
+   "file": "data/CID24823.cif",
+   "madeOf": "Three oxygen atoms in a bent chain.",
+   "description": [
+    {
+     "t": "Ozone is a molecule of three oxygen atoms, a pale blue gas with a sharp smell.",
+     "s": [
+      "pubchem-24823",
+      "osc-18-9"
+     ]
+    },
+    {
+     "t": "Sunlight makes it high in the sky: ultraviolet light acting on oxygen forms ozone, and most of it sits in the stratosphere, about 10 to 50 kilometres up.",
+     "s": [
+      "osc-18-9",
+      "pubchem-24823"
+     ]
+    },
+    {
+     "t": "That ozone layer absorbs harmful ultraviolet light from the sun, which lowers the risk of skin cancer.",
+     "s": [
+      "osc-18-9"
+     ]
+    },
+    {
+     "t": "This model is PubChem's computed 3D shape for ozone (compound 24823).",
+     "s": [
+      "pubchem3d-24823"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "model": {
+    "type": "pubchem",
+    "cid": "24823",
+    "src": "pubchem3d-24823"
+   },
+   "sizeGzip": 667,
+   "review": "pending"
+  },
+  {
+   "id": "table-salt",
+   "aliases": [
+    "salt",
+    "nacl",
+    "sodium-chloride"
+   ],
+   "name": "Table salt (sodium chloride)",
+   "short": "Table salt",
+   "group": "small",
+   "kind": "ccd",
+   "code": "NACL",
+   "file": "data/NACL.cif",
+   "madeOf": "Sodium ions and chloride ions packed in a repeating cube pattern, one sodium for every chloride. This piece shows 64 ions.",
+   "description": [
+    {
+     "t": "Table salt is not made of molecules: it is an ionic compound, a crystal of sodium ions and chloride ions held together by the pull between opposite charges.",
+     "s": [
+      "osc-2-6",
+      "pubchem-5234"
+     ]
+    },
+    {
+     "t": "An ion is an atom with a charge: each sodium atom gives up one electron and turns positive (Na+), and each chlorine atom takes one and turns negative (Cl-).",
+     "s": [
+      "osc-2-6"
+     ]
+    },
+    {
+     "t": "In the crystal every sodium ion sits in the middle of six chloride ions, and that strong grip is why salt melts only at 801 degrees C, while ice melts at 0.",
+     "s": [
+      "osc-10-6",
+      "osc-2-6"
+     ]
+    },
+    {
+     "t": "We get it from salt mines and by drying out seawater, and we use it to flavour food.",
+     "s": [
+      "pubchem-5234"
+     ]
+    },
+    {
+     "t": "This piece was built for this page from the measured spacing in real salt crystals (a cube edge of 5.64 angstroms), with each ion drawn at its real size: 102 picometres for sodium, 181 for chloride.",
+     "s": [
+      "cod-9003308",
+      "osc-10-6"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "model": {
+    "type": "built",
+    "src": "cod-9003308",
+    "style": "spacefill",
+    "radii": {
+     "NA": 1.02,
+     "CL": 1.81
+    },
+    "formula": "NaCl",
+    "alt": "lattice"
+   },
+   "sizeGzip": 1538,
+   "review": "pending"
+  },
+  {
+   "id": "acetic-acid",
+   "aliases": [
+    "vinegar",
+    "ethanoic-acid"
+   ],
+   "name": "Acetic acid (vinegar)",
+   "short": "Acetic acid",
+   "group": "small",
+   "kind": "ccd",
+   "code": "ACY",
+   "file": "data/ACY.cif",
+   "madeOf": "Two carbons: a methyl group joined to a carboxyl group (COOH).",
+   "description": [
+    {
+     "t": "Acetic acid is the acid in vinegar, and it gives vinegar its sour taste and sharp smell.",
+     "s": [
+      "pubchem-176",
+      "osc-14-3"
+     ]
+    },
+    {
+     "t": "It is a weak acid: in water only some of its molecules give away a hydrogen ion, unlike a strong acid such as hydrochloric acid.",
+     "s": [
+      "osc-14-3"
+     ]
+    },
+    {
+     "t": "Food makers also add it to control how acidic food is and to stop microbes from spoiling it.",
+     "s": [
+      "pubchem-176"
+     ]
+    },
+    {
+     "t": "This model, formula C2 H4 O2, is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-ACY"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 1278,
+   "review": "pending"
+  },
+  {
+   "id": "citric-acid",
+   "aliases": [
+    "citrate",
+    "lemon"
+   ],
+   "name": "Citric acid (lemons)",
+   "short": "Citric acid",
+   "group": "small",
+   "kind": "ccd",
+   "code": "CIT",
+   "file": "data/CIT.cif",
+   "madeOf": "A three-carbon backbone carrying three carboxyl groups (COOH) and one OH group.",
+   "description": [
+    {
+     "t": "Citric acid comes from citrus fruits like lemons and limes, and food makers add it to drinks and foods to make them more acidic.",
+     "s": [
+      "pubchem-311"
+     ]
+    },
+    {
+     "t": "Citrus juice is strongly acidic: lime juice sits at about pH 2.",
+     "s": [
+      "osc-14-2"
+     ]
+    },
+    {
+     "t": "Your own cells make citric acid too, as one step of the Krebs cycle, a pathway found in every living thing that uses oxygen.",
+     "s": [
+      "pubchem-311"
+     ]
+    },
+    {
+     "t": "This model, formula C6 H8 O7, is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-CIT"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 1966,
+   "review": "pending"
+  },
+  {
+   "id": "baking-soda",
+   "aliases": [
+    "sodium-bicarbonate",
+    "bicarbonate"
+   ],
+   "name": "Baking soda (sodium bicarbonate)",
+   "short": "Baking soda",
+   "group": "small",
+   "kind": "ccd",
+   "code": "BCT",
+   "file": "data/BCT.cif",
+   "madeOf": "The bicarbonate ion: one carbon with three oxygens, one of them carrying a hydrogen. In baking soda each one is paired with a sodium ion, which is not shown.",
+   "description": [
+    {
+     "t": "Baking soda is sodium bicarbonate, a salt made of sodium ions and bicarbonate ions; this model shows one bicarbonate ion.",
+     "s": [
+      "pubchem-516892",
+      "ccd-BCT"
+     ]
+    },
+    {
+     "t": "It is a raising agent: in baking powder it is a source of carbon dioxide gas, which makes dough and batter rise.",
+     "s": [
+      "pubchem-516892"
+     ]
+    },
+    {
+     "t": "The bicarbonate ion is a base that neutralizes acid, which is why baking soda is sold as an antacid and why your stomach lining covers itself in bicarbonate.",
+     "s": [
+      "pubchem-516892",
+      "osc-14-3",
+      "osap-23-4"
+     ]
+    },
+    {
+     "t": "This model, formula C H O3 with a charge of minus one, is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-BCT"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 1158,
+   "review": "pending"
+  },
+  {
+   "id": "ethanol",
+   "aliases": [
+    "alcohol",
+    "ethyl-alcohol"
+   ],
+   "name": "Ethanol",
+   "group": "small",
+   "kind": "ccd",
+   "code": "EOH",
+   "file": "data/EOH.cif",
+   "madeOf": "Two carbons with an OH group on the end.",
+   "description": [
+    {
+     "t": "Ethanol is the alcohol in alcoholic drinks: an ethane molecule with one hydrogen swapped for an OH group.",
+     "s": [
+      "pubchem-702"
+     ]
+    },
+    {
+     "t": "It kills bacteria, so it is used as a disinfectant on skin, and it is a solvent in many household products and medicines.",
+     "s": [
+      "pubchem-702"
+     ]
+    },
+    {
+     "t": "It is also a fuel, and it is added to gasoline.",
+     "s": [
+      "pubchem-702"
+     ]
+    },
+    {
+     "t": "This model, formula C2 H6 O, is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-EOH"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 1244,
+   "review": "pending"
+  },
+  {
+   "id": "vanillin",
+   "aliases": [
+    "vanilla"
+   ],
+   "name": "Vanillin",
+   "group": "small",
+   "kind": "ccd",
+   "code": "V55",
+   "file": "data/V55.cif",
+   "madeOf": "A six-carbon ring carrying an aldehyde group (CHO), an OH group and a methoxy group (OCH3).",
+   "description": [
+    {
+     "t": "Natural vanillin comes mostly from vanilla bean extract, and it also occurs in other plants, such as orchids and clove buds.",
+     "s": [
+      "pubchem-1183"
+     ]
+    },
+    {
+     "t": "It is used to flavour sweets, drinks and other foods, and as a fragrance.",
+     "s": [
+      "pubchem-1183"
+     ]
+    },
+    {
+     "t": "This model is 4-hydroxy-3-methoxybenzaldehyde, vanillin's chemical name, formula C8 H8 O3, from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-V55"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 2013,
+   "review": "pending"
+  },
+  {
+   "id": "hydrochloric-acid",
+   "aliases": [
+    "hcl",
+    "stomach-acid",
+    "hydrogen-chloride"
+   ],
+   "name": "Hydrochloric acid (stomach acid)",
+   "short": "Hydrochloric acid",
+   "group": "small",
+   "kind": "ccd",
+   "code": "CID313",
+   "file": "data/CID313.cif",
+   "madeOf": "One hydrogen atom bonded to one chlorine atom (hydrogen chloride). In water it splits into a hydrogen ion and a chloride ion.",
+   "description": [
+    {
+     "t": "Hydrochloric acid is found naturally in your stomach juice: cells in the stomach lining called parietal cells make it.",
+     "s": [
+      "pubchem-313",
+      "osap-23-4"
+     ]
+    },
+    {
+     "t": "It makes the stomach very acidic, pH 1.5 to 3.5, and it switches on pepsin, the enzyme that starts digesting protein.",
+     "s": [
+      "osap-23-4"
+     ]
+    },
+    {
+     "t": "It is a strong acid: in water every molecule gives away its hydrogen ion, leaving chloride ions behind.",
+     "s": [
+      "osc-14-3"
+     ]
+    },
+    {
+     "t": "This model of one hydrogen chloride molecule is PubChem's computed 3D shape (compound 313).",
+     "s": [
+      "pubchem3d-313"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "model": {
+    "type": "pubchem",
+    "cid": "313",
+    "src": "pubchem3d-313"
+   },
+   "sizeGzip": 652,
+   "review": "pending"
+  },
+  {
+   "id": "ammonia",
+   "aliases": [
+    "nh3"
+   ],
+   "name": "Ammonia",
+   "group": "small",
+   "kind": "ccd",
+   "code": "NH3",
+   "file": "data/NH3.cif",
+   "madeOf": "One nitrogen atom bonded to three hydrogen atoms.",
+   "description": [
+    {
+     "t": "Ammonia is a gas made of one nitrogen atom bonded to three hydrogen atoms, and it is in many household and industrial cleaners.",
+     "s": [
+      "pubchem-222"
+     ]
+    },
+    {
+     "t": "It is a base: it takes a hydrogen ion from water and becomes an ammonium ion, which is why household ammonia has a pH near 12.",
+     "s": [
+      "osc-14-1",
+      "osc-14-2"
+     ]
+    },
+    {
+     "t": "About 80 percent of all ammonia goes into fertilizers for farm crops.",
+     "s": [
+      "pubchem-222"
+     ]
+    },
+    {
+     "t": "This model, formula H3 N, is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-NH3"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 1027,
+   "review": "pending"
+  },
+  {
+   "id": "hydrogen-peroxide",
+   "aliases": [
+    "h2o2",
+    "peroxide"
+   ],
+   "name": "Hydrogen peroxide",
+   "group": "small",
+   "kind": "ccd",
+   "code": "PEO",
+   "file": "data/PEO.cif",
+   "madeOf": "Two oxygen atoms bonded to each other, each carrying one hydrogen atom.",
+   "description": [
+    {
+     "t": "Hydrogen peroxide, H2O2, is two hydrogen atoms and two oxygen atoms, like water with one extra oxygen.",
+     "s": [
+      "ccd-PEO"
+     ]
+    },
+    {
+     "t": "It is used as a bleach and a disinfectant, including for bleaching hair, and in antiseptics.",
+     "s": [
+      "pubchem-784",
+      "osc-2-6"
+     ]
+    },
+    {
+     "t": "It is a molecular compound, built from separate molecules, unlike ionic table salt.",
+     "s": [
+      "osc-2-6"
+     ]
+    },
+    {
+     "t": "This model, formula H2 O2, is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-PEO"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 1080,
+   "review": "pending"
+  },
+  {
+   "id": "methane",
+   "aliases": [
+    "ch4",
+    "natural-gas"
+   ],
+   "name": "Methane (natural gas)",
+   "short": "Methane",
+   "group": "small",
+   "kind": "ccd",
+   "code": "CID297",
+   "file": "data/CID297.cif",
+   "madeOf": "One carbon atom bonded to four hydrogen atoms.",
+   "description": [
+    {
+     "t": "Methane is one carbon atom bonded to four hydrogen atoms, a colourless gas with no smell that burns easily.",
+     "s": [
+      "pubchem-297"
+     ]
+    },
+    {
+     "t": "It is the main part of natural gas, which is piped into homes for heating and cooking.",
+     "s": [
+      "eia-natgas",
+      "osc-20-1",
+      "pubchem-297"
+     ]
+    },
+    {
+     "t": "Cattle and other livestock also release methane as they digest their food, one of the largest human-linked sources in the United States.",
+     "s": [
+      "epa-methane"
+     ]
+    },
+    {
+     "t": "It is a powerful greenhouse gas, more than 28 times as potent as carbon dioxide at trapping heat.",
+     "s": [
+      "epa-methane"
+     ]
+    },
+    {
+     "t": "This model of methane is PubChem's computed 3D shape (compound 297).",
+     "s": [
+      "pubchem3d-297"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "model": {
+    "type": "pubchem",
+    "cid": "297",
+    "src": "pubchem3d-297"
+   },
+   "sizeGzip": 730,
+   "review": "pending"
+  },
+  {
+   "id": "propane",
+   "aliases": [
+    "c3h8"
+   ],
+   "name": "Propane",
+   "group": "small",
+   "kind": "ccd",
+   "code": "TME",
+   "file": "data/TME.cif",
+   "madeOf": "A chain of three carbon atoms with eight hydrogen atoms around it.",
+   "description": [
+    {
+     "t": "Propane is a chain of three carbons with eight hydrogens, and it is a gas at room temperature.",
+     "s": [
+      "osc-20-1",
+      "ccd-TME"
+     ]
+    },
+    {
+     "t": "It is burned as a fuel in homes and industry, it is part of liquid petroleum gas, and it is used as a refrigerant and a spray can propellant.",
+     "s": [
+      "pubchem-6334",
+      "osc-20-1"
+     ]
+    },
+    {
+     "t": "This model, formula C3 H8, is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-TME"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 1437,
+   "review": "pending"
+  },
+  {
+   "id": "soap",
+   "aliases": [
+    "sodium-stearate",
+    "stearic-acid",
+    "stearate"
+   ],
+   "name": "Soap (sodium stearate)",
+   "short": "Soap",
+   "group": "small",
+   "kind": "ccd",
+   "code": "STE",
+   "file": "data/STE.cif",
+   "madeOf": "A long tail of 17 carbons ending in a carboxyl group. In soap that end has lost its hydrogen and pairs with a sodium ion; this model shows stearic acid.",
+   "description": [
+    {
+     "t": "Soaps are salts of fatty acids, and sodium stearate, made from stearic acid, is the most common ingredient in soap.",
+     "s": [
+      "osc-11-5",
+      "pubchem-2724691"
+     ]
+    },
+    {
+     "t": "Each soap molecule has two ends: a long oily tail of carbon and hydrogen, and a charged head.",
+     "s": [
+      "osc-11-5"
+     ]
+    },
+    {
+     "t": "That is how soap grabs grease: the tail dissolves into oil, grease and dirt while the charged head is pulled toward water, so soap bridges the two and holds tiny oil drops in the water.",
+     "s": [
+      "osc-11-5"
+     ]
+    },
+    {
+     "t": "Stearic acid is a fatty acid found in many animal and plant fats; this model is stearic acid, formula C18 H36 O2, from the PDB Chemical Component Dictionary.",
+     "s": [
+      "pubchem-5281",
+      "ccd-STE"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 3251,
+   "review": "pending"
+  },
+  {
+   "id": "aspirin",
+   "aliases": [
+    "acetylsalicylic-acid",
+    "asa"
+   ],
+   "name": "Aspirin",
+   "group": "small",
+   "kind": "ccd",
+   "code": "AIN",
+   "file": "data/AIN.cif",
+   "madeOf": "A six-carbon ring carrying a carboxyl group (COOH) and an acetyl group attached through an oxygen.",
+   "description": [
+    {
+     "t": "Aspirin, or acetylsalicylic acid, relieves pain, brings down fever and keeps blood from clotting quickly.",
+     "s": [
+      "pubchem-2244"
+     ]
+    },
+    {
+     "t": "It is a non-steroidal anti-inflammatory drug, and it works by blocking cyclooxygenase enzymes.",
+     "s": [
+      "pubchem-2244"
+     ]
+    },
+    {
+     "t": "It is not recommended for children because of a link to Reye syndrome, a serious liver disease.",
+     "s": [
+      "pubchem-2244"
+     ]
+    },
+    {
+     "t": "This model is 2-(acetyloxy)benzoic acid, aspirin's chemical name, formula C9 H8 O4, from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-AIN"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 1897,
+   "review": "pending"
+  },
+  {
+   "id": "menthol",
+   "aliases": [
+    "mint",
+    "levomenthol"
+   ],
+   "name": "Menthol",
+   "group": "small",
+   "kind": "ccd",
+   "code": "XUQ",
+   "file": "data/XUQ.cif",
+   "madeOf": "A six-carbon ring carrying an OH group, a methyl group and an isopropyl group.",
+   "description": [
+    {
+     "t": "Menthol is found in peppermint oil and other mint oils, and it flavours sweets, cough drops and nasal inhalers.",
+     "s": [
+      "pubchem-16666"
+     ]
+    },
+    {
+     "t": "It feels cool because it switches on TRPM8, a cold-sensing receptor in the skin, much as capsaicin from chili peppers switches on a heat sensor.",
+     "s": [
+      "pubchem-16666",
+      "motm-250"
+     ]
+    },
+    {
+     "t": "It is also rubbed on skin to calm itching.",
+     "s": [
+      "pubchem-16666"
+     ]
+    },
+    {
+     "t": "This model is (-)-menthol, the form most common in nature, formula C10 H20 O, from the PDB Chemical Component Dictionary.",
+     "s": [
+      "pubchem-16666",
+      "ccd-XUQ"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 2357,
+   "review": "pending"
+  }
+ ],
+ "structures": [
+  {
+   "id": "hemoglobin-oxy",
+   "code": "1HHO",
+   "file": "data/1HHO.cif",
+   "assembly": "1",
+   "use": "Second state for the hemoglobin morph against 4HHB (deoxy). Structure file only, not a library card.",
+   "title": "Structure of human oxyhaemoglobin at 2.1 angstroms resolution",
+   "s": [
+    "rcsb-1HHO"
+   ],
+   "sizeGzip": 75465
+  }
+ ]
+}

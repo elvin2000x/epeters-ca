@@ -1,0 +1,4185 @@
+{
+ "about": "Built by tools/build_search.py from every section's data file. Do not edit by hand; rerun the script.",
+ "learn": {
+  "lab": 0,
+  "processes": 5,
+  "teach": 8
+ },
+ "rows": [
+  {
+   "t": "Paramecium",
+   "s": "Paramecium caudatum",
+   "l": "organism",
+   "h": "microscope/#paramecium",
+   "k": [
+    "Paramecium caudatum"
+   ]
+  },
+  {
+   "t": "Amoeba",
+   "s": "Amoeba proteus",
+   "l": "organism",
+   "h": "microscope/#amoeba",
+   "k": [
+    "Amoeba proteus"
+   ]
+  },
+  {
+   "t": "Euglena",
+   "s": "Euglena gracilis",
+   "l": "organism",
+   "h": "microscope/#euglena",
+   "k": [
+    "Euglena gracilis"
+   ]
+  },
+  {
+   "t": "Bacteria",
+   "s": "Rods, spheres and spirals",
+   "l": "organism",
+   "h": "microscope/#bacteria",
+   "k": [
+    "Rods, spheres and spirals"
+   ]
+  },
+  {
+   "t": "Yeast",
+   "s": "Saccharomyces cerevisiae",
+   "l": "organism",
+   "h": "microscope/#yeast",
+   "k": [
+    "Saccharomyces cerevisiae"
+   ]
+  },
+  {
+   "t": "Diatom",
+   "s": "Pinnularia socialis",
+   "l": "organism",
+   "h": "microscope/#diatom",
+   "k": [
+    "Pinnularia socialis"
+   ]
+  },
+  {
+   "t": "Animal cell",
+   "s": "Animal",
+   "l": "cell",
+   "h": "cells/#animal",
+   "k": [
+    "animal"
+   ]
+  },
+  {
+   "t": "Cell membrane",
+   "s": "Cell part, Animal cell",
+   "l": "cell",
+   "h": "cells/#animal/membrane",
+   "k": [
+    "membrane",
+    "cell part"
+   ]
+  },
+  {
+   "t": "Nucleus",
+   "s": "Cell part, Animal cell",
+   "l": "cell",
+   "h": "cells/#animal/nucleus",
+   "k": [
+    "cell part"
+   ]
+  },
+  {
+   "t": "Endoplasmic reticulum",
+   "s": "Cell part, Animal cell",
+   "l": "cell",
+   "h": "cells/#animal/er",
+   "k": [
+    "er",
+    "cell part"
+   ]
+  },
+  {
+   "t": "Ribosomes",
+   "s": "Cell part, Animal cell",
+   "l": "cell",
+   "h": "cells/#animal/ribosomes",
+   "k": [
+    "cell part"
+   ]
+  },
+  {
+   "t": "Golgi apparatus",
+   "s": "Cell part, Animal cell",
+   "l": "cell",
+   "h": "cells/#animal/golgi",
+   "k": [
+    "golgi",
+    "cell part"
+   ]
+  },
+  {
+   "t": "Mitochondria",
+   "s": "Cell part, Animal cell",
+   "l": "cell",
+   "h": "cells/#animal/mitochondrion",
+   "k": [
+    "mitochondrion",
+    "cell part"
+   ]
+  },
+  {
+   "t": "Lysosomes",
+   "s": "Cell part, Animal cell",
+   "l": "cell",
+   "h": "cells/#animal/lysosome",
+   "k": [
+    "lysosome",
+    "cell part"
+   ]
+  },
+  {
+   "t": "Cytoskeleton",
+   "s": "Cell part, Animal cell",
+   "l": "cell",
+   "h": "cells/#animal/cytoskeleton",
+   "k": [
+    "cell part"
+   ]
+  },
+  {
+   "t": "Plant cell",
+   "s": "Plant",
+   "l": "cell",
+   "h": "cells/#plant",
+   "k": [
+    "plant"
+   ]
+  },
+  {
+   "t": "Cell wall",
+   "s": "Cell part, Plant cell",
+   "l": "cell",
+   "h": "cells/#plant/cellwall",
+   "k": [
+    "cellwall",
+    "cell part"
+   ]
+  },
+  {
+   "t": "Cell membrane",
+   "s": "Cell part, Plant cell",
+   "l": "cell",
+   "h": "cells/#plant/membrane",
+   "k": [
+    "membrane",
+    "cell part"
+   ]
+  },
+  {
+   "t": "Large central vacuole",
+   "s": "Cell part, Plant cell",
+   "l": "cell",
+   "h": "cells/#plant/vacuole",
+   "k": [
+    "vacuole",
+    "cell part"
+   ]
+  },
+  {
+   "t": "Nucleus",
+   "s": "Cell part, Plant cell",
+   "l": "cell",
+   "h": "cells/#plant/nucleus",
+   "k": [
+    "cell part"
+   ]
+  },
+  {
+   "t": "Chloroplasts",
+   "s": "Cell part, Plant cell",
+   "l": "cell",
+   "h": "cells/#plant/chloroplast",
+   "k": [
+    "chloroplast",
+    "cell part"
+   ]
+  },
+  {
+   "t": "Mitochondria",
+   "s": "Cell part, Plant cell",
+   "l": "cell",
+   "h": "cells/#plant/mitochondrion",
+   "k": [
+    "mitochondrion",
+    "cell part"
+   ]
+  },
+  {
+   "t": "Endoplasmic reticulum",
+   "s": "Cell part, Plant cell",
+   "l": "cell",
+   "h": "cells/#plant/er",
+   "k": [
+    "er",
+    "cell part"
+   ]
+  },
+  {
+   "t": "Golgi apparatus",
+   "s": "Cell part, Plant cell",
+   "l": "cell",
+   "h": "cells/#plant/p-golgi",
+   "k": [
+    "p-golgi",
+    "cell part"
+   ]
+  },
+  {
+   "t": "Ribosomes",
+   "s": "Cell part, Plant cell",
+   "l": "cell",
+   "h": "cells/#plant/ribosomes",
+   "k": [
+    "cell part"
+   ]
+  },
+  {
+   "t": "Bacterial cell",
+   "s": "Bacterium",
+   "l": "cell",
+   "h": "cells/#bacterium",
+   "k": [
+    "bacterium"
+   ]
+  },
+  {
+   "t": "Cell wall",
+   "s": "Cell part, Bacterial cell",
+   "l": "cell",
+   "h": "cells/#bacterium/b-wall",
+   "k": [
+    "b-wall",
+    "cell part"
+   ]
+  },
+  {
+   "t": "Cell membrane",
+   "s": "Cell part, Bacterial cell",
+   "l": "cell",
+   "h": "cells/#bacterium/b-membrane",
+   "k": [
+    "b-membrane",
+    "cell part"
+   ]
+  },
+  {
+   "t": "Nucleoid (the DNA)",
+   "s": "Cell part, Bacterial cell",
+   "l": "cell",
+   "h": "cells/#bacterium/nucleoid",
+   "k": [
+    "nucleoid",
+    "cell part"
+   ]
+  },
+  {
+   "t": "Ribosomes",
+   "s": "Cell part, Bacterial cell",
+   "l": "cell",
+   "h": "cells/#bacterium/b-ribosomes",
+   "k": [
+    "b-ribosomes",
+    "cell part"
+   ]
+  },
+  {
+   "t": "Flagellum",
+   "s": "Cell part, Bacterial cell",
+   "l": "cell",
+   "h": "cells/#bacterium/flagellum",
+   "k": [
+    "cell part"
+   ]
+  },
+  {
+   "t": "Red blood cell",
+   "s": "Red blood",
+   "l": "cell",
+   "h": "cells/#rbc",
+   "k": [
+    "rbc"
+   ]
+  },
+  {
+   "t": "Cell membrane (the disc shape)",
+   "s": "Cell part, Red blood cell",
+   "l": "cell",
+   "h": "cells/#rbc/rbc-membrane",
+   "k": [
+    "rbc-membrane",
+    "cell part"
+   ]
+  },
+  {
+   "t": "Inside, packed with hemoglobin",
+   "s": "Cell part, Red blood cell",
+   "l": "cell",
+   "h": "cells/#rbc/rbc-hb",
+   "k": [
+    "rbc-hb",
+    "cell part"
+   ]
+  },
+  {
+   "t": "Nerve cell (neuron)",
+   "s": "Neuron",
+   "l": "cell",
+   "h": "cells/#neuron",
+   "k": [
+    "neuron"
+   ]
+  },
+  {
+   "t": "Cell body",
+   "s": "Cell part, Nerve cell (neuron)",
+   "l": "cell",
+   "h": "cells/#neuron/soma",
+   "k": [
+    "soma",
+    "cell part"
+   ]
+  },
+  {
+   "t": "Nucleus",
+   "s": "Cell part, Nerve cell (neuron)",
+   "l": "cell",
+   "h": "cells/#neuron/nucleus",
+   "k": [
+    "cell part"
+   ]
+  },
+  {
+   "t": "Dendrites",
+   "s": "Cell part, Nerve cell (neuron)",
+   "l": "cell",
+   "h": "cells/#neuron/dendrites",
+   "k": [
+    "cell part"
+   ]
+  },
+  {
+   "t": "Axon",
+   "s": "Cell part, Nerve cell (neuron)",
+   "l": "cell",
+   "h": "cells/#neuron/axon",
+   "k": [
+    "cell part"
+   ]
+  },
+  {
+   "t": "Myelin sheath",
+   "s": "Cell part, Nerve cell (neuron)",
+   "l": "cell",
+   "h": "cells/#neuron/myelin",
+   "k": [
+    "myelin",
+    "cell part"
+   ]
+  },
+  {
+   "t": "Axon terminals",
+   "s": "Cell part, Nerve cell (neuron)",
+   "l": "cell",
+   "h": "cells/#neuron/terminals",
+   "k": [
+    "terminals",
+    "cell part"
+   ]
+  },
+  {
+   "t": "Muscle cell (fibre)",
+   "s": "Muscle",
+   "l": "cell",
+   "h": "cells/#muscle",
+   "k": [
+    "muscle"
+   ]
+  },
+  {
+   "t": "Sarcolemma (cell membrane)",
+   "s": "Cell part, Muscle cell (fibre)",
+   "l": "cell",
+   "h": "cells/#muscle/sarcolemma",
+   "k": [
+    "sarcolemma",
+    "cell part"
+   ]
+  },
+  {
+   "t": "Nuclei (many)",
+   "s": "Cell part, Muscle cell (fibre)",
+   "l": "cell",
+   "h": "cells/#muscle/m-nuclei",
+   "k": [
+    "m-nuclei",
+    "cell part"
+   ]
+  },
+  {
+   "t": "Myofibrils",
+   "s": "Cell part, Muscle cell (fibre)",
+   "l": "cell",
+   "h": "cells/#muscle/myofibrils",
+   "k": [
+    "cell part"
+   ]
+  },
+  {
+   "t": "Sarcoplasmic reticulum",
+   "s": "Cell part, Muscle cell (fibre)",
+   "l": "cell",
+   "h": "cells/#muscle/sr",
+   "k": [
+    "sr",
+    "cell part"
+   ]
+  },
+  {
+   "t": "Mitochondria",
+   "s": "Cell part, Muscle cell (fibre)",
+   "l": "cell",
+   "h": "cells/#muscle/m-mito",
+   "k": [
+    "m-mito",
+    "cell part"
+   ]
+  },
+  {
+   "t": "Water",
+   "s": "One oxygen atom bonded to two hydrogen atoms.",
+   "l": "molecule",
+   "h": "molecules/#water",
+   "k": [
+    "HOH",
+    "h2o"
+   ]
+  },
+  {
+   "t": "Glucose",
+   "s": "A ring of five carbons and one oxygen, with a sixth carbon and five OH groups around it.",
+   "l": "molecule",
+   "h": "molecules/#glucose",
+   "k": [
+    "GLC",
+    "sugar"
+   ]
+  },
+  {
+   "t": "ATP",
+   "s": "Adenine and the sugar ribose, joined to a chain of three phosphate groups.",
+   "l": "molecule",
+   "h": "molecules/#atp",
+   "k": [
+    "adenosine-triphosphate"
+   ]
+  },
+  {
+   "t": "Glycine (an amino acid)",
+   "s": "A central carbon carrying an amino group, a carboxyl group and two hydrogen atoms (one of ",
+   "l": "molecule",
+   "h": "molecules/#glycine",
+   "k": [
+    "glycine",
+    "GLY",
+    "amino-acid",
+    "gly"
+   ]
+  },
+  {
+   "t": "Palmitic acid (a fatty acid)",
+   "s": "A chain of 16 carbon atoms with a carboxyl group (COOH) at one end.",
+   "l": "molecule",
+   "h": "molecules/#palmitic-acid",
+   "k": [
+    "palmitic-acid",
+    "PLM",
+    "fatty-acid",
+    "fat",
+    "phospholipid"
+   ]
+  },
+  {
+   "t": "Cholesterol",
+   "s": "Four linked carbon rings with a short carbon tail and one OH group.",
+   "l": "molecule",
+   "h": "molecules/#cholesterol",
+   "k": [
+    "CLR",
+    "steroid"
+   ]
+  },
+  {
+   "t": "Actin",
+   "s": "One protein chain of 375 amino acids, with ADP and calcium ions bound.",
+   "l": "big",
+   "h": "molecules/#actin",
+   "k": [
+    "1J6Z"
+   ]
+  },
+  {
+   "t": "DNA",
+   "s": "Two strands of 12 nucleotides each, paired into 12 base pairs (CGCGAATTCGCG).",
+   "l": "big",
+   "h": "molecules/#dna",
+   "k": [
+    "1BNA",
+    "b-dna",
+    "1bna"
+   ]
+  },
+  {
+   "t": "Hemoglobin",
+   "s": "Four protein chains (two alpha, two beta), each holding a heme group with one iron atom.",
+   "l": "big",
+   "h": "molecules/#hemoglobin",
+   "k": [
+    "4HHB",
+    "haemoglobin",
+    "4hhb"
+   ]
+  },
+  {
+   "t": "Insulin",
+   "s": "Two short protein chains per molecule (A: 21 amino acids, B: 30); this file has two molecu",
+   "l": "big",
+   "h": "molecules/#insulin",
+   "k": [
+    "4INS",
+    "4ins"
+   ]
+  },
+  {
+   "t": "Collagen",
+   "s": "Three chains of 30 amino acids twisted into a triple helix, in a repeating pattern with gl",
+   "l": "big",
+   "h": "molecules/#collagen",
+   "k": [
+    "1CAG",
+    "1cag"
+   ]
+  },
+  {
+   "t": "Myosin (head)",
+   "s": "One heavy chain plus an essential and a regulatory light chain, with ADP, magnesium and ca",
+   "l": "big",
+   "h": "molecules/#myosin",
+   "k": [
+    "myosin",
+    "1B7T",
+    "1b7t"
+   ]
+  },
+  {
+   "t": "Green fluorescent protein",
+   "s": "One protein chain of 236 amino acids folded into a barrel, with the chromophore inside.",
+   "l": "big",
+   "h": "molecules/#gfp",
+   "k": [
+    "gfp",
+    "1EMA",
+    "green-fluorescent-protein",
+    "1ema"
+   ]
+  },
+  {
+   "t": "Lysozyme",
+   "s": "One protein chain of 129 amino acids.",
+   "l": "big",
+   "h": "molecules/#lysozyme",
+   "k": [
+    "1LYZ",
+    "1lyz"
+   ]
+  },
+  {
+   "t": "Aquaporin 1",
+   "s": "One protein chain of 271 amino acids that sits across the cell membrane.",
+   "l": "big",
+   "h": "molecules/#aquaporin",
+   "k": [
+    "aquaporin",
+    "1J4N",
+    "aqp1",
+    "1j4n"
+   ]
+  },
+  {
+   "t": "ATP synthase (F1 head)",
+   "s": "Three alpha and three beta chains in a ring around one gamma chain, with ATP, ADP and magn",
+   "l": "big",
+   "h": "molecules/#atp-synthase",
+   "k": [
+    "atp-synthase",
+    "1MAB",
+    "atp-synthase-f1",
+    "f1-atpase",
+    "1mab"
+   ]
+  },
+  {
+   "t": "Kinesin",
+   "s": "Two kinesin heavy chains from rat, each with ADP in its motor head. The file stores each c",
+   "l": "big",
+   "h": "molecules/#kinesin",
+   "k": [
+    "3KIN",
+    "kinesin-motor",
+    "3kin"
+   ]
+  },
+  {
+   "t": "Potassium channel (KcsA)",
+   "s": "Four identical protein chains around a central pore, with three potassium ions inside the ",
+   "l": "big",
+   "h": "molecules/#potassium-channel",
+   "k": [
+    "potassium-channel",
+    "1BL8",
+    "kcsa",
+    "k-channel",
+    "1bl8"
+   ]
+  },
+  {
+   "t": "Nucleosome",
+   "s": "Eight histone proteins (two each of H3, H4, H2A and H2B) with two DNA strands of 146 bases",
+   "l": "big",
+   "h": "molecules/#nucleosome",
+   "k": [
+    "1AOI",
+    "histones",
+    "chromatin",
+    "1aoi"
+   ]
+  },
+  {
+   "t": "Acetylcholinesterase",
+   "s": "One protein chain of 537 amino acids with one tacrine drug molecule bound.",
+   "l": "big",
+   "h": "molecules/#acetylcholinesterase",
+   "k": [
+    "1ACJ",
+    "ache",
+    "1acj"
+   ]
+  },
+  {
+   "t": "HIV-1 protease with ritonavir",
+   "s": "Two identical protein chains of 99 amino acids, with one ritonavir drug molecule bound bet",
+   "l": "big",
+   "h": "molecules/#hiv-protease",
+   "k": [
+    "hiv-protease",
+    "1HXW",
+    "hiv",
+    "ritonavir",
+    "protease",
+    "1hxw"
+   ]
+  },
+  {
+   "t": "Pepsin",
+   "s": "One protein chain of 326 amino acids.",
+   "l": "big",
+   "h": "molecules/#pepsin",
+   "k": [
+    "4PEP",
+    "4pep"
+   ]
+  },
+  {
+   "t": "Adrenaline",
+   "s": "A ring of six carbons carrying two OH groups, joined to a short chain with an OH group and",
+   "l": "molecule",
+   "h": "molecules/#adrenaline",
+   "k": [
+    "ALE",
+    "epinephrine"
+   ]
+  },
+  {
+   "t": "Dopamine",
+   "s": "A ring of six carbons carrying two OH groups, joined to a two-carbon chain ending in an am",
+   "l": "molecule",
+   "h": "molecules/#dopamine",
+   "k": [
+    "LDP"
+   ]
+  },
+  {
+   "t": "Serotonin",
+   "s": "A two-ring indole with an OH group, plus a two-carbon chain ending in an amine group.",
+   "l": "molecule",
+   "h": "molecules/#serotonin",
+   "k": [
+    "SRO",
+    "5-ht"
+   ]
+  },
+  {
+   "t": "Oxytocin (with its carrier neurophysin)",
+   "s": "Two neurophysin carrier proteins of 95 amino acids, each holding one oxytocin, a chain of ",
+   "l": "big",
+   "h": "molecules/#oxytocin",
+   "k": [
+    "oxytocin",
+    "1NPO",
+    "1npo"
+   ]
+  },
+  {
+   "t": "Acetylcholine",
+   "s": "Acetic acid joined to choline: a short chain with an ester group and a nitrogen carrying t",
+   "l": "molecule",
+   "h": "molecules/#acetylcholine",
+   "k": [
+    "ACH"
+   ]
+  },
+  {
+   "t": "Antibody (IgG)",
+   "s": "Two heavy chains of 444 amino acids and two light chains of 214, with sugar chains attache",
+   "l": "big",
+   "h": "molecules/#antibody",
+   "k": [
+    "antibody",
+    "1IGT",
+    "igg",
+    "immunoglobulin",
+    "1igt"
+   ]
+  },
+  {
+   "t": "Virus shell (satellite tobacco necrosis virus)",
+   "s": "60 copies of one coat protein of 196 amino acids. The genome inside the shell is not in th",
+   "l": "big",
+   "h": "molecules/#virus-capsid",
+   "k": [
+    "virus-capsid",
+    "2BUK",
+    "capsid",
+    "virus",
+    "stnv",
+    "2buk"
+   ]
+  },
+  {
+   "t": "MHC class I (HLA-B27)",
+   "s": "A heavy chain of 276 amino acids, a small beta 2-microglobulin chain of 99, and a bound pe",
+   "l": "big",
+   "h": "molecules/#mhc",
+   "k": [
+    "mhc",
+    "1HSA",
+    "hla",
+    "hla-b27",
+    "1hsa"
+   ]
+  },
+  {
+   "t": "Rubisco",
+   "s": "Eight large chains of 475 amino acids and eight small chains of 123, with magnesium and a ",
+   "l": "big",
+   "h": "molecules/#rubisco",
+   "k": [
+    "8RUC",
+    "rubp-carboxylase",
+    "8ruc"
+   ]
+  },
+  {
+   "t": "Chlorophyll a",
+   "s": "A large flat ring of carbon and nitrogen holding one magnesium atom, with a long carbon ta",
+   "l": "molecule",
+   "h": "molecules/#chlorophyll",
+   "k": [
+    "chlorophyll",
+    "CLA",
+    "chlorophyll-a"
+   ]
+  },
+  {
+   "t": "Caffeine",
+   "s": "Two joined rings of carbon and nitrogen, with three methyl groups and two oxygens.",
+   "l": "molecule",
+   "h": "molecules/#caffeine",
+   "k": [
+    "CFF"
+   ]
+  },
+  {
+   "t": "Capsaicin",
+   "s": "A six-carbon ring with OH and methoxy groups, linked through an amide to a long carbon tai",
+   "l": "molecule",
+   "h": "molecules/#capsaicin",
+   "k": [
+    "4DY",
+    "chili"
+   ]
+  },
+  {
+   "t": "Sucrose",
+   "s": "One glucose ring and one fructose ring joined through an oxygen atom.",
+   "l": "molecule",
+   "h": "molecules/#sucrose",
+   "k": [
+    "SUC",
+    "table-sugar"
+   ]
+  },
+  {
+   "t": "Vitamin C",
+   "s": "A five-membered ring of four carbons and one oxygen, with a short side chain and four OH g",
+   "l": "molecule",
+   "h": "molecules/#vitamin-c",
+   "k": [
+    "vitamin-c",
+    "ASC",
+    "ascorbic-acid"
+   ]
+  },
+  {
+   "t": "Beta-carotene",
+   "s": "A long chain of 40 carbons with alternating single and double bonds, and a ring at each en",
+   "l": "molecule",
+   "h": "molecules/#beta-carotene",
+   "k": [
+    "BCR",
+    "carotene"
+   ]
+  },
+  {
+   "t": "Myoglobin",
+   "s": "One protein chain of 153 amino acids holding one heme group with its iron atom.",
+   "l": "big",
+   "h": "molecules/#myoglobin",
+   "k": [
+    "1MBN",
+    "1mbn"
+   ]
+  },
+  {
+   "t": "Keratin (keratin 5 and 14 coil)",
+   "s": "Two protein pieces wound into a coiled coil: part of keratin 14 (131 amino acids) and part",
+   "l": "big",
+   "h": "molecules/#keratin",
+   "k": [
+    "keratin",
+    "3TNU",
+    "3tnu"
+   ]
+  },
+  {
+   "t": "Rhodopsin",
+   "s": "One protein chain of 348 amino acids with a retinal molecule bound inside, plus sugar chai",
+   "l": "big",
+   "h": "molecules/#rhodopsin",
+   "k": [
+    "1F88",
+    "1f88"
+   ]
+  },
+  {
+   "t": "Nitrogen gas",
+   "s": "Two nitrogen atoms joined by a triple bond.",
+   "l": "molecule",
+   "h": "molecules/#nitrogen",
+   "k": [
+    "nitrogen",
+    "HDZ",
+    "n2",
+    "dinitrogen",
+    "nitrogen-gas"
+   ]
+  },
+  {
+   "t": "Oxygen gas",
+   "s": "Two oxygen atoms joined by a double bond.",
+   "l": "molecule",
+   "h": "molecules/#oxygen",
+   "k": [
+    "oxygen",
+    "OXY",
+    "o2",
+    "dioxygen",
+    "oxygen-gas"
+   ]
+  },
+  {
+   "t": "Argon (a single atom)",
+   "s": "One argon atom on its own, not bonded to anything.",
+   "l": "molecule",
+   "h": "molecules/#argon",
+   "k": [
+    "argon",
+    "AR",
+    "ar"
+   ]
+  },
+  {
+   "t": "Carbon dioxide",
+   "s": "One carbon atom with an oxygen atom double bonded on each side, in a straight line.",
+   "l": "molecule",
+   "h": "molecules/#carbon-dioxide",
+   "k": [
+    "carbon-dioxide",
+    "CO2",
+    "co2"
+   ]
+  },
+  {
+   "t": "Ozone",
+   "s": "Three oxygen atoms in a bent chain.",
+   "l": "molecule",
+   "h": "molecules/#ozone",
+   "k": [
+    "CID24823",
+    "o3"
+   ]
+  },
+  {
+   "t": "Table salt (sodium chloride)",
+   "s": "Sodium ions and chloride ions packed in a repeating cube pattern, one sodium for every chl",
+   "l": "molecule",
+   "h": "molecules/#table-salt",
+   "k": [
+    "table-salt",
+    "NACL",
+    "salt",
+    "nacl",
+    "sodium-chloride"
+   ]
+  },
+  {
+   "t": "Acetic acid (vinegar)",
+   "s": "Two carbons: a methyl group joined to a carboxyl group (COOH).",
+   "l": "molecule",
+   "h": "molecules/#acetic-acid",
+   "k": [
+    "acetic-acid",
+    "ACY",
+    "vinegar",
+    "ethanoic-acid"
+   ]
+  },
+  {
+   "t": "Citric acid (lemons)",
+   "s": "A three-carbon backbone carrying three carboxyl groups (COOH) and one OH group.",
+   "l": "molecule",
+   "h": "molecules/#citric-acid",
+   "k": [
+    "citric-acid",
+    "CIT",
+    "citrate",
+    "lemon"
+   ]
+  },
+  {
+   "t": "Baking soda (sodium bicarbonate)",
+   "s": "The bicarbonate ion: one carbon with three oxygens, one of them carrying a hydrogen. In ba",
+   "l": "molecule",
+   "h": "molecules/#baking-soda",
+   "k": [
+    "baking-soda",
+    "BCT",
+    "sodium-bicarbonate",
+    "bicarbonate"
+   ]
+  },
+  {
+   "t": "Ethanol",
+   "s": "Two carbons with an OH group on the end.",
+   "l": "molecule",
+   "h": "molecules/#ethanol",
+   "k": [
+    "EOH",
+    "alcohol",
+    "ethyl-alcohol"
+   ]
+  },
+  {
+   "t": "Vanillin",
+   "s": "A six-carbon ring carrying an aldehyde group (CHO), an OH group and a methoxy group (OCH3)",
+   "l": "molecule",
+   "h": "molecules/#vanillin",
+   "k": [
+    "V55",
+    "vanilla"
+   ]
+  },
+  {
+   "t": "Hydrochloric acid (stomach acid)",
+   "s": "One hydrogen atom bonded to one chlorine atom (hydrogen chloride). In water it splits into",
+   "l": "molecule",
+   "h": "molecules/#hydrochloric-acid",
+   "k": [
+    "hydrochloric-acid",
+    "CID313",
+    "hcl",
+    "stomach-acid",
+    "hydrogen-chloride"
+   ]
+  },
+  {
+   "t": "Ammonia",
+   "s": "One nitrogen atom bonded to three hydrogen atoms.",
+   "l": "molecule",
+   "h": "molecules/#ammonia",
+   "k": [
+    "NH3",
+    "nh3"
+   ]
+  },
+  {
+   "t": "Hydrogen peroxide",
+   "s": "Two oxygen atoms bonded to each other, each carrying one hydrogen atom.",
+   "l": "molecule",
+   "h": "molecules/#hydrogen-peroxide",
+   "k": [
+    "hydrogen-peroxide",
+    "PEO",
+    "h2o2",
+    "peroxide"
+   ]
+  },
+  {
+   "t": "Methane (natural gas)",
+   "s": "One carbon atom bonded to four hydrogen atoms.",
+   "l": "molecule",
+   "h": "molecules/#methane",
+   "k": [
+    "methane",
+    "CID297",
+    "ch4",
+    "natural-gas"
+   ]
+  },
+  {
+   "t": "Propane",
+   "s": "A chain of three carbon atoms with eight hydrogen atoms around it.",
+   "l": "molecule",
+   "h": "molecules/#propane",
+   "k": [
+    "TME",
+    "c3h8"
+   ]
+  },
+  {
+   "t": "Soap (sodium stearate)",
+   "s": "A long tail of 17 carbons ending in a carboxyl group. In soap that end has lost its hydrog",
+   "l": "molecule",
+   "h": "molecules/#soap",
+   "k": [
+    "soap",
+    "STE",
+    "sodium-stearate",
+    "stearic-acid",
+    "stearate"
+   ]
+  },
+  {
+   "t": "Aspirin",
+   "s": "A six-carbon ring carrying a carboxyl group (COOH) and an acetyl group attached through an",
+   "l": "molecule",
+   "h": "molecules/#aspirin",
+   "k": [
+    "AIN",
+    "acetylsalicylic-acid",
+    "asa"
+   ]
+  },
+  {
+   "t": "Menthol",
+   "s": "A six-carbon ring carrying an OH group, a methyl group and an isopropyl group.",
+   "l": "molecule",
+   "h": "molecules/#menthol",
+   "k": [
+    "XUQ",
+    "mint",
+    "levomenthol"
+   ]
+  },
+  {
+   "t": "Hydrogen",
+   "s": "H, 1",
+   "l": "atom",
+   "h": "elements/#H",
+   "k": [
+    "H",
+    "1"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#H"
+   }
+  },
+  {
+   "t": "Helium",
+   "s": "He, 2",
+   "l": "atom",
+   "h": "elements/#He",
+   "k": [
+    "He",
+    "2"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#He"
+   }
+  },
+  {
+   "t": "Lithium",
+   "s": "Li, 3",
+   "l": "atom",
+   "h": "elements/#Li",
+   "k": [
+    "Li",
+    "3"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Li"
+   }
+  },
+  {
+   "t": "Beryllium",
+   "s": "Be, 4",
+   "l": "atom",
+   "h": "elements/#Be",
+   "k": [
+    "Be",
+    "4"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Be"
+   }
+  },
+  {
+   "t": "Boron",
+   "s": "B, 5",
+   "l": "atom",
+   "h": "elements/#B",
+   "k": [
+    "B",
+    "5"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#B"
+   }
+  },
+  {
+   "t": "Carbon",
+   "s": "C, 6",
+   "l": "atom",
+   "h": "elements/#C",
+   "k": [
+    "C",
+    "6"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#C"
+   }
+  },
+  {
+   "t": "Nitrogen",
+   "s": "N, 7",
+   "l": "atom",
+   "h": "elements/#N",
+   "k": [
+    "N",
+    "7"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#N"
+   }
+  },
+  {
+   "t": "Oxygen",
+   "s": "O, 8",
+   "l": "atom",
+   "h": "elements/#O",
+   "k": [
+    "O",
+    "8"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#O"
+   }
+  },
+  {
+   "t": "Fluorine",
+   "s": "F, 9",
+   "l": "atom",
+   "h": "elements/#F",
+   "k": [
+    "F",
+    "9"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#F"
+   }
+  },
+  {
+   "t": "Neon",
+   "s": "Ne, 10",
+   "l": "atom",
+   "h": "elements/#Ne",
+   "k": [
+    "Ne",
+    "10"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Ne"
+   }
+  },
+  {
+   "t": "Sodium",
+   "s": "Na, 11",
+   "l": "atom",
+   "h": "elements/#Na",
+   "k": [
+    "Na",
+    "11"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Na"
+   }
+  },
+  {
+   "t": "Magnesium",
+   "s": "Mg, 12",
+   "l": "atom",
+   "h": "elements/#Mg",
+   "k": [
+    "Mg",
+    "12"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Mg"
+   }
+  },
+  {
+   "t": "Aluminium",
+   "s": "Al, 13",
+   "l": "atom",
+   "h": "elements/#Al",
+   "k": [
+    "Al",
+    "13",
+    "aluminum"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Al"
+   }
+  },
+  {
+   "t": "Silicon",
+   "s": "Si, 14",
+   "l": "atom",
+   "h": "elements/#Si",
+   "k": [
+    "Si",
+    "14"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Si"
+   }
+  },
+  {
+   "t": "Phosphorus",
+   "s": "P, 15",
+   "l": "atom",
+   "h": "elements/#P",
+   "k": [
+    "P",
+    "15"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#P"
+   }
+  },
+  {
+   "t": "Sulfur",
+   "s": "S, 16",
+   "l": "atom",
+   "h": "elements/#S",
+   "k": [
+    "S",
+    "16",
+    "sulphur"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#S"
+   }
+  },
+  {
+   "t": "Chlorine",
+   "s": "Cl, 17",
+   "l": "atom",
+   "h": "elements/#Cl",
+   "k": [
+    "Cl",
+    "17"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Cl"
+   }
+  },
+  {
+   "t": "Argon",
+   "s": "Ar, 18",
+   "l": "atom",
+   "h": "elements/#Ar",
+   "k": [
+    "Ar",
+    "18"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Ar"
+   }
+  },
+  {
+   "t": "Potassium",
+   "s": "K, 19",
+   "l": "atom",
+   "h": "elements/#K",
+   "k": [
+    "K",
+    "19"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#K"
+   }
+  },
+  {
+   "t": "Calcium",
+   "s": "Ca, 20",
+   "l": "atom",
+   "h": "elements/#Ca",
+   "k": [
+    "Ca",
+    "20"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Ca"
+   }
+  },
+  {
+   "t": "Scandium",
+   "s": "Sc, 21",
+   "l": "atom",
+   "h": "elements/#Sc",
+   "k": [
+    "Sc",
+    "21"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Sc"
+   }
+  },
+  {
+   "t": "Titanium",
+   "s": "Ti, 22",
+   "l": "atom",
+   "h": "elements/#Ti",
+   "k": [
+    "Ti",
+    "22"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Ti"
+   }
+  },
+  {
+   "t": "Vanadium",
+   "s": "V, 23",
+   "l": "atom",
+   "h": "elements/#V",
+   "k": [
+    "V",
+    "23"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#V"
+   }
+  },
+  {
+   "t": "Chromium",
+   "s": "Cr, 24",
+   "l": "atom",
+   "h": "elements/#Cr",
+   "k": [
+    "Cr",
+    "24"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Cr"
+   }
+  },
+  {
+   "t": "Manganese",
+   "s": "Mn, 25",
+   "l": "atom",
+   "h": "elements/#Mn",
+   "k": [
+    "Mn",
+    "25"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Mn"
+   }
+  },
+  {
+   "t": "Iron",
+   "s": "Fe, 26",
+   "l": "atom",
+   "h": "elements/#Fe",
+   "k": [
+    "Fe",
+    "26"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Fe"
+   }
+  },
+  {
+   "t": "Cobalt",
+   "s": "Co, 27",
+   "l": "atom",
+   "h": "elements/#Co",
+   "k": [
+    "Co",
+    "27"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Co"
+   }
+  },
+  {
+   "t": "Nickel",
+   "s": "Ni, 28",
+   "l": "atom",
+   "h": "elements/#Ni",
+   "k": [
+    "Ni",
+    "28"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Ni"
+   }
+  },
+  {
+   "t": "Copper",
+   "s": "Cu, 29",
+   "l": "atom",
+   "h": "elements/#Cu",
+   "k": [
+    "Cu",
+    "29"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Cu"
+   }
+  },
+  {
+   "t": "Zinc",
+   "s": "Zn, 30",
+   "l": "atom",
+   "h": "elements/#Zn",
+   "k": [
+    "Zn",
+    "30"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Zn"
+   }
+  },
+  {
+   "t": "Gallium",
+   "s": "Ga, 31",
+   "l": "atom",
+   "h": "elements/#Ga",
+   "k": [
+    "Ga",
+    "31"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Ga"
+   }
+  },
+  {
+   "t": "Germanium",
+   "s": "Ge, 32",
+   "l": "atom",
+   "h": "elements/#Ge",
+   "k": [
+    "Ge",
+    "32"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Ge"
+   }
+  },
+  {
+   "t": "Arsenic",
+   "s": "As, 33",
+   "l": "atom",
+   "h": "elements/#As",
+   "k": [
+    "As",
+    "33"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#As"
+   }
+  },
+  {
+   "t": "Selenium",
+   "s": "Se, 34",
+   "l": "atom",
+   "h": "elements/#Se",
+   "k": [
+    "Se",
+    "34"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Se"
+   }
+  },
+  {
+   "t": "Bromine",
+   "s": "Br, 35",
+   "l": "atom",
+   "h": "elements/#Br",
+   "k": [
+    "Br",
+    "35"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Br"
+   }
+  },
+  {
+   "t": "Krypton",
+   "s": "Kr, 36",
+   "l": "atom",
+   "h": "elements/#Kr",
+   "k": [
+    "Kr",
+    "36"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Kr"
+   }
+  },
+  {
+   "t": "Rubidium",
+   "s": "Rb, 37",
+   "l": "atom",
+   "h": "elements/#Rb",
+   "k": [
+    "Rb",
+    "37"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Rb"
+   }
+  },
+  {
+   "t": "Strontium",
+   "s": "Sr, 38",
+   "l": "atom",
+   "h": "elements/#Sr",
+   "k": [
+    "Sr",
+    "38"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Sr"
+   }
+  },
+  {
+   "t": "Yttrium",
+   "s": "Y, 39",
+   "l": "atom",
+   "h": "elements/#Y",
+   "k": [
+    "Y",
+    "39"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Y"
+   }
+  },
+  {
+   "t": "Zirconium",
+   "s": "Zr, 40",
+   "l": "atom",
+   "h": "elements/#Zr",
+   "k": [
+    "Zr",
+    "40"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Zr"
+   }
+  },
+  {
+   "t": "Niobium",
+   "s": "Nb, 41",
+   "l": "atom",
+   "h": "elements/#Nb",
+   "k": [
+    "Nb",
+    "41"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Nb"
+   }
+  },
+  {
+   "t": "Molybdenum",
+   "s": "Mo, 42",
+   "l": "atom",
+   "h": "elements/#Mo",
+   "k": [
+    "Mo",
+    "42"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Mo"
+   }
+  },
+  {
+   "t": "Technetium",
+   "s": "Tc, 43",
+   "l": "atom",
+   "h": "elements/#Tc",
+   "k": [
+    "Tc",
+    "43"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Tc"
+   }
+  },
+  {
+   "t": "Ruthenium",
+   "s": "Ru, 44",
+   "l": "atom",
+   "h": "elements/#Ru",
+   "k": [
+    "Ru",
+    "44"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Ru"
+   }
+  },
+  {
+   "t": "Rhodium",
+   "s": "Rh, 45",
+   "l": "atom",
+   "h": "elements/#Rh",
+   "k": [
+    "Rh",
+    "45"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Rh"
+   }
+  },
+  {
+   "t": "Palladium",
+   "s": "Pd, 46",
+   "l": "atom",
+   "h": "elements/#Pd",
+   "k": [
+    "Pd",
+    "46"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Pd"
+   }
+  },
+  {
+   "t": "Silver",
+   "s": "Ag, 47",
+   "l": "atom",
+   "h": "elements/#Ag",
+   "k": [
+    "Ag",
+    "47"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Ag"
+   }
+  },
+  {
+   "t": "Cadmium",
+   "s": "Cd, 48",
+   "l": "atom",
+   "h": "elements/#Cd",
+   "k": [
+    "Cd",
+    "48"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Cd"
+   }
+  },
+  {
+   "t": "Indium",
+   "s": "In, 49",
+   "l": "atom",
+   "h": "elements/#In",
+   "k": [
+    "In",
+    "49"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#In"
+   }
+  },
+  {
+   "t": "Tin",
+   "s": "Sn, 50",
+   "l": "atom",
+   "h": "elements/#Sn",
+   "k": [
+    "Sn",
+    "50"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Sn"
+   }
+  },
+  {
+   "t": "Antimony",
+   "s": "Sb, 51",
+   "l": "atom",
+   "h": "elements/#Sb",
+   "k": [
+    "Sb",
+    "51"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Sb"
+   }
+  },
+  {
+   "t": "Tellurium",
+   "s": "Te, 52",
+   "l": "atom",
+   "h": "elements/#Te",
+   "k": [
+    "Te",
+    "52"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Te"
+   }
+  },
+  {
+   "t": "Iodine",
+   "s": "I, 53",
+   "l": "atom",
+   "h": "elements/#I",
+   "k": [
+    "I",
+    "53"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#I"
+   }
+  },
+  {
+   "t": "Xenon",
+   "s": "Xe, 54",
+   "l": "atom",
+   "h": "elements/#Xe",
+   "k": [
+    "Xe",
+    "54"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Xe"
+   }
+  },
+  {
+   "t": "Caesium",
+   "s": "Cs, 55",
+   "l": "atom",
+   "h": "elements/#Cs",
+   "k": [
+    "Cs",
+    "55",
+    "cesium"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Cs"
+   }
+  },
+  {
+   "t": "Barium",
+   "s": "Ba, 56",
+   "l": "atom",
+   "h": "elements/#Ba",
+   "k": [
+    "Ba",
+    "56"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Ba"
+   }
+  },
+  {
+   "t": "Lanthanum",
+   "s": "La, 57",
+   "l": "atom",
+   "h": "elements/#La",
+   "k": [
+    "La",
+    "57"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#La"
+   }
+  },
+  {
+   "t": "Cerium",
+   "s": "Ce, 58",
+   "l": "atom",
+   "h": "elements/#Ce",
+   "k": [
+    "Ce",
+    "58"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Ce"
+   }
+  },
+  {
+   "t": "Praseodymium",
+   "s": "Pr, 59",
+   "l": "atom",
+   "h": "elements/#Pr",
+   "k": [
+    "Pr",
+    "59"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Pr"
+   }
+  },
+  {
+   "t": "Neodymium",
+   "s": "Nd, 60",
+   "l": "atom",
+   "h": "elements/#Nd",
+   "k": [
+    "Nd",
+    "60"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Nd"
+   }
+  },
+  {
+   "t": "Promethium",
+   "s": "Pm, 61",
+   "l": "atom",
+   "h": "elements/#Pm",
+   "k": [
+    "Pm",
+    "61"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Pm"
+   }
+  },
+  {
+   "t": "Samarium",
+   "s": "Sm, 62",
+   "l": "atom",
+   "h": "elements/#Sm",
+   "k": [
+    "Sm",
+    "62"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Sm"
+   }
+  },
+  {
+   "t": "Europium",
+   "s": "Eu, 63",
+   "l": "atom",
+   "h": "elements/#Eu",
+   "k": [
+    "Eu",
+    "63"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Eu"
+   }
+  },
+  {
+   "t": "Gadolinium",
+   "s": "Gd, 64",
+   "l": "atom",
+   "h": "elements/#Gd",
+   "k": [
+    "Gd",
+    "64"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Gd"
+   }
+  },
+  {
+   "t": "Terbium",
+   "s": "Tb, 65",
+   "l": "atom",
+   "h": "elements/#Tb",
+   "k": [
+    "Tb",
+    "65"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Tb"
+   }
+  },
+  {
+   "t": "Dysprosium",
+   "s": "Dy, 66",
+   "l": "atom",
+   "h": "elements/#Dy",
+   "k": [
+    "Dy",
+    "66"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Dy"
+   }
+  },
+  {
+   "t": "Holmium",
+   "s": "Ho, 67",
+   "l": "atom",
+   "h": "elements/#Ho",
+   "k": [
+    "Ho",
+    "67"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Ho"
+   }
+  },
+  {
+   "t": "Erbium",
+   "s": "Er, 68",
+   "l": "atom",
+   "h": "elements/#Er",
+   "k": [
+    "Er",
+    "68"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Er"
+   }
+  },
+  {
+   "t": "Thulium",
+   "s": "Tm, 69",
+   "l": "atom",
+   "h": "elements/#Tm",
+   "k": [
+    "Tm",
+    "69"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Tm"
+   }
+  },
+  {
+   "t": "Ytterbium",
+   "s": "Yb, 70",
+   "l": "atom",
+   "h": "elements/#Yb",
+   "k": [
+    "Yb",
+    "70"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Yb"
+   }
+  },
+  {
+   "t": "Lutetium",
+   "s": "Lu, 71",
+   "l": "atom",
+   "h": "elements/#Lu",
+   "k": [
+    "Lu",
+    "71"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Lu"
+   }
+  },
+  {
+   "t": "Hafnium",
+   "s": "Hf, 72",
+   "l": "atom",
+   "h": "elements/#Hf",
+   "k": [
+    "Hf",
+    "72"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Hf"
+   }
+  },
+  {
+   "t": "Tantalum",
+   "s": "Ta, 73",
+   "l": "atom",
+   "h": "elements/#Ta",
+   "k": [
+    "Ta",
+    "73"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Ta"
+   }
+  },
+  {
+   "t": "Tungsten",
+   "s": "W, 74",
+   "l": "atom",
+   "h": "elements/#W",
+   "k": [
+    "W",
+    "74"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#W"
+   }
+  },
+  {
+   "t": "Rhenium",
+   "s": "Re, 75",
+   "l": "atom",
+   "h": "elements/#Re",
+   "k": [
+    "Re",
+    "75"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Re"
+   }
+  },
+  {
+   "t": "Osmium",
+   "s": "Os, 76",
+   "l": "atom",
+   "h": "elements/#Os",
+   "k": [
+    "Os",
+    "76"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Os"
+   }
+  },
+  {
+   "t": "Iridium",
+   "s": "Ir, 77",
+   "l": "atom",
+   "h": "elements/#Ir",
+   "k": [
+    "Ir",
+    "77"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Ir"
+   }
+  },
+  {
+   "t": "Platinum",
+   "s": "Pt, 78",
+   "l": "atom",
+   "h": "elements/#Pt",
+   "k": [
+    "Pt",
+    "78"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Pt"
+   }
+  },
+  {
+   "t": "Gold",
+   "s": "Au, 79",
+   "l": "atom",
+   "h": "elements/#Au",
+   "k": [
+    "Au",
+    "79"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Au"
+   }
+  },
+  {
+   "t": "Mercury",
+   "s": "Hg, 80",
+   "l": "atom",
+   "h": "elements/#Hg",
+   "k": [
+    "Hg",
+    "80"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Hg"
+   }
+  },
+  {
+   "t": "Thallium",
+   "s": "Tl, 81",
+   "l": "atom",
+   "h": "elements/#Tl",
+   "k": [
+    "Tl",
+    "81"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Tl"
+   }
+  },
+  {
+   "t": "Lead",
+   "s": "Pb, 82",
+   "l": "atom",
+   "h": "elements/#Pb",
+   "k": [
+    "Pb",
+    "82"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Pb"
+   }
+  },
+  {
+   "t": "Bismuth",
+   "s": "Bi, 83",
+   "l": "atom",
+   "h": "elements/#Bi",
+   "k": [
+    "Bi",
+    "83"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Bi"
+   }
+  },
+  {
+   "t": "Polonium",
+   "s": "Po, 84",
+   "l": "atom",
+   "h": "elements/#Po",
+   "k": [
+    "Po",
+    "84"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Po"
+   }
+  },
+  {
+   "t": "Astatine",
+   "s": "At, 85",
+   "l": "atom",
+   "h": "elements/#At",
+   "k": [
+    "At",
+    "85"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#At"
+   }
+  },
+  {
+   "t": "Radon",
+   "s": "Rn, 86",
+   "l": "atom",
+   "h": "elements/#Rn",
+   "k": [
+    "Rn",
+    "86"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Rn"
+   }
+  },
+  {
+   "t": "Francium",
+   "s": "Fr, 87",
+   "l": "atom",
+   "h": "elements/#Fr",
+   "k": [
+    "Fr",
+    "87"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Fr"
+   }
+  },
+  {
+   "t": "Radium",
+   "s": "Ra, 88",
+   "l": "atom",
+   "h": "elements/#Ra",
+   "k": [
+    "Ra",
+    "88"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Ra"
+   }
+  },
+  {
+   "t": "Actinium",
+   "s": "Ac, 89",
+   "l": "atom",
+   "h": "elements/#Ac",
+   "k": [
+    "Ac",
+    "89"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Ac"
+   }
+  },
+  {
+   "t": "Thorium",
+   "s": "Th, 90",
+   "l": "atom",
+   "h": "elements/#Th",
+   "k": [
+    "Th",
+    "90"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Th"
+   }
+  },
+  {
+   "t": "Protactinium",
+   "s": "Pa, 91",
+   "l": "atom",
+   "h": "elements/#Pa",
+   "k": [
+    "Pa",
+    "91"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Pa"
+   }
+  },
+  {
+   "t": "Uranium",
+   "s": "U, 92",
+   "l": "atom",
+   "h": "elements/#U",
+   "k": [
+    "U",
+    "92"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#U"
+   }
+  },
+  {
+   "t": "Neptunium",
+   "s": "Np, 93",
+   "l": "atom",
+   "h": "elements/#Np",
+   "k": [
+    "Np",
+    "93"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Np"
+   }
+  },
+  {
+   "t": "Plutonium",
+   "s": "Pu, 94",
+   "l": "atom",
+   "h": "elements/#Pu",
+   "k": [
+    "Pu",
+    "94"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Pu"
+   }
+  },
+  {
+   "t": "Americium",
+   "s": "Am, 95",
+   "l": "atom",
+   "h": "elements/#Am",
+   "k": [
+    "Am",
+    "95"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Am"
+   }
+  },
+  {
+   "t": "Curium",
+   "s": "Cm, 96",
+   "l": "atom",
+   "h": "elements/#Cm",
+   "k": [
+    "Cm",
+    "96"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Cm"
+   }
+  },
+  {
+   "t": "Berkelium",
+   "s": "Bk, 97",
+   "l": "atom",
+   "h": "elements/#Bk",
+   "k": [
+    "Bk",
+    "97"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Bk"
+   }
+  },
+  {
+   "t": "Californium",
+   "s": "Cf, 98",
+   "l": "atom",
+   "h": "elements/#Cf",
+   "k": [
+    "Cf",
+    "98"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Cf"
+   }
+  },
+  {
+   "t": "Einsteinium",
+   "s": "Es, 99",
+   "l": "atom",
+   "h": "elements/#Es",
+   "k": [
+    "Es",
+    "99"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Es"
+   }
+  },
+  {
+   "t": "Fermium",
+   "s": "Fm, 100",
+   "l": "atom",
+   "h": "elements/#Fm",
+   "k": [
+    "Fm",
+    "100"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Fm"
+   }
+  },
+  {
+   "t": "Mendelevium",
+   "s": "Md, 101",
+   "l": "atom",
+   "h": "elements/#Md",
+   "k": [
+    "Md",
+    "101"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Md"
+   }
+  },
+  {
+   "t": "Nobelium",
+   "s": "No, 102",
+   "l": "atom",
+   "h": "elements/#No",
+   "k": [
+    "No",
+    "102"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#No"
+   }
+  },
+  {
+   "t": "Lawrencium",
+   "s": "Lr, 103",
+   "l": "atom",
+   "h": "elements/#Lr",
+   "k": [
+    "Lr",
+    "103"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Lr"
+   }
+  },
+  {
+   "t": "Rutherfordium",
+   "s": "Rf, 104",
+   "l": "atom",
+   "h": "elements/#Rf",
+   "k": [
+    "Rf",
+    "104"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Rf"
+   }
+  },
+  {
+   "t": "Dubnium",
+   "s": "Db, 105",
+   "l": "atom",
+   "h": "elements/#Db",
+   "k": [
+    "Db",
+    "105"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Db"
+   }
+  },
+  {
+   "t": "Seaborgium",
+   "s": "Sg, 106",
+   "l": "atom",
+   "h": "elements/#Sg",
+   "k": [
+    "Sg",
+    "106"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Sg"
+   }
+  },
+  {
+   "t": "Bohrium",
+   "s": "Bh, 107",
+   "l": "atom",
+   "h": "elements/#Bh",
+   "k": [
+    "Bh",
+    "107"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Bh"
+   }
+  },
+  {
+   "t": "Hassium",
+   "s": "Hs, 108",
+   "l": "atom",
+   "h": "elements/#Hs",
+   "k": [
+    "Hs",
+    "108"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Hs"
+   }
+  },
+  {
+   "t": "Meitnerium",
+   "s": "Mt, 109",
+   "l": "atom",
+   "h": "elements/#Mt",
+   "k": [
+    "Mt",
+    "109"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Mt"
+   }
+  },
+  {
+   "t": "Darmstadtium",
+   "s": "Ds, 110",
+   "l": "atom",
+   "h": "elements/#Ds",
+   "k": [
+    "Ds",
+    "110"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Ds"
+   }
+  },
+  {
+   "t": "Roentgenium",
+   "s": "Rg, 111",
+   "l": "atom",
+   "h": "elements/#Rg",
+   "k": [
+    "Rg",
+    "111"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Rg"
+   }
+  },
+  {
+   "t": "Copernicium",
+   "s": "Cn, 112",
+   "l": "atom",
+   "h": "elements/#Cn",
+   "k": [
+    "Cn",
+    "112"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Cn"
+   }
+  },
+  {
+   "t": "Nihonium",
+   "s": "Nh, 113",
+   "l": "atom",
+   "h": "elements/#Nh",
+   "k": [
+    "Nh",
+    "113"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Nh"
+   }
+  },
+  {
+   "t": "Flerovium",
+   "s": "Fl, 114",
+   "l": "atom",
+   "h": "elements/#Fl",
+   "k": [
+    "Fl",
+    "114"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Fl"
+   }
+  },
+  {
+   "t": "Moscovium",
+   "s": "Mc, 115",
+   "l": "atom",
+   "h": "elements/#Mc",
+   "k": [
+    "Mc",
+    "115"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Mc"
+   }
+  },
+  {
+   "t": "Livermorium",
+   "s": "Lv, 116",
+   "l": "atom",
+   "h": "elements/#Lv",
+   "k": [
+    "Lv",
+    "116"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Lv"
+   }
+  },
+  {
+   "t": "Tennessine",
+   "s": "Ts, 117",
+   "l": "atom",
+   "h": "elements/#Ts",
+   "k": [
+    "Ts",
+    "117"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Ts"
+   }
+  },
+  {
+   "t": "Oganesson",
+   "s": "Og, 118",
+   "l": "atom",
+   "h": "elements/#Og",
+   "k": [
+    "Og",
+    "118"
+   ],
+   "x": {
+    "t": "3D",
+    "h": "atom/#Og"
+   }
+  },
+  {
+   "t": "Where your energy comes from",
+   "s": "Glucose > Mitochondria > ATP synthase > ATP > Phosphorus > Phosphorus",
+   "l": "path",
+   "h": "?path=energy.1",
+   "p": "energy",
+   "k": [
+    "energy"
+   ]
+  },
+  {
+   "t": "How a muscle moves",
+   "s": "Muscle cell (fibre) > Myofibrils > A sarcomere > Actin > Myosin (head) > Sarcoplasmic reticulum > Calcium",
+   "l": "path",
+   "h": "?path=muscle.1",
+   "p": "muscle",
+   "k": [
+    "muscle"
+   ]
+  },
+  {
+   "t": "How blood carries oxygen",
+   "s": "Red blood cell > Inside, packed with hemoglobin > Hemoglobin > Iron > Iron",
+   "l": "path",
+   "h": "?path=blood.1",
+   "p": "blood",
+   "k": [
+    "blood"
+   ]
+  },
+  {
+   "t": "Inside a pond creature",
+   "s": "Paramecium > Inside the paramecium > Nucleus > DNA > Nitrogen > Nitrogen",
+   "l": "path",
+   "h": "?path=pond.1",
+   "p": "pond",
+   "k": [
+    "pond"
+   ]
+  },
+  {
+   "t": "Organelle",
+   "s": "A compartment wrapped in membrane inside a eukaryotic cell, with its own job, like the nuc",
+   "l": "term",
+   "h": "cells/#animal"
+  },
+  {
+   "t": "ATP",
+   "s": "ATP (adenosine triphosphate) is the cell's main energy currency: splitting off its last ph",
+   "l": "term",
+   "h": "molecules/#atp"
+  },
+  {
+   "t": "Protein",
+   "s": "A large molecule made of one or more chains of amino acids, folded into the shape that let",
+   "l": "term",
+   "h": "molecules/#actin"
+  },
+  {
+   "t": "Amino acid",
+   "s": "Amino acids are the building blocks of proteins, and proteins use 20 common ones.",
+   "l": "term",
+   "h": "molecules/#glycine",
+   "k": [
+    "amino-acid"
+   ]
+  },
+  {
+   "t": "Enzyme",
+   "s": "A protein that speeds up a chemical reaction in a cell without being used up by it.",
+   "l": "term",
+   "h": "molecules/#lysozyme"
+  },
+  {
+   "t": "Cell membrane",
+   "s": "The cell membrane is a double layer of phospholipids with proteins set into it, and it sep",
+   "l": "term",
+   "h": "cells/#animal/membrane",
+   "k": [
+    "membrane"
+   ]
+  },
+  {
+   "t": "Eukaryote",
+   "s": "A living thing whose cells have a nucleus and other organelles wrapped in membrane. Animal",
+   "l": "term",
+   "h": "cells/#animal"
+  },
+  {
+   "t": "Prokaryote",
+   "s": "A mostly single-celled living thing with no nucleus and no other organelles wrapped in mem",
+   "l": "term",
+   "h": "cells/#bacterium"
+  },
+  {
+   "t": "Nucleus (of a cell)",
+   "s": "The nucleus holds the cell's DNA and directs the making of ribosomes and proteins.",
+   "l": "term",
+   "h": "cells/#animal/nucleus",
+   "k": [
+    "nucleus"
+   ]
+  },
+  {
+   "t": "Nucleus (of an atom)",
+   "s": "The tiny, dense centre of an atom, made of protons and neutrons. It is about 100,000 times",
+   "l": "term",
+   "h": "atom/",
+   "k": [
+    "atomic-nucleus"
+   ]
+  },
+  {
+   "t": "DNA",
+   "s": "DNA is the genetic material of living things, built from two strands wound into a double h",
+   "l": "term",
+   "h": "molecules/#dna"
+  },
+  {
+   "t": "Proton",
+   "s": "A particle with a positive charge in an atom's nucleus. The number of protons is the eleme",
+   "l": "term",
+   "h": "elements/"
+  },
+  {
+   "t": "Neutron",
+   "s": "A particle with no charge in an atom's nucleus, about as heavy as a proton.",
+   "l": "term",
+   "h": "atom/"
+  },
+  {
+   "t": "Electron",
+   "s": "A very light particle with a negative charge that moves around an atom's nucleus.",
+   "l": "term",
+   "h": "atom/"
+  },
+  {
+   "t": "Isotope",
+   "s": "Atoms of the same element with the same number of protons but different numbers of neutron",
+   "l": "term",
+   "h": "atom/"
+  },
+  {
+   "t": "Orbital",
+   "s": "A region around the nucleus where an electron is likely to be found. s, p, d and f orbital",
+   "l": "term",
+   "h": "atom/"
+  },
+  {
+   "t": "Photosynthesis",
+   "s": "Chloroplasts carry out photosynthesis, using light energy, carbon dioxide and water to mak",
+   "l": "term",
+   "h": "cells/#plant/chloroplast"
+  },
+  {
+   "t": "Cellular respiration",
+   "s": "Cells break glucose down during cellular respiration and use the energy released to make A",
+   "l": "term",
+   "h": "cells/#animal/mitochondrion",
+   "k": [
+    "respiration"
+   ]
+  },
+  {
+   "t": "Phospholipid",
+   "s": "A phospholipid, the molecule that cell membranes are built from, carries two fatty acid ta",
+   "l": "term",
+   "h": "molecules/#palmitic-acid"
+  },
+  {
+   "t": "Flagellum",
+   "s": "Some bacteria have flagella, long threads they use to move around.",
+   "l": "term",
+   "h": "cells/#bacterium/flagellum"
+  },
+  {
+   "t": "Peptidoglycan",
+   "s": "Most bacteria have a cell wall made of peptidoglycan just outside the membrane.",
+   "l": "term",
+   "h": "cells/#bacterium/b-wall"
+  },
+  {
+   "t": "Sarcomere",
+   "s": "One repeat of the stripe pattern is called a sarcomere, and it holds two kinds of overlapp",
+   "l": "term",
+   "h": "muscle.html#s=sarcomere"
+  },
+  {
+   "t": "Binary fission",
+   "s": "Binary fission is how many bacteria and some eukaryotes such as amoeba and Paramecium repr",
+   "l": "term",
+   "h": "microscope/#amoeba",
+   "k": [
+    "binary-fission"
+   ]
+  },
+  {
+   "t": "Reynolds number",
+   "s": "A number, ρvL/μ, that compares inertia with viscosity for something moving through a fluid",
+   "l": "term",
+   "h": "microscope/shrink.html",
+   "k": [
+    "reynolds-number"
+   ]
+  },
+  {
+   "t": "Viscosity",
+   "s": "How sticky or thick a fluid is: how strongly it resists layers sliding past each other. Wa",
+   "l": "term",
+   "h": "microscope/shrink.html"
+  },
+  {
+   "t": "Inertia",
+   "s": "The way a moving mass keeps moving until a force slows it. It is what lets a swimmer glide",
+   "l": "term",
+   "h": "microscope/shrink.html"
+  },
+  {
+   "t": "Scallop theorem",
+   "s": "Purcell's rule that at low Reynolds number a motion that simply reverses itself produces n",
+   "l": "term",
+   "h": "microscope/shrink.html",
+   "k": [
+    "scallop-theorem"
+   ]
+  },
+  {
+   "t": "Brownian motion",
+   "s": "The random jiggling of a small particle caused by the molecules of a warm fluid hitting it",
+   "l": "term",
+   "h": "microscope/shrink.html",
+   "k": [
+    "brownian-motion"
+   ]
+  },
+  {
+   "t": "Diffusion coefficient",
+   "s": "D, a measure of how fast something spreads by random motion. Its typical drift in time t i",
+   "l": "term",
+   "h": "microscope/shrink.html",
+   "k": [
+    "diffusion-coefficient"
+   ]
+  },
+  {
+   "t": "Stokes drag",
+   "s": "The drag on a small ball moving slowly through a fluid: 6πrμv, proportional to speed.",
+   "l": "term",
+   "h": "microscope/shrink.html",
+   "k": [
+    "stokes-drag"
+   ]
+  },
+  {
+   "t": "Thermal energy",
+   "s": "The energy of molecules moving and jiggling. The hotter something is, the faster its molec",
+   "l": "term",
+   "h": "heat/",
+   "k": [
+    "thermal-energy"
+   ]
+  },
+  {
+   "t": "RT and kT",
+   "s": "The energy scale of heat. RT is for a mole of molecules (R is the gas constant, T the temp",
+   "l": "term",
+   "h": "heat/",
+   "k": [
+    "rt-and-kt"
+   ]
+  },
+  {
+   "t": "Bond energy",
+   "s": "The energy needed to break one mole of a particular bond. Bigger number, stronger bond.",
+   "l": "term",
+   "h": "heat/",
+   "k": [
+    "bond-energy"
+   ]
+  },
+  {
+   "t": "Covalent bond",
+   "s": "A strong bond where two atoms share electrons, like the C-C and O-H bonds inside molecules",
+   "l": "term",
+   "h": "heat/",
+   "k": [
+    "covalent-bond"
+   ]
+  },
+  {
+   "t": "Hydrogen bond",
+   "s": "A weak pull between a slightly positive hydrogen and a slightly negative atom such as oxyg",
+   "l": "term",
+   "h": "heat/",
+   "k": [
+    "hydrogen-bond"
+   ]
+  },
+  {
+   "t": "Van der Waals interactions",
+   "s": "Very weak attractions between neutral atoms and molecules caused by brief shifts in their ",
+   "l": "term",
+   "h": "heat/",
+   "k": [
+    "van-der-waals-interactions"
+   ]
+  },
+  {
+   "t": "Ionic bond",
+   "s": "The pull between a positive ion and a negative ion. Very strong in a dry crystal, but wate",
+   "l": "term",
+   "h": "heat/",
+   "k": [
+    "ionic-bond"
+   ]
+  },
+  {
+   "t": "Denaturation",
+   "s": "When a protein or DNA loses its shape because of heat, acid or chemicals, without its chai",
+   "l": "term",
+   "h": "heat/"
+  },
+  {
+   "t": "Melting temperature (Tm)",
+   "s": "For DNA, the temperature where half of the double strands have come apart. More G-C pairs ",
+   "l": "term",
+   "h": "heat/",
+   "k": [
+    "melting-temperature-tm"
+   ]
+  },
+  {
+   "t": "Membrane potential",
+   "s": "The voltage across a cell membrane, inside compared with outside, measured in millivolts (",
+   "l": "term",
+   "h": "spark/",
+   "k": [
+    "membrane-potential"
+   ]
+  },
+  {
+   "t": "Resting potential",
+   "s": "The steady negative voltage of a neuron that is not signalling, about -70 mV in a typical ",
+   "l": "term",
+   "h": "spark/",
+   "k": [
+    "resting-potential"
+   ]
+  },
+  {
+   "t": "Action potential",
+   "s": "A quick all or none flip of the membrane voltage from negative to positive and back, the s",
+   "l": "term",
+   "h": "spark/",
+   "k": [
+    "action-potential"
+   ]
+  },
+  {
+   "t": "Threshold",
+   "s": "The voltage a stimulus must reach for voltage gated Na+ channels to open and a spike to st",
+   "l": "term",
+   "h": "spark/"
+  },
+  {
+   "t": "Depolarization",
+   "s": "A change that makes the inside of the cell less negative, moving the voltage toward zero.",
+   "l": "term",
+   "h": "spark/"
+  },
+  {
+   "t": "Repolarization",
+   "s": "The return of the voltage toward rest after the peak of a spike, driven by K+ leaving the ",
+   "l": "term",
+   "h": "spark/"
+  },
+  {
+   "t": "Hyperpolarization",
+   "s": "A dip below the resting voltage, as at the end of a spike while K+ channels are still open",
+   "l": "term",
+   "h": "spark/"
+  },
+  {
+   "t": "Refractory period",
+   "s": "The short time after a spike when a new spike cannot start (absolute) or needs a stronger ",
+   "l": "term",
+   "h": "spark/",
+   "k": [
+    "refractory-period"
+   ]
+  },
+  {
+   "t": "Voltage gated channel",
+   "s": "An ion channel that opens or closes when the membrane voltage changes.",
+   "l": "term",
+   "h": "spark/",
+   "k": [
+    "voltage-gated-channel"
+   ]
+  },
+  {
+   "t": "Sodium potassium pump",
+   "s": "A membrane protein that uses ATP to move 3 Na+ out and 2 K+ in, keeping the ion gradients ",
+   "l": "term",
+   "h": "spark/",
+   "k": [
+    "sodium-potassium-pump"
+   ]
+  },
+  {
+   "t": "Selectivity filter",
+   "s": "The narrowest part of an ion channel pore, which picks the ion that may pass. In K+ channe",
+   "l": "term",
+   "h": "spark/",
+   "k": [
+    "selectivity-filter"
+   ]
+  },
+  {
+   "t": "Myelin",
+   "s": "A fatty insulating wrap around an axon, laid down in bands, that speeds up signals.",
+   "l": "term",
+   "h": "spark/"
+  },
+  {
+   "t": "Node of Ranvier",
+   "s": "A bare gap between myelin bands, crowded with voltage gated channels that regenerate the s",
+   "l": "term",
+   "h": "spark/",
+   "k": [
+    "node-of-ranvier"
+   ]
+  },
+  {
+   "t": "Saltatory conduction",
+   "s": "The way a spike jumps from node to node along a myelinated axon (from Latin saltare, to le",
+   "l": "term",
+   "h": "spark/",
+   "k": [
+    "saltatory-conduction"
+   ]
+  },
+  {
+   "t": "Nernst equation",
+   "s": "The formula for the voltage at which one ion's concentration push and electrical pull canc",
+   "l": "term",
+   "h": "spark/",
+   "k": [
+    "nernst-equation"
+   ]
+  },
+  {
+   "t": "Vitamin",
+   "s": "An organic compound in food that the body needs for its chemical reactions.",
+   "l": "term",
+   "h": "nutrients/"
+  },
+  {
+   "t": "Mineral",
+   "s": "An inorganic nutrient from food that the body cannot make, such as calcium or iron.",
+   "l": "term",
+   "h": "nutrients/"
+  },
+  {
+   "t": "Cofactor",
+   "s": "An inorganic ion, such as iron or magnesium, that an enzyme needs to bind to work well.",
+   "l": "term",
+   "h": "nutrients/"
+  },
+  {
+   "t": "Coenzyme",
+   "s": "An organic helper molecule that an enzyme needs. Many vitamins are coenzymes or are made i",
+   "l": "term",
+   "h": "nutrients/"
+  },
+  {
+   "t": "Fat soluble",
+   "s": "Dissolves in fat. Vitamins A, D, E and K are absorbed with fats and can be stored in body ",
+   "l": "term",
+   "h": "nutrients/",
+   "k": [
+    "fat-soluble"
+   ]
+  },
+  {
+   "t": "Water soluble",
+   "s": "Dissolves in water. The B vitamins and vitamin C move easily through body fluids and are n",
+   "l": "term",
+   "h": "nutrients/",
+   "k": [
+    "water-soluble"
+   ]
+  },
+  {
+   "t": "Hypervitaminosis",
+   "s": "Harm from too much of a vitamin, most often a fat-soluble one stored in body fat.",
+   "l": "term",
+   "h": "nutrients/"
+  },
+  {
+   "t": "Electrolyte",
+   "s": "A substance that splits into ions in solution, so it can carry electricity. Sodium, potass",
+   "l": "term",
+   "h": "nutrients/"
+  },
+  {
+   "t": "Heme",
+   "s": "The iron-holding ring inside hemoglobin, myoglobin and cytochromes.",
+   "l": "term",
+   "h": "nutrients/"
+  },
+  {
+   "t": "Anemia",
+   "s": "Too few working red blood cells or too little hemoglobin. Lack of iron, folate or vitamin ",
+   "l": "term",
+   "h": "nutrients/"
+  },
+  {
+   "t": "Goitre",
+   "s": "A swollen thyroid gland, often from too little iodine. Also spelled goiter.",
+   "l": "term",
+   "h": "nutrients/"
+  },
+  {
+   "t": "Intrinsic factor",
+   "s": "A protein made in the stomach that vitamin B12 must bind to be absorbed.",
+   "l": "term",
+   "h": "nutrients/",
+   "k": [
+    "intrinsic-factor"
+   ]
+  },
+  {
+   "t": "RDA",
+   "s": "Recommended Dietary Allowance: the daily amount that meets the needs of nearly all (97 to ",
+   "l": "term",
+   "h": "nutrients/"
+  },
+  {
+   "t": "AI",
+   "s": "Adequate Intake: a daily amount used when there is not enough evidence to set an RDA.",
+   "l": "term",
+   "h": "nutrients/"
+  },
+  {
+   "t": "UL",
+   "s": "Tolerable Upper Intake Level: the highest daily amount likely to pose no risk of harm to a",
+   "l": "term",
+   "h": "nutrients/"
+  },
+  {
+   "t": "Photon",
+   "s": "A tiny packet of light. Every photon moves at the speed of light and carries a set amount ",
+   "l": "term",
+   "h": "light/"
+  },
+  {
+   "t": "Wavelength",
+   "s": "The distance from one crest of a wave to the next. Shorter wavelengths carry more energy t",
+   "l": "term",
+   "h": "light/"
+  },
+  {
+   "t": "Visible light",
+   "s": "The narrow band of light, from about 400 to about 750 nanometres, that the human eye can s",
+   "l": "term",
+   "h": "light/",
+   "k": [
+    "visible-light"
+   ]
+  },
+  {
+   "t": "Electronvolt",
+   "s": "A tiny unit of energy that suits single photons. It is the energy one electron picks up cr",
+   "l": "term",
+   "h": "light/"
+  },
+  {
+   "t": "Chlorophyll a and b",
+   "s": "The green pigments that catch light for photosynthesis. They absorb blue and red light wel",
+   "l": "term",
+   "h": "light/",
+   "k": [
+    "chlorophyll-a-and-b"
+   ]
+  },
+  {
+   "t": "Carotenoid",
+   "s": "Yellow, orange or red pigments that also sit in the thylakoid membrane. They catch blue li",
+   "l": "term",
+   "h": "light/"
+  },
+  {
+   "t": "Chloroplast",
+   "s": "The part of a plant cell that does photosynthesis. It has an outer and an inner membrane a",
+   "l": "term",
+   "h": "light/"
+  },
+  {
+   "t": "Thylakoid",
+   "s": "A flat, disc-shaped sac inside a chloroplast. Chlorophyll and the photosystems sit in its ",
+   "l": "term",
+   "h": "light/"
+  },
+  {
+   "t": "Granum",
+   "s": "A stack of thylakoids, like a pile of coins. More than one are called grana.",
+   "l": "term",
+   "h": "light/"
+  },
+  {
+   "t": "Stroma",
+   "s": "The fluid around the thylakoid stacks inside a chloroplast. This is where the plant uses t",
+   "l": "term",
+   "h": "light/"
+  },
+  {
+   "t": "Light-harvesting complex",
+   "s": "Proteins holding many chlorophylls and carotenoids that work like an antenna. They catch p",
+   "l": "term",
+   "h": "light/",
+   "k": [
+    "light-harvesting-complex"
+   ]
+  },
+  {
+   "t": "Resonance energy transfer",
+   "s": "How energy jumps from an excited pigment to a nearby one without giving off any light. It ",
+   "l": "term",
+   "h": "light/",
+   "k": [
+    "resonance-energy-transfer"
+   ]
+  },
+  {
+   "t": "Reaction centre",
+   "s": "The heart of a photosystem. A special pair of chlorophyll a molecules there turns light en",
+   "l": "term",
+   "h": "light/",
+   "k": [
+    "reaction-centre"
+   ]
+  },
+  {
+   "t": "Photosystem II",
+   "s": "One of two light-catching machines in the thylakoid membrane, made of a light-harvesting c",
+   "l": "term",
+   "h": "light/",
+   "k": [
+    "photosystem-ii"
+   ]
+  },
+  {
+   "t": "A muscle",
+   "s": "Whole muscle",
+   "l": "page",
+   "h": "muscle.html#s=muscle",
+   "k": [
+    "muscle"
+   ]
+  },
+  {
+   "t": "A muscle fibre",
+   "s": "Inside a fibre",
+   "l": "page",
+   "h": "muscle.html#s=fibre",
+   "k": [
+    "muscle",
+    "fibre"
+   ]
+  },
+  {
+   "t": "A sarcomere",
+   "s": "One repeat of the stripes",
+   "l": "page",
+   "h": "muscle.html#s=sarcomere",
+   "k": [
+    "muscle",
+    "sarcomere"
+   ]
+  },
+  {
+   "t": "Actin, a real molecule",
+   "s": "One protein, atom by atom",
+   "l": "page",
+   "h": "muscle.html#s=molecule",
+   "k": [
+    "muscle",
+    "molecule"
+   ]
+  },
+  {
+   "t": "A paramecium in pond water",
+   "s": "Microorganisms",
+   "l": "page",
+   "h": "index.html#zoom=organism",
+   "k": [
+    "zoom",
+    "journey"
+   ]
+  },
+  {
+   "t": "Inside the paramecium",
+   "s": "Cell",
+   "l": "page",
+   "h": "index.html#zoom=cell",
+   "k": [
+    "zoom",
+    "journey"
+   ]
+  },
+  {
+   "t": "A mitochondrion",
+   "s": "Inside a cell",
+   "l": "page",
+   "h": "index.html#zoom=part",
+   "k": [
+    "zoom",
+    "journey"
+   ]
+  },
+  {
+   "t": "ATP synthase",
+   "s": "Big molecule",
+   "l": "page",
+   "h": "index.html#zoom=big",
+   "k": [
+    "zoom",
+    "journey"
+   ]
+  },
+  {
+   "t": "ATP",
+   "s": "Molecule",
+   "l": "page",
+   "h": "index.html#zoom=mol",
+   "k": [
+    "zoom",
+    "journey"
+   ]
+  },
+  {
+   "t": "A phosphorus atom",
+   "s": "Atom",
+   "l": "page",
+   "h": "index.html#zoom=atom",
+   "k": [
+    "zoom",
+    "journey"
+   ]
+  },
+  {
+   "t": "Home",
+   "l": "page",
+   "h": "index.html"
+  },
+  {
+   "t": "Periodic table",
+   "l": "page",
+   "h": "elements/",
+   "k": [
+    "elements"
+   ]
+  },
+  {
+   "t": "Atom viewer",
+   "l": "page",
+   "h": "atom/",
+   "k": [
+    "atom"
+   ]
+  },
+  {
+   "t": "Molecules",
+   "l": "page",
+   "h": "molecules/"
+  },
+  {
+   "t": "Cells",
+   "l": "page",
+   "h": "cells/"
+  },
+  {
+   "t": "Microscope",
+   "l": "page",
+   "h": "microscope/"
+  },
+  {
+   "t": "Pond sandbox",
+   "l": "page",
+   "h": "microscope/#pond",
+   "k": [
+    "pond"
+   ]
+  },
+  {
+   "t": "Muscle zoom",
+   "l": "page",
+   "h": "muscle.html",
+   "k": [
+    "muscle"
+   ]
+  },
+  {
+   "t": "DNA double helix (cinematic)",
+   "l": "page",
+   "h": "dna/",
+   "k": [
+    "dna"
+   ]
+  },
+  {
+   "t": "Molecule lab",
+   "l": "page",
+   "h": "lab/",
+   "k": [
+    "lab"
+   ]
+  },
+  {
+   "t": "How life works",
+   "l": "page",
+   "h": "processes/",
+   "k": [
+    "processes"
+   ]
+  },
+  {
+   "t": "Teacher hub",
+   "l": "page",
+   "h": "teach/",
+   "k": [
+    "teach"
+   ]
+  },
+  {
+   "t": "Hemoglobin breathing",
+   "l": "page",
+   "h": "morph/",
+   "k": [
+    "morph",
+    "hemoglobin",
+    "oxygen",
+    "breathing"
+   ]
+  },
+  {
+   "t": "ATP synthase spinning",
+   "l": "page",
+   "h": "atp-scene/",
+   "k": [
+    "atp-scene",
+    "ATP synthase",
+    "rotary motor"
+   ]
+  },
+  {
+   "t": "Size lineup",
+   "l": "page",
+   "h": "lineup/",
+   "k": [
+    "lineup",
+    "size",
+    "scale",
+    "compare sizes"
+   ]
+  },
+  {
+   "t": "Follow a photon",
+   "l": "page",
+   "h": "light/",
+   "k": [
+    "light",
+    "photon",
+    "prism",
+    "spectrum",
+    "wavelength",
+    "chlorophyll absorption",
+    "why leaves are green",
+    "LHC-II",
+    "P680",
+    "energy transfer"
+   ]
+  },
+  {
+   "t": "Shrink yourself",
+   "l": "page",
+   "h": "microscope/shrink.html",
+   "k": [
+    "shrink",
+    "Reynolds number",
+    "Brownian motion",
+    "swimming",
+    "viscosity",
+    "bacteria swim",
+    "scallop"
+   ]
+  },
+  {
+   "t": "Heat vs bonds",
+   "l": "page",
+   "h": "heat/",
+   "k": [
+    "heat",
+    "temperature",
+    "melting",
+    "hydrogen bond",
+    "protein unfolding",
+    "boiling",
+    "fever",
+    "DNA melting"
+   ]
+  },
+  {
+   "t": "Neuron spark",
+   "l": "page",
+   "h": "spark/",
+   "k": [
+    "spark",
+    "action potential",
+    "nerve impulse",
+    "ion channel",
+    "sodium",
+    "potassium",
+    "myelin",
+    "Hodgkin Huxley"
+   ]
+  },
+  {
+   "t": "Vitamins and minerals",
+   "l": "page",
+   "h": "nutrients/",
+   "k": [
+    "nutrients",
+    "vitamin",
+    "mineral",
+    "nutrition",
+    "diet",
+    "deficiency",
+    "food"
+   ]
+  },
+  {
+   "t": "Vitamin A",
+   "s": "Lets your eyes see in dim light.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#vitamin-a",
+   "k": [
+    "Retinol",
+    "vitamin-a",
+    "vitamin",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Vitamin C",
+   "s": "Helps build collagen, the protein that holds you together.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#vitamin-c",
+   "k": [
+    "Ascorbic acid",
+    "vitamin-c",
+    "vitamin",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Vitamin D",
+   "s": "Your skin makes it in sunlight. It keeps bones hard.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#vitamin-d",
+   "k": [
+    "Cholecalciferol (D3)",
+    "vitamin-d",
+    "vitamin",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Vitamin E",
+   "s": "Guards the fats in your cell membranes.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#vitamin-e",
+   "k": [
+    "Alpha-tocopherol",
+    "vitamin-e",
+    "vitamin",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Vitamin K",
+   "s": "Makes blood clot when you get a cut.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#vitamin-k",
+   "k": [
+    "Phylloquinone (K1)",
+    "vitamin-k",
+    "vitamin",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Vitamin B1",
+   "s": "Helps cells burn sugar for energy.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#b1",
+   "k": [
+    "Thiamin",
+    "b1",
+    "vitamin",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Vitamin B2",
+   "s": "Becomes FAD, an electron carrier for energy.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#b2",
+   "k": [
+    "Riboflavin",
+    "b2",
+    "vitamin",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Vitamin B3",
+   "s": "Becomes NAD, which shuttles electrons in every cell.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#b3",
+   "k": [
+    "Niacin",
+    "b3",
+    "vitamin",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Vitamin B5",
+   "s": "The starting piece of coenzyme A.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#b5",
+   "k": [
+    "Pantothenic acid",
+    "b5",
+    "vitamin",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Vitamin B6",
+   "s": "A helper for more than 100 protein enzymes.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#b6",
+   "k": [
+    "Pyridoxine",
+    "b6",
+    "vitamin",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Vitamin B7",
+   "s": "An enzyme helper that raw egg white can block.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#b7",
+   "k": [
+    "Biotin",
+    "b7",
+    "vitamin",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Vitamin B9",
+   "s": "Needed to copy DNA and make new cells.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#b9",
+   "k": [
+    "Folate",
+    "b9",
+    "vitamin",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Vitamin B12",
+   "s": "The biggest vitamin, with a cobalt atom at its heart.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#b12",
+   "k": [
+    "Cobalamin",
+    "b12",
+    "vitamin",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Calcium",
+   "s": "Builds bones and switches on every muscle contraction.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#calcium",
+   "k": [
+    "mineral",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Phosphorus",
+   "s": "Part of bone, DNA and ATP.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#phosphorus",
+   "k": [
+    "mineral",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Magnesium",
+   "s": "Rides along with every ATP, and sits in the middle of chlorophyll.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#magnesium",
+   "k": [
+    "mineral",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Sodium",
+   "s": "The salt ion outside cells that powers nerve signals.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#sodium",
+   "k": [
+    "mineral",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Potassium",
+   "s": "The ion inside cells, partner to sodium in every nerve signal.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#potassium",
+   "k": [
+    "mineral",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Chloride",
+   "s": "Sodium's partner in salt, and the acid in your stomach.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#chloride",
+   "k": [
+    "mineral",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Iron",
+   "s": "Sits in heme and carries oxygen in your blood.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#iron",
+   "k": [
+    "mineral",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Zinc",
+   "s": "Holds proteins in shape so they can grip DNA.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#zinc",
+   "k": [
+    "mineral",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Iodine",
+   "s": "The thyroid builds four iodine atoms into thyroxine.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#iodine",
+   "k": [
+    "mineral",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Selenium",
+   "s": "Built into a rare amino acid, selenocysteine.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#selenium",
+   "k": [
+    "mineral",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Copper",
+   "s": "Moves electrons and gets iron ready to travel.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#copper",
+   "k": [
+    "mineral",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Fluoride",
+   "s": "Swaps into tooth crystals and helps fight cavities.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#fluoride",
+   "k": [
+    "mineral",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Manganese",
+   "s": "Helps enzymes guard mitochondria and build cartilage and bone.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#manganese",
+   "k": [
+    "mineral",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Molybdenum",
+   "s": "Sits inside a cofactor that runs four enzymes, one of them vital for clearing sulfite.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#molybdenum",
+   "k": [
+    "mineral",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "Chromium",
+   "s": "May help insulin work, but whether the body truly needs it is debated.",
+   "l": "learn",
+   "g": "nutrients",
+   "h": "nutrients/#chromium",
+   "k": [
+    "mineral",
+    "nutrient"
+   ]
+  },
+  {
+   "t": "DNA to protein",
+   "s": "A gene is copied into messenger RNA in the nucleus, the message leaves through a pore, and a ribosome reads it three letters at a time to build a protein.",
+   "l": "learn",
+   "g": "processes",
+   "h": "processes/#dna-to-protein"
+  },
+  {
+   "t": "Cell division (mitosis)",
+   "s": "During mitosis a cell sorts its copied chromosomes into two identical sets, then cytokinesis splits the cell in two.",
+   "l": "learn",
+   "g": "processes",
+   "h": "processes/#mitosis"
+  },
+  {
+   "t": "Cellular respiration",
+   "s": "Cells break glucose down step by step and store part of its energy in ATP, finishing inside mitochondria where ATP synthase spins.",
+   "l": "learn",
+   "g": "processes",
+   "h": "processes/#respiration"
+  },
+  {
+   "t": "Photosynthesis",
+   "s": "In the thylakoids light energy makes ATP and NADPH and releases oxygen; in the stroma the Calvin cycle uses them to build sugar from carbon dioxide.",
+   "l": "learn",
+   "g": "processes",
+   "h": "processes/#photosynthesis"
+  },
+  {
+   "t": "Diffusion and osmosis lab",
+   "s": "Particles drift at random. That alone spreads solutes out, and when a membrane holds the solute back, it moves water instead.",
+   "l": "learn",
+   "g": "processes",
+   "h": "processes/#osmosis-lab"
+  },
+  {
+   "t": "Cells are the unit of life",
+   "s": "Students meet whole organisms that are a single cell, compare a bacterium with an animal c",
+   "l": "learn",
+   "g": "teach",
+   "h": "teach/lessons/cells-unit-of-life.html",
+   "k": [
+    "lesson",
+    "teacher",
+    "cells",
+    "organisms"
+   ]
+  },
+  {
+   "t": "Organelles and their jobs",
+   "s": "A jigsaw tour of the animal cell, then students follow one protein from the nucleus to the",
+   "l": "learn",
+   "g": "teach",
+   "h": "teach/lessons/organelles-and-jobs.html",
+   "k": [
+    "lesson",
+    "teacher",
+    "cells"
+   ]
+  },
+  {
+   "t": "Microscopes and scale",
+   "s": "Students convert between millimetres, micrometres and nanometres, calculate the field of v",
+   "l": "learn",
+   "g": "teach",
+   "h": "teach/lessons/microscopes-and-scale.html",
+   "k": [
+    "lesson",
+    "teacher",
+    "scale",
+    "organisms"
+   ]
+  },
+  {
+   "t": "The pond: who eats whom",
+   "s": "Students read the field guide to find out what each pond organism eats or makes, run a fee",
+   "l": "learn",
+   "g": "teach",
+   "h": "teach/lessons/pond-who-eats-whom.html",
+   "k": [
+    "lesson",
+    "teacher",
+    "ecosystems",
+    "organisms"
+   ]
+  },
+  {
+   "t": "Elements of life",
+   "s": "Students find which elements build the molecules of life, write formulas from atom counts,",
+   "l": "learn",
+   "g": "teach",
+   "h": "teach/lessons/elements-of-life.html",
+   "k": [
+    "lesson",
+    "teacher",
+    "elements",
+    "molecules"
+   ]
+  },
+  {
+   "t": "Atoms and electrons",
+   "s": "Students use the atom viewer to count protons, neutrons and electrons, draw shell diagrams",
+   "l": "learn",
+   "g": "teach",
+   "h": "teach/lessons/atoms-and-electrons.html",
+   "k": [
+    "lesson",
+    "teacher",
+    "atoms",
+    "elements"
+   ]
+  },
+  {
+   "t": "From glucose to ATP",
+   "s": "Students follow the energy in a glucose molecule into ATP: glycolysis in the cytoplasm, th",
+   "l": "learn",
+   "g": "teach",
+   "h": "teach/lessons/glucose-to-atp.html",
+   "k": [
+    "lesson",
+    "teacher",
+    "energy",
+    "cells",
+    "molecules"
+   ]
+  },
+  {
+   "t": "DNA to protein",
+   "s": "Students read a real DNA structure, trace a protein's route through the cell, transcribe a",
+   "l": "learn",
+   "g": "teach",
+   "h": "teach/lessons/dna-to-protein.html",
+   "k": [
+    "lesson",
+    "teacher",
+    "genetics",
+    "molecules",
+    "cells"
+   ]
+  }
+ ]
+}

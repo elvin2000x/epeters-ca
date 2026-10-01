@@ -1,0 +1,201 @@
+{
+  "contentStatus": "Shrink yourself (Builder F, 2026-10-01). Final copy, written by the builder (no copywriter pass, per decision 2026-10-01). Every number in 'constants' and 'anchors' and every learn sentence points at source ids in 'sources' here or in sources.json. Computed values are worked out live in shrink-physics.js with the formulas shown on the page.",
+  "copy": {
+    "title": "Shrink yourself",
+    "eyebrow": "Virtual microscope",
+    "intro": "Slide yourself from swimmer size down to bacterium size. Watch what happens when you stop pushing, and what the warm water does to you.",
+    "modeHeading": "View",
+    "modeSlides": "Slides",
+    "modePond": "Pond",
+    "modeShrink": "Shrink",
+    "sizeLabel": "Your size",
+    "sizeBig": "1 m",
+    "sizeSmall": "2 µm",
+    "presetsHeading": "Jump to",
+    "liveHeading": "Live numbers",
+    "speedRow": "Swimming speed",
+    "reRow": "Reynolds number",
+    "coastRow": "Coasting after you stop",
+    "stopRow": "Time to slow to a tenth",
+    "jitterRow": "Heat jiggle in 1 second",
+    "showMaths": "Show the maths",
+    "verdictInertia": "Inertia wins. You glide when you stop.",
+    "verdictMiddle": "In between. Gliding fades fast.",
+    "verdictViscous": "Thick water wins. You stop dead.",
+    "speedAnchor": "measured",
+    "speedBlend": "our smooth blend between the measured sizes",
+    "bodyLengths": "body lengths",
+    "atomWidths": "hydrogen atoms wide",
+    "play": "Play",
+    "pause": "Pause",
+    "slow": "Slow x10",
+    "laneCoast": "Push, then stop",
+    "laneScallop": "Scallop: open, close",
+    "laneCorkscrew": "Corkscrew: turn",
+    "pushing": "Pushing",
+    "coasting": "Stopped pushing",
+    "timeReal": "Real time",
+    "timeSlow": "10 times slower",
+    "gridNote": "Dots are 1 body length apart",
+    "netLabel": "Net trip in 10 strokes",
+    "rememberHeading": "What to remember",
+    "deeperHeading": "Go deeper",
+    "mythsHeading": "Myth or fact",
+    "myth": "Myth",
+    "truth": "Fact",
+    "vocabHeading": "Words to know",
+    "mathsHeading": "The maths and the numbers we used",
+    "altHeading": "Text description of this view",
+    "keysHeading": "Keyboard",
+    "sourcesHeading": "Sources",
+    "seeParamecium": "See Paramecium",
+    "seeBacteria": "See bacteria",
+    "seePond": "Open the pond",
+    "reducedMotion": "Movement is paused because your device asks for reduced motion. Press Play to start it.",
+    "noCanvas": "Your browser cannot draw this view, but every number below still works.",
+    "back": "Back to the explorer",
+    "skip": "Skip to the controls",
+    "badge": "Drawing to scale in body lengths",
+    "keys1": "Tab to the size slider, then use the arrow keys to shrink or grow. Page Up and Page Down take bigger steps. Home and End jump to the ends.",
+    "keys2": "The Jump to buttons pick a real organism's size.",
+    "keys3": "Play, Pause and Slow x10 control the moving drawing."
+  },
+  "constants": {
+    "kB": { "value": 1.380649e-23, "unit": "J/K", "label": "Boltzmann constant k", "s": ["nist-k"] },
+    "T": { "value": 293.15, "unit": "K", "label": "Water temperature T (20 °C)", "s": ["nist-water"] },
+    "rho": { "value": 998.21, "unit": "kg/m³", "label": "Density of water ρ at 20 °C", "s": ["nist-water"] },
+    "mu": { "value": 0.0010016, "unit": "Pa·s", "label": "Viscosity of water μ at 20 °C", "s": ["nist-water"] },
+    "Cd": { "value": 0.45, "unit": "", "label": "Drag coefficient C of a sphere", "s": ["os-cp-5-2"] },
+    "bohr": { "value": 5.29177210544e-11, "unit": "m", "label": "Bohr radius a₀ (a hydrogen atom is about 2a₀ across)", "s": ["nist-bohr"] }
+  },
+  "model": {
+    "note": "We treat the swimmer as a ball as wide as its length L and as dense as water. Drag is the sum of the slow, smooth part (Stokes, 6πμrv) and the fast, splashy part (½CρAv²). Coasting distance is how far it goes before its speed falls to a tenth. Brownian jiggle is the root mean square distance along one direction in 1 second, √(2Dt), with D from the Stokes Einstein relation. Between the measured sizes, speed is a straight line blend on a log scale.",
+    "s": ["os-cp-12-6", "os-cp-5-2", "os-cp-12-7", "lt-ses"]
+  },
+  "anchors": [
+    { "id": "ecoli", "name": "E. coli", "L": 2e-6, "v": 30e-6, "note": "About 2 µm long, swims at about 30 µm per second.", "s": ["purcell1977"], "link": "index.html#bacteria", "linkKey": "seeBacteria", "drive": "corkscrew" },
+    { "id": "paramecium", "name": "Paramecium", "L": 240e-6, "v": 1e-3, "note": "Drawn 240 µm long in our slides, swims at about 1 mm per second.", "s": ["kreutz-pcaudatum", "brette2021"], "link": "index.html#paramecium", "linkKey": "seeParamecium", "drive": "cilia" },
+    { "id": "swimmer", "name": "Swimmer", "L": 1, "v": 2.155, "note": "We round the swimmer to 1 m long. Speed is the 100 m world record pace: 100 m in 46.40 s.", "s": ["gwr-100free"], "drive": "arms" }
+  ],
+  "presets": [
+    { "label": "Swimmer", "L": 1 },
+    { "label": "Paramecium", "L": 240e-6 },
+    { "label": "E. coli", "L": 2e-6 }
+  ],
+  "drives": {
+    "arms": "A swimmer pushes water backward and glides on its own momentum between strokes.",
+    "cilia": "Paramecium is covered in 10,000 to 14,000 cilia about 10 to 12 µm long that beat about 30 times a second in waves.",
+    "corkscrew": "E. coli spins its flagella about 100 times a second. Turned counterclockwise they bundle into a corkscrew that pushes the cell forward."
+  },
+  "drivesS": {
+    "arms": ["purcell1977"],
+    "cilia": ["neupane-pcaudatum", "jana2012"],
+    "corkscrew": ["berg2006"]
+  },
+  "learn": {
+    "keyIdeas": [
+      { "text": "The Reynolds number, ρvL/μ, compares how hard the water's inertia pushes with how hard its stickiness (viscosity) holds back. A person swimming is in the thousands or more; a bacterium is near 0.00003.", "s": ["os-cp-12-6", "purcell1977"] },
+      { "text": "Below a Reynolds number of about 1, there is no gliding. If E. coli stops pushing, it coasts about 0.1 ångström, less than the width of one atom, in under a millionth of a second.", "s": ["purcell1977", "berg2006"] },
+      { "text": "At low Reynolds number, a stroke that simply runs backward to undo itself (like a scallop opening and closing) gets you nowhere, however fast or slow you do it. This is Purcell's scallop theorem.", "s": ["purcell1977"] },
+      { "text": "A turning corkscrew is not a back and forth motion, so it works in thick water. Bacteria spin their flagella with a rotary motor about 100 times a second.", "s": ["purcell1977", "berg2006"] },
+      { "text": "Water molecules hit a small cell from every side all the time, so it jiggles. The Stokes Einstein relation, D = kT / (6πμr), says smaller things jiggle more, which is why a bacterium drifts off course in about 10 seconds.", "s": ["lt-ses", "berg2006"] }
+    ],
+    "deeper": [
+      { "title": "1. Two forces in a tug of war", "text": "When anything moves through water, two things resist it. Inertia: the water you shove has mass, so it keeps moving and swirls behind you. Viscosity: water is slightly sticky, so the layer touching you drags on the layer next to it. The Reynolds number is the ratio of the first to the second, written ρvL/μ, where ρ is water's density, v your speed, L your size and μ the viscosity. Big and fast makes it large. Small and slow makes it tiny. Below about 1 the flow around you is smooth and orderly. Above about a million it is fully turbulent.", "s": ["os-cp-12-6", "purcell1977"] },
+      { "text": "Purcell gave a picture for it. To feel what a bacterium feels, imagine swimming in a pool full of molasses, where you may not move any part of your body faster than 1 cm per minute. Under those rules, if you could move a few metres in a couple of weeks, you would be a good low Reynolds number swimmer.", "title": "2. The molasses pool", "s": ["purcell1977"] },
+      { "title": "3. Why you cannot glide when tiny", "text": "Drag grows with your surface and speed, but momentum grows with your mass, and mass shrinks much faster than surface as you get smaller. For a ball moving slowly, Stokes's law gives the drag as 6πrμv. Divide momentum by that drag and you get a stopping time that shrinks with the square of your size. For a cell 1 µm across, Purcell worked out a coasting distance of about 0.1 ångström and a stopping time well under a microsecond. Berg put it as stopping within a tenth of the diameter of a hydrogen atom. What you do right now is all that matters; there is no memory of the push you made a moment ago.", "s": ["os-cp-12-6", "purcell1977", "berg2006"] },
+      { "title": "4. The scallop theorem", "text": "At low Reynolds number the equations of water flow lose their time term, so only the shape of a motion counts, not its speed. Run a motion forward, then backward, and you retrace your path exactly. A scallop opens slowly and snaps shut fast, which works for a real scallop in the sea, but a tiny scallop would go nowhere. To swim you need a cycle that is not its own reverse: a flexible oar that bends one way on the power stroke and the other way coming back, or a corkscrew that keeps turning in one direction.", "s": ["purcell1977"] },
+      { "title": "5. How the corkscrew pushes", "text": "A thin rod in thick water feels about twice as much drag moving sideways as moving along its length. A turning helix uses that difference: each piece of the spiral slides partly sideways and partly lengthwise, and the uneven drag adds up to a push along the axis. E. coli runs its flagellar motors counterclockwise to bundle the filaments and swim, and switches some to clockwise to tumble and pick a new direction. Runs last about 1 second and tumbles about 0.1 second.", "s": ["berg2006", "purcell1977"] },
+      { "title": "6. The heat jiggle", "text": "Every water molecule is moving because it is warm, and a small cell is hit from all sides billions of times. The kicks do not cancel perfectly, so the cell wanders in a random walk. How far it drifts grows with the square root of time, √(2Dt) along any one direction. The Stokes Einstein relation gives D = kT / (6πμr): hotter water and smaller cells jiggle more, thicker water less. The same kicks turn the cell too. Berg found an E. coli wanders about 90 degrees off its heading in roughly 10 seconds, so it has to keep sniffing and correcting.", "s": ["os-cp-12-7", "lt-ses", "berg2006"] },
+      { "title": "7. Why swim at all?", "text": "Stirring the water around you does not help a bacterium eat; food arrives by diffusion whether it moves or not. Purcell showed that to find a better spot, a cell has to swim further than diffusion can carry things in the same time, about D/v. With typical numbers that is about 30 µm, and that is roughly how far swimming bacteria do go before turning.", "s": ["purcell1977"] }
+    ],
+    "misconceptions": [
+      { "myth": "A bacterium swims like a tiny fish, flicking its tail and gliding.", "truth": "At its size water acts thick and sticky. It never glides: the moment it stops pushing, it stops within less than an atom's width.", "s": ["purcell1977", "berg2006"] },
+      { "myth": "If you flap faster, a back and forth stroke will work even when you are tiny.", "truth": "At low Reynolds number speed does not matter. A stroke that just reverses itself brings you back to where you started, fast or slow.", "s": ["purcell1977"] },
+      { "myth": "Bacterial flagella wave like a whip.", "truth": "They rotate. A motor at the base spins each corkscrew filament about 100 times a second.", "s": ["berg2006", "purcell1977"] },
+      { "myth": "Water is calm and still at small sizes.", "truth": "Warm water molecules hit a small cell constantly, so it jiggles and drifts off course. The smaller the cell, the bigger the jiggle.", "s": ["os-cp-12-7", "lt-ses", "berg2006"] }
+    ],
+    "vocab": [
+      { "term": "Reynolds number", "definition": "A number, ρvL/μ, that compares inertia with viscosity for something moving through a fluid. Small means smooth, sticky flow; large means swirls and gliding.", "s": ["os-cp-12-6", "purcell1977"] },
+      { "term": "Viscosity", "definition": "How sticky or thick a fluid is: how strongly it resists layers sliding past each other. Water at 20 °C has about 0.001 pascal seconds.", "s": ["os-cp-12-6", "nist-water"] },
+      { "term": "Inertia", "definition": "The way a moving mass keeps moving until a force slows it. It is what lets a swimmer glide.", "s": ["purcell1977"] },
+      { "term": "Scallop theorem", "definition": "Purcell's rule that at low Reynolds number a motion that simply reverses itself produces no net movement.", "s": ["purcell1977"] },
+      { "term": "Brownian motion", "definition": "The random jiggling of a small particle caused by the molecules of a warm fluid hitting it from all sides.", "s": ["os-cp-12-7", "berg2006"] },
+      { "term": "Diffusion coefficient", "definition": "D, a measure of how fast something spreads by random motion. Its typical drift in time t is √(2Dt) along one direction.", "s": ["os-cp-12-7", "lt-ses"] },
+      { "term": "Stokes drag", "definition": "The drag on a small ball moving slowly through a fluid: 6πrμv, proportional to speed.", "s": ["os-cp-12-6"] },
+      { "term": "Flagellum", "definition": "A long thin filament that bacteria spin like a corkscrew to swim. Plural: flagella.", "s": ["berg2006", "purcell1977"] }
+    ]
+  },
+  "sources": {
+    "purcell1977": {
+      "title": "Life at low Reynolds number",
+      "publisher": "E. M. Purcell, American Journal of Physics 45, 3 to 11 (1977), doi:10.1119/1.10903. Read from the copy hosted by DAMTP, University of Cambridge",
+      "url": "https://www.damtp.cam.ac.uk/user/gold/pdfs/purcell.pdf",
+      "checked": "2026-10-01",
+      "supports": "Reynolds number avρ/η; man swimming about 10^4, goldfish 10^2, microorganisms 10^-4 to 10^-5; a 1 micron cell at 30 micrometres per second has R about 3 x 10^-5, coasts about 0.1 angstrom and takes about 0.6 microseconds (figure: 0.3) to slow down; molasses pool picture (1 cm per minute); scallop theorem: reciprocal motion goes nowhere, fast or slow; flexible oar and corkscrew escape it; E. coli about 2 micrometres long; tracked E. coli swim 20 to 40 micrometres per second; flagella rotate; to outswim diffusion a cell must go about D/v, about 30 micrometres."
+    },
+    "berg2006": {
+      "title": "Marvels of Bacterial Behavior",
+      "publisher": "Howard C. Berg, Proceedings of the American Philosophical Society 150, no. 3 (2006). Read from Harvard DASH",
+      "url": "https://dash.harvard.edu/server/api/core/bitstreams/7312037c-8102-6bd4-e053-0100007fdf3b/content",
+      "checked": "2026-10-01",
+      "supports": "Runs about 1 s, tumbles about 0.1 s; counterclockwise flagella bundle and push, clockwise break the bundle; flagella spin about 100 revolutions per second; cells swim about 30 diameters a second; rotational Brownian motion turns E. coli about 90 degrees rms in about 10 s; Reynolds number about 10^-5; coasts to a stop within a tenth of the diameter of a hydrogen atom; drag on a thin rod about twice as large sideways as lengthwise."
+    },
+    "nist-k": {
+      "title": "CODATA value: Boltzmann constant",
+      "publisher": "NIST Reference on Constants, Units, and Uncertainty",
+      "url": "https://physics.nist.gov/cgi-bin/cuu/Value?k",
+      "checked": "2026-10-01",
+      "supports": "k = 1.380 649 x 10^-23 J/K (exact)."
+    },
+    "nist-bohr": {
+      "title": "CODATA value: Bohr radius",
+      "publisher": "NIST Reference on Constants, Units, and Uncertainty",
+      "url": "https://physics.nist.gov/cgi-bin/cuu/Value?bohrrada0",
+      "checked": "2026-10-01",
+      "supports": "a0 = 5.291 772 105 44 x 10^-11 m."
+    },
+    "nist-water": {
+      "title": "Thermophysical Properties of Fluid Systems: water at 20 °C and 0.101325 MPa",
+      "publisher": "NIST Chemistry WebBook, SRD 69",
+      "url": "https://webbook.nist.gov/cgi/fluid.cgi?Action=Data&Wide=on&ID=C7732185&Type=IsoBar&Digits=5&P=0.101325&THigh=20&TLow=20&TInc=1&RefState=DEF&TUnit=C&PUnit=MPa&DUnit=kg%2Fm3&HUnit=kJ%2Fmol&WUnit=m%2Fs&VisUnit=Pa*s&STUnit=N%2Fm",
+      "checked": "2026-10-01",
+      "supports": "Liquid water at 20.000 °C, 0.101325 MPa: density 998.21 kg/m3, viscosity 0.0010016 Pa s."
+    },
+    "os-cp-12-6": {
+      "title": "12.6 Motion of an Object in a Viscous Fluid",
+      "publisher": "OpenStax, College Physics 2e, CC BY 4.0",
+      "url": "https://openstax.org/books/college-physics-2e/pages/12-6-motion-of-an-object-in-a-viscous-fluid",
+      "checked": "2026-10-01",
+      "supports": "Reynolds number for an object in a fluid N'R = ρvL/η; below about 1 flow can be laminar; above about 10^6 fully turbulent; laminar drag proportional to speed, between about 10 and 10^6 proportional to speed squared; Stokes's law F = 6πrηv for a small sphere."
+    },
+    "os-cp-12-7": {
+      "title": "12.7 Molecular Transport Phenomena: Diffusion, Osmosis, and Related Processes",
+      "publisher": "OpenStax, College Physics 2e, CC BY 4.0",
+      "url": "https://openstax.org/books/college-physics-2e/pages/12-7-molecular-transport-phenomena-diffusion-osmosis-and-related-processes",
+      "checked": "2026-10-01",
+      "supports": "Molecules in fluids move randomly (random walk); rms distance x_rms = √(2Dt); diffusion constants increase with temperature; single celled organisms rely on diffusion for nutrients and wastes."
+    },
+    "os-cp-5-2": {
+      "title": "5.2 Drag Forces",
+      "publisher": "OpenStax, College Physics 2e, CC BY 4.0",
+      "url": "https://openstax.org/books/college-physics-2e/pages/5-2-drag-forces",
+      "checked": "2026-10-01",
+      "supports": "F_D = ½CρAv²; Table 5.2 drag coefficient of a sphere 0.45."
+    },
+    "lt-ses": {
+      "title": "5.5: Stokes-Einstein-Sutherland Equation",
+      "publisher": "Jonathan Gutow, Chemistry LibreTexts (University of Wisconsin Oshkosh), CC BY-NC-SA 4.0",
+      "url": "https://chem.libretexts.org/Courses/University_of_Wisconsin_Oshkosh/Chem_371%3A_P-Chem_2_to_Folow_Combined_Biophysical_and_P-Chem_1_(Gutow)/05%3A_Moving_Molecules_and_Chemical_Kinetics/5.05%3A_Stokes-Einstein-Sutherland_Equation",
+      "checked": "2026-10-01",
+      "supports": "D = kB T / (6π η R_eff), with kB the Boltzmann constant, T in kelvin, η the solvent viscosity and R_eff the effective radius."
+    },
+    "gwr-100free": {
+      "title": "Fastest swim long course 100 metres freestyle (male)",
+      "publisher": "Guinness World Records",
+      "url": "https://www.guinnessworldrecords.com/world-records/fastest-swim-long-course-100-metres-freestyle-male",
+      "checked": "2026-10-01",
+      "supports": "46.40 seconds, Pan Zhanle, Paris, 31 July 2024."
+    }
+  }
+}

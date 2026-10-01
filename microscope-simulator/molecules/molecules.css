@@ -1,0 +1,134 @@
+/* Molecules page, viewer engine layer (guided tour, story sections, view controls, sequence strip, measure, collections).
+   Loaded after the inline styles in index.html, so it can override the stage layout. Uses the same tokens. */
+.vh { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* layout: the stage column holds the 3D view, then the picked card, the tour and the sequence strip */
+.stagecol { flex: 0 0 auto; display: flex; flex-direction: column; min-height: 0; min-width: 0; background: var(--panel); }
+.stagecol > .stagewrap { flex: none; height: 40vh; height: 40dvh; min-height: 230px; }
+@media (min-width: 880px) {
+  .stagecol { flex: 1 1 auto; }
+  .stagecol > .stagewrap { flex: 1 1 auto; height: auto; min-height: 0; }
+}
+.tools.top { flex-wrap: wrap; justify-content: flex-end; max-width: 54%; }
+@media (min-width: 560px) { .tools.top { max-width: 62%; } }
+
+/* buttons shared by the new controls */
+.pill { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 40px; padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--raised); color: var(--ink); font-size: 14px; font-weight: 500; line-height: 1.2; text-decoration: none; }
+.pill:hover { border-color: var(--accent); }
+.pill[aria-pressed="true"], .pill.main { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.pill.main[aria-pressed="true"] { background: var(--raised); color: var(--ink); border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.pill:disabled { opacity: 0.45; cursor: default; }
+
+/* view options popover */
+.ctrls { position: absolute; right: 10px; top: calc(60px + var(--top)); z-index: 7; width: min(340px, calc(100% - 20px)); max-height: calc(100% - 72px); overflow-y: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; box-shadow: var(--shadow); }
+body.cme-shell .ctrls { top: 60px; }
+.ctrls fieldset { border: 0; margin: 0 0 10px; padding: 0; min-width: 0; }
+.ctrls legend { padding: 0; margin: 0 0 6px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.opts { display: flex; flex-wrap: wrap; gap: 6px; }
+.opt { position: relative; display: inline-flex; }
+.opt input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.opt span { display: inline-flex; align-items: center; min-height: 38px; padding: 5px 12px; border: 1px solid var(--hair); border-radius: 999px; background: var(--raised); font-size: 14px; cursor: pointer; }
+.opt span:hover { border-color: var(--accent); }
+.opt input:checked + span { border-color: var(--accent); background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); font-weight: 600; }
+.opt input:focus-visible + span { outline: 3px solid var(--accent); outline-offset: 2px; }
+.ckey { margin: 0 0 10px; font-size: 13px; color: var(--muted); }
+.ckey .bar { display: block; height: 10px; border-radius: 5px; margin: 0 0 4px; border: 1px solid var(--hair); }
+.ctrl-row { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* picked residue or atom, measure readout */
+.pick { border-top: 1px solid var(--line); background: var(--raised); padding: 10px 16px; font-size: 14px; }
+.pick-top { display: flex; align-items: flex-start; gap: 10px; }
+.pick-top .t { flex: 1 1 auto; min-width: 0; }
+.pick-top b { font-size: 16px; }
+.pick p { margin: 4px 0 0; }
+.pick .links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.pick .els { margin-top: 6px; }
+.pick .note { color: var(--muted); font-size: 13px; }
+.pick .note a { color: var(--muted); }
+.pick .x { flex: none; min-height: 36px; padding: 4px 12px; }
+/* what a tapped ion, water or ligand is (hets.json), and the key to the close-up's dashed lines */
+.pick { max-height: 40vh; max-height: 40dvh; overflow-y: auto; overscroll-behavior: contain; }
+.pick .het { line-height: 1.45; }
+/* friendly names first (parts.json), the file's code after, smaller; then what the tapped part does in this protein */
+.pick .sub { font-weight: 600; overflow-wrap: anywhere; }
+.pick .code { font-size: 12px; overflow-wrap: anywhere; }
+.pick .here { margin-top: 8px; padding-top: 6px; border-top: 1px solid var(--hair); line-height: 1.45; }
+.pick .here h4 { margin: 0; font-size: 13px; color: var(--muted); font-weight: 600; }
+.pick .kind { display: inline-block; margin-right: 2px; padding: 0 8px; border: 1px solid var(--line); border-radius: 999px; background: var(--accent-soft); color: var(--ink); font-size: 12px; font-weight: 600; line-height: 20px; vertical-align: 1px; }
+.lines-key { margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--hair); }
+.lines-key h3 { margin: 0; font-size: 14px; }
+.lines-key ul { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 6px; }
+.lines-key li { display: flex; align-items: baseline; gap: 8px; line-height: 1.4; }
+.lines-key .dash { flex: none; display: inline-flex; flex-direction: column; justify-content: center; gap: 3px; width: 28px; align-self: center; }
+.lines-key .dash i { display: block; border-top: 3px dashed; }
+
+/* guided tour player */
+.tour { border-top: 1px solid var(--line); background: var(--raised); padding: 10px 16px 12px; }
+.tour-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.tour-count { margin: 0; font-family: var(--font-data); font-size: 12.5px; color: var(--muted); }
+.tour-title { margin: 0; font-size: 17px; line-height: 1.25; outline: none; }
+.tour-title:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.tour-text { margin: 4px 0 8px; font-size: 15px; max-height: 8.5em; overflow-y: auto; }
+.tour-text sup a, .tourlist sup a, .sec sup a, .pick sup a { text-decoration: none; font-family: var(--font-data); font-size: 11px; padding: 0 1px; }
+.tour-ctl { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.dots { display: flex; flex-wrap: wrap; align-items: center; gap: 0; margin: 0 auto 0 2px; }
+.dots button { position: relative; width: 28px; height: 32px; padding: 0; border: 0; background: transparent; border-radius: 8px; }
+.dots button::before { content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: var(--line); transition: transform 0.2s, background 0.2s; }
+.dots button[aria-current="step"]::before { background: var(--accent); transform: scale(1.45); }
+.dots button:hover::before { background: var(--accent); }
+@media (prefers-reduced-motion: reduce) { .dots button::before { transition: none; } }
+
+/* sequence strip */
+.seq { border-top: 1px solid var(--line); background: var(--panel); padding: 6px 16px 4px; }
+.seq-head { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; }
+.seq-h { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.seq-chain { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
+.seq-chain select { min-height: 32px; font: inherit; color: var(--ink); background: var(--raised); border: 1px solid var(--line); border-radius: 8px; padding: 2px 6px; }
+.seq-hint { font-size: 12.5px; color: var(--muted); }
+.seq-strip { display: flex; gap: 1px; overflow-x: auto; overscroll-behavior-x: contain; padding: 13px 2px 8px; scrollbar-width: thin; font-family: var(--font-data); }
+.seq-strip button { position: relative; flex: none; min-width: 22px; height: 32px; padding: 0 3px; border: 1px solid transparent; border-radius: 5px; background: transparent; font-size: 14px; line-height: 30px; text-align: center; }
+.seq-strip button.wide { font-size: 11px; }
+.seq-strip button:hover { background: var(--accent-soft); }
+.seq-strip button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+.seq-strip button.mark { border-color: #b37800; background: rgba(255, 179, 0, 0.18); }
+.seq-strip button[data-n]::before { content: attr(data-n); position: absolute; left: 1px; top: -13px; font-size: 9.5px; line-height: 12px; color: var(--muted); pointer-events: none; }
+.seq-strip:focus-within { outline: none; }
+
+/* collections and molecule of the week */
+.colls { margin: 0 0 6px; }
+.collrow { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
+.collrow .pill { min-height: 36px; padding: 4px 12px; }
+.coll-notes { margin: 0 0 14px; padding: 12px 14px; border: 1px solid var(--hair); border-left: 3px solid var(--accent); border-radius: 12px; background: var(--raised); }
+.coll-notes h3 { margin: 0 0 6px; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.coll-note + .coll-note { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--hair); }
+.coll-note h4 { margin: 0 0 4px; font-size: 16px; }
+.coll-note p { margin: 0 0 8px; overflow-wrap: anywhere; }
+.coll-note .cards { display: flex; flex-wrap: wrap; gap: 6px; }
+.coll-note .cards .pill { min-height: 32px; padding: 3px 10px; text-decoration: none; }
+.coll-note .note { margin: 0; font-size: 13px; color: var(--muted); }
+.motw { display: flex; align-items: center; gap: 12px; margin: 0 0 14px; padding: 10px 12px; border: 1px solid var(--hair); border-left: 3px solid var(--accent); border-radius: 12px; background: var(--raised); }
+.motw img { flex: none; width: 72px; height: 54px; object-fit: contain; border-radius: 8px; background: radial-gradient(120% 100% at 50% 40%, var(--stage-a), var(--stage-b)); }
+.motw .eb { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.motw a { font-weight: 600; font-size: 15px; }
+.grid li.off { display: none; }
+
+/* story sections and the tour start button inside the detail card */
+.tourstart { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 4px 0 12px; }
+.tourstart .n { font-size: 13px; color: var(--muted); }
+.sec p { margin: 0 0 6px; }
+.hist { margin: 0 0 6px; display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 15px; }
+.hist dt { color: var(--muted); }
+.hist dd { margin: 0; overflow-wrap: anywhere; }
+.lookrow { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 4px; }
+.lookrow .pill { min-height: 38px; font-size: 13.5px; }
+.lookrow .pill b { font-family: var(--font-data); font-weight: 500; }
+.tourlist { margin: 10px 0 0; }
+.tourlist ol { margin: 8px 0 0; padding-left: 22px; }
+.tourlist li { margin: 0 0 10px; }
+.tourlist li p { margin: 2px 0 6px; }
+.tourlist .pill { min-height: 36px; padding: 4px 12px; font-size: 13.5px; }
+.slinks { list-style: none; margin: 6px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.slinks a { display: inline-flex; align-items: center; min-height: 40px; padding: 6px 12px; border: 1px solid var(--hair); border-left: 3px solid var(--accent); border-radius: 10px; background: var(--panel); color: var(--ink); text-decoration: none; font-size: 14px; }
+.slinks a:hover, .slinks a:focus-visible { border-color: var(--accent); }
+.lineup { margin: 0 0 12px; }
+.lineup .pill { display: inline-flex; align-items: center; min-height: 36px; padding: 4px 12px; text-decoration: none; }

@@ -1,0 +1,1084 @@
+{
+  "version": 1,
+  "about": "Vitamins and minerals (Builder I, 2026-10-01). Every sentence object {t, s} and every amount cites ids in sources.json. ui holds every interface word, final copy. Checked by tools/check_nutrients.py.",
+  "ui": {
+    "page.docTitle": "Vitamins and minerals: Cell and Molecule Explorer",
+    "page.eyebrow": "Cell and Molecule Explorer",
+    "page.title": "Vitamins and minerals",
+    "page.lede": "Your body runs on tiny amounts of these. Find out what each one does, the molecule or cell where it works, and what happens without it.",
+    "skip": "Skip to the nutrients",
+    "theme": "Light or dark",
+    "cite": "Source {n}",
+    "notice.title": "For learning only",
+    "notice.text": "This page is for learning, not medical advice. The amounts are general reference values for healthy teens, not personal targets. For your own needs, talk to a doctor or a dietitian.",
+    "browse.title": "Browse",
+    "browse.kind": "Show",
+    "kind.all": "All",
+    "kind.vitamin": "Vitamins",
+    "kind.mineral": "Minerals",
+    "filter.job": "Body job",
+    "filter.food": "Food",
+    "filter.site": "Body part",
+    "filter.any": "Any",
+    "filter.clear": "Clear",
+    "count": "{n} shown",
+    "none": "Nothing matches. Try clearing a filter.",
+    "map.title": "Where it works",
+    "map.help": "Pick a body part to see which nutrients work there. Open a nutrient to light up its places.",
+    "map.showing": "Places for {name}",
+    "map.showingAll": "Places for the nutrients shown",
+    "map.label": "Body map",
+    "map.picked": "{site}: {n} nutrients",
+    "soluble.fat": "Fat soluble",
+    "soluble.water": "Water soluble",
+    "mineral.tag": "Mineral, element {sym}",
+    "d.back": "All nutrients",
+    "d.prev": "Previous",
+    "d.next": "Next",
+    "d.what": "What it is",
+    "d.molecule": "The molecule",
+    "d.how": "How it works",
+    "d.where": "Where it works",
+    "d.lack": "Not enough",
+    "d.tooMuch": "Too much",
+    "d.history": "How it was found",
+    "d.foods": "Found in",
+    "d.amount": "Daily amount, ages 14 to 18",
+    "d.links": "See it in the app",
+    "d.sources": "Sources for this page",
+    "d.jobs": "Jobs",
+    "d.noMolecule": "Minerals are single elements, so there is no vitamin molecule to show. Open the element or the molecules it works in below.",
+    "amt.group": "Group",
+    "amt.male": "Males 14 to 18",
+    "amt.female": "Females 14 to 18",
+    "amt.type": "Type",
+    "amt.ul": "Upper limit",
+    "amt.perDay": "per day",
+    "amt.notSet": "Not set",
+    "amt.nutrient": "Nutrient",
+    "table.title": "Daily amounts for teens",
+    "table.caption": "Reference amounts per day for healthy people aged 14 to 18",
+    "v.spin": "Spin",
+    "v.stop": "Stop",
+    "v.reset": "Reset",
+    "v.hideH": "Hide H",
+    "v.showH": "Show H",
+    "v.label": "3D model of {name}, {formula}. Drag or use arrow keys to turn it.",
+    "v.flat": "3D is not available here, so this is a flat drawing of the same atoms.",
+    "v.note": "Ideal shape from the RCSB Chemical Component Dictionary ({code}).",
+    "v.loading": "Loading the model",
+    "v.failed": "The model could not load. The text below has everything.",
+    "v.pick": "Show",
+    "v.atoms": "{n} atoms",
+    "el.C": "carbon", "el.H": "hydrogen", "el.O": "oxygen", "el.N": "nitrogen", "el.S": "sulfur", "el.P": "phosphorus",
+    "el.Fe": "iron", "el.Co": "cobalt", "el.Mg": "magnesium", "el.I": "iodine", "el.Se": "selenium", "el.Mo": "molybdenum",
+    "link.element": "{name} on the periodic table",
+    "link.molecule": "{name} molecule",
+    "link.cell": "{name}",
+    "link.process": "{name}",
+    "link.page": "{name}",
+    "learn.remember": "What to remember",
+    "learn.myths": "Myth or fact",
+    "learn.myth": "Myth",
+    "learn.truth": "Fact",
+    "learn.words": "Words to know",
+    "sources.title": "Sources",
+    "sources.note": "Every sentence on this page comes from one of these sources. The number after a sentence points to its source.",
+    "loadFail": "This page could not load. Please refresh.",
+    "notFound": "That nutrient is not on this page. Here is the full list.",
+    "foot.credits": "Molecule shapes: RCSB PDB Chemical Component Dictionary. Text: written for this app from the sources listed.",
+    "foot.status": "Not medical advice. Reference values are for learning."
+  },
+  "jobs": [
+    {"id": "blood", "label": "Blood"},
+    {"id": "bones", "label": "Bones and teeth"},
+    {"id": "nerves", "label": "Nerves and brain"},
+    {"id": "muscles", "label": "Muscles"},
+    {"id": "energy", "label": "Energy"},
+    {"id": "eyes", "label": "Eyes"},
+    {"id": "immune", "label": "Immune system"}
+  ],
+  "sites": [
+    {"id": "brain", "label": "Brain and nerves"},
+    {"id": "eyes", "label": "Eyes"},
+    {"id": "thyroid", "label": "Thyroid"},
+    {"id": "blood", "label": "Heart and blood"},
+    {"id": "gut", "label": "Stomach and gut"},
+    {"id": "muscles", "label": "Muscles"},
+    {"id": "bones", "label": "Bones and teeth"},
+    {"id": "skin", "label": "Skin"},
+    {"id": "cells", "label": "Every cell"}
+  ],
+  "foods": [
+    {"id": "dairy", "label": "Milk and dairy"},
+    {"id": "eggs", "label": "Eggs"},
+    {"id": "meat", "label": "Meat and poultry"},
+    {"id": "fish", "label": "Fish and seafood"},
+    {"id": "greens", "label": "Leafy greens"},
+    {"id": "veg", "label": "Other vegetables"},
+    {"id": "fruit", "label": "Fruit"},
+    {"id": "grains", "label": "Whole or enriched grains"},
+    {"id": "nuts", "label": "Nuts and seeds"},
+    {"id": "beans", "label": "Beans and legumes"},
+    {"id": "salt", "label": "Salt"},
+    {"id": "water", "label": "Tap water"}
+  ],
+  "amountsInfo": [
+    {"t": "An RDA (Recommended Dietary Allowance) is the daily amount that meets the needs of nearly all healthy people in a group, 97 to 98 percent of them.", "s": ["nasem-2019-dri"]},
+    {"t": "An AI (Adequate Intake) is used when there is not enough evidence to set an RDA.", "s": ["nasem-2019-dri"]},
+    {"t": "The upper limit (UL) is the highest daily amount likely to pose no risk of harm to almost everyone. Not set means there was not enough data, not that any amount is safe.", "s": ["nasem-2019-dri"]},
+    {"t": "Numbers are for healthy people aged 14 to 18, from the National Academies summary tables. Pregnancy and breastfeeding have their own rows, not shown here.", "s": ["nasem-2019-dri"]}
+  ],
+  "nutrients": [
+    {
+      "id": "vitamin-a", "kind": "vitamin", "name": "Vitamin A", "alt": "Retinol", "soluble": "fat",
+      "short": "Lets your eyes see in dim light.",
+      "jobs": ["eyes", "immune"], "sites": ["eyes", "cells"], "foods": ["dairy", "eggs", "meat", "fish", "greens", "veg", "fruit"],
+      "what": [
+        {"t": "Vitamin A is a fat-soluble vitamin. Animal foods carry it ready made as retinol, and many fruits and vegetables carry carotenoids that the body can turn into it.", "s": ["lpi-vitamin-a"]},
+        {"t": "For example, the body makes vitamin A from the beta-carotene in orange vegetables like carrots and sweet potatoes.", "s": ["os-ap-24-7"]}
+      ],
+      "how": [
+        {"t": "In the eye, a form of vitamin A called 11-cis-retinal joins a protein called opsin to make rhodopsin, the light-catching pigment of the rod cells that let you see in dim light.", "s": ["lpi-vitamin-a"]},
+        {"t": "When a photon of light hits rhodopsin, the bent 11-cis-retinal straightens into all-trans-retinal and leaves the opsin. That change starts a nerve signal that travels along the optic nerve to the brain.", "s": ["lpi-vitamin-a"]},
+        {"t": "The straight retinal is then carried back and rebuilt into the bent form, so the visual cycle can run again.", "s": ["lpi-vitamin-a"]},
+        {"t": "Vitamin A also helps control how almost every cell in the body grows and specialises, and it supports normal immune function.", "s": ["lpi-vitamin-a"]}
+      ],
+      "lack": [
+        {"t": "Vitamin A deficiency is a major cause of preventable blindness in the world.", "s": ["lpi-vitamin-a"]},
+        {"t": "The earliest sign is night blindness, trouble adjusting to the dark. Severe or long deficiency dries out the eye (xerophthalmia) and can damage the cornea until it causes blindness.", "s": ["lpi-vitamin-a"]},
+        {"t": "Lack of vitamin A also makes people more likely to get infections.", "s": ["lpi-vitamin-a"]}
+      ],
+      "tooMuch": [
+        {"t": "Too much ready-made vitamin A can be highly toxic, and before or during pregnancy it can cause severe birth defects.", "s": ["lpi-vitamin-a"]},
+        {"t": "The upper limit applies to ready-made vitamin A only, not to vitamin A the body makes from carotenoids.", "s": ["lpi-vitamin-a", "nasem-2019-dri"]},
+        {"t": "Because fat-soluble vitamins are stored in body fat, they can build up to harmful levels.", "s": ["os-ap-24-7"]}
+      ],
+      "foodText": [
+        {"t": "Ready-made vitamin A comes from dairy products, fortified cereal, liver and fish oils. Orange and green vegetables such as sweet potato and spinach are rich in carotenoids.", "s": ["lpi-vitamin-a"]},
+        {"t": "Yellow and orange fruits and vegetables, dark green leafy vegetables, eggs and milk are also listed as sources.", "s": ["os-ap-24-7"]}
+      ],
+      "amount": {"unit": "µg RAE", "m": "900", "f": "700", "type": "RDA", "ul": "2,800 µg", "note": "RAE means retinol activity equivalents. The upper limit counts ready-made vitamin A only.", "s": ["nasem-2019-dri"]},
+      "structures": [{"code": "RTL", "label": "Retinol", "s": ["ccd-RTL"]}],
+      "links": [
+        {"type": "molecule", "id": "rhodopsin", "label": "Rhodopsin"},
+        {"type": "molecule", "id": "beta-carotene", "label": "Beta-carotene"}
+      ]
+    },
+    {
+      "id": "vitamin-c", "kind": "vitamin", "name": "Vitamin C", "alt": "Ascorbic acid", "soluble": "water",
+      "short": "Helps build collagen, the protein that holds you together.",
+      "jobs": ["immune", "bones", "blood"], "sites": ["skin", "blood", "bones"], "foods": ["fruit", "veg", "greens"],
+      "what": [
+        {"t": "Vitamin C, also called L-ascorbic acid, is a water-soluble vitamin.", "s": ["lpi-vitamin-c"]},
+        {"t": "Unlike most mammals, humans cannot make vitamin C, so it has to come from food.", "s": ["lpi-vitamin-c"]}
+      ],
+      "how": [
+        {"t": "Vitamin C is a helper (cofactor) for the enzymes that add hydroxyl groups to collagen as it is built.", "s": ["lpi-vitamin-c"]},
+        {"t": "It works by keeping the metal atom inside these enzymes in its reduced form, so the enzymes can keep going.", "s": ["lpi-vitamin-c"]},
+        {"t": "Collagen strengthens blood vessels, connective tissue and bone, and it is needed for teeth and for wounds to heal.", "s": ["lpi-vitamin-c", "os-ap-24-7"]},
+        {"t": "Vitamin C is also needed to make carnitine, which helps get energy from fat, and it is a strong antioxidant.", "s": ["lpi-vitamin-c"]}
+      ],
+      "lack": [
+        {"t": "Severe lack of vitamin C causes scurvy: bleeding under the skin, wounds that do not close, easy bruising, hair and tooth loss, and sore, swollen joints.", "s": ["lpi-vitamin-c"]},
+        {"t": "These signs come from weak collagen in blood vessels, connective tissue and bone.", "s": ["lpi-vitamin-c"]},
+        {"t": "As little as 10 mg of vitamin C a day prevents scurvy.", "s": ["lpi-vitamin-c"]}
+      ],
+      "tooMuch": [
+        {"t": "There is no good evidence that large amounts are toxic, but an upper limit was set to avoid diarrhea and stomach upset from big supplement doses.", "s": ["lpi-vitamin-c"]},
+        {"t": "Extra water-soluble vitamins leave the body in urine, so they rarely build up, except with too many supplements.", "s": ["os-ap-24-7"]}
+      ],
+      "history": [
+        {"t": "Scurvy has been known for many centuries. By the late 1700s the British navy knew it could be cured with oranges or lemons.", "s": ["lpi-vitamin-c"]},
+        {"t": "Vitamin C itself was not isolated until the early 1930s.", "s": ["lpi-vitamin-c"]},
+        {"t": "Albert Szent-Györgyi, who identified vitamin C, won the 1937 Nobel Prize in Physiology or Medicine for his work on how cells burn food, with special reference to vitamin C.", "s": ["nobel-1937"]}
+      ],
+      "foodText": [
+        {"t": "Citrus fruits, red berries, peppers, tomatoes, broccoli and dark green leafy vegetables are sources.", "s": ["os-ap-24-7"]}
+      ],
+      "amount": {"unit": "mg", "m": "75", "f": "65", "type": "RDA", "ul": "1,800 mg", "s": ["nasem-2019-dri"]},
+      "structures": [{"code": "ASC", "label": "Ascorbic acid", "s": ["ccd-ASC"]}],
+      "links": [
+        {"type": "molecule", "id": "vitamin-c", "label": "Vitamin C"},
+        {"type": "molecule", "id": "collagen", "label": "Collagen"}
+      ]
+    },
+    {
+      "id": "vitamin-d", "kind": "vitamin", "name": "Vitamin D", "alt": "Cholecalciferol (D3)", "soluble": "fat",
+      "short": "Your skin makes it in sunlight. It keeps bones hard.",
+      "jobs": ["bones", "immune"], "sites": ["skin", "bones", "gut"], "foods": ["dairy", "eggs"],
+      "what": [
+        {"t": "Vitamin D is a fat-soluble vitamin that controls calcium in the body and is vital for bones.", "s": ["lpi-vitamin-d"]},
+        {"t": "Your skin makes vitamin D3 (cholecalciferol) from a molecule called 7-dehydrocholesterol when ultraviolet B light from the sun hits it. When skin does not make enough, it has to come from food.", "s": ["lpi-vitamin-d"]}
+      ],
+      "how": [
+        {"t": "The liver and then the kidneys change vitamin D into its active form, 1,25-dihydroxyvitamin D.", "s": ["lpi-vitamin-d"]},
+        {"t": "The active form binds the vitamin D receptor and switches on hundreds of genes, many of them for the skeleton.", "s": ["lpi-vitamin-d"]},
+        {"t": "It helps the body absorb calcium, which lets bones grow, and it keeps calcium and phosphorus at the levels bones need to mineralise.", "s": ["os-ap-24-7", "lpi-vitamin-d"]},
+        {"t": "Vitamin D also has effects outside bone, especially on the immune, hormone and heart and blood vessel systems.", "s": ["lpi-vitamin-d"]}
+      ],
+      "lack": [
+        {"t": "Severe vitamin D deficiency causes rickets in children and osteomalacia, soft bones, in adults.", "s": ["lpi-vitamin-d"]},
+        {"t": "In rickets, growing bones do not harden with calcium phosphate crystals, so the arms and legs that carry weight bend and bow.", "s": ["lpi-vitamin-d"]}
+      ],
+      "tooMuch": [
+        {"t": "Too much vitamin D raises calcium in the blood (hypercalcemia), which can cause bone loss, kidney stones and calcium deposits in the heart and kidneys.", "s": ["lpi-vitamin-d"]},
+        {"t": "Sunlight does not cause vitamin D overload, because extra sun turns the starting molecules into inactive products.", "s": ["lpi-vitamin-d"]}
+      ],
+      "foodText": [
+        {"t": "Dairy products and egg yolks are sources, and the skin makes it in sunlight.", "s": ["os-ap-24-7"]}
+      ],
+      "amount": {"unit": "µg", "m": "15", "f": "15", "type": "RDA", "ul": "100 µg", "note": "As cholecalciferol, where 1 µg equals 40 IU, assuming very little sunlight.", "s": ["nasem-2019-dri"]},
+      "structures": [{"code": "VD3", "label": "Vitamin D3", "s": ["ccd-VD3"]}],
+      "links": [
+        {"type": "nutrient", "id": "calcium", "label": "Calcium"},
+        {"type": "molecule", "id": "cholesterol", "label": "Cholesterol"}
+      ]
+    },
+    {
+      "id": "vitamin-e", "kind": "vitamin", "name": "Vitamin E", "alt": "Alpha-tocopherol", "soluble": "fat",
+      "short": "Guards the fats in your cell membranes.",
+      "jobs": ["immune", "nerves"], "sites": ["cells", "brain", "eyes"], "foods": ["nuts", "greens", "veg", "fruit"],
+      "what": [
+        {"t": "Plants make eight related fat-soluble molecules, but the body mainly uses alpha-tocopherol, and only it can fix vitamin E deficiency. So only alpha-tocopherol counts as vitamin E.", "s": ["lpi-vitamin-e"]}
+      ],
+      "how": [
+        {"t": "Every cell membrane is built from fats, and free radicals can damage them in a chain reaction called lipid peroxidation.", "s": ["lpi-vitamin-e"]},
+        {"t": "Alpha-tocopherol catches these radicals and breaks the chain, protecting membranes and the fats carried in the blood.", "s": ["lpi-vitamin-e"]},
+        {"t": "After it catches a radical, vitamin E is used up, and other antioxidants such as vitamin C can turn it back into working vitamin E.", "s": ["lpi-vitamin-e"]}
+      ],
+      "lack": [
+        {"t": "Deficiency usually comes from problems absorbing fat or from rare genes, not from diet. Severe cases bring poor balance and coordination (ataxia), nerve damage, muscle weakness and damage to the retina.", "s": ["lpi-vitamin-e"]},
+        {"t": "Anemia is also listed as a problem with deficiency.", "s": ["os-ap-24-7"]}
+      ],
+      "tooMuch": [
+        {"t": "High supplement doses can get in the way of vitamin K and raise the risk of bleeding.", "s": ["lpi-vitamin-e"]}
+      ],
+      "foodText": [
+        {"t": "Sunflower seeds, almonds and hazelnuts are rich in it, and so are vegetable oils such as olive and sunflower oil. Tomatoes, avocados, spinach, asparagus and broccoli add more.", "s": ["lpi-vitamin-e"]}
+      ],
+      "amount": {"unit": "mg", "m": "15", "f": "15", "type": "RDA", "ul": "800 mg", "note": "As alpha-tocopherol. The upper limit applies to supplement forms.", "s": ["nasem-2019-dri"]},
+      "structures": [{"code": "VIV", "label": "Alpha-tocopherol", "s": ["ccd-VIV"]}],
+      "links": [
+        {"type": "cell", "id": "animal/membrane", "label": "Cell membrane"},
+        {"type": "nutrient", "id": "vitamin-c", "label": "Vitamin C"}
+      ]
+    },
+    {
+      "id": "vitamin-k", "kind": "vitamin", "name": "Vitamin K", "alt": "Phylloquinone (K1)", "soluble": "fat",
+      "short": "Makes blood clot when you get a cut.",
+      "jobs": ["blood", "bones"], "sites": ["blood", "bones"], "foods": ["greens", "veg", "dairy", "meat"],
+      "what": [
+        {"t": "Vitamin K is a fat-soluble vitamin. Vitamin K1 (phylloquinone) is made by plants and is the main form in food. Vitamin K2 (menaquinones) is made mostly by gut bacteria and found in fermented and animal foods.", "s": ["lpi-vitamin-k"]}
+      ],
+      "how": [
+        {"t": "Vitamin K is the helper for an enzyme that changes certain glutamic acid units in proteins into gamma-carboxyglutamic acid, called Gla.", "s": ["lpi-vitamin-k"]},
+        {"t": "The extra carboxyl group lets these proteins grab calcium, which blood clotting proteins and bone proteins such as osteocalcin need to work.", "s": ["lpi-vitamin-k"]},
+        {"t": "The body stores little vitamin K, so it recycles it many times in a loop called the vitamin K cycle.", "s": ["lpi-vitamin-k"]}
+      ],
+      "lack": [
+        {"t": "Lack of vitamin K raises the risk of heavy bleeding.", "s": ["lpi-vitamin-k"]},
+        {"t": "Newborns get a vitamin K injection to protect them from dangerous bleeding inside the skull. In healthy adults deficiency is uncommon.", "s": ["lpi-vitamin-k", "os-ap-24-7"]}
+      ],
+      "tooMuch": [
+        {"t": "No upper limit has been set, because there was not enough data.", "s": ["nasem-2019-dri"]}
+      ],
+      "history": [
+        {"t": "The K comes from koagulation, the Danish word for clotting.", "s": ["lpi-vitamin-k"]},
+        {"t": "Henrik Dam saw that chickens on low-fat food bled for a long time. In 1934 he showed that hempseed stopped it and concluded it held a substance needed for clotting, vitamin K. He won the 1943 Nobel Prize for the discovery.", "s": ["nobel-1943"]}
+      ],
+      "foodText": [
+        {"t": "Green leafy vegetables and some plant oils are high in phylloquinone. Cheese, animal foods and some fermented foods have menaquinones.", "s": ["lpi-vitamin-k"]},
+        {"t": "Broccoli, Brussels sprouts and cabbage are also listed.", "s": ["os-ap-24-7"]}
+      ],
+      "amount": {"unit": "µg", "m": "75", "f": "75", "type": "AI", "ul": null, "s": ["nasem-2019-dri"]},
+      "structures": [{"code": "PQN", "label": "Phylloquinone (K1)", "s": ["ccd-PQN"]}],
+      "links": [
+        {"type": "nutrient", "id": "calcium", "label": "Calcium"}
+      ]
+    },
+    {
+      "id": "b1", "kind": "vitamin", "name": "Vitamin B1", "alt": "Thiamin", "soluble": "water",
+      "short": "Helps cells burn sugar for energy.",
+      "jobs": ["energy", "nerves"], "sites": ["cells", "brain"], "foods": ["grains", "dairy", "meat"],
+      "what": [
+        {"t": "Thiamin (also spelled thiamine) is a water-soluble B vitamin, also called vitamin B1.", "s": ["lpi-thiamin"]},
+        {"t": "Isolated in the 1930s, it was one of the first molecules to be recognised as a vitamin.", "s": ["lpi-thiamin"]}
+      ],
+      "how": [
+        {"t": "Inside cells, thiamin gets two phosphate groups added and becomes thiamin pyrophosphate (TPP, also called thiamin diphosphate), its active form.", "s": ["lpi-thiamin"]},
+        {"t": "TPP helps enzyme complexes in the mitochondria, such as pyruvate dehydrogenase, break down molecules from sugars and amino acids so they can feed the citric acid cycle and make energy.", "s": ["lpi-thiamin"]}
+      ],
+      "lack": [
+        {"t": "Severe lack of thiamin causes beriberi, which can harm the nerves, muscles, heart and gut.", "s": ["lpi-thiamin"]},
+        {"t": "In dry beriberi, the nerves of the arms and legs are damaged: burning feet, weakness, and trouble getting up from a squat.", "s": ["lpi-thiamin"]},
+        {"t": "Wernicke-Korsakoff syndrome is a brain disorder from thiamin lack that causes lasting memory problems.", "s": ["lpi-thiamin", "os-ap-24-7"]}
+      ],
+      "tooMuch": [
+        {"t": "No upper limit has been set, because there was not enough data.", "s": ["nasem-2019-dri"]}
+      ],
+      "history": [
+        {"t": "Beriberi was described in Chinese writing as early as 2600 B.C.", "s": ["lpi-thiamin"]},
+        {"t": "In Dutch colonies in Asia, Christiaan Eijkman noticed that hens fed milled rice got symptoms like beriberi. By 1897 he concluded that the husk of rice held a substance that worked against the illness.", "s": ["nobel-1929"]},
+        {"t": "Substances like this came to be called vitamins, and this one was named vitamin B1. Eijkman won the 1929 Nobel Prize for the discovery.", "s": ["nobel-1929"]}
+      ],
+      "foodText": [
+        {"t": "Whole grains, enriched bread and cereals, milk and meat are sources.", "s": ["os-ap-24-7"]}
+      ],
+      "amount": {"unit": "mg", "m": "1.2", "f": "1.0", "type": "RDA", "ul": null, "s": ["nasem-2019-dri"]},
+      "structures": [
+        {"code": "VIB", "label": "Thiamin", "s": ["ccd-VIB"]},
+        {"code": "TPP", "label": "TPP, the active form", "s": ["ccd-TPP"]}
+      ],
+      "links": [
+        {"type": "process", "id": "respiration", "label": "Cellular respiration"},
+        {"type": "cell", "id": "animal/mitochondrion", "label": "Mitochondrion"}
+      ]
+    },
+    {
+      "id": "b2", "kind": "vitamin", "name": "Vitamin B2", "alt": "Riboflavin", "soluble": "water",
+      "short": "Becomes FAD, an electron carrier for energy.",
+      "jobs": ["energy", "blood"], "sites": ["cells", "skin", "eyes"], "foods": ["dairy", "nuts", "meat", "beans", "grains", "veg"],
+      "what": [
+        {"t": "Riboflavin is a water-soluble B vitamin, also known as vitamin B2.", "s": ["lpi-riboflavin"]}
+      ],
+      "how": [
+        {"t": "The body builds riboflavin into two coenzymes, flavin adenine dinucleotide (FAD) and flavin mononucleotide (FMN).", "s": ["lpi-riboflavin"]},
+        {"t": "FAD and FMN carry electrons in the oxidation and reduction reactions that release energy from food.", "s": ["lpi-riboflavin"]},
+        {"t": "They are also needed to use iron and vitamin B6 and to make niacin from the amino acid tryptophan.", "s": ["lpi-riboflavin"]},
+        {"t": "Riboflavin also plays a part in making red blood cells.", "s": ["os-ap-24-7"]}
+      ],
+      "lack": [
+        {"t": "Signs of deficiency include skin problems, cracks at the corners of the mouth, a sore tongue and changes in the cornea of the eye.", "s": ["lpi-riboflavin"]},
+        {"t": "Tiredness, slowed growth and sensitivity to light are also listed.", "s": ["os-ap-24-7"]}
+      ],
+      "tooMuch": [
+        {"t": "No upper limit has been set, because there was not enough data.", "s": ["nasem-2019-dri"]}
+      ],
+      "foodText": [
+        {"t": "Brewer's yeast, almonds, milk, organ meats, legumes, enriched breads and cereals, broccoli and asparagus are sources.", "s": ["os-ap-24-7"]}
+      ],
+      "amount": {"unit": "mg", "m": "1.3", "f": "1.0", "type": "RDA", "ul": null, "s": ["nasem-2019-dri"]},
+      "structures": [
+        {"code": "RBF", "label": "Riboflavin", "s": ["ccd-RBF"]},
+        {"code": "FAD", "label": "FAD, the coenzyme", "s": ["ccd-FAD"]}
+      ],
+      "links": [
+        {"type": "process", "id": "respiration", "label": "Cellular respiration"}
+      ]
+    },
+    {
+      "id": "b3", "kind": "vitamin", "name": "Vitamin B3", "alt": "Niacin", "soluble": "water",
+      "short": "Becomes NAD, which shuttles electrons in every cell.",
+      "jobs": ["energy", "nerves"], "sites": ["cells", "skin", "gut", "brain"], "foods": ["meat", "fish", "grains", "nuts"],
+      "what": [
+        {"t": "Niacin, or vitamin B3, is the name for food molecules the body turns into NAD, such as nicotinic acid and nicotinamide.", "s": ["lpi-niacin"]},
+        {"t": "The body can also make NAD from tryptophan, an amino acid in protein.", "s": ["lpi-niacin"]}
+      ],
+      "how": [
+        {"t": "NAD switches back and forth between NAD+ and NADH by gaining and losing electrons at its nicotinamide ring.", "s": ["lpi-niacin"]},
+        {"t": "This shuttle carries electrons for the energy reactions in all cells.", "s": ["lpi-niacin"]},
+        {"t": "Niacin is also needed for nerve function and for making cholesterol.", "s": ["os-ap-24-7"]}
+      ],
+      "lack": [
+        {"t": "Severe lack of niacin causes pellagra, known for the three Ds: sun-sensitive dermatitis, diarrhea and dementia. A fourth D, death, follows if it is not treated.", "s": ["lpi-niacin"]},
+        {"t": "The name comes from the Italian pelle agra, rough skin.", "s": ["lpi-niacin"]}
+      ],
+      "tooMuch": [
+        {"t": "Large supplement doses of nicotinic acid make the skin flush, and the upper limit is set to prevent that.", "s": ["lpi-niacin"]}
+      ],
+      "history": [
+        {"t": "Records of pellagra began after corn became a main crop in Europe in the 1700s, and it was common in the southern United States in the early 1900s where corn was a staple.", "s": ["lpi-niacin"]},
+        {"t": "It was not known in Mexico, where corn for tortillas is soaked in lime (calcium oxide). Heating corn in this alkaline water frees the niacin that is otherwise locked up in it.", "s": ["lpi-niacin"]}
+      ],
+      "foodText": [
+        {"t": "Meat, fish, poultry, enriched breads and cereals, and peanuts are sources.", "s": ["os-ap-24-7"]}
+      ],
+      "amount": {"unit": "mg NE", "m": "16", "f": "14", "type": "RDA", "ul": "30 mg", "note": "NE means niacin equivalents: 1 mg niacin equals 60 mg tryptophan. The upper limit applies to forms from supplements and fortified food.", "s": ["nasem-2019-dri"]},
+      "structures": [
+        {"code": "NCA", "label": "Nicotinamide", "s": ["ccd-NCA"]},
+        {"code": "NAD", "label": "NAD, the coenzyme", "s": ["ccd-NAD"]}
+      ],
+      "links": [
+        {"type": "process", "id": "respiration", "label": "Cellular respiration"}
+      ]
+    },
+    {
+      "id": "b5", "kind": "vitamin", "name": "Vitamin B5", "alt": "Pantothenic acid", "soluble": "water",
+      "short": "The starting piece of coenzyme A.",
+      "jobs": ["energy"], "sites": ["cells"], "foods": ["meat", "fish", "dairy", "eggs", "fruit", "beans", "veg"],
+      "what": [
+        {"t": "Pantothenic acid, also called vitamin B5, is a water-soluble vitamin that is essential to all forms of life.", "s": ["lpi-pantothenic-acid"]}
+      ],
+      "how": [
+        {"t": "The body uses pantothenic acid to build coenzyme A, which many life-sustaining reactions depend on.", "s": ["lpi-pantothenic-acid"]},
+        {"t": "Coenzyme A is used in breaking down and building fatty acids. A piece of it is also needed by the acyl carrier protein that makes fatty acids.", "s": ["os-ap-24-7", "lpi-pantothenic-acid"]}
+      ],
+      "lack": [
+        {"t": "Deficiency from diet is very rare, because pantothenic acid is found in foods from both plants and animals.", "s": ["lpi-pantothenic-acid"]},
+        {"t": "When it does happen, symptoms may include tiredness, trouble sleeping, depression and irritability.", "s": ["os-ap-24-7"]}
+      ],
+      "tooMuch": [
+        {"t": "Little or no harm has been seen from food or supplements, so no upper limit has been set.", "s": ["lpi-pantothenic-acid"]}
+      ],
+      "foodText": [
+        {"t": "Liver and kidney, fish, shellfish, milk products, eggs, avocados, legumes, mushrooms and sweet potatoes are rich in it.", "s": ["lpi-pantothenic-acid"]}
+      ],
+      "amount": {"unit": "mg", "m": "5", "f": "5", "type": "AI", "ul": null, "s": ["nasem-2019-dri"]},
+      "structures": [
+        {"code": "PAU", "label": "Pantothenic acid", "s": ["ccd-PAU"]},
+        {"code": "COA", "label": "Coenzyme A", "s": ["ccd-COA"]}
+      ],
+      "links": [
+        {"type": "molecule", "id": "palmitic-acid", "label": "Palmitic acid"},
+        {"type": "process", "id": "respiration", "label": "Cellular respiration"}
+      ]
+    },
+    {
+      "id": "b6", "kind": "vitamin", "name": "Vitamin B6", "alt": "Pyridoxine", "soluble": "water",
+      "short": "A helper for more than 100 protein enzymes.",
+      "jobs": ["blood", "nerves"], "sites": ["blood", "brain", "cells"], "foods": ["fish", "meat", "nuts", "beans", "veg", "fruit"],
+      "what": [
+        {"t": "Vitamin B6 is a water-soluble vitamin with six common forms, including pyridoxine. The active form is pyridoxal 5'-phosphate (PLP).", "s": ["lpi-vitamin-b6"]}
+      ],
+      "how": [
+        {"t": "PLP is a helper for over 100 enzymes, mostly ones that build and break down proteins and amino acids.", "s": ["lpi-vitamin-b6"]},
+        {"t": "It takes part in more than 4 percent of all enzyme reactions.", "s": ["lpi-vitamin-b6"]},
+        {"t": "It also helps make red blood cells and keeps sodium and potassium in balance.", "s": ["os-ap-24-7"]}
+      ],
+      "lack": [
+        {"t": "Deficiency can bring confusion, irritability, depression, and sores of the mouth and tongue.", "s": ["os-ap-24-7"]}
+      ],
+      "tooMuch": [
+        {"t": "Even though it dissolves in water, years of very high supplement doses can cause painful nerve damage with numbness, which may not heal.", "s": ["lpi-vitamin-b6"]},
+        {"t": "This has only been seen from supplements, never from food.", "s": ["lpi-vitamin-b6"]}
+      ],
+      "foodText": [
+        {"t": "Fish, poultry, nuts, legumes, potatoes and bananas are sources.", "s": ["lpi-vitamin-b6"]}
+      ],
+      "amount": {"unit": "mg", "m": "1.3", "f": "1.2", "type": "RDA", "ul": "80 mg", "s": ["nasem-2019-dri"]},
+      "structures": [
+        {"code": "UEG", "label": "Pyridoxine", "s": ["ccd-UEG"]},
+        {"code": "PLP", "label": "PLP, the active form", "s": ["ccd-PLP"]}
+      ],
+      "links": [
+        {"type": "molecule", "id": "glycine", "label": "Glycine, an amino acid"}
+      ]
+    },
+    {
+      "id": "b7", "kind": "vitamin", "name": "Vitamin B7", "alt": "Biotin", "soluble": "water",
+      "short": "An enzyme helper that raw egg white can block.",
+      "jobs": ["energy", "blood"], "sites": ["cells", "skin"], "foods": ["eggs", "meat", "grains", "veg", "fruit"],
+      "what": [
+        {"t": "Biotin is a water-soluble B vitamin. It was first discovered in 1927, but it took 40 more years of research to prove it is a vitamin.", "s": ["lpi-biotin"]},
+        {"t": "Humans cannot make biotin, so it has to come from outside the body.", "s": ["lpi-biotin"]}
+      ],
+      "how": [
+        {"t": "Biotin is a helper for enzymes in the cell's central metabolism and helps control which genes are switched on.", "s": ["lpi-biotin"]},
+        {"t": "It is needed for cell growth, for handling fatty acids and for making blood cells.", "s": ["os-ap-24-7"]}
+      ],
+      "lack": [
+        {"t": "Real deficiency is very rare. It has been seen in people who ate raw egg white for weeks to years.", "s": ["lpi-biotin"]},
+        {"t": "Raw egg white contains avidin, a protein that grabs biotin so tightly that it cannot be absorbed. Cooking breaks down avidin, so cooked egg white does not do this.", "s": ["lpi-biotin"]},
+        {"t": "Signs include hair loss, skin rash, poor coordination and seizures.", "s": ["lpi-biotin"]}
+      ],
+      "tooMuch": [
+        {"t": "High-dose biotin supplements can upset some lab blood tests that use the biotin and streptavidin reaction.", "s": ["lpi-biotin"]}
+      ],
+      "foodText": [
+        {"t": "Egg yolk, liver, whole-grain cereal and some vegetables are good sources.", "s": ["lpi-biotin"]},
+        {"t": "Fruits and meats are also listed.", "s": ["os-ap-24-7"]}
+      ],
+      "amount": {"unit": "µg", "m": "25", "f": "25", "type": "AI", "ul": null, "s": ["nasem-2019-dri"]},
+      "structures": [{"code": "BTN", "label": "Biotin", "s": ["ccd-BTN"]}],
+      "links": []
+    },
+    {
+      "id": "b9", "kind": "vitamin", "name": "Vitamin B9", "alt": "Folate", "soluble": "water",
+      "short": "Needed to copy DNA and make new cells.",
+      "jobs": ["blood"], "sites": ["blood", "cells"], "foods": ["meat", "beans", "greens", "grains", "fruit"],
+      "what": [
+        {"t": "Folate is a water-soluble B vitamin, also called vitamin B9. Folic acid is the man-made form used in supplements and fortified food.", "s": ["lpi-folate"]}
+      ],
+      "how": [
+        {"t": "Folate is needed to make the building blocks of DNA and RNA, to handle several amino acids and for methylation reactions.", "s": ["lpi-folate"]},
+        {"t": "In short, it supports DNA and protein synthesis.", "s": ["os-ap-24-7"]}
+      ],
+      "lack": [
+        {"t": "Severe lack of folate or of vitamin B12 causes megaloblastic anemia, with tiredness, weakness and shortness of breath.", "s": ["lpi-folate"]},
+        {"t": "Too little folate early in pregnancy raises the risk of neural tube defects in the baby. Since the US began adding folic acid to refined grains in 1998, these defects have become less common.", "s": ["lpi-folate"]}
+      ],
+      "tooMuch": [
+        {"t": "High doses of folic acid can hide a vitamin B12 deficiency and delay its diagnosis, leaving a risk of lasting nerve damage.", "s": ["lpi-folate"]}
+      ],
+      "foodText": [
+        {"t": "Liver, legumes, dark green leafy vegetables, enriched breads and cereals, and citrus fruits are sources.", "s": ["os-ap-24-7"]}
+      ],
+      "amount": {"unit": "µg DFE", "m": "400", "f": "400", "type": "RDA", "ul": "800 µg", "note": "DFE means dietary folate equivalents. The upper limit applies to folic acid from supplements and fortified food.", "s": ["nasem-2019-dri"]},
+      "structures": [{"code": "FOL", "label": "Folic acid", "s": ["ccd-FOL"]}],
+      "links": [
+        {"type": "molecule", "id": "dna", "label": "DNA"},
+        {"type": "process", "id": "dna-to-protein", "label": "DNA to protein"},
+        {"type": "cell", "id": "rbc", "label": "Red blood cell"}
+      ]
+    },
+    {
+      "id": "b12", "kind": "vitamin", "name": "Vitamin B12", "alt": "Cobalamin", "soluble": "water",
+      "short": "The biggest vitamin, with a cobalt atom at its heart.",
+      "jobs": ["blood", "nerves", "energy"], "sites": ["blood", "brain", "gut"], "foods": ["fish", "meat", "dairy", "eggs"],
+      "what": [
+        {"t": "Vitamin B12, or cobalamin, has the largest and most complex chemical structure of all the vitamins.", "s": ["lpi-vitamin-b12"]},
+        {"t": "It is the only vitamin with a metal atom inside it: cobalt.", "s": ["lpi-vitamin-b12"]}
+      ],
+      "how": [
+        {"t": "In people, cobalamin is a helper for just two enzymes. Methionine synthase links it to folate, and methylmalonyl-CoA mutase makes succinyl-CoA for the citric acid cycle.", "s": ["lpi-vitamin-b12"]},
+        {"t": "Vitamin B12 is needed to keep the myelin sheath around nerve cells healthy and to make neurotransmitters.", "s": ["lpi-vitamin-b12"]},
+        {"t": "To be absorbed, B12 has to bind intrinsic factor, a protein made by parietal cells in the stomach. The pair is taken up at the end of the small intestine.", "s": ["lpi-vitamin-b12"]}
+      ],
+      "lack": [
+        {"t": "Poor B12 absorption can cause megaloblastic anemia and nerve problems.", "s": ["lpi-vitamin-b12"]},
+        {"t": "Pernicious anemia is an autoimmune disease in which the body's own antibodies destroy stomach cells, so B12 cannot be absorbed. It leads to nerve cell damage.", "s": ["lpi-vitamin-b12", "os-ap-24-7"]}
+      ],
+      "tooMuch": [
+        {"t": "No upper limit has been set, because there was not enough data.", "s": ["nasem-2019-dri"]}
+      ],
+      "history": [
+        {"t": "George Whipple, George Minot and William Murphy shared the 1934 Nobel Prize in Physiology or Medicine for discoveries about liver therapy in cases of anaemia.", "s": ["nobel-1934"]},
+        {"t": "Using X-rays, Dorothy Crowfoot Hodgkin worked out the structure of vitamin B12 in 1956, and she won the 1964 Nobel Prize in Chemistry.", "s": ["nobel-1964"]}
+      ],
+      "foodText": [
+        {"t": "Foods from animals are the main source: fish, meat, poultry, dairy products and eggs.", "s": ["lpi-vitamin-b12", "os-ap-24-7"]}
+      ],
+      "amount": {"unit": "µg", "m": "2.4", "f": "2.4", "type": "RDA", "ul": null, "s": ["nasem-2019-dri"]},
+      "structures": [{"code": "CNC", "label": "Cyanocobalamin", "s": ["ccd-CNC"]}],
+      "links": [
+        {"type": "element", "id": "Co", "label": "Cobalt"},
+        {"type": "cell", "id": "neuron/myelin", "label": "Myelin around a nerve cell"},
+        {"type": "cell", "id": "rbc", "label": "Red blood cell"},
+        {"type": "nutrient", "id": "b9", "label": "Folate"}
+      ]
+    },
+    {
+      "id": "calcium", "kind": "mineral", "name": "Calcium", "symbol": "Ca",
+      "short": "Builds bones and switches on every muscle contraction.",
+      "jobs": ["bones", "muscles", "nerves"], "sites": ["bones", "muscles", "brain", "cells"], "foods": ["dairy", "beans", "greens", "fish", "nuts"],
+      "what": [
+        {"t": "Calcium is the most abundant mineral in the human body. About 99 percent of it is in bones and teeth, and the other 1 percent is in blood and soft tissue.", "s": ["lpi-calcium"]}
+      ],
+      "how": [
+        {"t": "When a nerve signal reaches a muscle fibre, calcium channels open and let calcium in. That calcium triggers a flood of more calcium from a store inside the cell.", "s": ["lpi-calcium"]},
+        {"t": "Calcium binds the protein troponin C, which sets off the steps of muscle contraction. Afterwards it is pumped away until the next signal.", "s": ["lpi-calcium"]},
+        {"t": "Calcium also carries messages inside cells and helps nerves send signals and blood vessels tighten and relax.", "s": ["lpi-calcium"]},
+        {"t": "Parathyroid hormone and vitamin D keep blood calcium in a narrow range. If you eat too little, the body takes calcium out of bone to keep the blood level steady.", "s": ["lpi-calcium"]}
+      ],
+      "lack": [
+        {"t": "Getting enough calcium while growing helps you reach your highest bone mass. Too little leads to bone loss later, which can end in osteoporosis and fractures.", "s": ["lpi-calcium"]},
+        {"t": "Slow growth and weak, brittle bones are listed as problems.", "s": ["os-ap-24-7"]}
+      ],
+      "tooMuch": [
+        {"t": "Very high blood calcium (hypercalcemia) is usually caused by disease, but large supplement doses taken with absorbable alkali raise the risk. Left untreated it can be fatal.", "s": ["lpi-calcium"]}
+      ],
+      "foodText": [
+        {"t": "Dairy products, beans and vegetables of the kale family are sources, though how much the body absorbs varies by food.", "s": ["lpi-calcium"]},
+        {"t": "Dark green leafy vegetables, nuts and some fish are also listed.", "s": ["os-ap-24-7"]}
+      ],
+      "amount": {"unit": "mg", "m": "1,300", "f": "1,300", "type": "RDA", "ul": "3,000 mg", "s": ["nasem-2019-dri"]},
+      "structures": [],
+      "links": [
+        {"type": "element", "id": "Ca"},
+        {"type": "cell", "id": "muscle/sr", "label": "Muscle calcium store"},
+        {"type": "cell", "id": "muscle/myofibrils", "label": "Myofibrils"},
+        {"type": "nutrient", "id": "vitamin-d", "label": "Vitamin D"}
+      ]
+    },
+    {
+      "id": "phosphorus", "kind": "mineral", "name": "Phosphorus", "symbol": "P",
+      "short": "Part of bone, DNA and ATP.",
+      "jobs": ["bones", "energy"], "sites": ["bones", "cells"], "foods": ["meat", "dairy"],
+      "what": [
+        {"t": "In the body, phosphorus is almost always bound to oxygen as phosphate.", "s": ["lpi-phosphorus"]},
+        {"t": "About 80 to 85 percent of it is in bones and teeth as hydroxyapatite, a hard crystal of calcium phosphate.", "s": ["lpi-phosphorus"]}
+      ],
+      "how": [
+        {"t": "Phosphate is part of cell membranes and of DNA and RNA.", "s": ["lpi-phosphorus"]},
+        {"t": "It is used to make energy, to mineralise bone and to send signals inside cells by adding phosphate to proteins.", "s": ["lpi-phosphorus"]},
+        {"t": "It is part of ATP, the cell's energy molecule.", "s": ["os-ap-24-7"]}
+      ],
+      "lack": [
+        {"t": "Deficiency is uncommon, seen mainly in near starvation or rare kidney disorders. Signs include loss of appetite, muscle weakness, fragile bones and rickets in children.", "s": ["lpi-phosphorus"]}
+      ],
+      "tooMuch": [
+        {"t": "High blood phosphorus is common when the kidneys fail, because they cannot remove it.", "s": ["lpi-phosphorus"]}
+      ],
+      "foodText": [
+        {"t": "Meat and milk are sources.", "s": ["os-ap-24-7"]},
+        {"t": "Phosphorus is in most foods and many food additives, and the body absorbs it more easily from animal foods than from grains, legumes and seeds.", "s": ["lpi-phosphorus"]}
+      ],
+      "amount": {"unit": "mg", "m": "1,250", "f": "1,250", "type": "RDA", "ul": "4,000 mg", "s": ["nasem-2019-dri"]},
+      "structures": [{"code": "ATP", "label": "ATP (three phosphates)", "s": ["ccd-ATP"]}],
+      "links": [
+        {"type": "element", "id": "P"},
+        {"type": "molecule", "id": "atp", "label": "ATP"},
+        {"type": "molecule", "id": "dna", "label": "DNA"}
+      ]
+    },
+    {
+      "id": "magnesium", "kind": "mineral", "name": "Magnesium", "symbol": "Mg",
+      "short": "Rides along with every ATP, and sits in the middle of chlorophyll.",
+      "jobs": ["energy", "bones", "muscles"], "sites": ["cells", "bones", "muscles"], "foods": ["greens", "grains", "beans", "nuts"],
+      "what": [
+        {"t": "Magnesium is an essential mineral that helps hundreds of enzymes work.", "s": ["lpi-magnesium"]},
+        {"t": "About 50 to 60 percent of the body's magnesium is in the skeleton, and most of the rest is in muscle.", "s": ["lpi-magnesium"]}
+      ],
+      "how": [
+        {"t": "ATP, the molecule that powers almost every process in the cell, mostly exists as a complex with magnesium, called MgATP.", "s": ["lpi-magnesium"]},
+        {"t": "Magnesium is also needed by ATP synthase, the machine in mitochondria that makes ATP.", "s": ["lpi-magnesium"]},
+        {"t": "In plants, magnesium is part of chlorophyll, the green pigment, which is why green leafy vegetables are good sources.", "s": ["lpi-magnesium"]}
+      ],
+      "lack": [
+        {"t": "Severe magnesium deficiency can upset the balance of vitamin D and calcium.", "s": ["lpi-magnesium"]},
+        {"t": "Listed problems include anxiety, sleep problems, nausea, abnormal heart rhythms, low blood pressure and muscle problems.", "s": ["os-ap-24-7"]}
+      ],
+      "tooMuch": [
+        {"t": "Too much from supplements can cause harm, especially when the kidneys do not work well. The upper limit counts magnesium from supplements and medicines only, not from food and water.", "s": ["lpi-magnesium", "nasem-2019-dri"]}
+      ],
+      "foodText": [
+        {"t": "Green leafy vegetables, unrefined grains, legumes, beans and nuts are good sources.", "s": ["lpi-magnesium"]}
+      ],
+      "amount": {"unit": "mg", "m": "410", "f": "360", "type": "RDA", "ul": "350 mg", "note": "The upper limit is for supplements and medicines only, not food.", "s": ["nasem-2019-dri"]},
+      "structures": [
+        {"code": "CLA", "label": "Chlorophyll a", "s": ["ccd-CLA"]},
+        {"code": "ATP", "label": "ATP", "s": ["ccd-ATP"]}
+      ],
+      "links": [
+        {"type": "element", "id": "Mg"},
+        {"type": "molecule", "id": "chlorophyll", "label": "Chlorophyll"},
+        {"type": "molecule", "id": "atp-synthase", "label": "ATP synthase"},
+        {"type": "process", "id": "photosynthesis", "label": "Photosynthesis"}
+      ]
+    },
+    {
+      "id": "sodium", "kind": "mineral", "name": "Sodium", "symbol": "Na",
+      "short": "The salt ion outside cells that powers nerve signals.",
+      "jobs": ["nerves", "muscles", "blood"], "sites": ["brain", "muscles", "blood", "gut"], "foods": ["salt", "dairy", "veg"],
+      "what": [
+        {"t": "Sodium is the main positive ion in the fluid outside cells. Table salt is sodium chloride.", "s": ["lpi-sodium"]}
+      ],
+      "how": [
+        {"t": "Sodium and chloride work together to control the amount of fluid outside cells and blood pressure.", "s": ["lpi-sodium"]},
+        {"t": "Pumps in the cell membrane, called Na+/K+-ATPase, use ATP to push sodium out of the cell in exchange for potassium.", "s": ["lpi-potassium"]},
+        {"t": "The difference in charge this builds across the membrane, the membrane potential, is what nerve signals, muscle contraction and the heartbeat depend on.", "s": ["lpi-potassium"]},
+        {"t": "Taking up sodium in the small intestine also helps the body absorb chloride, amino acids, glucose and water.", "s": ["lpi-sodium"]}
+      ],
+      "lack": [
+        {"t": "Low sodium in the diet is rare.", "s": ["os-ap-24-7"]},
+        {"t": "Low blood sodium (hyponatremia) that comes on fast and severe can make the brain swell and can be deadly without quick treatment.", "s": ["lpi-sodium"]}
+      ],
+      "tooMuch": [
+        {"t": "Too much sodium is a major cause of high blood pressure, a leading preventable risk for heart disease.", "s": ["lpi-sodium"]},
+        {"t": "For ages 14 to 18, the advice is to reduce intake if it is above 2,300 mg a day.", "s": ["nasem-2019-dri"]}
+      ],
+      "foodText": [
+        {"t": "Table salt, milk, beets, celery and processed foods are sources.", "s": ["os-ap-24-7"]}
+      ],
+      "amount": {"unit": "mg", "m": "1,500", "f": "1,500", "type": "AI", "ul": null, "note": "No upper limit was set. Instead there is a Chronic Disease Risk Reduction intake: reduce intake if above 2,300 mg a day.", "s": ["nasem-2019-dri"]},
+      "structures": [],
+      "links": [
+        {"type": "element", "id": "Na"},
+        {"type": "page", "id": "spark", "label": "Watch a nerve signal"},
+        {"type": "cell", "id": "neuron/axon", "label": "Axon of a nerve cell"},
+        {"type": "nutrient", "id": "potassium", "label": "Potassium"}
+      ]
+    },
+    {
+      "id": "potassium", "kind": "mineral", "name": "Potassium", "symbol": "K",
+      "short": "The ion inside cells, partner to sodium in every nerve signal.",
+      "jobs": ["nerves", "muscles"], "sites": ["brain", "muscles", "blood", "cells"], "foods": ["fruit", "veg", "nuts", "dairy", "beans", "meat", "fish"],
+      "what": [
+        {"t": "Potassium is an essential mineral and electrolyte. It is the main positive ion inside cells, where it is about 30 times more concentrated than outside.", "s": ["lpi-potassium"]}
+      ],
+      "how": [
+        {"t": "The difference in sodium and potassium across the cell membrane creates the membrane potential, kept up by Na+/K+-ATPase pumps.", "s": ["lpi-potassium"]},
+        {"t": "Running these pumps uses an estimated 20 to 40 percent of the energy a resting adult burns.", "s": ["lpi-potassium"]},
+        {"t": "Tight control of the membrane potential is critical for nerve signals, muscle contraction and the heartbeat.", "s": ["lpi-potassium"]}
+      ],
+      "lack": [
+        {"t": "Low blood potassium (hypokalemia) can cause tiredness, muscle weakness and cramps. At its worst it causes paralysis or abnormal heart rhythms that can be fatal.", "s": ["lpi-potassium"]},
+        {"t": "It usually comes from losing potassium, for example through long vomiting or diarrhea.", "s": ["lpi-potassium"]}
+      ],
+      "tooMuch": [
+        {"t": "In healthy people the kidneys adjust how much potassium leaves in urine, so safety concerns are limited.", "s": ["lpi-potassium"]},
+        {"t": "No upper limit has been set.", "s": ["nasem-2019-dri"]}
+      ],
+      "foodText": [
+        {"t": "Fruit and vegetables, some nuts and seeds, and dairy products are good sources.", "s": ["lpi-potassium"]},
+        {"t": "Meats, some fish and legumes are also listed.", "s": ["os-ap-24-7"]}
+      ],
+      "amount": {"unit": "mg", "m": "3,000", "f": "2,300", "type": "AI", "ul": null, "s": ["nasem-2019-dri"]},
+      "structures": [],
+      "links": [
+        {"type": "element", "id": "K"},
+        {"type": "page", "id": "spark", "label": "Watch a nerve signal"},
+        {"type": "molecule", "id": "potassium-channel", "label": "Potassium channel"},
+        {"type": "nutrient", "id": "sodium", "label": "Sodium"}
+      ]
+    },
+    {
+      "id": "chloride", "kind": "mineral", "name": "Chloride", "symbol": "Cl",
+      "short": "Sodium's partner in salt, and the acid in your stomach.",
+      "jobs": ["blood"], "sites": ["blood", "gut"], "foods": ["salt", "veg"],
+      "what": [
+        {"t": "Chloride is the negative ion in table salt, sodium chloride.", "s": ["lpi-sodium"]},
+        {"t": "About 70 percent of the body's chloride is in the fluid outside cells, and the rest is in the collagen of connective tissue.", "s": ["lpi-sodium"]}
+      ],
+      "how": [
+        {"t": "Sodium and chloride ions work together to control the volume of fluid outside cells and blood pressure.", "s": ["lpi-sodium"]},
+        {"t": "As hydrochloric acid (HCl), chloride is part of the gastric juice that helps digest food.", "s": ["lpi-sodium", "os-ap-24-7"]}
+      ],
+      "lack": [
+        {"t": "Loss of appetite and muscle cramps are listed as problems.", "s": ["os-ap-24-7"]}
+      ],
+      "tooMuch": [
+        {"t": "The upper limit for ages 14 to 18 is 3.6 g a day.", "s": ["nasem-2019-dri"]}
+      ],
+      "foodText": [
+        {"t": "Chloride is in most foods and salt, and in vegetables, especially seaweed, tomatoes, lettuce, celery and olives.", "s": ["os-ap-24-7"]}
+      ],
+      "amount": {"unit": "g", "m": "2.3", "f": "2.3", "type": "AI", "ul": "3.6 g", "s": ["nasem-2019-dri"]},
+      "structures": [],
+      "links": [
+        {"type": "element", "id": "Cl"},
+        {"type": "nutrient", "id": "sodium", "label": "Sodium"}
+      ]
+    },
+    {
+      "id": "iron", "kind": "mineral", "name": "Iron", "symbol": "Fe",
+      "short": "Sits in heme and carries oxygen in your blood.",
+      "jobs": ["blood", "energy"], "sites": ["blood", "muscles", "cells"], "foods": ["meat", "fish", "beans", "nuts", "grains", "greens"],
+      "what": [
+        {"t": "Iron is part of hundreds of proteins and enzymes. It switches between two forms, ferrous iron (Fe2+) and ferric iron (Fe3+).", "s": ["lpi-iron"]}
+      ],
+      "how": [
+        {"t": "Hemoglobin, myoglobin and cytochromes all hold their iron in a flat ring called heme.", "s": ["lpi-iron"]},
+        {"t": "Heme proteins like hemoglobin and myoglobin carry and store oxygen, and iron is also used to make ATP.", "s": ["lpi-iron", "os-ap-24-7"]},
+        {"t": "The body gets rid of very little iron, so the hormone hepcidin tightly controls how much is absorbed.", "s": ["lpi-iron"]},
+        {"t": "Much of the iron needed each day comes from recycling the iron in old red blood cells.", "s": ["lpi-iron"]}
+      ],
+      "lack": [
+        {"t": "Iron deficiency is the most common nutritional deficiency in the world, affecting mostly children, women of childbearing age and pregnant women.", "s": ["lpi-iron"]},
+        {"t": "When iron stores run very low, the body cannot make enough hemoglobin and red blood cells, which is anemia.", "s": ["lpi-iron"]},
+        {"t": "Weakness and fatigue are typical.", "s": ["os-ap-24-7"]}
+      ],
+      "tooMuch": [
+        {"t": "Accidental overdose of iron products is the single largest cause of poisoning deaths in children under six.", "s": ["lpi-iron"]}
+      ],
+      "foodText": [
+        {"t": "Heme iron from the hemoglobin and myoglobin in meat is absorbed much better than the nonheme iron in plants. It is only 10 to 15 percent of the iron meat eaters take in, but up to 40 percent of what they absorb.", "s": ["lpi-iron"]},
+        {"t": "Meat, poultry, fish, shellfish, legumes, nuts, seeds, whole grains and dark leafy green vegetables are sources.", "s": ["os-ap-24-7"]}
+      ],
+      "amount": {"unit": "mg", "m": "11", "f": "15", "type": "RDA", "ul": "45 mg", "s": ["nasem-2019-dri"]},
+      "structures": [{"code": "HEM", "label": "Heme", "s": ["ccd-HEM"]}],
+      "links": [
+        {"type": "element", "id": "Fe"},
+        {"type": "molecule", "id": "hemoglobin", "label": "Hemoglobin"},
+        {"type": "molecule", "id": "myoglobin", "label": "Myoglobin"},
+        {"type": "cell", "id": "rbc/rbc-hb", "label": "Hemoglobin in a red blood cell"},
+        {"type": "page", "id": "morph", "label": "Hemoglobin breathing"}
+      ]
+    },
+    {
+      "id": "zinc", "kind": "mineral", "name": "Zinc", "symbol": "Zn",
+      "short": "Holds proteins in shape so they can grip DNA.",
+      "jobs": ["immune"], "sites": ["cells", "skin"], "foods": ["meat", "eggs", "fish", "dairy", "grains", "beans"],
+      "what": [
+        {"t": "Zinc is an essential trace element for all forms of life, needed for catalytic, structural and control jobs.", "s": ["lpi-zinc"]}
+      ],
+      "how": [
+        {"t": "Over 50 different enzymes depend on zinc to speed up their reactions.", "s": ["lpi-zinc"]},
+        {"t": "Zinc also holds some proteins in shape. In a zinc finger, a zinc ion stabilises a finger-like fold that lets receptors for vitamin D, vitamin A and thyroid hormone bind DNA and switch genes on or off.", "s": ["lpi-zinc"]},
+        {"t": "The enzyme that builds DNA, DNA polymerase, needs a bound zinc ion as a cofactor.", "s": ["os-bio-6-5"]}
+      ],
+      "lack": [
+        {"t": "Lack of zinc is linked to poor growth in children and a weaker immune system with more infections.", "s": ["lpi-zinc"]},
+        {"t": "Loss of appetite, skin problems, hair loss and loss of taste or smell are also listed.", "s": ["os-ap-24-7"]}
+      ],
+      "tooMuch": [
+        {"t": "Taking more than the upper limit for a long time can cause copper deficiency.", "s": ["lpi-zinc"]}
+      ],
+      "history": [
+        {"t": "Zinc deficiency in people was first described in 1961, when diets with little usable zinc were linked to adolescent nutritional dwarfism in the Middle East.", "s": ["lpi-zinc"]}
+      ],
+      "foodText": [
+        {"t": "The body absorbs zinc well from meat, eggs and seafood, and less well from whole grains and legumes, whose phytate blocks it.", "s": ["lpi-zinc"]},
+        {"t": "Poultry and cheese are also listed.", "s": ["os-ap-24-7"]}
+      ],
+      "amount": {"unit": "mg", "m": "11", "f": "9", "type": "RDA", "ul": "34 mg", "s": ["nasem-2019-dri"]},
+      "structures": [],
+      "links": [
+        {"type": "element", "id": "Zn"},
+        {"type": "molecule", "id": "dna", "label": "DNA"},
+        {"type": "nutrient", "id": "copper", "label": "Copper"}
+      ]
+    },
+    {
+      "id": "iodine", "kind": "mineral", "name": "Iodine", "symbol": "I",
+      "short": "The thyroid builds four iodine atoms into thyroxine.",
+      "jobs": ["energy", "nerves"], "sites": ["thyroid", "brain"], "foods": ["fish", "dairy", "grains", "eggs", "salt"],
+      "what": [
+        {"t": "Iodine is a trace element the body needs to make thyroid hormones, which control growth, brain development and metabolism.", "s": ["lpi-iodine"]}
+      ],
+      "how": [
+        {"t": "The thyroid gland traps iodine from the blood and builds it into a large protein called thyroglobulin. Cutting up thyroglobulin releases the thyroid hormones thyroxine (T4) and triiodothyronine (T3).", "s": ["lpi-iodine"]},
+        {"t": "Thyroxine carries four iodine atoms, which is where the 4 in T4 comes from.", "s": ["ccd-T44", "lpi-iodine"]},
+        {"t": "In tissues like the liver and brain, selenium enzymes turn T4 into T3, the active hormone, which enters cell nuclei and switches genes on.", "s": ["lpi-iodine"]}
+      ],
+      "lack": [
+        {"t": "Too little iodine means too little thyroid hormone (hypothyroidism). The effects range from a swollen thyroid gland, called a goitre (goiter), to severe growth and intellectual impairment.", "s": ["lpi-iodine"]},
+        {"t": "Iodine deficiency is the most common cause of preventable brain damage in the world.", "s": ["lpi-iodine"]}
+      ],
+      "tooMuch": [
+        {"t": "Taking in more than the upper limit for a long time can itself cause goitre and other thyroid problems.", "s": ["lpi-iodine"]}
+      ],
+      "history": [
+        {"t": "More than 140 countries add iodine to salt to fight deficiency, and about 89 percent of the world's people use iodized salt.", "s": ["lpi-iodine"]}
+      ],
+      "foodText": [
+        {"t": "Seafood and some seaweeds are excellent sources. Dairy products, grains and eggs also add a lot in the US.", "s": ["lpi-iodine"]}
+      ],
+      "amount": {"unit": "µg", "m": "150", "f": "150", "type": "RDA", "ul": "900 µg", "s": ["nasem-2019-dri"]},
+      "structures": [{"code": "T44", "label": "Thyroxine (T4)", "s": ["ccd-T44"]}],
+      "links": [
+        {"type": "element", "id": "I"},
+        {"type": "nutrient", "id": "selenium", "label": "Selenium"}
+      ]
+    },
+    {
+      "id": "selenium", "kind": "mineral", "name": "Selenium", "symbol": "Se",
+      "short": "Built into a rare amino acid, selenocysteine.",
+      "jobs": ["immune"], "sites": ["thyroid", "cells"], "foods": ["nuts", "grains", "fish", "meat", "dairy"],
+      "what": [
+        {"t": "Selenium is a trace mineral that humans need in small amounts, but like all essential elements it can be toxic at high levels.", "s": ["lpi-selenium"]}
+      ],
+      "how": [
+        {"t": "Selenium works mainly as part of the amino acid selenocysteine, which is built into at least 25 human proteins called selenoproteins.", "s": ["lpi-selenium"]},
+        {"t": "Selenoproteins include glutathione peroxidases, which protect against oxidation, and the deiodinases that turn thyroid hormone T4 into active T3.", "s": ["lpi-selenium", "lpi-iodine"]},
+        {"t": "Selenium also supports the immune system.", "s": ["os-ap-24-7"]}
+      ],
+      "lack": [
+        {"t": "Keshan disease, a heart muscle disease, and Kashin-Beck disease, a bone and joint disease, occur in areas of Asia where soil is low in selenium.", "s": ["lpi-selenium"]}
+      ],
+      "tooMuch": [
+        {"t": "The upper limit of 400 µg a day for teens and adults counts selenium from food and supplements together.", "s": ["lpi-selenium", "nasem-2019-dri"]}
+      ],
+      "foodText": [
+        {"t": "How much selenium plants hold depends on the soil they grow in. Brazil nuts, grains, seafood, organ meats, poultry and dairy products are rich sources.", "s": ["lpi-selenium"]}
+      ],
+      "amount": {"unit": "µg", "m": "55", "f": "55", "type": "RDA", "ul": "400 µg", "s": ["nasem-2019-dri"]},
+      "structures": [{"code": "SEC", "label": "Selenocysteine", "s": ["ccd-SEC"]}],
+      "links": [
+        {"type": "element", "id": "Se"},
+        {"type": "nutrient", "id": "iodine", "label": "Iodine"}
+      ]
+    },
+    {
+      "id": "copper", "kind": "mineral", "name": "Copper", "symbol": "Cu",
+      "short": "Moves electrons and gets iron ready to travel.",
+      "jobs": ["blood", "nerves", "immune"], "sites": ["blood", "brain", "cells"], "foods": ["meat", "fish", "nuts", "grains", "beans"],
+      "what": [
+        {"t": "Copper is an essential trace element. It easily switches between two forms, Cu+ and Cu2+, which makes it good at oxidation and reduction reactions.", "s": ["lpi-copper"]}
+      ],
+      "how": [
+        {"t": "Copper enzymes help make ATP, handle iron, build connective tissue and make nerve signal chemicals.", "s": ["lpi-copper"]},
+        {"t": "Ceruloplasmin, which holds most of the copper in blood plasma, changes iron from Fe2+ to Fe3+ so it can load onto transferrin and travel to places like the bone marrow.", "s": ["lpi-copper"]},
+        {"t": "Copper is also needed for red blood cells, the immune system and collagen.", "s": ["os-ap-24-7"]}
+      ],
+      "lack": [
+        {"t": "Low copper causes anemia, bone and connective tissue problems and nerve trouble.", "s": ["lpi-copper"]},
+        {"t": "Lack from diet alone is rarely described, but very high zinc supplements or rare genetic conditions can cause it.", "s": ["lpi-copper"]}
+      ],
+      "tooMuch": [
+        {"t": "Copper overload is rare. It is mostly seen in Wilson disease, an inherited condition where copper builds up first in the liver and then in the brain.", "s": ["lpi-copper"]}
+      ],
+      "history": [
+        {"t": "Hippocrates is said to have prescribed copper compounds to treat disease as early as 400 B.C.", "s": ["lpi-copper"]}
+      ],
+      "foodText": [
+        {"t": "Organ meats, shellfish, nuts, seeds, wheat-bran cereals and whole grains are good sources.", "s": ["lpi-copper"]},
+        {"t": "Legumes, chocolate and some fruits and vegetables are also listed.", "s": ["os-ap-24-7"]}
+      ],
+      "amount": {"unit": "µg", "m": "890", "f": "890", "type": "RDA", "ul": "8,000 µg", "s": ["nasem-2019-dri"]},
+      "structures": [],
+      "links": [
+        {"type": "element", "id": "Cu"},
+        {"type": "nutrient", "id": "iron", "label": "Iron"},
+        {"type": "nutrient", "id": "zinc", "label": "Zinc"}
+      ]
+    },
+    {
+      "id": "fluoride", "kind": "mineral", "name": "Fluoride", "symbol": "F",
+      "short": "Swaps into tooth crystals and helps fight cavities.",
+      "jobs": ["bones"], "sites": ["bones"], "foods": ["water"],
+      "what": [
+        {"t": "Fluoride is the ion form of the element fluorine. About 95 percent of the body's fluoride is in bones and teeth.", "s": ["lpi-fluoride"]},
+        {"t": "Fluoride is not usually called essential, because people do not need it to grow or stay alive, but it is valued for preventing tooth decay.", "s": ["lpi-fluoride"]}
+      ],
+      "how": [
+        {"t": "Bone and teeth are made of hydroxyapatite, a calcium phosphate crystal. Fluoride is small and reactive, so it can take the place of the hydroxyl group in the crystal, forming fluoroapatite.", "s": ["lpi-fluoride"]},
+        {"t": "Fluoride intake and fluoride dental products reduce cavities by helping teeth mineralise and remineralise.", "s": ["lpi-fluoride"]}
+      ],
+      "lack": [
+        {"t": "More cavities and weaker bones and teeth are listed as problems.", "s": ["os-ap-24-7"]}
+      ],
+      "tooMuch": [
+        {"t": "Too much fluoride while teeth are forming causes white speckles or mottling, called dental fluorosis.", "s": ["lpi-fluoride"]}
+      ],
+      "foodText": [
+        {"t": "The main sources are drinking water, foods and drinks made with fluoridated water, and fluoride dental products.", "s": ["lpi-fluoride", "os-ap-24-7"]}
+      ],
+      "amount": {"unit": "mg", "m": "3", "f": "3", "type": "AI", "ul": "10 mg", "s": ["nasem-2019-dri"]},
+      "structures": [],
+      "links": [
+        {"type": "element", "id": "F"},
+        {"type": "nutrient", "id": "calcium", "label": "Calcium"}
+      ]
+    },
+    {
+      "id": "manganese", "kind": "mineral", "name": "Manganese", "symbol": "Mn",
+      "short": "Helps enzymes guard mitochondria and build cartilage and bone.",
+      "jobs": ["bones", "energy"], "sites": ["bones", "cells", "brain"], "foods": ["grains", "beans", "nuts", "greens", "fruit"],
+      "what": [
+        {"t": "Manganese is a mineral the body needs, but it can also be toxic. Its name comes from the Greek word for magic.", "s": ["lpi-manganese"]}
+      ],
+      "how": [
+        {"t": "Manganese is part of some enzymes and switches on others.", "s": ["lpi-manganese"]},
+        {"t": "In mitochondria, the enzyme manganese superoxide dismutase (MnSOD) turns superoxide, a harmful form of oxygen made while making ATP, into hydrogen peroxide, which other enzymes turn into water.", "s": ["lpi-manganese"]},
+        {"t": "Manganese enzymes help make glucose from non-carbohydrate building blocks, and the liver needs one of them, arginase, for the urea cycle that clears ammonia.", "s": ["lpi-manganese"]},
+        {"t": "It is the preferred helper of enzymes that build cartilage and bone, and it switches on prolidase, which supplies the amino acid proline for collagen in skin.", "s": ["lpi-manganese"]}
+      ],
+      "lack": [
+        {"t": "Manganese deficiency is seen in animals but is not a concern in humans, and overall it is quite rare.", "s": ["lpi-manganese"]},
+        {"t": "A child fed only by drip (total parenteral nutrition) without manganese for a long time developed weaker bones and slower growth, which manganese corrected.", "s": ["lpi-manganese"]}
+      ],
+      "tooMuch": [
+        {"t": "There is more concern about too much manganese than too little. Breathing in manganese dust, as welders, miners and smelters can, may cause manganism, a lasting nerve disorder like Parkinson's disease.", "s": ["lpi-manganese"]},
+        {"t": "Infants and children absorb more manganese and clear less of it than adults, so they are especially at risk from too much.", "s": ["lpi-manganese"]}
+      ],
+      "foodText": [
+        {"t": "Whole grains, legumes, nuts, leafy vegetables and tea are rich sources. Pineapple, pecans and oatmeal are among the foods listed with high amounts.", "s": ["lpi-manganese"]},
+        {"t": "Tea is rich in manganese, but tannins in tea may lower how much of it is absorbed.", "s": ["lpi-manganese"]}
+      ],
+      "amount": {"unit": "mg", "m": "2.2", "f": "1.6", "type": "AI", "ul": "9 mg", "s": ["nasem-2019-dri"]},
+      "structures": [],
+      "links": [
+        {"type": "element", "id": "Mn"},
+        {"type": "nutrient", "id": "iron", "label": "Iron"}
+      ]
+    },
+    {
+      "id": "molybdenum", "kind": "mineral", "name": "Molybdenum", "symbol": "Mo",
+      "short": "Sits inside a cofactor that runs four enzymes, one of them vital for clearing sulfite.",
+      "jobs": ["nerves"], "sites": ["cells"], "foods": ["beans", "grains", "nuts"],
+      "what": [
+        {"t": "Molybdenum is an essential trace element for almost all living things.", "s": ["lpi-molybdenum"]},
+        {"t": "In the body it works as part of an organic molecule called the molybdenum cofactor (Moco), which sits in the active site of the enzymes that use it.", "s": ["lpi-molybdenum"]}
+      ],
+      "how": [
+        {"t": "In humans, molybdenum is a cofactor for four enzymes: sulfite oxidase, xanthine oxidase, aldehyde oxidase and mitochondrial amidoxime reducing component (mARC).", "s": ["lpi-molybdenum"]},
+        {"t": "Sulfite oxidase turns sulfite into sulfate, a step needed to break down the sulfur amino acids methionine and cysteine. Of the four enzymes, it is the one known to be crucial for health.", "s": ["lpi-molybdenum"]},
+        {"t": "Xanthine oxidase breaks down nucleotides into uric acid, and together with aldehyde oxidase it also helps process drugs and toxins.", "s": ["lpi-molybdenum"]}
+      ],
+      "lack": [
+        {"t": "Molybdenum deficiency from diet has never been seen in healthy people. The only documented case was a patient on long-term drip feeding without molybdenum, who improved once molybdenum was added.", "s": ["lpi-molybdenum"]},
+        {"t": "Rare inherited defects in making the cofactor stop all the molybdenum enzymes at once. Losing sulfite oxidase causes severe brain and nerve problems, usually from the first days of life.", "s": ["lpi-molybdenum"]}
+      ],
+      "tooMuch": [
+        {"t": "Molybdenum seems to have fairly low toxicity in people. Gout-like symptoms were reported in a population eating 10 to 15 mg a day from food.", "s": ["lpi-molybdenum"]},
+        {"t": "In grazing animals, too much molybdenum causes a deadly copper deficiency, because molybdenum and sulfur form compounds that block copper.", "s": ["lpi-molybdenum"]}
+      ],
+      "foodText": [
+        {"t": "Legumes such as beans, lentils and peas are the richest sources. Grain products and nuts are good sources, while animal foods, fruit and many vegetables are low.", "s": ["lpi-molybdenum"]},
+        {"t": "How much a plant holds depends on the soil it grew in, so amounts vary a lot. Usual intakes in the US are well above the RDA.", "s": ["lpi-molybdenum"]}
+      ],
+      "amount": {"unit": "µg", "m": "43", "f": "43", "type": "RDA", "ul": "1,700 µg", "s": ["nasem-2019-dri"]},
+      "structures": [{"code": "MSS", "label": "Molybdopterin holding a molybdenum atom, the core of the cofactor", "s": ["ccd-MSS", "lpi-molybdenum"]}],
+      "links": [
+        {"type": "element", "id": "Mo"},
+        {"type": "nutrient", "id": "copper", "label": "Copper"}
+      ]
+    },
+    {
+      "id": "chromium", "kind": "mineral", "name": "Chromium", "symbol": "Cr",
+      "short": "May help insulin work, but whether the body truly needs it is debated.",
+      "jobs": ["energy"], "sites": ["blood"], "foods": ["grains", "veg", "nuts", "eggs", "meat"],
+      "what": [
+        {"t": "Chromium is a trace metal found almost everywhere. In the body it is mostly in the form called trivalent chromium, Cr3+.", "s": ["lpi-chromium"]},
+        {"t": "Whether chromium is essential is questioned. In 2001 the US Institute of Medicine set an Adequate Intake, but in 2014 the European Food Safety Authority concluded that no requirement could be set, because there is no conclusive evidence that chromium is essential.", "s": ["lpi-chromium"]}
+      ],
+      "how": [
+        {"t": "Cr3+ has been proposed as a helper for a molecule that boosts the effect of insulin, the hormone that lets cells take up glucose from the blood.", "s": ["lpi-chromium"]},
+        {"t": "One model says a small chromium-binding substance called chromodulin helps the insulin receptor signal, but this has not been confirmed in living animals or people.", "s": ["lpi-chromium"]},
+        {"t": "Chromium seems to have health effects only at doses far above what food provides.", "s": ["lpi-chromium"]}
+      ],
+      "lack": [
+        {"t": "A chromium deficiency from diet has not been observed in humans.", "s": ["lpi-chromium"]},
+        {"t": "A few patients on long-term drip feeding without chromium had trouble using glucose that improved with chromium, but these cases are now seen as hard to interpret.", "s": ["lpi-chromium"]}
+      ],
+      "tooMuch": [
+        {"t": "There is little evidence that Cr3+ from food or supplements is toxic, because it is poorly absorbed and quickly lost in urine. No upper limit was set, but experts still advised caution with high-dose supplements.", "s": ["lpi-chromium"]},
+        {"t": "A few isolated reports link chromium picolinate supplements to kidney failure.", "s": ["lpi-chromium"]},
+        {"t": "Hexavalent chromium, Cr6+, is a different, industrial form. It is highly toxic and causes cancer when breathed in.", "s": ["lpi-chromium"]}
+      ],
+      "history": [
+        {"t": "Chromium was first discovered in 1797.", "s": ["lpi-chromium"]}
+      ],
+      "foodText": [
+        {"t": "Whole-grain products, high-bran cereals, green beans, broccoli, nuts and egg yolk are good sources.", "s": ["lpi-chromium"]},
+        {"t": "Chromium has been measured in relatively few foods, and the amount can vary a lot between batches of the same food.", "s": ["lpi-chromium"]}
+      ],
+      "amount": {"unit": "µg", "m": "35", "f": "24", "type": "AI", "ul": null, "s": ["nasem-2019-dri"]},
+      "structures": [],
+      "links": [
+        {"type": "element", "id": "Cr"}
+      ]
+    }
+  ],
+  "learn": {
+    "keyIdeas": [
+      {"t": "Vitamins are organic compounds from food that the body needs for its chemical reactions, and many of them are coenzymes or the starting pieces of coenzymes that enzymes need to work.", "s": ["os-ap-24-7", "os-bio-6-5"]},
+      {"t": "Vitamins A, D, E and K are fat soluble: they travel with fats and can build up in body fat. The B vitamins and vitamin C are water soluble: extra amounts leave in urine.", "s": ["os-ap-24-7"]},
+      {"t": "Minerals are inorganic and cannot be made by the body, so they must come from food. Calcium and phosphorus are the most common and harden the skeleton.", "s": ["os-ap-24-7"]},
+      {"t": "Several B vitamins become coenzymes for energy reactions: B2 becomes FAD and FMN, B3 becomes NAD, and B5 becomes coenzyme A.", "s": ["lpi-riboflavin", "lpi-niacin", "lpi-pantothenic-acid"]},
+      {"t": "Some minerals sit at the heart of a molecule: iron in heme, magnesium in chlorophyll and with ATP, cobalt in vitamin B12, iodine in thyroid hormone.", "s": ["lpi-iron", "lpi-magnesium", "lpi-vitamin-b12", "lpi-iodine"]},
+      {"t": "Sodium outside cells and potassium inside, kept apart by Na+/K+ pumps, create the membrane potential that nerve signals, muscle contraction and the heartbeat need.", "s": ["lpi-potassium"]},
+      {"t": "Classic deficiency diseases each point to one missing nutrient: scurvy (vitamin C), rickets (vitamin D), beriberi (B1), pellagra (B3), goitre (iodine) and anemia (iron, folate or B12).", "s": ["lpi-vitamin-c", "lpi-vitamin-d", "lpi-thiamin", "lpi-niacin", "lpi-iodine", "lpi-iron", "lpi-folate"]},
+      {"t": "Reference amounts are for groups, not individuals: an RDA covers nearly all healthy people in a group (97 to 98 percent), and an AI is used when the evidence is too thin for an RDA.", "s": ["nasem-2019-dri"]}
+    ],
+    "misconceptions": [
+      {"myth": "More vitamins are always better.", "truth": "Fat-soluble vitamins are stored in body fat and can build up to harmful levels (hypervitaminosis). Minerals can also reach toxic amounts, mostly through supplements and processed foods.", "s": ["os-ap-24-7"]},
+      {"myth": "Water-soluble vitamins are harmless in any amount.", "truth": "Years of very high vitamin B6 supplement doses can cause nerve damage that may not heal, even though B6 dissolves in water.", "s": ["lpi-vitamin-b6"]},
+      {"myth": "Taking vitamin C stops you catching colds.", "truth": "Regular vitamin C supplements do not lower the chance of catching a cold. They make colds a bit shorter and milder, and starting them after symptoms begin helps little.", "s": ["lpi-vitamin-c"]},
+      {"myth": "Lots of sun can give you a vitamin D overdose.", "truth": "Vitamin D toxicity has not been seen from sun exposure. Extra sunlight turns the starting molecules into inactive products instead.", "s": ["lpi-vitamin-d"]},
+      {"myth": "Niacin is related to the nicotine in tobacco.", "truth": "None of the forms of niacin are related to nicotine, even though the names sound alike.", "s": ["lpi-niacin"]},
+      {"myth": "Minerals are just for bones.", "truth": "Most minerals work as ions all over the body. Sodium and chloride are electrolytes in the blood, and iron is needed to make hemoglobin.", "s": ["os-ap-24-7"]},
+      {"myth": "Iron from plants and iron from meat are absorbed the same.", "truth": "Heme iron from meat is absorbed much better than the nonheme iron in plants.", "s": ["lpi-iron"]}
+    ],
+    "vocab": [
+      {"term": "Vitamin", "definition": "An organic compound in food that the body needs for its chemical reactions.", "s": ["os-ap-24-7"]},
+      {"term": "Mineral", "definition": "An inorganic nutrient from food that the body cannot make, such as calcium or iron.", "s": ["os-ap-24-7"]},
+      {"term": "Cofactor", "definition": "An inorganic ion, such as iron or magnesium, that an enzyme needs to bind to work well.", "s": ["os-bio-6-5"]},
+      {"term": "Coenzyme", "definition": "An organic helper molecule that an enzyme needs. Many vitamins are coenzymes or are made into them.", "s": ["os-bio-6-5"]},
+      {"term": "Fat soluble", "definition": "Dissolves in fat. Vitamins A, D, E and K are absorbed with fats and can be stored in body fat.", "s": ["os-ap-24-7"]},
+      {"term": "Water soluble", "definition": "Dissolves in water. The B vitamins and vitamin C move easily through body fluids and are not stored.", "s": ["os-ap-24-7"]},
+      {"term": "Hypervitaminosis", "definition": "Harm from too much of a vitamin, most often a fat-soluble one stored in body fat.", "s": ["os-ap-24-7"]},
+      {"term": "Electrolyte", "definition": "A substance that splits into ions in solution, so it can carry electricity. Sodium, potassium and chloride are electrolytes.", "s": ["lpi-potassium", "os-ap-24-7"]},
+      {"term": "Membrane potential", "definition": "The electrical difference across a cell membrane made by different amounts of sodium and potassium on each side.", "s": ["lpi-potassium"]},
+      {"term": "Heme", "definition": "The iron-holding ring inside hemoglobin, myoglobin and cytochromes.", "s": ["lpi-iron"]},
+      {"term": "Anemia", "definition": "Too few working red blood cells or too little hemoglobin. Lack of iron, folate or vitamin B12 can cause it.", "s": ["lpi-iron", "lpi-folate"]},
+      {"term": "Goitre", "definition": "A swollen thyroid gland, often from too little iodine. Also spelled goiter.", "s": ["lpi-iodine"]},
+      {"term": "Intrinsic factor", "definition": "A protein made in the stomach that vitamin B12 must bind to be absorbed.", "s": ["lpi-vitamin-b12"]},
+      {"term": "RDA", "definition": "Recommended Dietary Allowance: the daily amount that meets the needs of nearly all (97 to 98 percent) healthy people in a group.", "s": ["nasem-2019-dri"]},
+      {"term": "AI", "definition": "Adequate Intake: a daily amount used when there is not enough evidence to set an RDA.", "s": ["nasem-2019-dri"]},
+      {"term": "UL", "definition": "Tolerable Upper Intake Level: the highest daily amount likely to pose no risk of harm to almost everyone.", "s": ["nasem-2019-dri"]}
+    ]
+  }
+}

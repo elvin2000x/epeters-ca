@@ -1,0 +1,61 @@
+{
+ "id": "aquaporin",
+ "structure": "1J4N",
+ "tour": [
+  {"id": "channel", "title": "A water channel", "focus": {"chains": ["A"], "residues": null, "ligands": null, "whole": true}, "view": "cartoon",
+   "text": [{"t": "Aquaporin 1 is a channel that lets water cross the cell membrane, which otherwise resists water.", "s": ["motm-aquaporin", "uniprot-P47865"]},
+            {"t": "The real channel is four identical chains, each with its own pore; this file holds one of them, from a cow.", "s": ["motm-aquaporin", "rcsb-1J4N"]}]},
+  {"id": "helices", "title": "Six helices across the membrane", "focus": {"chains": ["A"], "residues": [[12, 29], [49, 67], [93, 111], [136, 155], [166, 183], [209, 226]], "ligands": null, "whole": false}, "view": "cartoon",
+   "text": [{"t": "Six helices cross the membrane, the frame that holds the water pore.", "s": ["uniprot-P47865", "rcsb-1J4N"]}]},
+  {"id": "npa", "title": "Two NPA loops", "focus": {"chains": ["A"], "residues": [[78, 80], [194, 196]], "ligands": null, "whole": false}, "view": "ball-and-stick",
+   "text": [{"t": "Two short loops dip into the membrane, each carrying the signature asparagine, proline, alanine (NPA).", "s": ["uniprot-P47865", "rcsb-1J4N"]},
+            {"t": "Their two asparagines hold the central water in a fixed direction, so the channel cannot pass protons along a chain of water.", "s": ["motm-aquaporin", "paper-sui-2001"]}]},
+  {"id": "his182", "title": "The narrowest point", "focus": {"chains": ["A"], "residues": [[182, 182]], "ligands": null, "whole": false}, "view": "ball-and-stick",
+   "text": [{"t": "Histidine 182 lines the tightest part of the pore.", "s": ["paper-sui-2001", "rcsb-1J4N"]},
+            {"t": "It is found in every known water-only channel and helps make sure that only water gets through.", "s": ["paper-sui-2001"]}]},
+  {"id": "pore", "title": "Single file", "focus": {"chains": ["A"], "residues": null, "ligands": null, "whole": true}, "view": "surface",
+   "text": [{"t": "Water molecules pass through the long, narrow pore one at a time, in single file.", "s": ["motm-aquaporin", "paper-sui-2001"]}]}
+ ],
+ "sections": {
+  "does": [
+   {"t": "Aquaporins let water flow in and out of cells that need to move a lot of water, such as in the kidneys and the eye.", "s": ["motm-aquaporin"]},
+   {"t": "In the kidney, aquaporins let water leave the tubules and return to the body, which reduces the amount of urine.", "s": ["os-37-3", "os-41-2"]}
+  ],
+  "shape": [
+   {"t": "The pore has a wide entrance on each side of the membrane, joined by a long, narrow filter.", "s": ["paper-sui-2001"]},
+   {"t": "The filter is mostly water-repelling with just a few spots that bind water, a mix that lets water rush through quickly.", "s": ["paper-sui-2001"]},
+   {"t": "Water molecules in the channel are forced to point in set directions, which blocks protons from hopping through.", "s": ["motm-aquaporin", "paper-sui-2001"]}
+  ],
+  "lives": {
+   "text": [
+    {"t": "This aquaporin, AQP1, is found in the membrane of red blood cells.", "s": ["motm-aquaporin"]},
+    {"t": "Kidney tubule cells also use aquaporins to take water back from the filtrate.", "s": ["os-41-2", "os-37-3"]}
+   ],
+   "links": [{"type": "cell", "id": "rbc"}, {"type": "part", "id": "rbc-membrane"}, {"type": "part", "id": "membrane"}, {"type": "molecule", "id": "water"}, {"type": "process", "id": "osmosis-lab"}]
+  },
+  "wrong": [
+   {"t": "Aquaporins were first noticed because mercury blocks water flow in and out of red blood cells, but mercury is far too toxic to use as a drug.", "s": ["motm-aquaporin"]},
+   {"t": "Scientists are searching for safer aquaporin blockers to treat water-related diseases such as glaucoma.", "s": ["motm-aquaporin"]}
+  ],
+  "history": {
+   "year": 2001, "who": "H. Sui, B.G. Han, J.K. Lee, P. Walian and B.K. Jap", "method": "X-ray", "resolution_A": 2.2,
+   "text": [
+    {"t": "This X-ray structure of cow AQP1 at 2.2 angstroms showed how the channel lets water through but not protons.", "s": ["paper-sui-2001", "rcsb-1J4N"]},
+    {"t": "In 2001, mammals were known to have ten families of these water channels, named AQP0 to AQP9.", "s": ["paper-sui-2001"]}
+   ]
+  },
+  "size": {
+   "nm": 7.0,
+   "compare": [
+    {"t": "One aquaporin chain measures about 7 nm from end to end in this file.", "s": ["rcsb-1J4N"]},
+    {"t": "A water molecule measures about 0.16 nm across, so the water passing through is tiny next to its channel.", "s": ["ccd-HOH", "rcsb-1J4N"]}
+   ]
+  }
+ },
+ "highlights": [
+  {"chain": "A", "residue": 182, "comp": "HIS", "label": "His182 in the constriction", "text": [{"t": "Key to letting only water through.", "s": ["paper-sui-2001"]}]},
+  {"chain": "A", "residue": 78, "comp": "ASN", "label": "Asn78 (first NPA)", "text": [{"t": "One of the two asparagines that hold the central water.", "s": ["motm-aquaporin", "uniprot-P47865"]}]},
+  {"chain": "A", "residue": 194, "comp": "ASN", "label": "Asn194 (second NPA)", "text": [{"t": "The other asparagine that holds the central water.", "s": ["motm-aquaporin", "uniprot-P47865"]}]}
+ ],
+ "review": "pending"
+}

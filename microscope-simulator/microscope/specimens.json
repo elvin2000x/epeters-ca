@@ -1,0 +1,534 @@
+{
+  "contentStatus": "Organisms section, built 2026-10-01. Shapes are our own illustrative drawings. Every size used for drawing is inside the cited range, so the scale bar is true. Copy under 'copy' is placeholder text for COPYWRITER MAIN.",
+  "copy": {
+    "brand": "Cell and Molecule Explorer",
+    "eyebrow": "Virtual microscope",
+    "intro": "Pick a slide, then zoom, focus and tap a cell to identify it.",
+    "realSize": "Illustrative drawing, real size",
+    "slidesHeading": "Slides",
+    "magHeading": "Magnification",
+    "focusLabel": "Focus",
+    "focusHint": "0 is the middle of the cell. Move up or down to see other layers.",
+    "refocus": "Refocus",
+    "lightHeading": "Light",
+    "brightfield": "Brightfield",
+    "darkfield": "Darkfield",
+    "timeHeading": "Time",
+    "pause": "Pause",
+    "play": "Play",
+    "follow": "Follow with the stage",
+    "identify": "Identify",
+    "identifyHint": "Tap or click a cell, or press Enter on the view.",
+    "missed": "Nothing to identify there. Try tapping right on a cell.",
+    "fieldGuide": "Field guide",
+    "sizeDrawn": "Drawn at",
+    "legendHeading": "Colour key",
+    "altHeading": "Text description of this view",
+    "keysHeading": "Keyboard",
+    "sourcesHeading": "Sources",
+    "back": "Back to the explorer",
+    "theme": "Theme",
+    "reducedMotion": "Movement is paused because your device asks for reduced motion. Press Play to start it.",
+    "idlePaused": "Paused to save power. Press Play to carry on.",
+    "noWebgl": "Your browser has WebGL turned off, so this is a simpler drawing.",
+    "modeHeading": "View",
+    "modeSlides": "Slides",
+    "modePond": "Pond",
+    "modeShrink": "Shrink",
+    "pondIntro": "Drop organisms and food on the slide and watch what they do.",
+    "pondLabel": "Illustrative drawing, real size, time sped up",
+    "addHeading": "Add to the slide",
+    "addHint": "Tap, press Enter or drag onto the slide.",
+    "foodHeading": "Add food",
+    "foodBacteria": "Bacteria",
+    "foodYeast": "Yeast",
+    "foodAlgae": "Algae",
+    "clear": "Clear slide",
+    "countsHeading": "On the slide",
+    "chartLabel": "Population over time",
+    "lightSpot": "Lamp spot",
+    "lightSpotHint": "Euglena swims toward this light. Drag it, or focus it and use the arrow keys.",
+    "full": "The slide is full. Clear it or let the hungry ones eat.",
+    "lifeClock": "Life x720",
+    "lifeClockLong": "Feeding and dividing run 720 times faster than real life: 1 second here is 12 minutes.",
+    "inPond": "In the pond",
+    "empty": "The slide is empty. Add an organism and some food.",
+    "fineUp": "Fine up",
+    "fineDown": "Fine down",
+    "skip": "Skip to the controls"
+  },
+  "scope": {
+    "note": "Eyepiece 10x with field number 18 mm. Field of view = 18 mm / objective magnification (source mw-fov). Numerical apertures are typical student objectives and only shape the focus blur.",
+    "fieldNumberMm": 18,
+    "fovSources": [
+      "mw-fov"
+    ],
+    "steps": [
+      {
+        "total": 40,
+        "objective": 4,
+        "na": 0.1,
+        "immersion": 1.0,
+        "focusRange": 300
+      },
+      {
+        "total": 100,
+        "objective": 10,
+        "na": 0.25,
+        "immersion": 1.0,
+        "focusRange": 100
+      },
+      {
+        "total": 400,
+        "objective": 40,
+        "na": 0.65,
+        "immersion": 1.0,
+        "focusRange": 30
+      },
+      {
+        "total": 1000,
+        "objective": 100,
+        "na": 1.25,
+        "immersion": 1.515,
+        "focusRange": 12
+      }
+    ]
+  },
+  "legend": {
+    "brightfield": [
+      {
+        "swatch": "#efe9d6",
+        "text": "Pale gold: lamp light shining up through the slide"
+      },
+      {
+        "swatch": "#6f6a5e",
+        "text": "Dark lines: cell edges and parts that bend or block light"
+      },
+      {
+        "swatch": "#7aa05a",
+        "text": "Green: chloroplasts in algae"
+      },
+      {
+        "swatch": "#a07a4a",
+        "text": "Brown: food and golden plastids"
+      }
+    ],
+    "darkfield": [
+      {
+        "swatch": "#05070a",
+        "text": "Black: no direct lamp light reaches your eye"
+      },
+      {
+        "swatch": "#dce9ff",
+        "text": "Glowing lines: edges, hairs and specks that scatter light"
+      },
+      {
+        "swatch": "#8fd07a",
+        "text": "Green glow: chloroplasts"
+      },
+      {
+        "swatch": "#e7c27a",
+        "text": "Warm glow: food and golden plastids"
+      }
+    ]
+  },
+  "organisms": [
+    {
+      "id": "paramecium",
+      "name": "Paramecium",
+      "latin": "Paramecium caudatum",
+      "kind": 0,
+      "defaultMag": 2,
+      "drawn": {
+        "lengthUm": 240,
+        "widthUm": 60,
+        "sources": [
+          "kreutz-pcaudatum",
+          "neupane-pcaudatum"
+        ],
+        "note": "Length inside 170 to 330; width is length / 4."
+      },
+      "motion": {
+        "speedUmPerS": 1000,
+        "sources": [
+          "jana2012"
+        ],
+        "note": "Swims about 1 mm per second. Cilia drawn 11 micrometres long, metachronal wave 27 micrometres, beat 30 Hz (jana2012)."
+      },
+      "sizeLabel": "240 µm long",
+      "story": [
+        {
+          "text": "Paramecium caudatum is a single cell 170 to 330 micrometres long, so the biggest are about a third of a millimetre.",
+          "sources": [
+            "neupane-pcaudatum",
+            "kreutz-pcaudatum"
+          ]
+        },
+        {
+          "text": "Between 10,000 and 14,000 cilia cover it and beat in waves, pushing it along at about one millimetre per second.",
+          "sources": [
+            "neupane-pcaudatum",
+            "jana2012"
+          ]
+        },
+        {
+          "text": "It swims in a spiral, and two contractile vacuoles, each ringed by 6 to 10 canals, sit near its front and back ends.",
+          "sources": [
+            "neupane-pcaudatum",
+            "kreutz-pcaudatum"
+          ]
+        }
+      ],
+      "parts": "the slipper-shaped body, the beating cilia along its edge, the oral groove, the oval macronucleus in the middle, two star-shaped contractile vacuoles and brown food vacuoles",
+      "pond": [
+        {
+          "text": "When it bumps into something it swims backward, turns and swims on. Biologists call this the avoiding reaction.",
+          "sources": [
+            "brette2021"
+          ]
+        },
+        {
+          "text": "Cilia sweep bacteria, yeast and algae into its oral groove.",
+          "sources": [
+            "brette2021",
+            "neupane-pcaudatum"
+          ]
+        },
+        {
+          "text": "A well-fed paramecium can split in two about every 6 hours.",
+          "sources": [
+            "brette2021",
+            "mbn-binary-fission"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "amoeba",
+      "name": "Amoeba",
+      "latin": "Amoeba proteus",
+      "kind": 1,
+      "defaultMag": 1,
+      "drawn": {
+        "lengthUm": 420,
+        "nucleusUm": 40,
+        "sources": [
+          "kreutz-aproteus",
+          "siemensma-aproteus"
+        ],
+        "note": "About 420 micrometres tip to tip, near the cited mean of 425; nucleus 40 inside 22 to 62."
+      },
+      "motion": {
+        "speedUmPerS": null,
+        "sources": [],
+        "note": "Crawling speed is illustrative, not cited."
+      },
+      "sizeLabel": "about 420 µm across",
+      "story": [
+        {
+          "text": "A moving Amoeba proteus is 160 to 760 micrometres long, with one nucleus 22 to 62 micrometres across.",
+          "sources": [
+            "kreutz-aproteus",
+            "siemensma-aproteus"
+          ]
+        },
+        {
+          "text": "It has no fixed shape and usually pushes out several pseudopodia at once, one bigger than the rest.",
+          "sources": [
+            "siemensma-aproteus",
+            "kreutz-aproteus"
+          ]
+        },
+        {
+          "text": "It is a predator that surrounds bacteria and algae and takes them into a food vacuole.",
+          "sources": [
+            "garden-amoebae"
+          ]
+        }
+      ],
+      "parts": "a shapeless cell with broad pseudopodia, a clear rim, grainy flowing cytoplasm, one disc-shaped nucleus, one contractile vacuole near the rear, food vacuoles and small crystals",
+      "pond": [
+        {
+          "text": "It reaches out with pseudopods and wraps its food, mostly bacteria and algae, into a food vacuole.",
+          "sources": [
+            "garden-amoebae",
+            "mbn-aproteus"
+          ]
+        },
+        {
+          "text": "The food is digested inside the vacuole.",
+          "sources": [
+            "mbn-aproteus"
+          ]
+        },
+        {
+          "text": "It reproduces by binary fission, splitting into two.",
+          "sources": [
+            "mbn-binary-fission"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "euglena",
+      "name": "Euglena",
+      "latin": "Euglena gracilis",
+      "kind": 2,
+      "defaultMag": 2,
+      "drawn": {
+        "lengthUm": 90,
+        "widthUm": 16,
+        "sources": [
+          "hader2022",
+          "fbpb-egracilis"
+        ],
+        "note": "Length inside 'up to 100'; width is drawn, not cited."
+      },
+      "motion": {
+        "speedUmPerS": null,
+        "sources": [],
+        "note": "Swimming speed is illustrative, not cited."
+      },
+      "sizeLabel": "90 µm long",
+      "story": [
+        {
+          "text": "Euglena gracilis is a single cell up to about 100 micrometres long that can squeeze itself into a ball about 20 micrometres across.",
+          "sources": [
+            "fbpb-egracilis",
+            "hader2022"
+          ]
+        },
+        {
+          "text": "Its chloroplasts make food from light, and in the dark it can live on organic matter instead.",
+          "sources": [
+            "hader2022",
+            "fbpb-egracilis"
+          ]
+        },
+        {
+          "text": "A red eyespot sits near the base of the flagellum it swims with.",
+          "sources": [
+            "hader2022"
+          ]
+        }
+      ],
+      "parts": "a spindle-shaped green cell, disc-shaped chloroplasts, a red eyespot at the front and a long whipping flagellum",
+      "pond": [
+        {
+          "text": "In gentle light it steers toward the light; in very strong light it turns away.",
+          "sources": [
+            "hader2022"
+          ]
+        },
+        {
+          "text": "It makes food with its chloroplasts in light, so it does not need to hunt.",
+          "sources": [
+            "hader2022",
+            "fbpb-egracilis"
+          ]
+        },
+        {
+          "text": "It divides by splitting lengthwise into two.",
+          "sources": [
+            "hader2022"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bacteria",
+      "name": "Bacteria",
+      "latin": "Rods, spheres and spirals",
+      "kind": 3,
+      "defaultMag": 3,
+      "drawn": {
+        "rodUm": [
+          2.0,
+          0.7
+        ],
+        "coccusUm": 0.9,
+        "spiralUm": [
+          30,
+          1.5
+        ],
+        "sources": [
+          "kaiser-bacteria",
+          "mm-spirilla"
+        ],
+        "note": "Rod and sphere inside the cited averages; spiral 30 long and 1.5 thick, inside 1.4 to 1.7 thick and up to about 60 long."
+      },
+      "motion": {
+        "speedUmPerS": 30,
+        "sources": [
+          "kaiser-flagella"
+        ],
+        "note": "Runs of about 1 second covering 15 body lengths (30 micrometres for a 2 micrometre rod), tumbles of 0.1 second (kaiser-flagella)."
+      },
+      "sizeLabel": "rods 2 µm, spheres 0.9 µm, spirals 30 µm",
+      "story": [
+        {
+          "text": "Bacteria come in three basic shapes: rods (bacilli), spheres (cocci) and spirals.",
+          "sources": [
+            "kaiser-bacteria"
+          ]
+        },
+        {
+          "text": "An average rod is 1 to 4 micrometres long and an average sphere 0.5 to 1 micrometre across, so even at 1000x they are tiny.",
+          "sources": [
+            "kaiser-bacteria"
+          ]
+        },
+        {
+          "text": "Spiral bacteria called spirilla can reach about 60 micrometres long and have flagella at both ends.",
+          "sources": [
+            "mm-spirilla"
+          ]
+        }
+      ],
+      "parts": "many tiny rods, grape-like clusters of spheres and a few corkscrew-shaped spirals",
+      "pond": [
+        {
+          "text": "A swimming bacterium runs for about a second, covering 10 to 20 body lengths, then tumbles and heads off in a random direction.",
+          "sources": [
+            "kaiser-flagella"
+          ]
+        },
+        {
+          "text": "Bacteria multiply by binary fission.",
+          "sources": [
+            "mbn-binary-fission"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "yeast",
+      "name": "Yeast",
+      "latin": "Saccharomyces cerevisiae",
+      "kind": 4,
+      "defaultMag": 3,
+      "drawn": {
+        "diameterUm": 5,
+        "budVolumeRatio": [
+          0.5,
+          0.7
+        ],
+        "sources": [
+          "bionumbers-yeast",
+          "bionumbers-bud"
+        ],
+        "note": "Mother cells 5 micrometres; the largest buds have 0.6 of the mother's volume."
+      },
+      "motion": {
+        "speedUmPerS": null,
+        "sources": [],
+        "note": "Yeast does not swim; the small jiggle is illustrative."
+      },
+      "sizeLabel": "5 µm across",
+      "story": [
+        {
+          "text": "Baker's yeast, Saccharomyces cerevisiae, is a single cell about 5 micrometres across.",
+          "sources": [
+            "bionumbers-yeast"
+          ]
+        },
+        {
+          "text": "It multiplies by budding, and at its first budding the daughter cell reaches about half to two thirds of its mother's volume.",
+          "sources": [
+            "bionumbers-bud"
+          ]
+        }
+      ],
+      "parts": "round to oval cells, many with a smaller bud attached, and a clear vacuole inside the bigger cells",
+      "pond": [
+        {
+          "text": "Yeast grows a bud that pinches off when it is about half to two thirds the size of its mother.",
+          "sources": [
+            "bionumbers-bud"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "diatom",
+      "name": "Diatom",
+      "latin": "Pinnularia socialis",
+      "kind": 5,
+      "defaultMag": 2,
+      "drawn": {
+        "lengthUm": 100,
+        "widthUm": 16,
+        "sources": [
+          "dona-pinnularia"
+        ],
+        "note": "Inside 71 to 126 long and 13.7 to 18.7 wide."
+      },
+      "motion": {
+        "speedUmPerS": null,
+        "sources": [],
+        "note": "Gliding speed is illustrative, not cited."
+      },
+      "sizeLabel": "100 µm long",
+      "story": [
+        {
+          "text": "Pinnularia is a diatom, a single algal cell inside a shell that is basically glass, and this species is 71 to 126 micrometres long.",
+          "sources": [
+            "dona-pinnularia",
+            "exeter-diatom"
+          ]
+        },
+        {
+          "text": "It glides along surfaces using a slit in its shell called the raphe.",
+          "sources": [
+            "exeter-diatom"
+          ]
+        },
+        {
+          "text": "Diatoms make about one fifth of the world's oxygen.",
+          "sources": [
+            "exeter-diatom"
+          ]
+        }
+      ],
+      "parts": "boat-shaped glass shells with fine ribs, a central slit called the raphe and two golden-brown plastids",
+      "pond": [
+        {
+          "text": "It glides over surfaces by pushing out sticky material through a slit in its glass wall called the raphe.",
+          "sources": [
+            "exeter-diatom"
+          ]
+        }
+      ]
+    }
+  ],
+  "food": {
+    "algae": {
+      "name": "Green alga",
+      "latin": "Chlorella vulgaris",
+      "diameterUm": 3,
+      "sources": [
+        "bionumbers-chlorella"
+      ]
+    },
+    "bacteria": {
+      "name": "Rod bacterium",
+      "lengthUm": 2,
+      "widthUm": 0.7,
+      "sources": [
+        "kaiser-bacteria"
+      ]
+    },
+    "yeast": {
+      "name": "Baker's yeast",
+      "diameterUm": 5,
+      "sources": [
+        "bionumbers-yeast"
+      ]
+    }
+  },
+  "pond": {
+    "lifeFactor": 720,
+    "note": "Life clock: Paramecium division every 6 h (brette2021) is shown after 30 s of well-fed time at x720. Division timing for the other organisms and all crawling speeds except Paramecium (jana2012) and bacteria (kaiser-flagella) are illustrative.",
+    "cap": 160
+  }
+}

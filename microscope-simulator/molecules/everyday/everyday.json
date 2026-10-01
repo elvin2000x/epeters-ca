@@ -1,0 +1,1157 @@
+{
+ "_note": "Everyday molecules collection, staged for the molecules page. Cards use the library.json entry shape (plus an optional 'model' block, see 'viewer'). Built by tools/build_everyday.py, checked by tools/check_everyday.py, merged by tools/wire_everyday.py (copies structures to molecules/data/, appends cards and the collection to library.json, sources to library-sources.json, UI keys to molecules.json).",
+ "collection": {
+  "id": "everyday",
+  "name": "Everyday",
+  "molecules": [
+   "nitrogen",
+   "oxygen",
+   "argon",
+   "carbon-dioxide",
+   "ozone",
+   "water",
+   "table-salt",
+   "sucrose",
+   "acetic-acid",
+   "citric-acid",
+   "baking-soda",
+   "ethanol",
+   "caffeine",
+   "vanillin",
+   "hydrochloric-acid",
+   "ammonia",
+   "hydrogen-peroxide",
+   "methane",
+   "propane",
+   "soap",
+   "aspirin",
+   "menthol"
+  ],
+  "notes": [
+   {
+    "id": "air",
+    "title": "What is air made of?",
+    "ids": [
+     "nitrogen",
+     "oxygen",
+     "argon",
+     "carbon-dioxide",
+     "water",
+     "ozone"
+    ],
+    "sentences": [
+     {
+      "t": "Yes, air is made of molecules, and dry air is mostly two of them: nitrogen (N2) at 78.08 percent and oxygen (O2) at 20.95 percent.",
+      "s": [
+       "nasa-earthfact"
+      ]
+     },
+     {
+      "t": "Next comes argon at about 0.93 percent, and argon is single atoms, not molecules.",
+      "s": [
+       "nasa-earthfact",
+       "pubchem-23968"
+      ]
+     },
+     {
+      "t": "Carbon dioxide is only about 0.04 percent, roughly 426 parts per million in 2025, and it has risen every year since 1979.",
+      "s": [
+       "noaa-co2"
+      ]
+     },
+     {
+      "t": "Real air also holds water vapour, typically about 1 percent but it changes a lot, plus traces of neon, helium, methane and ozone.",
+      "s": [
+       "nasa-earthfact",
+       "osc-18-9"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "acid-base",
+    "title": "Acids and bases",
+    "ids": [
+     "hydrochloric-acid",
+     "acetic-acid",
+     "citric-acid",
+     "water",
+     "baking-soda",
+     "ammonia"
+    ],
+    "sentences": [
+     {
+      "t": "An acid gives away a hydrogen ion (a proton) and a base takes one in, so when an acid meets a base, a proton changes hands.",
+      "s": [
+       "osc-14-1"
+      ]
+     },
+     {
+      "t": "The pH scale tells you which side a liquid is on: below 7 is acidic, 7 is neutral like pure water, and above 7 is basic.",
+      "s": [
+       "osc-14-2"
+      ]
+     },
+     {
+      "t": "Stomach juice sits around pH 1.5 to 3.5, lime juice near 2 and household ammonia near 12.",
+      "s": [
+       "osap-23-4",
+       "osc-14-2"
+      ]
+     },
+     {
+      "t": "Hydrochloric acid is a strong acid that gives away all its hydrogen ions in water, while the acetic acid in vinegar is a weak acid that gives away only some.",
+      "s": [
+       "osc-14-3"
+      ]
+     },
+     {
+      "t": "Baking soda's bicarbonate ion is a base that neutralizes acid, which is why it is sold as an antacid.",
+      "s": [
+       "pubchem-516892",
+       "osap-23-4"
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "molecules": [
+  {
+   "id": "nitrogen",
+   "aliases": [
+    "n2",
+    "dinitrogen",
+    "nitrogen-gas"
+   ],
+   "name": "Nitrogen gas",
+   "short": "Nitrogen",
+   "group": "small",
+   "kind": "ccd",
+   "code": "HDZ",
+   "file": "data/HDZ.cif",
+   "madeOf": "Two nitrogen atoms joined by a triple bond.",
+   "description": [
+    {
+     "t": "Nitrogen gas is a molecule of two nitrogen atoms, and it makes up 78.08 percent of dry air, more than any other gas.",
+     "s": [
+      "pubchem-947",
+      "nasa-earthfact"
+     ]
+    },
+    {
+     "t": "So most of every breath you take is nitrogen; food makers also fill packets with it to keep food fresh.",
+     "s": [
+      "nasa-earthfact",
+      "pubchem-947"
+     ]
+    },
+    {
+     "t": "This model, formula N2, is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-HDZ"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 991,
+   "review": "pending"
+  },
+  {
+   "id": "oxygen",
+   "aliases": [
+    "o2",
+    "dioxygen",
+    "oxygen-gas"
+   ],
+   "name": "Oxygen gas",
+   "short": "Oxygen",
+   "group": "small",
+   "kind": "ccd",
+   "code": "OXY",
+   "file": "data/OXY.cif",
+   "madeOf": "Two oxygen atoms joined by a double bond.",
+   "description": [
+    {
+     "t": "Oxygen gas is a molecule of two oxygen atoms, and it makes up 20.95 percent of dry air.",
+     "s": [
+      "pubchem-977",
+      "nasa-earthfact"
+     ]
+    },
+    {
+     "t": "Green plants keep refilling the air with it: photosynthesis turns carbon dioxide and water into sugar and oxygen.",
+     "s": [
+      "osc-18-9"
+     ]
+    },
+    {
+     "t": "This model, formula O2, is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-OXY"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 965,
+   "review": "pending"
+  },
+  {
+   "id": "argon",
+   "aliases": [
+    "ar"
+   ],
+   "name": "Argon (a single atom)",
+   "short": "Argon",
+   "group": "small",
+   "kind": "ccd",
+   "code": "AR",
+   "file": "data/AR.cif",
+   "madeOf": "One argon atom on its own, not bonded to anything.",
+   "description": [
+    {
+     "t": "Argon is the third most common gas in dry air, about 0.93 percent, after nitrogen and oxygen.",
+     "s": [
+      "osc-18-12",
+      "nasa-earthfact"
+     ]
+    },
+    {
+     "t": "It is not a molecule: argon floats around as single atoms, because as a noble gas its outer shell of electrons is already full.",
+     "s": [
+      "pubchem-23968",
+      "osc-18-12"
+     ]
+    },
+    {
+     "t": "It is collected from liquid air, and it has been used inside light bulbs to make the hot filament last longer.",
+     "s": [
+      "osc-18-12"
+     ]
+    },
+    {
+     "t": "This model is one argon atom from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-AR"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "model": {
+    "alt": "atom"
+   },
+   "sizeGzip": 787,
+   "review": "pending"
+  },
+  {
+   "id": "carbon-dioxide",
+   "aliases": [
+    "co2"
+   ],
+   "name": "Carbon dioxide",
+   "group": "small",
+   "kind": "ccd",
+   "code": "CO2",
+   "file": "data/CO2.cif",
+   "madeOf": "One carbon atom with an oxygen atom double bonded on each side, in a straight line.",
+   "description": [
+    {
+     "t": "Carbon dioxide is one carbon atom joined to two oxygen atoms by double bonds, a colourless gas with no smell.",
+     "s": [
+      "pubchem-280"
+     ]
+    },
+    {
+     "t": "Animals, fungi and many microbes breathe it out as they break down food, and plants take it in for photosynthesis.",
+     "s": [
+      "pubchem-280",
+      "osc-18-9"
+     ]
+    },
+    {
+     "t": "It is only about 0.04 percent of the air, about 426 parts per million in 2025, but it is a greenhouse gas and its level has gone up every year since 1979.",
+     "s": [
+      "noaa-co2",
+      "pubchem-280"
+     ]
+    },
+    {
+     "t": "This model, formula C O2, is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-CO2"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 1016,
+   "review": "pending"
+  },
+  {
+   "id": "ozone",
+   "aliases": [
+    "o3"
+   ],
+   "name": "Ozone",
+   "group": "small",
+   "kind": "ccd",
+   "code": "CID24823",
+   "file": "data/CID24823.cif",
+   "madeOf": "Three oxygen atoms in a bent chain.",
+   "description": [
+    {
+     "t": "Ozone is a molecule of three oxygen atoms, a pale blue gas with a sharp smell.",
+     "s": [
+      "pubchem-24823",
+      "osc-18-9"
+     ]
+    },
+    {
+     "t": "Sunlight makes it high in the sky: ultraviolet light acting on oxygen forms ozone, and most of it sits in the stratosphere, about 10 to 50 kilometres up.",
+     "s": [
+      "osc-18-9",
+      "pubchem-24823"
+     ]
+    },
+    {
+     "t": "That ozone layer absorbs harmful ultraviolet light from the sun, which lowers the risk of skin cancer.",
+     "s": [
+      "osc-18-9"
+     ]
+    },
+    {
+     "t": "This model is PubChem's computed 3D shape for ozone (compound 24823).",
+     "s": [
+      "pubchem3d-24823"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "model": {
+    "type": "pubchem",
+    "cid": "24823",
+    "src": "pubchem3d-24823"
+   },
+   "sizeGzip": 667,
+   "review": "pending"
+  },
+  {
+   "id": "table-salt",
+   "aliases": [
+    "salt",
+    "nacl",
+    "sodium-chloride"
+   ],
+   "name": "Table salt (sodium chloride)",
+   "short": "Table salt",
+   "group": "small",
+   "kind": "ccd",
+   "code": "NACL",
+   "file": "data/NACL.cif",
+   "madeOf": "Sodium ions and chloride ions packed in a repeating cube pattern, one sodium for every chloride. This piece shows 64 ions.",
+   "description": [
+    {
+     "t": "Table salt is not made of molecules: it is an ionic compound, a crystal of sodium ions and chloride ions held together by the pull between opposite charges.",
+     "s": [
+      "osc-2-6",
+      "pubchem-5234"
+     ]
+    },
+    {
+     "t": "An ion is an atom with a charge: each sodium atom gives up one electron and turns positive (Na+), and each chlorine atom takes one and turns negative (Cl-).",
+     "s": [
+      "osc-2-6"
+     ]
+    },
+    {
+     "t": "In the crystal every sodium ion sits in the middle of six chloride ions, and that strong grip is why salt melts only at 801 degrees C, while ice melts at 0.",
+     "s": [
+      "osc-10-6",
+      "osc-2-6"
+     ]
+    },
+    {
+     "t": "We get it from salt mines and by drying out seawater, and we use it to flavour food.",
+     "s": [
+      "pubchem-5234"
+     ]
+    },
+    {
+     "t": "This piece was built for this page from the measured spacing in real salt crystals (a cube edge of 5.64 angstroms), with each ion drawn at its real size: 102 picometres for sodium, 181 for chloride.",
+     "s": [
+      "cod-9003308",
+      "osc-10-6"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "model": {
+    "type": "built",
+    "src": "cod-9003308",
+    "style": "spacefill",
+    "radii": {
+     "NA": 1.02,
+     "CL": 1.81
+    },
+    "formula": "NaCl",
+    "alt": "lattice"
+   },
+   "sizeGzip": 1538,
+   "review": "pending"
+  },
+  {
+   "id": "acetic-acid",
+   "aliases": [
+    "vinegar",
+    "ethanoic-acid"
+   ],
+   "name": "Acetic acid (vinegar)",
+   "short": "Acetic acid",
+   "group": "small",
+   "kind": "ccd",
+   "code": "ACY",
+   "file": "data/ACY.cif",
+   "madeOf": "Two carbons: a methyl group joined to a carboxyl group (COOH).",
+   "description": [
+    {
+     "t": "Acetic acid is the acid in vinegar, and it gives vinegar its sour taste and sharp smell.",
+     "s": [
+      "pubchem-176",
+      "osc-14-3"
+     ]
+    },
+    {
+     "t": "It is a weak acid: in water only some of its molecules give away a hydrogen ion, unlike a strong acid such as hydrochloric acid.",
+     "s": [
+      "osc-14-3"
+     ]
+    },
+    {
+     "t": "Food makers also add it to control how acidic food is and to stop microbes from spoiling it.",
+     "s": [
+      "pubchem-176"
+     ]
+    },
+    {
+     "t": "This model, formula C2 H4 O2, is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-ACY"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 1278,
+   "review": "pending"
+  },
+  {
+   "id": "citric-acid",
+   "aliases": [
+    "citrate",
+    "lemon"
+   ],
+   "name": "Citric acid (lemons)",
+   "short": "Citric acid",
+   "group": "small",
+   "kind": "ccd",
+   "code": "CIT",
+   "file": "data/CIT.cif",
+   "madeOf": "A three-carbon backbone carrying three carboxyl groups (COOH) and one OH group.",
+   "description": [
+    {
+     "t": "Citric acid comes from citrus fruits like lemons and limes, and food makers add it to drinks and foods to make them more acidic.",
+     "s": [
+      "pubchem-311"
+     ]
+    },
+    {
+     "t": "Citrus juice is strongly acidic: lime juice sits at about pH 2.",
+     "s": [
+      "osc-14-2"
+     ]
+    },
+    {
+     "t": "Your own cells make citric acid too, as one step of the Krebs cycle, a pathway found in every living thing that uses oxygen.",
+     "s": [
+      "pubchem-311"
+     ]
+    },
+    {
+     "t": "This model, formula C6 H8 O7, is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-CIT"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 1966,
+   "review": "pending"
+  },
+  {
+   "id": "baking-soda",
+   "aliases": [
+    "sodium-bicarbonate",
+    "bicarbonate"
+   ],
+   "name": "Baking soda (sodium bicarbonate)",
+   "short": "Baking soda",
+   "group": "small",
+   "kind": "ccd",
+   "code": "BCT",
+   "file": "data/BCT.cif",
+   "madeOf": "The bicarbonate ion: one carbon with three oxygens, one of them carrying a hydrogen. In baking soda each one is paired with a sodium ion, which is not shown.",
+   "description": [
+    {
+     "t": "Baking soda is sodium bicarbonate, a salt made of sodium ions and bicarbonate ions; this model shows one bicarbonate ion.",
+     "s": [
+      "pubchem-516892",
+      "ccd-BCT"
+     ]
+    },
+    {
+     "t": "It is a raising agent: in baking powder it is a source of carbon dioxide gas, which makes dough and batter rise.",
+     "s": [
+      "pubchem-516892"
+     ]
+    },
+    {
+     "t": "The bicarbonate ion is a base that neutralizes acid, which is why baking soda is sold as an antacid and why your stomach lining covers itself in bicarbonate.",
+     "s": [
+      "pubchem-516892",
+      "osc-14-3",
+      "osap-23-4"
+     ]
+    },
+    {
+     "t": "This model, formula C H O3 with a charge of minus one, is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-BCT"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 1158,
+   "review": "pending"
+  },
+  {
+   "id": "ethanol",
+   "aliases": [
+    "alcohol",
+    "ethyl-alcohol"
+   ],
+   "name": "Ethanol",
+   "group": "small",
+   "kind": "ccd",
+   "code": "EOH",
+   "file": "data/EOH.cif",
+   "madeOf": "Two carbons with an OH group on the end.",
+   "description": [
+    {
+     "t": "Ethanol is the alcohol in alcoholic drinks: an ethane molecule with one hydrogen swapped for an OH group.",
+     "s": [
+      "pubchem-702"
+     ]
+    },
+    {
+     "t": "It kills bacteria, so it is used as a disinfectant on skin, and it is a solvent in many household products and medicines.",
+     "s": [
+      "pubchem-702"
+     ]
+    },
+    {
+     "t": "It is also a fuel, and it is added to gasoline.",
+     "s": [
+      "pubchem-702"
+     ]
+    },
+    {
+     "t": "This model, formula C2 H6 O, is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-EOH"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 1244,
+   "review": "pending"
+  },
+  {
+   "id": "vanillin",
+   "aliases": [
+    "vanilla"
+   ],
+   "name": "Vanillin",
+   "group": "small",
+   "kind": "ccd",
+   "code": "V55",
+   "file": "data/V55.cif",
+   "madeOf": "A six-carbon ring carrying an aldehyde group (CHO), an OH group and a methoxy group (OCH3).",
+   "description": [
+    {
+     "t": "Natural vanillin comes mostly from vanilla bean extract, and it also occurs in other plants, such as orchids and clove buds.",
+     "s": [
+      "pubchem-1183"
+     ]
+    },
+    {
+     "t": "It is used to flavour sweets, drinks and other foods, and as a fragrance.",
+     "s": [
+      "pubchem-1183"
+     ]
+    },
+    {
+     "t": "This model is 4-hydroxy-3-methoxybenzaldehyde, vanillin's chemical name, formula C8 H8 O3, from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-V55"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 2013,
+   "review": "pending"
+  },
+  {
+   "id": "hydrochloric-acid",
+   "aliases": [
+    "hcl",
+    "stomach-acid",
+    "hydrogen-chloride"
+   ],
+   "name": "Hydrochloric acid (stomach acid)",
+   "short": "Hydrochloric acid",
+   "group": "small",
+   "kind": "ccd",
+   "code": "CID313",
+   "file": "data/CID313.cif",
+   "madeOf": "One hydrogen atom bonded to one chlorine atom (hydrogen chloride). In water it splits into a hydrogen ion and a chloride ion.",
+   "description": [
+    {
+     "t": "Hydrochloric acid is found naturally in your stomach juice: cells in the stomach lining called parietal cells make it.",
+     "s": [
+      "pubchem-313",
+      "osap-23-4"
+     ]
+    },
+    {
+     "t": "It makes the stomach very acidic, pH 1.5 to 3.5, and it switches on pepsin, the enzyme that starts digesting protein.",
+     "s": [
+      "osap-23-4"
+     ]
+    },
+    {
+     "t": "It is a strong acid: in water every molecule gives away its hydrogen ion, leaving chloride ions behind.",
+     "s": [
+      "osc-14-3"
+     ]
+    },
+    {
+     "t": "This model of one hydrogen chloride molecule is PubChem's computed 3D shape (compound 313).",
+     "s": [
+      "pubchem3d-313"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "model": {
+    "type": "pubchem",
+    "cid": "313",
+    "src": "pubchem3d-313"
+   },
+   "sizeGzip": 652,
+   "review": "pending"
+  },
+  {
+   "id": "ammonia",
+   "aliases": [
+    "nh3"
+   ],
+   "name": "Ammonia",
+   "group": "small",
+   "kind": "ccd",
+   "code": "NH3",
+   "file": "data/NH3.cif",
+   "madeOf": "One nitrogen atom bonded to three hydrogen atoms.",
+   "description": [
+    {
+     "t": "Ammonia is a gas made of one nitrogen atom bonded to three hydrogen atoms, and it is in many household and industrial cleaners.",
+     "s": [
+      "pubchem-222"
+     ]
+    },
+    {
+     "t": "It is a base: it takes a hydrogen ion from water and becomes an ammonium ion, which is why household ammonia has a pH near 12.",
+     "s": [
+      "osc-14-1",
+      "osc-14-2"
+     ]
+    },
+    {
+     "t": "About 80 percent of all ammonia goes into fertilizers for farm crops.",
+     "s": [
+      "pubchem-222"
+     ]
+    },
+    {
+     "t": "This model, formula H3 N, is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-NH3"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 1027,
+   "review": "pending"
+  },
+  {
+   "id": "hydrogen-peroxide",
+   "aliases": [
+    "h2o2",
+    "peroxide"
+   ],
+   "name": "Hydrogen peroxide",
+   "group": "small",
+   "kind": "ccd",
+   "code": "PEO",
+   "file": "data/PEO.cif",
+   "madeOf": "Two oxygen atoms bonded to each other, each carrying one hydrogen atom.",
+   "description": [
+    {
+     "t": "Hydrogen peroxide, H2O2, is two hydrogen atoms and two oxygen atoms, like water with one extra oxygen.",
+     "s": [
+      "ccd-PEO"
+     ]
+    },
+    {
+     "t": "It is used as a bleach and a disinfectant, including for bleaching hair, and in antiseptics.",
+     "s": [
+      "pubchem-784",
+      "osc-2-6"
+     ]
+    },
+    {
+     "t": "It is a molecular compound, built from separate molecules, unlike ionic table salt.",
+     "s": [
+      "osc-2-6"
+     ]
+    },
+    {
+     "t": "This model, formula H2 O2, is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-PEO"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 1080,
+   "review": "pending"
+  },
+  {
+   "id": "methane",
+   "aliases": [
+    "ch4",
+    "natural-gas"
+   ],
+   "name": "Methane (natural gas)",
+   "short": "Methane",
+   "group": "small",
+   "kind": "ccd",
+   "code": "CID297",
+   "file": "data/CID297.cif",
+   "madeOf": "One carbon atom bonded to four hydrogen atoms.",
+   "description": [
+    {
+     "t": "Methane is one carbon atom bonded to four hydrogen atoms, a colourless gas with no smell that burns easily.",
+     "s": [
+      "pubchem-297"
+     ]
+    },
+    {
+     "t": "It is the main part of natural gas, which is piped into homes for heating and cooking.",
+     "s": [
+      "eia-natgas",
+      "osc-20-1",
+      "pubchem-297"
+     ]
+    },
+    {
+     "t": "Cattle and other livestock also release methane as they digest their food, one of the largest human-linked sources in the United States.",
+     "s": [
+      "epa-methane"
+     ]
+    },
+    {
+     "t": "It is a powerful greenhouse gas, more than 28 times as potent as carbon dioxide at trapping heat.",
+     "s": [
+      "epa-methane"
+     ]
+    },
+    {
+     "t": "This model of methane is PubChem's computed 3D shape (compound 297).",
+     "s": [
+      "pubchem3d-297"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "model": {
+    "type": "pubchem",
+    "cid": "297",
+    "src": "pubchem3d-297"
+   },
+   "sizeGzip": 730,
+   "review": "pending"
+  },
+  {
+   "id": "propane",
+   "aliases": [
+    "c3h8"
+   ],
+   "name": "Propane",
+   "group": "small",
+   "kind": "ccd",
+   "code": "TME",
+   "file": "data/TME.cif",
+   "madeOf": "A chain of three carbon atoms with eight hydrogen atoms around it.",
+   "description": [
+    {
+     "t": "Propane is a chain of three carbons with eight hydrogens, and it is a gas at room temperature.",
+     "s": [
+      "osc-20-1",
+      "ccd-TME"
+     ]
+    },
+    {
+     "t": "It is burned as a fuel in homes and industry, it is part of liquid petroleum gas, and it is used as a refrigerant and a spray can propellant.",
+     "s": [
+      "pubchem-6334",
+      "osc-20-1"
+     ]
+    },
+    {
+     "t": "This model, formula C3 H8, is from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-TME"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 1437,
+   "review": "pending"
+  },
+  {
+   "id": "soap",
+   "aliases": [
+    "sodium-stearate",
+    "stearic-acid",
+    "stearate"
+   ],
+   "name": "Soap (sodium stearate)",
+   "short": "Soap",
+   "group": "small",
+   "kind": "ccd",
+   "code": "STE",
+   "file": "data/STE.cif",
+   "madeOf": "A long tail of 17 carbons ending in a carboxyl group. In soap that end has lost its hydrogen and pairs with a sodium ion; this model shows stearic acid.",
+   "description": [
+    {
+     "t": "Soaps are salts of fatty acids, and sodium stearate, made from stearic acid, is the most common ingredient in soap.",
+     "s": [
+      "osc-11-5",
+      "pubchem-2724691"
+     ]
+    },
+    {
+     "t": "Each soap molecule has two ends: a long oily tail of carbon and hydrogen, and a charged head.",
+     "s": [
+      "osc-11-5"
+     ]
+    },
+    {
+     "t": "That is how soap grabs grease: the tail dissolves into oil, grease and dirt while the charged head is pulled toward water, so soap bridges the two and holds tiny oil drops in the water.",
+     "s": [
+      "osc-11-5"
+     ]
+    },
+    {
+     "t": "Stearic acid is a fatty acid found in many animal and plant fats; this model is stearic acid, formula C18 H36 O2, from the PDB Chemical Component Dictionary.",
+     "s": [
+      "pubchem-5281",
+      "ccd-STE"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 3251,
+   "review": "pending"
+  },
+  {
+   "id": "aspirin",
+   "aliases": [
+    "acetylsalicylic-acid",
+    "asa"
+   ],
+   "name": "Aspirin",
+   "group": "small",
+   "kind": "ccd",
+   "code": "AIN",
+   "file": "data/AIN.cif",
+   "madeOf": "A six-carbon ring carrying a carboxyl group (COOH) and an acetyl group attached through an oxygen.",
+   "description": [
+    {
+     "t": "Aspirin, or acetylsalicylic acid, relieves pain, brings down fever and keeps blood from clotting quickly.",
+     "s": [
+      "pubchem-2244"
+     ]
+    },
+    {
+     "t": "It is a non-steroidal anti-inflammatory drug, and it works by blocking cyclooxygenase enzymes.",
+     "s": [
+      "pubchem-2244"
+     ]
+    },
+    {
+     "t": "It is not recommended for children because of a link to Reye syndrome, a serious liver disease.",
+     "s": [
+      "pubchem-2244"
+     ]
+    },
+    {
+     "t": "This model is 2-(acetyloxy)benzoic acid, aspirin's chemical name, formula C9 H8 O4, from the PDB Chemical Component Dictionary.",
+     "s": [
+      "ccd-AIN"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 1897,
+   "review": "pending"
+  },
+  {
+   "id": "menthol",
+   "aliases": [
+    "mint",
+    "levomenthol"
+   ],
+   "name": "Menthol",
+   "group": "small",
+   "kind": "ccd",
+   "code": "XUQ",
+   "file": "data/XUQ.cif",
+   "madeOf": "A six-carbon ring carrying an OH group, a methyl group and an isopropyl group.",
+   "description": [
+    {
+     "t": "Menthol is found in peppermint oil and other mint oils, and it flavours sweets, cough drops and nasal inhalers.",
+     "s": [
+      "pubchem-16666"
+     ]
+    },
+    {
+     "t": "It feels cool because it switches on TRPM8, a cold-sensing receptor in the skin, much as capsaicin from chili peppers switches on a heat sensor.",
+     "s": [
+      "pubchem-16666",
+      "motm-250"
+     ]
+    },
+    {
+     "t": "It is also rubbed on skin to calm itching.",
+     "s": [
+      "pubchem-16666"
+     ]
+    },
+    {
+     "t": "This model is (-)-menthol, the form most common in nature, formula C10 H20 O, from the PDB Chemical Component Dictionary.",
+     "s": [
+      "pubchem-16666",
+      "ccd-XUQ"
+     ]
+    }
+   ],
+   "collection": "everyday",
+   "sizeGzip": 2357,
+   "review": "pending"
+  }
+ ],
+ "files": {
+  "HDZ": {
+   "from": "https://files.rcsb.org/ligands/download/HDZ.cif",
+   "rawBytes": 3916,
+   "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)",
+   "made": "verbatim copy",
+   "file": "everyday/structures/HDZ.cif",
+   "bytes": 3916,
+   "gzip": 991
+  },
+  "OXY": {
+   "from": "https://files.rcsb.org/ligands/download/OXY.cif",
+   "rawBytes": 3791,
+   "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)",
+   "made": "verbatim copy",
+   "file": "everyday/structures/OXY.cif",
+   "bytes": 3791,
+   "gzip": 965
+  },
+  "CO2": {
+   "from": "https://files.rcsb.org/ligands/download/CO2.cif",
+   "rawBytes": 3952,
+   "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)",
+   "made": "verbatim copy",
+   "file": "everyday/structures/CO2.cif",
+   "bytes": 3952,
+   "gzip": 1016
+  },
+  "AR": {
+   "from": "https://files.rcsb.org/ligands/download/AR.cif",
+   "rawBytes": 3430,
+   "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)",
+   "made": "atoms rewritten from key-value pairs to a loop (same values)",
+   "file": "everyday/structures/AR.cif",
+   "bytes": 3227,
+   "gzip": 787
+  },
+  "ACY": {
+   "from": "https://files.rcsb.org/ligands/download/ACY.cif",
+   "rawBytes": 4586,
+   "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)",
+   "made": "verbatim copy",
+   "file": "everyday/structures/ACY.cif",
+   "bytes": 4586,
+   "gzip": 1278
+  },
+  "CIT": {
+   "from": "https://files.rcsb.org/ligands/download/CIT.cif",
+   "rawBytes": 7089,
+   "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)",
+   "made": "verbatim copy",
+   "file": "everyday/structures/CIT.cif",
+   "bytes": 7089,
+   "gzip": 1966
+  },
+  "BCT": {
+   "from": "https://files.rcsb.org/ligands/download/BCT.cif",
+   "rawBytes": 4294,
+   "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)",
+   "made": "verbatim copy",
+   "file": "everyday/structures/BCT.cif",
+   "bytes": 4294,
+   "gzip": 1158
+  },
+  "EOH": {
+   "from": "https://files.rcsb.org/ligands/download/EOH.cif",
+   "rawBytes": 4617,
+   "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)",
+   "made": "verbatim copy",
+   "file": "everyday/structures/EOH.cif",
+   "bytes": 4617,
+   "gzip": 1244
+  },
+  "V55": {
+   "from": "https://files.rcsb.org/ligands/download/V55.cif",
+   "rawBytes": 7210,
+   "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)",
+   "made": "verbatim copy",
+   "file": "everyday/structures/V55.cif",
+   "bytes": 7210,
+   "gzip": 2013
+  },
+  "NH3": {
+   "from": "https://files.rcsb.org/ligands/download/NH3.cif",
+   "rawBytes": 4052,
+   "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)",
+   "made": "verbatim copy",
+   "file": "everyday/structures/NH3.cif",
+   "bytes": 4052,
+   "gzip": 1027
+  },
+  "PEO": {
+   "from": "https://files.rcsb.org/ligands/download/PEO.cif",
+   "rawBytes": 4134,
+   "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)",
+   "made": "verbatim copy",
+   "file": "everyday/structures/PEO.cif",
+   "bytes": 4134,
+   "gzip": 1080
+  },
+  "TME": {
+   "from": "https://files.rcsb.org/ligands/download/TME.cif",
+   "rawBytes": 5415,
+   "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)",
+   "made": "verbatim copy",
+   "file": "everyday/structures/TME.cif",
+   "bytes": 5415,
+   "gzip": 1437
+  },
+  "STE": {
+   "from": "https://files.rcsb.org/ligands/download/STE.cif",
+   "rawBytes": 11232,
+   "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)",
+   "made": "verbatim copy",
+   "file": "everyday/structures/STE.cif",
+   "bytes": 11232,
+   "gzip": 3251
+  },
+  "AIN": {
+   "from": "https://files.rcsb.org/ligands/download/AIN.cif",
+   "rawBytes": 6248,
+   "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)",
+   "made": "verbatim copy",
+   "file": "everyday/structures/AIN.cif",
+   "bytes": 6248,
+   "gzip": 1897
+  },
+  "XUQ": {
+   "from": "https://files.rcsb.org/ligands/download/XUQ.cif",
+   "rawBytes": 7815,
+   "licence": "CC0 1.0 (wwPDB: data files in the PDB archive, including the Chemical Component Dictionary, are free of all copyright restrictions)",
+   "made": "verbatim copy",
+   "file": "everyday/structures/XUQ.cif",
+   "bytes": 7815,
+   "gzip": 2357
+  },
+  "CID24823": {
+   "from": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/24823/record/SDF?record_type=3d",
+   "rawBytes": 1270,
+   "licence": "PubChem 3D conformer computed by PubChem (NCBI). NCBI Molecular Data Usage policy (ncbi.nlm.nih.gov/home/about/policies): NCBI itself places no restrictions on the use or distribution of the data, though some original submitters may claim patent, copyright or other rights.",
+   "made": "PubChem 3D SDF converted to the CCD layout (atoms, bonds, charges as given; coordinates centred)",
+   "file": "everyday/structures/CID24823.cif",
+   "bytes": 1801,
+   "gzip": 667
+  },
+  "CID313": {
+   "from": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/313/record/SDF?record_type=3d",
+   "rawBytes": 1106,
+   "licence": "PubChem 3D conformer computed by PubChem (NCBI). NCBI Molecular Data Usage policy (ncbi.nlm.nih.gov/home/about/policies): NCBI itself places no restrictions on the use or distribution of the data, though some original submitters may claim patent, copyright or other rights.",
+   "made": "PubChem 3D SDF converted to the CCD layout (atoms, bonds, charges as given; coordinates centred)",
+   "file": "everyday/structures/CID313.cif",
+   "bytes": 1706,
+   "gzip": 652
+  },
+  "CID297": {
+   "from": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/297/record/SDF?record_type=3d",
+   "rawBytes": 1359,
+   "licence": "PubChem 3D conformer computed by PubChem (NCBI). NCBI Molecular Data Usage policy (ncbi.nlm.nih.gov/home/about/policies): NCBI itself places no restrictions on the use or distribution of the data, though some original submitters may claim patent, copyright or other rights.",
+   "made": "PubChem 3D SDF converted to the CCD layout (atoms, bonds, charges as given; coordinates centred)",
+   "file": "everyday/structures/CID297.cif",
+   "bytes": 1996,
+   "gzip": 730
+  },
+  "NACL": {
+   "from": "https://www.crystallography.net/cod/9003308.cif",
+   "licence": "built for this page; cell edge from COD 9003308 (CC0); ion radii from OpenStax Chemistry 2e 10.6 (CC BY 4.0)",
+   "made": "4 x 4 x 4 rock salt piece, 32 Na+ and 32 Cl-, spacing a/2 from a = 5.6401 angstroms",
+   "file": "everyday/structures/NACL.cif",
+   "bytes": 6912,
+   "gzip": 1538
+  }
+ },
+ "viewer": {
+  "summary": "Four cards need small viewer changes before they can go live honestly: ozone, hydrochloric acid and methane (PubChem models, not PDB Chemical Components) and table salt (a built crystal piece). wire_everyday.py holds those four back until molecules.js reads m.model, unless run with --all. Argon only needs the alt and legend keys and works without changes.",
+  "changes": [
+   "Label and badge: when m.model.type is 'pubchem', use ui detail.pubchemLabel and detail.badgePubchem with {cid: m.model.cid} instead of detail.idealLabel and detail.badgeIdeal; when 'built', use detail.builtLabel and detail.badgeBuilt.",
+   "Own source: use m.model.src (when present) instead of `ccd-${m.code}` in collectSources (addSrc) and in renderDetail (own), so the Made of footnote and the Sources list cite PubChem or the Crystallography Open Database, not a CCD page that does not exist.",
+   "Table salt formula: when m.model.formula is set, show it in the Formula row (NaCl) and replace the counted note with ui detail.formulaUnit {formula, n}; the file holds 32 Na and 32 Cl, so hill() alone would print Cl32Na32.",
+   "Table salt style: when m.model.style is 'spacefill', open the card in Spacefill (CCD_STYLES already has it) instead of ball and stick, and draw each element as its own component with size_factor = radius / Mol* van der Waals radius, using m.model.radii (angstroms): NA 1.02 / 2.27 = 0.449, CL 1.81 / 1.75 = 1.034. Then neighbouring ions just touch (1.02 + 1.81 = 2.83, spacing 2.82), the textbook picture. Without this, Mol* uses van der Waals radii and sodium would look bigger than chloride, which is backwards for the ions.",
+   "Bonds: the salt file has no _chem_comp_bond rows on purpose. If Mol* still draws Na to Cl sticks in ball and stick (distance-based bond guess), keep the salt card in Spacefill only (hide Normal in the style switcher for it).",
+   "Alt text and legend: m.model.alt 'atom' uses ui alt.atom and legend.atom; 'lattice' uses alt.lattice and legend.ions, instead of alt.ccd ('one ... molecule') and legend.ccd ('Sticks are bonds').",
+   "Collection notes (optional but planned): library.json collections may carry 'notes' [{id, title, ids, sentences:[{t, s}]}]. When the Everyday chip is active, show them above the gallery under ui coll.notesTitle, each as a short titled paragraph with source footnotes like descriptions, ids as links to the cards. The page ignores the field until then.",
+   "Element colours and names for Na, Cl and Ar: wire_everyday.py adds them to molecules.json elementColors and elementNames (Mol* colours #ab5cf2, #1ff01f, #80d1e3)."
+  ]
+ }
+}

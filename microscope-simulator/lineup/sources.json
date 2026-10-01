@@ -1,0 +1,17 @@
+{
+  "_note": "Every fact in lineup.json points at keys here. Each molecule's own sources (who solved it, its PDB entry) are in ../molecules/sources.json and ../molecules/library-sources.json.",
+  "sources": {
+    "calc": {
+      "type": "measured from the files",
+      "cite": "Measured by this app's tools/hero_lineup_build.py from the local structure files listed in molecules.json and library.json.",
+      "checked": "2026-10-01: widest distance between any two atom centres (convex hull, then all pairs), water left out; entries that name a biological assembly are measured on that assembly built from the file's own operators; CCD entries use their ideal coordinates with hydrogens."
+    },
+    "rcsb-pdb": {
+      "type": "database",
+      "cite": "RCSB Protein Data Bank: PDB entries and Chemical Component Dictionary (CCD) files, downloaded from files.rcsb.org.",
+      "url": "https://www.rcsb.org/",
+      "checked": "2026-10-01: each molecule's PDB or CCD entry is recorded in ../molecules/sources.json or ../molecules/library-sources.json; 39 of the 40 files are logged there with their files.rcsb.org download link, and actin's 1J6Z is the file shared from ../data/ (RCSB entry 1J6Z)."
+    }
+  },
+  "downloads": []
+}

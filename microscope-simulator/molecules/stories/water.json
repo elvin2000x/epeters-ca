@@ -1,0 +1,46 @@
+{
+ "id": "water",
+ "structure": "HOH",
+ "tour": [
+  {"id": "whole", "title": "Three atoms", "focus": {"atoms": ["O", "H1", "H2"]}, "view": "ball-and-stick",
+   "text": [{"t": "Water is one oxygen atom bonded to two hydrogen atoms: H2O.", "s": ["os-2-2", "pubchem-water"]}]},
+  {"id": "oxygen", "title": "The negative end", "focus": {"atoms": ["O"]}, "view": "spacefill",
+   "text": [{"t": "Oxygen and hydrogen share their electrons unequally, which leaves the oxygen with a slight negative charge.", "s": ["os-2-2"]}]},
+  {"id": "hydrogens", "title": "The positive ends", "focus": {"atoms": ["H1", "H2"]}, "view": "spacefill",
+   "text": [{"t": "The two hydrogens are left with a slight positive charge.", "s": ["os-2-2"]},
+            {"t": "A molecule with charged ends like this is called polar.", "s": ["os-2-2"]}]},
+  {"id": "hydrogen-bonds", "title": "Water sticks to water", "focus": {"atoms": ["O", "H1", "H2"]}, "view": "spacefill",
+   "text": [{"t": "Opposite charges attract, so the hydrogens of one water cling to the oxygen of the next, forming hydrogen bonds.", "s": ["os-2-2"]},
+            {"t": "In liquid water these bonds constantly form and break as the molecules slide past each other.", "s": ["os-2-2"]}]}
+ ],
+ "sections": {
+  "does": [
+   {"t": "Water dissolves ions and polar molecules, and its special properties are closely tied to the processes of life.", "s": ["os-2-2"]},
+   {"t": "Water makes up roughly 60 to 70 percent of the human body.", "s": ["os-2-2"]}
+  ],
+  "shape": [
+   {"t": "Because oxygen and hydrogen pull on electrons differently, water has a negative end and two positive ends.", "s": ["os-2-2"]},
+   {"t": "Those charged ends let water molecules hold onto each other and onto other polar molecules.", "s": ["os-2-2"]},
+   {"t": "When water freezes, hydrogen bonds lock the molecules into a crystal that is less dense than liquid water, so ice floats.", "s": ["os-2-2"]}
+  ],
+  "lives": {
+   "text": [
+    {"t": "Living things have a high water content, so understanding water is key to understanding life.", "s": ["os-2-2"]},
+    {"t": "Special channel proteins called aquaporins let water cross cell membranes quickly.", "s": ["motm-aquaporin"]}
+   ],
+   "links": [{"type": "element", "id": "H"}, {"type": "element", "id": "O"}, {"type": "molecule", "id": "aquaporin"}, {"type": "process", "id": "osmosis-lab"}]
+  },
+  "size": {
+   "nm": 0.16,
+   "compare": [
+    {"t": "From one hydrogen to the other, a water molecule measures about 0.16 nm.", "s": ["ccd-HOH"]},
+    {"t": "It is the smallest molecule in this gallery; glucose measures about 0.8 nm.", "s": ["ccd-HOH", "ccd-GLC"]}
+   ]
+  }
+ },
+ "highlights": [
+  {"atoms": ["O"], "label": "Oxygen (slightly negative)", "text": [{"t": "The oxygen end carries a slight negative charge.", "s": ["os-2-2"]}]},
+  {"atoms": ["H1", "H2"], "label": "Hydrogens (slightly positive)", "text": [{"t": "The hydrogen ends carry a slight positive charge.", "s": ["os-2-2"]}]}
+ ],
+ "review": "pending"
+}

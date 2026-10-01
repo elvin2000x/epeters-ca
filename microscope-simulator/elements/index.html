@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Periodic table · Cell and Molecule Explorer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="All 118 elements, each with its atomic weight, place in the table and a short plain-English description, linked to the molecules in this app that contain them.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%230b7469'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='%23fff' stroke-width='3'/%3E%3C/svg%3E">
+<script>try { var t = localStorage.getItem('cme-theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}</script>
+<link rel="stylesheet" href="../vendor/fonts/fonts.css">
+<link rel="stylesheet" href="../app.css">
+<link rel="stylesheet" href="elements.css">
+</head>
+<body>
+<a class="skip" href="#table">Skip to the table</a>
+<header class="topbar">
+  <a class="brand" href="../"><span class="brand-name" data-copy="brand.name">Cell and Molecule Explorer</span><span class="brand-sub" data-copy="nav.home">Home</span></a>
+  <button class="icon-btn" id="theme" type="button" aria-pressed="false" data-copy="theme.toggle">Switch light or dark</button>
+</header>
+<main class="wrap wide" id="main">
+  <div class="hero">
+    <div>
+      <h1 data-copy="table.title">Periodic table</h1>
+      <p class="lede" data-copy="table.intro">Pick an element to see its card. Use the arrow keys to move around the table.</p>
+    </div>
+    <ul class="stats" id="stats" aria-label="This app in numbers"></ul>
+  </div>
+
+  <div class="controls" id="controls">
+    <form class="find" id="findForm" role="search">
+      <label for="find" data-copy="table.search">Find an element by name, symbol or number</label>
+      <div class="find-row"><input id="find" type="search" autocomplete="off" spellcheck="false" enterkeyhint="go"><button class="btn" type="submit">Find</button></div>
+      <span class="small" id="findMsg" role="status"></span>
+    </form>
+    <div class="ctl">
+      <span class="ctl-l" id="viewL" data-ck="pt.view">View</span>
+      <div class="seg" role="radiogroup" aria-labelledby="viewL" id="viewSeg">
+        <button type="button" role="radio" aria-checked="true" data-view="table" data-ck="pt.viewTable">Table</button>
+        <button type="button" role="radio" aria-checked="false" data-view="3d" data-ck="pt.view3d">3D landscape</button>
+      </div>
+    </div>
+    <div class="ctl">
+      <span class="ctl-l" id="colL" data-ck="pt.colourBy">Colour by</span>
+      <div class="seg" role="radiogroup" aria-labelledby="colL" id="colSeg">
+        <button type="button" role="radio" aria-checked="false" data-col="block" data-ck="pt.colourBlock">Block</button>
+        <button type="button" role="radio" aria-checked="true" data-col="category" data-ck="pt.colourCategory">Category</button>
+      </div>
+    </div>
+    <div class="ctl">
+      <span class="ctl-l" aria-hidden="true">&nbsp;</span>
+      <button type="button" class="btn life" id="lifeBtn" aria-pressed="false"><span class="dot" aria-hidden="true"></span><span data-ck="pt.lifeToggle">Elements of life</span></button>
+    </div>
+    <div class="ctl">
+      <label class="ctl-l" for="molSel" data-ck="pt.molPick">Light up a molecule</label>
+      <div class="sel"><select id="molSel"><option value="" data-ck="pt.molNone">None</option></select></div>
+    </div>
+  </div>
+
+  <div class="layout">
+    <div class="tablecol">
+      <div class="legendbar">
+        <p class="small legend-t" id="legendTitle">Colour shows the category</p>
+        <ul class="legend" id="legend" aria-labelledby="legendTitle"></ul>
+      </div>
+      <p class="mode" id="modeMsg" role="status" aria-live="polite"></p>
+      <div class="scroller" id="table" tabindex="-1"><p class="empty">Loading the table.</p></div>
+      <p class="small hint" id="keyHelp">Keys: arrows move, Home and End jump along a row, Enter or Space opens the card.</p>
+      <section class="land" id="land" hidden aria-labelledby="landH">
+        <h2 class="sr-only" id="landH" data-ck="pt.view3d">3D landscape</h2>
+        <div class="ctl">
+          <span class="ctl-l" id="propL" data-ck="land.prop">Column height</span>
+          <div class="seg wrapseg" role="radiogroup" aria-labelledby="propL" id="propSeg"></div>
+        </div>
+        <div class="stage" id="landStage" tabindex="0" role="img" aria-label="3D landscape">
+          <div class="tip" id="landTip" hidden></div>
+          <div class="landmsg" id="landMsg" hidden></div>
+        </div>
+        <div class="landlegend" id="landLegend"></div>
+        <p class="small" id="landHelp" data-ck="land.help">Drag to turn, scroll or pinch to zoom. Pick a column to open its card.</p>
+      </section>
+    </div>
+    <section class="card" id="card" aria-live="polite" aria-labelledby="cardTitle">
+      <h2 class="sr-only" id="cardTitle">Element card</h2>
+      <p class="empty" data-copy="table.cardEmpty">Pick an element in the table to see its card.</p>
+    </section>
+  </div>
+  <footer class="foot" id="foot"></footer>
+</main>
+<script type="importmap">
+{ "imports": { "three": "../vendor/three/0.170.0/build/three.module.js", "three/addons/": "../vendor/three/0.170.0/examples/jsm/" } }
+</script>
+<script type="module" src="elements.js"></script>
+<script type="module" src="../shell/shell.js" data-page="elements"></script>
+</body>
+</html>

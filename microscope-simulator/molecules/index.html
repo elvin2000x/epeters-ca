@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Molecules of Life</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Fifty-nine molecules in 3D, from the air you breathe to the machines inside every cell, each with a plain-English description and the elements it contains.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' data: blob:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'none'">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%230b7469'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='%23fff' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../vendor/fonts/fonts.css">
+<style>
+:root {
+  --stage-a: #e7eeec; --stage-b: #cdd9d6;
+  --panel: #f7faf9; --raised: #ffffff;
+  --ink: #13201e; --muted: #4c5e5b; --line: #7d8d8a; --hair: #cad5d2;
+  --accent: #0b7469; --accent-soft: rgba(11, 116, 105, 0.12); --on-accent: #ffffff;
+  --shadow: 0 10px 30px rgba(17, 36, 33, 0.14);
+  --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Menlo, Consolas, monospace;
+  --top: env(safe-area-inset-top, 0px); --bottom: env(safe-area-inset-bottom, 0px);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --stage-a: #17211f; --stage-b: #0b1110;
+    --panel: #141e1d; --raised: #1b2826;
+    --ink: #e4eeeb; --muted: #9db0ac; --line: #66807b; --hair: #283a38;
+    --accent: #39b9ab; --accent-soft: rgba(57, 185, 171, 0.16); --on-accent: #04201c;
+    --shadow: 0 12px 34px rgba(0, 0, 0, 0.5);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --stage-a: #17211f; --stage-b: #0b1110;
+  --panel: #141e1d; --raised: #1b2826;
+  --ink: #e4eeeb; --muted: #9db0ac; --line: #66807b; --hair: #283a38;
+  --accent: #39b9ab; --accent-soft: rgba(57, 185, 171, 0.16); --on-accent: #04201c;
+  --shadow: 0 12px 34px rgba(0, 0, 0, 0.5);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body { margin: 0; background: var(--panel); color: var(--ink); font-family: var(--font-ui); font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; overflow: hidden; }
+button { font: inherit; color: inherit; cursor: pointer; }
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.skip { position: absolute; left: 8px; top: -60px; z-index: 50; background: var(--accent); color: var(--on-accent); padding: 8px 12px; border-radius: 8px; }
+.skip:focus { top: calc(8px + var(--top)); }
+
+.app { display: flex; flex-direction: column; height: 100vh; height: 100dvh; }
+.stagewrap { position: relative; flex: 0 0 42%; min-height: 230px; background: radial-gradient(120% 100% at 50% 40%, var(--stage-a), var(--stage-b)); overflow: hidden; }
+.panel { flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden; background: var(--panel); border-top: 1px solid var(--line); padding: 14px 16px calc(24px + var(--bottom)); -webkit-overflow-scrolling: touch; }
+@media (min-width: 880px) {
+  .app { flex-direction: row; }
+  .stagewrap { flex: 1 1 auto; min-height: 0; }
+  .panel { flex: 0 0 430px; border-top: 0; border-left: 1px solid var(--line); padding: 18px 22px 28px; }
+}
+
+#mol { position: absolute; inset: 0; width: 100%; height: 100%; }
+#viewport { position: absolute; inset: 0; outline: none; }
+#viewport:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
+#mol .msp-viewport-controls, #mol .msp-state-snapshot-viewport-controls, #mol .msp-viewport-top-left-controls, #mol .msp-help-text, #mol .msp-canvas3d-axes { display: none !important; }
+#mol .msp-plugin, #mol .msp-plugin > div, #mol .msp-plugin .msp-layout-standard { background: transparent !important; border: 0 !important; }
+#mol canvas, #mol .msp-viewport, #mol .msp-viewport-host3d { background: transparent !important; background-image: none !important; }
+#mol .msp-plugin .msp-layout-static, #mol .msp-plugin .msp-layout-region { background: transparent !important; }
+
+.chip { background: var(--panel); border: 1px solid var(--line); color: var(--ink); border-radius: 999px; box-shadow: var(--shadow); }
+.badge { position: absolute; left: 10px; top: calc(58px + var(--top)); z-index: 4; max-width: calc(100% - 20px); padding: 3px 12px; font-size: 13px; font-weight: 500; }
+.brand { position: absolute; left: 10px; top: calc(10px + var(--top)); z-index: 4; display: inline-flex; align-items: center; min-height: 40px; padding: 4px 14px; font-weight: 600; font-size: 15px; text-decoration: none; }
+.tools { position: absolute; right: 10px; z-index: 4; display: flex; gap: 6px; }
+.tools.top { top: calc(10px + var(--top)); }
+.tools.bottom { bottom: 10px; }
+.tools button { min-height: 40px; padding: 6px 14px; font-size: 14px; font-weight: 500; }
+.tools button:hover, .brand:hover { border-color: var(--accent); }
+.tools button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.msg { position: absolute; inset: 0; z-index: 3; display: flex; align-items: center; justify-content: center; padding: 60px 20px 50px; text-align: center; }
+.msg > div { max-width: 360px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; box-shadow: var(--shadow); font-size: 15px; }
+.spin { display: inline-block; width: 16px; height: 16px; margin-right: 8px; vertical-align: -3px; border: 2px solid var(--line); border-top-color: var(--accent); border-radius: 50%; animation: rot 0.9s linear infinite; }
+@keyframes rot { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spin { animation: none; } }
+
+h1 { margin: 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.01em; }
+h2 { margin: 0 0 4px; font-size: 20px; line-height: 1.25; }
+h3 { margin: 0 0 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.intro { margin: 4px 0 14px; color: var(--muted); font-size: 15px; }
+.card { background: var(--raised); border: 1px solid var(--hair); border-radius: 12px; padding: 12px 14px; margin-bottom: 12px; }
+.grid { list-style: none; margin: 0 0 14px; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.grid button { min-height: 40px; text-align: left; background: var(--raised); border: 1px solid var(--hair); border-radius: 999px; padding: 6px 13px; line-height: 1.25; }
+.grid button:hover { border-color: var(--accent); }
+.grid button[aria-current="true"] { border-color: var(--accent); background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+.grid .nm { font-weight: 600; font-size: 14px; overflow-wrap: anywhere; }
+.label { display: inline-block; font-family: var(--font-data); font-size: 12.5px; color: var(--muted); margin-bottom: 8px; }
+.desc { margin: 0 0 6px; }
+.desc sup a { text-decoration: none; font-family: var(--font-data); font-size: 11px; padding: 0 1px; }
+.kv { margin: 10px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 15px; }
+.kv dt { color: var(--muted); }
+.kv dd { margin: 0; overflow-wrap: anywhere; }
+.formula { font-family: var(--font-data); }
+.els { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.els li { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--hair); border-radius: 999px; padding: 3px 10px 3px 4px; font-size: 14px; }
+.els b { font-family: var(--font-data); font-weight: 500; }
+.els .n { font-family: var(--font-data); color: var(--muted); font-size: 12.5px; }
+.sw { flex: none; width: 18px; height: 18px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.35); }
+.legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.legend li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; }
+.legend .sw { border-radius: 5px; margin-top: 1px; }
+.small { font-size: 13px; color: var(--muted); margin: 8px 0 0; }
+.srcs { margin: 0; padding-left: 22px; font-size: 13px; color: var(--muted); }
+.srcs li { margin-bottom: 4px; overflow-wrap: anywhere; }
+.srcs li:target { color: var(--ink); background: var(--accent-soft); border-radius: 4px; }
+details summary { cursor: pointer; font-weight: 600; font-size: 14px; }
+
+/* ---------- D1: thumbnail gallery strips ---------- */
+.grid { flex-wrap: nowrap; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; padding: 4px 2px 10px; margin: 0 -2px 10px; scrollbar-width: thin; gap: 8px; }
+.grid li { flex: none; scroll-snap-align: start; }
+.grid button { width: 112px; padding: 0 0 8px; border-radius: 14px; display: flex; flex-direction: column; align-items: stretch; text-align: left; overflow: hidden; transition: transform 0.18s ease, box-shadow 0.2s ease, border-color 0.2s; }
+.grid button:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.grid button[aria-current="true"] { box-shadow: inset 0 0 0 1px var(--accent), 0 6px 18px var(--accent-soft); }
+.grid .th { display: block; height: 84px; background: radial-gradient(120% 100% at 50% 40%, var(--stage-a), var(--stage-b)); border-bottom: 1px solid var(--hair); }
+.grid .th img { display: block; width: 100%; height: 100%; object-fit: contain; padding: 6px; transition: transform 0.3s ease; }
+.grid button:hover .th img { transform: scale(1.06); }
+.grid .nm { padding: 6px 10px 0; font-size: 13.5px; line-height: 1.2; }
+.grid .ct { padding: 2px 10px 0; font-family: var(--font-data); font-size: 11.5px; color: var(--muted); }
+
+/* ---------- D1: smooth swaps ---------- */
+#mol { transition: opacity 0.35s ease; }
+#mol.swap { opacity: 0.25; }
+#detail.fresh > * { animation: fadeUp 0.35s ease both; }
+#detail.fresh > *:nth-child(n+3) { animation-delay: 0.05s; }
+#detail.fresh > *:nth-child(n+6) { animation-delay: 0.1s; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.msg .still { display: block; max-width: min(80%, 420px); max-height: 48vh; margin: 0 auto 12px; }
+.msg { flex-direction: column; }
+
+/* ---------- D1: element chips link to the table, light up one element, where it lives, size ---------- */
+.els li { padding: 0; border: 0; }
+.els a { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; border: 1px solid var(--hair); border-radius: 999px; padding: 3px 10px 3px 4px; font-size: 14px; color: var(--ink); text-decoration: none; transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s; }
+.els a:hover, .els a:focus-visible { border-color: var(--accent); transform: translateY(-1px); box-shadow: 0 4px 12px var(--accent-soft); }
+.subh { margin: 16px 0 8px; }
+.lightbar { display: flex; flex-wrap: wrap; gap: 6px; }
+.lightbar button { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 4px 12px 4px 8px; border: 1px solid var(--hair); border-radius: 999px; background: var(--raised); font-family: var(--font-data); font-size: 14px; font-weight: 500; transition: background 0.2s, border-color 0.2s, box-shadow 0.2s; }
+.lightbar button:first-child { padding-left: 12px; font-family: var(--font-ui); }
+.lightbar button:hover { border-color: var(--accent); }
+.lightbar button[aria-pressed="true"] { border-color: #b37800; background: rgba(255, 179, 0, 0.16); box-shadow: 0 0 0 1px #b37800, 0 0 14px rgba(255, 179, 0, 0.35); }
+.lightbar button:first-child[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+.lightmsg { display: flex; gap: 8px; align-items: center; margin: 8px 0 0; font-size: 14px; }
+.gold { flex: none; width: 14px; height: 14px; border-radius: 50%; background: #ffb300; box-shadow: 0 0 0 3px rgba(255, 179, 0, 0.3), 0 0 10px rgba(255, 179, 0, 0.8); }
+.where { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.where a { display: flex; flex-direction: column; min-height: 44px; justify-content: center; padding: 6px 12px; border: 1px solid var(--hair); border-left: 3px solid var(--accent); border-radius: 10px; background: var(--panel); color: var(--ink); text-decoration: none; line-height: 1.25; transition: border-color 0.2s, transform 0.15s; }
+.where a:hover, .where a:focus-visible { border-color: var(--accent); transform: translateY(-1px); }
+.where b { font-size: 14px; font-weight: 600; }
+.where span { font-size: 12.5px; color: var(--muted); }
+.sizeline { margin: 0 0 4px; font-size: 15px; }
+.sizestrip { display: block; width: 100%; height: auto; max-width: 420px; }
+.sizestrip .axis { stroke: var(--line); stroke-width: 1; }
+.sizestrip .tick { stroke: var(--line); stroke-width: 1; }
+.sizestrip .tl { fill: var(--muted); font-family: var(--font-data); font-size: 10px; text-anchor: middle; }
+.sizestrip .dot { fill: var(--line); opacity: 0.8; }
+.sizestrip .me { fill: var(--accent); stroke: var(--raised); stroke-width: 2; }
+.sizestrip .ml { fill: var(--ink); font-size: 11.5px; font-weight: 600; text-anchor: middle; }
+@media (prefers-reduced-motion: reduce) { #detail.fresh > *, .grid button, .grid .th img, #mol { animation: none !important; transition: none !important; } }
+.foot { font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+/* app shell (integration phase 2): the shell bar replaces the back link and theme button, so the badge moves up */
+body.cme-shell .badge { top: 10px; }
+/* cinematic DNA (web/dna, loaded only when opened) covers the Mol* stage; its own "Real structure" button closes it */
+.cine { position: absolute; inset: 0; z-index: 6; background: #050b16; }
+.cine .msgbox { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 20px; text-align: center; color: #e8f1f7; }
+.stagewrap.cine-open > .tools, .stagewrap.cine-open > .badge { visibility: hidden; }
+</style>
+<link rel="stylesheet" href="molecules.css">
+</head>
+<body>
+<a class="skip" href="#detail" data-copy="copy.skip">Skip to the description</a>
+<div class="app">
+  <div class="stagecol" id="stagecol">
+    <div class="stagewrap" id="stagewrap">
+      <div id="viewport" role="img" tabindex="0" aria-label="3D view">
+        <div id="mol"></div>
+      </div>
+      <a class="brand chip" href="../index.html" data-copy="copy.back">Back to the explorer</a>
+      <div class="tools top">
+        <button class="chip" type="button" id="themeBtn" aria-label="Theme: auto">Auto</button>
+        <button class="chip" type="button" id="tourBtn" aria-controls="tour" aria-expanded="false" hidden>Tour</button>
+        <button class="chip" type="button" id="viewBtn" aria-controls="ctrls" aria-expanded="false" hidden>View</button>
+        <button class="chip" type="button" id="cineBtn" aria-controls="cine" aria-expanded="false" hidden>Cinematic view</button>
+      </div>
+      <div class="ctrls" id="ctrls" role="group" aria-labelledby="ctrlsH" hidden>
+        <h2 class="vh" id="ctrlsH" data-copy="view.panel">View options</h2>
+        <fieldset id="styleSet"><legend data-copy="view.style">Style</legend><div class="opts" id="styleOpts"></div></fieldset>
+        <fieldset id="colourSet"><legend data-copy="view.colour">Colour by</legend><div class="opts" id="colourOpts"></div></fieldset>
+        <p class="ckey" id="colourKey"></p>
+        <div class="ctrl-row">
+          <button class="pill" type="button" id="measureBtn" aria-pressed="false" data-copy="measure.toggle">Measure</button>
+          <button class="pill" type="button" id="ctrlsDone" data-copy="view.close">Done</button>
+        </div>
+      </div>
+      <div class="cine" id="cine" hidden></div>
+      <div class="badge chip" id="badge" hidden></div>
+      <div class="tools bottom">
+        <button class="chip" type="button" id="spinBtn" aria-pressed="false" data-copy="copy.spinOn">Spin</button>
+        <button class="chip" type="button" id="resetBtn" data-copy="copy.reset">Reset view</button>
+      </div>
+      <div class="msg" id="msg" hidden><div id="msgBox" role="status"></div></div>
+    </div>
+    <section class="pick" id="pick" aria-labelledby="pickH" hidden>
+      <h2 class="vh" id="pickH" data-copy="pick.region">What you picked</h2>
+      <div id="pickBody" role="status"></div>
+      <div class="lines-key" id="linesKey" role="group" aria-labelledby="linesH" hidden></div>
+    </section>
+    <section class="tour" id="tour" aria-labelledby="tourTitle" hidden>
+      <div class="tour-head">
+        <p class="tour-count" id="tourCount"></p>
+        <h2 class="tour-title" id="tourTitle" tabindex="-1"></h2>
+      </div>
+      <p class="tour-text" id="tourText" aria-live="polite"></p>
+      <div class="tour-ctl">
+        <button class="pill" type="button" id="tourBack"></button>
+        <button class="pill main" type="button" id="tourPlay" aria-pressed="false"></button>
+        <button class="pill" type="button" id="tourNext"></button>
+        <div class="dots" id="tourDots" role="group"></div>
+        <button class="pill" type="button" id="tourClose"></button>
+      </div>
+      <p class="vh" id="tourKeys"></p>
+    </section>
+    <section class="seq" id="seq" aria-labelledby="seqH" hidden>
+      <div class="seq-head">
+        <h2 class="seq-h" id="seqH" data-copy="seq.title">Sequence</h2>
+        <label class="seq-chain"><span data-copy="seq.chain">Chain</span> <select id="seqChain"></select></label>
+        <span class="seq-hint" id="seqHint"></span>
+      </div>
+      <div class="seq-strip" id="seqStrip" role="toolbar" aria-orientation="horizontal"></div>
+    </section>
+  </div>
+  <main class="panel" id="panel">
+    <h1 data-copy="copy.pageTitle">Molecules of life</h1>
+    <p class="intro" data-copy="copy.intro">Pick a molecule to turn it in 3D.</p>
+    <aside class="motw" id="motw" hidden></aside>
+    <nav aria-label="Molecules">
+      <div class="colls" id="colls" hidden>
+        <h3 id="collH" data-copy="coll.title">Collections</h3>
+        <div class="collrow" id="collRow" role="group" aria-labelledby="collH"></div>
+        <div class="coll-notes" id="collNotes" hidden></div>
+      </div>
+      <p class="lineup"><a class="pill" id="lineupLink" href="../lineup/" data-copy="coll.lineup">Size lineup</a></p>
+      <h3 id="gSmall" data-copy="copy.groupSmall">Small molecules</h3>
+      <ul class="grid" id="listSmall" aria-labelledby="gSmall"></ul>
+      <h3 id="gBig" data-copy="copy.groupBig">Big molecules</h3>
+      <ul class="grid" id="listBig" aria-labelledby="gBig"></ul>
+    </nav>
+    <section class="card" id="detail" tabindex="-1">
+      <p data-copy="copy.loadingShort">Loading.</p>
+    </section>
+    <section class="card" id="legendCard" aria-labelledby="legendH">
+      <h3 id="legendH" data-copy="legend.title">Colour key</h3>
+      <ul class="legend" id="legend"></ul>
+    </section>
+    <section class="card" id="altCard" aria-labelledby="altH">
+      <h3 id="altH" data-copy="alt.title">What the 3D view shows</h3>
+      <p id="altText" style="margin:0"></p>
+    </section>
+    <p class="foot" id="credits" data-copy="copy.credits">3D viewer: Mol* (molstar.org), MIT licence. Structures: RCSB Protein Data Bank (rcsb.org). Textbook facts: OpenStax Biology 2e (CC BY 4.0).</p>
+  </main>
+</div>
+<script src="molecules.js"></script>
+<script type="module" src="../shell/shell.js" data-page="molecules"></script>
+</body>
+</html>

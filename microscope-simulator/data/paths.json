@@ -1,0 +1,667 @@
+{
+ "about": "Built by tools/build_paths.py from the section data files. Do not edit by hand; rerun the script.",
+ "paths": [
+  {
+   "id": "energy",
+   "steps": [
+    {
+     "level": "molecule",
+     "title": "Glucose",
+     "href": "molecules/#glucose",
+     "ref": {
+      "type": "molecule",
+      "id": "glucose"
+     },
+     "text": [
+      {
+       "t": "Cells break glucose down during cellular respiration and use the energy released to make ATP.",
+       "src": [
+        {
+         "id": "molecules:os-3-2",
+         "t": "OpenStax Biology 2e, section 3.2 Carbohydrates",
+         "u": "https://openstax.org/books/biology-2e/pages/3-2-carbohydrates"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "level": "cell",
+     "title": "Mitochondria",
+     "href": "cells/#animal/mitochondrion",
+     "ref": {
+      "type": "part",
+      "id": "mitochondrion"
+     },
+     "text": [
+      {
+       "t": "Mitochondria make ATP, the cell's main energy-carrying molecule, from the chemical energy in glucose and other nutrients.",
+       "src": [
+        {
+         "id": "cells:bio-4-3",
+         "t": "Biology 2e, section 4.3 Eukaryotic Cells",
+         "u": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "level": "big",
+     "title": "ATP synthase",
+     "href": "index.html#zoom=big",
+     "text": [
+      {
+       "t": "ATP synthase, a protein machine in the inner membrane. Its round head is about 9 nanometres across, and turning parts of it add a phosphate to ADP to make ATP.",
+       "src": [
+        {
+         "id": "journey:boundless-f1",
+         "t": "Boundless Microbiology (LibreTexts), 5.5C F1F0 ATP Synthase",
+         "u": "https://bio.libretexts.org/Bookshelves/Microbiology/Microbiology_(Boundless)/05%3A_Microbial_Metabolism/5.05%3A_Respiratory_ETS_and_ATP_Synthase/5.5C%3A_F10_ATP_Synthase"
+        },
+        {
+         "id": "journey:os-7-4",
+         "t": "OpenStax Biology 2e, section 7.4 Oxidative Phosphorylation",
+         "u": "https://openstax.org/books/biology-2e/pages/7-4-oxidative-phosphorylation"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "level": "molecule",
+     "title": "ATP",
+     "href": "molecules/#atp",
+     "ref": {
+      "type": "molecule",
+      "id": "atp"
+     },
+     "text": [
+      {
+       "t": "ATP (adenosine triphosphate) is the base adenine and the sugar ribose joined to a chain of three phosphate groups.",
+       "src": [
+        {
+         "id": "molecules:os-6-4",
+         "t": "OpenStax Biology 2e, section 6.4 ATP: Adenosine Triphosphate",
+         "u": "https://openstax.org/books/biology-2e/pages/6-4-atp-adenosine-triphosphate"
+        },
+        {
+         "id": "molecules:ccd-ATP",
+         "t": "RCSB PDB Chemical Component Dictionary, ATP (adenosine-5'-triphosphate)",
+         "u": "https://www.rcsb.org/ligand/ATP"
+        }
+       ]
+      },
+      {
+       "t": "It is the cell's main energy currency: splitting off the last phosphate leaves ADP and releases energy that powers other reactions.",
+       "src": [
+        {
+         "id": "molecules:os-6-4",
+         "t": "OpenStax Biology 2e, section 6.4 ATP: Adenosine Triphosphate",
+         "u": "https://openstax.org/books/biology-2e/pages/6-4-atp-adenosine-triphosphate"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "level": "atom",
+     "title": "Phosphorus",
+     "href": "molecules/#atp?el=P",
+     "ref": {
+      "type": "element",
+      "id": "P"
+     },
+     "text": [
+      {
+       "t": "The ATP structure in this explorer has 3 phosphorus atoms, counted from its structure file.",
+       "src": [
+        {
+         "id": "molecules:ccd-ATP",
+         "t": "RCSB PDB Chemical Component Dictionary, ATP (adenosine-5'-triphosphate)",
+         "u": "https://www.rcsb.org/ligand/ATP"
+        }
+       ],
+       "computed": true
+      },
+      {
+       "t": "All living things need it: it forms the backbone of DNA and RNA and is part of ATP.",
+       "src": [
+        {
+         "id": "elements:rsc",
+         "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+         "u": "https://periodic-table.rsc.org/"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "level": "atom",
+     "title": "Phosphorus",
+     "href": "atom/#P",
+     "ref": {
+      "type": "element",
+      "id": "P"
+     },
+     "text": [
+      {
+       "t": "A phosphorus atom has 15 protons and 15 electrons. Its most common natural isotope, phosphorus-31, has 16 neutrons.",
+       "src": [
+        {
+         "id": "atom:rsc",
+         "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+         "u": "https://periodic-table.rsc.org/"
+        }
+       ],
+       "computed": true
+      }
+     ]
+    }
+   ],
+   "titleKey": "paths.energy.title",
+   "introKey": "paths.energy.intro"
+  },
+  {
+   "id": "muscle",
+   "steps": [
+    {
+     "level": "cell",
+     "title": "Muscle cell (fibre)",
+     "href": "cells/#muscle",
+     "ref": {
+      "type": "cell",
+      "id": "muscle"
+     },
+     "text": [
+      {
+       "t": "Skeletal muscle cells are long and cylinder-shaped, so they are also called muscle fibres.",
+       "src": [
+        {
+         "id": "cells:ap-10-2",
+         "t": "Anatomy and Physiology 2e, section 10.2 Skeletal Muscle",
+         "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/10-2-skeletal-muscle"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "level": "cell",
+     "title": "Myofibrils",
+     "href": "cells/#muscle/myofibrils",
+     "ref": {
+      "type": "part",
+      "id": "myofibrils"
+     },
+     "text": [
+      {
+       "t": "Myofibrils are strands that run the whole length of the cell, built from repeating units called sarcomeres.",
+       "src": [
+        {
+         "id": "cells:ap-10-2",
+         "t": "Anatomy and Physiology 2e, section 10.2 Skeletal Muscle",
+         "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/10-2-skeletal-muscle"
+        }
+       ]
+      },
+      {
+       "t": "Their actin and myosin filaments, lined up in order, give the cell its striped look.",
+       "src": [
+        {
+         "id": "cells:ap-10-2",
+         "t": "Anatomy and Physiology 2e, section 10.2 Skeletal Muscle",
+         "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/10-2-skeletal-muscle"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "level": "cell",
+     "title": "A sarcomere",
+     "href": "muscle.html#s=sarcomere",
+     "text": [
+      {
+       "t": "One repeat of the stripe pattern is called a sarcomere, and it holds two kinds of overlapping filament, thick and thin, that slide past each other when the muscle shortens.",
+       "src": [
+        {
+         "id": "stops:huxley-hanson-1954",
+         "t": "Huxley, H. and Hanson, J. (1954). Changes in the cross-striations of muscle during contraction and stretch and their structural interpretation. Nature 173, 973-976",
+         "u": "https://doi.org/10.1038/173973a0"
+        },
+        {
+         "id": "stops:huxley-niedergerke-1954",
+         "t": "Huxley, A. F. and Niedergerke, R. (1954). Structural changes in muscle during contraction: interference microscopy of living muscle fibres. Nature 173, 971-973",
+         "u": "https://doi.org/10.1038/173971a0"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "level": "big",
+     "title": "Actin",
+     "href": "molecules/#actin",
+     "ref": {
+      "type": "molecule",
+      "id": "actin"
+     },
+     "text": [
+      {
+       "t": "Actin is one of the two proteins that make muscle contract, working together with myosin.",
+       "src": [
+        {
+         "id": "molecules:os-3-4",
+         "t": "OpenStax Biology 2e, section 3.4 Proteins",
+         "u": "https://openstax.org/books/biology-2e/pages/3-4-proteins"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "level": "big",
+     "title": "Myosin (head)",
+     "href": "molecules/#myosin",
+     "ref": {
+      "type": "molecule",
+      "id": "myosin"
+     },
+     "text": [
+      {
+       "t": "Myosin is the other protein that drives muscle contraction, working together with actin.",
+       "src": [
+        {
+         "id": "molecules:os-3-4",
+         "t": "OpenStax Biology 2e, section 3.4 Proteins",
+         "u": "https://openstax.org/books/biology-2e/pages/3-4-proteins"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "level": "cell",
+     "title": "Sarcoplasmic reticulum",
+     "href": "cells/#muscle/sr",
+     "ref": {
+      "type": "part",
+      "id": "sr"
+     },
+     "text": [
+      {
+       "t": "The sarcoplasmic reticulum is a special smooth endoplasmic reticulum that stores, releases and takes back calcium ions.",
+       "src": [
+        {
+         "id": "cells:ap-10-2",
+         "t": "Anatomy and Physiology 2e, section 10.2 Skeletal Muscle",
+         "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/10-2-skeletal-muscle"
+        }
+       ]
+      },
+      {
+       "t": "Releasing that calcium is the step that links the electrical signal to the contraction.",
+       "src": [
+        {
+         "id": "cells:ap-10-2",
+         "t": "Anatomy and Physiology 2e, section 10.2 Skeletal Muscle",
+         "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/10-2-skeletal-muscle"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "level": "atom",
+     "title": "Calcium",
+     "href": "elements/#Ca",
+     "ref": {
+      "type": "element",
+      "id": "Ca"
+     },
+     "text": [
+      {
+       "t": "The actin structure in this explorer has 6 calcium atoms, counted from its structure file.",
+       "src": [
+        {
+         "id": "molecules:rcsb-1J6Z",
+         "t": "RCSB PDB 1J6Z, Uncomplexed actin",
+         "u": "https://www.rcsb.org/structure/1J6Z"
+        }
+       ],
+       "computed": true
+      },
+      {
+       "t": "All living things need it, and calcium phosphate is the main mineral in bone.",
+       "src": [
+        {
+         "id": "elements:rsc",
+         "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+         "u": "https://periodic-table.rsc.org/"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "titleKey": "paths.muscle.title",
+   "introKey": "paths.muscle.intro"
+  },
+  {
+   "id": "blood",
+   "steps": [
+    {
+     "level": "cell",
+     "title": "Red blood cell",
+     "href": "cells/#rbc",
+     "ref": {
+      "type": "cell",
+      "id": "rbc"
+     },
+     "text": [
+      {
+       "t": "Red blood cells pick up oxygen in the lungs and carry it to the body's tissues, held by hemoglobin.",
+       "src": [
+        {
+         "id": "cells:ap-18-3",
+         "t": "Anatomy and Physiology 2e, section 18.3 Erythrocytes",
+         "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/18-3-erythrocytes"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "level": "cell",
+     "title": "Inside, packed with hemoglobin",
+     "href": "cells/#rbc/rbc-hb",
+     "ref": {
+      "type": "part",
+      "id": "rbc-hb"
+     },
+     "text": [
+      {
+       "t": "Each hemoglobin molecule can carry four oxygen molecules, and one red blood cell may hold about 300 million of them.",
+       "src": [
+        {
+         "id": "cells:ap-18-3",
+         "t": "Anatomy and Physiology 2e, section 18.3 Erythrocytes",
+         "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/18-3-erythrocytes"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "level": "big",
+     "title": "Hemoglobin",
+     "href": "molecules/#hemoglobin",
+     "ref": {
+      "type": "molecule",
+      "id": "hemoglobin"
+     },
+     "text": [
+      {
+       "t": "Hemoglobin is the protein that carries oxygen in the blood, packed inside red blood cells.",
+       "src": [
+        {
+         "id": "molecules:os-40-2",
+         "t": "OpenStax Biology 2e, section 40.2 Components of the Blood",
+         "u": "https://openstax.org/books/biology-2e/pages/40-2-components-of-the-blood"
+        }
+       ]
+      },
+      {
+       "t": "It is made of four protein chains, two alpha and two beta, and each chain holds a heme group with an iron atom.",
+       "src": [
+        {
+         "id": "molecules:os-40-2",
+         "t": "OpenStax Biology 2e, section 40.2 Components of the Blood",
+         "u": "https://openstax.org/books/biology-2e/pages/40-2-components-of-the-blood"
+        },
+        {
+         "id": "molecules:rcsb-4HHB",
+         "t": "RCSB PDB 4HHB, The crystal structure of human deoxyhaemoglobin at 1.74 angstroms resolution",
+         "u": "https://www.rcsb.org/structure/4HHB"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "level": "atom",
+     "title": "Iron",
+     "href": "molecules/#hemoglobin?el=Fe",
+     "ref": {
+      "type": "element",
+      "id": "Fe"
+     },
+     "text": [
+      {
+       "t": "The hemoglobin structure in this explorer has 4 iron atoms, counted from its structure file.",
+       "src": [
+        {
+         "id": "molecules:rcsb-4HHB",
+         "t": "RCSB PDB 4HHB, The crystal structure of human deoxyhaemoglobin at 1.74 angstroms resolution",
+         "u": "https://www.rcsb.org/structure/4HHB"
+        }
+       ],
+       "computed": true
+      },
+      {
+       "t": "About 90% of all refined metal is iron, mostly made into steel, and the body uses it in haemoglobin to carry oxygen in the blood.",
+       "src": [
+        {
+         "id": "elements:rsc",
+         "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+         "u": "https://periodic-table.rsc.org/"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "level": "atom",
+     "title": "Iron",
+     "href": "atom/#Fe",
+     "ref": {
+      "type": "element",
+      "id": "Fe"
+     },
+     "text": [
+      {
+       "t": "An iron atom has 26 protons and 26 electrons. Its most common natural isotope, iron-56, has 30 neutrons.",
+       "src": [
+        {
+         "id": "atom:rsc",
+         "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+         "u": "https://periodic-table.rsc.org/"
+        }
+       ],
+       "computed": true
+      }
+     ]
+    }
+   ],
+   "titleKey": "paths.blood.title",
+   "introKey": "paths.blood.intro"
+  },
+  {
+   "id": "pond",
+   "steps": [
+    {
+     "level": "organism",
+     "title": "Paramecium",
+     "href": "microscope/#paramecium",
+     "ref": {
+      "type": "organism",
+      "id": "paramecium"
+     },
+     "text": [
+      {
+       "t": "Paramecium caudatum is a single cell 170 to 330 micrometres long, so the biggest are about a third of a millimetre.",
+       "src": [
+        {
+         "id": "microscope:neupane-pcaudatum",
+         "t": "Paramecium caudatum: Habitat, Culture, Structure, Locomotion",
+         "u": "https://microbenotes.com/paramecium-caudatum-habitat-culture-structure-locomotion/"
+        },
+        {
+         "id": "microscope:kreutz-pcaudatum",
+         "t": "Paramecium caudatum Ehrenberg, 1833",
+         "u": "https://realmicrolife.com/paramecium-caudatum/"
+        }
+       ]
+      },
+      {
+       "t": "Between 10,000 and 14,000 cilia cover it and beat in waves, pushing it along at about one millimetre per second.",
+       "src": [
+        {
+         "id": "microscope:neupane-pcaudatum",
+         "t": "Paramecium caudatum: Habitat, Culture, Structure, Locomotion",
+         "u": "https://microbenotes.com/paramecium-caudatum-habitat-culture-structure-locomotion/"
+        },
+        {
+         "id": "microscope:jana2012",
+         "t": "Paramecium swimming in capillary tube",
+         "u": "https://arxiv.org/abs/1012.4812"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "level": "cell",
+     "title": "Inside the paramecium",
+     "href": "index.html#zoom=cell",
+     "text": [
+      {
+       "t": "The whole living thing is this one cell, covered in 10,000 to 14,000 cilia that beat to swim it forward.",
+       "src": [
+        {
+         "id": "journey:neupane-pcaudatum",
+         "t": "Neupane, Paramecium caudatum: Habitat, Culture, Structure, Locomotion. Microbe Notes",
+         "u": "https://microbenotes.com/paramecium-caudatum-habitat-culture-structure-locomotion/"
+        },
+        {
+         "id": "journey:bionumbers-mito",
+         "t": "Milo and Phillips, Cell Biology by the Numbers: How big are mitochondria?",
+         "u": "https://book.bionumbers.org/how-big-are-mitochondria/"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "level": "cell",
+     "title": "Nucleus",
+     "href": "cells/#animal/nucleus",
+     "ref": {
+      "type": "part",
+      "id": "nucleus"
+     },
+     "text": [
+      {
+       "t": "The nucleus holds the cell's DNA and directs the making of ribosomes and proteins.",
+       "src": [
+        {
+         "id": "cells:bio-4-3",
+         "t": "Biology 2e, section 4.3 Eukaryotic Cells",
+         "u": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "level": "big",
+     "title": "DNA",
+     "href": "molecules/#dna",
+     "ref": {
+      "type": "molecule",
+      "id": "dna"
+     },
+     "text": [
+      {
+       "t": "DNA is the genetic material of living things, built from two strands wound into a double helix.",
+       "src": [
+        {
+         "id": "molecules:os-3-5",
+         "t": "OpenStax Biology 2e, section 3.5 Nucleic Acids",
+         "u": "https://openstax.org/books/biology-2e/pages/3-5-nucleic-acids"
+        }
+       ]
+      },
+      {
+       "t": "The sugar and phosphate backbone runs along the outside, and the bases pair across the middle, A with T and G with C.",
+       "src": [
+        {
+         "id": "molecules:os-3-5",
+         "t": "OpenStax Biology 2e, section 3.5 Nucleic Acids",
+         "u": "https://openstax.org/books/biology-2e/pages/3-5-nucleic-acids"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "level": "atom",
+     "title": "Nitrogen",
+     "href": "molecules/#dna?el=N",
+     "ref": {
+      "type": "element",
+      "id": "N"
+     },
+     "text": [
+      {
+       "t": "The DNA structure in this explorer has 92 nitrogen atoms, counted from its structure file.",
+       "src": [
+        {
+         "id": "molecules:rcsb-1BNA",
+         "t": "RCSB PDB 1BNA, Structure of a B-DNA dodecamer: conformation and dynamics",
+         "u": "https://www.rcsb.org/structure/1BNA"
+        }
+       ],
+       "computed": true
+      },
+      {
+       "t": "Plants take it up from the soil to build DNA, RNA and amino acids, and industry turns it into ammonia to make fertilisers.",
+       "src": [
+        {
+         "id": "elements:rsc",
+         "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+         "u": "https://periodic-table.rsc.org/"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "level": "atom",
+     "title": "Nitrogen",
+     "href": "atom/#N",
+     "ref": {
+      "type": "element",
+      "id": "N"
+     },
+     "text": [
+      {
+       "t": "A nitrogen atom has 7 protons and 7 electrons. Its most common natural isotope, nitrogen-14, has 7 neutrons.",
+       "src": [
+        {
+         "id": "atom:rsc",
+         "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+         "u": "https://periodic-table.rsc.org/"
+        }
+       ],
+       "computed": true
+      }
+     ]
+    }
+   ],
+   "titleKey": "paths.pond.title",
+   "introKey": "paths.pond.intro"
+  }
+ ]
+}

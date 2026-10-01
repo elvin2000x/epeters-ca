@@ -1,0 +1,44 @@
+{
+  "_note": "Every fact in atp.json points at keys here. 'checked' says what was read and when. The machine's counts (8 c-subunits, 8 protons and 3 ATP per turn) come only from watt-2010. 'calc' numbers were measured by tools/hero_atp_build.py from the local 1MAB file. Shapes and sizes of the membrane, ring, stalks and a-subunit are drawn, not measured.",
+  "sources": {
+    "os-7-4": {
+      "type": "textbook",
+      "cite": "OpenStax Biology 2e, section 7.4 Oxidative Phosphorylation.",
+      "url": "https://openstax.org/books/biology-2e/pages/7-4-oxidative-phosphorylation",
+      "checked": "2026-10-01, page read: complex I pumps hydrogen ions from the matrix into the intermembrane space, building a gradient across the inner membrane; hydrogen ions can only pass back through the inner membrane by an integral membrane protein called ATP synthase, which acts as a tiny generator turned by the hydrogen ions diffusing through it down their electrochemical gradient; chemiosmosis makes 90 percent of the ATP made during aerobic glucose catabolism."
+    },
+    "motm-72": {
+      "type": "educational article",
+      "cite": "Goodsell, D. (2005). Molecule of the Month: ATP Synthase. RCSB PDB-101, December 2005.",
+      "url": "https://pdb101.rcsb.org/motm/72",
+      "checked": "2026-10-01, page read: ATP synthase is two motors in one machine; F0 is an electric motor embedded in the membrane, F1 a chemical motor; protons flowing through F0 turn a circular rotor; in the bacterial F0 shown, the rotor has 12 identical chains and the ion pump is a single chain."
+    },
+    "watt-2010": {
+      "type": "primary paper",
+      "cite": "Watt, I. N., Montgomery, M. G., Runswick, M. J., Leslie, A. G. and Walker, J. E. (2010). Bioenergetic cost of making an adenosine triphosphate molecule in animal mitochondria. Proc. Natl. Acad. Sci. USA 107, 16823-16827.",
+      "doi": "10.1073/pnas.1011099107",
+      "url": "https://doi.org/10.1073/pnas.1011099107",
+      "checked": "2026-10-01, abstract read (Europe PMC, PMID 20847295): the catalytic domain sticks out into the mitochondrial matrix and is joined to the membrane domain by central and peripheral stalks; the central stalk and a ring of c-subunits turn about 100 times per second; each c-subunit carries a glutamate near the middle of the membrane on the ring's outer surface, and the turning comes from protonating and deprotonating each glutamate in turn; each full turn makes three ATP and moves one proton per c-subunit; in cow (bovine) mitochondria the ring has eight c-subunits; vertebrate c-subunits are nearly identical, so vertebrates probably have 8-rings too, needing 2.7 protons per ATP; fungi, eubacteria and chloroplasts have rings of 10 to 15."
+    },
+    "rcsb-1MAB": {
+      "type": "PDB entry",
+      "cite": "RCSB PDB 1MAB, Rat liver F1-ATPase.",
+      "url": "https://www.rcsb.org/structure/1MAB",
+      "file": "../molecules/data/1MAB.cif",
+      "checked": "2026-10-01, local mmCIF file read by tools/hero_atp_build.py: one alpha (501 of 510 residues modelled), one beta (477 of 479) and the gamma chain (124 of 270 residues modelled), plus ATP, ADP, one magnesium and one phosphate; assembly 1 applies the crystal three-fold turns (operators 1 and 2) to alpha, beta and the ligands, giving three alpha and three beta around one gamma. Also see ../molecules/sources.json (X-ray, 2.8 angstrom, Rattus norvegicus)."
+    },
+    "bianchet-1998": {
+      "type": "primary paper",
+      "cite": "Bianchet, M. A., Hullihen, J., Pedersen, P. L. and Amzel, L. M. (1998). The 2.8-A structure of rat liver F1-ATPase: configuration of a critical intermediate in ATP synthesis/hydrolysis. Proc. Natl. Acad. Sci. USA 95, 11065-11070.",
+      "doi": "10.1073/pnas.95.19.11065",
+      "url": "https://doi.org/10.1073/pnas.95.19.11065",
+      "checked": "2026-10-01, entry in ../molecules/sources.json: citation read from the 1MAB mmCIF file."
+    },
+    "calc": {
+      "type": "measured from the file",
+      "cite": "Measured by this app's tools/hero_atp_build.py from the local 1MAB mmCIF file.",
+      "checked": "2026-10-01: the full head built from assembly 1 has 22,655 atoms (no water); the ring of three alpha and three beta chains is 12.1 nm across its three-fold axis and 10.6 nm tall along it; the modelled part of gamma is 10.3 nm long and sticks out 1.9 nm beyond the ring on one side."
+    }
+  },
+  "downloads": []
+}

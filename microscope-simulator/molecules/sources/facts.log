@@ -1,0 +1,88 @@
+﻿== 1B7T
+   title=MYOSIN DIGESTED BY PAPAIN
+   cite=Atomic structure of scallop myosin subfragment S1 complexed with MgADP: a novel conformation of the myosin head. | Cell(Cambridge,Mass.) 97 459-470 (1999) doi=10.1016/S0092-8674(00)80756-4 pmid=10338210 authors=['Houdusse, A.', 'Kalabokis, V.N.', 'Himmel, D.']
+   organisms=['Argopecten irradians']
+   entities=[('1', 'polymer', 'MYOSIN HEAVY CHAIN', '1'), ('2', 'polymer', 'MYOSIN REGULATORY LIGHT CHAIN', '1'), ('3', 'polymer', 'MYOSIN ESSENTIAL LIGHT CHAIN', '1'), ('4', 'non-polymer', 'MAGNESIUM ION', '2'), ('5', 'non-polymer', "ADENOSINE-5'-DIPHOSPHATE", '1'), ('6', 'non-polymer', 'CALCIUM ION', '1'), ('7', 'water', 'water', '104')]
+   poly=[('1', 'polypeptide(L)', 835), ('2', 'polypeptide(L)', 156), ('3', 'polypeptide(L)', 156)]
+   elements={'C': 5271, 'O': 1560, 'N': 1393, 'S': 50, 'MG': 2, 'P': 2, 'CA': 1}
+== 1BNA
+   title=STRUCTURE OF A B-DNA DODECAMER. CONFORMATION AND DYNAMICS
+   cite=Structure of a B-DNA dodecamer: conformation and dynamics. | Proc.Natl.Acad.Sci.USA 78 2179-2183 (1981) doi=10.1073/pnas.78.4.2179 pmid=6941276 authors=['Drew, H.R.', 'Wing, R.M.', 'Takano, T.']
+   organisms=[]
+   entities=[('1', 'polymer', "DNA (5'-D(*CP*GP*CP*GP*AP*AP*TP*TP*CP*GP*CP*G)-3')", '2'), ('2', 'water', 'water', '80')]
+   poly=[('1', 'polydeoxyribonucleotide', 12)]
+   elements={'C': 232, 'O': 140, 'N': 92, 'P': 22}
+== 1CAG
+   title=CRYSTAL AND MOLECULAR STRUCTURE OF A COLLAGEN-LIKE PEPTIDE AT 1.9 ANGSTROM RESOLUTION
+   cite=Crystal and molecular structure of a collagen-like peptide at 1.9 A resolution. | Science 266 75-81 (1994) doi=? pmid=7695699 authors=['Bella, J.', 'Eaton, M.', 'Brodsky, B.']
+   organisms=[]
+   entities=[('1', 'polymer', 'COLLAGEN-LIKE PEPTIDE', '3'), ('2', 'non-polymer', 'ACETIC ACID', '6'), ('3', 'water', 'water', '85')]
+   poly=[('1', 'polypeptide(L)', 30)]
+   elements={'C': 371, 'O': 130, 'N': 88}
+== 1EMA
+   title=GREEN FLUORESCENT PROTEIN FROM AEQUOREA VICTORIA
+   cite=Crystal structure of the Aequorea victoria green fluorescent protein. | Science 273 1392-1395 (1996) doi=? pmid=8703075 authors=['Ormo, M.', 'Cubitt, A.B.', 'Kallio, K.']
+   organisms=['Aequorea victoria']
+   entities=[('1', 'polymer', 'GREEN FLUORESCENT PROTEIN', '1'), ('2', 'water', 'water', '95')]
+   poly=[('1', 'polypeptide(L)', 236)]
+   elements={'C': 1134, 'O': 338, 'N': 293, 'SE': 4, 'S': 2}
+== 1J4N
+   title=Crystal Structure of the AQP1 water channel
+   cite=Structural basis of water-specific transport through the AQP1 water channel. | Nature 414 872-878 (2001) doi=10.1038/414872a pmid=11780053 authors=['Sui, H.', 'Han, B.G.', 'Lee, J.K.']
+   organisms=['Bos taurus']
+   entities=[('1', 'polymer', 'AQUAPORIN 1', '1'), ('2', 'non-polymer', 'nonyl beta-D-glucopyranoside', '3'), ('3', 'water', 'water', '114')]
+   poly=[('1', 'polypeptide(L)', 271)]
+   elements={'C': 1247, 'O': 347, 'N': 314, 'S': 7}
+== 1LYZ
+   title=Real-space refinement of the structure of hen egg-white lysozyme
+   cite=Real-space refinement of the structure of hen egg-white lysozyme. | J.Mol.Biol. 82 371-391 (1974) doi=10.1016/0022-2836(74)90598-1 pmid=4856347 authors=['Diamond, R.']
+   organisms=['Gallus gallus']
+   entities=[('1', 'polymer', 'HEN EGG WHITE LYSOZYME', '1'), ('2', 'water', 'water', '101')]
+   poly=[('1', 'polypeptide(L)', 129)]
+   elements={'C': 613, 'N': 193, 'O': 185, 'S': 10}
+== 1MAB
+   title=RAT LIVER F1-ATPASE
+   cite=The 2.8-A structure of rat liver F1-ATPase: configuration of a critical intermediate in ATP synthesis/hydrolysis. | Proc.Natl.Acad.Sci.USA 95 11065-11070 (1998) doi=10.1073/pnas.95.19.11065 pmid=9736690 authors=['Bianchet, M.A.', 'Hullihen, J.', 'Pedersen, P.L.']
+   organisms=['Rattus norvegicus']
+   entities=[('1', 'polymer', 'PROTEIN (F1-ATPASE ALPHA CHAIN)', '1'), ('2', 'polymer', 'PROTEIN (F1-ATPASE BETA CHAIN)', '1'), ('3', 'polymer', 'PROTEIN (F1-ATPASE GAMMA CHAIN)', '1'), ('4', 'non-polymer', 'MAGNESIUM ION', '1'), ('5', 'non-polymer', "ADENOSINE-5'-TRIPHOSPHATE", '1'), ('6', 'non-polymer', 'PHOSPHATE ION', '1'), ('7', 'non-polymer', "ADENOSINE-5'-DIPHOSPHATE", '1'), ('8', 'water', 'water', '61')]
+   poly=[('1', 'polypeptide(L)', 510), ('2', 'polypeptide(L)', 479), ('3', 'polypeptide(L)', 270)]
+   elements={'C': 5286, 'O': 1636, 'N': 1468, 'S': 31, 'P': 6, 'MG': 1}
+== 4HHB
+   title=THE CRYSTAL STRUCTURE OF HUMAN DEOXYHAEMOGLOBIN AT 1.74 ANGSTROMS RESOLUTION
+   cite=The crystal structure of human deoxyhaemoglobin at 1.74 A resolution | J.Mol.Biol. 175 159-174 (1984) doi=10.1016/0022-2836(84)90472-8 pmid=6726807 authors=['Fermi, G.', 'Perutz, M.F.', 'Shaanan, B.']
+   organisms=['Homo sapiens']
+   entities=[('1', 'polymer', 'Hemoglobin subunit alpha', '2'), ('2', 'polymer', 'Hemoglobin subunit beta', '2'), ('3', 'non-polymer', 'PROTOPORPHYRIN IX CONTAINING FE', '4'), ('4', 'non-polymer', 'PHOSPHATE ION', '2'), ('5', 'water', 'water', '221')]
+   poly=[('1', 'polypeptide(L)', 141), ('2', 'polypeptide(L)', 146)]
+   elements={'C': 2954, 'O': 806, 'N': 780, 'S': 12, 'FE': 4, 'P': 2}
+== 4INS
+   title=THE STRUCTURE OF 2ZN PIG INSULIN CRYSTALS AT 1.5 ANGSTROMS RESOLUTION
+   cite=The structure of 2Zn pig insulin crystals at 1.5 A resolution. | Philos.Trans.R.Soc.London,Ser.B 319 369-456 (1988) doi=? pmid=2905485 authors=['Baker, E.N.', 'Blundell, T.L.', 'Cutfield, J.F.']
+   organisms=['Sus scrofa']
+   entities=[('1', 'polymer', 'INSULIN (CHAIN A)', '2'), ('2', 'polymer', 'INSULIN (CHAIN B)', '2'), ('3', 'non-polymer', 'ZINC ION', '2'), ('4', 'water', 'water', '350')]
+   poly=[('1', 'polypeptide(L)', 21), ('2', 'polypeptide(L)', 30)]
+   elements={'C': 524, 'O': 156, 'N': 138, 'S': 12, 'ZN': 2}
+== ATP
+   name=ADENOSINE-5'-TRIPHOSPHATE formula=C10 H16 N5 O13 P3 weight=507.181
+   elements={'H': 16, 'O': 13, 'C': 10, 'N': 5, 'P': 3}
+== CLR
+   name=CHOLESTEROL formula=C27 H46 O weight=386.654
+   elements={'H': 46, 'C': 27, 'O': 1}
+== GLC
+   name=alpha-D-glucopyranose formula=C6 H12 O6 weight=180.156
+   elements={'H': 12, 'C': 6, 'O': 6}
+== GLY
+   name=GLYCINE formula=C2 H5 N O2 weight=75.067
+   elements={'H': 5, 'C': 2, 'O': 2, 'N': 1}
+== HOH
+   name=WATER formula=H2 O weight=18.015
+   elements={'H': 2, 'O': 1}
+== PLM
+   name=PALMITIC ACID formula=C16 H32 O2 weight=256.424
+   elements={'H': 32, 'C': 16, 'O': 2}
+== 1J6Z
+   title=UNCOMPLEXED ACTIN
+   cite=The crystal structure of uncomplexed actin in the ADP state. | Science 293 708-711 (2001) doi=10.1126/science.1059700 pmid=11474115 authors=['Otterbein, L.R.', 'Graceffa, P.', 'Dominguez, R.']
+   organisms=['Oryctolagus cuniculus']
+   entities=[('1', 'polymer', 'ACTIN ALPHA 1', '1'), ('2', 'non-polymer', 'CALCIUM ION', '6'), ('3', 'non-polymer', "ADENOSINE-5'-DIPHOSPHATE", '1'), ('4', 'non-polymer', 'TETRAMETHYLRHODAMINE-5-MALEIMIDE', '1'), ('5', 'water', 'water', '404')]
+   poly=[('1', 'polypeptide(L)', 375)]
+   elements={'C': 1858, 'O': 565, 'N': 494, 'S': 21, 'CA': 6, 'P': 2}

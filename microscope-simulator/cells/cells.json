@@ -1,0 +1,193 @@
+{
+  "version": 1,
+  "copyNote": "The 'ui' strings are short functional placeholders for COPYWRITER MAIN to replace. Keys are stable; the page reads them by key.",
+  "ui": {
+    "pageTitle": "Cells",
+    "intro": "Pick a cell, then tap a part to see what it does.",
+    "homeLink": "Explorer home",
+    "pickerLabel": "Cells",
+    "resetView": "Reset view",
+    "showAll": "Show all parts",
+    "partsHeading": "Parts and colour key",
+    "partsHint": "Tap a part in the picture or choose one here.",
+    "partPrompt": "No part chosen yet.",
+    "moleculeLink": "See the molecule: {name}",
+    "sourcesHeading": "Sources",
+    "altSummary": "Text description of this view",
+    "scaleBadge": "Illustrative, not to scale",
+    "noWebGL": "The 3D view cannot run on this device, so the parts and what they do are listed below as text.",
+    "viewHelp": "Drag to turn the cell. Arrow keys turn it, plus and minus zoom, zero resets, Escape clears the chosen part. Tap a part to read about it, or use the list of parts. L shows or hides the labels.",
+    "credits": "Credits and licences",
+    "creditThree": "3D drawing by three.js (MIT licence), served from this site.",
+    "creditFonts": "IBM Plex Sans and IBM Plex Mono (SIL Open Font License), served from this site.",
+    "creditText": "Facts are paraphrased from OpenStax open textbooks (CC BY-NC-SA 4.0), cited sentence by sentence.",
+    "labelsButton": "Labels",
+    "pauseMotion": "Pause motion",
+    "playMotion": "Play motion",
+    "prevPart": "Previous part",
+    "nextPart": "Next part",
+    "moleculeChip": "Molecule: {name}"
+  },
+  "note": "Every sentence names its source. Sentences are paraphrased from the open textbook sections listed under sources, which were read on the date in 'checked'. Drawings are illustrative, not to scale.",
+  "sources": {
+    "bio-4-2": { "title": "Biology 2e, section 4.2 Prokaryotic Cells", "authors": "Mary Ann Clark, Matthew Douglas, Jung Choi", "publisher": "OpenStax, Rice University", "url": "https://openstax.org/books/biology-2e/pages/4-2-prokaryotic-cells", "licence": "CC BY-NC-SA 4.0", "checked": "2026-10-01" },
+    "bio-4-3": { "title": "Biology 2e, section 4.3 Eukaryotic Cells", "authors": "Mary Ann Clark, Matthew Douglas, Jung Choi", "publisher": "OpenStax, Rice University", "url": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells", "licence": "CC BY-NC-SA 4.0", "checked": "2026-10-01" },
+    "bio-4-4": { "title": "Biology 2e, section 4.4 The Endomembrane System and Proteins", "authors": "Mary Ann Clark, Matthew Douglas, Jung Choi", "publisher": "OpenStax, Rice University", "url": "https://openstax.org/books/biology-2e/pages/4-4-the-endomembrane-system-and-proteins", "licence": "CC BY-NC-SA 4.0", "checked": "2026-10-01" },
+    "bio-4-5": { "title": "Biology 2e, section 4.5 The Cytoskeleton", "authors": "Mary Ann Clark, Matthew Douglas, Jung Choi", "publisher": "OpenStax, Rice University", "url": "https://openstax.org/books/biology-2e/pages/4-5-the-cytoskeleton", "licence": "CC BY-NC-SA 4.0", "checked": "2026-10-01" },
+    "ap-10-2": { "title": "Anatomy and Physiology 2e, section 10.2 Skeletal Muscle", "authors": "J. Gordon Betts, Kelly A. Young, James A. Wise and others", "publisher": "OpenStax, Rice University", "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/10-2-skeletal-muscle", "licence": "CC BY-NC-SA 4.0", "checked": "2026-10-01" },
+    "ap-12-2": { "title": "Anatomy and Physiology 2e, section 12.2 Nervous Tissue", "authors": "J. Gordon Betts, Kelly A. Young, James A. Wise and others", "publisher": "OpenStax, Rice University", "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-2-nervous-tissue", "licence": "CC BY-NC-SA 4.0", "checked": "2026-10-01" },
+    "ap-18-3": { "title": "Anatomy and Physiology 2e, section 18.3 Erythrocytes", "authors": "J. Gordon Betts, Kelly A. Young, James A. Wise and others", "publisher": "OpenStax, Rice University", "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/18-3-erythrocytes", "licence": "CC BY-NC-SA 4.0", "checked": "2026-10-01" }
+  },
+  "parts": {
+    "membrane": { "name": "Cell membrane", "swatch": "#e2a63c", "molecule": "phospholipid", "moleculeName": "a fatty acid, the tail of a membrane phospholipid",
+      "text": [
+        { "s": "The cell membrane is a double layer of phospholipids with proteins set into it, and it separates the inside of the cell from its surroundings.", "src": "bio-4-3" },
+        { "s": "It controls what passes in and out, such as ions, water and oxygen, and lets wastes like carbon dioxide leave.", "src": "bio-4-3" } ] },
+    "nucleus": { "name": "Nucleus", "swatch": "#7b5cc4", "molecule": "dna", "moleculeName": "DNA",
+      "text": [
+        { "s": "The nucleus holds the cell's DNA and directs the making of ribosomes and proteins.", "src": "bio-4-3" },
+        { "s": "It is wrapped in a double membrane with pores that control what moves between the nucleus and the rest of the cell.", "src": "bio-4-3" } ] },
+    "mitochondrion": { "name": "Mitochondria", "swatch": "#e8662f", "molecule": "atp", "moleculeName": "ATP",
+      "text": [
+        { "s": "Mitochondria make ATP, the cell's main energy-carrying molecule, from the chemical energy in glucose and other nutrients.", "src": "bio-4-3" },
+        { "s": "Each has two membranes, and the inner one is folded into ridges called cristae.", "src": "bio-4-3" } ] },
+    "ribosomes": { "name": "Ribosomes", "swatch": "#27358c",
+      "text": [
+        { "s": "Ribosomes build proteins, joining amino acids in the order set by messenger RNA copied from the DNA in the nucleus.", "src": "bio-4-3" },
+        { "s": "Some float free in the cytoplasm and some sit on the outer surface of the endoplasmic reticulum.", "src": "bio-4-3" } ] },
+    "er": { "name": "Endoplasmic reticulum", "swatch": "#3a9bd5",
+      "text": [
+        { "s": "The endoplasmic reticulum is a network of connected membrane sacs and tubes that modifies proteins and makes lipids.", "src": "bio-4-4" },
+        { "s": "The rough part is studded with ribosomes, while the smooth part has few or none and makes lipids and stores calcium ions.", "src": "bio-4-4" } ] },
+    "golgi": { "name": "Golgi apparatus", "swatch": "#d4559a",
+      "text": [
+        { "s": "The Golgi apparatus is a stack of flattened membrane sacs that sorts, tags and packages proteins and lipids.", "src": "bio-4-4" },
+        { "s": "Proteins arrive from the endoplasmic reticulum in small sacs called vesicles and leave from the far side of the stack in new vesicles.", "src": "bio-4-4" } ] },
+    "lysosome": { "name": "Lysosomes", "swatch": "#14a396",
+      "text": [
+        { "s": "Lysosomes are the cell's digestive sacs, with enzymes that break down proteins, complex sugars, lipids, nucleic acids and worn-out organelles.", "src": "bio-4-3" },
+        { "s": "Their insides are more acidic than the rest of the cell, which is the condition those enzymes work in.", "src": "bio-4-3" } ] },
+    "cytoskeleton": { "name": "Cytoskeleton", "swatch": "#55636d", "molecule": "actin", "moleculeName": "actin",
+      "text": [
+        { "s": "The cytoskeleton is a network of protein fibres that holds the cell's shape, keeps some organelles in place and lets the cell and its contents move.", "src": "bio-4-5" },
+        { "s": "Its thinnest fibres, the microfilaments, are made of two twisted strands of the protein actin.", "src": "bio-4-5" } ] },
+    "chloroplast": { "name": "Chloroplasts", "swatch": "#3c9a37",
+      "text": [
+        { "s": "Chloroplasts carry out photosynthesis, using light energy, carbon dioxide and water to make sugar and oxygen.", "src": "bio-4-3" },
+        { "s": "They contain the green pigment chlorophyll, which captures the light.", "src": "bio-4-3" } ] },
+    "cellwall": { "name": "Cell wall", "swatch": "#8c6a3c",
+      "text": [
+        { "s": "The cell wall is a rigid layer outside the membrane that protects the cell, supports it and gives it its shape.", "src": "bio-4-3" },
+        { "s": "In plants its main ingredient is cellulose, a long chain of glucose units.", "src": "bio-4-3" } ] },
+    "vacuole": { "name": "Large central vacuole", "swatch": "#86c3ea",
+      "text": [
+        { "s": "The large central vacuole takes up most of a plant cell's volume and helps control how much water the cell holds.", "src": "bio-4-3" },
+        { "s": "When it holds more water the cell grows larger, and when water leaves, the vacuole shrinks and the plant wilts.", "src": "bio-4-3" } ] },
+    "nucleoid": { "name": "Nucleoid (the DNA)", "swatch": "#7b5cc4", "molecule": "dna", "moleculeName": "DNA",
+      "text": [
+        { "s": "A bacterium has no nucleus, so its DNA sits in a central region called the nucleoid.", "src": "bio-4-2" },
+        { "s": "In prokaryotes like this one, the DNA is usually organised as a single circular chromosome.", "src": "bio-4-3" } ] },
+    "flagellum": { "name": "Flagellum", "swatch": "#a2703f",
+      "text": [
+        { "s": "Some bacteria have flagella, long threads they use to move around.", "src": "bio-4-2" } ] },
+    "b-wall": { "name": "Cell wall", "swatch": "#8c6a3c",
+      "text": [
+        { "s": "Most bacteria have a cell wall made of peptidoglycan just outside the membrane.", "src": "bio-4-2" },
+        { "s": "It adds protection, helps the cell keep its shape and stops it drying out.", "src": "bio-4-2" } ] },
+    "b-membrane": { "name": "Cell membrane", "swatch": "#e2a63c", "molecule": "phospholipid", "moleculeName": "a fatty acid, the tail of a membrane phospholipid",
+      "text": [
+        { "s": "Every cell, bacteria included, has a cell membrane that separates its inside from its surroundings.", "src": "bio-4-2" } ] },
+    "b-ribosomes": { "name": "Ribosomes", "swatch": "#27358c",
+      "text": [
+        { "s": "Ribosomes build proteins from amino acids, following instructions copied from the DNA.", "src": "bio-4-3" },
+        { "s": "All bacteria have them, even though they have no nucleus or other membrane-bound organelles.", "src": "bio-4-2" } ] },
+    "p-golgi": { "name": "Golgi apparatus", "swatch": "#d4559a",
+      "text": [
+        { "s": "The Golgi apparatus is a stack of flattened membrane sacs that sorts, tags and packages proteins and lipids.", "src": "bio-4-4" },
+        { "s": "In plant cells it also makes complex sugars, some of which become part of the cell wall.", "src": "bio-4-4" } ] },
+    "rbc-membrane": { "name": "Cell membrane (the disc shape)", "swatch": "#d0402f", "molecule": "phospholipid", "moleculeName": "a fatty acid, the tail of a membrane phospholipid",
+      "text": [
+        { "s": "A red blood cell is a disc that is plump at the rim and very thin in the middle.", "src": "ap-18-3" },
+        { "s": "That shape gives more surface for swapping gases than a sphere of the same width, and lets the cell fold to pass through narrow blood vessels.", "src": "ap-18-3" } ] },
+    "rbc-hb": { "name": "Inside, packed with hemoglobin", "swatch": "#7d1620", "molecule": "hemoglobin", "moleculeName": "hemoglobin",
+      "text": [
+        { "s": "As a red blood cell matures it pushes out its nucleus and most other organelles, which leaves more room for hemoglobin.", "src": "ap-18-3" },
+        { "s": "Each hemoglobin molecule can carry four oxygen molecules, and one red blood cell may hold about 300 million of them.", "src": "ap-18-3" } ] },
+    "soma": { "name": "Cell body", "swatch": "#e9ad62",
+      "text": [
+        { "s": "The cell body, also called the soma, holds the nucleus and most of the neuron's major organelles.", "src": "ap-12-2" } ] },
+    "dendrites": { "name": "Dendrites", "swatch": "#c9852f",
+      "text": [
+        { "s": "Dendrites are branched extensions that receive information from other neurons at contact points called synapses.", "src": "ap-12-2" },
+        { "s": "Information flows from the dendrites, across the cell body and down the axon.", "src": "ap-12-2" } ] },
+    "axon": { "name": "Axon", "swatch": "#b4612a",
+      "text": [
+        { "s": "The axon is a single long fibre that leaves the cell body and reaches toward the cells it signals to.", "src": "ap-12-2" },
+        { "s": "It can branch again and again to communicate with many target cells.", "src": "ap-12-2" } ] },
+    "myelin": { "name": "Myelin sheath", "swatch": "#efe6cf",
+      "text": [
+        { "s": "Many axons are wrapped in myelin, an insulating layer that is made by glial cells, not by the neuron itself.", "src": "ap-12-2" },
+        { "s": "The small gaps in the myelin, called nodes of Ranvier, are important to the way electrical signals travel along the axon.", "src": "ap-12-2" } ] },
+    "terminals": { "name": "Axon terminals", "swatch": "#a8488a",
+      "text": [
+        { "s": "At its end the axon splits into several branches toward the target cell, each ending in a small swelling called a synaptic end bulb.", "src": "ap-12-2" } ] },
+    "sarcolemma": { "name": "Sarcolemma (cell membrane)", "swatch": "#c4423a", "molecule": "phospholipid", "moleculeName": "a fatty acid, the tail of a membrane phospholipid",
+      "text": [
+        { "s": "The membrane of a muscle cell is called the sarcolemma.", "src": "ap-10-2" },
+        { "s": "An electrical signal sweeps along it as a wave, and that signal starts the contraction.", "src": "ap-10-2" } ] },
+    "m-nuclei": { "name": "Nuclei (many)", "swatch": "#7b5cc4", "molecule": "dna", "moleculeName": "DNA",
+      "text": [
+        { "s": "A skeletal muscle cell has many nuclei, because it forms when a cell fuses with up to hundreds of others during development.", "src": "ap-10-2" },
+        { "s": "More nuclei means more copies of the genes, so the cell can make the large amounts of protein that contraction needs.", "src": "ap-10-2" } ] },
+    "myofibrils": { "name": "Myofibrils", "swatch": "#e7a097", "molecule": "actin", "moleculeName": "actin",
+      "text": [
+        { "s": "Myofibrils are strands that run the whole length of the cell, built from repeating units called sarcomeres.", "src": "ap-10-2" },
+        { "s": "Their actin and myosin filaments, lined up in order, give the cell its striped look.", "src": "ap-10-2" } ] },
+    "sr": { "name": "Sarcoplasmic reticulum", "swatch": "#3a9bd5",
+      "text": [
+        { "s": "The sarcoplasmic reticulum is a special smooth endoplasmic reticulum that stores, releases and takes back calcium ions.", "src": "ap-10-2" },
+        { "s": "Releasing that calcium is the step that links the electrical signal to the contraction.", "src": "ap-10-2" } ] },
+    "m-mito": { "name": "Mitochondria", "swatch": "#e8662f", "molecule": "atp", "moleculeName": "ATP",
+      "text": [
+        { "s": "Muscle cells have a very high concentration of mitochondria, which make the ATP the cell needs to keep the body moving.", "src": "bio-4-3" } ] }
+  },
+  "cells": [
+    { "id": "animal", "name": "Animal cell", "short": "Animal",
+      "summary": [
+        { "s": "An animal cell has a nucleus and many membrane-bound organelles, each with its own job.", "src": "bio-4-3" },
+        { "s": "Unlike a plant cell, it has no cell wall, chloroplasts or large central vacuole.", "src": "bio-4-3" } ],
+      "alt": "A round cell with a wedge cut out of the front so you can see inside. A purple nucleus with a darker nucleolus and tangled purple strands of DNA sits left of centre, wrapped in blue curved bands of endoplasmic reticulum dotted with tiny navy ribosomes. Orange bean-shaped mitochondria, several cut open to show folds inside, a pink stack of curved Golgi sacs, small teal lysosomes and thin grey cytoskeleton fibres fill the rest. The yellow-orange outer skin is the cell membrane. Illustrative, not to scale.",
+      "parts": ["membrane", "nucleus", "er", "ribosomes", "golgi", "mitochondrion", "lysosome", "cytoskeleton"] },
+    { "id": "plant", "name": "Plant cell", "short": "Plant",
+      "summary": [
+        { "s": "A plant cell has most of the same organelles as an animal cell, plus a cell wall, chloroplasts and a large central vacuole.", "src": "bio-4-3" },
+        { "s": "Most plant cells do not have lysosomes; their vacuoles do that digesting instead.", "src": "bio-4-3" } ],
+      "alt": "A box-shaped cell with rounded corners and a wedge cut out of the front. A brown cell wall forms the outside, lined on the inside by the yellow-orange membrane. A large pale blue vacuole fills most of the middle. A purple nucleus with blue endoplasmic reticulum sits upper left, green oval chloroplasts, some cut open to show stacks inside, line the walls, and there are orange mitochondria, a pink Golgi stack and tiny navy ribosomes. Illustrative, not to scale.",
+      "parts": ["cellwall", "membrane", "vacuole", "nucleus", "chloroplast", "mitochondrion", "er", "p-golgi", "ribosomes"] },
+    { "id": "bacterium", "name": "Bacterial cell", "short": "Bacterium",
+      "summary": [
+        { "s": "A bacterium is a prokaryote: a mostly single-celled organism with no nucleus and no other membrane-bound organelles.", "src": "bio-4-2" },
+        { "s": "Every prokaryote has DNA in a nucleoid, ribosomes, a cell membrane and a cell wall; other parts, like a flagellum, appear in some kinds only.", "src": "bio-4-2" } ],
+      "alt": "A rod-shaped bacterium with a wedge cut out of the front. A brown cell wall surrounds a yellow-orange membrane. Inside, a tangled purple loop of DNA, the nucleoid, sits in the middle among many tiny navy ribosomes. A long wavy brown flagellum trails from one end. Illustrative, not to scale.",
+      "parts": ["b-wall", "b-membrane", "nucleoid", "b-ribosomes", "flagellum"] },
+    { "id": "rbc", "name": "Red blood cell", "short": "Red blood",
+      "summary": [
+        { "s": "Red blood cells pick up oxygen in the lungs and carry it to the body's tissues, held by hemoglobin.", "src": "ap-18-3" },
+        { "s": "A mature human red blood cell has no nucleus and few other organelles.", "src": "ap-18-3" } ],
+      "alt": "A red disc, thick at the rim and dipped thin in the middle, with a wedge cut out of one side. The cut shows an interior packed with small dark red grains of hemoglobin, and no nucleus. Illustrative, not to scale.",
+      "parts": ["rbc-membrane", "rbc-hb"] },
+    { "id": "neuron", "name": "Nerve cell (neuron)", "short": "Neuron",
+      "summary": [
+        { "s": "A neuron is a nerve cell with long extensions, and information flows through it from the dendrites, across the cell body and down the axon.", "src": "ap-12-2" },
+        { "s": "This model is a multipolar neuron, with one axon and two or more dendrites; apart from a few special types, all neurons are this kind.", "src": "ap-12-2" } ],
+      "alt": "A nerve cell drawn left to right. On the left, a round tan cell body, cut open to show a purple nucleus, sprouts branching darker dendrites. A long brown axon runs to the right, wrapped in pale cream sections of myelin with small gaps between them. At the far right the axon splits into magenta branches ending in small bulbs. Illustrative, not to scale.",
+      "parts": ["soma", "nucleus", "dendrites", "axon", "myelin", "terminals"] },
+    { "id": "muscle", "name": "Muscle cell (fibre)", "short": "Muscle",
+      "summary": [
+        { "s": "Skeletal muscle cells are long and cylinder-shaped, so they are also called muscle fibres.", "src": "ap-10-2" },
+        { "s": "They can be very large for human cells, up to about 30 cm long in the sartorius muscle of the upper leg.", "src": "ap-10-2" } ],
+      "alt": "A short length of a long cylindrical muscle cell, cut open along the top front. The red outer skin is the sarcolemma. Inside, a bundle of striped pink myofibrils runs the length of the cell, ringed at intervals by thin blue bands of sarcoplasmic reticulum, with small orange mitochondria between them. Several flattened purple nuclei sit just under the membrane. Illustrative, not to scale.",
+      "link": { "href": "../muscle.html", "text": "Zoom into a muscle, from the whole muscle down to the actin molecule" },
+      "parts": ["sarcolemma", "m-nuclei", "myofibrils", "sr", "m-mito"] }
+  ]
+}

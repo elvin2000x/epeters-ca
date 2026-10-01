@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Virtual Microscope</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="A virtual microscope with single-celled organisms drawn at their real size.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%230b7469'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='%23fff' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../vendor/fonts/fonts.css">
+<link rel="stylesheet" href="microscope.css">
+</head>
+<body>
+<a class="skip" href="#panel" data-copy="skip">Skip to the controls</a>
+<div class="app">
+  <main class="stagewrap" id="stagewrap">
+    <div id="viewport" tabindex="0" role="application" aria-roledescription="microscope view" aria-label="Microscope view" aria-describedby="viewhelp viewalt">
+      <canvas id="gl" aria-hidden="true"></canvas>
+      <canvas id="c2d" aria-hidden="true" hidden></canvas>
+      <div class="ring" id="ring" hidden></div>
+    </div>
+    <button class="lamp" id="lamp" type="button" hidden aria-label="Lamp spot" aria-describedby="lampHint"><span aria-hidden="true"></span></button>
+    <span id="lampHint" class="sr-only" data-copy="lightSpotHint"></span>
+    <div class="clock" id="clock" hidden aria-hidden="true"></div>
+    <span id="viewhelp" class="sr-only">Press Enter to identify the cell in the middle. Plus and minus change magnification. Page Up and Page Down focus. Arrow keys move the stage. L switches the light. Space pauses.</span>
+    <a class="brand" href="../" data-copy="back">Back to the explorer</a>
+    <button class="viewbtn" id="themeBtn" type="button" aria-label="Theme: auto">Theme: auto</button>
+    <div class="readout" id="readout" aria-hidden="true"></div>
+    <div class="scalebar" id="scalebar" aria-hidden="true"><span class="bar" id="bar"></span><span class="lbl" id="barLbl"></span></div>
+    <div class="badge" id="badge" data-copy="realSize">Illustrative drawing, real size</div>
+    <div class="note" id="note" role="status" hidden></div>
+  </main>
+  <section class="panel" id="panel" aria-labelledby="orgTitle" tabindex="-1">
+    <p class="eyebrow" data-copy="eyebrow">Virtual microscope</p>
+    <h1 id="orgTitle">Loading</h1>
+    <p class="latin" id="orgLatin"></p>
+    <p class="intro" id="introP" data-copy="intro"></p>
+
+    <h2 class="sr-only" id="modeHd" data-copy="modeHeading">View</h2>
+    <div class="seg modes" role="group" aria-labelledby="modeHd">
+      <button class="btn" id="viewSlides" type="button" aria-pressed="true" data-copy="modeSlides">Slides</button>
+      <button class="btn" id="viewPond" type="button" aria-pressed="false" data-copy="modePond">Pond</button>
+      <a class="btn" href="shrink.html" data-copy="modeShrink">Shrink</a>
+    </div>
+
+    <h2 class="hd" id="slidesHd" data-copy="slidesHeading">Slides</h2>
+    <ul class="tray" id="tray" aria-labelledby="slidesHd"></ul>
+    <p class="small" id="trayHint" data-copy="addHint" hidden></p>
+
+    <section id="pondPanel" hidden aria-labelledby="foodHd">
+      <h2 class="hd" id="foodHd" data-copy="foodHeading">Add food</h2>
+      <div class="seg" role="group" aria-labelledby="foodHd">
+        <button class="btn" type="button" data-food="bacteria" data-copy="foodBacteria">Bacteria</button>
+        <button class="btn" type="button" data-food="yeast" data-copy="foodYeast">Yeast</button>
+        <button class="btn" type="button" data-food="algae" data-copy="foodAlgae">Algae</button>
+      </div>
+      <div class="card">
+        <h2 id="countsHd" data-copy="countsHeading">On the slide</h2>
+        <ul class="counts" id="counts" aria-labelledby="countsHd"></ul>
+        <canvas id="popChart" class="chart" aria-hidden="true"></canvas>
+        <p class="small"><span data-copy="chartLabel"></span>. <span data-copy="lifeClockLong"></span></p>
+        <div class="row tight"><button class="btn" id="clearBtn" type="button" data-copy="clear">Clear slide</button></div>
+      </div>
+    </section>
+
+    <h2 class="hd" id="magHd" data-copy="magHeading">Magnification</h2>
+    <ol class="steps" id="steps" aria-labelledby="magHd"></ol>
+
+    <div class="card slider">
+      <label for="focus"><span data-copy="focusLabel">Focus</span> <output id="focusOut" for="focus"></output></label>
+      <input type="range" id="focus" min="-30" max="30" step="0.5" value="0" aria-describedby="focusHint">
+      <div class="ends"><span id="focusMin"></span><span id="focusMax"></span></div>
+      <p class="small" id="focusHint" data-copy="focusHint"></p>
+      <div class="row tight">
+        <button class="btn" id="fineDown" type="button" aria-label="Fine focus down" data-copy="fineDown">Fine down</button>
+        <button class="btn" id="fineUp" type="button" aria-label="Fine focus up" data-copy="fineUp">Fine up</button>
+        <button class="btn" id="refocus" type="button" data-copy="refocus">Refocus</button>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div>
+        <h2 class="hd" id="lightHd" data-copy="lightHeading">Light</h2>
+        <div class="seg" role="group" aria-labelledby="lightHd">
+          <button class="btn" id="bf" type="button" aria-pressed="true" data-copy="brightfield">Brightfield</button>
+          <button class="btn" id="df" type="button" aria-pressed="false" data-copy="darkfield">Darkfield</button>
+        </div>
+      </div>
+      <div>
+        <h2 class="hd" id="timeHd" data-copy="timeHeading">Time</h2>
+        <div class="seg" role="group" aria-labelledby="timeHd" id="speeds"></div>
+      </div>
+    </div>
+    <div class="row">
+      <button class="btn" id="playBtn" type="button">Pause</button>
+      <button class="btn" id="followBtn" type="button" aria-pressed="true" data-copy="follow">Follow with the stage</button>
+      <button class="btn primary" id="identifyBtn" type="button" data-copy="identify">Identify</button>
+    </div>
+    <p class="small" data-copy="identifyHint"></p>
+
+    <section class="card guide" id="guide" hidden aria-labelledby="guideTitle" tabindex="-1">
+      <h2 data-copy="fieldGuide">Field guide</h2>
+      <p class="gname" id="guideTitle"></p>
+      <ol class="facts" id="facts"></ol>
+      <h3 class="sub" id="pondFactsHd" data-copy="inPond" hidden>In the pond</h3>
+      <ol class="facts" id="pondFacts"></ol>
+      <p class="small" id="guideSize"></p>
+    </section>
+
+    <div class="card">
+      <h2 data-copy="legendHeading">Colour key</h2>
+      <ul class="legend" id="legend"></ul>
+    </div>
+    <details class="card">
+      <summary data-copy="altHeading">Text description of this view</summary>
+      <p id="viewalt"></p>
+    </details>
+    <details class="card">
+      <summary data-copy="keysHeading">Keyboard</summary>
+      <ul class="keys">
+        <li><kbd>Tab</kbd> to the view, then <kbd>Enter</kbd> identifies the cell in the middle</li>
+        <li><kbd>+</kbd> and <kbd>-</kbd> change magnification</li>
+        <li><kbd>Page Up</kbd> and <kbd>Page Down</kbd> turn the focus knob</li>
+        <li>Arrow keys move the stage (this stops following)</li>
+        <li><kbd>L</kbd> switches the light, <kbd>Space</kbd> pauses, <kbd>1</kbd> to <kbd>6</kbd> pick a slide</li>
+        <li>In the pond, <kbd>1</kbd> to <kbd>6</kbd> add that organism; <kbd>B</kbd>, <kbd>Y</kbd> and <kbd>G</kbd> add bacteria, yeast and green algae</li>
+        <li>Tab to the lamp spot and use the arrow keys to move it</li>
+      </ul>
+    </details>
+    <details class="card">
+      <summary data-copy="sourcesHeading">Sources</summary>
+      <ul class="sources" id="sourceList"></ul>
+    </details>
+    <p class="sr-only" id="live" aria-live="polite"></p>
+  </section>
+</div>
+<div class="ghost" id="ghost" hidden aria-hidden="true"></div>
+<script type="module" src="microscope.js"></script>
+<script type="module" src="../shell/shell.js" data-page="microscope"></script>
+</body>
+</html>

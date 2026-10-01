@@ -1,0 +1,58 @@
+/* Shared look for the home page and the periodic table. Same tokens as the muscle ladder (muscle.html) and the
+   Anatomy Sandbox: teal accent, IBM Plex, light and dark themes. data-theme on <html> overrides the system setting. */
+:root {
+  --page: #eef3f2; --panel: #f7faf9; --raised: #ffffff;
+  --ink: #13201e; --muted: #4c5e5b; --line: #9aa9a6; --line-soft: #cad5d2;
+  --accent: #0b7469; --accent-soft: rgba(11, 116, 105, 0.12); --on-accent: #ffffff;
+  --shadow: 0 10px 30px rgba(17, 36, 33, 0.12);
+  --blk-s: #f3d3c4; --blk-p: #cfe3f5; --blk-d: #f4e7b8; --blk-f: #d9ecd2;
+  --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-name: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-data: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Menlo, Consolas, monospace;
+  --top: env(safe-area-inset-top, 0px); --bottom: env(safe-area-inset-bottom, 0px);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --page: #0e1514; --panel: #141e1d; --raised: #1b2826;
+    --ink: #e4eeeb; --muted: #9db0ac; --line: #5d7672; --line-soft: #283a38;
+    --accent: #39b9ab; --accent-soft: rgba(57, 185, 171, 0.16); --on-accent: #04201c;
+    --shadow: 0 12px 34px rgba(0, 0, 0, 0.5);
+    --blk-s: #4a2f27; --blk-p: #23384c; --blk-d: #45401f; --blk-f: #29402a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --page: #0e1514; --panel: #141e1d; --raised: #1b2826;
+  --ink: #e4eeeb; --muted: #9db0ac; --line: #5d7672; --line-soft: #283a38;
+  --accent: #39b9ab; --accent-soft: rgba(57, 185, 171, 0.16); --on-accent: #04201c;
+  --shadow: 0 12px 34px rgba(0, 0, 0, 0.5);
+  --blk-s: #4a2f27; --blk-p: #23384c; --blk-d: #45401f; --blk-f: #29402a;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--page); color: var(--ink); font-family: var(--font-ui); font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.skip { position: absolute; left: 8px; top: -60px; z-index: 50; background: var(--accent); color: var(--on-accent); padding: 8px 12px; border-radius: 8px; }
+.skip:focus { top: calc(8px + var(--top)); }
+
+.topbar { display: flex; align-items: center; gap: 12px; padding: calc(12px + var(--top)) 16px 12px; border-bottom: 1px solid var(--line-soft); background: var(--panel); }
+.brand { display: flex; flex-direction: column; line-height: 1.1; text-decoration: none; color: var(--ink); margin-right: auto; min-height: 44px; justify-content: center; }
+.brand-name { font-family: var(--font-name); font-style: italic; font-weight: 600; font-size: 21px; letter-spacing: -0.01em; }
+.brand-sub { font-family: var(--font-data); font-size: 11px; color: var(--muted); }
+.icon-btn { border: 1px solid var(--line); background: var(--raised); border-radius: 8px; padding: 8px 12px; min-height: 44px; font-size: 14px; font-weight: 500; }
+.icon-btn:hover { border-color: var(--accent); }
+
+.wrap { max-width: 1180px; margin: 0 auto; padding: 20px 16px calc(32px + var(--bottom)); }
+.wrap.wide { max-width: 1440px; }
+h1 { margin: 0 0 6px; font-size: 28px; line-height: 1.2; letter-spacing: -0.015em; }
+.lede { margin: 0 0 20px; font-size: 18px; color: var(--muted); max-width: 60ch; }
+.small { font-size: 14px; color: var(--muted); }
+.foot { margin-top: 28px; padding-top: 14px; border-top: 1px solid var(--line-soft); font-size: 13px; color: var(--muted); }
+.foot p { margin: 0 0 4px; }

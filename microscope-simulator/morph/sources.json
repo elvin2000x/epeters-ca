@@ -1,0 +1,87 @@
+{
+  "_note": "Every fact in morph.json 'facts' and every caption points at keys here. 'checked' says what was read and when. Numbers marked 'calc' were measured by tools/hero_morph_build.py from the two local structure files, not taken from a paper.",
+  "sources": {
+    "motm-41": {
+      "type": "educational article",
+      "cite": "Dutta, S. and Goodsell, D. (2003). Molecule of the Month: Hemoglobin. RCSB PDB-101, May 2003.",
+      "url": "https://pdb101.rcsb.org/motm/41",
+      "checked": "2026-10-01, page read: four chains, each with a heme group holding an iron atom; oxygen binds reversibly to the irons; binding at the four hemes does not happen all at once; when oxygen binds the iron it pulls a histidine upwards on the bottom side of the heme, and the motion spreads through the chain and on to the other chains, nudging them into a shape that binds oxygen more easily; the first oxygen is hardest to add and the second, third and fourth get easier; sickle cell: glutamate 6 of the beta chain changed to valine makes deoxygenated hemoglobin stick together into stiff fibres; names 1hho among its example entries."
+    },
+    "os-39-4": {
+      "type": "textbook",
+      "cite": "OpenStax Biology 2e, section 39.4 Transport of Gases in Human Bodily Fluids.",
+      "url": "https://openstax.org/books/biology-2e/pages/39-4-transport-of-gases-in-human-bodily-fluids",
+      "checked": "2026-10-01, page read: hemoglobin is made of two alpha and two beta subunits; each subunit surrounds a heme group that contains iron and binds one oxygen molecule, so each hemoglobin binds four; it is easier to bind a second and third oxygen than the first because the molecule changes shape as oxygen binds; the oxygen dissociation curve is S-shaped; 98.5 percent of oxygen in the blood is bound to hemoglobin and 1.5 percent is dissolved."
+    },
+    "os-40-2": {
+      "type": "textbook",
+      "cite": "OpenStax Biology 2e, section 40.2 Components of the Blood.",
+      "url": "https://openstax.org/books/biology-2e/pages/40-2-components-of-the-blood",
+      "checked": "2026-10-01, entry in ../molecules/sources.json: hemoglobin's main job is to carry oxygen; it is packed into red blood cells; four subunits (two alpha, two beta) and a heme group with iron."
+    },
+    "rcsb-4HHB": {
+      "type": "PDB entry",
+      "cite": "RCSB PDB 4HHB, The crystal structure of human deoxyhaemoglobin at 1.74 angstroms resolution.",
+      "url": "https://www.rcsb.org/structure/4HHB",
+      "file": "../molecules/data/4HHB.cif",
+      "checked": "2026-10-01, local mmCIF file read by tools/hero_morph_build.py: title as cited, X-ray, 1.74 angstrom; four chains A and C alpha (141 residues), B and D beta (146), each with one heme (HEM) and no oxygen."
+    },
+    "rcsb-1HHO": {
+      "type": "PDB entry",
+      "cite": "RCSB PDB 1HHO, Structure of human oxyhaemoglobin at 2.1 angstroms resolution.",
+      "url": "https://www.rcsb.org/structure/1HHO",
+      "file": "../molecules/data/1HHO.cif",
+      "checked": "2026-10-01, RCSB data API entry read (data.rcsb.org/rest/v1/core/entry/1HHO) and the local mmCIF file: X-ray, 2.1 angstrom, deposited 1983-06-10; the file holds one alpha (chain A) and one beta (chain B), each with a heme and an oxygen molecule (OXY); assembly 1 builds the full four-chain molecule with crystal symmetry operator 2 (y, x, -z)."
+    },
+    "fermi-1984": {
+      "type": "primary paper",
+      "cite": "Fermi, G., Perutz, M. F., Shaanan, B. et al. (1984). The crystal structure of human deoxyhaemoglobin at 1.74 A resolution. J. Mol. Biol. 175, 159-174.",
+      "doi": "10.1016/0022-2836(84)90472-8",
+      "url": "https://doi.org/10.1016/0022-2836(84)90472-8",
+      "checked": "2026-10-01, entry in ../molecules/sources.json (abstract read via Europe PMC, PMID 6726807); citation also read from the 4HHB mmCIF file."
+    },
+    "shaanan-1983": {
+      "type": "primary paper",
+      "cite": "Shaanan, B. (1983). Structure of human oxyhaemoglobin at 2.1 A resolution. J. Mol. Biol. 171, 31-59.",
+      "doi": "10.1016/S0022-2836(83)80313-1",
+      "url": "https://doi.org/10.1016/S0022-2836(83)80313-1",
+      "checked": "2026-10-01, abstract read (Europe PMC, PMID 6644819): in oxyhaemoglobin the irons are 0.12 A (alpha) and -0.11 A (beta) from the mean plane of the porphyrin nitrogens; Fe-O1 bond 1.66 A (alpha) and 1.87 A (beta); the result confirms that the allosteric mechanisms proposed by Perutz and by Baldwin and Chothia apply to oxygen binding."
+    },
+    "perutz-1970": {
+      "type": "primary paper",
+      "cite": "Perutz, M. F. (1970). Stereochemistry of cooperative effects in haemoglobin: haem-haem interaction and the problem of allostery. Nature 228, 726-734.",
+      "doi": "10.1038/228726a0",
+      "url": "https://doi.org/10.1038/228726a0",
+      "checked": "2026-10-01, Crossref record read (api.crossref.org/works/10.1038/228726a0): title, single author M. F. Perutz, Nature 228 issue 5273, pages 726-734, November 1970. Cited as the original proposal of how the four hemes influence each other; no numbers are taken from it."
+    },
+    "baldwin-1979": {
+      "type": "primary paper",
+      "cite": "Baldwin, J. and Chothia, C. (1979). Haemoglobin: the structural changes related to ligand binding and its allosteric mechanism. J. Mol. Biol. 129, 175-220.",
+      "doi": "10.1016/0022-2836(79)90277-8",
+      "url": "https://doi.org/10.1016/0022-2836(79)90277-8",
+      "checked": "2026-10-01, Crossref record read (api.crossref.org/works/10.1016/0022-2836(79)90277-8): title, authors Joyce Baldwin and Cyrus Chothia, J. Mol. Biol. 129 issue 2, pages 175-220, April 1979. No abstract in the record; cited only for the comparison of the two structures, no numbers taken from it."
+    },
+    "viappiani-2004": {
+      "type": "primary paper",
+      "cite": "Viappiani, C. et al. (2004). New insights into allosteric mechanisms from trapping unstable protein conformations in silica gels. Proc. Natl. Acad. Sci. USA 101, 14414-14419.",
+      "doi": "10.1073/pnas.0405987101",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC521967/",
+      "checked": "2026-10-01, full text read on PMC: names deoxyhemoglobin in the T quaternary structure as PDB 4HHB and oxyhemoglobin in the R quaternary structure as PDB 1HHO; the quaternary change is a 15 degree relative rotation of the alpha-beta dimers that are swapped by the two-fold symmetry axis; Monod, Wyman and Changeux proposed a pre-existing balance between high (R) and low (T) reactivity shapes."
+    },
+    "mihailescu-2001": {
+      "type": "primary paper",
+      "cite": "Mihailescu, M.-R. and Russu, I. M. (2001). A signature of the T to R transition in human hemoglobin. Proc. Natl. Acad. Sci. USA 98, 3773-3777.",
+      "doi": "10.1073/pnas.071493598",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC31128/",
+      "checked": "2026-10-01, full text read on PMC: hemoglobin switches between a tense state, T, and a relaxed state, R; in the T state, constraints between subunits oppose the changes caused by ligand binding; in the R state these constraints are released, so it binds ligands more strongly."
+    },
+    "calc": {
+      "type": "measured from the files",
+      "cite": "Measured by this app's tools/hero_morph_build.py from the local 4HHB and 1HHO mmCIF files.",
+      "checked": "2026-10-01: all 574 C-alpha atoms match by chain and residue number. After the oxy molecule is laid over the deoxy one on the alpha1 beta1 pair (C-alpha RMSD 0.95 A), the other pair (alpha2 beta2) is 5.11 A RMSD away and needs a 13.0 degree turn to fit. Iron to porphyrin nitrogen plane, toward the F8 histidine: deoxy (4HHB) +0.49 A (alpha1), +0.37 A (beta1), +0.32 A (alpha2), +0.36 A (beta2); oxy (1HHO) +0.12 A (alpha), -0.11 A (beta), matching the paper's 0.12 and -0.11. Distance between the two beta irons: 39.5 A in deoxy, 34.6 A in oxy. Widest span of the deoxy molecule (all non-water atoms): about 69 A, so about 7 nm."
+    }
+  },
+  "downloads": [
+    { "file": "web/molecules/data/1HHO.cif", "url": "https://files.rcsb.org/download/1HHO.cif", "date": "2026-10-01", "bytes": 304328, "gzipBytes": 76554, "sha256": "4d7b3ff09044c5d0a55f7adbfcfac71b0e33cbedd6c63896ecac5d865a05c434", "by": "hero scenes builder (Builder D); not present when needed" }
+  ]
+}

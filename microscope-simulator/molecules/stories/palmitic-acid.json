@@ -1,0 +1,48 @@
+{
+ "id": "palmitic-acid",
+ "structure": "PLM",
+ "tour": [
+  {"id": "whole", "title": "A fatty acid", "focus": {"atoms": ["C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "CA", "CB", "CC", "CD", "CE", "CF", "CG"]}, "view": "ball-and-stick",
+   "text": [{"t": "Palmitic acid is a fatty acid: a long chain of carbon and hydrogen with an acid group on one end.", "s": ["os-3-3", "ccd-PLM"]},
+            {"t": "Its formula is C16H32O2, so the chain has 16 carbons.", "s": ["pubchem-palmitic-acid", "ccd-PLM"]}]},
+  {"id": "carboxyl", "title": "The acid head", "focus": {"atoms": ["C1", "O1", "O2"]}, "view": "ball-and-stick",
+   "text": [{"t": "The first carbon carries two oxygens, forming the carboxyl group that makes it an acid.", "s": ["os-3-3", "ccd-PLM"]}]},
+  {"id": "chain", "title": "The long tail", "focus": {"atoms": ["C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "CA", "CB", "CC", "CD", "CE", "CF", "CG"]}, "view": "spacefill",
+   "text": [{"t": "The rest is a hydrocarbon tail made only of carbon and hydrogen, which does not mix with water.", "s": ["os-3-3", "ccd-PLM"]}]},
+  {"id": "saturated", "title": "Saturated means straight", "focus": {"atoms": ["C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "CA", "CB", "CC", "CD", "CE", "CF", "CG"]}, "view": "ball-and-stick",
+   "text": [{"t": "Every carbon-to-carbon bond in the tail is a single bond, so palmitic acid is a saturated fatty acid.", "s": ["os-3-3", "ccd-PLM"]},
+            {"t": "Long, straight saturated chains pack tightly, which is why fats rich in them are solid at room temperature.", "s": ["os-3-3"]}]}
+ ],
+ "sections": {
+  "does": [
+   {"t": "Fatty acids are building blocks of fats, which cells use to store energy for the long term.", "s": ["os-3-3"]},
+   {"t": "They are also part of phospholipids, major building blocks of cell membranes.", "s": ["os-3-3"]}
+  ],
+  "shape": [
+   {"t": "A fat molecule is glycerol with three fatty acids attached.", "s": ["os-3-3"]},
+   {"t": "A phospholipid has two fatty acids and a phosphate group on glycerol, giving it a water-loving end and two water-fearing tails.", "s": ["os-3-3"]}
+  ],
+  "lives": {
+   "text": [
+    {"t": "Palmitic acid is derived from the palm tree, and it is also common in animal fats such as those in meat.", "s": ["os-3-3"]},
+    {"t": "Fatty acid tails form the inside of the cell membrane.", "s": ["os-3-3", "os-5-1"]}
+   ],
+   "links": [{"type": "part", "id": "membrane"}, {"type": "part", "id": "rbc-membrane"}, {"type": "molecule", "id": "cholesterol"}, {"type": "element", "id": "C"}, {"type": "element", "id": "H"}]
+  },
+  "wrong": [
+   {"t": "Diets high in saturated fats might contribute to plaque building up in the arteries.", "s": ["os-3-3"]}
+  ],
+  "size": {
+   "nm": 2.2,
+   "compare": [
+    {"t": "Stretched out, palmitic acid measures about 2.2 nm from end to end.", "s": ["ccd-PLM"]},
+    {"t": "That is a little longer than cholesterol in this gallery, which measures about 1.8 nm.", "s": ["ccd-PLM", "ccd-CLR"]}
+   ]
+  }
+ },
+ "highlights": [
+  {"atoms": ["C1", "O1", "O2"], "label": "Carboxyl group", "text": [{"t": "The acid end of the fatty acid.", "s": ["os-3-3"]}]},
+  {"atoms": ["CG"], "label": "Carbon 16", "text": [{"t": "The last carbon of the 16-carbon chain.", "s": ["ccd-PLM"]}]}
+ ],
+ "review": "pending"
+}

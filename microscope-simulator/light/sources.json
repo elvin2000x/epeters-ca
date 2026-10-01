@@ -1,0 +1,153 @@
+{
+  "_note": "Every fact in light.json 'facts' and every dataset in data/ points at keys here. 'checked' says what was read and when. Raw copies of each page and file are in .refs/light/ (tools/light_fetch.py, git-ignored). 'licence' is given for every dataset the page ships.",
+  "sources": {
+    "codata-h": {
+      "type": "constant",
+      "cite": "NIST, CODATA Value: Planck constant (2022 CODATA recommended values).",
+      "url": "https://physics.nist.gov/cgi-bin/cuu/Value?h",
+      "checked": "2026-10-01, page read: numerical value 6.626 070 15 x 10^-34 J Hz^-1, standard uncertainty (exact), source 2022 CODATA recommended values."
+    },
+    "codata-c": {
+      "type": "constant",
+      "cite": "NIST, CODATA Value: speed of light in vacuum (2022 CODATA recommended values).",
+      "url": "https://physics.nist.gov/cgi-bin/cuu/Value?c",
+      "checked": "2026-10-01, page read: 299 792 458 m s^-1, exact."
+    },
+    "codata-e": {
+      "type": "constant",
+      "cite": "NIST, CODATA Value: elementary charge (2022 CODATA recommended values).",
+      "url": "https://physics.nist.gov/cgi-bin/cuu/Value?e",
+      "checked": "2026-10-01, page read: 1.602 176 634 x 10^-19 C, exact. Also read the Planck constant in eV/Hz page (4.135 667 696... x 10^-15 eV Hz^-1) as a cross-check of h / e."
+    },
+    "os-up3-6-2": {
+      "type": "textbook",
+      "cite": "OpenStax University Physics Volume 3, section 6.2 Photoelectric Effect.",
+      "url": "https://openstax.org/books/university-physics-volume-3/pages/6-2-photoelectric-effect",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike, as stated on the page; facts cited in our own words, no text copied",
+      "checked": "2026-10-01, page text read: a photon is a particle of light, each photon moves at the speed of light and carries an energy quantum; the energy of a photon is E = hf (equation 6.13), where h is Planck's constant."
+    },
+    "os-up2-16-5": {
+      "type": "textbook",
+      "cite": "OpenStax University Physics Volume 2, section 16.5 The Electromagnetic Spectrum.",
+      "url": "https://openstax.org/books/university-physics-volume-2/pages/16-5-the-electromagnetic-spectrum",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike, as stated on the page; facts cited in our own words, no text copied",
+      "checked": "2026-10-01, page text read: visible light is the narrow segment of the electromagnetic spectrum between about 400 nm and about 750 nm to which the normal human eye responds."
+    },
+    "os-up3-1-5": {
+      "type": "textbook",
+      "cite": "OpenStax University Physics Volume 3, section 1.5 Dispersion, Table 1.2.",
+      "url": "https://openstax.org/books/university-physics-volume-3/pages/1-5-dispersion",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike, as stated on the page; facts cited in our own words, no text copied",
+      "checked": "2026-10-01, page text read: for a given medium n increases as wavelength decreases and is greatest for violet light, so violet light is bent more than red light. Table 1.2 flint glass: 1.662 (660 nm), 1.665 (610), 1.667 (580), 1.674 (550), 1.684 (470), 1.698 (410)."
+    },
+    "os-bio-8-1": {
+      "type": "textbook",
+      "cite": "OpenStax Biology 2e, section 8.1 Overview of Photosynthesis.",
+      "url": "https://openstax.org/books/biology-2e/pages/8-1-overview-of-photosynthesis",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike, as stated on the page; facts cited in our own words, no text copied",
+      "checked": "2026-10-01, page text read: chloroplasts have a double membrane envelope (outer and inner membrane); within are stacked, disc-shaped thylakoids with chlorophyll embedded in the thylakoid membrane; a stack of thylakoids is a granum; the liquid-filled space around the granum is the stroma; the Calvin cycle takes place in the stroma."
+    },
+    "os-bio-8-2": {
+      "type": "textbook",
+      "cite": "OpenStax Biology 2e, section 8.2 The Light-Dependent Reactions of Photosynthesis.",
+      "url": "https://openstax.org/books/biology-2e/pages/8-2-the-light-dependent-reactions-of-photosynthesis",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike, as stated on the page; facts cited in our own words, no text copied",
+      "checked": "2026-10-01, page text read: shorter wavelengths are more powerful than longer wavelengths; chlorophyll a absorbs blue and red but not green, and because green is reflected or transmitted chlorophyll appears green; each photosystem is serviced by a light-harvesting complex of 300 to 400 chlorophyll a and b molecules plus carotenoids; absorbing a photon pushes a chlorophyll into an excited state; energy is transferred chlorophyll to chlorophyll until, after about a millionth of a second, it reaches the reaction center, and only energy, not electrons, moves up to that point; the PSII reaction center is P680; its missing electron is replaced from water; splitting one H2O releases two electrons, two hydrogen atoms and one oxygen atom, and two are split for one O2; ATP and NADPH are made in the light-dependent reactions."
+    },
+    "os-bio-4-2": {
+      "type": "textbook",
+      "cite": "OpenStax Biology 2e, section 4.2 Prokaryotic Cells (Cell Size).",
+      "url": "https://openstax.org/books/biology-2e/pages/4-2-prokaryotic-cells",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike, as stated on the page; facts cited in our own words, no text copied",
+      "checked": "2026-10-01, page text read: prokaryotic cells are 0.1 to 5.0 um in diameter, significantly smaller than eukaryotic cells, which have diameters ranging from 10 to 100 um."
+    },
+    "os-bio-4-3": {
+      "type": "textbook",
+      "cite": "OpenStax Biology 2e, section 4.3 Eukaryotic Cells.",
+      "url": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike, as stated on the page; facts cited in our own words, no text copied",
+      "checked": "2026-10-01, page text read: plant cells have a cell wall, chloroplasts and other specialized plastids, and a large central vacuole; chloroplasts are plant cell organelles that carry out photosynthesis."
+    },
+    "astm-g173": {
+      "type": "dataset",
+      "cite": "ASTM G173-03 Reference Solar Spectral Irradiance at Air Mass 1.5 (direct normal and hemispherical on a 37 degree tilted surface), distributed by NREL (Reference Air Mass 1.5 Spectra). Spectra modelled with SMARTS 2.9.2 (Gueymard).",
+      "url": "https://www.nrel.gov/grid/solar-resource/spectra-am1.5.html",
+      "file_from": "https://raw.githubusercontent.com/pvlib/pvlib-python/main/pvlib/data/ASTMG173.csv",
+      "licence": "Reference data published by NREL for free use; the copied file is part of pvlib-python, BSD 3-Clause licence.",
+      "checked": "2026-10-01, nrel.gov did not answer from this machine, so the NREL page was read from the Internet Archive copy (web.archive.org/web/2024id_/...): G-173 is spectral irradiance in W m^-2 nm^-1 on an inclined plane at 37 degrees tilt facing the sun, absolute air mass 1.5, 1976 U.S. Standard Atmosphere, modelled with SMARTS2 2.9.2; columns are extraterrestrial, direct normal and global tilt. The CSV header reads 'ASTM G173-03 Reference Spectra Derived from SMARTS v. 2.9.2' with columns wavelength, extraterrestrial, global, direct. Used: global (as 'solar') and extraterrestrial (as 'space')."
+    },
+    "pcad": {
+      "type": "dataset",
+      "cite": "PhotochemCAD 2.1a spectra (Du, H., Fuh, R. A., Li, J., Corkan, A. and Lindsey, J. S. (1998) Photochem. Photobiol. 68, 141-142; Dixon, J. M., Taniguchi, M. and Lindsey, J. S. (2005) Photochem. Photobiol. 81, 212-213), as published by S. Prahl at OMLC: Chlorophyll a in diethyl ether (123) and Chlorophyll b in diethyl ether (125).",
+      "url": "https://omlc.org/spectra/PhotochemCAD/html/123.html",
+      "url2": "https://omlc.org/spectra/PhotochemCAD/html/125.html",
+      "files": ["https://omlc.org/spectra/PhotochemCAD/data/123-abs.txt", "https://omlc.org/spectra/PhotochemCAD/data/125-abs.txt"],
+      "licence": "No licence is stated on the OMLC pages (site footer: Copyright 2018 Scott Prahl and Steve Jacques). Measured data are cited to the original PhotochemCAD papers and OMLC here and in the page credits; open question logged.",
+      "checked": "2026-10-01, both pages and both data files read: absorption measured by J. Li on 1997-12-11 with a Cary 3, 1.0 nm bandwidth; chlorophyll a scaled to a molar extinction of 111,700 cm^-1 M^-1 at 427.8 nm (Strain, Thomas and Katz 1963); chlorophyll b scaled to 159,100 cm^-1 M^-1 at 453.0 nm (Vernon and Seely 1966). Peaks found by tools/light_build.py: a 427.75 and 660.06 nm, b 453.0 and 643.0 nm."
+    },
+    "cie1931": {
+      "type": "dataset",
+      "cite": "CIE 2019, Colour-matching functions of CIE 1931 standard colorimetric observer, International Commission on Illumination (CIE), Vienna. DOI 10.25039/CIE.DS.xvudnb9b. File: CIE 1931 2-deg XYZ CMFs, 1 nm, from the Colour and Vision Research Laboratory (CVRL) database.",
+      "url": "https://cie.co.at/datatable/cie-1931-colour-matching-functions-2-degree-observer",
+      "file_from": "http://www.cvrl.org/database/data/cmfs/ciexyz31_1.csv",
+      "licence": "Standard reference data; cited by the DOI CIE asks for. No licence text was found on the CIE or CVRL pages.",
+      "checked": "2026-10-01, CIE data table page read (how to cite, DOI) and the CVRL colour matching functions index read (CIE 1931 2-deg XYZ CMFs listed); CSV read: 360 to 830 nm at 1 nm, columns wavelength, x, y, z."
+    },
+    "w3c-color4": {
+      "type": "specification",
+      "cite": "W3C CSS Color Module Level 4, sample code for colour conversions: XYZ_to_lin_sRGB matrix and the sRGB transfer function (gam_sRGB).",
+      "url": "https://www.w3.org/TR/css-color-4/",
+      "checked": "2026-10-01, sample code read: XYZ_to_lin_sRGB M = [[12831/3959, -329/214, -1974/3959], [-851781/878810, 1648619/878810, 36519/878810], [705/12673, -2585/12673, 705/667]]; gam_sRGB uses 1.055 * x^(1/2.4) - 0.055 above 0.0031308 and 12.92 * x below."
+    },
+    "pdb-2bhw": {
+      "type": "PDB entry",
+      "cite": "RCSB PDB 2BHW, Pea light-harvesting complex II at 2.5 angstrom resolution.",
+      "url": "https://www.rcsb.org/structure/2BHW",
+      "file_from": "https://files.rcsb.org/download/2BHW.cif.gz",
+      "licence": "CC0 1.0 (wwPDB usage policy, www.wwpdb.org/about/usage-policies, read 2026-10-01).",
+      "checked": "2026-10-01, RCSB entry record read (data.rcsb.org/rest/v1/core/entry/2BHW): resolution 2.5 A, primary citation Standfuss et al. 2005. mmCIF read by tools/light_build.py: chains A, B, C (one trimer in the file, PQS assembly 'trimeric', identity operator), 24 CLA (chlorophyll a) and 18 CHL (chlorophyll b) with 42 magnesium atoms, carotenoids 6 LUX (lutein), 3 NEX (neoxanthin), 3 XAT (violaxanthin), 223 alpha carbons per chain."
+    },
+    "standfuss-2005": {
+      "type": "primary paper",
+      "cite": "Standfuss, J., Terwisscha van Scheltinga, A. C., Lamborghini, M. and Kuhlbrandt, W. (2005). Mechanisms of photoprotection and nonphotochemical quenching in pea light-harvesting complex at 2.5 A resolution. EMBO J. 24, 919-928.",
+      "doi": "10.1038/sj.emboj.7600585",
+      "url": "https://doi.org/10.1038/sj.emboj.7600585",
+      "checked": "2026-10-01, abstract read (Europe PMC, PMID 15719016): the 2.5 A structure of pea LHC-II shows the arrangement of 42 chlorophylls a and b, 12 carotenoids and six lipids in the LHC-II trimer; spectral assignment of individual chlorophylls indicates the flow of energy; the structure shows the complex in a quenched state."
+    },
+    "liu-2004": {
+      "type": "primary paper",
+      "cite": "Liu, Z., Yan, H., Wang, K. et al. (2004). Crystal structure of spinach major light-harvesting complex at 2.72 A resolution. Nature 428, 287-292.",
+      "doi": "10.1038/nature02373",
+      "url": "https://doi.org/10.1038/nature02373",
+      "checked": "2026-10-01, abstract read (Europe PMC, PMID 15029188): the 14 chlorophylls in each monomer are eight Chla and six Chlb; all Chlb are located around the interface between adjacent monomers; four carotenoid-binding sites per monomer."
+    },
+    "mirkovic-2017": {
+      "type": "review",
+      "cite": "Mirkovic, T., Ostroumov, E. E., Anna, J. M., van Grondelle, R., Govindjee and Scholes, G. D. (2017). Light Absorption and Energy Transfer in the Antenna Complexes of Photosynthetic Organisms. Chem. Rev. 117, 249-293.",
+      "doi": "10.1021/acs.chemrev.6b00002",
+      "url": "https://doi.org/10.1021/acs.chemrev.6b00002",
+      "checked": "2026-10-01, abstract read (Europe PMC, PMID 27428615): sunlight is captured by a network of light-absorbing pigments that funnel the excitation energy to the reaction centres; the review describes electronic excitation energy transfer (EET) and how coupling depends on the spatial and energetic landscape of the pigments."
+    },
+    "croce-2014": {
+      "type": "review",
+      "cite": "Croce, R. and van Amerongen, H. (2014). Natural strategies for photosynthetic light harvesting. Nat. Chem. Biol. 10, 492-501.",
+      "doi": "10.1038/nchembio.1555",
+      "url": "https://doi.org/10.1038/nchembio.1555",
+      "checked": "2026-10-01, abstract read (Europe PMC, PMID 24937067): organisms adapt their pigmentation to the light in their habitat, acclimate to slow changes in light intensity and respond rapidly to fast changes; an overdose of light with oxygen can be lethal."
+    },
+    "fret": {
+      "type": "encyclopedia",
+      "cite": "Wikipedia, Forster resonance energy transfer (read 2026-10-01).",
+      "url": "https://en.wikipedia.org/wiki/F%C3%B6rster_resonance_energy_transfer",
+      "licence": "Wikipedia text licence applies to the article; only facts are used here, no text copied.",
+      "checked": "2026-10-01, article source read: a donor chromophore in its excited state may transfer energy to an acceptor through nonradiative dipole-dipole coupling; the efficiency is inversely proportional to the sixth power of the distance between donor and acceptor; 'Forster resonance energy transfer' is preferred because the transfer is always nonradiative."
+    },
+    "terashima-2009": {
+      "type": "primary paper",
+      "cite": "Terashima, I., Fujita, T., Inoue, T., Chow, W. S. and Oguchi, R. (2009). Green light drives leaf photosynthesis more efficiently than red light in strong white light: revisiting the enigmatic question of why leaves are green. Plant Cell Physiol. 50, 684-697.",
+      "doi": "10.1093/pcp/pcp034",
+      "url": "https://doi.org/10.1093/pcp/pcp034",
+      "checked": "2026-10-01, abstract read (Europe PMC, PMID 19246458): green light can penetrate further into the leaf than red or blue light; leaves use chlorophylls that absorb green light weakly, modify mesophyll structure and adjust the Rubisco to chlorophyll ratio."
+    }
+  }
+}

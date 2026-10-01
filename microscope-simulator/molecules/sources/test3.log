@@ -1,0 +1,29 @@
+PASS  load water                         comps=1 reps=1 desc=3 els=2 legend=3 formula=H2O (CCD H2O)
+PASS  load glucose                       comps=1 reps=1 desc=3 els=3 legend=4 formula=C6H12O6 (CCD C6H12O6)
+PASS  load atp                           comps=1 reps=1 desc=3 els=5 legend=6 formula=C10H16N5O13P3 (CCD C10H16N5O13P3)
+PASS  load glycine                       comps=1 reps=1 desc=3 els=4 legend=5 formula=C2H5NO2 (CCD C2H5NO2)
+PASS  load palmitic-acid                 comps=1 reps=1 desc=3 els=3 legend=4 formula=C16H32O2 (CCD C16H32O2)
+PASS  load cholesterol                   comps=1 reps=1 desc=3 els=3 legend=4 formula=C27H46O (CCD C27H46O)
+PASS  load actin                         comps=3 reps=3 desc=3 els=6 legend=7
+PASS  load dna                           comps=2 reps=2 desc=3 els=4 legend=2
+PASS  load hemoglobin                    comps=3 reps=3 desc=3 els=6 legend=7
+PASS  load insulin                       comps=3 reps=3 desc=3 els=5 legend=4
+PASS  load collagen                      comps=3 reps=3 desc=3 els=3 legend=3
+PASS  load myosin                        comps=5 reps=5 desc=3 els=7 legend=10
+PASS  load gfp                           comps=2 reps=2 desc=3 els=5 legend=5
+PASS  load lysozyme                      comps=1 reps=1 desc=3 els=4 legend=1
+PASS  load aquaporin                     comps=1 reps=1 desc=3 els=4 legend=1
+PASS  deep link #dna                     dna
+PASS  deep link #atp                     atp
+PASS  deep link #actin                   actin
+PASS  deep link #haemoglobin             hemoglobin
+PASS  deep link #amino-acid              glycine
+PASS  deep link #(none)                  dna
+PASS  keyboard tab order                 Skip to the description > viewport > Back to the explorer > themeBtn > spinBtn > resetBtn > water > glucose > atp > glycine > palmitic-acid > cholesterol
+PASS  keyboard Enter selects             glucose
+PASS  dark theme                         rgb(20, 30, 29)
+PASS  phone 375px no horizontal scroll   [375, 375, 375, 375]
+PASS  no-WebGL fallback                  els=5 msg=3D needs WebGL, which this browser or device does not offer.
+PASS  page errors                        
+PASS  no non-local requests              
+ALL PASS

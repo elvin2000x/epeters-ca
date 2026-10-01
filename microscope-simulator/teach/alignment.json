@@ -1,0 +1,50 @@
+{
+  "_note": "Curriculum expectations the lessons map to. 'text' is copied exactly as printed in the official document named by 'doc' (see sources.json 'curriculum'), read 2026-10-01. Only entries with checked true appear in the visible tables. Entries with checked false were not confirmed against an official document and are kept here only so nobody adds them by mistake.",
+  "frameworks": {
+    "on-snc1w": { "doc": "on-snc1w-2022", "grade": "on9" },
+    "on-sbi3u": { "doc": "on-sci-11-12-2008", "grade": "on11" },
+    "on-sbi4u": { "doc": "on-sci-11-12-2008", "grade": "on12" },
+    "ngss-ms": { "doc": "ngss", "grade": "ms" },
+    "ngss-hs": { "doc": "ngss", "grade": "hs" }
+  },
+  "expectations": {
+    "on-snc1w:B2.2": { "checked": true, "text": "explain how naturally occurring phenomena, including the cycling of matter and the flow of energy, contribute to the dynamic equilibrium within and between ecosystems" },
+    "on-snc1w:B2.3": { "checked": true, "text": "compare and contrast the processes of cellular respiration and photosynthesis, and explain how their complementary relationship contributes to the dynamic equilibrium of ecosystems" },
+    "on-snc1w:C2.2": { "checked": true, "text": "research the role of experimental evidence in the development of various atomic models, and compare and contrast different models of the atom" },
+    "on-snc1w:C2.3": { "checked": true, "text": "identify the location, relative mass, and charge of subatomic particles within an atom, using the Bohr-Rutherford model" },
+    "on-snc1w:C2.4": { "checked": true, "text": "explain the relationship between the position of an element in the periodic table and the structure of its atoms, using models" },
+    "on-snc1w:C2.7": { "checked": true, "text": "describe the relationship between the structure of simple compounds and their chemical formulas" },
+
+    "on-sbi3u:A1.2": { "checked": true, "text": "select appropriate instruments (e.g., sampling instruments, a microscope, a stethoscope, dissection instruments) and materials (e.g., dichotomous keys, computer simulations, plant cuttings), and identify appropriate methods, techniques, and procedures, for each inquiry" },
+    "on-sbi3u:A1.12": { "checked": true, "text": "use appropriate numeric, symbolic, and graphic modes of representation (e.g., biological diagrams, Punnett squares), and appropriate units of measurement (e.g., SI and imperial units)" },
+    "on-sbi3u:B2.4": { "checked": true, "text": "create and apply a dichotomous key to identify and classify organisms from each of the kingdoms" },
+    "on-sbi3u:B3.2": { "checked": true, "text": "compare and contrast the structure and function of different types of prokaryotes, eukaryotes, and viruses (e.g., compare and contrast genetic material, metabolism, organelles, and other cell parts)" },
+    "on-sbi3u:B3.3": { "checked": true, "text": "describe unifying and distinguishing anatomical and physiological characteristics (e.g., types of reproduction, habitat, general physical structure) of representative organisms from each of the kingdoms" },
+    "on-sbi3u:D3.2": { "checked": true, "text": "explain the concepts of DNA, genes, chromosomes, alleles, mitosis, and meiosis, and how they account for the transmission of hereditary characteristics according to Mendelian laws of inheritance" },
+
+    "on-sbi4u:B3.1": { "checked": true, "text": "explain the roles of various organelles, such as lysosomes, vacuoles, mitochondria, internal cell membranes, ribosomes, smooth and rough endoplasmic reticulum, and Golgi bodies, in cellular processes" },
+    "on-sbi4u:B3.2": { "checked": true, "text": "describe the structure of important biochemical compounds, including carbohydrates, proteins, lipids, and nucleic acids, and explain their function within cells" },
+    "on-sbi4u:C2.1": { "checked": true, "text": "use appropriate terminology related to metabolism, including, but not limited to: energy carriers, glycolysis, Krebs cycle, electron transport chain, ATP synthase, oxidative phosphorylation, chemiosmosis, proton pump, photolysis, Calvin cycle, light and dark reactions, and cyclic and noncyclic phosphorylation" },
+    "on-sbi4u:C3.1": { "checked": true, "text": "explain the chemical changes and energy conversions associated with the processes of aerobic and anaerobic cellular respiration (e.g., in aerobic cellular respiration, glucose and oxygen react to produce carbon dioxide, water, and energy in the form of heat and ATP; in anaerobic cellular respiration, yeast reacts with glucose in the absence of oxygen to produce carbon dioxide and ethanol)" },
+    "on-sbi4u:C3.4": { "checked": true, "text": "describe, compare, and illustrate (e.g., using flow charts) the matter and energy transformations that occur during the processes of cellular respiration (aerobic and anaerobic) and photosynthesis, including the roles of oxygen and organelles such as mitochondria and chloroplasts" },
+    "on-sbi4u:D2.1": { "checked": true, "text": "use appropriate terminology related to molecular genetics, including, but not limited to: polymerase I, II, and III, DNA ligase, helicase, Okazaki fragment, mRNA, rRNA, tRNA, codon, anticodon, translation, transcription, and ribosome subunits" },
+    "on-sbi4u:D2.2": { "checked": true, "text": "analyse a simulated strand of DNA to determine the genetic code and base pairing of DNA (e.g., determine base sequences of DNA for a protein; analyse base sequences in DNA to recognize an anomaly)" },
+    "on-sbi4u:D3.2": { "checked": true, "text": "compare the structures and functions of RNA and DNA, and explain their roles in the process of protein synthesis" },
+    "on-sbi4u:D3.3": { "checked": true, "text": "explain the steps involved in the process of protein synthesis and how genetic expression is controlled in prokaryotes and eukaryotes by regulatory proteins (e.g., the role of operons in prokaryotic cells; the mechanism of gene expression in eukaryotic cells)" },
+
+    "ngss-ms:MS-LS1-1": { "checked": true, "text": "Conduct an investigation to provide evidence that living things are made of cells; either one cell or many different numbers and types of cells." },
+    "ngss-ms:MS-LS1-2": { "checked": true, "text": "Develop and use a model to describe the function of a cell as a whole and ways the parts of cells contribute to the function." },
+    "ngss-ms:MS-LS1-6": { "checked": true, "text": "Construct a scientific explanation based on evidence for the role of photosynthesis in the cycling of matter and flow of energy into and out of organisms." },
+    "ngss-ms:MS-LS1-7": { "checked": true, "text": "Develop a model to describe how food is rearranged through chemical reactions forming new molecules that support growth and/or release energy as this matter moves through an organism." },
+    "ngss-ms:MS-LS2-1": { "checked": true, "text": "Analyze and interpret data to provide evidence for the effects of resource availability on organisms and populations of organisms in an ecosystem." },
+    "ngss-ms:MS-LS2-2": { "checked": true, "text": "Construct an explanation that predicts patterns of interactions among organisms across multiple ecosystems." },
+    "ngss-ms:MS-LS2-3": { "checked": true, "text": "Develop a model to describe the cycling of matter and flow of energy among living and nonliving parts of an ecosystem." },
+    "ngss-ms:MS-PS1-1": { "checked": true, "text": "Develop models to describe the atomic composition of simple molecules and extended structures." },
+    "ngss-hs:HS-LS1-1": { "checked": true, "text": "Construct an explanation based on evidence for how the structure of DNA determines the structure of proteins, which carry out the essential functions of life through systems of specialized cells." },
+    "ngss-hs:HS-LS1-6": { "checked": true, "text": "Construct and revise an explanation based on evidence for how carbon, hydrogen, and oxygen from sugar molecules may combine with other elements to form amino acids and/or other large carbon-based molecules." },
+    "ngss-hs:HS-LS1-7": { "checked": true, "text": "Use a model to illustrate that cellular respiration is a chemical process whereby the bonds of food molecules and oxygen molecules are broken and the bonds in new compounds are formed, resulting in a net transfer of energy." },
+    "ngss-hs:HS-PS1-1": { "checked": true, "text": "Use the periodic table as a model to predict the relative properties of elements based on the patterns of electrons in the outermost energy level of atoms." },
+
+    "on-gr8:cells": { "checked": false, "text": "not checked: Ontario Science and Technology, Grade 8 (2022), Strand B Life Systems: Cells. The document was not read for this hub, so no code is quoted." }
+  }
+}

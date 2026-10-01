@@ -1,0 +1,56 @@
+{
+ "id": "atp-synthase",
+ "structure": "1MAB",
+ "tour": [
+  {"id": "f1-head", "title": "The F1 head only", "focus": {"chains": ["A", "B", "G"], "residues": null, "ligands": null, "whole": true}, "view": "cartoon",
+   "text": [{"t": "ATP synthase is a machine of two rotary motors; this file is only the F1 head, the part that makes ATP.", "s": ["motm-atp-synthase", "rcsb-1MAB"]},
+            {"t": "The F0 motor that sits in the membrane is not in this file.", "s": ["rcsb-1MAB", "motm-atp-synthase"]}]},
+  {"id": "beta", "title": "Beta: where ATP is made", "focus": {"chains": ["B"], "residues": null, "ligands": ["ADP", "PO4"], "whole": false}, "view": "cartoon",
+   "text": [{"t": "Chain B is one of the three beta subunits of the F1 head.", "s": ["paper-bianchet-1998", "rcsb-1MAB"]},
+            {"t": "Here it holds ADP and a phosphate, the two pieces that get joined into ATP.", "s": ["rcsb-1MAB", "motm-atp-synthase"]}]},
+  {"id": "alpha", "title": "Alpha with its ATP", "focus": {"chains": ["A"], "residues": null, "ligands": ["ATP", "MG"], "whole": false}, "view": "cartoon",
+   "text": [{"t": "Chain A is an alpha subunit, and in this crystal it holds an ATP with a magnesium ion.", "s": ["rcsb-1MAB"]}]},
+  {"id": "gamma", "title": "The turning axle", "focus": {"chains": ["G"], "residues": null, "ligands": null, "whole": false}, "view": "cartoon",
+   "text": [{"t": "Chain G is the gamma subunit, the axle in the middle of the head.", "s": ["rcsb-1MAB", "motm-atp-synthase"]},
+            {"t": "As the axle turns, its odd shape forces the surrounding subunits through the steps of making ATP.", "s": ["motm-atp-synthase"]}]},
+  {"id": "full-head", "title": "Three of each", "focus": {"chains": ["A", "B", "G"], "residues": null, "ligands": ["ATP", "ADP"], "whole": true}, "view": "surface",
+   "text": [{"t": "The full head has three alpha and three beta subunits around the axle, and in this structure all three beta subunits hold a nucleotide.", "s": ["rcsb-1MAB", "paper-bianchet-1998"]}]}
+ ],
+ "sections": {
+  "does": [
+   {"t": "ATP synthase builds most of the ATP that powers your cells.", "s": ["motm-atp-synthase"]},
+   {"t": "It uses a flow of hydrogen ions across a membrane to join ADP and phosphate into ATP.", "s": ["os-7-4", "motm-atp-synthase"]}
+  ],
+  "shape": [
+   {"t": "Hydrogen ions flowing through the F0 motor in the membrane spin a rotor, which turns the axle.", "s": ["motm-atp-synthase"]},
+   {"t": "The turning axle forces the F1 head through three shapes: one binds ADP and phosphate, one forms the new bond, and one opens to release ATP.", "s": ["motm-atp-synthase"]},
+   {"t": "Run backwards, the same F1 motor can break down ATP to spin the axle the other way.", "s": ["motm-atp-synthase"]}
+  ],
+  "lives": {
+   "text": [
+    {"t": "ATP synthase sits in the inner membrane of mitochondria, where hydrogen ions flow back through it into the matrix.", "s": ["os-7-4"]},
+    {"t": "This one comes from rat liver.", "s": ["rcsb-1MAB"]}
+   ],
+   "links": [{"type": "part", "id": "mitochondrion"}, {"type": "part", "id": "m-mito"}, {"type": "process", "id": "respiration"}, {"type": "molecule", "id": "atp"}, {"type": "element", "id": "Mg"}]
+  },
+  "history": {
+   "year": 1998, "who": "M.A. Bianchet, J. Hullihen, P.L. Pedersen and L.M. Amzel", "method": "X-ray", "resolution_A": 2.8,
+   "text": [
+    {"t": "This rat liver F1 structure was solved by X-ray crystallography at 2.8 angstroms, with nucleotide levels like those inside cells.", "s": ["paper-bianchet-1998", "rcsb-1MAB"]},
+    {"t": "Big machines like ATP synthase are often solved in parts, and cryo-electron microscopy has since shown the whole machine.", "s": ["motm-atp-synthase"]}
+   ]
+  },
+  "size": {
+   "nm": 13.6,
+   "compare": [
+    {"t": "The part in this file, one alpha, one beta and the axle, measures about 13.6 nm from end to end.", "s": ["rcsb-1MAB"]},
+    {"t": "The ATP it makes measures about 1.7 nm, so the machine is far bigger than its product.", "s": ["ccd-ATP", "rcsb-1MAB"]}
+   ]
+  }
+ },
+ "highlights": [
+  {"chain": "B", "residue": 604, "comp": "ADP", "label": "ADP in a beta subunit", "text": [{"t": "ADP held by a beta subunit.", "s": ["rcsb-1MAB", "paper-bianchet-1998"]}]},
+  {"chain": "A", "residue": 603, "comp": "ATP", "label": "ATP in the alpha subunit", "text": [{"t": "An ATP held by the alpha subunit.", "s": ["rcsb-1MAB"]}]}
+ ],
+ "review": "pending"
+}

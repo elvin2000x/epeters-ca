@@ -1,0 +1,186 @@
+data_MSS
+# 
+_chem_comp.id                                    MSS 
+_chem_comp.name                                  "(MOLYBDOPTERIN-S,S)-OXO-MOLYBDENUM" 
+_chem_comp.type                                  NON-POLYMER 
+_chem_comp.pdbx_type                             HETAIN 
+_chem_comp.formula                               "C10 H12 Mo N5 O7 P S2" 
+_chem_comp.mon_nstd_parent_comp_id               ? 
+_chem_comp.pdbx_synonyms                         ? 
+_chem_comp.pdbx_formal_charge                    ? 
+_chem_comp.pdbx_initial_date                     2005-03-04 
+_chem_comp.pdbx_modified_date                    2026-09-16 
+_chem_comp.pdbx_ambiguous_flag                   N 
+_chem_comp.pdbx_release_status                   REL 
+_chem_comp.pdbx_replaced_by                      ? 
+_chem_comp.pdbx_replaces                         ? 
+_chem_comp.formula_weight                        505.275 
+_chem_comp.one_letter_code                       ? 
+_chem_comp.three_letter_code                     MSS 
+_chem_comp.pdbx_model_coordinates_details        ? 
+_chem_comp.pdbx_model_coordinates_missing_flag   N 
+_chem_comp.pdbx_ideal_coordinates_details        MetalCoord 
+_chem_comp.pdbx_ideal_coordinates_missing_flag   N 
+_chem_comp.pdbx_model_coordinates_db_code        2BLF 
+_chem_comp.pdbx_subcomponent_list                ? 
+_chem_comp.pdbx_processing_site                  EBI 
+_chem_comp.pdbx_comp_type                        "metal-containing ligand" 
+_chem_comp.pdbx_pcm                              Y 
+# 
+loop_
+_chem_comp_atom.comp_id 
+_chem_comp_atom.atom_id 
+_chem_comp_atom.alt_atom_id 
+_chem_comp_atom.type_symbol 
+_chem_comp_atom.charge 
+_chem_comp_atom.pdbx_align 
+_chem_comp_atom.pdbx_aromatic_flag 
+_chem_comp_atom.pdbx_leaving_atom_flag 
+_chem_comp_atom.pdbx_stereo_config 
+_chem_comp_atom.pdbx_backbone_atom_flag 
+_chem_comp_atom.pdbx_n_terminal_atom_flag 
+_chem_comp_atom.pdbx_c_terminal_atom_flag 
+_chem_comp_atom.model_Cartn_x 
+_chem_comp_atom.model_Cartn_y 
+_chem_comp_atom.model_Cartn_z 
+_chem_comp_atom.pdbx_model_Cartn_x_ideal 
+_chem_comp_atom.pdbx_model_Cartn_y_ideal 
+_chem_comp_atom.pdbx_model_Cartn_z_ideal 
+_chem_comp_atom.pdbx_component_atom_id 
+_chem_comp_atom.pdbx_component_comp_id 
+_chem_comp_atom.pdbx_ordinal 
+MSS N1     N1     N  0  1 Y N N N N N 69.624 13.175 21.096 -3.567 -0.644 -1.401 N1     MSS 1  
+MSS C2     C2     C  0  1 Y N N N N N 70.357 14.300 20.963 -4.500 -1.222 -0.639 C2     MSS 2  
+MSS N2     N2     N  0  1 N N N N N N 70.083 15.150 19.959 -5.446 -1.956 -1.218 N2     MSS 3  
+MSS N3     N3     N  0  1 Y N N N N N 71.391 14.608 21.787 -4.536 -1.090 0.721  N3     MSS 4  
+MSS C4     C4     C  0  1 Y N N N N N 71.740 13.808 22.830 -3.591 -0.350 1.424  C4     MSS 5  
+MSS O4     O4     O  0  1 N N N N N N 72.694 14.108 23.580 -3.675 -0.260 2.645  O4     MSS 6  
+MSS N5     N5     N  0  1 N N N N N N 71.273 11.668 24.020 -1.576 1.050  1.175  N5     MSS 7  
+MSS C6     C6     C  0  1 N N R N N N 70.797 10.302 23.869 -0.637 1.846  0.383  C6     MSS 8  
+MSS C7     C7     C  0  1 N N R N N N 69.394 10.238 23.264 -0.465 1.297  -1.068 C7     MSS 9  
+MSS N8     N8     N  0  1 N N N N N N 69.167 11.212 22.234 -1.668 0.661  -1.589 N8     MSS 10 
+MSS C9     C9     C  0  1 Y N N N N N 70.973 12.581 23.061 -2.583 0.283  0.609  C9     MSS 11 
+MSS C10    C10    C  0  1 Y N N N N N 69.885 12.318 22.112 -2.604 0.085  -0.786 C10    MSS 12 
+MSS "C1'"  "C1'"  C  0  1 N N N N N N 70.914 9.401  25.071 0.700  1.982  1.123  "C1'"  MSS 13 
+MSS "S1'"  "S1'"  S  -1 1 N N N N N N 72.483 8.892  25.511 0.692  2.833  2.565  "S1'"  MSS 14 
+MSS "C2'"  "C2'"  C  0  1 N N N N N N 69.805 8.934  25.676 1.858  1.467  0.652  "C2'"  MSS 15 
+MSS "S2'"  "S2'"  S  -1 1 N N N N N N 69.922 7.752  26.900 3.264  1.785  1.517  "S2'"  MSS 16 
+MSS "C3'"  "C3'"  C  0  1 N N R N N N 68.421 9.394  25.253 1.907  0.643  -0.625 "C3'"  MSS 17 
+MSS "O3'"  "O3'"  O  0  1 N N N N N N 68.410 10.439 24.259 0.592  0.321  -1.124 "O3'"  MSS 18 
+MSS "C4'"  "C4'"  C  0  1 N N N N N N 67.621 9.892  26.435 2.639  -0.695 -0.479 "C4'"  MSS 19 
+MSS "O4'"  "O4'"  O  0  1 N N N N N N 66.338 10.349 25.969 4.039  -0.527 -0.773 "O4'"  MSS 20 
+MSS P      P      P  0  1 N N N N N N 65.442 11.276 26.940 5.149  -1.472 -0.185 P      MSS 21 
+MSS O1P    O1P    O  0  1 N N N N N N 66.326 12.426 27.334 5.192  -1.203 1.334  O1P    MSS 22 
+MSS O2P    O2P    O  0  1 N N N N N N 65.104 10.322 28.096 6.489  -0.966 -0.759 O2P    MSS 23 
+MSS O3P    O3P    O  0  1 N N N N N N 64.205 11.587 26.179 4.904  -2.907 -0.503 O3P    MSS 24 
+MSS MOM1   MOM1   MO ?  0 N N N N N N 72.282 7.090  27.084 2.659  2.356  3.663  MOM1   MSS 25 
+MSS OM1    OM1    O  -2 1 N N N N N N 72.591 5.619  26.201 2.139  0.802  3.926  OM1    MSS 26 
+MSS H2N1   1H2N   H  0  0 N N N N N N 70.637 16.000 19.858 -5.454 -2.056 -2.090 H2N1   MSS 27 
+MSS H2N2   2H2N   H  0  0 N N N N N N 69.306 14.919 19.340 -6.068 -2.344 -0.735 H2N2   MSS 28 
+MSS H3     H3     H  0  1 N N N N N N 71.921 15.463 21.619 -5.177 -1.489 1.173  H3     MSS 29 
+MSS H5     H5     H  0  1 N N N N N N 71.825 11.936 24.835 -1.513 1.052  2.043  H5     MSS 30 
+MSS H6     H6     H  0  1 N N N N N N 71.464 9.847  23.100 -1.016 2.757  0.291  H6     MSS 31 
+MSS H7     H7     H  0  1 N N N N N N 69.247 9.223  22.826 -0.237 2.049  -1.670 H7     MSS 32 
+MSS H8     H8     H  0  1 N N N N N N 68.417 11.044 21.564 -1.802 0.648  -2.463 H8     MSS 33 
+MSS "H3'"  "H3'"  H  0  1 N N N N N N 67.886 8.514  24.827 2.384  1.188  -1.306 "H3'"  MSS 34 
+MSS "H4'1" "1H4'" H  0  0 N N N N N N 68.164 10.672 27.018 2.245  -1.352 -1.094 "H4'1" MSS 35 
+MSS "H4'2" "2H4'" H  0  0 N N N N N N 67.533 9.127  27.242 2.523  -1.029 0.437  "H4'2" MSS 36 
+MSS HP1    1HP    H  0  1 N N N N N N 65.798 12.971 27.905 5.808  -1.718 1.707  HP1    MSS 37 
+MSS HP2    2HP    H  0  1 N N N N N N 64.576 10.867 28.667 6.467  -1.011 -1.643 HP2    MSS 38 
+# 
+loop_
+_chem_comp_bond.comp_id 
+_chem_comp_bond.atom_id_1 
+_chem_comp_bond.atom_id_2 
+_chem_comp_bond.value_order 
+_chem_comp_bond.pdbx_aromatic_flag 
+_chem_comp_bond.pdbx_stereo_config 
+_chem_comp_bond.pdbx_ordinal 
+_chem_comp_bond.pdbx_metal_coordination_flag 
+_chem_comp_bond.pdbx_metal_pi_flag 
+MSS N1    C2     DOUB Y N 1  N N 
+MSS N1    C10    SING Y N 2  N N 
+MSS C2    N2     SING N N 3  N N 
+MSS C2    N3     SING Y N 4  N N 
+MSS N2    H2N1   SING N N 5  N N 
+MSS N2    H2N2   SING N N 6  N N 
+MSS N3    C4     SING Y N 7  N N 
+MSS N3    H3     SING N N 8  N N 
+MSS C4    O4     DOUB N N 9  N N 
+MSS C4    C9     SING Y N 10 N N 
+MSS N5    C6     SING N N 11 N N 
+MSS N5    C9     SING N N 12 N N 
+MSS N5    H5     SING N N 13 N N 
+MSS C6    C7     SING N N 14 N N 
+MSS C6    "C1'"  SING N N 15 N N 
+MSS C6    H6     SING N N 16 N N 
+MSS C7    N8     SING N N 17 N N 
+MSS C7    "O3'"  SING N N 18 N N 
+MSS C7    H7     SING N N 19 N N 
+MSS N8    C10    SING N N 20 N N 
+MSS N8    H8     SING N N 21 N N 
+MSS C9    C10    DOUB Y N 22 N N 
+MSS "C1'" "S1'"  SING N N 23 N N 
+MSS "C1'" "C2'"  DOUB N N 24 N N 
+MSS "S1'" MOM1   SING N N 25 Y N 
+MSS "C2'" "S2'"  SING N N 26 N N 
+MSS "C2'" "C3'"  SING N N 27 N N 
+MSS "S2'" MOM1   SING N N 28 Y N 
+MSS "C3'" "O3'"  SING N N 29 N N 
+MSS "C3'" "C4'"  SING N N 30 N N 
+MSS "C3'" "H3'"  SING N N 31 N N 
+MSS "C4'" "O4'"  SING N N 32 N N 
+MSS "C4'" "H4'1" SING N N 33 N N 
+MSS "C4'" "H4'2" SING N N 34 N N 
+MSS "O4'" P      SING N N 35 N N 
+MSS P     O1P    SING N N 36 N N 
+MSS P     O2P    SING N N 37 N N 
+MSS P     O3P    DOUB N N 38 N N 
+MSS O1P   HP1    SING N N 39 N N 
+MSS O2P   HP2    SING N N 40 N N 
+MSS MOM1  OM1    DOUB N N 41 Y N 
+# 
+loop_
+_pdbx_chem_comp_descriptor.comp_id 
+_pdbx_chem_comp_descriptor.type 
+_pdbx_chem_comp_descriptor.program 
+_pdbx_chem_comp_descriptor.program_version 
+_pdbx_chem_comp_descriptor.descriptor 
+MSS SMILES           ACDLabs              10.04 "O=P(O)(O)OCC2OC3NC=4N=C(N)NC(=O)C=4NC3C=1S[Mo](=O)SC=12"                                                                                                                                    
+MSS SMILES_CANONICAL CACTVS               3.341 "NC1=NC2=C(N[C@@H]3[C@H](N2)O[C@H](CO[P](O)(O)=O)C4=C3S[Mo](=O)S4)C(=O)N1"                                                                                                                   
+MSS SMILES           CACTVS               3.341 "NC1=NC2=C(N[CH]3[CH](N2)O[CH](CO[P](O)(O)=O)C4=C3S[Mo](=O)S4)C(=O)N1"                                                                                                                       
+MSS SMILES_CANONICAL "OpenEye OEToolkits" 1.5.0 "C([C@@H]1C2=C([C@H]3[C@@H](O1)NC4=C(N3)C(=O)NC(=N4)N)S[Mo](=O)S2)OP(=O)(O)O"                                                                                                                
+MSS SMILES           "OpenEye OEToolkits" 1.5.0 "C(C1C2=C(C3C(O1)NC4=C(N3)C(=O)NC(=N4)N)S[Mo](=O)S2)OP(=O)(O)O"                                                                                                                              
+MSS InChI            InChI                1.03  "InChI=1S/C10H14N5O6PS2.Mo.O/c11-10-14-7-4(8(16)15-10)12-3-6(24)5(23)2(21-9(3)13-7)1-20-22(17,18)19;;/h2-3,9,12,23-24H,1H2,(H2,17,18,19)(H4,11,13,14,15,16);;/q;+2;/p-2/t2-,3+,9-;;/m1../s1" 
+MSS InChIKey         InChI                1.03  BDXDYZBRBRKVRM-MRZGRPIRSA-L                                                                                                                                                                  
+# 
+_pdbx_chem_comp_identifier.comp_id           MSS 
+_pdbx_chem_comp_identifier.type              "SYSTEMATIC NAME" 
+_pdbx_chem_comp_identifier.program           ACDLabs 
+_pdbx_chem_comp_identifier.program_version   10.04 
+_pdbx_chem_comp_identifier.identifier        "oxo(phosphate)molybdenum" 
+# 
+_pdbx_chem_comp_pcm.pcm_id                             1 
+_pdbx_chem_comp_pcm.comp_id                            MSS 
+_pdbx_chem_comp_pcm.modified_residue_id                CYS 
+_pdbx_chem_comp_pcm.type                               None 
+_pdbx_chem_comp_pcm.category                           "Metal coordination" 
+_pdbx_chem_comp_pcm.polypeptide_position               "Any position" 
+_pdbx_chem_comp_pcm.comp_id_linking_atom               MOM1 
+_pdbx_chem_comp_pcm.modified_residue_id_linking_atom   SG 
+_pdbx_chem_comp_pcm.uniprot_specific_ptm_accession     ? 
+_pdbx_chem_comp_pcm.uniprot_generic_ptm_accession      ? 
+_pdbx_chem_comp_pcm.position                           "Amino-acid side chain" 
+# 
+loop_
+_pdbx_chem_comp_audit.comp_id 
+_pdbx_chem_comp_audit.action_type 
+_pdbx_chem_comp_audit.date 
+_pdbx_chem_comp_audit.processing_site 
+MSS "Create component"   2005-03-04 EBI  
+MSS "Modify descriptor"  2011-06-04 RCSB 
+MSS "Other modification" 2026-07-17 RCSB 
+MSS "Other modification" 2026-07-31 RCSB 
+MSS "Other modification" 2026-09-01 RCSB 
+MSS "Other modification" 2026-09-16 RCSB 
+# 

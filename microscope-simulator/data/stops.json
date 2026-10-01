@@ -1,0 +1,239 @@
+{
+  "title": "Cell and Molecule Explorer",
+  "sceneLabel": "Illustrative, not to scale",
+  "moleculeLabel": "Real structure: PDB 1J6Z",
+  "contentStatus": "M1 sample. Every story sentence lists its sources. Titles, authors and DOIs of all primary papers were confirmed against Crossref on 2026-10-01. The 1954 papers are paywalled, so for them only the title was checked, and a qualified biology reviewer still has to read the full text against the wording here before anything goes public (PLAN.md blindspot 4).",
+  "stops": [
+    {
+      "id": "muscle",
+      "kind": "scene",
+      "scale": "Whole muscle",
+      "title": "A muscle",
+      "story": "A muscle is made of long, thin cells called muscle fibres, and when the muscle pulls, its fibres get shorter.",
+      "storySources": [
+        "huxley-niedergerke-1954"
+      ],
+      "deeper": "Early microscope work on living muscle fibres is where scientists first watched the stripes inside a fibre change as the fibre shortened. The next stop looks at those stripes.",
+      "deeperSources": [
+        "huxley-niedergerke-1954"
+      ],
+      "alt": "A drawing of one muscle seen from the side. It is fat in the middle and tapers to a pale tendon at each end. A pulsing ring on the belly of the muscle marks the place to tap or press Enter to look inside. The drawing is illustrative and not to scale.",
+      "hotspot": {
+        "label": "Look inside this muscle",
+        "target": "fibre"
+      },
+      "legend": [
+        {
+          "key": "muscle-fibre",
+          "swatch": "#c4423a",
+          "label": "Muscle fibres (the belly of the muscle)"
+        },
+        {
+          "key": "tendon",
+          "swatch": "#e8dfcf",
+          "label": "Tendon, the cord that joins muscle to bone"
+        }
+      ],
+      "short": "Muscle"
+    },
+    {
+      "id": "fibre",
+      "kind": "scene",
+      "scale": "Inside a fibre",
+      "title": "A muscle fibre",
+      "story": "Inside each fibre sit even thinner strands, and under a microscope they show a pattern of light and dark stripes that repeats along their length.",
+      "storySources": [
+        "huxley-hanson-1954"
+      ],
+      "deeper": "Those thin strands are called myofibrils. The repeating stripes are why muscle is also called striated muscle. One full repeat of the stripe pattern is the unit you will meet next.",
+      "deeperSources": [
+        "huxley-hanson-1954"
+      ],
+      "alt": "A drawing of a cut-open bundle of muscle fibres running left to right. One fibre is cut open to show a handful of thinner strands inside it. Each strand has light and dark bands that repeat along its length. A pulsing ring on one strand marks the place to look closer. Illustrative and not to scale.",
+      "hotspot": {
+        "label": "Zoom into one repeat of the stripes",
+        "target": "sarcomere"
+      },
+      "legend": [
+        {
+          "key": "muscle-fibre",
+          "swatch": "#c4423a",
+          "label": "Muscle fibres"
+        },
+        {
+          "key": "myofibril",
+          "swatch": "#e6a27a",
+          "label": "Thinner strands inside one fibre (myofibrils)"
+        },
+        {
+          "key": "band-dark",
+          "swatch": "#5a3b36",
+          "label": "Dark bands of the stripe pattern"
+        }
+      ],
+      "short": "Fibre"
+    },
+    {
+      "id": "sarcomere",
+      "kind": "scene",
+      "scale": "One repeat of the stripes",
+      "title": "A sarcomere",
+      "story": "One repeat of the stripe pattern is called a sarcomere, and it holds two kinds of overlapping filament, thick and thin, that slide past each other when the muscle shortens.",
+      "storySources": [
+        "huxley-hanson-1954",
+        "huxley-niedergerke-1954"
+      ],
+      "deeper": "The thin filaments are built from a protein called actin and the thick filaments from a protein called myosin. Use the slider to slide the filaments and watch the repeat get shorter. Next you will jump to a real actin protein.",
+      "deeperSources": [
+        "huxley-hanson-1954"
+      ],
+      "alt": "A drawing of one sarcomere. Two dark plates, one at each end, hold bundles of thin blue filaments that reach toward the middle. Between them sit thicker orange filaments. A slider slides the thin filaments over the thick ones and the gap between the dark plates shrinks. A pulsing ring on a thin filament marks the way to a real molecule. Illustrative and not to scale.",
+      "hotspot": {
+        "label": "Jump to a real actin molecule",
+        "target": "molecule"
+      },
+      "slider": {
+        "label": "Muscle shortening",
+        "min": "Relaxed",
+        "max": "Shortened"
+      },
+      "legend": [
+        {
+          "key": "thin",
+          "swatch": "#3f7fd6",
+          "label": "Thin filaments (actin)"
+        },
+        {
+          "key": "thick",
+          "swatch": "#e08a2c",
+          "label": "Thick filaments (myosin)"
+        },
+        {
+          "key": "zdisc",
+          "swatch": "#4a4458",
+          "label": "Z discs, the plates at each end of a sarcomere"
+        }
+      ],
+      "short": "Sarcomere"
+    },
+    {
+      "id": "molecule",
+      "kind": "molecule",
+      "scale": "One protein, atom by atom",
+      "title": "Actin, a real molecule",
+      "pdb": "1J6Z",
+      "file": "data/1J6Z.cif",
+      "story": "This is a single actin protein from rabbit muscle, shown atom by atom, and many copies of it join in a twisting chain to build the thin filament.",
+      "storySources": [
+        "pdb-1J6Z",
+        "holmes-1990"
+      ],
+      "deeper": "In this crystal the actin holds one molecule of ADP, which is what remains after the cell splits ATP, its energy-carrying molecule. The researchers also chemically modified the actin so it would stay a single molecule instead of joining a chain, and the fluorescent dye label they attached is hidden here. The structure was worked out to a detail of 1.54 angstroms.",
+      "deeperSources": [
+        "pdb-1J6Z",
+        "otterbein-2001"
+      ],
+      "alt": "A 3D picture of one actin protein drawn as a folded ribbon in a single colour, because the structure has only one protein chain. A small ADP molecule is drawn as balls and sticks, and calcium ions as green spheres. Drag or use the arrow keys to turn it, pinch or scroll to zoom, press 0 or Reset view to return. The picture is of a real structure, not an illustration.",
+      "legend": [
+        {
+          "key": "actin",
+          "swatch": "#2f8f83",
+          "label": "Actin protein (colour by chain: there is one chain, so one colour)"
+        },
+        {
+          "key": "adp",
+          "swatch": "#8f8f8f",
+          "label": "ADP, atoms by element: grey carbon, red oxygen, blue nitrogen, orange phosphorus"
+        },
+        {
+          "key": "calcium",
+          "swatch": "#3dff00",
+          "label": "Calcium ions (green spheres)"
+        }
+      ],
+      "quiz": [
+        {
+          "q": "Which animal did the actin in this picture come from?",
+          "options": [
+            "Rabbit",
+            "Zebrafish",
+            "Fruit fly"
+          ],
+          "answer": 0,
+          "why": "The structure file lists the source as Oryctolagus cuniculus, the rabbit.",
+          "sources": [
+            "pdb-1J6Z"
+          ]
+        },
+        {
+          "q": "When many copies of this protein join up inside a sarcomere, what do they build?",
+          "options": [
+            "The thick filament",
+            "The thin filament",
+            "The tendon"
+          ],
+          "answer": 1,
+          "why": "Copies of actin join in a twisting chain to form the thin filament. The thick filament is built from myosin.",
+          "sources": [
+            "holmes-1990",
+            "huxley-hanson-1954"
+          ]
+        },
+        {
+          "q": "Which small molecule is bound to this actin, shown as balls and sticks?",
+          "options": [
+            "Glucose",
+            "ADP",
+            "Caffeine"
+          ],
+          "answer": 1,
+          "why": "The structure file lists one ADP molecule (plus calcium ions) bound to the protein.",
+          "sources": [
+            "pdb-1J6Z",
+            "otterbein-2001"
+          ]
+        }
+      ],
+      "short": "Molecule"
+    }
+  ],
+  "sources": {
+    "huxley-niedergerke-1954": {
+      "type": "primary paper",
+      "cite": "Huxley, A. F. and Niedergerke, R. (1954). Structural changes in muscle during contraction: interference microscopy of living muscle fibres. Nature 173, 971-973.",
+      "doi": "10.1038/173971a0",
+      "checked": "Title, authors, journal, pages and DOI confirmed against Crossref 2026-10-01. Paper is paywalled, so wording was matched to the title only."
+    },
+    "huxley-hanson-1954": {
+      "type": "primary paper",
+      "cite": "Huxley, H. and Hanson, J. (1954). Changes in the cross-striations of muscle during contraction and stretch and their structural interpretation. Nature 173, 973-976.",
+      "doi": "10.1038/173973a0",
+      "checked": "Title, authors, journal, pages and DOI confirmed against Crossref 2026-10-01. Paper is paywalled, so wording was matched to the title only. The thick = myosin and thin = actin wording follows the standard account of this paper and needs the reviewer to confirm it against the full text."
+    },
+    "holmes-1990": {
+      "type": "primary paper",
+      "cite": "Holmes, K. C., Popp, D., Gebhard, W. and Kabsch, W. (1990). Atomic model of the actin filament. Nature 347, 44-49.",
+      "doi": "10.1038/347044a0",
+      "checked": "Abstract read 2026-10-01 (Europe PMC): the actin filament is built from copies of the actin monomer arranged on a helix."
+    },
+    "otterbein-2001": {
+      "type": "primary paper",
+      "cite": "Otterbein, L. R., Graceffa, P. and Dominguez, R. (2001). The crystal structure of uncomplexed actin in the ADP state. Science 293, 708-711.",
+      "doi": "10.1126/science.1059700",
+      "checked": "Abstract read 2026-10-01 (Europe PMC): actin modified to block polymerization was crystallized in the ADP state and solved to 1.54 angstrom resolution."
+    },
+    "pdb-1J6Z": {
+      "type": "PDB entry",
+      "cite": "wwPDB entry 1J6Z, 'Uncomplexed actin' (Otterbein, Graceffa and Dominguez), X-ray diffraction, 1.54 angstroms. Public domain (CC0 1.0), wwPDB usage policy.",
+      "doi": "10.2210/pdb1J6Z/pdb",
+      "checked": "Read from the cached file web/data/1J6Z.cif on 2026-10-01: one chain, 'ACTIN ALPHA 1', source organism Oryctolagus cuniculus (rabbit), one ADP and six calcium ions, a tetramethylrhodamine-5-maleimide dye label, X-ray diffraction at 1.54 angstroms."
+    }
+  },
+  "credits": {
+    "molstar": "Sehnal, D. et al. (2021). Mol* Viewer: modern web app for 3D visualization and analysis of large biomolecular structures. Nucleic Acids Research 49, W431-W437. doi:10.1093/nar/gkab314",
+    "molstarLicence": "Mol* 5.12.0, MIT licence, copyright Mol* contributors (vendor/molstar/LICENSE).",
+    "three": "three.js 0.170.0, MIT licence (vendor/three/0.170.0/LICENSE).",
+    "fonts": "IBM Plex Sans and IBM Plex Mono, SIL Open Font License 1.1 (vendor/fonts/OFL.txt).",
+    "pdb": "Structure files from the wwPDB archive are public domain (CC0 1.0). Authors are credited with each entry."
+  }
+}

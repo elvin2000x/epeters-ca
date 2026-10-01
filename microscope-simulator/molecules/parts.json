@@ -1,0 +1,822 @@
+{
+ "about": "What the tap panel says about a tapped part of a big (PDB) molecule: friendly chain names (names, with the file's own _entity.pdbx_description kept in entities), part lines saying what that part does in this protein (lines), and the small parts each file holds (holds, for the card's note on balls and ribbons). Keyed by molecule id. A line's at picks what it covers: het (a small part by its CCD code), seq (author-numbered ranges, in chains or every chain), res ([chain, number] pairs), comp (every residue of that code in chains) or chains (a whole chain). up lines a range up with UniProt (file number = UniProt position + offset) and tools/build_parts.py checks every residue against the saved UniProt sequence. {chain} in a sentence is filled with the friendly chain name. Every sentence names its sources (s). UI words live in molecules.json ui (pick.*, holds.*). Generated keys (entities, chains, holds, copied sources) come from python tools/build_parts.py, which also checks the file. No em or en dashes.",
+ "review": "pending",
+ "sources": {
+  "uniprot-P69905": {"cite": "UniProt P69905, Hemoglobin subunit alpha (human).", "url": "https://www.uniprot.org/uniprotkb/P69905/entry", "checked": "2026-10-01, saved in .refs/parts: function 'involved in oxygen transport from the lung to the various peripheral tissues'; binding site 59 O2; binding site 88 proximal binding residue heme b. UniProt counts the first methionine, which the mature chain and 4HHB do not, so UniProt 59 and 88 are His58 and His87 in the file (checked by tools/build_parts.py)."},
+  "uniprot-P68871": {"cite": "UniProt P68871, Hemoglobin subunit beta (human).", "url": "https://www.uniprot.org/uniprotkb/P68871/entry", "checked": "2026-10-01, saved in .refs/parts: binding sites 2, 3, 83, 144 (2R)-2,3-bisphosphoglycerate; 64 distal and 93 proximal binding residues heme b. UniProt counts the first methionine, so these are Val1, His2, Lys82, His143, His63 and His92 in 4HHB (checked by tools/build_parts.py)."},
+  "uniprot-P0A334": {"cite": "UniProt P0A334, pH-gated potassium channel KcsA (Streptomyces lividans).", "url": "https://www.uniprot.org/uniprotkb/P0A334/entry", "checked": "2026-10-01, saved in .refs/parts: motif 75 to 80 selectivity filter (TVGYGD); intramembrane 62 to 72 helical, pore-forming; cation preference K+ > Rb+ > NH4+ >> Na+ > Li+. Same numbering as 1BL8."},
+  "uniprot-P10719": {"cite": "UniProt P10719, ATP synthase F1 subunit beta, mitochondrial (rat).", "url": "https://www.uniprot.org/uniprotkb/P10719/entry", "checked": "2026-10-01, saved in .refs/parts: catalytic subunit beta of the F1 head; with the non-catalytic subunit alpha forms the catalytic core; binding sites 209 to 214 ADP, ATP and phosphate, 213 and 238 Mg2+. 1MAB numbers the mature chain, 50 lower than UniProt (209 to 214 are 159 to 164, 238 is Glu188; checked by tools/build_parts.py)."},
+  "uniprot-P04058": {"cite": "UniProt P04058, Acetylcholinesterase (Torpedo californica).", "url": "https://www.uniprot.org/uniprotkb/P04058/entry", "checked": "2026-10-01, saved in .refs/parts: active site 221 acyl-ester intermediate, 348 and 461 charge relay system; signal peptide 1 to 21; function: ends signals at the nerve to muscle junction by fast hydrolysis of acetylcholine. 1ACJ numbers the mature chain, 21 lower (Ser200, Glu327, His440; checked by tools/build_parts.py)."},
+  "uniprot-P00875": {"cite": "UniProt P00875, Ribulose bisphosphate carboxylase large chain (spinach).", "url": "https://www.uniprot.org/uniprotkb/P00875/entry", "checked": "2026-10-01, saved in .refs/parts: active sites 175 and 294 proton acceptor; Mg2+ binding 201 (via carbamate group), 203, 204; modified residue 201 N6-carboxylysine. Same numbering as 8RUC."},
+  "uniprot-P02699": {"cite": "UniProt P02699, Rhodopsin (cow).", "url": "https://www.uniprot.org/uniprotkb/P02699/entry", "checked": "2026-10-01, saved in .refs/parts: modified residue 296 N6-(retinylidene)lysine; site 113 plays an important role in the conformation switch to the active conformation; motif 134 to 136 'ionic lock' involved in activated form stabilization; disulfide bond 110 to 187; activation when the bound 11-cis-retinal absorbs a photon and isomerizes to all-trans. Same numbering as 1F88."},
+  "uniprot-P02185": {"cite": "UniProt P02185, Myoglobin (sperm whale).", "url": "https://www.uniprot.org/uniprotkb/P02185/entry", "checked": "2026-10-01, saved in .refs/parts: function: stores oxygen and helps it spread in muscle; binding site 65 O2; binding site 94 proximal binding residue heme b. UniProt counts the first methionine, so these are His64 and His93 in 1MBN (checked by tools/build_parts.py)."},
+  "uniprot-P00791": {"cite": "UniProt P00791, Pepsin A (pig).", "url": "https://www.uniprot.org/uniprotkb/P00791/entry", "checked": "2026-10-01, saved in .refs/parts: active sites 91 and 274; signal 1 to 15, activation peptide 16 to 59. 4PEP numbers the mature enzyme, 59 lower (Asp32 and Asp215; checked by tools/build_parts.py)."},
+  "uniprot-P01315": {"cite": "UniProt P01315, Insulin (pig).", "url": "https://www.uniprot.org/uniprotkb/P01315/entry", "checked": "2026-10-01, saved in .refs/parts: B chain 25 to 54, A chain 88 to 108; disulfide bonds 31 to 94 and 43 to 107 (between B and A) and 93 to 98 (inside A). In 4INS that is CysB7 to CysA7, CysB19 to CysA20 and CysA6 to CysA11 (checked by tools/build_parts.py)."},
+  "uniprot-P03989": {"cite": "UniProt P03989, HLA class I antigen B-27 (human).", "url": "https://www.uniprot.org/uniprotkb/P03989/entry", "checked": "2026-10-01, saved in .refs/parts: binding sites for a peptide antigen at 87, 108, 167, 170, 176, 183, 195; signal 1 to 24. 1HSA numbers the mature chain, 24 lower (Tyr84, Thr143, Lys146, Tyr159, Tyr171; checked by tools/build_parts.py against the saved sequence; 87 and 176 are left out because the residue in the 1HSA file differs from the UniProt reference sequence there)."},
+  "uniprot-P04585": {"cite": "UniProt P04585, Gag-Pol polyprotein (HIV-1).", "url": "https://www.uniprot.org/uniprotkb/P04585/entry", "checked": "2026-10-01, saved in .refs/parts: the protease is 489 to 587 of the polyprotein; active site 513 'for protease activity; shared with dimeric partner'; aspartyl protease. 513 is Asp25 of the protease in 1HXW (checked by tools/build_parts.py)."},
+  "motm-1": {"cite": "PDB-101 Molecule of the Month: Myoglobin (January 2000).", "url": "https://pdb101.rcsb.org/motm/1", "checked": "2026-10-01: small, bright red protein, common in muscle cells, gives meat much of its red colour; stores oxygen for when muscles work hard; John Kendrew and coworkers determined its structure; first protein to have its atomic structure determined."},
+  "motm-11": {"cite": "PDB-101 Molecule of the Month: Rubisco (November 2000).", "url": "https://pdb101.rcsb.org/motm/11", "checked": "2026-10-01: attaches carbon dioxide to ribulose bisphosphate, a five-carbon sugar; most plentiful single enzyme on Earth; fixes only about three carbon dioxide molecules per second; plant form has eight large and eight small chains; 8ruc named."},
+  "motm-12": {"cite": "PDB-101 Molecule of the Month: Pepsin (December 2000).", "url": "https://pdb101.rcsb.org/motm/12", "checked": "2026-10-01: digests proteins in strong stomach acid; protein chains bind in its deep active-site groove and are broken into smaller pieces; works best in strong hydrochloric acid; made with an extra 44 amino acids that block the groove and are clipped off in the stomach."},
+  "motm-147": {"cite": "PDB-101 Molecule of the Month: Rhodopsin (March 2012).", "url": "https://pdb101.rcsb.org/motm/147", "checked": "2026-10-01: the molecule that senses light; retinal absorbs a photon and one bond flips from bent (cis) to extended (trans); rod cells can be triggered by a single photon; launches a G-protein signal leading to a nerve signal to the brain; 1f88 shown."},
+  "motm-38": {"cite": "PDB-101 Molecule of the Month: Potassium Channels (February 2003).", "url": "https://pdb101.rcsb.org/motm/38", "checked": "2026-10-01: allow potassium to flow across the membrane while blocking other ions; one sodium ion passes for every ten thousand potassium ions; four identical proteins forming a pore down the centre; nerve cells concentrate potassium inside and pump sodium out before a signal; bacterial channel from entry 1bl8."},
+  "motm-54": {"cite": "PDB-101 Molecule of the Month: Acetylcholinesterase (June 2004).", "url": "https://pdb101.rcsb.org/motm/54", "checked": "2026-10-01: breaks acetylcholine into acetic acid and choline, stopping the signal; each in about 80 microseconds; active site in a deep pocket; partial blocking drugs raise neurotransmitter levels (Alzheimer's); first studied in electric fish such as the torpedo ray; 1acj shown."},
+  "motm-6": {"cite": "PDB-101 Molecule of the Month: HIV-1 Protease (June 2000).", "url": "https://pdb101.rcsb.org/motm/6", "checked": "2026-10-01: cuts the long polyprotein into protein-sized pieces; two identical chains of 99 amino acids; a tunnel covered by two flexible flaps; drugs mimic a protein chain but cannot be cleaved; ritonavir shown with entry 1hxw."},
+  "motm-62": {"cite": "PDB-101 Molecule of the Month: Major Histocompatibility Complex (February 2005).", "url": "https://pdb101.rcsb.org/motm/62", "checked": "2026-10-01: class I MHC on the surface of most cells protects from viral infection; cells display pieces of old proteins on their surfaces; each person has their own MHC types and grafts with different types trigger the immune system; human MHC called HLA; 1hsa named."},
+  "motm-64": {"cite": "PDB-101 Molecule of the Month: Kinesin (April 2005).", "url": "https://pdb101.rcsb.org/motm/64", "checked": "2026-10-01: carries cargo along microtubules, crawling hand over hand; cells built three types of ATP-powered motors; kinesin in entry 3kin is two chains with two motor domains holding ADP."},
+  "motm-7": {"cite": "PDB-101 Molecule of the Month: Nucleosome (July 2000).", "url": "https://pdb101.rcsb.org/motm/7", "checked": "2026-10-01: eight histone proteins bundled together, encircled by two loops of DNA; nucleosomes protect DNA strands from physical damage; intact nucleosome in entry 1aoi."},
+  "motm-actin": {
+   "title": "Molecule of the Month: Actin",
+   "url": "https://pdb101.rcsb.org/motm/19",
+   "checked": "Actin filaments form the cytoskeleton and the ladder myosin climbs; up to 5 percent of the protein in a typical cell; each actin holds an ATP, broken to ADP after joining a filament, ADP actin lets go more easily; treadmilling; phalloidin from the death cap mushroom clogs cells with actin filaments; crystal structures hold a single actin, not a filament; actin is U-shaped with the nucleotide deep in the groove between the two arms.",
+   "accessed": "2026-10-01",
+   "publisher": "RCSB PDB-101 (David S. Goodsell)",
+   "cite": "Molecule of the Month: Actin"
+  },
+  "motm-aquaporin": {
+   "title": "Molecule of the Month: Aquaporin",
+   "url": "https://pdb101.rcsb.org/motm/173",
+   "checked": "Membranes resist water; kidneys and the eye use aquaporins to control water flow; four identical chains, each with its own channel; water passes single file; the red blood cell aquaporin; two asparagines hold a central water in a set orientation so the channel cannot pass protons; constriction controls what passes; mercury blocks water flow in red blood cells; blockers studied for glaucoma.",
+   "accessed": "2026-10-01",
+   "publisher": "RCSB PDB-101 (David S. Goodsell)",
+   "cite": "Molecule of the Month: Aquaporin"
+  },
+  "motm-atp-synthase": {"title": "Molecule of the Month: ATP Synthase", "url": "https://pdb101.rcsb.org/motm/72", "checked": "Builds most of the ATP in cells; two rotary motors, F0 in the membrane powered by hydrogen ions and F1 the chemical motor; F0 turns the rotor and axle and F1 becomes a generator making ATP; the axle forces F1 through three shapes: bind ADP and phosphate, make the bond, release ATP; the structure is solved in parts.", "accessed": "2026-10-01", "publisher": "RCSB PDB-101 (David S. Goodsell)", "cite": "Molecule of the Month: ATP Synthase"},
+  "motm-collagen": {
+   "title": "Molecule of the Month: Collagen",
+   "url": "https://pdb101.rcsb.org/motm/4",
+   "checked": "About one quarter of the protein in the body; strengthens tendons and supports skin and organs; bones and teeth add mineral to collagen; three chains in a triple helix; every third amino acid is glycine, which fits inside the helix; proline and hydroxyproline fill many other positions; hydroxyproline needs vitamin C, lack of it causes scurvy; each chain is over 1400 amino acids long; in 1cag an alanine replaces a glycine and crowds the neighbouring chains; heated collagen becomes gelatin.",
+   "accessed": "2026-10-01",
+   "publisher": "RCSB PDB-101 (David S. Goodsell)",
+   "cite": "Molecule of the Month: Collagen"
+  },
+  "motm-dna": {
+   "title": "Molecule of the Month: DNA",
+   "url": "https://pdb101.rcsb.org/motm/23",
+   "checked": "Each cell carries about 1.5 gigabytes of genetic information; strands pair into the double helix; A pairs with T, G with C through hydrogen bonds; major and minor grooves expose chemical groups proteins read without unwinding; 1bna is the B form found in cells, bent at the top by crystal packing, with propeller twisted bases; Watson and Crick in the 1950s; proteins repair DNA corrupted by chemicals or radiation.",
+   "accessed": "2026-10-01",
+   "publisher": "RCSB PDB-101 (David S. Goodsell)",
+   "cite": "Molecule of the Month: DNA"
+  },
+  "motm-gfp": {
+   "title": "Molecule of the Month: Green Fluorescent Protein (GFP)",
+   "url": "https://pdb101.rcsb.org/motm/42",
+   "checked": "From a jellyfish in the cold north Pacific; turns blue light from aequorin into green light; absorbs ultraviolet and emits green; attached to proteins or viruses to watch them in cells; chromophore built from three amino acids (serine or threonine, tyrosine, glycine) buried inside; oxygen finishes the chromophore over about an hour; 1ema: the chain forms a cylindrical can with a strand through the middle and the chromophore in the centre, shielded from water.",
+   "accessed": "2026-10-01",
+   "publisher": "RCSB PDB-101 (David S. Goodsell)",
+   "cite": "Molecule of the Month: Green Fluorescent Protein (GFP)"
+  },
+  "motm-hemoglobin": {
+   "title": "Molecule of the Month: Hemoglobin",
+   "url": "https://pdb101.rcsb.org/motm/41",
+   "checked": "Four chains, two alpha and two beta, each with a heme holding an iron atom; oxygen binds reversibly to the iron; first oxygen is hard to add, then binding gets easier; oxygen pulls a histidine under the heme; carbon monoxide replaces oxygen at the heme; sickle cell is glutamate 6 to valine in the beta chain, deoxy hemoglobin sticks into stiff fibers, cells become C or sickle shaped; Max Perutz solved horse hemoglobin (2dhb); 2hhb has no oxygen bound.",
+   "accessed": "2026-10-01",
+   "publisher": "RCSB PDB-101 (David S. Goodsell)",
+   "cite": "Molecule of the Month: Hemoglobin"
+  },
+  "motm-insulin": {
+   "title": "Molecule of the Month: Insulin",
+   "url": "https://pdb101.rcsb.org/motm/14",
+   "checked": "Made in the pancreas, released after meals; tells liver, muscle and fat cells to take glucose out of the blood; made as a longer chain then clipped to two chains; three disulfide bridges; pig insulin (4ins) differs from human by one amino acid, alanine in place of threonine at the end of the chain; impaired insulin leads to diabetes mellitus; hexamer stores the hormone before release; hydrophobic core of leucine and isoleucine.",
+   "accessed": "2026-10-01",
+   "publisher": "RCSB PDB-101 (David S. Goodsell)",
+   "cite": "Molecule of the Month: Insulin"
+  },
+  "motm-lysozyme": {"title": "Molecule of the Month: Lysozyme", "url": "https://pdb101.rcsb.org/motm/9", "checked": "Small enzyme that breaks the carbohydrate chains of bacterial cell walls so bacteria burst; Alexander Fleming discovered it when a drop of mucus killed bacteria; found in hen egg white, tears and mucus; first enzyme to have its structure solved (2lyz); long active site cleft binds the cell wall carbohydrate chain.", "accessed": "2026-10-01", "publisher": "RCSB PDB-101 (David S. Goodsell)", "cite": "Molecule of the Month: Lysozyme"},
+  "motm-myosin": {
+   "title": "Molecule of the Month: Myosin",
+   "url": "https://pdb101.rcsb.org/motm/18",
+   "checked": "Powers every voluntary and involuntary movement; captures and breaks ATP to make a power stroke; two heavy chains and four light chains; 1b7t contains only part of the molecule, the tail was clipped off, but includes most of the motor domain; about 300 myosins form a thick filament; heads climb actin filaments; release of phosphate powers the stroke, amplified by the lever arm; about 2 trillion myosins to hold up a baseball.",
+   "accessed": "2026-10-01",
+   "publisher": "RCSB PDB-101 (David S. Goodsell)",
+   "cite": "Molecule of the Month: Myosin"
+  },
+  "os-3-4": {"cite": "OpenStax Biology 2e, section 3.4 Proteins.", "url": "https://openstax.org/books/biology-2e/pages/3-4-proteins", "checked": "2026-10-01: 20 common amino acids; glycine's R group is a hydrogen atom; peptide bonds join amino acids; insulin is a protein hormone that helps regulate blood glucose; collagen in skin is a fibrous protein; actin and myosin effect muscle contraction."},
+  "os-3-5": {"cite": "OpenStax Biology 2e, section 3.5 Nucleic Acids.", "url": "https://openstax.org/books/biology-2e/pages/3-5-nucleic-acids", "checked": "2026-10-01: DNA is the genetic material in all living organisms; double helix; sugar and phosphate on the outside as the backbone; A pairs with T, G with C."},
+  "os-35-2": {"cite": "OpenStax Biology 2e, section 35.2 How Neurons Communicate.", "url": "https://openstax.org/books/biology-2e/pages/35-2-how-neurons-communicate", "checked": "2026-10-01: acetylcholine released at the neuromuscular junction opens sodium channels; some drugs for Alzheimer's patients inhibit acetylcholinesterase, the enzyme that degrades acetylcholine; dopamine and serotonin listed as biogenic amine neurotransmitters."},
+  "os-38-4": {"title": "OpenStax Biology 2e, 38.4 Muscle Contraction and Locomotion", "url": "https://openstax.org/books/biology-2e/pages/38-4-muscle-contraction-and-locomotion", "checked": "Myosin heads bind actin and form cross-bridges that pull actin inward; myosin splits ATP to ADP and phosphate at its ATP site; the energy cocks the myosin head; ATP binding makes myosin release actin.", "accessed": "2026-10-01", "publisher": "OpenStax, Rice University", "cite": "OpenStax Biology 2e, 38.4 Muscle Contraction and Locomotion"},
+  "os-40-2": {"cite": "OpenStax Biology 2e, section 40.2 Components of the Blood.", "url": "https://openstax.org/books/biology-2e/pages/40-2-components-of-the-blood", "checked": "2026-10-01: hemoglobin's main job is to carry oxygen; it is packed into red blood cells; four subunits (two alpha, two beta) and a heme group with iron."},
+  "paper-baker-1988": {"title": "Baker EN and others (1988) The structure of 2Zn pig insulin crystals at 1.5 A resolution. Phil Trans R Soc Lond B 319:369-456", "url": "https://doi.org/10.1098/rstb.1988.0058", "checked": "Abstract: 1.5 A X-ray data; two insulin molecules form a compact dimer and three dimers form a hexamer around two zinc ions.", "accessed": "2026-10-01", "publisher": "Philosophical Transactions of the Royal Society B (abstract read on PubMed, PMID 2905485)", "cite": "Baker EN and others (1988) The structure of 2Zn pig insulin crystals at 1.5 A resolution. Phil Trans R Soc Lond B 319:369-456"},
+  "paper-bella-1994": {
+   "title": "Bella J, Eaton M, Brodsky B, Berman HM (1994) Crystal and molecular structure of a collagen-like peptide at 1.9 A resolution. Science 266:75-81",
+   "url": "https://doi.org/10.1126/science.7695699",
+   "checked": "Abstract: first protein triple helix at 1.9 A; each triple helix wrapped in a cylinder of water; hydroxyproline critical to the water network; Gly to Ala substitution locally untwists the helix and water bridges replace direct hydrogen bonds; similar Gly mutations in collagen cause osteogenesis imperfecta, chondrodysplasias and Ehlers-Danlos syndrome IV.",
+   "accessed": "2026-10-01",
+   "publisher": "Science (abstract read on PubMed, PMID 7695699)",
+   "cite": "Bella J, Eaton M, Brodsky B, Berman HM (1994) Crystal and molecular structure of a collagen-like peptide at 1.9 A resolution. Science 266:75-81"
+  },
+  "paper-bianchet-1998": {
+   "title": "Bianchet MA, Hullihen J, Pedersen PL, Amzel LM (1998) The 2.8-A structure of rat liver F1-ATPase. PNAS 95:11065-11070",
+   "url": "https://doi.org/10.1073/pnas.95.19.11065",
+   "checked": "Abstract: F1 is the part of ATP synthase with the catalytic and regulatory nucleotide sites; its shape changes couple proton flow to ATP synthesis; rat liver F1 at 2.8 A with physiological nucleotide levels; all three beta subunits hold nucleotide.",
+   "accessed": "2026-10-01",
+   "publisher": "Proceedings of the National Academy of Sciences (abstract read on PubMed, PMID 9736690)",
+   "cite": "Bianchet MA, Hullihen J, Pedersen PL, Amzel LM (1998) The 2.8-A structure of rat liver F1-ATPase. PNAS 95:11065-11070"
+  },
+  "paper-drew-1981": {
+   "title": "Drew HR, Wing RM, Takano T, Broka C, Tanaka S, Itakura K, Dickerson RE (1981) Structure of a B-DNA dodecamer: conformation and dynamics. PNAS 78:2179-2183",
+   "url": "https://doi.org/10.1073/pnas.78.4.2179",
+   "checked": "Abstract: synthetic dodecamer CGCGAATTCGCG at 1.9 A; slightly more than one full turn of right-handed B helix; 19 degree bend; 9.8 base pairs per turn in the centre; A.T pairs propeller twisted about 17.3 degrees, C.G pairs about 11.5.",
+   "accessed": "2026-10-01",
+   "publisher": "Proceedings of the National Academy of Sciences (abstract read on PubMed, PMID 6941276)",
+   "cite": "Drew HR, Wing RM, Takano T, Broka C, Tanaka S, Itakura K, Dickerson RE (1981) Structure of a B-DNA dodecamer: conformation and dynamics. PNAS 78:2179-2183"
+  },
+  "paper-fermi-1984": {
+   "title": "Fermi G, Perutz MF, Shaanan B, Fourme R (1984) The crystal structure of human deoxyhaemoglobin at 1.74 A resolution. J Mol Biol 175:159-174",
+   "url": "https://doi.org/10.1016/0022-2836(84)90472-8",
+   "checked": "Abstract: refined at 1.74 A from synchrotron X-ray data; iron sits out of the heme plane in the deoxy form and is bonded to the F8 histidine nitrogen.",
+   "accessed": "2026-10-01",
+   "publisher": "Journal of Molecular Biology (abstract read on PubMed, PMID 6726807)",
+   "cite": "Fermi G, Perutz MF, Shaanan B, Fourme R (1984) The crystal structure of human deoxyhaemoglobin at 1.74 A resolution. J Mol Biol 175:159-174"
+  },
+  "paper-houdusse-1999": {
+   "title": "Houdusse A, Kalabokis VN, Himmel D, Szent-Gyorgyi AG, Cohen C (1999) Atomic structure of scallop myosin subfragment S1 complexed with MgADP. Cell 97:459-470",
+   "url": "https://doi.org/10.1016/s0092-8674(00)80756-4",
+   "checked": "Abstract: scallop striated muscle myosin head with MgADP at 2.5 A; converter and lever arm in a new position; likely a state before ATP is split in which the heads stay detached from actin.",
+   "accessed": "2026-10-01",
+   "publisher": "Cell (abstract read on PubMed, PMID 10338210)",
+   "cite": "Houdusse A, Kalabokis VN, Himmel D, Szent-Gyorgyi AG, Cohen C (1999) Atomic structure of scallop myosin subfragment S1 complexed with MgADP. Cell 97:459-470"
+  },
+  "paper-ormo-1996": {
+   "title": "Ormo M, Cubitt AB, Kallio K, Gross LA, Tsien RY, Remington SJ (1996) Crystal structure of the Aequorea victoria green fluorescent protein. Science 273:1392-1395",
+   "url": "https://doi.org/10.1126/science.273.5280.1392",
+   "checked": "Abstract: chromophore from cyclization and oxidation of Ser65 (or Thr65), Tyr66, Gly67; needs the native fold; Thr65 GFP at 1.9 A; 11-stranded beta barrel with a coaxial helix, chromophore formed from the central helix; changing Thr203 to Tyr or His shifts the colours toward red.",
+   "accessed": "2026-10-01",
+   "publisher": "Science (abstract read on PubMed, PMID 8703075)",
+   "cite": "Ormo M, Cubitt AB, Kallio K, Gross LA, Tsien RY, Remington SJ (1996) Crystal structure of the Aequorea victoria green fluorescent protein. Science 273:1392-1395"
+  },
+  "paper-sui-2001": {
+   "title": "Sui H, Han BG, Lee JK, Walian P, Jap BK (2001) Structural basis of water-specific transport through the AQP1 water channel. Nature 414:872-878",
+   "url": "https://doi.org/10.1038/414872a",
+   "checked": "Abstract: AQP1 at 2.2 A; extracellular and cytoplasmic vestibules joined by a long narrow pore; four bound waters in the selectivity filter; histidine 182 in the constriction is conserved in all water-specific channels and key to water specificity; proton transport through the channel is highly unfavourable; 10 aquaporin families AQP0 to AQP9 in mammals.",
+   "accessed": "2026-10-01",
+   "publisher": "Nature (abstract read on PubMed, PMID 11780053)",
+   "cite": "Sui H, Han BG, Lee JK, Walian P, Jap BK (2001) Structural basis of water-specific transport through the AQP1 water channel. Nature 414:872-878"
+  },
+  "rcsb-1ACJ": {"cite": "RCSB PDB 1ACJ, Quaternary ligand binding to aromatic residues in the active-site gorge of acetylcholinesterase.", "url": "https://www.rcsb.org/structure/1ACJ", "checked": "2026-10-01 (from file): Torpedo californica; X-ray 2.8 A; one chain of 537 residues; one tacrine (THA)."},
+  "rcsb-1AOI": {"cite": "RCSB PDB 1AOI, Complex between nucleosome core particle (H3, H4, H2A, H2B) and 146 bp long DNA fragment.", "url": "https://www.rcsb.org/structure/1AOI", "checked": "2026-10-01 (from file): histones from Xenopus laevis, two each of H3, H4, H2A, H2B; two 146-base DNA strands named as a repeat from human X-chromosome alpha satellite DNA; X-ray 2.8 A."},
+  "rcsb-1B7T": {"cite": "RCSB PDB 1B7T, Myosin digested by papain.", "url": "https://www.rcsb.org/structure/1B7T", "checked": "2026-10-01: Argopecten irradians (bay scallop); heavy chain (835 residues), regulatory and essential light chains (156 each), all with full atoms; ADP, 2 Mg, 1 Ca bound. Replaces 2MYS (light chains alpha-carbon only)."},
+  "rcsb-1BL8": {"cite": "RCSB PDB 1BL8, Potassium channel (KcsA) from Streptomyces lividans.", "url": "https://www.rcsb.org/structure/1BL8", "checked": "2026-10-01 (from file): Streptomyces lividans; X-ray 3.2 A; four identical chains (97-residue construct); three potassium ions."},
+  "rcsb-1BNA": {"cite": "RCSB PDB 1BNA, Structure of a B-DNA dodecamer: conformation and dynamics.", "url": "https://www.rcsb.org/structure/1BNA", "checked": "2026-10-01: two copies of DNA strand CGCGAATTCGCG (12 nucleotides), X-ray 1.9 angstrom."},
+  "rcsb-1CAG": {"cite": "RCSB PDB 1CAG, Crystal and molecular structure of a collagen-like peptide at 1.9 angstrom resolution.", "url": "https://www.rcsb.org/structure/1CAG", "checked": "2026-10-01: three chains of 30 residues, (Pro-Hyp-Gly) repeats with one Gly replaced by Ala."},
+  "rcsb-1EMA": {"cite": "RCSB PDB 1EMA, Green fluorescent protein from Aequorea victoria.", "url": "https://www.rcsb.org/structure/1EMA", "checked": "2026-10-01: Aequorea victoria; one chain (236 residues) with chromophore residue CRO and selenomethionine residues (MSE)."},
+  "rcsb-1F88": {"cite": "RCSB PDB 1F88, Crystal structure of bovine rhodopsin.", "url": "https://www.rcsb.org/structure/1F88", "checked": "2026-10-01 (from file): Bos taurus; X-ray 2.8 A; two rhodopsin chains of 348 residues, each with retinal (RET) and sugar chains; assembly 2 is one copy."},
+  "rcsb-1HSA": {"cite": "RCSB PDB 1HSA, The three-dimensional structure of HLA-B27 at 2.1 angstroms resolution.", "url": "https://www.rcsb.org/structure/1HSA", "checked": "2026-10-01 (from file): Homo sapiens; X-ray 2.1 A; two copies of HLA-B*2705 heavy chain (276), beta 2-microglobulin (99) and a peptide entity named model peptide sequence ARAAAAAAA (9); assembly 1 is one copy."},
+  "rcsb-1HXW": {"cite": "RCSB PDB 1HXW, HIV-1 protease dimer complexed with A-84538.", "url": "https://www.rcsb.org/structure/1HXW", "checked": "2026-10-01 (from file): Human immunodeficiency virus 1; X-ray 1.8 A; two chains of 99 residues; ligand entity named RITONAVIR (RIT)."},
+  "rcsb-1IGT": {"cite": "RCSB PDB 1IGT, Structure of immunoglobulin (intact IgG2a monoclonal antibody).", "url": "https://www.rcsb.org/structure/1IGT", "checked": "2026-10-01 (from file): Mus musculus; X-ray 2.8 A; two light chains of 214 and two heavy chains of 444 residues; branched sugar entities attached; citation Refined structure of an intact IgG2a monoclonal antibody."},
+  "rcsb-1J4N": {"cite": "RCSB PDB 1J4N, Crystal structure of the AQP1 water channel.", "url": "https://www.rcsb.org/structure/1J4N", "checked": "2026-10-01: Bos taurus, tissue blood; one chain AQUAPORIN 1 (271 residues); X-ray 2.2 angstrom."},
+  "rcsb-1J6Z": {"cite": "RCSB PDB 1J6Z, Uncomplexed actin.", "url": "https://www.rcsb.org/structure/1J6Z", "checked": "2026-10-01: title UNCOMPLEXED ACTIN; one chain ACTIN ALPHA 1 (375 residues), rabbit (Oryctolagus cuniculus); ADP and calcium ions bound."},
+  "rcsb-1LYZ": {"cite": "RCSB PDB 1LYZ, Real-space refinement of the structure of hen egg-white lysozyme.", "url": "https://www.rcsb.org/structure/1LYZ", "checked": "2026-10-01: Gallus gallus; one chain of 129 residues."},
+  "rcsb-1MAB": {
+   "cite": "RCSB PDB 1MAB, Rat liver F1-ATPase.",
+   "url": "https://www.rcsb.org/structure/1MAB",
+   "checked": "2026-10-01: title RAT LIVER F1-ATPASE (file and RCSB data API); Rattus norvegicus; X-ray, 2.8 angstrom; the file holds one alpha (510 residues), one beta (479) and one gamma chain (270 residues in the sequence, of which the file models 124), plus ATP, ADP, one Mg and one phosphate; assembly 1 (author defined, heptameric) applies the crystal symmetry to give three alpha, three beta and one gamma. File 953,100 bytes raw, 231,769 gzip. Chosen because every full F1 or Fo/F1 entry checked (1BMF, 1COW, 1E1Q, 1E79, 1H8E, 1NBM, 2JDI, 2CK3, 4XD7, 2WPD, 3ZRY, 1OHH) is 587 KB to 1.1 MB gzip, the Fo/F1 model 1C17 is 344 KB gzip, and the yeast F1-c10 entry 1QO1 (137 KB gzip) has alpha-carbon atoms only."
+  },
+  "rcsb-1MBN": {"cite": "RCSB PDB 1MBN, The stereochemistry of the protein myoglobin.", "url": "https://www.rcsb.org/structure/1MBN", "checked": "2026-10-01 (from file): Physeter catodon (sperm whale); X-ray 2.0 A; one chain of 153 residues; one heme (HEM)."},
+  "rcsb-1NPO": {"cite": "RCSB PDB 1NPO, Bovine neurophysin II complex with oxytocin.", "url": "https://www.rcsb.org/structure/1NPO", "checked": "2026-10-01 (from file): Bos taurus; X-ray 3.0 A; two neurophysin II chains of 95 residues and two oxytocin chains of 9 residues."},
+  "rcsb-2BUK": {"cite": "RCSB PDB 2BUK, Satellite tobacco necrosis virus.", "url": "https://www.rcsb.org/structure/2BUK", "checked": "2026-10-01 (from file): coat protein of 196 residues; X-ray 2.45 A; assembly 1 is the complete icosahedral assembly of 60 copies; three calcium ions; no nucleic acid in the entry."},
+  "rcsb-3KIN": {"cite": "RCSB PDB 3KIN, Kinesin (dimeric) from Rattus norvegicus.", "url": "https://www.rcsb.org/structure/3KIN", "checked": "2026-10-01 (from file): Rattus norvegicus; X-ray 3.1 A; two kinesin heavy chains, each stored as two pieces (residues 2 to 239 and 256 onward); two ADP."},
+  "rcsb-3TNU": {"cite": "RCSB PDB 3TNU, Heterocomplex of coil 2B domains of human keratin 5 and keratin 14.", "url": "https://www.rcsb.org/structure/3TNU", "checked": "2026-10-01 (from file): Homo sapiens; X-ray 3.005 A; keratin 14 piece of 131 and keratin 5 piece of 129 residues."},
+  "rcsb-4HHB": {"cite": "RCSB PDB 4HHB, The crystal structure of human deoxyhaemoglobin at 1.74 angstroms resolution.", "url": "https://www.rcsb.org/structure/4HHB", "checked": "2026-10-01: Homo sapiens; 2 alpha chains (141 residues), 2 beta chains (146); 4 protoporphyrin IX containing Fe (heme)."},
+  "rcsb-4INS": {"cite": "RCSB PDB 4INS, The structure of 2Zn pig insulin crystals at 1.5 angstroms resolution.", "url": "https://www.rcsb.org/structure/4INS", "checked": "2026-10-01: Sus scrofa; 2 copies each of chain A (21 residues) and chain B (30 residues); 2 zinc ions."},
+  "rcsb-4PEP": {"cite": "RCSB PDB 4PEP, The molecular and crystal structures of monoclinic porcine pepsin refined at 1.8 angstroms resolution.", "url": "https://www.rcsb.org/structure/4PEP", "checked": "2026-10-01 (from file): Sus scrofa; X-ray 1.8 A; one chain of 326 residues."},
+  "rcsb-8RUC": {"cite": "RCSB PDB 8RUC, Activated spinach rubisco complexed with 2-carboxyarabinitol bisphosphate.", "url": "https://www.rcsb.org/structure/8RUC", "checked": "2026-10-01 (from file): Spinacia oleracea; X-ray 1.6 A; four large chains of 475 and four small chains of 123 residues with four Mg and four CAP; assembly 1 has 16 chains."},
+  "uniprot-P00698": {"cite": "UniProt P00698, Lysozyme C (Gallus gallus).", "url": "https://www.uniprot.org/uniprotkb/P00698/entry", "checked": "2026-10-01: function is primarily bacteriolytic; hydrolyses linkages between sugars in peptidoglycan; found in egg white."},
+  "uniprot-P42212": {"title": "UniProt P42212: Green fluorescent protein (Aequorea victoria)", "url": "https://www.uniprot.org/uniprotkb/P42212/entry", "checked": "238 residues; turns the blue light of aequorin into green light by energy transfer; found in photocytes; chromophore from Ser65, Tyr66 and Gly67, formed by itself, needs only oxygen to mature.", "accessed": "2026-10-01", "publisher": "UniProt Consortium", "cite": "UniProt P42212: Green fluorescent protein (Aequorea victoria)"},
+  "uniprot-P47865": {"title": "UniProt P47865: Aquaporin-1 (Bos taurus)", "url": "https://www.uniprot.org/uniprotkb/P47865/entry", "checked": "271 residues; six membrane-crossing helices (12 to 29, 49 to 67, 93 to 111, 136 to 155, 166 to 183, 209 to 226) and two half helices dipping into the membrane; NPA motifs at 78 to 80 and 194 to 196; forms a water channel; each half of the protein has three membrane-spanning parts and a pore-forming loop with the NPA signature.", "accessed": "2026-10-01", "publisher": "UniProt Consortium", "cite": "UniProt P47865: Aquaporin-1 (Bos taurus)"}
+ },
+ "molecules": {
+  "hemoglobin": {
+   "names": {"1": {"name": "Hemoglobin subunit alpha", "s": ["rcsb-4HHB", "uniprot-P69905"]}, "2": {"name": "Hemoglobin subunit beta", "s": ["rcsb-4HHB", "uniprot-P68871"]}},
+   "lines": [
+    {
+     "at": {"het": "HEM"},
+     "label": "The oxygen seat",
+     "text": [{"t": "This heme is the oxygen seat of {chain}: one oxygen molecule binds to the iron atom at its centre.", "s": ["motm-hemoglobin", "os-40-2"]}, {"t": "With one heme in each of its four chains, one hemoglobin carries up to four oxygen molecules, picked up in the lungs and dropped off in the tissues.", "s": ["os-40-2", "motm-hemoglobin"]}]
+    },
+    {
+     "at": {"chains": ["A", "C"], "seq": [87, 87], "comp": "HIS"},
+     "up": {"acc": "P69905", "offset": -1},
+     "label": "Iron-holding histidine",
+     "text": [{"t": "Histidine 87 reaches up from below the heme and bonds to its iron.", "s": ["rcsb-4HHB", "paper-fermi-1984", "uniprot-P69905"]}, {"t": "When oxygen lands on the iron it pulls this histidine, and the shift spreads to the other chains so they grab oxygen more easily.", "s": ["motm-hemoglobin"]}]
+    },
+    {
+     "at": {"chains": ["B", "D"], "seq": [92, 92], "comp": "HIS"},
+     "up": {"acc": "P68871", "offset": -1},
+     "label": "Iron-holding histidine",
+     "text": [{"t": "In the beta chains, histidine 92 is the one that bonds to the heme iron from below.", "s": ["rcsb-4HHB", "uniprot-P68871"]}, {"t": "When oxygen lands on the iron it pulls this histidine, and the shift spreads to the other chains so they grab oxygen more easily.", "s": ["motm-hemoglobin"]}]
+    },
+    {
+     "at": {"chains": ["A", "C"], "seq": [58, 58], "comp": "HIS"},
+     "up": {"acc": "P69905", "offset": -1},
+     "label": "Beside the oxygen",
+     "text": [{"t": "Histidine 58 sits in the pocket above the heme, at the spot where oxygen binds.", "s": ["uniprot-P69905"]}]
+    },
+    {
+     "at": {"chains": ["B", "D"], "seq": [63, 63], "comp": "HIS"},
+     "up": {"acc": "P68871", "offset": -1},
+     "label": "Second heme histidine",
+     "text": [{"t": "Histidine 63 is the beta chain's second heme histidine, on the far side of the heme from histidine 92.", "s": ["uniprot-P68871"]}]
+    },
+    {
+     "at": {"chains": ["B", "D"], "seq": [6, 6], "comp": "GLU"},
+     "label": "Sickle cell site",
+     "text": [{"t": "Position 6 of each beta chain is glutamate in normal hemoglobin.", "s": ["rcsb-4HHB", "motm-hemoglobin"]}, {"t": "In sickle cell hemoglobin it is valine, and that one change lets the molecules stick together into stiff fibers.", "s": ["motm-hemoglobin", "os-3-4"]}]
+    },
+    {
+     "at": {"chains": ["B", "D"], "seq": [[1, 2], [82, 82], [143, 143]]},
+     "up": {"acc": "P68871", "offset": -1},
+     "label": "BPG grip",
+     "text": [{"t": "This amino acid is one of the spots on the beta chain that hold 2,3-bisphosphoglycerate (BPG), a small molecule that binds to hemoglobin.", "s": ["uniprot-P68871"]}]
+    }
+   ],
+   "entities": {"1": "Hemoglobin subunit alpha", "2": "Hemoglobin subunit beta"},
+   "chains": {"A": "1", "B": "2", "C": "1", "D": "2"},
+   "holds": {
+    "poly": "protein",
+    "shown": [{"c": "HEM", "n": 4}],
+    "hidden": [{"c": "PO4", "n": 2}],
+    "s": ["rcsb-4HHB"]
+   }
+  },
+  "gfp": {
+   "names": {"1": {"name": "Green fluorescent protein", "s": ["rcsb-1EMA", "uniprot-P42212"]}},
+   "holdsExtra": [{"t": "Its glowing chromophore is built from the chain's own amino acids, so it is drawn as part of the ribbon.", "s": ["motm-gfp", "rcsb-1EMA"]}],
+   "lines": [
+    {
+     "at": {"seq": [66, 66], "comp": "CRO"},
+     "label": "The glowing chromophore",
+     "text": [
+      {"t": "This is the chromophore, the part that absorbs light and glows green.", "s": ["motm-gfp", "rcsb-1EMA"]},
+      {"t": "It forms by itself from three amino acids of the chain: serine 65, tyrosine 66 and glycine 67 in the jellyfish protein, with threonine at 65 in this version.", "s": ["motm-gfp", "uniprot-P42212", "paper-ormo-1996"]},
+      {"t": "The glycine bonds to the serine to close a new ring, and over about an hour oxygen from the surroundings finishes the glowing group.", "s": ["motm-gfp"]},
+      {"t": "The can of protein around it shields it from water molecules that would otherwise steal its energy.", "s": ["motm-gfp"]}
+     ]
+    },
+    {
+     "at": {"seq": [203, 203], "comp": "THR"},
+     "label": "Colour tuner",
+     "text": [{"t": "Threonine 203 sits next to the chromophore.", "s": ["paper-ormo-1996", "rcsb-1EMA"]}, {"t": "Changing it to tyrosine or histidine shifts the light toward red, one way scientists made new colours.", "s": ["paper-ormo-1996", "motm-gfp"]}]
+    },
+    {
+     "at": {"seq": [[64, 64], [68, 68]]},
+     "label": "Next to the chromophore",
+     "text": [{"t": "The chain runs straight into the chromophore here: it is joined to phenylalanine 64 on one side and valine 68 on the other.", "s": ["rcsb-1EMA"]}, {"t": "This stretch is the central helix that runs through the middle of the can.", "s": ["motm-gfp", "paper-ormo-1996"]}]
+    }
+   ],
+   "entities": {"1": "GREEN FLUORESCENT PROTEIN"},
+   "chains": {"A": "1"},
+   "holds": {"poly": "protein", "shown": [], "hidden": [], "s": ["rcsb-1EMA"]}
+  },
+  "aquaporin": {
+   "names": {"1": {"name": "Aquaporin 1", "s": ["rcsb-1J4N", "uniprot-P47865"]}},
+   "lines": [
+    {
+     "at": {"seq": [[78, 80], [194, 196]]},
+     "up": {"acc": "P47865", "offset": 0},
+     "label": "NPA motif",
+     "text": [{"t": "This is one of the two NPA loops (asparagine, proline, alanine) that dip into the membrane, the signature of every aquaporin.", "s": ["uniprot-P47865", "rcsb-1J4N"]}, {"t": "Their two asparagines hold the central water in a fixed direction, so the channel cannot pass protons along a chain of water.", "s": ["motm-aquaporin", "paper-sui-2001"]}]
+    },
+    {
+     "at": {"seq": [182, 182], "comp": "HIS"},
+     "label": "Selectivity filter",
+     "text": [{"t": "Histidine 182 lines the tightest part of the pore, the long, narrow filter that decides what gets through.", "s": ["paper-sui-2001", "rcsb-1J4N"]}, {"t": "It is found in every known water-only channel and helps make sure that only water gets through.", "s": ["paper-sui-2001"]}]
+    },
+    {
+     "at": {"seq": [[12, 29], [49, 67], [93, 111], [136, 155], [166, 183], [209, 226]]},
+     "label": "Membrane helix",
+     "text": [{"t": "This part of the chain is one of six helices that cross the membrane, the frame that holds the water pore.", "s": ["uniprot-P47865", "rcsb-1J4N"]}, {"t": "Water molecules pass through the pore one at a time, in single file.", "s": ["motm-aquaporin", "paper-sui-2001"]}]
+    }
+   ],
+   "entities": {"1": "AQUAPORIN 1"},
+   "chains": {"A": "1"},
+   "holds": {
+    "poly": "protein",
+    "shown": [],
+    "hidden": [{"c": "BNG", "n": 3}],
+    "s": ["rcsb-1J4N"]
+   }
+  },
+  "lysozyme": {
+   "names": {"1": {"name": "Lysozyme", "s": ["rcsb-1LYZ", "uniprot-P00698"]}},
+   "lines": [
+    {
+     "at": {"seq": [35, 35], "comp": "GLU"},
+     "up": {"acc": "P00698", "offset": -18},
+     "label": "Active site",
+     "text": [{"t": "Glutamate 35 is one of the enzyme's two active-site amino acids, with aspartate 52.", "s": ["uniprot-P00698", "rcsb-1LYZ"]}, {"t": "Together they cut the sugar chain of a bacterial cell wall in the long cleft, and the bacterium then bursts under its own pressure.", "s": ["uniprot-P00698", "motm-lysozyme"]}]
+    },
+    {
+     "at": {"seq": [52, 52], "comp": "ASP"},
+     "up": {"acc": "P00698", "offset": -18},
+     "label": "Active site",
+     "text": [{"t": "Aspartate 52 is one of the enzyme's two active-site amino acids, with glutamate 35.", "s": ["uniprot-P00698", "rcsb-1LYZ"]}, {"t": "Together they cut the sugar chain of a bacterial cell wall in the long cleft, and the bacterium then bursts under its own pressure.", "s": ["uniprot-P00698", "motm-lysozyme"]}]
+    },
+    {
+     "at": {"seq": [[6, 6], [127, 127], [30, 30], [115, 115], [64, 64], [80, 80], [76, 76], [94, 94]], "comp": "CYS"},
+     "up": {"acc": "P00698", "offset": -18},
+     "label": "Disulfide bridge",
+     "text": [{"t": "This cysteine is half of one of four disulfide bridges that staple the chain to itself in this small, stable enzyme.", "s": ["rcsb-1LYZ", "uniprot-P00698", "motm-lysozyme"]}]
+    }
+   ],
+   "entities": {"1": "HEN EGG WHITE LYSOZYME"},
+   "chains": {"A": "1"},
+   "holds": {"poly": "protein", "shown": [], "hidden": [], "s": ["rcsb-1LYZ"]}
+  },
+  "potassium-channel": {
+   "names": {"1": {"name": "Potassium channel KcsA", "s": ["rcsb-1BL8", "uniprot-P0A334"]}},
+   "lines": [
+    {
+     "at": {"seq": [75, 80]},
+     "up": {"acc": "P0A334", "offset": 0},
+     "label": "Selectivity filter",
+     "text": [{"t": "Amino acids 75 to 80 (threonine, valine, glycine, tyrosine, glycine, aspartate: TVGYGD) form the selectivity filter, where the four chains meet around the pore.", "s": ["uniprot-P0A334", "rcsb-1BL8"]}, {"t": "The filter lets potassium ions through but blocks sodium: only one sodium ion passes for every ten thousand potassium ions.", "s": ["motm-38"]}]
+    },
+    {
+     "at": {"seq": [62, 72]},
+     "up": {"acc": "P0A334", "offset": 0},
+     "label": "Pore helix",
+     "text": [{"t": "This short helix sits inside the membrane and helps form the pore, just below the filter.", "s": ["uniprot-P0A334"]}]
+    },
+    {
+     "at": {"het": "K"},
+     "label": "Potassium in the pore",
+     "text": [{"t": "One of the three potassium ions this crystal caught inside the pore.", "s": ["rcsb-1BL8", "motm-38"]}, {"t": "Nerve cells rely on channels like this one: potassium flows out through them to reset the cell after a signal.", "s": ["motm-38"]}]
+    }
+   ],
+   "entities": {"1": "PROTEIN (POTASSIUM CHANNEL PROTEIN)"},
+   "chains": {"A": "1", "B": "1", "C": "1", "D": "1"},
+   "holds": {
+    "poly": "protein",
+    "shown": [{"c": "K", "n": 3}],
+    "hidden": [],
+    "s": ["rcsb-1BL8"]
+   }
+  },
+  "atp-synthase": {
+   "names": {"1": {"name": "ATP synthase alpha subunit", "s": ["rcsb-1MAB"]}, "2": {"name": "ATP synthase beta subunit", "s": ["rcsb-1MAB", "uniprot-P10719"]}, "3": {"name": "ATP synthase gamma subunit", "s": ["rcsb-1MAB"]}},
+   "lines": [
+    {
+     "at": {"chains": ["B"], "seq": [159, 164]},
+     "up": {"acc": "P10719", "offset": -50},
+     "label": "Catalytic site loop",
+     "text": [{"t": "This loop of the beta subunit holds the phosphates of ADP, ATP and free phosphate.", "s": ["uniprot-P10719"]}, {"t": "The beta subunits are the catalytic ones, where ADP and phosphate are joined into ATP.", "s": ["uniprot-P10719", "motm-atp-synthase"]}]
+    },
+    {
+     "at": {"chains": ["B"], "seq": [188, 188], "comp": "GLU"},
+     "up": {"acc": "P10719", "offset": -50},
+     "label": "Catalytic site",
+     "text": [{"t": "Glutamate 188 helps hold the magnesium ion that sits with the nucleotide in this catalytic site.", "s": ["uniprot-P10719"]}]
+    },
+    {
+     "at": {"het": "ADP"},
+     "label": "ADP waiting to become ATP",
+     "text": [{"t": "This ADP sits in a catalytic site of the beta subunit, one of the two pieces that get joined into ATP.", "s": ["rcsb-1MAB", "motm-atp-synthase", "paper-bianchet-1998"]}]
+    },
+    {
+     "at": {"het": "ATP"},
+     "label": "ATP in the alpha subunit",
+     "text": [{"t": "This ATP sits in the alpha subunit, the partner that forms the catalytic core with beta but does not make ATP itself.", "s": ["rcsb-1MAB", "uniprot-P10719"]}]
+    },
+    {
+     "at": {"chains": ["G"]},
+     "label": "The turning axle",
+     "text": [{"t": "The gamma subunit is the axle in the middle of the head.", "s": ["rcsb-1MAB", "motm-atp-synthase"]}, {"t": "As the axle turns, its odd shape forces the surrounding subunits through the steps of making ATP.", "s": ["motm-atp-synthase"]}]
+    }
+   ],
+   "entities": {"1": "PROTEIN (F1-ATPASE ALPHA CHAIN)", "2": "PROTEIN (F1-ATPASE BETA CHAIN)", "3": "PROTEIN (F1-ATPASE GAMMA CHAIN)"},
+   "chains": {"A": "1", "B": "2", "G": "3"},
+   "holds": {
+    "poly": "protein",
+    "shown": [{"c": "ADP", "n": 1}, {"c": "ATP", "n": 1}, {"c": "MG", "n": 1}],
+    "hidden": [{"c": "PO4", "n": 1}],
+    "s": ["rcsb-1MAB"]
+   }
+  },
+  "acetylcholinesterase": {
+   "names": {"1": {"name": "Acetylcholinesterase", "s": ["rcsb-1ACJ", "uniprot-P04058"]}},
+   "lines": [
+    {
+     "at": {"seq": [200, 200], "comp": "SER"},
+     "up": {"acc": "P04058", "offset": -21},
+     "label": "Active-site serine",
+     "text": [{"t": "Serine 200 does the cutting: it bonds to the acetyl group of acetylcholine and breaks the molecule.", "s": ["uniprot-P04058", "motm-54"]}, {"t": "A water molecule then frees the serine, ready for the next acetylcholine.", "s": ["motm-54"]}]
+    },
+    {
+     "at": {"seq": [[327, 327], [440, 440]]},
+     "up": {"acc": "P04058", "offset": -21},
+     "label": "Active-site helper",
+     "text": [{"t": "Part of the serine, histidine, glutamate trio at the bottom of the active-site pocket, helping serine 200 break acetylcholine.", "s": ["uniprot-P04058", "motm-54"]}]
+    },
+    {
+     "at": {"het": "THA"},
+     "label": "A drug in the gorge",
+     "text": [{"t": "Tacrine, a drug, sits in the deep active-site gorge.", "s": ["rcsb-1ACJ", "motm-54"]}, {"t": "Some drugs for Alzheimer's disease work by partly blocking this enzyme.", "s": ["motm-54", "os-35-2"]}]
+    }
+   ],
+   "entities": {"1": "ACETYLCHOLINESTERASE"},
+   "chains": {"A": "1"},
+   "holds": {
+    "poly": "protein",
+    "shown": [{"c": "THA", "n": 1}],
+    "hidden": [],
+    "s": ["rcsb-1ACJ"]
+   }
+  },
+  "hiv-protease": {
+   "names": {"1": {"name": "HIV-1 protease", "s": ["rcsb-1HXW", "uniprot-P04585"]}},
+   "lines": [
+    {
+     "at": {"seq": [25, 25], "comp": "ASP"},
+     "up": {"acc": "P04585", "offset": -488},
+     "label": "The cutting aspartates",
+     "text": [{"t": "Aspartate 25 of each chain meets its twin at the centre of the tunnel, and these two aspartates do all of the cutting.", "s": ["uniprot-P04585", "motm-6"]}]
+    },
+    {
+     "at": {"het": "RIT"},
+     "label": "A drug in the tunnel",
+     "text": [{"t": "Ritonavir sits in the tunnel where a protein chain would be cut.", "s": ["rcsb-1HXW", "motm-6"]}, {"t": "The enzyme cannot cut it, so it stays lodged in the active site and blocks the enzyme.", "s": ["motm-6"]}]
+    }
+   ],
+   "entities": {"1": "HIV-1 PROTEASE"},
+   "chains": {"A": "1", "B": "1"},
+   "holds": {
+    "poly": "protein",
+    "shown": [{"c": "RIT", "n": 1}],
+    "hidden": [],
+    "s": ["rcsb-1HXW"]
+   }
+  },
+  "rubisco": {
+   "names": {"1": {"name": "Rubisco large chain", "s": ["rcsb-8RUC", "uniprot-P00875"]}, "2": {"name": "Rubisco small chain", "s": ["rcsb-8RUC"]}},
+   "lines": [
+    {
+     "at": {"chains": ["A", "C", "E", "G"], "seq": [201, 201], "comp": "KCX"},
+     "label": "The switched-on lysine",
+     "text": [{"t": "Lysine 201 carries an extra carbon dioxide, which acts as an activator, and helps hold the magnesium ion in the active site.", "s": ["motm-11", "uniprot-P00875"]}]
+    },
+    {
+     "at": {"chains": ["A", "C", "E", "G"], "seq": [[203, 204]]},
+     "up": {"acc": "P00875", "offset": 0},
+     "label": "Magnesium grip",
+     "text": [{"t": "Aspartate 203 and glutamate 204 help hold the magnesium ion at the centre of the active site.", "s": ["uniprot-P00875", "motm-11"]}]
+    },
+    {
+     "at": {"chains": ["A", "C", "E", "G"], "seq": [[175, 175], [294, 294]]},
+     "up": {"acc": "P00875", "offset": 0},
+     "label": "Active site",
+     "text": [{"t": "One of the two active-site amino acids (lysine 175 and histidine 294) that take up a proton during the carbon-fixing reaction.", "s": ["uniprot-P00875"]}]
+    },
+    {
+     "at": {"het": "MG"},
+     "label": "Heart of the active site",
+     "text": [{"t": "Rubisco's active site is centred on this magnesium ion.", "s": ["motm-11"]}, {"t": "When the enzyme is active, the free side of the magnesium binds the sugar so it can react with carbon dioxide.", "s": ["motm-11"]}]
+    }
+   ],
+   "entities": {"1": "RIBULOSE-1,5-BISPHOSPHATE CARBOXYLASE/OXYGENASE", "2": "RIBULOSE-1,5-BISPHOSPHATE CARBOXYLASE/OXYGENASE"},
+   "chains": {"A": "1", "C": "1", "E": "1", "G": "1", "I": "2", "J": "2", "K": "2", "L": "2"},
+   "holds": {
+    "poly": "protein",
+    "shown": [{"c": "CAP", "n": 4}, {"c": "MG", "n": 4}],
+    "hidden": [],
+    "s": ["rcsb-8RUC"]
+   }
+  },
+  "rhodopsin": {
+   "names": {"1": {"name": "Rhodopsin", "s": ["rcsb-1F88", "uniprot-P02699"]}},
+   "lines": [
+    {
+     "at": {"seq": [296, 296], "comp": "LYS"},
+     "up": {"acc": "P02699", "offset": 0},
+     "label": "Retinal anchor",
+     "text": [{"t": "Lysine 296 forms a covalent bond with retinal, holding it deep inside the protein.", "s": ["uniprot-P02699", "motm-147"]}, {"t": "That bond makes sure the light-driven change in retinal's shape is passed on to the protein around it.", "s": ["motm-147"]}]
+    },
+    {
+     "at": {"het": "RET"},
+     "label": "The light catcher",
+     "text": [{"t": "Retinal is the part that catches light: when it absorbs a photon, one bond flips from a bent to an extended shape.", "s": ["motm-147", "uniprot-P02699"]}, {"t": "Opsin holds it in a strained shape, which makes the flip happen about twice as often as in free retinal.", "s": ["motm-147"]}]
+    },
+    {
+     "at": {"seq": [113, 113], "comp": "GLU"},
+     "up": {"acc": "P02699", "offset": 0},
+     "label": "Switch helper",
+     "text": [{"t": "Glutamate 113 plays an important part in the switch to the active shape.", "s": ["uniprot-P02699"]}]
+    },
+    {
+     "at": {"seq": [134, 136]},
+     "up": {"acc": "P02699", "offset": 0},
+     "label": "Ionic lock",
+     "text": [{"t": "Glutamate, arginine and tyrosine here form the 'ionic lock', which helps steady the activated form.", "s": ["uniprot-P02699"]}]
+    },
+    {
+     "at": {"seq": [[110, 110], [187, 187]], "comp": "CYS"},
+     "up": {"acc": "P02699", "offset": 0},
+     "label": "Disulfide bridge",
+     "text": [{"t": "Cysteines 110 and 187 are joined by a disulfide bridge.", "s": ["uniprot-P02699"]}]
+    }
+   ],
+   "entities": {"1": "RHODOPSIN"},
+   "chains": {"A": "1", "B": "1"},
+   "holds": {
+    "poly": "protein",
+    "shown": [{"c": "RET", "n": 2}],
+    "hidden": [{"c": "HG", "n": 6}, {"c": "MAN", "n": 1}, {"c": "NAG", "n": 8}, {"c": "ZN", "n": 4}],
+    "s": ["rcsb-1F88"]
+   }
+  },
+  "myoglobin": {
+   "names": {"1": {"name": "Myoglobin", "s": ["rcsb-1MBN", "uniprot-P02185"]}},
+   "lines": [
+    {
+     "at": {"het": "HEM"},
+     "label": "The oxygen store",
+     "text": [{"t": "This heme is where myoglobin stores oxygen: the iron in its centre holds one oxygen molecule.", "s": ["motm-1", "uniprot-P02185"]}, {"t": "The heme sits in a deep pocket on one side of the protein.", "s": ["motm-1"]}]
+    },
+    {
+     "at": {"seq": [93, 93], "comp": "HIS"},
+     "up": {"acc": "P02185", "offset": -1},
+     "label": "Iron-holding histidine",
+     "text": [{"t": "Histidine 93 holds the heme iron from the side away from the oxygen.", "s": ["uniprot-P02185"]}]
+    },
+    {
+     "at": {"seq": [64, 64], "comp": "HIS"},
+     "up": {"acc": "P02185", "offset": -1},
+     "label": "Beside the oxygen",
+     "text": [{"t": "Histidine 64 sits at the spot where oxygen binds to the heme iron.", "s": ["uniprot-P02185"]}]
+    }
+   ],
+   "entities": {"1": "MYOGLOBIN"},
+   "chains": {"A": "1"},
+   "holds": {
+    "poly": "protein",
+    "shown": [{"c": "HEM", "n": 1}],
+    "hidden": [{"c": "OH", "n": 1}],
+    "s": ["rcsb-1MBN"]
+   }
+  },
+  "pepsin": {
+   "names": {"1": {"name": "Pepsin", "s": ["rcsb-4PEP", "uniprot-P00791"]}},
+   "lines": [
+    {
+     "at": {"seq": [[32, 32], [215, 215]], "comp": "ASP"},
+     "up": {"acc": "P00791", "offset": -59},
+     "label": "The two aspartates",
+     "text": [{"t": "Aspartate 32 and aspartate 215 are pepsin's two active-site aspartates.", "s": ["uniprot-P00791", "motm-12"]}, {"t": "They activate a water molecule and use it to cut protein chains in the deep groove.", "s": ["motm-12"]}]
+    }
+   ],
+   "entities": {"1": "PEPSIN"},
+   "chains": {"A": "1"},
+   "holds": {"poly": "protein", "shown": [], "hidden": [], "s": ["rcsb-4PEP"]}
+  },
+  "mhc": {
+   "names": {"1": {"name": "HLA-B27 heavy chain", "s": ["rcsb-1HSA", "uniprot-P03989"]}, "2": {"name": "Beta 2-microglobulin", "s": ["rcsb-1HSA"]}, "3": {"name": "Bound peptide", "s": ["rcsb-1HSA"]}},
+   "lines": [
+    {
+     "at": {"chains": ["A", "D"], "seq": [[84, 84], [143, 143], [146, 146], [159, 159], [171, 171]]},
+     "up": {"acc": "P03989", "offset": -24},
+     "label": "Peptide grip",
+     "text": [{"t": "This amino acid lines the groove at the top of the heavy chain and helps grip the peptide on display.", "s": ["uniprot-P03989", "motm-62"]}]
+    },
+    {
+     "at": {"chains": ["C", "F"]},
+     "label": "The peptide on display",
+     "text": [{"t": "MHC holds short pieces of the cell's proteins like this one so the immune system can check them, and a cell showing viral pieces is killed.", "s": ["motm-62"]}, {"t": "The file models this peptide as a chain of 9 amino acids.", "s": ["rcsb-1HSA"]}]
+    }
+   ],
+   "entities": {"1": "CLASS I HISTOCOMPATIBILITY ANTIGEN (HLA-B*2705)", "2": "BETA 2-MICROGLOBULIN", "3": "MODEL PEPTIDE SEQUENCE - ARAAAAAAA"},
+   "chains": {"A": "1", "B": "2", "C": "3", "D": "1", "E": "2", "F": "3"},
+   "holds": {"poly": "protein", "shown": [], "hidden": [], "s": ["rcsb-1HSA"]}
+  },
+  "insulin": {
+   "names": {"1": {"name": "Insulin A chain", "s": ["rcsb-4INS", "uniprot-P01315"]}, "2": {"name": "Insulin B chain", "s": ["rcsb-4INS", "uniprot-P01315"]}},
+   "lines": [
+    {
+     "at": {"chains": ["A", "C"], "seq": [[6, 7], [11, 11], [20, 20]], "comp": "CYS"},
+     "up": {"acc": "P01315", "offset": -87},
+     "label": "Disulfide bridge",
+     "text": [{"t": "This cysteine is part of one of three disulfide bridges that hold insulin together: one inside the A chain and two joining A to B.", "s": ["motm-insulin", "rcsb-4INS", "uniprot-P01315"]}]
+    },
+    {
+     "at": {"chains": ["B", "D"], "seq": [[7, 7], [19, 19]], "comp": "CYS"},
+     "up": {"acc": "P01315", "offset": -24},
+     "label": "Disulfide bridge",
+     "text": [{"t": "This cysteine forms one of the two disulfide bridges that join the B chain to the A chain.", "s": ["motm-insulin", "rcsb-4INS", "uniprot-P01315"]}]
+    },
+    {
+     "at": {"chains": ["B", "D"], "seq": [10, 10], "comp": "HIS"},
+     "up": {"acc": "P01315", "offset": -24},
+     "label": "Zinc grip",
+     "text": [{"t": "In this crystal, histidine 10 of the B chain grips a zinc ion.", "s": ["rcsb-4INS"]}, {"t": "Six insulins gather around two zinc ions to form a hexamer, the form used to store the hormone before release.", "s": ["paper-baker-1988", "motm-insulin"]}]
+    },
+    {
+     "at": {"chains": ["B", "D"], "seq": [30, 30], "comp": "ALA"},
+     "label": "Pig or human",
+     "text": [{"t": "This is pig insulin, and it differs from human insulin only here: alanine at the end of the B chain where humans have threonine.", "s": ["motm-insulin", "rcsb-4INS"]}]
+    },
+    {
+     "at": {"het": "ZN"},
+     "label": "Storage zinc",
+     "text": [{"t": "One of the two zinc ions in this crystal, held by histidine 10 of the B chains.", "s": ["rcsb-4INS"]}, {"t": "Six insulins gather around two zinc ions to form a hexamer, the form used to store the hormone before release.", "s": ["paper-baker-1988", "motm-insulin"]}]
+    }
+   ],
+   "entities": {"1": "INSULIN (CHAIN A)", "2": "INSULIN (CHAIN B)"},
+   "chains": {"A": "1", "B": "2", "C": "1", "D": "2"},
+   "holds": {
+    "poly": "protein",
+    "shown": [{"c": "ZN", "n": 2}],
+    "hidden": [],
+    "s": ["rcsb-4INS"]
+   }
+  },
+  "collagen": {
+   "names": {"1": {"name": "Collagen-like peptide", "s": ["rcsb-1CAG"]}},
+   "lines": [
+    {
+     "at": {"res": [["A", 15], ["B", 45], ["C", 75]], "comp": "ALA"},
+     "label": "Alanine in a glycine spot",
+     "text": [{"t": "Here the researchers put a bigger alanine where a glycine should be.", "s": ["motm-collagen", "rcsb-1CAG"]}, {"t": "It crowds the neighbouring chains and makes the helix untwist a little at this spot.", "s": ["motm-collagen", "paper-bella-1994"]}]
+    },
+    {
+     "at": {"comp": "GLY"},
+     "label": "Every third spot",
+     "text": [{"t": "Every third amino acid is glycine, small enough to tuck into the crowded centre of the triple helix.", "s": ["motm-collagen"]}]
+    },
+    {
+     "at": {"comp": "HYP"},
+     "label": "Needs vitamin C",
+     "text": [{"t": "Hydroxyproline is proline with an extra oxygen added after the chain is built, a step that needs vitamin C.", "s": ["motm-collagen"]}, {"t": "In this crystal, hydroxyprolines help hold a sleeve of water molecules around the helix.", "s": ["paper-bella-1994"]}]
+    },
+    {
+     "at": {"comp": "PRO"},
+     "label": "The bend",
+     "text": [{"t": "Proline and hydroxyproline bend each chain smoothly around the helix.", "s": ["motm-collagen"]}]
+    }
+   ],
+   "entities": {"1": "COLLAGEN-LIKE PEPTIDE"},
+   "chains": {"A": "1", "B": "1", "C": "1"},
+   "holds": {
+    "poly": "protein",
+    "shown": [],
+    "hidden": [{"c": "ACY", "n": 6}],
+    "s": ["rcsb-1CAG"]
+   }
+  },
+  "actin": {
+   "names": {"1": {"name": "Actin", "s": ["rcsb-1J6Z"]}},
+   "lines": [
+    {
+     "at": {"het": "ADP"},
+     "label": "Actin's fuel",
+     "text": [{"t": "This ADP sits deep in the groove between actin's two arms.", "s": ["motm-actin", "rcsb-1J6Z"]}, {"t": "Actin carries ATP when it joins a filament, then splits it to ADP, and ADP-actin lets go more easily.", "s": ["motm-actin"]}]
+    },
+    {
+     "at": {"het": "CA"},
+     "label": "Calcium",
+     "text": [{"t": "Small calcium ions are bound around the protein, and one of them holds onto a phosphate of the ADP.", "s": ["rcsb-1J6Z"]}]
+    }
+   ],
+   "entities": {"1": "ACTIN ALPHA 1"},
+   "chains": {"A": "1"},
+   "holds": {
+    "poly": "protein",
+    "shown": [{"c": "ADP", "n": 1}, {"c": "CA", "n": 6}],
+    "hidden": [{"c": "RHO", "n": 1}],
+    "s": ["rcsb-1J6Z"]
+   }
+  },
+  "myosin": {
+   "names": {"1": {"name": "Myosin heavy chain", "s": ["rcsb-1B7T"]}, "2": {"name": "Myosin regulatory light chain", "s": ["rcsb-1B7T"]}, "3": {"name": "Myosin essential light chain", "s": ["rcsb-1B7T"]}},
+   "lines": [
+    {
+     "at": {"het": "ADP"},
+     "label": "Spent fuel",
+     "text": [{"t": "Myosin catches ATP here and splits it into ADP and phosphate.", "s": ["motm-myosin", "os-38-4"]}, {"t": "This crystal caught it holding ADP and a magnesium ion.", "s": ["rcsb-1B7T", "paper-houdusse-1999"]}]
+    },
+    {
+     "at": {"het": "MG"},
+     "label": "Magnesium",
+     "text": [{"t": "A magnesium ion sits with the ADP in the fuel site.", "s": ["rcsb-1B7T"]}]
+    },
+    {
+     "at": {"chains": ["A"]},
+     "label": "The motor",
+     "text": [{"t": "The heavy chain holds most of the motor domain, the part that makes the power stroke.", "s": ["rcsb-1B7T", "motm-myosin"]}]
+    },
+    {
+     "at": {"chains": ["Y", "Z"]},
+     "label": "Light chain",
+     "text": [{"t": "Two small light chains ride along with the heavy chain: chain Y is the regulatory light chain and chain Z the essential light chain.", "s": ["rcsb-1B7T", "motm-myosin"]}]
+    }
+   ],
+   "entities": {"1": "MYOSIN HEAVY CHAIN", "2": "MYOSIN REGULATORY LIGHT CHAIN", "3": "MYOSIN ESSENTIAL LIGHT CHAIN"},
+   "chains": {"A": "1", "Y": "2", "Z": "3"},
+   "holds": {
+    "poly": "protein",
+    "shown": [{"c": "ADP", "n": 1}, {"c": "CA", "n": 1}, {"c": "MG", "n": 2}],
+    "hidden": [],
+    "s": ["rcsb-1B7T"]
+   }
+  },
+  "kinesin": {
+   "names": {"1": {"name": "Kinesin heavy chain, motor head piece", "s": ["rcsb-3KIN"]}, "2": {"name": "Kinesin heavy chain, second piece", "s": ["rcsb-3KIN"]}},
+   "lines": [
+    {
+     "at": {"het": "ADP"},
+     "label": "Fuel in the motor head",
+     "text": [{"t": "Each of the two motor heads holds an ADP.", "s": ["rcsb-3KIN", "motm-64"]}, {"t": "Kinesin is one of the cell's ATP-powered motors, crawling hand over hand along microtubules.", "s": ["motm-64"]}]
+    }
+   ],
+   "entities": {"1": "KINESIN HEAVY CHAIN", "2": "KINESIN HEAVY CHAIN"},
+   "chains": {"A": "1", "B": "2", "C": "1", "D": "2"},
+   "holds": {
+    "poly": "protein",
+    "shown": [{"c": "ADP", "n": 2}],
+    "hidden": [],
+    "s": ["rcsb-3KIN"]
+   }
+  },
+  "dna": {
+   "names": {"1": {"name": "DNA strand", "s": ["rcsb-1BNA"]}},
+   "lines": [
+    {
+     "at": {"comp": "DA"},
+     "label": "A pairs with T",
+     "text": [{"t": "This adenine pairs with a thymine on the other strand.", "s": ["os-3-5", "motm-dna"]}, {"t": "The A and T pairs in the middle of this piece are propeller twisted, not perfectly flat, which helps the bases stack.", "s": ["paper-drew-1981", "motm-dna"]}]
+    },
+    {
+     "at": {"comp": "DT"},
+     "label": "T pairs with A",
+     "text": [{"t": "This thymine pairs with an adenine on the other strand.", "s": ["os-3-5", "motm-dna"]}]
+    },
+    {
+     "at": {"comp": "DG"},
+     "label": "G pairs with C",
+     "text": [{"t": "This guanine pairs with a cytosine on the other strand, held by hydrogen bonds across the middle of the helix.", "s": ["os-3-5", "motm-dna"]}]
+    },
+    {
+     "at": {"comp": "DC"},
+     "label": "C pairs with G",
+     "text": [{"t": "This cytosine pairs with a guanine on the other strand, held by hydrogen bonds across the middle of the helix.", "s": ["os-3-5", "motm-dna"]}]
+    }
+   ],
+   "entities": {"1": "DNA (5'-D(*CP*GP*CP*GP*AP*AP*TP*TP*CP*GP*CP*G)-3')"},
+   "chains": {"A": "1", "B": "1"},
+   "holds": {"poly": "dna", "shown": [], "hidden": [], "s": ["rcsb-1BNA"]}
+  },
+  "nucleosome": {
+   "names": {"1": {"name": "DNA strand", "s": ["rcsb-1AOI"]}, "2": {"name": "Histone H3", "s": ["rcsb-1AOI"]}, "3": {"name": "Histone H4", "s": ["rcsb-1AOI"]}, "4": {"name": "Histone H2A", "s": ["rcsb-1AOI"]}, "5": {"name": "Histone H2B", "s": ["rcsb-1AOI"]}},
+   "lines": [
+    {
+     "at": {"chains": ["A", "B", "C", "D", "E", "F", "G", "H"]},
+     "label": "Part of the spool",
+     "text": [{"t": "This histone is one of eight bundled tightly together, with the DNA wrapped around them in two loops.", "s": ["motm-7"]}]
+    },
+    {
+     "at": {"chains": ["I", "J"]},
+     "label": "Wrapped DNA",
+     "text": [{"t": "One strand of the 146 base pair DNA wrapped around the histone spool, a sequence taken from the human X chromosome.", "s": ["rcsb-1AOI", "motm-7"]}, {"t": "Nucleosomes protect the delicate DNA strands in our cells from physical damage.", "s": ["motm-7"]}]
+    }
+   ],
+   "entities": {"1": "PALINDROMIC 146 BP DNA REPEAT 8/9 FROM HUMAN X-CHROMOSOME ALPHA SATELLITE DNA", "2": "HISTONE H3", "3": "HISTONE H4", "4": "HISTONE H2A", "5": "HISTONE H2B"},
+   "chains": {
+    "A": "2",
+    "B": "3",
+    "C": "4",
+    "D": "5",
+    "E": "2",
+    "F": "3",
+    "G": "4",
+    "H": "5",
+    "I": "1",
+    "J": "1"
+   },
+   "holds": {
+    "poly": "both",
+    "shown": [],
+    "hidden": [{"c": "MN", "n": 6}],
+    "s": ["rcsb-1AOI"]
+   }
+  },
+  "oxytocin": {"entities": {"1": "NEUROPHYSIN II", "2": "OXYTOCIN", "3": "NEUROPHYSIN II"}, "chains": {"A": "1", "B": "2", "C": "3", "D": "2"}, "holds": {"poly": "protein", "shown": [], "hidden": [], "s": ["rcsb-1NPO"]}},
+  "antibody": {
+   "entities": {"1": "IGG2A INTACT ANTIBODY - MAB231", "2": "IGG2A INTACT ANTIBODY - MAB231"},
+   "chains": {"A": "1", "B": "2", "C": "1", "D": "2"},
+   "holds": {
+    "poly": "protein",
+    "shown": [{"c": "BMA", "n": 1}, {"c": "FUL", "n": 1}, {"c": "GAL", "n": 1}, {"c": "MAN", "n": 2}, {"c": "NAG", "n": 4}],
+    "hidden": [{"c": "BMA", "n": 1}, {"c": "FUC", "n": 1}, {"c": "GAL", "n": 1}, {"c": "MAN", "n": 2}, {"c": "NAG", "n": 4}],
+    "s": ["rcsb-1IGT"]
+   }
+  },
+  "virus-capsid": {
+   "entities": {"1": "COAT PROTEIN"},
+   "chains": {"A": "1"},
+   "holds": {
+    "poly": "protein",
+    "shown": [{"c": "CA", "n": 3}],
+    "hidden": [],
+    "s": ["rcsb-2BUK"]
+   }
+  },
+  "keratin": {"entities": {"1": "Keratin, type I cytoskeletal 14", "2": "Keratin, type II cytoskeletal 5"}, "chains": {"A": "1", "B": "2"}, "holds": {"poly": "protein", "shown": [], "hidden": [], "s": ["rcsb-3TNU"]}}
+ }
+}

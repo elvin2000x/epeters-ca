@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cell and Molecule Explorer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Zoom from a drop of pond water to a single atom, then explore microorganisms, cells, molecules and the elements.">
+<meta name="color-scheme" content="dark light">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%230b7469'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='%23fff' stroke-width='3'/%3E%3C/svg%3E">
+<script>// The home page opens dark (cinematic) unless the visitor picked a theme before.
+try { var t = localStorage.getItem('cme-theme'); document.documentElement.dataset.theme = (t === 'light' || t === 'dark') ? t : 'dark'; } catch (e) { document.documentElement.dataset.theme = 'dark'; }
+// Old links to the muscle ladder (index.html#s=...) now open muscle.html.
+if (/^#s=[\w-]+$/.test(location.hash)) location.replace('muscle.html' + location.hash);
+document.documentElement.classList.add('js');</script>
+<link rel="stylesheet" href="vendor/fonts/fonts.css">
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="journey/journey.css">
+</head>
+<body class="home">
+<a class="skip" href="#explore" data-copy="journey.skip">Skip the journey</a>
+<header class="jbar">
+  <a class="jbrand" href="./"><span class="brand-name" data-copy="brand.name">Cell and Molecule Explorer</span><span class="brand-sub" data-copy="brand.sub">From atoms to microorganisms</span></a>
+  <button class="jbtn" id="theme" type="button" aria-pressed="false"><span class="jbtn-ic" aria-hidden="true"></span><span data-copy="theme.toggle">Switch light or dark</span></button>
+</header>
+<main id="main" tabindex="-1">
+  <section class="journey" id="journey" aria-labelledby="j-title">
+    <div class="stage" id="stage">
+      <canvas id="gl" aria-hidden="true"></canvas>
+      <div class="vignette" aria-hidden="true"></div>
+      <div class="hero" id="hero">
+        <p class="eyebrow" data-copy="journey.eyebrow">A journey in powers of ten</p>
+        <h1 id="j-title" data-copy="journey.title">From a drop of pond water to a single atom</h1>
+        <p class="lede" data-copy="journey.lede">One continuous zoom through eight powers of ten. Every size on the ruler is real.</p>
+        <p class="hint" id="hint"><span class="hint-ic" aria-hidden="true"></span><span data-copy="journey.hint">Scroll to zoom in</span></p>
+      </div>
+      <div class="readout" id="readout" aria-hidden="true">
+        <div class="ro-label" data-copy="journey.viewAcross">View across</div>
+        <div class="ro-big" id="roBig">0.6 mm</div>
+        <div class="ro-bar"><span class="ro-line" id="roLine"></span><span class="ro-tick" id="roTick">100 µm</span></div>
+      </div>
+      <nav class="rail" id="rail" aria-label="Zoom steps" data-copy-label="journey.railLabel">
+        <div class="track" id="track" role="slider" tabindex="0" aria-orientation="vertical" aria-label="Zoom" data-copy-label="journey.slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0.6 millimetres across"><span class="track-fill" id="trackFill"></span><span class="thumb" id="thumb"></span></div>
+        <ol class="levels" id="levels">
+          <li><button type="button" data-level="0"><span class="dot" aria-hidden="true"></span><span class="lv-name" data-copy="journey.level.organism">Microorganisms</span><span class="lv-size" aria-hidden="true">0.6 mm</span></button></li>
+          <li><button type="button" data-level="1"><span class="dot" aria-hidden="true"></span><span class="lv-name" data-copy="journey.level.cell">Cell</span><span class="lv-size" aria-hidden="true">30 µm</span></button></li>
+          <li><button type="button" data-level="2"><span class="dot" aria-hidden="true"></span><span class="lv-name" data-copy="journey.level.part">Inside a cell</span><span class="lv-size" aria-hidden="true">3 µm</span></button></li>
+          <li><button type="button" data-level="3"><span class="dot" aria-hidden="true"></span><span class="lv-name" data-copy="journey.level.big">Big molecule</span><span class="lv-size" aria-hidden="true">32 nm</span></button></li>
+          <li><button type="button" data-level="4"><span class="dot" aria-hidden="true"></span><span class="lv-name" data-copy="journey.level.mol">Molecule</span><span class="lv-size" aria-hidden="true">2.6 nm</span></button></li>
+          <li><button type="button" data-level="5"><span class="dot" aria-hidden="true"></span><span class="lv-name" data-copy="journey.level.atom">Atom</span><span class="lv-size" aria-hidden="true">4 Å</span></button></li>
+        </ol>
+      </nav>
+      <div class="caption" id="caption" aria-hidden="true">
+        <p class="cap-eyebrow"><span id="capStep">1 / 6</span><span class="cap-sep" aria-hidden="true"></span><span id="capRail">Microorganisms</span></p>
+        <h2 class="cap-title" id="capTitle">Paramecium in pond water</h2>
+        <p class="cap-fact" id="capFact"></p>
+        <p class="cap-row"><a class="cap-link" id="capLink" href="microscope/index.html#paramecium"><span id="capLinkText">Open the microscope</span><span aria-hidden="true" class="arrow"></span></a><span class="cap-badge" id="capBadge">Illustrative drawing. The scale readout is real.</span></p>
+      </div>
+      <p class="sr-only" aria-live="polite" id="live"></p>
+      <div class="nogl" id="nogl" hidden>
+        <p class="nogl-msg" data-copy="journey.nogl">Your browser cannot show the 3D journey, so here are the six zoom steps.</p>
+        <ol class="nogl-list" id="noglList"></ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="explore" id="explore" tabindex="-1" aria-labelledby="ex-title">
+    <div class="ex-wrap">
+      <p class="eyebrow" data-copy="explore.eyebrow">Four ways in</p>
+      <h2 id="ex-title" data-copy="explore.title">Explore each level up close</h2>
+      <ul class="sections" aria-label="Sections" data-copy-label="home.sectionsLabel">
+        <li class="sec" data-href="microscope/index.html" style="--tone: #39b9ab">
+          <span class="sec-chip" data-copy="section.organisms.levels">Microorganisms</span>
+          <svg viewBox="0 0 64 64" aria-hidden="true"><circle class="ic-soft" cx="32" cy="32" r="26"/><circle class="ic-line" cx="32" cy="32" r="26"/><path class="ic-line" d="M18 30c2-8 14-10 20-6s10 12 4 16-20 4-23-2"/><circle class="ic-fill" cx="28" cy="32" r="3"/></svg>
+          <h3 data-copy="section.organisms.title">Organisms</h3><p data-copy="section.organisms.blurb">Single-celled life under a virtual microscope.</p>
+          <div class="links"><a class="go" href="microscope/index.html" data-copy="section.organisms.cta">Open the microscope</a></div>
+        </li>
+        <li class="sec" data-href="cells/index.html" style="--tone: #ff8f66">
+          <span class="sec-chip" data-copy="section.cells.levels">Cells and cell parts</span>
+          <svg viewBox="0 0 64 64" aria-hidden="true"><ellipse class="ic-soft" cx="32" cy="32" rx="26" ry="20"/><ellipse class="ic-line" cx="32" cy="32" rx="26" ry="20"/><circle class="ic-fill" cx="36" cy="30" r="7"/><path class="ic-line" d="M14 36c4-3 8 3 12 0M42 44c3-2 6 2 9 0"/></svg>
+          <h3 data-copy="section.cells.title">Cells</h3><p data-copy="section.cells.blurb">Look inside different kinds of cells.</p>
+          <div class="links"><a class="go" href="cells/index.html" data-copy="section.cells.cta">Browse cells</a><a class="sub" href="muscle.html" data-copy="section.cells.muscle">Muscle cell: zoom from a muscle down to one molecule</a></div>
+        </li>
+        <li class="sec" data-href="molecules/index.html" style="--tone: #8f9bff">
+          <span class="sec-chip" data-copy="section.molecules.levels">Big molecules and molecules</span>
+          <svg viewBox="0 0 64 64" aria-hidden="true"><g class="ic-line"><path d="M20 22l14 10M34 32l14-8M34 32l-4 16"/></g><circle class="ic-fill" cx="18" cy="20" r="7"/><circle class="ic-soft" cx="34" cy="32" r="9"/><circle class="ic-line" cx="34" cy="32" r="9"/><circle class="ic-fill" cx="49" cy="23" r="6"/><circle class="ic-fill" cx="29" cy="50" r="6"/></svg>
+          <h3 data-copy="section.molecules.title">Molecules</h3><p data-copy="section.molecules.blurb">Molecules you can turn and zoom, atom by atom.</p>
+          <div class="links"><a class="go" href="molecules/index.html" data-copy="section.molecules.cta">Browse molecules</a></div>
+        </li>
+        <li class="sec" data-href="elements/index.html" style="--tone: #ffab4a">
+          <span class="sec-chip" data-copy="section.table.levels">Atoms</span>
+          <svg viewBox="0 0 64 64" aria-hidden="true"><rect class="ic-soft" x="6" y="10" width="52" height="44" rx="6"/><g class="ic-line"><rect x="6" y="10" width="52" height="44" rx="6"/><path d="M6 25h52M6 40h52M23 10v44M41 10v44"/></g><text x="32" y="36" text-anchor="middle" class="ic-fill" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="700">P</text></svg>
+          <h3 data-copy="section.table.title">Periodic table</h3><p data-copy="section.table.blurb">All 118 elements, each with a short description.</p>
+          <div class="links"><a class="go" href="elements/index.html" data-copy="section.table.cta">Open the periodic table</a></div>
+        </li>
+        <li class="sec" data-href="lab/index.html" style="--tone: #c3a3ff">
+          <span class="sec-chip" data-copy="section.lab.levels">Atoms into molecules</span>
+          <svg viewBox="0 0 64 64" aria-hidden="true"><g class="ic-line"><path d="M22 34h20M42 34l8-14"/></g><circle class="ic-soft" cx="20" cy="34" r="10"/><circle class="ic-line" cx="20" cy="34" r="10"/><circle class="ic-fill" cx="44" cy="34" r="7"/><circle class="ic-fill" cx="51" cy="18" r="5"/><path class="ic-line" d="M10 52h44"/></svg>
+          <h3 data-copy="section.lab.title">Molecule lab</h3><p data-copy="section.lab.blurb">Build molecules atom by atom, with the bonding rules explained.</p>
+          <div class="links"><a class="go" href="lab/index.html" data-copy="section.lab.cta">Open the lab</a></div>
+        </li>
+        <li class="sec" data-href="processes/index.html" style="--tone: #7fd483">
+          <span class="sec-chip" data-copy="section.processes.levels">Cells at work</span>
+          <svg viewBox="0 0 64 64" aria-hidden="true"><circle class="ic-soft" cx="32" cy="32" r="24"/><path class="ic-line" d="M32 8a24 24 0 0 1 24 24M56 32l-5-6M56 32l6-5M32 56A24 24 0 0 1 8 32M8 32l5 6M8 32l-6 5"/><circle class="ic-fill" cx="32" cy="32" r="6"/></svg>
+          <h3 data-copy="section.processes.title">How life works</h3><p data-copy="section.processes.blurb">Step-by-step animations of DNA to protein, cell division, respiration, photosynthesis and osmosis.</p>
+          <div class="links"><a class="go" href="processes/index.html" data-copy="section.processes.cta">See how it works</a></div>
+        </li>
+      </ul>
+
+      <h2 class="ex-group" id="g-physics" data-copy="home.group.physics">Physics of life</h2>
+      <ul class="sections" aria-labelledby="g-physics">
+        <li class="sec" data-href="light/index.html" style="--tone: #ffd23f">
+          <span class="sec-chip" data-copy="section.light.levels">Light and leaves</span>
+          <svg viewBox="0 0 64 64" aria-hidden="true"><circle class="ic-soft" cx="16" cy="18" r="10"/><circle class="ic-line" cx="16" cy="18" r="10"/><path class="ic-line" d="M26 22c4 2 6 6 10 6s6-4 10-2 4 6 8 6"/><path class="ic-line" d="M30 54c0-14 10-22 26-22-2 14-12 22-26 22zM30 54l14-12"/></svg>
+          <h3 data-copy="section.light.title">Follow a photon</h3><p data-copy="section.light.blurb">Ride one bit of sunlight through a prism and into a leaf.</p>
+          <div class="links"><a class="go" href="light/" data-copy="section.light.cta">Follow it</a></div>
+        </li>
+        <li class="sec" data-href="microscope/shrink.html" style="--tone: #4fc3f7">
+          <span class="sec-chip" data-copy="section.shrink.levels">Size and water</span>
+          <svg viewBox="0 0 64 64" aria-hidden="true"><circle class="ic-soft" cx="22" cy="30" r="16"/><circle class="ic-line" cx="22" cy="30" r="16"/><circle class="ic-line" cx="46" cy="38" r="7"/><circle class="ic-fill" cx="56" cy="44" r="3"/><path class="ic-line" d="M8 56h48"/></svg>
+          <h3 data-copy="section.shrink.title">Shrink yourself</h3><p data-copy="section.shrink.blurb">Shrink from swimmer size to a bacterium and feel water turn thick.</p>
+          <div class="links"><a class="go" href="microscope/shrink.html" data-copy="section.shrink.cta">Shrink down</a></div>
+        </li>
+        <li class="sec" data-href="heat/index.html" style="--tone: #ff7a59">
+          <span class="sec-chip" data-copy="section.heat.levels">Temperature and bonds</span>
+          <svg viewBox="0 0 64 64" aria-hidden="true"><rect class="ic-soft" x="26" y="6" width="12" height="38" rx="6"/><path class="ic-line" d="M26 40V12a6 6 0 0 1 12 0v28a10 10 0 1 1-12 0z"/><circle class="ic-fill" cx="32" cy="48" r="6"/><path class="ic-line" d="M32 42V22M46 16h8M46 26h6M46 36h8"/></svg>
+          <h3 data-copy="section.heat.title">Heat vs bonds</h3><p data-copy="section.heat.blurb">Turn up the heat and watch DNA melt, an egg protein unfold and ice turn to steam.</p>
+          <div class="links"><a class="go" href="heat/" data-copy="section.heat.cta">Turn it up</a></div>
+        </li>
+      </ul>
+
+      <h2 class="ex-group" id="g-body" data-copy="home.group.body">Your body</h2>
+      <ul class="sections" aria-labelledby="g-body">
+        <li class="sec" data-href="spark/index.html" style="--tone: #b388ff">
+          <span class="sec-chip" data-copy="section.spark.levels">Nerves</span>
+          <svg viewBox="0 0 64 64" aria-hidden="true"><circle class="ic-soft" cx="18" cy="32" r="10"/><circle class="ic-line" cx="18" cy="32" r="10"/><path class="ic-line" d="M8 22l-4-6M8 42l-4 6M28 32h6l4-10 6 20 4-10h12"/></svg>
+          <h3 data-copy="section.spark.title">Neuron spark</h3><p data-copy="section.spark.blurb">Fire a model neuron and watch ions rush through their channels.</p>
+          <div class="links"><a class="go" href="spark/" data-copy="section.spark.cta">Fire it</a></div>
+        </li>
+        <li class="sec" data-href="nutrients/index.html" style="--tone: #66d18f">
+          <span class="sec-chip" data-copy="section.nutrients.levels">Food and body</span>
+          <svg viewBox="0 0 64 64" aria-hidden="true"><path class="ic-soft" d="M32 56c-14 0-22-10-22-22 0-10 8-16 16-14 4 1 8 1 12 0 8-2 16 4 16 14 0 12-8 22-22 22z"/><path class="ic-line" d="M32 56c-14 0-22-10-22-22 0-10 8-16 16-14 4 1 8 1 12 0 8-2 16 4 16 14 0 12-8 22-22 22zM32 20c0-6 2-10 8-12"/></svg>
+          <h3 data-copy="section.nutrients.title">Vitamins and minerals</h3><p data-copy="section.nutrients.blurb">What 25 vitamins and minerals do in your body, and what happens without them.</p>
+          <div class="links"><a class="go" href="nutrients/" data-copy="section.nutrients.cta">Open the list</a></div>
+        </li>
+        <li class="sec" data-href="morph/index.html" style="--tone: #ff6b81">
+          <span class="sec-chip" data-copy="section.morph.levels">Blood</span>
+          <svg viewBox="0 0 64 64" aria-hidden="true"><ellipse class="ic-soft" cx="32" cy="32" rx="24" ry="18"/><ellipse class="ic-line" cx="32" cy="32" rx="24" ry="18"/><ellipse class="ic-line" cx="32" cy="32" rx="11" ry="7"/><circle class="ic-fill" cx="54" cy="14" r="4"/><circle class="ic-fill" cx="60" cy="22" r="3"/></svg>
+          <h3 data-copy="section.morph.title">Hemoglobin breathing</h3><p data-copy="section.morph.blurb">Watch the real hemoglobin molecule change shape as it picks up oxygen.</p>
+          <div class="links"><a class="go" href="morph/" data-copy="section.morph.cta">Watch it breathe</a></div>
+        </li>
+      </ul>
+
+      <h2 class="ex-group" id="g-mols" data-copy="home.group.molecules">Molecules up close</h2>
+      <ul class="sections" aria-labelledby="g-mols">
+        <li class="sec" id="motw" hidden style="--tone: #8f9bff">
+          <span class="sec-chip" data-copy="section.motw.levels">Molecule of the week</span>
+          <img class="motw-img" id="motwImg" alt="" width="56" height="56" hidden>
+          <h3 id="motwName"></h3><p data-copy="section.motw.blurb">A new molecule to turn and zoom every week.</p>
+          <div class="links"><a class="go" id="motwGo" href="molecules/" data-copy="section.motw.cta">Open it</a></div>
+        </li>
+        <li class="sec" data-href="lineup/index.html" style="--tone: #39b9ab">
+          <span class="sec-chip" data-copy="section.lineup.levels">Size</span>
+          <svg viewBox="0 0 64 64" aria-hidden="true"><path class="ic-line" d="M6 54h52"/><circle class="ic-fill" cx="10" cy="51" r="3"/><circle class="ic-soft" cx="22" cy="48" r="6"/><circle class="ic-line" cx="22" cy="48" r="6"/><circle class="ic-soft" cx="44" cy="38" r="16"/><circle class="ic-line" cx="44" cy="38" r="16"/></svg>
+          <h3 data-copy="section.lineup.title">Size lineup</h3><p data-copy="section.lineup.blurb">All 40 molecules side by side at true scale, from water to a virus shell.</p>
+          <div class="links"><a class="go" href="lineup/" data-copy="section.lineup.cta">See the lineup</a></div>
+        </li>
+      </ul>
+      <details class="sources" id="sources">
+        <summary data-copy="journey.sourcesTitle">Where the sizes on the ruler come from</summary>
+        <p class="small" data-copy="journey.sourcesIntro">The ruler and the sizes things are drawn at follow these sources. The shapes are drawn by code, so treat them as illustrations; only the ATP and its atoms use real measured positions.</p>
+        <ol class="src-levels" id="srcLevels"></ol>
+      </details>
+      <footer class="foot"><p data-copy="footer.credits">Element facts: Royal Society of Chemistry and IUPAC CIAAW. Fonts: IBM Plex, SIL Open Font License.</p><p data-copy="footer.status">Draft. Not yet reviewed by a biologist.</p></footer>
+    </div>
+  </section>
+</main>
+<script type="importmap">
+{ "imports": { "three": "./vendor/three/0.170.0/build/three.module.js", "three/addons/": "./vendor/three/0.170.0/examples/jsm/" } }
+</script>
+<script type="module">
+import { $, el, loadCopy, bindTheme } from './common.js';
+import { startJourney } from './journey/journey.js';
+bindTheme($('#theme'));
+const copy = await loadCopy('');
+startJourney(copy);
+// Molecule of the week (molecules/motw.js): the card stays hidden when there is no pick.
+import('./molecules/motw.js').then(({ moleculeOfTheWeek }) => moleculeOfTheWeek()).then((m) => {
+  if (!m) return;
+  $('#motwName').textContent = m.name;
+  $('#motwGo').href = m.href;
+  $('#motwGo').setAttribute('aria-label', (copy['section.motw.ctaLabel'] || 'Open {name}').replace('{name}', m.name));
+  const img = $('#motwImg');
+  img.onload = () => { img.hidden = false; };
+  img.onerror = () => img.remove();
+  img.src = m.thumb;
+  $('#motw').hidden = false;
+}).catch(() => { /* no molecule data: keep the card hidden */ });
+// A section another session is still building has no index.html yet: show "Coming soon" instead of a dead link.
+for (const card of document.querySelectorAll('.sec[data-href]')) {
+  let ok = false;
+  try { ok = (await fetch(card.dataset.href, { method: 'HEAD' })).ok; } catch (e) { ok = false; }
+  if (!ok) { const go = card.querySelector('.go'); go.replaceWith(el('span', { class: 'soon', text: copy['home.soon'] || 'Coming soon' })); }
+}
+</script>
+<script type="module" src="shell/shell.js" data-page="home"></script>
+</body>
+</html>

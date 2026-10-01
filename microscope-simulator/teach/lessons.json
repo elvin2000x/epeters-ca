@@ -1,0 +1,375 @@
+{
+  "_note": "Lesson content for the teacher hub. Written for the hub (not copy). Every fact-bearing step, question and answer lists source ids from sources.json in 'src'. Link 'path' is relative to the site root (web/). Step minutes add up to the lesson's 'minutes'. 'align' ids are keys in alignment.json. Run build_teach.py after any change. No em dashes.",
+  "lessons": [
+    {
+      "id": "cells-unit-of-life",
+      "n": 1,
+      "title": "Cells are the unit of life",
+      "minutes": 45,
+      "topics": ["cells", "organisms"],
+      "summary": "Students meet whole organisms that are a single cell, compare a bacterium with an animal cell, and use what they see to argue for the three ideas of cell theory.",
+      "goals": [
+        "State the three ideas of cell theory.",
+        "Tell an organism made of one cell from one made of many cells, using examples from the explorer.",
+        "Compare where the DNA sits in a bacterium and in an animal cell."
+      ],
+      "materials": ["Projector or one device per pair", "Student worksheet 1 (one per student)"],
+      "hook": { "minutes": 5, "text": "Project the home zoom stopped at its first level, a Paramecium in pond water. Ask: is this one thing alive, or is it a part of something alive? Take three answers, then reveal that the whole organism is a single cell, 170 to 330 micrometres long and covered in 10,000 to 14,000 cilia.", "links": [{ "path": "index.html#zoom=organism", "label": "Home zoom: Paramecium" }], "src": ["neupane-pcaudatum", "cme-journey"] },
+      "steps": [
+        { "minutes": 8, "title": "Cell theory in three lines", "text": "Write the three ideas of cell theory on the board: one or more cells make up every living thing; the cell is the basic unit of life; new cells come from cells that already exist. Name Schleiden and Schwann (late 1830s) and Virchow, who added to the theory later. Students copy the three ideas onto the worksheet in their own words.", "links": [], "src": ["os-4-1"] },
+        { "minutes": 12, "title": "Whole organisms that are one cell", "text": "In pairs, students open each slide in the virtual microscope and fill the worksheet table: name, one cell or many, size from the field guide, and one thing it does. Paramecium is 170 to 330 micrometres long, Euglena is up to about 100 micrometres long and makes food with chloroplasts, and baker's yeast is about 5 micrometres across.", "links": [{ "path": "microscope/index.html#paramecium", "label": "Microscope: Paramecium" }, { "path": "microscope/index.html#euglena", "label": "Microscope: Euglena" }, { "path": "microscope/index.html#yeast", "label": "Microscope: Yeast" }], "src": ["neupane-pcaudatum", "hader2022", "fbpb-egracilis", "bionumbers-yeast"] },
+        { "minutes": 10, "title": "Bacterium or animal cell?", "text": "Open the bacterial cell and tap the nucleoid, then open the animal cell and tap the nucleus. A bacterium has no nucleus, so its DNA sits in a region called the nucleoid; an animal cell keeps its DNA inside a nucleus wrapped in a double membrane. Every prokaryote has DNA, ribosomes, a cell membrane and a cell wall. Students list what both cells share and what only the animal cell has.", "links": [{ "path": "cells/#bacterium/nucleoid", "label": "Bacterial cell: nucleoid" }, { "path": "cells/#animal/nucleus", "label": "Animal cell: nucleus" }], "src": ["bio-4-2", "bio-4-3"] },
+        { "minutes": 5, "title": "Organisms made of many cells", "text": "Show the muscle cell. A single skeletal muscle cell can be up to about 30 cm long in the upper leg and holds many nuclei. Contrast it with a red blood cell, about 8 micrometres across. Cells of one kind that join up and share a job form a tissue.", "links": [{ "path": "cells/#muscle", "label": "Muscle cell" }, { "path": "cells/#rbc", "label": "Red blood cell" }], "src": ["ap-10-2", "os-4-1"] },
+        { "minutes": 5, "title": "Exit ticket", "text": "Students answer the exit ticket on a card or the back of the worksheet.", "links": [], "src": [] }
+      ],
+      "discussion": [
+        "Yeast is one cell. Is it a cell, an organism, or both? What makes you say so?",
+        "In the pond view, a Paramecium splits in two and yeast grows a bud. Which idea of cell theory does that support?",
+        "A muscle cell has many nuclei. Why might a very long cell that makes lots of protein need more than one?"
+      ],
+      "exit": { "prompt": "Write the three ideas of cell theory. Then give one thing you saw today that supports one of them.", "answer": "One or more cells make up all living things; the cell is the basic unit of life; new cells come from existing cells. Example evidence: a Paramecium or a yeast cell is a whole living organism that is one cell, or a Paramecium dividing in two in the pond view.", "src": ["os-4-1", "brette2021", "mbn-binary-fission"] },
+      "support": [
+        "Give a word bank: cell, organism, nucleus, nucleoid, DNA, membrane, wall.",
+        "Pair a confident reader with a student who needs the text read aloud; every explorer page has a text description of the view.",
+        "Fill in the first row of the table together on the projector."
+      ],
+      "extension": [
+        "How many times longer is a 240 micrometre Paramecium than an 8 micrometre red blood cell?",
+        "Find out what Rudolf Virchow added to cell theory and write two sentences on it."
+      ],
+      "worksheet": [
+        { "q": "Write the three ideas of cell theory in your own words.", "lines": 4, "answer": "1. One or more cells make up every living thing. 2. The cell is the basic unit of life. 3. New cells come from cells that already exist.", "src": ["os-4-1"] },
+        { "q": "Fill in the table from the microscope field guide.", "table": { "cols": ["Organism", "One cell or many?", "Size", "One thing it does"], "rows": ["Paramecium", "Euglena", "Yeast"] }, "link": { "path": "microscope/index.html#paramecium", "label": "Microscope" }, "answer": "Paramecium: one cell, 170 to 330 micrometres long, swims with beating cilia. Euglena: one cell, up to about 100 micrometres long, makes food with chloroplasts in light. Yeast: one cell, about 5 micrometres across, multiplies by budding.", "src": ["neupane-pcaudatum", "hader2022", "bionumbers-yeast", "bionumbers-bud"] },
+        { "q": "Where is the DNA in a bacterium? Where is it in an animal cell?", "lines": 2, "link": { "path": "cells/#bacterium/nucleoid", "label": "Bacterial cell" }, "answer": "In a bacterium the DNA sits in a central region called the nucleoid, because there is no nucleus. In an animal cell the DNA is inside the nucleus.", "src": ["bio-4-2", "bio-4-3"] },
+        { "q": "Name two parts that every bacterium has.", "lines": 2, "answer": "Any two of: DNA in a nucleoid, ribosomes, a cell membrane, a cell wall.", "src": ["bio-4-2"] },
+        { "q": "A red blood cell is about 8 micrometres across and a pin head is about 2 mm across. About how many red blood cells fit across a pin head? Show your work.", "lines": 3, "answer": "2 mm = 2000 micrometres. 2000 / 8 = 250 red blood cells.", "src": ["os-4-1", "nist-prefixes"] },
+        { "q": "What did you see in the pond view that supports the idea that new cells come from existing cells?", "lines": 3, "link": { "path": "microscope/index.html#pond", "label": "Pond view" }, "answer": "A well-fed Paramecium splits in two (binary fission), and yeast grows a bud that pinches off. In both cases the new cell comes from a cell that already existed.", "src": ["brette2021", "mbn-binary-fission", "bionumbers-bud"] }
+      ],
+      "align": ["ngss-ms:MS-LS1-1", "on-sbi3u:B3.2"]
+    },
+    {
+      "id": "organelles-and-jobs",
+      "n": 2,
+      "title": "Organelles and their jobs",
+      "minutes": 50,
+      "topics": ["cells"],
+      "summary": "A jigsaw tour of the animal cell, then students follow one protein from the nucleus to the Golgi and compare animal and plant cells.",
+      "goals": [
+        "Match eight organelles to their jobs.",
+        "Describe how the nucleus, ribosomes, endoplasmic reticulum and Golgi work together to make and ship a protein.",
+        "Name three parts a plant cell has that an animal cell does not."
+      ],
+      "materials": ["One device per group of four", "Student worksheet 2"],
+      "hook": { "minutes": 5, "text": "Open the animal cell with labels on (press L). Ask: if this cell were a factory, which part would be the office that holds the plans, and which would be the power plant? Collect guesses and keep them on the board to check later.", "links": [{ "path": "cells/#animal", "label": "Animal cell" }], "src": [] },
+      "steps": [
+        { "minutes": 15, "title": "Organelle jigsaw", "text": "Give each group member two parts to research on the animal cell: nucleus and ribosomes; endoplasmic reticulum and Golgi apparatus; mitochondria and lysosomes; cell membrane and cytoskeleton. Each student reads the part card, writes the job in their own words in the worksheet table, then teaches it to the group. Check the hook guesses: the nucleus holds the DNA, and mitochondria make ATP.", "links": [{ "path": "cells/#animal/nucleus", "label": "Nucleus" }, { "path": "cells/#animal/ribosomes", "label": "Ribosomes" }, { "path": "cells/#animal/er", "label": "Endoplasmic reticulum" }, { "path": "cells/#animal/golgi", "label": "Golgi apparatus" }, { "path": "cells/#animal/mitochondrion", "label": "Mitochondria" }, { "path": "cells/#animal/lysosome", "label": "Lysosomes" }, { "path": "cells/#animal/membrane", "label": "Cell membrane" }, { "path": "cells/#animal/cytoskeleton", "label": "Cytoskeleton" }], "src": ["bio-4-3", "bio-4-4", "bio-4-5"] },
+        { "minutes": 10, "title": "Follow one protein", "text": "As a class, trace a protein's route on the projector. The nucleus holds the DNA and directs protein making. Ribosomes join amino acids in the order set by messenger RNA; some sit on the rough endoplasmic reticulum. The ER modifies proteins and sends them in small sacs called vesicles to the Golgi, which sorts, tags and packages them and ships them on in new vesicles. Students draw the route as a flow chart.", "links": [{ "path": "cells/#animal/er", "label": "Endoplasmic reticulum" }, { "path": "cells/#animal/golgi", "label": "Golgi apparatus" }], "src": ["bio-4-3", "bio-4-4"] },
+        { "minutes": 10, "title": "Plant cell or animal cell?", "text": "Open the plant cell. It has most of the same organelles, plus a cell wall (mostly cellulose), chloroplasts that capture light, and a large central vacuole that controls how much water the cell holds. Most plant cells do not have lysosomes; the vacuole does that digesting. Students complete a Venn diagram.", "links": [{ "path": "cells/#plant", "label": "Plant cell" }, { "path": "cells/#plant/vacuole", "label": "Central vacuole" }], "src": ["bio-4-3"] },
+        { "minutes": 5, "title": "Shape fits the job", "text": "Each pair picks one specialised cell and writes one sentence linking a part to its job: a neuron passes information from the dendrites, across the cell body and down the axon; a mature red blood cell has no nucleus, which leaves room for hemoglobin; a muscle cell has a very high concentration of mitochondria.", "links": [{ "path": "cells/#neuron", "label": "Neuron" }, { "path": "cells/#rbc", "label": "Red blood cell" }, { "path": "cells/#muscle/m-mito", "label": "Muscle cell mitochondria" }], "src": ["ap-12-2", "ap-18-3", "bio-4-3"] },
+        { "minutes": 5, "title": "Exit ticket", "text": "Students answer the exit ticket.", "links": [], "src": [] }
+      ],
+      "discussion": [
+        "Why does it help that some ribosomes sit right on the endoplasmic reticulum?",
+        "A plant wilts on a hot day. Which organelle explains what you see?",
+        "Which cell part would you expect to find in large numbers in a cell that does a lot of work? Why?"
+      ],
+      "exit": { "prompt": "Suppose a cell's lysosomes stopped working. Predict one problem the cell would have.", "answer": "Worn-out organelles and large molecules such as proteins, complex sugars, lipids and nucleic acids would not be broken down, because lysosomes hold the enzymes that digest them.", "src": ["bio-4-3"] },
+      "support": [
+        "Give each student a half-filled organelle table with the names already written in.",
+        "Use the analogy of a factory only as a starting point; ask students where it breaks down.",
+        "Turn on Labels (press L) so the colour key numbers match the list."
+      ],
+      "extension": [
+        "Explain why a red blood cell, which has no nucleus, cannot make new proteins for itself.",
+        "Compare the bacterium with the plant cell: which parts do both have, and why might a bacterium manage without a nucleus?"
+      ],
+      "worksheet": [
+        { "q": "Write the job of each part in your own words.", "table": { "cols": ["Part", "Its job"], "rows": ["Nucleus", "Ribosomes", "Endoplasmic reticulum", "Golgi apparatus", "Mitochondria", "Lysosomes", "Cell membrane", "Cytoskeleton"] }, "link": { "path": "cells/#animal", "label": "Animal cell" }, "answer": "Nucleus: holds the DNA and directs making ribosomes and proteins. Ribosomes: build proteins from amino acids in the order set by mRNA. Endoplasmic reticulum: modifies proteins and makes lipids. Golgi: sorts, tags and packages proteins and lipids. Mitochondria: make ATP from the chemical energy in glucose and other nutrients. Lysosomes: digest proteins, complex sugars, lipids, nucleic acids and worn-out organelles. Cell membrane: separates the inside of the cell from its surroundings and controls what passes in and out. Cytoskeleton: holds the cell's shape, keeps some organelles in place and lets the cell and its contents move.", "src": ["bio-4-3", "bio-4-4", "bio-4-5"] },
+        { "q": "Put these in order to show the route of a protein that leaves the cell: Golgi apparatus, ribosome on the ER, nucleus (DNA), vesicle, endoplasmic reticulum.", "lines": 2, "answer": "Nucleus (DNA) then ribosome on the ER then endoplasmic reticulum then vesicle then Golgi apparatus (which ships it on in new vesicles).", "src": ["bio-4-3", "bio-4-4"] },
+        { "q": "Name three parts a plant cell has that an animal cell does not.", "lines": 2, "link": { "path": "cells/#plant", "label": "Plant cell" }, "answer": "Cell wall, chloroplasts and a large central vacuole.", "src": ["bio-4-3"] },
+        { "q": "Why does a plant wilt when it loses water?", "lines": 2, "link": { "path": "cells/#plant/vacuole", "label": "Central vacuole" }, "answer": "When water leaves, the large central vacuole shrinks, so the cells lose their firmness and the plant wilts.", "src": ["bio-4-3"] },
+        { "q": "In which direction does information travel through a neuron?", "lines": 2, "link": { "path": "cells/#neuron", "label": "Neuron" }, "answer": "From the dendrites, across the cell body, and down the axon.", "src": ["ap-12-2"] },
+        { "q": "A mature red blood cell has no nucleus. How does that help it do its job?", "lines": 2, "link": { "path": "cells/#rbc/rbc-hb", "label": "Red blood cell" }, "answer": "Pushing out the nucleus and most organelles leaves more room for hemoglobin, which carries the oxygen.", "src": ["ap-18-3"] }
+      ],
+      "align": ["ngss-ms:MS-LS1-2", "on-sbi4u:B3.1"]
+    },
+    {
+      "id": "microscopes-and-scale",
+      "n": 3,
+      "title": "Microscopes and scale",
+      "minutes": 50,
+      "topics": ["scale", "organisms"],
+      "summary": "Students convert between millimetres, micrometres and nanometres, calculate the field of view of the virtual microscope, and use it to estimate the size of real pond organisms.",
+      "goals": [
+        "Convert between millimetres, micrometres and nanometres.",
+        "Calculate field of view from the field number and the objective lens.",
+        "Estimate an organism's size from how much of the field it fills, and check it against the field guide.",
+        "Explain the difference between magnification and resolving power."
+      ],
+      "materials": ["One device per pair", "Calculators", "Student worksheet 3"],
+      "hook": { "minutes": 5, "text": "Play the home zoom from start to end. The first view is 0.6 mm across and the last is 0.4 nanometres across. Ask students to guess how many times smaller the last view is, and write the guesses down. (Answer: 0.0006 m divided by 0.0000000004 m is 1.5 million times.)", "links": [{ "path": "index.html#zoom=organism", "label": "Home zoom" }], "src": ["cme-journey", "nist-prefixes"] },
+      "steps": [
+        { "minutes": 8, "title": "The three small units", "text": "Milli means one thousandth, micro one millionth and nano one billionth. So 1 mm = 1000 micrometres and 1 micrometre = 1000 nanometres. Anchor with two real sizes: a pin head is about 2 mm across and a red blood cell about 8 micrometres.", "links": [], "src": ["nist-prefixes", "os-4-1"] },
+        { "minutes": 12, "title": "Field of view", "text": "The field of view is the width of the circle you see. Field of view = field number divided by objective magnification. This virtual microscope has a 10x eyepiece with field number 18 mm, and objectives of 4x, 10x, 40x and 100x (40x, 100x, 400x and 1000x in total). Students calculate the field of view for each objective, then switch magnification on the Paramecium slide and compare with the scale bar.", "links": [{ "path": "microscope/index.html#paramecium", "label": "Microscope: Paramecium" }], "src": ["mw-fov", "cme-scope"] },
+        { "minutes": 12, "title": "Estimate, then check", "text": "At 400x total (40x objective) the field is 0.45 mm, or 450 micrometres. Students estimate what fraction of the field a Paramecium fills and multiply. They compare their estimate with the field guide range of 170 to 330 micrometres, then repeat with bacteria at 1000x (rods 1 to 4 micrometres long on average).", "links": [{ "path": "microscope/index.html#paramecium", "label": "Microscope: Paramecium" }, { "path": "microscope/index.html#bacteria", "label": "Microscope: Bacteria" }], "src": ["mw-fov", "neupane-pcaudatum", "kaiser-bacteria"] },
+        { "minutes": 8, "title": "Magnification is not everything", "text": "Magnification makes an object look bigger; resolving power is the ability to see two close things as separate. Student light microscopes magnify up to about 400 times (about 1000 with oil immersion) and resolve about 200 nanometres; electron microscopes magnify about 100,000 times. Ask: could a light microscope show the head of ATP synthase, about 9 nanometres across? Zoom the home journey to that level to check.", "links": [{ "path": "index.html#zoom=big", "label": "Home zoom: ATP synthase" }], "src": ["os-4-1", "boundless-f1"] },
+        { "minutes": 5, "title": "Exit ticket", "text": "Students answer the exit ticket.", "links": [], "src": [] }
+      ],
+      "discussion": [
+        "Why do bacteria still look tiny even at 1000x?",
+        "Your estimate and the field guide disagree. List two reasons that could explain it.",
+        "When would a scientist choose an electron microscope over a light microscope, and what would they give up?"
+      ],
+      "exit": { "prompt": "With the 10x objective the field of view is 1.8 mm. A cell stretches across one tenth of the field. How long is it in micrometres?", "answer": "1.8 mm / 10 = 0.18 mm = 180 micrometres.", "src": ["mw-fov", "nist-prefixes"] },
+      "support": [
+        "Give a filled-in conversion ladder (mm, micrometre, nanometre) with arrows marked multiply by 1000 and divide by 1000.",
+        "Let students use the on-screen scale bar instead of the formula for the estimate step.",
+        "Work the 4x objective row together before pairs do the rest."
+      ],
+      "extension": [
+        "How many 5 micrometre yeast cells would fit across the 1000x field of view?",
+        "Write the field of view at each objective in scientific notation in metres."
+      ],
+      "worksheet": [
+        { "q": "Fill in: 1 mm = ____ micrometres, and 1 micrometre = ____ nanometres.", "lines": 1, "answer": "1 mm = 1000 micrometres; 1 micrometre = 1000 nanometres.", "src": ["nist-prefixes"] },
+        { "q": "The eyepiece field number is 18 mm. Calculate the field of view for each objective.", "table": { "cols": ["Objective", "Total magnification", "Field of view (mm)", "Field of view (micrometres)"], "rows": ["4x", "10x", "40x", "100x"] }, "link": { "path": "microscope/index.html#paramecium", "label": "Microscope" }, "answer": "4x: 40x total, 4.5 mm, 4500 micrometres. 10x: 100x total, 1.8 mm, 1800 micrometres. 40x: 400x total, 0.45 mm, 450 micrometres. 100x: 1000x total, 0.18 mm, 180 micrometres.", "src": ["mw-fov", "cme-scope", "nist-prefixes"] },
+        { "q": "At 400x, about what fraction of the field does the Paramecium fill? Use it to estimate its length. Compare with the field guide.", "lines": 3, "link": { "path": "microscope/index.html#paramecium", "label": "Paramecium slide" }, "answer": "Answers vary with the estimate. Example: about half of 450 micrometres is about 225 micrometres, which is inside the field guide range of 170 to 330 micrometres. (The explorer draws it 240 micrometres long.)", "src": ["mw-fov", "neupane-pcaudatum", "cme-scope"] },
+        { "q": "What is the difference between magnification and resolving power?", "lines": 3, "answer": "Magnification enlarges how big an object looks. Resolving power is the ability to show two close structures as separate, which sets how much detail you can see.", "src": ["os-4-1"] },
+        { "q": "The head of ATP synthase is about 9 nm across. A student light microscope resolves about 200 nm. Can it show the head? Explain.", "lines": 2, "answer": "No. 9 nm is much smaller than the roughly 200 nm the light microscope can resolve, so it cannot be seen as a separate structure.", "src": ["boundless-f1", "os-4-1"] }
+      ],
+      "align": ["ngss-ms:MS-LS1-1", "on-sbi3u:A1.2", "on-sbi3u:A1.12"]
+    },
+    {
+      "id": "pond-who-eats-whom",
+      "n": 4,
+      "title": "The pond: who eats whom",
+      "minutes": 55,
+      "topics": ["ecosystems", "organisms"],
+      "summary": "Students read the field guide to find out what each pond organism eats or makes, run a feeding experiment in the pond sandbox, draw a food web and build a dichotomous key.",
+      "goals": [
+        "Sort pond organisms into those that make food from light and those that eat other organisms.",
+        "Draw a food web with arrows that show the direction energy flows.",
+        "Use population counts from the pond sandbox as evidence for how food supply affects a population.",
+        "Build a dichotomous key for six pond organisms."
+      ],
+      "materials": ["One device per pair", "Student worksheet 4", "Coloured pencils"],
+      "hook": { "minutes": 5, "text": "Open the pond view and drop in a few Paramecium with no food. Before pressing play, ask: what will happen to their number? Then add bacteria and ask again. Record both predictions.", "links": [{ "path": "microscope/index.html#pond", "label": "Pond sandbox" }], "src": [] },
+      "steps": [
+        { "minutes": 10, "title": "Read the field guide", "text": "Pairs read the field guide for each organism and note what it eats or makes. Paramecium sweeps bacteria, yeast and algae into its oral groove. Amoeba engulfs bacteria and algae into a food vacuole and digests them there. Euglena makes food with its chloroplasts in light and can live on organic matter in the dark. Diatoms are single-celled algae in glass shells that make food by photosynthesis; together they make about one fifth of the world's oxygen.", "links": [{ "path": "microscope/index.html#paramecium", "label": "Paramecium" }, { "path": "microscope/index.html#amoeba", "label": "Amoeba" }, { "path": "microscope/index.html#euglena", "label": "Euglena" }, { "path": "microscope/index.html#diatom", "label": "Diatom" }], "src": ["brette2021", "garden-amoebae", "mbn-aproteus", "hader2022", "exeter-diatom"] },
+        { "minutes": 15, "title": "Feeding experiment", "text": "Each pair runs two slides in the pond: slide A with Paramecium and bacteria, slide B with Paramecium only. Every 10 seconds they record the Paramecium count from the 'On the slide' panel. Time runs 720 times faster than real life, so 1 second is 12 minutes. Tell students which parts are measured and which are drawn: a well-fed Paramecium dividing about every 6 hours is cited, while division timing for the other organisms is illustrative.", "links": [{ "path": "microscope/index.html#pond", "label": "Pond sandbox" }], "src": ["cme-scope", "brette2021"] },
+        { "minutes": 10, "title": "Draw the food web", "text": "Students draw a food web for the pond. Arrows point from the food to the eater, which is the direction energy moves. Light feeds the organisms that photosynthesise (green alga, Euglena, diatom). Bacteria, yeast and algae are eaten by Paramecium; bacteria and algae are eaten by Amoeba.", "links": [], "src": ["brette2021", "garden-amoebae", "hader2022", "exeter-diatom", "os-8-1"] },
+        { "minutes": 10, "title": "Build a dichotomous key", "text": "Groups write a key with yes or no questions that ends in one name for each of the six slides (Paramecium, Amoeba, Euglena, bacteria, yeast, diatom). Useful features from the field guide: chloroplasts or golden plastids, a glass shell, a single flagellum, thousands of cilia, no fixed shape with pseudopodia, budding. Groups swap keys and test them on the microscope.", "links": [{ "path": "microscope/index.html#bacteria", "label": "Bacteria" }, { "path": "microscope/index.html#yeast", "label": "Yeast" }], "src": ["neupane-pcaudatum", "kreutz-aproteus", "hader2022", "exeter-diatom", "bionumbers-bud", "kaiser-bacteria"] },
+        { "minutes": 5, "title": "Exit ticket", "text": "Students answer the exit ticket.", "links": [], "src": [] }
+      ],
+      "discussion": [
+        "Which organisms in the pond could keep going with only light and water? Which could not?",
+        "If all the bacteria disappeared, which organisms would be affected first, and why?",
+        "The sandbox is a model. Which of its behaviours come from measurements, and which are drawn to look right? Why does that matter when we use it as evidence?"
+      ],
+      "exit": { "prompt": "Draw one food chain from the pond with at least three links, starting with light. Label which organism makes its own food.", "answer": "Example: light to green alga (makes its own food by photosynthesis) to Paramecium. Or light to Euglena. Arrows go from food to eater.", "src": ["brette2021", "os-8-1", "hader2022"] },
+      "support": [
+        "Give a list of the six organisms with a picture of each and one fact already filled in.",
+        "Provide the food web outline with boxes placed; students only draw the arrows.",
+        "Press Pause in the pond while counting, then Play again."
+      ],
+      "extension": [
+        "Graph slide A and slide B on the same axes and write a claim, evidence and reasoning paragraph.",
+        "Euglena swims toward gentle light and away from very strong light. Design a pond test with the lamp spot and predict what you will see."
+      ],
+      "worksheet": [
+        { "q": "For each organism, write what it eats, or write 'makes food from light'.", "table": { "cols": ["Organism", "Eats or makes food?"], "rows": ["Paramecium", "Amoeba", "Euglena", "Diatom"] }, "link": { "path": "microscope/index.html#paramecium", "label": "Field guide" }, "answer": "Paramecium: eats bacteria, yeast and algae. Amoeba: eats bacteria and algae. Euglena: makes food from light with chloroplasts, and can live on organic matter in the dark. Diatom: makes food from light (photosynthetic alga).", "src": ["brette2021", "garden-amoebae", "hader2022", "exeter-diatom"] },
+        { "q": "Record the Paramecium count every 10 seconds on both slides.", "table": { "cols": ["Time (s)", "Slide A: with bacteria", "Slide B: no food"], "rows": ["0", "10", "20", "30", "40"] }, "link": { "path": "microscope/index.html#pond", "label": "Pond sandbox" }, "answer": "Counts vary from run to run. Expected pattern: the count on slide A rises as well-fed Paramecium divide, while slide B does not grow because there is no food to support division.", "src": ["brette2021", "cme-scope"] },
+        { "q": "One second in the pond is how much real time? How many seconds of pond time match one 6 hour Paramecium division?", "lines": 2, "answer": "720 times faster, so 1 second = 720 seconds = 12 minutes. 6 hours = 360 minutes, and 360 / 12 = 30 seconds.", "src": ["cme-scope", "brette2021"] },
+        { "q": "Draw the pond food web. Arrows point from the food to the eater.", "draw": true, "answer": "Light to green alga, Euglena and diatom. Bacteria, yeast and green alga to Paramecium. Bacteria and green alga to Amoeba.", "src": ["brette2021", "garden-amoebae", "hader2022", "exeter-diatom", "os-8-1"] },
+        { "q": "Write a dichotomous key that names all six slides: Paramecium, Amoeba, Euglena, bacteria, yeast, diatom.", "draw": true, "answer": "Keys vary. One working key: 1. Inside a glass shell? Yes: diatom. No: go to 2. 2. Green chloroplasts and one flagellum? Yes: Euglena. No: go to 3. 3. No fixed shape, moves with pseudopodia? Yes: Amoeba. No: go to 4. 4. Covered in cilia? Yes: Paramecium. No: go to 5. 5. Round cells that grow buds? Yes: yeast. No (rods, spheres or spirals): bacteria.", "src": ["exeter-diatom", "hader2022", "kreutz-aproteus", "neupane-pcaudatum", "bionumbers-bud", "kaiser-bacteria"] }
+      ],
+      "align": ["ngss-ms:MS-LS2-1", "ngss-ms:MS-LS2-2", "ngss-ms:MS-LS2-3", "on-snc1w:B2.2", "on-sbi3u:B2.4", "on-sbi3u:B3.3"]
+    },
+    {
+      "id": "elements-of-life",
+      "n": 5,
+      "title": "Elements of life",
+      "minutes": 45,
+      "topics": ["elements", "molecules"],
+      "summary": "Students find which elements build the molecules of life, write formulas from atom counts, and find out why carbon, nitrogen, phosphorus and a few metals matter to living things.",
+      "goals": [
+        "Write a chemical formula from the atoms in a molecule.",
+        "Name the elements that make up water, glucose, an amino acid and ATP.",
+        "Explain one job of carbon, nitrogen, phosphorus and iron in living things."
+      ],
+      "materials": ["One device per pair", "Student worksheet 5"],
+      "hook": { "minutes": 5, "text": "Open the periodic table with Elements of life switched on. Only 11 of the 118 elements are lit, yet they build all 15 molecules in the explorer. Ask students to guess which element appears in the most atoms.", "links": [{ "path": "elements/?life=1", "label": "Periodic table: Elements of life" }], "src": ["cme-links"] },
+      "steps": [
+        { "minutes": 10, "title": "Count the atoms", "text": "Pairs open four small molecules and record how many atoms of each element they contain, then write the formula. Water has 2 H and 1 O; glucose has 6 C, 12 H and 6 O; glycine has 2 C, 5 H, 1 N and 2 O; ATP has 10 C, 16 H, 5 N, 13 O and 3 P.", "links": [{ "path": "molecules/#water", "label": "Water" }, { "path": "molecules/#glucose", "label": "Glucose" }, { "path": "molecules/#glycine", "label": "Glycine" }, { "path": "molecules/#atp", "label": "ATP" }], "src": ["cme-links", "ccd-GLC", "ccd-GLY", "ccd-ATP"] },
+        { "minutes": 10, "title": "Light up a molecule on the table", "text": "Use 'Light up a molecule' on the periodic table to show where ATP's elements sit. Then compare glucose (C, H, O) with glycine (C, H, N, O): to build an amino acid from the carbon, hydrogen and oxygen of a sugar, a cell needs another element, nitrogen.", "links": [{ "path": "elements/?mol=atp", "label": "Periodic table: ATP lit up" }, { "path": "elements/?mol=glycine", "label": "Periodic table: glycine lit up" }], "src": ["cme-links", "ccd-GLY", "os-3-4"] },
+        { "minutes": 10, "title": "What each element does", "text": "Each pair opens one element card and reports its job in living things. Carbon atoms link into long chains, the backbone of the molecules of life. Plants take up nitrogen to build DNA, RNA and amino acids. Phosphorus forms the backbone of DNA and RNA and is part of ATP. Sulfur goes into two amino acids. Iron is used in hemoglobin to carry oxygen. Magnesium sits at the centre of chlorophyll. Zinc sits at the active site of many enzymes. Calcium phosphate is the main mineral in bone.", "links": [{ "path": "elements/#C", "label": "Carbon" }, { "path": "elements/#N", "label": "Nitrogen" }, { "path": "elements/#P", "label": "Phosphorus" }, { "path": "elements/#S", "label": "Sulfur" }, { "path": "elements/#Fe", "label": "Iron" }, { "path": "elements/#Mg", "label": "Magnesium" }, { "path": "elements/#Zn", "label": "Zinc" }, { "path": "elements/#Ca", "label": "Calcium" }], "src": ["rsc"] },
+        { "minutes": 5, "title": "Iron in a big molecule", "text": "Open hemoglobin with only its iron atoms lit. The structure has four heme groups, each holding one iron atom. Point out a data caveat: big X-ray structure files list no hydrogen atoms, so their atom counts are lower than the real molecule.", "links": [{ "path": "molecules/#hemoglobin?el=Fe", "label": "Hemoglobin: iron lit up" }], "src": ["rcsb-4HHB", "os-40-2", "cme-links"] },
+        { "minutes": 5, "title": "Exit ticket", "text": "Students answer the exit ticket.", "links": [], "src": [] }
+      ],
+      "discussion": [
+        "Carbon is in every molecule of life in the explorer except water. What property of carbon atoms makes that possible?",
+        "Why might a plant that cannot get nitrogen from the soil grow poorly?",
+        "The hemoglobin file shows no hydrogen at all. How should we use atom counts from a file like that?"
+      ],
+      "exit": { "prompt": "Write the formula for glucose. Which element would a cell need to add to glucose's elements to build glycine?", "answer": "C6H12O6. Nitrogen (glycine is C2H5NO2).", "src": ["ccd-GLC", "ccd-GLY"] },
+      "support": [
+        "Give a formula frame: C__ H__ O__ N__ P__ for students to fill in.",
+        "Show how to read the small numbers on lit elements before pairs start.",
+        "Pair element cards so each student reads one short description."
+      ],
+      "extension": [
+        "Which of the 15 molecules has the most kinds of elements? Use the periodic table's light-up menu to find out.",
+        "Palmitic acid is C16H32O2. Use its formula to explain why it has no nitrogen or phosphorus to offer a cell building DNA."
+      ],
+      "worksheet": [
+        { "q": "Count the atoms and write each formula.", "table": { "cols": ["Molecule", "Atoms of each element", "Formula"], "rows": ["Water", "Glucose", "Glycine", "ATP"] }, "link": { "path": "molecules/#glucose", "label": "Molecules" }, "answer": "Water: 2 H, 1 O, H2O. Glucose: 6 C, 12 H, 6 O, C6H12O6. Glycine: 2 C, 5 H, 1 N, 2 O, C2H5NO2. ATP: 10 C, 16 H, 5 N, 13 O, 3 P, C10H16N5O13P3.", "src": ["cme-links", "ccd-GLC", "ccd-GLY", "ccd-ATP"] },
+        { "q": "How many of the 118 elements build all 15 molecules in the explorer? Name four of them.", "lines": 2, "link": { "path": "elements/?life=1", "label": "Elements of life" }, "answer": "11. Any four of: hydrogen, carbon, nitrogen, oxygen, magnesium, phosphorus, sulfur, calcium, iron, zinc, selenium.", "src": ["cme-links"] },
+        { "q": "Which element do you need to add to carbon, hydrogen and oxygen to make an amino acid like glycine?", "lines": 1, "answer": "Nitrogen.", "src": ["ccd-GLY"] },
+        { "q": "Give one job in living things for each element.", "table": { "cols": ["Element", "Job in living things"], "rows": ["Carbon", "Nitrogen", "Phosphorus", "Iron"] }, "link": { "path": "elements/#C", "label": "Element cards" }, "answer": "Carbon: links into long chains, the backbone of the molecules of life. Nitrogen: used to build DNA, RNA and amino acids. Phosphorus: forms the backbone of DNA and RNA and is part of ATP. Iron: used in hemoglobin to carry oxygen in the blood.", "src": ["rsc"] },
+        { "q": "How many iron atoms are in the hemoglobin structure, and where are they?", "lines": 2, "link": { "path": "molecules/#hemoglobin?el=Fe", "label": "Hemoglobin" }, "answer": "Four, one in each of the four heme groups (one heme per protein chain).", "src": ["rcsb-4HHB", "os-40-2", "cme-links"] }
+      ],
+      "align": ["ngss-ms:MS-PS1-1", "ngss-hs:HS-LS1-6", "on-snc1w:C2.7", "on-sbi4u:B3.2"]
+    },
+    {
+      "id": "atoms-and-electrons",
+      "n": 6,
+      "title": "Atoms and electrons",
+      "minutes": 50,
+      "topics": ["atoms", "elements"],
+      "summary": "Students use the atom viewer to count protons, neutrons and electrons, draw shell diagrams, find the pattern in group 1, and compare two models of the atom.",
+      "goals": [
+        "Give the location, relative mass and charge of protons, neutrons and electrons.",
+        "Draw a shell (Bohr-Rutherford) diagram for an element from its electrons per shell.",
+        "Link an element's group in the periodic table to the number of electrons in its outer shell.",
+        "Name one strength and one limit of the shell model and the orbital model."
+      ],
+      "materials": ["One device per pair", "Student worksheet 6"],
+      "hook": { "minutes": 5, "text": "Zoom the home journey to its last level, a phosphorus atom. An atom is on the order of 0.1 nanometres across and its nucleus is about 100,000 times smaller. Ask: if an atom were 100 metres across, how big would the nucleus be? (100 m divided by 100,000 is 1 mm.)", "links": [{ "path": "index.html#zoom=atom", "label": "Home zoom: atom" }], "src": ["os-chem-2-3", "cme-journey"] },
+      "steps": [
+        { "minutes": 10, "title": "Inside the nucleus", "text": "Protons (charge 1+) and neutrons (no charge) sit in the nucleus and have almost the same mass; electrons (charge 1-) are outside it and about 1800 of them weigh as much as one proton. The number of protons is the atomic number, and a neutral atom has the same number of electrons. Open the nucleus view: carbon-12 has 6 protons and 6 neutrons; sodium-23 has 11 protons and 12 neutrons.", "links": [{ "path": "atom/?mode=nucleus#C", "label": "Atom viewer: carbon nucleus" }, { "path": "atom/?mode=nucleus#Na", "label": "Atom viewer: sodium nucleus" }], "src": ["os-chem-2-3", "rsc"] },
+        { "minutes": 12, "title": "Shells", "text": "Switch to Shells. Pairs record electrons per shell for H, C, O, Na, Mg, Cl and K and draw two shell diagrams. Values: H 1; C 2, 4; O 2, 6; Na 2, 8, 1; Mg 2, 8, 2; Cl 2, 8, 7; K 2, 8, 8, 1. Use Previous and Next element, or the [ and ] keys.", "links": [{ "path": "atom/?mode=bohr#H", "label": "Atom viewer: shells" }, { "path": "atom/?mode=bohr#Na", "label": "Sodium shells" }], "src": ["rsc"] },
+        { "minutes": 10, "title": "The group 1 pattern", "text": "Compare lithium (2, 1), sodium (2, 8, 1) and potassium (2, 8, 8, 1): each has one electron in its outer shell, and each sits in group 1. Then open the 3D landscape with column height set to first ionization energy: group 1 metals are the low valleys (Na 5.1 eV, K 4.3 eV) and noble gases the peaks (He 24.6 eV). Read the sodium card: it tarnishes within seconds in air and reacts strongly with water.", "links": [{ "path": "elements/?view=3d&prop=ionization", "label": "3D landscape: ionization energy" }, { "path": "elements/#Na", "label": "Sodium card" }], "src": ["rsc", "pubchem"] },
+        { "minutes": 8, "title": "Two models, one atom", "text": "Show oxygen in Orbitals and in Shells. The viewer labels the shell view a simplified picture, because real electrons do not travel in circles, and the orbital view a teaching model built from hydrogen-like orbital shapes. Students write one thing each model shows well and one thing it gets wrong or leaves out.", "links": [{ "path": "atom/#O", "label": "Atom viewer: oxygen orbitals" }, { "path": "atom/?mode=bohr#O", "label": "Atom viewer: oxygen shells" }], "src": ["rsc"] },
+        { "minutes": 5, "title": "Exit ticket", "text": "Students answer the exit ticket.", "links": [], "src": [] }
+      ],
+      "discussion": [
+        "Every carbon atom has 6 protons, but not every carbon atom has 6 neutrons. Which number decides that it is carbon?",
+        "Why do lithium, sodium and potassium behave alike?",
+        "Why do scientists keep using the shell model if real electrons do not orbit in circles?"
+      ],
+      "exit": { "prompt": "Chlorine has 17 protons. How many electrons does a neutral chlorine atom have, and how many are in its outer shell?", "answer": "17 electrons, arranged 2, 8, 7, so 7 in the outer shell.", "src": ["os-chem-2-3", "rsc"] },
+      "support": [
+        "Give a blank shell diagram template with rings already drawn.",
+        "Provide a three-row table: particle, where, charge, relative mass, with one row filled in.",
+        "Use the viewer's text description, which lists protons, neutrons and electrons per shell."
+      ],
+      "extension": [
+        "Predict the outer-shell electrons for magnesium and calcium, then check in the viewer. What do they share?",
+        "Research how one experiment (for example Rutherford's gold foil) changed the model of the atom."
+      ],
+      "worksheet": [
+        { "q": "Complete the table.", "table": { "cols": ["Particle", "Where in the atom", "Charge", "Relative mass"], "rows": ["Proton", "Neutron", "Electron"] }, "answer": "Proton: nucleus, 1+, about 1. Neutron: nucleus, 0, about 1. Electron: outside the nucleus, 1-, about 1/1800 of a proton.", "src": ["os-chem-2-3"] },
+        { "q": "How many protons and neutrons are in carbon-12 and in sodium-23?", "lines": 2, "link": { "path": "atom/?mode=nucleus#C", "label": "Nucleus view" }, "answer": "Carbon-12: 6 protons, 6 neutrons. Sodium-23: 11 protons, 12 neutrons.", "src": ["rsc", "os-chem-2-3"] },
+        { "q": "Write the electrons per shell.", "table": { "cols": ["Element", "Electrons per shell"], "rows": ["Hydrogen", "Carbon", "Oxygen", "Sodium", "Magnesium", "Chlorine", "Potassium"] }, "link": { "path": "atom/?mode=bohr#H", "label": "Shells view" }, "answer": "Hydrogen 1. Carbon 2, 4. Oxygen 2, 6. Sodium 2, 8, 1. Magnesium 2, 8, 2. Chlorine 2, 8, 7. Potassium 2, 8, 8, 1.", "src": ["rsc"] },
+        { "q": "Draw shell diagrams for oxygen and sodium.", "draw": true, "answer": "Oxygen: nucleus with 8 protons, 2 electrons in the first shell and 6 in the second. Sodium: nucleus with 11 protons, then 2, 8 and 1 electrons in three shells.", "src": ["rsc", "os-chem-2-3"] },
+        { "q": "Lithium, sodium and potassium are all in group 1. What do their atoms have in common?", "lines": 2, "link": { "path": "elements/?view=3d&prop=ionization", "label": "3D landscape" }, "answer": "Each has one electron in its outer shell. They also have low first ionization energies (Li 5.4, Na 5.1, K 4.3 eV).", "src": ["rsc", "pubchem"] },
+        { "q": "Name one strength and one limit of the shell model.", "lines": 3, "answer": "Strength: it shows clearly how many electrons are in each shell, which links to the group pattern. Limit: real electrons do not travel in circles; the viewer calls it a simplified picture.", "src": ["rsc"] }
+      ],
+      "align": ["ngss-hs:HS-PS1-1", "on-snc1w:C2.2", "on-snc1w:C2.3", "on-snc1w:C2.4"]
+    },
+    {
+      "id": "glucose-to-atp",
+      "n": 7,
+      "title": "From glucose to ATP",
+      "minutes": 60,
+      "topics": ["energy", "cells", "molecules"],
+      "summary": "Students follow the energy in a glucose molecule into ATP: glycolysis in the cytoplasm, then the mitochondrion and ATP synthase, solve the red blood cell puzzle, and compare respiration with photosynthesis.",
+      "goals": [
+        "Describe how ATP stores and releases energy.",
+        "Place glycolysis in the cytoplasm and the oxygen-using stage in the mitochondrion.",
+        "Explain why a mature red blood cell gets only two ATP from each glucose.",
+        "Compare the inputs and outputs of cellular respiration and photosynthesis."
+      ],
+      "materials": ["One device per pair", "Student worksheet 7"],
+      "hook": { "minutes": 5, "text": "Open the muscle cell's mitochondria. Muscle cells have a very high concentration of mitochondria, which make the ATP the cell needs. Ask: where does the energy to lift your arm actually come from, and how does it get to the muscle?", "links": [{ "path": "cells/#muscle/m-mito", "label": "Muscle cell: mitochondria" }], "src": ["bio-4-3"] },
+      "steps": [
+        { "minutes": 10, "title": "Two molecules", "text": "Open glucose and then ATP. Glucose is a six-carbon sugar, C6H12O6, and cells break it down in cellular respiration to make ATP. ATP is adenine and the sugar ribose joined to a chain of three phosphates. Splitting off the last phosphate leaves ADP and releases energy that powers other reactions.", "links": [{ "path": "molecules/#glucose", "label": "Glucose" }, { "path": "molecules/#atp", "label": "ATP" }], "src": ["os-3-2", "ccd-GLC", "os-6-4"] },
+        { "minutes": 15, "title": "The route, stage by stage", "text": "Glycolysis happens in the cytoplasm and does not use oxygen directly: one glucose becomes two pyruvate, making four ATP but using two, a net gain of two ATP (plus two NADH). Pyruvate moves into the mitochondrial matrix, where its carbons leave as carbon dioxide. On the inner membrane the electron transport chain, the only stage that uses oxygen, hands electrons to oxygen, which with protons forms water. Hydrogen ions flow through ATP synthase, and its turning parts add a phosphate to ADP to make ATP. Zoom the home journey from the mitochondrion (about 2 micrometres long) to ATP synthase (head about 9 nanometres) to one ATP.", "links": [{ "path": "index.html#zoom=part", "label": "Home zoom: mitochondrion" }, { "path": "index.html#zoom=big", "label": "Home zoom: ATP synthase" }, { "path": "index.html#zoom=mol", "label": "Home zoom: ATP" }], "src": ["os-7-2", "os-7-3", "os-7-4", "bionumbers-mito", "boundless-f1"] },
+        { "minutes": 10, "title": "The red blood cell puzzle", "text": "Open the red blood cell. A mature one has no nucleus and few other organelles. Mature mammalian red blood cells have no mitochondria, so they harvest only two ATP from each glucose. Ask pairs: what does that tell you about where the rest of glucose's ATP is made?", "links": [{ "path": "cells/#rbc", "label": "Red blood cell" }], "src": ["ap-18-3", "os-7-2"] },
+        { "minutes": 12, "title": "The other half of the cycle", "text": "Open the plant cell's chloroplast. Chloroplasts use light energy, carbon dioxide and water to make sugar, and release oxygen. Students fill a two-column table: what respiration uses and makes, and what photosynthesis uses and makes. Notice that each process makes what the other uses.", "links": [{ "path": "cells/#plant/chloroplast", "label": "Plant cell: chloroplast" }, { "path": "cells/#plant/mitochondrion", "label": "Plant cell: mitochondria" }], "src": ["bio-4-3", "os-8-1", "os-7-3", "os-7-4"] },
+        { "minutes": 8, "title": "Exit ticket", "text": "Students complete the flow chart exit ticket.", "links": [], "src": [] }
+      ],
+      "discussion": [
+        "Plant cells have both chloroplasts and mitochondria. Why would a plant need both?",
+        "Where does the oxygen you breathe in end up, according to today's route?",
+        "Why do you think the number of ATP made from one glucose is given as a range rather than one exact number?"
+      ],
+      "exit": { "prompt": "Fill in the flow chart: glucose to ____ (in the cytoplasm, net ____ ATP) to pyruvate into the ____ to electron transport chain, which uses ____ and makes ____, to ATP made by ____.", "answer": "Glycolysis; 2; mitochondrion (matrix); oxygen; water; ATP synthase.", "src": ["os-7-2", "os-7-3", "os-7-4"] },
+      "support": [
+        "Give the flow chart with arrows and boxes drawn, and a word bank.",
+        "Stop the home zoom at each level and read the fact line aloud.",
+        "Use 'energy currency' as a hook: ATP is spent, ADP is the empty wallet that gets refilled."
+      ],
+      "extension": [
+        "OpenStax says the ATP yield per glucose varies. Find two reasons it gives and explain one.",
+        "ATP has 47 atoms, 3 of them phosphorus. Which part of the molecule holds all three, and how does that connect to splitting off a phosphate to release energy?"
+      ],
+      "worksheet": [
+        { "q": "What is ATP made of, and what happens when the last phosphate is split off?", "lines": 3, "link": { "path": "molecules/#atp", "label": "ATP" }, "answer": "Adenine and the sugar ribose joined to a chain of three phosphate groups. Removing the last phosphate leaves ADP and releases energy that powers other reactions.", "src": ["os-6-4"] },
+        { "q": "Where does glycolysis happen, and what is its net ATP gain per glucose?", "lines": 2, "answer": "In the cytoplasm. Net gain of two ATP (four made, two used).", "src": ["os-7-2"] },
+        { "q": "Which stage uses oxygen, and what does the oxygen become?", "lines": 2, "link": { "path": "index.html#zoom=part", "label": "Mitochondrion" }, "answer": "The electron transport chain on the inner mitochondrial membrane. Oxygen takes the electrons and, with protons, becomes water.", "src": ["os-7-4"] },
+        { "q": "How does ATP synthase make ATP?", "lines": 2, "link": { "path": "index.html#zoom=big", "label": "ATP synthase" }, "answer": "Hydrogen ions flow through it, turning parts of the machine, and that turning adds a phosphate to ADP to form ATP.", "src": ["os-7-4"] },
+        { "q": "A mature red blood cell gets only 2 ATP from each glucose. Why? What does that tell you?", "lines": 3, "link": { "path": "cells/#rbc", "label": "Red blood cell" }, "answer": "It has no mitochondria, so it can only do glycolysis. It shows that the rest of the ATP from glucose is made in the mitochondria.", "src": ["os-7-2", "os-7-4", "ap-18-3"] },
+        { "q": "Compare the two processes.", "table": { "cols": ["", "Uses", "Makes", "Where"], "rows": ["Cellular respiration", "Photosynthesis"] }, "link": { "path": "cells/#plant/chloroplast", "label": "Chloroplast" }, "answer": "Cellular respiration: uses glucose and oxygen; makes carbon dioxide, water and ATP; glycolysis in the cytoplasm, the rest in mitochondria. Photosynthesis: uses light energy, carbon dioxide and water; makes sugar and oxygen; in chloroplasts.", "src": ["os-7-2", "os-7-3", "os-7-4", "os-8-1", "bio-4-3"] }
+      ],
+      "align": ["ngss-ms:MS-LS1-6", "ngss-ms:MS-LS1-7", "ngss-hs:HS-LS1-7", "on-snc1w:B2.3", "on-sbi4u:C2.1", "on-sbi4u:C3.1", "on-sbi4u:C3.4"]
+    },
+    {
+      "id": "dna-to-protein",
+      "n": 8,
+      "title": "DNA to protein",
+      "minutes": 60,
+      "topics": ["genetics", "molecules", "cells"],
+      "summary": "Students read a real DNA structure, trace a protein's route through the cell, transcribe and translate a short gene by hand, and connect codon counts to real proteins in the explorer.",
+      "goals": [
+        "Describe the structure of DNA and its base-pairing rules.",
+        "Explain transcription (DNA to mRNA) and translation (mRNA to protein) and where each happens.",
+        "Use codons, the start codon and stop codons to find how many amino acids a short gene codes for.",
+        "Explain how inserting or deleting one base changes the protein."
+      ],
+      "materials": ["One device per pair", "Student worksheet 8"],
+      "hook": { "minutes": 5, "text": "Open green fluorescent protein. Its glowing part forms by itself from three amino acids at the centre of a barrel, and scientists use GFP as a marker to see where genes are switched on. Ask: if the glow comes from the order of amino acids, where is that order written down?", "links": [{ "path": "molecules/#gfp", "label": "Green fluorescent protein" }], "src": ["ormo-1996"] },
+      "steps": [
+        { "minutes": 10, "title": "Read the DNA", "text": "Open DNA. Two strands wind into a double helix with the sugar and phosphate backbone outside and the bases pairing across the middle, A with T and G with C. Light up the phosphorus atoms to see the backbone. This crystal is a 12 base pair piece with the strand CGCGAATTCGCG. Students write the partner strand.", "links": [{ "path": "molecules/#dna", "label": "DNA" }, { "path": "molecules/#dna?el=P", "label": "DNA: phosphorus lit up" }], "src": ["os-3-5", "rcsb-1BNA", "rsc"] },
+        { "minutes": 10, "title": "The route through the cell", "text": "The nucleus holds the DNA. Transcription makes a messenger RNA copy, written with A, C, G and U. Ribosomes read the mRNA and join amino acids in the order it sets; some sit on the rough endoplasmic reticulum, and proteins can move on to the Golgi to be packaged.", "links": [{ "path": "cells/#animal/nucleus", "label": "Nucleus" }, { "path": "cells/#animal/ribosomes", "label": "Ribosomes" }, { "path": "cells/#animal/golgi", "label": "Golgi apparatus" }], "src": ["bio-4-3", "bio-4-4", "os-15-1"] },
+        { "minutes": 20, "title": "Decode a gene by hand", "text": "Give the template strand TAC CGT AAA GGC ATT. The mRNA pairs with the template, with U in place of T (A to U, T to A, G to C, C to G). Each amino acid is set by a three-letter codon; there are 64 possible codons. AUG is the start codon and codes for methionine; UAA, UAG and UGA are stop codons. Students transcribe, mark start and stop, and count the amino acids. Then delete the first G of GGC and repeat to see the reading frame shift.", "links": [], "src": ["os-15-1", "os-15-2", "os-15-5"] },
+        { "minutes": 10, "title": "Real proteins, real lengths", "text": "Open insulin (chain A 21 amino acids, chain B 30) and lysozyme (one chain of 129). Students calculate how many coding nucleotides each chain needs at three per amino acid, plus three more for a stop codon.", "links": [{ "path": "molecules/#insulin", "label": "Insulin" }, { "path": "molecules/#lysozyme", "label": "Lysozyme" }], "src": ["rcsb-4INS", "rcsb-1LYZ", "os-15-1", "os-15-5"] },
+        { "minutes": 5, "title": "Exit ticket", "text": "Students answer the exit ticket.", "links": [], "src": [] }
+      ],
+      "discussion": [
+        "Why can't codons be two letters long? Use the numbers 16 and 64.",
+        "Deleting one base changed every amino acid after it. Why would deleting three bases do less damage?",
+        "The DNA in the explorer reads the same on both strands. Is that common, or special to this piece? How could you check?"
+      ],
+      "exit": { "prompt": "An mRNA reads AUG UUU GGC UGA. How many amino acids does it code for, and which codon stops it?", "answer": "Three amino acids (AUG, UUU, GGC); UGA is the stop codon.", "src": ["os-15-1", "os-15-5"] },
+      "support": [
+        "Give a pairing card: template A to mRNA U, T to A, G to C, C to G.",
+        "Pre-split the template strand into groups of three.",
+        "Do the first codon together on the board."
+      ],
+      "extension": [
+        "Write a 15-letter template strand of your own with a start and a stop codon, and swap with a partner to decode.",
+        "Find the start codon AUG in the OpenStax genetic code table and list two other amino acids by their codons."
+      ],
+      "worksheet": [
+        { "q": "Write the partner strand for CGCGAATTCGCG. Then read your partner strand from right to left. What do you notice?", "lines": 2, "link": { "path": "molecules/#dna", "label": "DNA" }, "answer": "Partner strand: GCGCTTAAGCGC. Read right to left it is CGCGAATTCGCG, the same as the first strand. That is why the structure file holds two copies of the same strand.", "src": ["os-3-5", "rcsb-1BNA"] },
+        { "q": "Which element forms the DNA backbone together with sugar? How do you know from the explorer?", "lines": 2, "link": { "path": "molecules/#dna?el=P", "label": "DNA, phosphorus lit" }, "answer": "Phosphorus, in the phosphate groups. When phosphorus is lit up, the gold atoms run along the outside of both strands.", "src": ["os-3-5", "rsc"] },
+        { "q": "Template strand: TAC CGT AAA GGC ATT. Write the mRNA.", "lines": 1, "answer": "AUG GCA UUU CCG UAA", "src": ["os-15-2"] },
+        { "q": "Circle the start codon and the stop codon. How many amino acids are in the protein? What is the first one?", "lines": 2, "answer": "Start AUG, stop UAA. Four amino acids (AUG, GCA, UUU, CCG); the first is methionine.", "src": ["os-15-1", "os-15-5"] },
+        { "q": "Delete the first G of GGC in the template and transcribe again in groups of three. What changes?", "lines": 3, "answer": "New template TAC CGT AAA GCA TT gives mRNA AUG GCA UUU CGU AA. The reading frame shifts: the fourth codon changes from CCG to CGU, and the UAA stop codon is lost, so the protein changes from that point on.", "src": ["os-15-1", "os-15-2"] },
+        { "q": "How many coding nucleotides does each chain need, counting three per amino acid plus a three-letter stop codon?", "table": { "cols": ["Protein chain", "Amino acids", "Nucleotides"], "rows": ["Insulin chain A", "Insulin chain B", "Lysozyme"] }, "link": { "path": "molecules/#insulin", "label": "Insulin" }, "answer": "Insulin chain A: 21 amino acids, 21 x 3 + 3 = 66. Insulin chain B: 30, 93. Lysozyme: 129, 390. (A simplified count that treats each chain as read from its own stretch of mRNA.)", "src": ["rcsb-4INS", "rcsb-1LYZ", "os-15-1", "os-15-5"] }
+      ],
+      "align": ["ngss-hs:HS-LS1-1", "on-sbi3u:D3.2", "on-sbi4u:D2.1", "on-sbi4u:D2.2", "on-sbi4u:D3.2", "on-sbi4u:D3.3"]
+    }
+  ]
+}

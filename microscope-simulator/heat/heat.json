@@ -1,0 +1,187 @@
+{
+  "_note": "All words and numbers shown by heat.js live here. Every number in 'data' and every sentence in 'scenes', 'learn' and 'marks' cites keys in sources.json ('s'). {name} placeholders are filled in by the script. Values the page computes (RT, kT, multiples, odds, the ion pair in water) show their formula on the page.",
+  "ui": {
+    "eyebrow": "Physics of tiny things",
+    "title": "Heat vs the bonds of life",
+    "lede": "Life only works in a narrow band of temperatures. Slide the heat up and down and watch why: the jiggling of heat is tiny next to the bonds inside a molecule, but big enough to snap the weak bonds that hold DNA, proteins and water together.",
+    "sliderLabel": "Temperature",
+    "sliderHelp": "Drag, or use the arrow keys. Page Up and Page Down jump 5 degrees.",
+    "presetsLabel": "Jump to",
+    "landmarksTitle": "Temperature landmarks",
+    "landmarksLede": "Tap one to set the slider there.",
+    "kelvin": "{k} K",
+    "fahrenheit": "{f} °F",
+    "here": "You are here: {name}",
+    "nowhere": "",
+    "energyTitle": "Heat energy vs bond energy",
+    "energyLede": "Each bar is how much energy it takes to break one mole of that bond. The bright line is the energy scale of heat, RT. Bars far to the right of the line hold. Bars near the line get knocked apart.",
+    "axis": "kJ per mole, each step is 10 times bigger",
+    "rtLabel": "Heat: RT = {rt} kJ/mol",
+    "times": "{x} times RT",
+    "timesRange": "{a} to {b} times RT",
+    "odds": "Rough odds a kick of heat is this big: {o}",
+    "oddsOne": "about 1 in {n}",
+    "oddsPow": "about 1 in 10^{p}",
+    "oddsEasy": "most kicks",
+    "mathTitle": "Show the maths",
+    "mathRT": "RT = 8.314462618 J/(mol K) × {k} K = {rt} kJ/mol",
+    "mathKT": "kT = 1.380649 × 10^-23 J/K × {k} K = {kt} × 10^-21 J for one molecule",
+    "mathKE": "Average kinetic energy of a mole of gas = 3/2 RT = {ke} kJ/mol",
+    "mathOdds": "Odds = e^(-E/RT), the same term as in the Arrhenius equation for reaction rates",
+    "mathIon": "Ion pair in water: E = N_A e² / (4π ε₀ κ r) = {vac} kJ/mol in vacuum ÷ κ {kappa} = {wat} kJ/mol at r = {r} nm",
+    "scenesTitle": "Three things heat pulls apart",
+    "scenesLede": "All three move with the same slider. They are drawn to explain, not to scale in time.",
+    "illustrative": "Illustrative model",
+    "pause": "Pause",
+    "play": "Play",
+    "freshEgg": "Fresh egg",
+    "why": "Why it happens",
+    "seeReal": "See the real one",
+    "dnaTitle": "DNA melting",
+    "dnaAlt": "A short DNA double helix lying sideways. The left half is A-T rich, the right half is G-C rich. Pale lines between the bases are hydrogen bonds. As the temperature passes about 86 °C the left half unzips first; the G-C rich right half holds until about 97 °C.",
+    "dnaBlockA": "42% G-C: melts near {t} °C",
+    "dnaBlockB": "67% G-C: melts near {t} °C",
+    "dnaClosed": "All {n} base pairs closed. Hydrogen bonds hold the two strands together.",
+    "dnaSome": "{open} of {n} base pairs open. The A-T rich side opens first, because A-T pairs have 2 hydrogen bonds and G-C pairs have 3.",
+    "dnaAll": "All {n} base pairs open. The two strands have come apart, but each strand is still in one piece.",
+    "proteinTitle": "A protein unfolding",
+    "proteinAlt": "A chain of beads, a simple stand-in for an egg white protein, folded into a coil and a sheet held by pale hydrogen bond lines. Near 80 °C the lines snap and the chain loosens into a tangle. Once cooked, cooling does not fold it back.",
+    "proteinNote": "Egg white protein (ovalbumin) unfolds near {t} °C",
+    "proteinFolded": "Folded. Hydrogen bonds hold the coil and the sheet in shape, so the protein can do its job.",
+    "proteinMelting": "Unfolding: {pct}% of its hydrogen bonds broken.",
+    "proteinCooked": "Unfolded and tangled. This is a cooked egg white: cooling it down will not fold it back.",
+    "proteinCookedCool": "Cooled, but still tangled. Cooking an egg cannot be undone. Press Fresh egg to start again.",
+    "waterTitle": "Water: ice, liquid, steam",
+    "waterAlt": "Water molecules, red oxygen with two white hydrogens. Below 0 °C they sit in a neat crystal joined by hydrogen bonds. Between 0 and 100 °C they tumble about while hydrogen bonds flicker on and off. At 100 °C they fly apart as steam.",
+    "waterIce": "Ice: molecules locked in a crystal by hydrogen bonds. {n} bonds, none breaking.",
+    "waterLiquid": "Liquid: hydrogen bonds form and break all the time. {n} of them right now.",
+    "waterSteam": "Steam: molecules fly apart and almost every hydrogen bond is broken. Each molecule is still H2O.",
+    "learnTitle": "What to remember",
+    "mythTitle": "Common mix-ups",
+    "myth": "Myth",
+    "truth": "What is true",
+    "vocabTitle": "Words to know",
+    "linksTitle": "Keep exploring",
+    "sourcesTitle": "Sources",
+    "sourcesLede": "Every number on this page comes from one of these. Numbers the page works out itself show their formula.",
+    "srcLabel": "Sources:",
+    "live": "{t} °C. Heat energy RT is {rt} kJ/mol. {dna} {protein} {water}",
+    "noscript": "This page needs JavaScript to run the slider. In words: the energy of heat at body temperature, RT, is about 2.6 kJ/mol. A C-C covalent bond takes 345 kJ/mol to break, over 100 times more, so heat cannot break it. Hydrogen bonds take about 8 to 29 kJ/mol, only a few times RT, so heat breaks them easily: egg white protein unfolds near 80 °C, DNA strands separate between about 86 and 97 °C, and water boils at 100 °C.",
+    "nogl": "3D drawing is off in this browser, so these are flat drawings of the same models.",
+    "loading": "Loading",
+    "loadFail": "The page data could not be loaded. Please reload."
+  },
+  "data": {
+    "constants": {
+      "R": { "v": 8.314462618, "unit": "J/(mol K)", "s": ["nist-r"] },
+      "k": { "v": 1.380649e-23, "unit": "J/K", "s": ["nist-k"] },
+      "NA": { "v": 6.02214076e23, "unit": "1/mol", "s": ["nist-na"] },
+      "e": { "v": 1.602176634e-19, "unit": "C", "s": ["nist-e"] },
+      "ep0": { "v": 8.8541878188e-12, "unit": "F/m", "s": ["nist-ep0"] }
+    },
+    "slider": { "min": -20, "max": 110, "step": 0.5, "start": 37 },
+    "presets": [
+      { "id": "ice", "label": "Ice", "t": -10 },
+      { "id": "body", "label": "Body", "t": 37 },
+      { "id": "fever", "label": "High fever", "t": 40 },
+      { "id": "egg", "label": "Egg cooks", "t": 81 },
+      { "id": "dna", "label": "DNA melts", "t": 92 },
+      { "id": "boil", "label": "Boiling", "t": 100 }
+    ],
+    "marks": [
+      { "id": "melt", "lo": 0, "hi": 0, "name": "ice melts", "text": "0 °C: ice melts. It takes 6.01 kJ/mol to melt ice at 0 °C.", "s": ["os-chem-10-3"] },
+      { "id": "body", "lo": 36.5, "hi": 37.5, "name": "normal body temperature", "text": "36.5 to 37.5 °C: your body's core stays in this band.", "s": ["os-ap-24-6"] },
+      { "id": "fever", "lo": 37.2, "hi": 37.5, "name": "the start of a fever", "text": "Above 37.2 to 37.5 °C (measured in the mouth): an adult probably has a fever.", "s": ["medline-fever"] },
+      { "id": "highFever", "lo": 38.9, "hi": 40, "name": "a high fever", "text": "38.9 to 40 °C: a high fever, which even a cold can cause.", "s": ["medline-fever"] },
+      { "id": "danger", "lo": 42, "hi": 42, "name": "fever danger line", "text": "Over 42 °C: the point where a fever can start to damage the brain.", "s": ["medline-fever"] },
+      { "id": "lysozyme", "lo": 77.46, "hi": 77.46, "name": "lysozyme unfolds", "text": "77.46 °C: lysozyme, an egg white protein, unfolds (measured in water). It folds back when cooled.", "s": ["gels-2025"] },
+      { "id": "egg", "lo": 80.22, "hi": 80.22, "name": "egg white protein unfolds", "text": "80.22 °C: ovalbumin, the main egg white protein, unfolds for good (measured in water).", "s": ["gels-2025"] },
+      { "id": "dnaA", "lo": 86.5, "hi": 86.5, "name": "A-T rich DNA melts", "text": "86.5 °C: DNA with 42% G-C pairs melts (strands half apart).", "s": ["hz1v-1982"] },
+      { "id": "pcr", "lo": 95, "hi": 95, "name": "the PCR melting step", "text": "About 95 °C: labs heat DNA this hot to split the strands when they copy it by PCR.", "s": ["os-micro-12-2"] },
+      { "id": "dnaB", "lo": 97, "hi": 97, "name": "G-C rich DNA melts", "text": "97 °C: DNA with 67% G-C pairs melts. More G-C means more heat needed.", "s": ["hz1v-1982"] },
+      { "id": "boil", "lo": 100, "hi": 100, "name": "water boils", "text": "100 °C: water boils at sea level. The heat breaks the hydrogen bonds between molecules.", "s": ["os-bio-2-2"] }
+    ],
+    "bonds": [
+      { "id": "vdw", "name": "Van der Waals", "detail": "between two atoms of nearby molecules", "lo": 0.06, "hi": 1, "s": ["wiki-vdw", "os-chem-10-1"] },
+      { "id": "ion", "name": "Ionic, in water", "detail": "a + and a - ion side by side in water", "lo": "calc", "hi": 8, "calc": { "rNm": 0.4, "kappa": 80 }, "s": ["wiki-saltbridge", "os-up2-8-5", "nist-e", "nist-ep0", "nist-na"] },
+      { "id": "hbond", "name": "Hydrogen bond", "detail": "8 (water to amide) to 29 (water to ammonia); water to water is 21", "lo": 8, "hi": 29, "mark": 21, "s": ["wiki-hbond", "os-chem-10-1"] },
+      { "id": "cc", "name": "C-C covalent", "detail": "the carbon to carbon bond in every food and body molecule", "lo": 345, "hi": 345, "s": ["os-chem-7-5"] },
+      { "id": "oh", "name": "O-H covalent", "detail": "the bond inside every water molecule", "lo": 464, "hi": 464, "s": ["os-chem-7-5"] }
+    ],
+    "dna": { "gcA": 42, "tmA": 86.5, "gcB": 67, "tmB": 97, "seqA": "ATGCATTAGCAATGC", "seqB": "GCGCATGGCCTATCG", "s": ["hz1v-1982", "os-micro-10-2"] },
+    "protein": { "td": 80.22, "s": ["gels-2025", "os-bio-3-4"] },
+    "water": { "melt": 0, "boil": 100, "s": ["os-chem-10-3", "os-bio-2-2"] }
+  },
+  "scenes": {
+    "dna": {
+      "explain": [
+        { "t": "The two strands of DNA are held together by hydrogen bonds between the bases: A pairs with T through 2 hydrogen bonds, G pairs with C through 3.", "s": ["os-chem-10-1"] },
+        { "t": "Hydrogen bonds are weak next to the covalent bonds that join the atoms inside each strand, so heat can unzip the two strands without breaking either strand.", "s": ["os-chem-10-1", "os-bio-2-1"] },
+        { "t": "Because each G-C pair has one more hydrogen bond, DNA with more G-C pairs needs more heat to come apart.", "s": ["os-micro-10-2"] },
+        { "t": "Measured on real DNA from one virus: the part with 42% G-C pairs melted at 86.5 °C, and the part with 67% G-C pairs held on until 97 °C.", "s": ["hz1v-1982"] },
+        { "t": "Melting is not the end. Cool the strands slowly and the hydrogen bonds form again, pairing the strands back up.", "s": ["os-micro-10-2"] },
+        { "t": "Labs use this every day. PCR heats DNA to about 95 °C to split the strands, cools it to about 50 °C, then holds it at 72 °C so a heat-proof enzyme can copy each strand.", "s": ["os-micro-12-2"] },
+        { "t": "In this model the left half has 40% G-C pairs and the right half 67%. Each half opens near its measured melting point; the exact temperature of each pair is illustrative.", "s": ["hz1v-1982"] }
+      ]
+    },
+    "protein": {
+      "explain": [
+        { "t": "A protein is a long chain of amino acids that folds into one exact shape. Hydrogen bonds hold its coils (alpha helices) and pleated sheets (beta sheets).", "s": ["os-bio-3-4"] },
+        { "t": "In a coil, each amino acid's C=O group bonds to the N-H group of the amino acid four places along the chain. You can see those links in the model.", "s": ["os-bio-3-4"] },
+        { "t": "Ionic bonds, hydrogen bonds and van der Waals interactions all help hold the folded shape, and each one is weak on its own.", "s": ["os-bio-2-1"] },
+        { "t": "Heat, acid or some chemicals can make a protein lose its shape without changing its chain of amino acids. This is called denaturation.", "s": ["os-bio-3-4"] },
+        { "t": "Frying an egg is denaturation you can see: the albumin in clear egg white unfolds, tangles and turns white, and it never turns back.", "s": ["os-bio-3-4"] },
+        { "t": "Measured in water, ovalbumin, the main egg white protein, unfolds at 80.22 °C. Lysozyme, another egg white protein, unfolds at 77.46 °C but almost all of it folds back when cooled.", "s": ["gels-2025"] },
+        { "t": "Enzymes are proteins too. Warmth speeds them up, but past their best range their active sites change shape, and high heat denatures them.", "s": ["os-bio-6-5"] },
+        { "t": "One salt bridge (an ionic bond inside a protein) was measured adding 3 to 5 kcal/mol, about 13 to 21 kJ/mol, to the stability of a folded protein. Many small bonds add up.", "s": ["anderson-1990"] }
+      ]
+    },
+    "water": {
+      "explain": [
+        { "t": "Each water molecule has a slightly negative oxygen end and slightly positive hydrogen ends, so neighbours pull on each other with hydrogen bonds.", "s": ["os-bio-2-2"] },
+        { "t": "In ice there is not enough energy to break those bonds, so the molecules lock into a crystal. The crystal holds them farther apart than in liquid water, which is why ice floats.", "s": ["os-bio-2-2"] },
+        { "t": "In liquid water, hydrogen bonds constantly form and break as molecules slide past each other.", "s": ["os-bio-2-2"] },
+        { "t": "At 100 °C the heat breaks the hydrogen bonds and molecules escape as steam. While it boils, the water stays at the same temperature: the extra heat goes into breaking bonds.", "s": ["os-bio-2-2", "os-chem-10-3"] },
+        { "t": "Turning a mole of water (18 g) into steam takes 40.67 kJ at 100 °C, much more than the 6.01 kJ needed to melt a mole of ice.", "s": ["os-chem-10-3"] },
+        { "t": "Your sweat uses this: evaporating water at body temperature takes 43.46 kJ per mole, and that heat comes out of your skin.", "s": ["os-chem-10-3"] },
+        { "t": "Steam is still H2O. Boiling breaks the bonds between molecules, not the O-H bonds inside them, which need 464 kJ/mol.", "s": ["os-chem-10-1", "os-chem-7-5"] }
+      ]
+    }
+  },
+  "learn": {
+    "keyIdeas": [
+      { "t": "Heat is the jiggling of molecules. Its energy scale is RT, about 2.58 kJ/mol at body temperature (8.314 J/(mol K) × 310.15 K), and it grows in step with the temperature in kelvin.", "s": ["nist-r", "os-chem-9-5"] },
+      { "t": "Covalent bonds are far stronger than that: a C-C bond takes 345 kJ/mol to break, over 130 times RT at body temperature. That is why the molecules of life do not fall apart in your body.", "s": ["os-chem-7-5"] },
+      { "t": "Hydrogen bonds are only about 5 to 10% as strong as covalent bonds, a few times RT. Heat breaks them easily, and in liquid water they form and break all the time.", "s": ["os-chem-10-1", "os-bio-2-2"] },
+      { "t": "The shapes of DNA and proteins are held by many weak bonds working together. Add enough heat and they come apart: egg white protein near 80 °C, DNA between about 86 and 97 °C depending on how many G-C pairs it has.", "s": ["os-bio-2-1", "gels-2025", "hz1v-1982"] },
+      { "t": "Your body keeps its core at 36.5 to 37.5 °C. A fever over 42 °C is where brain damage becomes a risk, so the band life works in is narrow.", "s": ["os-ap-24-6", "medline-fever"] }
+    ],
+    "misconceptions": [
+      { "myth": "Boiling water breaks water molecules into hydrogen and oxygen.", "truth": "Boiling breaks the hydrogen bonds between water molecules. The O-H bonds inside each molecule need 464 kJ/mol and stay whole, so steam is still H2O.", "s": ["os-bio-2-2", "os-chem-7-5", "os-chem-10-1"] },
+      { "myth": "A hydrogen bond is the bond that holds a hydrogen atom inside a molecule.", "truth": "That is a covalent bond. A hydrogen bond is a weaker pull between a slightly positive hydrogen and a slightly negative atom on another molecule, or on another part of the same big molecule.", "s": ["os-chem-10-1", "os-bio-2-1"] },
+      { "myth": "Cooking an egg destroys its protein.", "truth": "Cooking changes the protein's shape, not its chain of amino acids. The amino acids are all still there, in the same order.", "s": ["os-bio-3-4"] },
+      { "myth": "Every protein is ruined by heat for good.", "truth": "Not all proteins denature at high temperatures, and some refold when cooled. Lysozyme from egg white unfolds at 77.46 °C and almost all of it folds back again.", "s": ["os-bio-3-4", "gels-2025"] },
+      { "myth": "When DNA melts it turns into liquid, like ice does.", "truth": "DNA melting means the two strands separate as their hydrogen bonds break. Each strand stays in one piece, and cooling lets the strands pair up again.", "s": ["os-micro-10-2"] }
+    ],
+    "vocab": [
+      { "term": "Thermal energy", "definition": "The energy of molecules moving and jiggling. The hotter something is, the faster its molecules move.", "s": ["os-chem-9-5"] },
+      { "term": "RT and kT", "definition": "The energy scale of heat. RT is for a mole of molecules (R is the gas constant, T the temperature in kelvin); kT is the same thing for one molecule (k is the Boltzmann constant).", "s": ["nist-r", "nist-k"] },
+      { "term": "Bond energy", "definition": "The energy needed to break one mole of a particular bond. Bigger number, stronger bond.", "s": ["os-chem-7-5"] },
+      { "term": "Covalent bond", "definition": "A strong bond where two atoms share electrons, like the C-C and O-H bonds inside molecules.", "s": ["os-chem-7-5", "os-bio-2-1"] },
+      { "term": "Hydrogen bond", "definition": "A weak pull between a slightly positive hydrogen and a slightly negative atom such as oxygen or nitrogen nearby. It holds DNA strands together and water molecules to each other.", "s": ["os-chem-10-1", "os-bio-2-1"] },
+      { "term": "Van der Waals interactions", "definition": "Very weak attractions between neutral atoms and molecules caused by brief shifts in their electrons. Millions of them let a gecko stick to a wall.", "s": ["os-chem-10-1", "os-bio-2-1"] },
+      { "term": "Ionic bond", "definition": "The pull between a positive ion and a negative ion. Very strong in a dry crystal, but water weakens it about 80 times.", "s": ["os-bio-2-1", "os-up2-8-5"] },
+      { "term": "Denaturation", "definition": "When a protein or DNA loses its shape because of heat, acid or chemicals, without its chain changing.", "s": ["os-bio-3-4", "os-micro-10-2"] },
+      { "term": "Melting temperature (Tm)", "definition": "For DNA, the temperature where half of the double strands have come apart. More G-C pairs means a higher Tm.", "s": ["hz1v-1982", "os-micro-10-2"] }
+    ]
+  },
+  "links": [
+    { "href": "../dna/", "label": "Fly along DNA", "detail": "A cinematic 3D double helix" },
+    { "href": "../molecules/#dna", "label": "Real DNA", "detail": "The crystal structure 1BNA" },
+    { "href": "../molecules/#lysozyme", "label": "Lysozyme", "detail": "A real egg white protein" },
+    { "href": "../molecules/#water", "label": "Water", "detail": "One molecule up close" },
+    { "href": "../lab/", "label": "Molecule lab", "detail": "Build molecules bond by bond" },
+    { "href": "../cells/", "label": "Cells", "detail": "Where these molecules work" },
+    { "href": "../processes/", "label": "How life works", "detail": "DNA to protein, and more" }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+ "id": "glucose",
+ "structure": "GLC",
+ "tour": [
+  {"id": "whole", "title": "A sugar ring", "focus": {"atoms": ["C1", "C2", "C3", "C4", "C5", "C6", "O1", "O2", "O3", "O4", "O5", "O6"]}, "view": "ball-and-stick",
+   "text": [{"t": "Glucose is a simple sugar with the formula C6H12O6: six carbons, twelve hydrogens and six oxygens.", "s": ["os-3-2", "pubchem-glucose"]}]},
+  {"id": "ring", "title": "Five carbons and an oxygen", "focus": {"atoms": ["C1", "C2", "C3", "C4", "C5", "O5"]}, "view": "ball-and-stick",
+   "text": [{"t": "Five carbons and one oxygen close into a six-sided ring.", "s": ["ccd-GLC"]},
+            {"t": "In water, simple sugars like glucose are mostly found in ring form.", "s": ["os-3-2"]}]},
+  {"id": "sixth-carbon", "title": "The sixth carbon", "focus": {"atoms": ["C6", "O6"]}, "view": "ball-and-stick",
+   "text": [{"t": "The sixth carbon sticks out of the ring and carries its own OH group.", "s": ["ccd-GLC", "pubchem-glucose"]}]},
+  {"id": "oh-groups", "title": "Five OH groups", "focus": {"atoms": ["O1", "O2", "O3", "O4", "O6", "HO1", "HO2", "HO3", "HO4", "HO6"]}, "view": "ball-and-stick",
+   "text": [{"t": "Five OH groups stick out around the molecule.", "s": ["ccd-GLC"]}]}
+ ],
+ "sections": {
+  "does": [
+   {"t": "Glucose is an important source of energy for humans.", "s": ["os-3-2"]},
+   {"t": "During cellular respiration, cells release the energy in glucose and use it to make ATP.", "s": ["os-3-2"]}
+  ],
+  "shape": [
+   {"t": "Glucose, galactose and fructose share the same formula, C6H12O6, but their atoms are arranged differently, so they differ chemically.", "s": ["os-3-2"]},
+   {"t": "This model is alpha-D-glucopyranose, one of glucose's ring forms.", "s": ["ccd-GLC"]}
+  ],
+  "lives": {
+   "text": [
+    {"t": "Plants make glucose from carbon dioxide and water.", "s": ["os-3-2"]},
+    {"t": "Animals that eat plants often get glucose by breaking down starch.", "s": ["os-3-2"]},
+    {"t": "Insulin tells liver, muscle and fat cells to take glucose out of the blood.", "s": ["motm-insulin"]}
+   ],
+   "links": [{"type": "process", "id": "respiration"}, {"type": "process", "id": "photosynthesis"}, {"type": "molecule", "id": "insulin"}, {"type": "molecule", "id": "atp"}, {"type": "element", "id": "C"}]
+  },
+  "wrong": [
+   {"t": "When insulin does not work properly, glucose builds up in the blood, a condition called diabetes mellitus.", "s": ["os-37-3", "motm-insulin"]}
+  ],
+  "size": {
+   "nm": 0.8,
+   "compare": [
+    {"t": "From its farthest atom to its farthest atom, glucose measures about 0.8 nm.", "s": ["ccd-GLC"]},
+    {"t": "A water molecule, the smallest in this gallery, measures about 0.16 nm.", "s": ["ccd-GLC", "ccd-HOH"]}
+   ]
+  }
+ },
+ "highlights": [
+  {"atoms": ["O5"], "label": "Ring oxygen", "text": [{"t": "The one oxygen inside the ring.", "s": ["ccd-GLC"]}]},
+  {"atoms": ["C6"], "label": "The sixth carbon", "text": [{"t": "The carbon outside the ring.", "s": ["ccd-GLC"]}]}
+ ],
+ "review": "pending"
+}

@@ -1,0 +1,3913 @@
+{
+ "about": "Built by tools/build_links.py from the structure files' atom records and cells/cells.json. Do not edit by hand; rerun the script.",
+ "molecules": {
+  "water": {
+   "name": "Water",
+   "short": "Water",
+   "group": "small",
+   "kind": "ccd",
+   "code": "HOH",
+   "file": "data/HOH.cif",
+   "atoms": 3,
+   "hasHydrogen": true,
+   "elements": {
+    "H": 2,
+    "O": 1
+   },
+   "href": "../molecules/#water",
+   "cellParts": []
+  },
+  "glucose": {
+   "name": "Glucose",
+   "short": "Glucose",
+   "group": "small",
+   "kind": "ccd",
+   "code": "GLC",
+   "file": "data/GLC.cif",
+   "atoms": 24,
+   "hasHydrogen": true,
+   "elements": {
+    "H": 12,
+    "C": 6,
+    "O": 6
+   },
+   "href": "../molecules/#glucose",
+   "cellParts": []
+  },
+  "atp": {
+   "name": "ATP",
+   "short": "ATP",
+   "group": "small",
+   "kind": "ccd",
+   "code": "ATP",
+   "file": "data/ATP.cif",
+   "atoms": 47,
+   "hasHydrogen": true,
+   "elements": {
+    "H": 16,
+    "O": 13,
+    "C": 10,
+    "N": 5,
+    "P": 3
+   },
+   "href": "../molecules/#atp",
+   "cellParts": [
+    {
+     "cell": "animal",
+     "cellName": "Animal cell",
+     "part": "mitochondrion",
+     "partName": "Mitochondria",
+     "href": "../cells/#animal/mitochondrion"
+    },
+    {
+     "cell": "plant",
+     "cellName": "Plant cell",
+     "part": "mitochondrion",
+     "partName": "Mitochondria",
+     "href": "../cells/#plant/mitochondrion"
+    },
+    {
+     "cell": "muscle",
+     "cellName": "Muscle cell (fibre)",
+     "part": "m-mito",
+     "partName": "Mitochondria",
+     "href": "../cells/#muscle/m-mito"
+    }
+   ]
+  },
+  "glycine": {
+   "name": "Glycine (an amino acid)",
+   "short": "Glycine",
+   "group": "small",
+   "kind": "ccd",
+   "code": "GLY",
+   "file": "data/GLY.cif",
+   "atoms": 10,
+   "hasHydrogen": true,
+   "elements": {
+    "H": 5,
+    "C": 2,
+    "O": 2,
+    "N": 1
+   },
+   "href": "../molecules/#glycine",
+   "cellParts": []
+  },
+  "palmitic-acid": {
+   "name": "Palmitic acid (a fatty acid)",
+   "short": "Palmitic acid",
+   "group": "small",
+   "kind": "ccd",
+   "code": "PLM",
+   "file": "data/PLM.cif",
+   "atoms": 50,
+   "hasHydrogen": true,
+   "elements": {
+    "H": 32,
+    "C": 16,
+    "O": 2
+   },
+   "href": "../molecules/#palmitic-acid",
+   "cellParts": [
+    {
+     "cell": "animal",
+     "cellName": "Animal cell",
+     "part": "membrane",
+     "partName": "Cell membrane",
+     "href": "../cells/#animal/membrane"
+    },
+    {
+     "cell": "plant",
+     "cellName": "Plant cell",
+     "part": "membrane",
+     "partName": "Cell membrane",
+     "href": "../cells/#plant/membrane"
+    },
+    {
+     "cell": "bacterium",
+     "cellName": "Bacterial cell",
+     "part": "b-membrane",
+     "partName": "Cell membrane",
+     "href": "../cells/#bacterium/b-membrane"
+    },
+    {
+     "cell": "rbc",
+     "cellName": "Red blood cell",
+     "part": "rbc-membrane",
+     "partName": "Cell membrane (the disc shape)",
+     "href": "../cells/#rbc/rbc-membrane"
+    },
+    {
+     "cell": "muscle",
+     "cellName": "Muscle cell (fibre)",
+     "part": "sarcolemma",
+     "partName": "Sarcolemma (cell membrane)",
+     "href": "../cells/#muscle/sarcolemma"
+    }
+   ]
+  },
+  "cholesterol": {
+   "name": "Cholesterol",
+   "short": "Cholesterol",
+   "group": "small",
+   "kind": "ccd",
+   "code": "CLR",
+   "file": "data/CLR.cif",
+   "atoms": 74,
+   "hasHydrogen": true,
+   "elements": {
+    "H": 46,
+    "C": 27,
+    "O": 1
+   },
+   "href": "../molecules/#cholesterol",
+   "cellParts": []
+  },
+  "actin": {
+   "name": "Actin",
+   "short": "Actin",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1J6Z",
+   "file": "../data/1J6Z.cif",
+   "atoms": 2946,
+   "hasHydrogen": false,
+   "elements": {
+    "C": 1858,
+    "O": 565,
+    "N": 494,
+    "S": 21,
+    "Ca": 6,
+    "P": 2
+   },
+   "href": "../molecules/#actin",
+   "cellParts": [
+    {
+     "cell": "animal",
+     "cellName": "Animal cell",
+     "part": "cytoskeleton",
+     "partName": "Cytoskeleton",
+     "href": "../cells/#animal/cytoskeleton"
+    },
+    {
+     "cell": "muscle",
+     "cellName": "Muscle cell (fibre)",
+     "part": "myofibrils",
+     "partName": "Myofibrils",
+     "href": "../cells/#muscle/myofibrils"
+    }
+   ]
+  },
+  "dna": {
+   "name": "DNA",
+   "short": "DNA",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1BNA",
+   "file": "data/1BNA.cif",
+   "atoms": 486,
+   "hasHydrogen": false,
+   "elements": {
+    "C": 232,
+    "O": 140,
+    "N": 92,
+    "P": 22
+   },
+   "href": "../molecules/#dna",
+   "cellParts": [
+    {
+     "cell": "animal",
+     "cellName": "Animal cell",
+     "part": "nucleus",
+     "partName": "Nucleus",
+     "href": "../cells/#animal/nucleus"
+    },
+    {
+     "cell": "plant",
+     "cellName": "Plant cell",
+     "part": "nucleus",
+     "partName": "Nucleus",
+     "href": "../cells/#plant/nucleus"
+    },
+    {
+     "cell": "neuron",
+     "cellName": "Nerve cell (neuron)",
+     "part": "nucleus",
+     "partName": "Nucleus",
+     "href": "../cells/#neuron/nucleus"
+    },
+    {
+     "cell": "bacterium",
+     "cellName": "Bacterial cell",
+     "part": "nucleoid",
+     "partName": "Nucleoid (the DNA)",
+     "href": "../cells/#bacterium/nucleoid"
+    },
+    {
+     "cell": "muscle",
+     "cellName": "Muscle cell (fibre)",
+     "part": "m-nuclei",
+     "partName": "Nuclei (many)",
+     "href": "../cells/#muscle/m-nuclei"
+    }
+   ]
+  },
+  "hemoglobin": {
+   "name": "Hemoglobin",
+   "short": "Hemoglobin",
+   "group": "big",
+   "kind": "pdb",
+   "code": "4HHB",
+   "file": "data/4HHB.cif",
+   "atoms": 4558,
+   "hasHydrogen": false,
+   "elements": {
+    "C": 2954,
+    "O": 806,
+    "N": 780,
+    "S": 12,
+    "Fe": 4,
+    "P": 2
+   },
+   "href": "../molecules/#hemoglobin",
+   "cellParts": [
+    {
+     "cell": "rbc",
+     "cellName": "Red blood cell",
+     "part": "rbc-hb",
+     "partName": "Inside, packed with hemoglobin",
+     "href": "../cells/#rbc/rbc-hb"
+    }
+   ]
+  },
+  "insulin": {
+   "name": "Insulin",
+   "short": "Insulin",
+   "group": "big",
+   "kind": "pdb",
+   "code": "4INS",
+   "file": "data/4INS.cif",
+   "atoms": 832,
+   "hasHydrogen": false,
+   "elements": {
+    "C": 524,
+    "O": 156,
+    "N": 138,
+    "S": 12,
+    "Zn": 2
+   },
+   "href": "../molecules/#insulin",
+   "cellParts": []
+  },
+  "collagen": {
+   "name": "Collagen",
+   "short": "Collagen",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1CAG",
+   "file": "data/1CAG.cif",
+   "atoms": 589,
+   "hasHydrogen": false,
+   "elements": {
+    "C": 371,
+    "O": 130,
+    "N": 88
+   },
+   "href": "../molecules/#collagen",
+   "cellParts": []
+  },
+  "myosin": {
+   "name": "Myosin (head)",
+   "short": "Myosin",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1B7T",
+   "file": "data/1B7T.cif",
+   "atoms": 8279,
+   "hasHydrogen": false,
+   "elements": {
+    "C": 5271,
+    "O": 1560,
+    "N": 1393,
+    "S": 50,
+    "Mg": 2,
+    "P": 2,
+    "Ca": 1
+   },
+   "href": "../molecules/#myosin",
+   "cellParts": []
+  },
+  "gfp": {
+   "name": "Green fluorescent protein",
+   "short": "GFP",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1EMA",
+   "file": "data/1EMA.cif",
+   "atoms": 1771,
+   "hasHydrogen": false,
+   "elements": {
+    "C": 1134,
+    "O": 338,
+    "N": 293,
+    "Se": 4,
+    "S": 2
+   },
+   "href": "../molecules/#gfp",
+   "cellParts": []
+  },
+  "lysozyme": {
+   "name": "Lysozyme",
+   "short": "Lysozyme",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1LYZ",
+   "file": "data/1LYZ.cif",
+   "atoms": 1001,
+   "hasHydrogen": false,
+   "elements": {
+    "C": 613,
+    "N": 193,
+    "O": 185,
+    "S": 10
+   },
+   "href": "../molecules/#lysozyme",
+   "cellParts": []
+  },
+  "aquaporin": {
+   "name": "Aquaporin 1",
+   "short": "Aquaporin 1",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1J4N",
+   "file": "data/1J4N.cif",
+   "atoms": 1915,
+   "hasHydrogen": false,
+   "elements": {
+    "C": 1247,
+    "O": 347,
+    "N": 314,
+    "S": 7
+   },
+   "href": "../molecules/#aquaporin",
+   "cellParts": []
+  },
+  "atp-synthase": {
+   "name": "ATP synthase (F1 head)",
+   "short": "ATP synthase",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1MAB",
+   "file": "data/1MAB.cif",
+   "atoms": 8428,
+   "hasHydrogen": false,
+   "elements": {
+    "C": 5286,
+    "O": 1636,
+    "N": 1468,
+    "S": 31,
+    "P": 6,
+    "Mg": 1
+   },
+   "href": "../molecules/#atp-synthase",
+   "cellParts": []
+  },
+  "kinesin": {
+   "name": "Kinesin",
+   "short": "Kinesin",
+   "group": "big",
+   "kind": "pdb",
+   "code": "3KIN",
+   "file": "data/3KIN.cif",
+   "atoms": 5683,
+   "hasHydrogen": false,
+   "elements": {
+    "C": 3564,
+    "O": 1097,
+    "N": 988,
+    "S": 30,
+    "P": 4
+   },
+   "href": "../molecules/#kinesin",
+   "cellParts": []
+  },
+  "potassium-channel": {
+   "name": "Potassium channel (KcsA)",
+   "short": "Potassium channel",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1BL8",
+   "file": "data/1BL8.cif",
+   "atoms": 2823,
+   "hasHydrogen": false,
+   "elements": {
+    "C": 1876,
+    "O": 484,
+    "N": 452,
+    "S": 8,
+    "K": 3
+   },
+   "href": "../molecules/#potassium-channel",
+   "cellParts": []
+  },
+  "nucleosome": {
+   "name": "Nucleosome",
+   "short": "Nucleosome",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1AOI",
+   "file": "data/1AOI.cif",
+   "atoms": 12372,
+   "hasHydrogen": false,
+   "elements": {
+    "C": 6879,
+    "O": 2867,
+    "N": 2318,
+    "P": 290,
+    "S": 12,
+    "Mn": 6
+   },
+   "href": "../molecules/#nucleosome",
+   "cellParts": []
+  },
+  "acetylcholinesterase": {
+   "name": "Acetylcholinesterase",
+   "short": "Acetylcholinesterase",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1ACJ",
+   "file": "data/1ACJ.cif",
+   "atoms": 4110,
+   "hasHydrogen": false,
+   "elements": {
+    "C": 2668,
+    "O": 733,
+    "N": 688,
+    "S": 21
+   },
+   "href": "../molecules/#acetylcholinesterase",
+   "cellParts": []
+  },
+  "hiv-protease": {
+   "name": "HIV-1 protease with ritonavir",
+   "short": "HIV protease",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1HXW",
+   "file": "data/1HXW.cif",
+   "atoms": 1902,
+   "hasHydrogen": true,
+   "elements": {
+    "C": 1017,
+    "H": 332,
+    "O": 275,
+    "N": 268,
+    "S": 10
+   },
+   "href": "../molecules/#hiv-protease",
+   "cellParts": []
+  },
+  "pepsin": {
+   "name": "Pepsin",
+   "short": "Pepsin",
+   "group": "big",
+   "kind": "pdb",
+   "code": "4PEP",
+   "file": "data/4PEP.cif",
+   "atoms": 2433,
+   "hasHydrogen": false,
+   "elements": {
+    "C": 1530,
+    "O": 527,
+    "N": 365,
+    "S": 10,
+    "P": 1
+   },
+   "href": "../molecules/#pepsin",
+   "cellParts": []
+  },
+  "adrenaline": {
+   "name": "Adrenaline",
+   "short": "Adrenaline",
+   "group": "small",
+   "kind": "ccd",
+   "code": "ALE",
+   "file": "data/ALE.cif",
+   "atoms": 26,
+   "hasHydrogen": true,
+   "elements": {
+    "H": 13,
+    "C": 9,
+    "O": 3,
+    "N": 1
+   },
+   "href": "../molecules/#adrenaline",
+   "cellParts": []
+  },
+  "dopamine": {
+   "name": "Dopamine",
+   "short": "Dopamine",
+   "group": "small",
+   "kind": "ccd",
+   "code": "LDP",
+   "file": "data/LDP.cif",
+   "atoms": 22,
+   "hasHydrogen": true,
+   "elements": {
+    "H": 11,
+    "C": 8,
+    "O": 2,
+    "N": 1
+   },
+   "href": "../molecules/#dopamine",
+   "cellParts": []
+  },
+  "serotonin": {
+   "name": "Serotonin",
+   "short": "Serotonin",
+   "group": "small",
+   "kind": "ccd",
+   "code": "SRO",
+   "file": "data/SRO.cif",
+   "atoms": 25,
+   "hasHydrogen": true,
+   "elements": {
+    "H": 12,
+    "C": 10,
+    "N": 2,
+    "O": 1
+   },
+   "href": "../molecules/#serotonin",
+   "cellParts": []
+  },
+  "oxytocin": {
+   "name": "Oxytocin (with its carrier neurophysin)",
+   "short": "Oxytocin",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1NPO",
+   "file": "data/1NPO.cif",
+   "atoms": 1247,
+   "hasHydrogen": false,
+   "elements": {
+    "C": 745,
+    "O": 250,
+    "N": 220,
+    "S": 32
+   },
+   "href": "../molecules/#oxytocin",
+   "cellParts": []
+  },
+  "acetylcholine": {
+   "name": "Acetylcholine",
+   "short": "Acetylcholine",
+   "group": "small",
+   "kind": "ccd",
+   "code": "ACH",
+   "file": "data/ACH.cif",
+   "atoms": 26,
+   "hasHydrogen": true,
+   "elements": {
+    "H": 16,
+    "C": 7,
+    "O": 2,
+    "N": 1
+   },
+   "href": "../molecules/#acetylcholine",
+   "cellParts": []
+  },
+  "antibody": {
+   "name": "Antibody (IgG)",
+   "short": "Antibody",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1IGT",
+   "file": "data/1IGT.cif",
+   "atoms": 12956,
+   "hasHydrogen": true,
+   "elements": {
+    "C": 6564,
+    "H": 2522,
+    "O": 2102,
+    "N": 1712,
+    "S": 56
+   },
+   "href": "../molecules/#antibody",
+   "cellParts": []
+  },
+  "virus-capsid": {
+   "name": "Virus shell (satellite tobacco necrosis virus)",
+   "short": "Virus shell",
+   "group": "big",
+   "kind": "pdb",
+   "code": "2BUK",
+   "file": "data/2BUK.cif",
+   "atoms": 1430,
+   "hasHydrogen": false,
+   "elements": {
+    "C": 889,
+    "O": 272,
+    "N": 260,
+    "S": 6,
+    "Ca": 3
+   },
+   "href": "../molecules/#virus-capsid",
+   "cellParts": []
+  },
+  "mhc": {
+   "name": "MHC class I (HLA-B27)",
+   "short": "MHC",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1HSA",
+   "file": "data/1HSA.cif",
+   "atoms": 6266,
+   "hasHydrogen": false,
+   "elements": {
+    "C": 3918,
+    "O": 1208,
+    "N": 1120,
+    "S": 20
+   },
+   "href": "../molecules/#mhc",
+   "cellParts": []
+  },
+  "rubisco": {
+   "name": "Rubisco",
+   "short": "Rubisco",
+   "group": "big",
+   "kind": "pdb",
+   "code": "8RUC",
+   "file": "data/8RUC.cif",
+   "atoms": 18848,
+   "hasHydrogen": false,
+   "elements": {
+    "C": 11992,
+    "O": 3516,
+    "N": 3228,
+    "S": 100,
+    "P": 8,
+    "Mg": 4
+   },
+   "href": "../molecules/#rubisco",
+   "cellParts": []
+  },
+  "chlorophyll": {
+   "name": "Chlorophyll a",
+   "short": "Chlorophyll",
+   "group": "small",
+   "kind": "ccd",
+   "code": "CLA",
+   "file": "data/CLA.cif",
+   "atoms": 137,
+   "hasHydrogen": true,
+   "elements": {
+    "H": 72,
+    "C": 55,
+    "O": 5,
+    "N": 4,
+    "Mg": 1
+   },
+   "href": "../molecules/#chlorophyll",
+   "cellParts": []
+  },
+  "caffeine": {
+   "name": "Caffeine",
+   "short": "Caffeine",
+   "group": "small",
+   "kind": "ccd",
+   "code": "CFF",
+   "file": "data/CFF.cif",
+   "atoms": 24,
+   "hasHydrogen": true,
+   "elements": {
+    "H": 10,
+    "C": 8,
+    "N": 4,
+    "O": 2
+   },
+   "href": "../molecules/#caffeine",
+   "cellParts": []
+  },
+  "capsaicin": {
+   "name": "Capsaicin",
+   "short": "Capsaicin",
+   "group": "small",
+   "kind": "ccd",
+   "code": "4DY",
+   "file": "data/4DY.cif",
+   "atoms": 49,
+   "hasHydrogen": true,
+   "elements": {
+    "H": 27,
+    "C": 18,
+    "O": 3,
+    "N": 1
+   },
+   "href": "../molecules/#capsaicin",
+   "cellParts": []
+  },
+  "sucrose": {
+   "name": "Sucrose",
+   "short": "Sucrose",
+   "group": "small",
+   "kind": "ccd",
+   "code": "SUC",
+   "file": "data/SUC.cif",
+   "atoms": 45,
+   "hasHydrogen": true,
+   "elements": {
+    "H": 22,
+    "C": 12,
+    "O": 11
+   },
+   "href": "../molecules/#sucrose",
+   "cellParts": []
+  },
+  "vitamin-c": {
+   "name": "Vitamin C",
+   "short": "Vitamin C",
+   "group": "small",
+   "kind": "ccd",
+   "code": "ASC",
+   "file": "data/ASC.cif",
+   "atoms": 20,
+   "hasHydrogen": true,
+   "elements": {
+    "H": 8,
+    "C": 6,
+    "O": 6
+   },
+   "href": "../molecules/#vitamin-c",
+   "cellParts": []
+  },
+  "beta-carotene": {
+   "name": "Beta-carotene",
+   "short": "Beta-carotene",
+   "group": "small",
+   "kind": "ccd",
+   "code": "BCR",
+   "file": "data/BCR.cif",
+   "atoms": 96,
+   "hasHydrogen": true,
+   "elements": {
+    "H": 56,
+    "C": 40
+   },
+   "href": "../molecules/#beta-carotene",
+   "cellParts": []
+  },
+  "myoglobin": {
+   "name": "Myoglobin",
+   "short": "Myoglobin",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1MBN",
+   "file": "data/1MBN.cif",
+   "atoms": 1260,
+   "hasHydrogen": false,
+   "elements": {
+    "C": 817,
+    "N": 220,
+    "O": 220,
+    "S": 2,
+    "Fe": 1
+   },
+   "href": "../molecules/#myoglobin",
+   "cellParts": []
+  },
+  "keratin": {
+   "name": "Keratin (keratin 5 and 14 coil)",
+   "short": "Keratin",
+   "group": "big",
+   "kind": "pdb",
+   "code": "3TNU",
+   "file": "data/3TNU.cif",
+   "atoms": 1504,
+   "hasHydrogen": false,
+   "elements": {
+    "C": 921,
+    "O": 298,
+    "N": 273,
+    "S": 12
+   },
+   "href": "../molecules/#keratin",
+   "cellParts": []
+  },
+  "rhodopsin": {
+   "name": "Rhodopsin",
+   "short": "Rhodopsin",
+   "group": "big",
+   "kind": "pdb",
+   "code": "1F88",
+   "file": "data/1F88.cif",
+   "atoms": 5240,
+   "hasHydrogen": false,
+   "elements": {
+    "C": 3489,
+    "O": 902,
+    "N": 788,
+    "S": 51,
+    "Hg": 6,
+    "Zn": 4
+   },
+   "href": "../molecules/#rhodopsin",
+   "cellParts": []
+  },
+  "nitrogen": {
+   "name": "Nitrogen gas",
+   "short": "Nitrogen",
+   "group": "small",
+   "kind": "ccd",
+   "code": "HDZ",
+   "file": "data/HDZ.cif",
+   "atoms": 2,
+   "hasHydrogen": false,
+   "elements": {
+    "N": 2
+   },
+   "href": "../molecules/#nitrogen",
+   "cellParts": []
+  },
+  "oxygen": {
+   "name": "Oxygen gas",
+   "short": "Oxygen",
+   "group": "small",
+   "kind": "ccd",
+   "code": "OXY",
+   "file": "data/OXY.cif",
+   "atoms": 2,
+   "hasHydrogen": false,
+   "elements": {
+    "O": 2
+   },
+   "href": "../molecules/#oxygen",
+   "cellParts": []
+  },
+  "argon": {
+   "name": "Argon (a single atom)",
+   "short": "Argon",
+   "group": "small",
+   "kind": "ccd",
+   "code": "AR",
+   "file": "data/AR.cif",
+   "atoms": 1,
+   "hasHydrogen": false,
+   "elements": {
+    "Ar": 1
+   },
+   "href": "../molecules/#argon",
+   "cellParts": []
+  },
+  "carbon-dioxide": {
+   "name": "Carbon dioxide",
+   "short": "Carbon dioxide",
+   "group": "small",
+   "kind": "ccd",
+   "code": "CO2",
+   "file": "data/CO2.cif",
+   "atoms": 3,
+   "hasHydrogen": false,
+   "elements": {
+    "O": 2,
+    "C": 1
+   },
+   "href": "../molecules/#carbon-dioxide",
+   "cellParts": []
+  },
+  "ozone": {
+   "name": "Ozone",
+   "short": "Ozone",
+   "group": "small",
+   "kind": "ccd",
+   "code": "CID24823",
+   "file": "data/CID24823.cif",
+   "atoms": 3,
+   "hasHydrogen": false,
+   "elements": {
+    "O": 3
+   },
+   "href": "../molecules/#ozone",
+   "cellParts": []
+  },
+  "table-salt": {
+   "name": "Table salt (sodium chloride)",
+   "short": "Table salt",
+   "group": "small",
+   "kind": "ccd",
+   "code": "NACL",
+   "file": "data/NACL.cif",
+   "atoms": 64,
+   "hasHydrogen": false,
+   "elements": {
+    "Cl": 32,
+    "Na": 32
+   },
+   "href": "../molecules/#table-salt",
+   "cellParts": []
+  },
+  "acetic-acid": {
+   "name": "Acetic acid (vinegar)",
+   "short": "Acetic acid",
+   "group": "small",
+   "kind": "ccd",
+   "code": "ACY",
+   "file": "data/ACY.cif",
+   "atoms": 8,
+   "hasHydrogen": true,
+   "elements": {
+    "H": 4,
+    "C": 2,
+    "O": 2
+   },
+   "href": "../molecules/#acetic-acid",
+   "cellParts": []
+  },
+  "citric-acid": {
+   "name": "Citric acid (lemons)",
+   "short": "Citric acid",
+   "group": "small",
+   "kind": "ccd",
+   "code": "CIT",
+   "file": "data/CIT.cif",
+   "atoms": 21,
+   "hasHydrogen": true,
+   "elements": {
+    "H": 8,
+    "O": 7,
+    "C": 6
+   },
+   "href": "../molecules/#citric-acid",
+   "cellParts": []
+  },
+  "baking-soda": {
+   "name": "Baking soda (sodium bicarbonate)",
+   "short": "Baking soda",
+   "group": "small",
+   "kind": "ccd",
+   "code": "BCT",
+   "file": "data/BCT.cif",
+   "atoms": 5,
+   "hasHydrogen": true,
+   "elements": {
+    "O": 3,
+    "C": 1,
+    "H": 1
+   },
+   "href": "../molecules/#baking-soda",
+   "cellParts": []
+  },
+  "ethanol": {
+   "name": "Ethanol",
+   "short": "Ethanol",
+   "group": "small",
+   "kind": "ccd",
+   "code": "EOH",
+   "file": "data/EOH.cif",
+   "atoms": 9,
+   "hasHydrogen": true,
+   "elements": {
+    "H": 6,
+    "C": 2,
+    "O": 1
+   },
+   "href": "../molecules/#ethanol",
+   "cellParts": []
+  },
+  "vanillin": {
+   "name": "Vanillin",
+   "short": "Vanillin",
+   "group": "small",
+   "kind": "ccd",
+   "code": "V55",
+   "file": "data/V55.cif",
+   "atoms": 19,
+   "hasHydrogen": true,
+   "elements": {
+    "C": 8,
+    "H": 8,
+    "O": 3
+   },
+   "href": "../molecules/#vanillin",
+   "cellParts": []
+  },
+  "hydrochloric-acid": {
+   "name": "Hydrochloric acid (stomach acid)",
+   "short": "Hydrochloric acid",
+   "group": "small",
+   "kind": "ccd",
+   "code": "CID313",
+   "file": "data/CID313.cif",
+   "atoms": 2,
+   "hasHydrogen": true,
+   "elements": {
+    "Cl": 1,
+    "H": 1
+   },
+   "href": "../molecules/#hydrochloric-acid",
+   "cellParts": []
+  },
+  "ammonia": {
+   "name": "Ammonia",
+   "short": "Ammonia",
+   "group": "small",
+   "kind": "ccd",
+   "code": "NH3",
+   "file": "data/NH3.cif",
+   "atoms": 4,
+   "hasHydrogen": true,
+   "elements": {
+    "H": 3,
+    "N": 1
+   },
+   "href": "../molecules/#ammonia",
+   "cellParts": []
+  },
+  "hydrogen-peroxide": {
+   "name": "Hydrogen peroxide",
+   "short": "Hydrogen peroxide",
+   "group": "small",
+   "kind": "ccd",
+   "code": "PEO",
+   "file": "data/PEO.cif",
+   "atoms": 4,
+   "hasHydrogen": true,
+   "elements": {
+    "H": 2,
+    "O": 2
+   },
+   "href": "../molecules/#hydrogen-peroxide",
+   "cellParts": []
+  },
+  "methane": {
+   "name": "Methane (natural gas)",
+   "short": "Methane",
+   "group": "small",
+   "kind": "ccd",
+   "code": "CID297",
+   "file": "data/CID297.cif",
+   "atoms": 5,
+   "hasHydrogen": true,
+   "elements": {
+    "H": 4,
+    "C": 1
+   },
+   "href": "../molecules/#methane",
+   "cellParts": []
+  },
+  "propane": {
+   "name": "Propane",
+   "short": "Propane",
+   "group": "small",
+   "kind": "ccd",
+   "code": "TME",
+   "file": "data/TME.cif",
+   "atoms": 11,
+   "hasHydrogen": true,
+   "elements": {
+    "H": 8,
+    "C": 3
+   },
+   "href": "../molecules/#propane",
+   "cellParts": []
+  },
+  "soap": {
+   "name": "Soap (sodium stearate)",
+   "short": "Soap",
+   "group": "small",
+   "kind": "ccd",
+   "code": "STE",
+   "file": "data/STE.cif",
+   "atoms": 56,
+   "hasHydrogen": true,
+   "elements": {
+    "H": 36,
+    "C": 18,
+    "O": 2
+   },
+   "href": "../molecules/#soap",
+   "cellParts": []
+  },
+  "aspirin": {
+   "name": "Aspirin",
+   "short": "Aspirin",
+   "group": "small",
+   "kind": "ccd",
+   "code": "AIN",
+   "file": "data/AIN.cif",
+   "atoms": 21,
+   "hasHydrogen": true,
+   "elements": {
+    "C": 9,
+    "H": 8,
+    "O": 4
+   },
+   "href": "../molecules/#aspirin",
+   "cellParts": []
+  },
+  "menthol": {
+   "name": "Menthol",
+   "short": "Menthol",
+   "group": "small",
+   "kind": "ccd",
+   "code": "XUQ",
+   "file": "data/XUQ.cif",
+   "atoms": 31,
+   "hasHydrogen": true,
+   "elements": {
+    "H": 20,
+    "C": 10,
+    "O": 1
+   },
+   "href": "../molecules/#menthol",
+   "cellParts": []
+  }
+ },
+ "elements": {
+  "H": [
+   {
+    "molecule": "antibody",
+    "count": 2522
+   },
+   {
+    "molecule": "hiv-protease",
+    "count": 332
+   },
+   {
+    "molecule": "chlorophyll",
+    "count": 72
+   },
+   {
+    "molecule": "beta-carotene",
+    "count": 56
+   },
+   {
+    "molecule": "cholesterol",
+    "count": 46
+   },
+   {
+    "molecule": "soap",
+    "count": 36
+   },
+   {
+    "molecule": "palmitic-acid",
+    "count": 32
+   },
+   {
+    "molecule": "capsaicin",
+    "count": 27
+   },
+   {
+    "molecule": "sucrose",
+    "count": 22
+   },
+   {
+    "molecule": "menthol",
+    "count": 20
+   },
+   {
+    "molecule": "atp",
+    "count": 16
+   },
+   {
+    "molecule": "acetylcholine",
+    "count": 16
+   },
+   {
+    "molecule": "adrenaline",
+    "count": 13
+   },
+   {
+    "molecule": "glucose",
+    "count": 12
+   },
+   {
+    "molecule": "serotonin",
+    "count": 12
+   },
+   {
+    "molecule": "dopamine",
+    "count": 11
+   },
+   {
+    "molecule": "caffeine",
+    "count": 10
+   },
+   {
+    "molecule": "vitamin-c",
+    "count": 8
+   },
+   {
+    "molecule": "citric-acid",
+    "count": 8
+   },
+   {
+    "molecule": "vanillin",
+    "count": 8
+   },
+   {
+    "molecule": "propane",
+    "count": 8
+   },
+   {
+    "molecule": "aspirin",
+    "count": 8
+   },
+   {
+    "molecule": "ethanol",
+    "count": 6
+   },
+   {
+    "molecule": "glycine",
+    "count": 5
+   },
+   {
+    "molecule": "acetic-acid",
+    "count": 4
+   },
+   {
+    "molecule": "methane",
+    "count": 4
+   },
+   {
+    "molecule": "ammonia",
+    "count": 3
+   },
+   {
+    "molecule": "water",
+    "count": 2
+   },
+   {
+    "molecule": "hydrogen-peroxide",
+    "count": 2
+   },
+   {
+    "molecule": "baking-soda",
+    "count": 1
+   },
+   {
+    "molecule": "hydrochloric-acid",
+    "count": 1
+   }
+  ],
+  "C": [
+   {
+    "molecule": "rubisco",
+    "count": 11992
+   },
+   {
+    "molecule": "nucleosome",
+    "count": 6879
+   },
+   {
+    "molecule": "antibody",
+    "count": 6564
+   },
+   {
+    "molecule": "atp-synthase",
+    "count": 5286
+   },
+   {
+    "molecule": "myosin",
+    "count": 5271
+   },
+   {
+    "molecule": "mhc",
+    "count": 3918
+   },
+   {
+    "molecule": "kinesin",
+    "count": 3564
+   },
+   {
+    "molecule": "rhodopsin",
+    "count": 3489
+   },
+   {
+    "molecule": "hemoglobin",
+    "count": 2954
+   },
+   {
+    "molecule": "acetylcholinesterase",
+    "count": 2668
+   },
+   {
+    "molecule": "potassium-channel",
+    "count": 1876
+   },
+   {
+    "molecule": "actin",
+    "count": 1858
+   },
+   {
+    "molecule": "pepsin",
+    "count": 1530
+   },
+   {
+    "molecule": "aquaporin",
+    "count": 1247
+   },
+   {
+    "molecule": "gfp",
+    "count": 1134
+   },
+   {
+    "molecule": "hiv-protease",
+    "count": 1017
+   },
+   {
+    "molecule": "keratin",
+    "count": 921
+   },
+   {
+    "molecule": "virus-capsid",
+    "count": 889
+   },
+   {
+    "molecule": "myoglobin",
+    "count": 817
+   },
+   {
+    "molecule": "oxytocin",
+    "count": 745
+   },
+   {
+    "molecule": "lysozyme",
+    "count": 613
+   },
+   {
+    "molecule": "insulin",
+    "count": 524
+   },
+   {
+    "molecule": "collagen",
+    "count": 371
+   },
+   {
+    "molecule": "dna",
+    "count": 232
+   },
+   {
+    "molecule": "chlorophyll",
+    "count": 55
+   },
+   {
+    "molecule": "beta-carotene",
+    "count": 40
+   },
+   {
+    "molecule": "cholesterol",
+    "count": 27
+   },
+   {
+    "molecule": "capsaicin",
+    "count": 18
+   },
+   {
+    "molecule": "soap",
+    "count": 18
+   },
+   {
+    "molecule": "palmitic-acid",
+    "count": 16
+   },
+   {
+    "molecule": "sucrose",
+    "count": 12
+   },
+   {
+    "molecule": "atp",
+    "count": 10
+   },
+   {
+    "molecule": "serotonin",
+    "count": 10
+   },
+   {
+    "molecule": "menthol",
+    "count": 10
+   },
+   {
+    "molecule": "adrenaline",
+    "count": 9
+   },
+   {
+    "molecule": "aspirin",
+    "count": 9
+   },
+   {
+    "molecule": "dopamine",
+    "count": 8
+   },
+   {
+    "molecule": "caffeine",
+    "count": 8
+   },
+   {
+    "molecule": "vanillin",
+    "count": 8
+   },
+   {
+    "molecule": "acetylcholine",
+    "count": 7
+   },
+   {
+    "molecule": "glucose",
+    "count": 6
+   },
+   {
+    "molecule": "vitamin-c",
+    "count": 6
+   },
+   {
+    "molecule": "citric-acid",
+    "count": 6
+   },
+   {
+    "molecule": "propane",
+    "count": 3
+   },
+   {
+    "molecule": "glycine",
+    "count": 2
+   },
+   {
+    "molecule": "acetic-acid",
+    "count": 2
+   },
+   {
+    "molecule": "ethanol",
+    "count": 2
+   },
+   {
+    "molecule": "carbon-dioxide",
+    "count": 1
+   },
+   {
+    "molecule": "baking-soda",
+    "count": 1
+   },
+   {
+    "molecule": "methane",
+    "count": 1
+   }
+  ],
+  "N": [
+   {
+    "molecule": "rubisco",
+    "count": 3228
+   },
+   {
+    "molecule": "nucleosome",
+    "count": 2318
+   },
+   {
+    "molecule": "antibody",
+    "count": 1712
+   },
+   {
+    "molecule": "atp-synthase",
+    "count": 1468
+   },
+   {
+    "molecule": "myosin",
+    "count": 1393
+   },
+   {
+    "molecule": "mhc",
+    "count": 1120
+   },
+   {
+    "molecule": "kinesin",
+    "count": 988
+   },
+   {
+    "molecule": "rhodopsin",
+    "count": 788
+   },
+   {
+    "molecule": "hemoglobin",
+    "count": 780
+   },
+   {
+    "molecule": "acetylcholinesterase",
+    "count": 688
+   },
+   {
+    "molecule": "actin",
+    "count": 494
+   },
+   {
+    "molecule": "potassium-channel",
+    "count": 452
+   },
+   {
+    "molecule": "pepsin",
+    "count": 365
+   },
+   {
+    "molecule": "aquaporin",
+    "count": 314
+   },
+   {
+    "molecule": "gfp",
+    "count": 293
+   },
+   {
+    "molecule": "keratin",
+    "count": 273
+   },
+   {
+    "molecule": "hiv-protease",
+    "count": 268
+   },
+   {
+    "molecule": "virus-capsid",
+    "count": 260
+   },
+   {
+    "molecule": "oxytocin",
+    "count": 220
+   },
+   {
+    "molecule": "myoglobin",
+    "count": 220
+   },
+   {
+    "molecule": "lysozyme",
+    "count": 193
+   },
+   {
+    "molecule": "insulin",
+    "count": 138
+   },
+   {
+    "molecule": "dna",
+    "count": 92
+   },
+   {
+    "molecule": "collagen",
+    "count": 88
+   },
+   {
+    "molecule": "atp",
+    "count": 5
+   },
+   {
+    "molecule": "chlorophyll",
+    "count": 4
+   },
+   {
+    "molecule": "caffeine",
+    "count": 4
+   },
+   {
+    "molecule": "serotonin",
+    "count": 2
+   },
+   {
+    "molecule": "nitrogen",
+    "count": 2
+   },
+   {
+    "molecule": "glycine",
+    "count": 1
+   },
+   {
+    "molecule": "adrenaline",
+    "count": 1
+   },
+   {
+    "molecule": "dopamine",
+    "count": 1
+   },
+   {
+    "molecule": "acetylcholine",
+    "count": 1
+   },
+   {
+    "molecule": "capsaicin",
+    "count": 1
+   },
+   {
+    "molecule": "ammonia",
+    "count": 1
+   }
+  ],
+  "O": [
+   {
+    "molecule": "rubisco",
+    "count": 3516
+   },
+   {
+    "molecule": "nucleosome",
+    "count": 2867
+   },
+   {
+    "molecule": "antibody",
+    "count": 2102
+   },
+   {
+    "molecule": "atp-synthase",
+    "count": 1636
+   },
+   {
+    "molecule": "myosin",
+    "count": 1560
+   },
+   {
+    "molecule": "mhc",
+    "count": 1208
+   },
+   {
+    "molecule": "kinesin",
+    "count": 1097
+   },
+   {
+    "molecule": "rhodopsin",
+    "count": 902
+   },
+   {
+    "molecule": "hemoglobin",
+    "count": 806
+   },
+   {
+    "molecule": "acetylcholinesterase",
+    "count": 733
+   },
+   {
+    "molecule": "actin",
+    "count": 565
+   },
+   {
+    "molecule": "pepsin",
+    "count": 527
+   },
+   {
+    "molecule": "potassium-channel",
+    "count": 484
+   },
+   {
+    "molecule": "aquaporin",
+    "count": 347
+   },
+   {
+    "molecule": "gfp",
+    "count": 338
+   },
+   {
+    "molecule": "keratin",
+    "count": 298
+   },
+   {
+    "molecule": "hiv-protease",
+    "count": 275
+   },
+   {
+    "molecule": "virus-capsid",
+    "count": 272
+   },
+   {
+    "molecule": "oxytocin",
+    "count": 250
+   },
+   {
+    "molecule": "myoglobin",
+    "count": 220
+   },
+   {
+    "molecule": "lysozyme",
+    "count": 185
+   },
+   {
+    "molecule": "insulin",
+    "count": 156
+   },
+   {
+    "molecule": "dna",
+    "count": 140
+   },
+   {
+    "molecule": "collagen",
+    "count": 130
+   },
+   {
+    "molecule": "atp",
+    "count": 13
+   },
+   {
+    "molecule": "sucrose",
+    "count": 11
+   },
+   {
+    "molecule": "citric-acid",
+    "count": 7
+   },
+   {
+    "molecule": "glucose",
+    "count": 6
+   },
+   {
+    "molecule": "vitamin-c",
+    "count": 6
+   },
+   {
+    "molecule": "chlorophyll",
+    "count": 5
+   },
+   {
+    "molecule": "aspirin",
+    "count": 4
+   },
+   {
+    "molecule": "adrenaline",
+    "count": 3
+   },
+   {
+    "molecule": "capsaicin",
+    "count": 3
+   },
+   {
+    "molecule": "ozone",
+    "count": 3
+   },
+   {
+    "molecule": "baking-soda",
+    "count": 3
+   },
+   {
+    "molecule": "vanillin",
+    "count": 3
+   },
+   {
+    "molecule": "glycine",
+    "count": 2
+   },
+   {
+    "molecule": "palmitic-acid",
+    "count": 2
+   },
+   {
+    "molecule": "dopamine",
+    "count": 2
+   },
+   {
+    "molecule": "acetylcholine",
+    "count": 2
+   },
+   {
+    "molecule": "caffeine",
+    "count": 2
+   },
+   {
+    "molecule": "oxygen",
+    "count": 2
+   },
+   {
+    "molecule": "carbon-dioxide",
+    "count": 2
+   },
+   {
+    "molecule": "acetic-acid",
+    "count": 2
+   },
+   {
+    "molecule": "hydrogen-peroxide",
+    "count": 2
+   },
+   {
+    "molecule": "soap",
+    "count": 2
+   },
+   {
+    "molecule": "water",
+    "count": 1
+   },
+   {
+    "molecule": "cholesterol",
+    "count": 1
+   },
+   {
+    "molecule": "serotonin",
+    "count": 1
+   },
+   {
+    "molecule": "ethanol",
+    "count": 1
+   },
+   {
+    "molecule": "menthol",
+    "count": 1
+   }
+  ],
+  "Na": [
+   {
+    "molecule": "table-salt",
+    "count": 32
+   }
+  ],
+  "Mg": [
+   {
+    "molecule": "rubisco",
+    "count": 4
+   },
+   {
+    "molecule": "myosin",
+    "count": 2
+   },
+   {
+    "molecule": "atp-synthase",
+    "count": 1
+   },
+   {
+    "molecule": "chlorophyll",
+    "count": 1
+   }
+  ],
+  "P": [
+   {
+    "molecule": "nucleosome",
+    "count": 290
+   },
+   {
+    "molecule": "dna",
+    "count": 22
+   },
+   {
+    "molecule": "rubisco",
+    "count": 8
+   },
+   {
+    "molecule": "atp-synthase",
+    "count": 6
+   },
+   {
+    "molecule": "kinesin",
+    "count": 4
+   },
+   {
+    "molecule": "atp",
+    "count": 3
+   },
+   {
+    "molecule": "actin",
+    "count": 2
+   },
+   {
+    "molecule": "hemoglobin",
+    "count": 2
+   },
+   {
+    "molecule": "myosin",
+    "count": 2
+   },
+   {
+    "molecule": "pepsin",
+    "count": 1
+   }
+  ],
+  "S": [
+   {
+    "molecule": "rubisco",
+    "count": 100
+   },
+   {
+    "molecule": "antibody",
+    "count": 56
+   },
+   {
+    "molecule": "rhodopsin",
+    "count": 51
+   },
+   {
+    "molecule": "myosin",
+    "count": 50
+   },
+   {
+    "molecule": "oxytocin",
+    "count": 32
+   },
+   {
+    "molecule": "atp-synthase",
+    "count": 31
+   },
+   {
+    "molecule": "kinesin",
+    "count": 30
+   },
+   {
+    "molecule": "actin",
+    "count": 21
+   },
+   {
+    "molecule": "acetylcholinesterase",
+    "count": 21
+   },
+   {
+    "molecule": "mhc",
+    "count": 20
+   },
+   {
+    "molecule": "hemoglobin",
+    "count": 12
+   },
+   {
+    "molecule": "insulin",
+    "count": 12
+   },
+   {
+    "molecule": "nucleosome",
+    "count": 12
+   },
+   {
+    "molecule": "keratin",
+    "count": 12
+   },
+   {
+    "molecule": "lysozyme",
+    "count": 10
+   },
+   {
+    "molecule": "hiv-protease",
+    "count": 10
+   },
+   {
+    "molecule": "pepsin",
+    "count": 10
+   },
+   {
+    "molecule": "potassium-channel",
+    "count": 8
+   },
+   {
+    "molecule": "aquaporin",
+    "count": 7
+   },
+   {
+    "molecule": "virus-capsid",
+    "count": 6
+   },
+   {
+    "molecule": "gfp",
+    "count": 2
+   },
+   {
+    "molecule": "myoglobin",
+    "count": 2
+   }
+  ],
+  "Cl": [
+   {
+    "molecule": "table-salt",
+    "count": 32
+   },
+   {
+    "molecule": "hydrochloric-acid",
+    "count": 1
+   }
+  ],
+  "Ar": [
+   {
+    "molecule": "argon",
+    "count": 1
+   }
+  ],
+  "K": [
+   {
+    "molecule": "potassium-channel",
+    "count": 3
+   }
+  ],
+  "Ca": [
+   {
+    "molecule": "actin",
+    "count": 6
+   },
+   {
+    "molecule": "virus-capsid",
+    "count": 3
+   },
+   {
+    "molecule": "myosin",
+    "count": 1
+   }
+  ],
+  "Mn": [
+   {
+    "molecule": "nucleosome",
+    "count": 6
+   }
+  ],
+  "Fe": [
+   {
+    "molecule": "hemoglobin",
+    "count": 4
+   },
+   {
+    "molecule": "myoglobin",
+    "count": 1
+   }
+  ],
+  "Zn": [
+   {
+    "molecule": "rhodopsin",
+    "count": 4
+   },
+   {
+    "molecule": "insulin",
+    "count": 2
+   }
+  ],
+  "Se": [
+   {
+    "molecule": "gfp",
+    "count": 4
+   }
+  ],
+  "Hg": [
+   {
+    "molecule": "rhodopsin",
+    "count": 6
+   }
+  ]
+ },
+ "atomViewer": true,
+ "totals": {
+  "molecules": 59,
+  "elementsUsed": 17,
+  "elementsInTable": 118,
+  "cellLinks": 16,
+  "elementLinks": 218,
+  "organismStructures": 13
+ },
+ "cells": {
+  "animal": {
+   "name": "Animal cell",
+   "parts": [
+    "membrane",
+    "nucleus",
+    "er",
+    "ribosomes",
+    "golgi",
+    "mitochondrion",
+    "lysosome",
+    "cytoskeleton"
+   ],
+   "href": "cells/#animal"
+  },
+  "plant": {
+   "name": "Plant cell",
+   "parts": [
+    "cellwall",
+    "membrane",
+    "vacuole",
+    "nucleus",
+    "chloroplast",
+    "mitochondrion",
+    "er",
+    "p-golgi",
+    "ribosomes"
+   ],
+   "href": "cells/#plant"
+  },
+  "bacterium": {
+   "name": "Bacterial cell",
+   "parts": [
+    "b-wall",
+    "b-membrane",
+    "nucleoid",
+    "b-ribosomes",
+    "flagellum"
+   ],
+   "href": "cells/#bacterium"
+  },
+  "rbc": {
+   "name": "Red blood cell",
+   "parts": [
+    "rbc-membrane",
+    "rbc-hb"
+   ],
+   "href": "cells/#rbc"
+  },
+  "neuron": {
+   "name": "Nerve cell (neuron)",
+   "parts": [
+    "soma",
+    "nucleus",
+    "dendrites",
+    "axon",
+    "myelin",
+    "terminals"
+   ],
+   "href": "cells/#neuron"
+  },
+  "muscle": {
+   "name": "Muscle cell (fibre)",
+   "parts": [
+    "sarcolemma",
+    "m-nuclei",
+    "myofibrils",
+    "sr",
+    "m-mito"
+   ],
+   "href": "cells/#muscle"
+  }
+ },
+ "parts": {
+  "membrane": {
+   "name": "Cell membrane",
+   "cells": [
+    "animal",
+    "plant"
+   ],
+   "molecule": "palmitic-acid",
+   "href": "cells/#animal/membrane",
+   "sources": [
+    "bio-4-3"
+   ]
+  },
+  "nucleus": {
+   "name": "Nucleus",
+   "cells": [
+    "animal",
+    "plant",
+    "neuron"
+   ],
+   "molecule": "dna",
+   "href": "cells/#animal/nucleus",
+   "sources": [
+    "bio-4-3"
+   ]
+  },
+  "mitochondrion": {
+   "name": "Mitochondria",
+   "cells": [
+    "animal",
+    "plant"
+   ],
+   "molecule": "atp",
+   "href": "cells/#animal/mitochondrion",
+   "sources": [
+    "bio-4-3"
+   ]
+  },
+  "ribosomes": {
+   "name": "Ribosomes",
+   "cells": [
+    "animal",
+    "plant"
+   ],
+   "molecule": null,
+   "href": "cells/#animal/ribosomes",
+   "sources": [
+    "bio-4-3"
+   ]
+  },
+  "er": {
+   "name": "Endoplasmic reticulum",
+   "cells": [
+    "animal",
+    "plant"
+   ],
+   "molecule": null,
+   "href": "cells/#animal/er",
+   "sources": [
+    "bio-4-4"
+   ]
+  },
+  "golgi": {
+   "name": "Golgi apparatus",
+   "cells": [
+    "animal"
+   ],
+   "molecule": null,
+   "href": "cells/#animal/golgi",
+   "sources": [
+    "bio-4-4"
+   ]
+  },
+  "lysosome": {
+   "name": "Lysosomes",
+   "cells": [
+    "animal"
+   ],
+   "molecule": null,
+   "href": "cells/#animal/lysosome",
+   "sources": [
+    "bio-4-3"
+   ]
+  },
+  "cytoskeleton": {
+   "name": "Cytoskeleton",
+   "cells": [
+    "animal"
+   ],
+   "molecule": "actin",
+   "href": "cells/#animal/cytoskeleton",
+   "sources": [
+    "bio-4-5"
+   ]
+  },
+  "chloroplast": {
+   "name": "Chloroplasts",
+   "cells": [
+    "plant"
+   ],
+   "molecule": null,
+   "href": "cells/#plant/chloroplast",
+   "sources": [
+    "bio-4-3"
+   ]
+  },
+  "cellwall": {
+   "name": "Cell wall",
+   "cells": [
+    "plant"
+   ],
+   "molecule": null,
+   "href": "cells/#plant/cellwall",
+   "sources": [
+    "bio-4-3"
+   ]
+  },
+  "vacuole": {
+   "name": "Large central vacuole",
+   "cells": [
+    "plant"
+   ],
+   "molecule": null,
+   "href": "cells/#plant/vacuole",
+   "sources": [
+    "bio-4-3"
+   ]
+  },
+  "nucleoid": {
+   "name": "Nucleoid (the DNA)",
+   "cells": [
+    "bacterium"
+   ],
+   "molecule": "dna",
+   "href": "cells/#bacterium/nucleoid",
+   "sources": [
+    "bio-4-2",
+    "bio-4-3"
+   ]
+  },
+  "flagellum": {
+   "name": "Flagellum",
+   "cells": [
+    "bacterium"
+   ],
+   "molecule": null,
+   "href": "cells/#bacterium/flagellum",
+   "sources": [
+    "bio-4-2"
+   ]
+  },
+  "b-wall": {
+   "name": "Cell wall",
+   "cells": [
+    "bacterium"
+   ],
+   "molecule": null,
+   "href": "cells/#bacterium/b-wall",
+   "sources": [
+    "bio-4-2"
+   ]
+  },
+  "b-membrane": {
+   "name": "Cell membrane",
+   "cells": [
+    "bacterium"
+   ],
+   "molecule": "palmitic-acid",
+   "href": "cells/#bacterium/b-membrane",
+   "sources": [
+    "bio-4-2"
+   ]
+  },
+  "b-ribosomes": {
+   "name": "Ribosomes",
+   "cells": [
+    "bacterium"
+   ],
+   "molecule": null,
+   "href": "cells/#bacterium/b-ribosomes",
+   "sources": [
+    "bio-4-2",
+    "bio-4-3"
+   ]
+  },
+  "p-golgi": {
+   "name": "Golgi apparatus",
+   "cells": [
+    "plant"
+   ],
+   "molecule": null,
+   "href": "cells/#plant/p-golgi",
+   "sources": [
+    "bio-4-4"
+   ]
+  },
+  "rbc-membrane": {
+   "name": "Cell membrane (the disc shape)",
+   "cells": [
+    "rbc"
+   ],
+   "molecule": "palmitic-acid",
+   "href": "cells/#rbc/rbc-membrane",
+   "sources": [
+    "ap-18-3"
+   ]
+  },
+  "rbc-hb": {
+   "name": "Inside, packed with hemoglobin",
+   "cells": [
+    "rbc"
+   ],
+   "molecule": "hemoglobin",
+   "href": "cells/#rbc/rbc-hb",
+   "sources": [
+    "ap-18-3"
+   ]
+  },
+  "soma": {
+   "name": "Cell body",
+   "cells": [
+    "neuron"
+   ],
+   "molecule": null,
+   "href": "cells/#neuron/soma",
+   "sources": [
+    "ap-12-2"
+   ]
+  },
+  "dendrites": {
+   "name": "Dendrites",
+   "cells": [
+    "neuron"
+   ],
+   "molecule": null,
+   "href": "cells/#neuron/dendrites",
+   "sources": [
+    "ap-12-2"
+   ]
+  },
+  "axon": {
+   "name": "Axon",
+   "cells": [
+    "neuron"
+   ],
+   "molecule": null,
+   "href": "cells/#neuron/axon",
+   "sources": [
+    "ap-12-2"
+   ]
+  },
+  "myelin": {
+   "name": "Myelin sheath",
+   "cells": [
+    "neuron"
+   ],
+   "molecule": null,
+   "href": "cells/#neuron/myelin",
+   "sources": [
+    "ap-12-2"
+   ]
+  },
+  "terminals": {
+   "name": "Axon terminals",
+   "cells": [
+    "neuron"
+   ],
+   "molecule": null,
+   "href": "cells/#neuron/terminals",
+   "sources": [
+    "ap-12-2"
+   ]
+  },
+  "sarcolemma": {
+   "name": "Sarcolemma (cell membrane)",
+   "cells": [
+    "muscle"
+   ],
+   "molecule": "palmitic-acid",
+   "href": "cells/#muscle/sarcolemma",
+   "sources": [
+    "ap-10-2"
+   ]
+  },
+  "m-nuclei": {
+   "name": "Nuclei (many)",
+   "cells": [
+    "muscle"
+   ],
+   "molecule": "dna",
+   "href": "cells/#muscle/m-nuclei",
+   "sources": [
+    "ap-10-2"
+   ]
+  },
+  "myofibrils": {
+   "name": "Myofibrils",
+   "cells": [
+    "muscle"
+   ],
+   "molecule": "actin",
+   "href": "cells/#muscle/myofibrils",
+   "sources": [
+    "ap-10-2"
+   ]
+  },
+  "sr": {
+   "name": "Sarcoplasmic reticulum",
+   "cells": [
+    "muscle"
+   ],
+   "molecule": null,
+   "href": "cells/#muscle/sr",
+   "sources": [
+    "ap-10-2"
+   ]
+  },
+  "m-mito": {
+   "name": "Mitochondria",
+   "cells": [
+    "muscle"
+   ],
+   "molecule": "atp",
+   "href": "cells/#muscle/m-mito",
+   "sources": [
+    "bio-4-3"
+   ]
+  }
+ },
+ "organisms": {
+  "paramecium": {
+   "name": "Paramecium",
+   "latin": "Paramecium caudatum",
+   "href": "microscope/#paramecium",
+   "cell": null,
+   "structures": [
+    {
+     "key": "nucleus",
+     "name": "Nucleus",
+     "part": "nucleus",
+     "href": "cells/#animal/nucleus",
+     "evidence": "Ellipsoid macronucleus in mid-body.",
+     "sources": [
+      {
+       "id": "kreutz-pcaudatum",
+       "title": "Paramecium caudatum Ehrenberg, 1833",
+       "url": "https://realmicrolife.com/paramecium-caudatum/"
+      }
+     ]
+    },
+    {
+     "key": "contractile-vacuole",
+     "name": "Contractile vacuole",
+     "part": null,
+     "href": null,
+     "evidence": "It swims in a spiral, and two contractile vacuoles, each ringed by 6 to 10 canals, sit near its front and back ends.",
+     "sources": [
+      {
+       "id": "neupane-pcaudatum",
+       "title": "Paramecium caudatum: Habitat, Culture, Structure, Locomotion",
+       "url": "https://microbenotes.com/paramecium-caudatum-habitat-culture-structure-locomotion/"
+      },
+      {
+       "id": "kreutz-pcaudatum",
+       "title": "Paramecium caudatum Ehrenberg, 1833",
+       "url": "https://realmicrolife.com/paramecium-caudatum/"
+      }
+     ]
+    },
+    {
+     "key": "cilia",
+     "name": "Cilia",
+     "part": null,
+     "href": null,
+     "evidence": "Between 10,000 and 14,000 cilia cover it and beat in waves, pushing it along at about one millimetre per second.",
+     "sources": [
+      {
+       "id": "neupane-pcaudatum",
+       "title": "Paramecium caudatum: Habitat, Culture, Structure, Locomotion",
+       "url": "https://microbenotes.com/paramecium-caudatum-habitat-culture-structure-locomotion/"
+      },
+      {
+       "id": "jana2012",
+       "title": "Paramecium swimming in capillary tube",
+       "url": "https://arxiv.org/abs/1012.4812"
+      }
+     ]
+    },
+    {
+     "key": "oral-groove",
+     "name": "Oral groove",
+     "part": null,
+     "href": null,
+     "evidence": "Cilia sweep bacteria, yeast and algae into its oral groove.",
+     "sources": [
+      {
+       "id": "brette2021",
+       "title": "Integrative Neuroscience of Paramecium, a \"Swimming Neuron\"",
+       "url": "https://www.eneuro.org/content/8/3/eneuro.0018-21.2021"
+      },
+      {
+       "id": "neupane-pcaudatum",
+       "title": "Paramecium caudatum: Habitat, Culture, Structure, Locomotion",
+       "url": "https://microbenotes.com/paramecium-caudatum-habitat-culture-structure-locomotion/"
+      }
+     ]
+    }
+   ]
+  },
+  "amoeba": {
+   "name": "Amoeba",
+   "latin": "Amoeba proteus",
+   "href": "microscope/#amoeba",
+   "cell": null,
+   "structures": [
+    {
+     "key": "nucleus",
+     "name": "Nucleus",
+     "part": "nucleus",
+     "href": "cells/#animal/nucleus",
+     "evidence": "A moving Amoeba proteus is 160 to 760 micrometres long, with one nucleus 22 to 62 micrometres across.",
+     "sources": [
+      {
+       "id": "kreutz-aproteus",
+       "title": "Amoeba proteus",
+       "url": "https://realmicrolife.com/amoeba-proteus/"
+      },
+      {
+       "id": "siemensma-aproteus",
+       "title": "Amoeba proteus",
+       "url": "https://arcella.nl/amoeba-proteus/"
+      }
+     ]
+    },
+    {
+     "key": "contractile-vacuole",
+     "name": "Contractile vacuole",
+     "part": null,
+     "href": null,
+     "evidence": "One contractile vacuole, often near the rear (uroid).",
+     "sources": [
+      {
+       "id": "kreutz-aproteus",
+       "title": "Amoeba proteus",
+       "url": "https://realmicrolife.com/amoeba-proteus/"
+      }
+     ]
+    },
+    {
+     "key": "food-vacuole",
+     "name": "Food vacuole",
+     "part": null,
+     "href": null,
+     "evidence": "It is a predator that surrounds bacteria and algae and takes them into a food vacuole.",
+     "sources": [
+      {
+       "id": "garden-amoebae",
+       "title": "Amoebae: food uptake",
+       "url": "https://mikrobiologischer-garten.microbial-world.com/eng/enamoe02.htm"
+      }
+     ]
+    },
+    {
+     "key": "pseudopodia",
+     "name": "Pseudopodia",
+     "part": null,
+     "href": null,
+     "evidence": "It has no fixed shape and usually pushes out several pseudopodia at once, one bigger than the rest.",
+     "sources": [
+      {
+       "id": "siemensma-aproteus",
+       "title": "Amoeba proteus",
+       "url": "https://arcella.nl/amoeba-proteus/"
+      },
+      {
+       "id": "kreutz-aproteus",
+       "title": "Amoeba proteus",
+       "url": "https://realmicrolife.com/amoeba-proteus/"
+      }
+     ]
+    }
+   ]
+  },
+  "euglena": {
+   "name": "Euglena",
+   "latin": "Euglena gracilis",
+   "href": "microscope/#euglena",
+   "cell": null,
+   "structures": [
+    {
+     "key": "flagellum",
+     "name": "Flagellum",
+     "part": null,
+     "href": null,
+     "evidence": "A red eyespot sits near the base of the flagellum it swims with.",
+     "sources": [
+      {
+       "id": "hader2022",
+       "title": "Euglena, a Gravitactic Flagellate of Multiple Usages",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9605500"
+      }
+     ]
+    },
+    {
+     "key": "chloroplast",
+     "name": "Chloroplasts",
+     "part": "chloroplast",
+     "href": "cells/#plant/chloroplast",
+     "evidence": "Its chloroplasts make food from light, and in the dark it can live on organic matter instead.",
+     "sources": [
+      {
+       "id": "hader2022",
+       "title": "Euglena, a Gravitactic Flagellate of Multiple Usages",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9605500"
+      },
+      {
+       "id": "fbpb-egracilis",
+       "title": "Euglena gracilis Klebs, 1883",
+       "url": "https://freshwaterbiodiversity.org.bd/?p=12482"
+      }
+     ]
+    },
+    {
+     "key": "eyespot",
+     "name": "Eyespot",
+     "part": null,
+     "href": null,
+     "evidence": "A red eyespot sits near the base of the flagellum it swims with.",
+     "sources": [
+      {
+       "id": "hader2022",
+       "title": "Euglena, a Gravitactic Flagellate of Multiple Usages",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9605500"
+      }
+     ]
+    }
+   ]
+  },
+  "bacteria": {
+   "name": "Bacteria",
+   "latin": "Rods, spheres and spirals",
+   "href": "microscope/#bacteria",
+   "cell": "bacterium",
+   "structures": [
+    {
+     "key": "flagellum",
+     "name": "Flagellum",
+     "part": "flagellum",
+     "href": "cells/#bacterium/flagellum",
+     "evidence": "Spiral bacteria called spirilla can reach about 60 micrometres long and have flagella at both ends.",
+     "sources": [
+      {
+       "id": "mm-spirilla",
+       "title": "Spirilla Bacteria",
+       "url": "https://microscopemaster.com/spirilla.html"
+      }
+     ]
+    }
+   ]
+  },
+  "yeast": {
+   "name": "Yeast",
+   "latin": "Saccharomyces cerevisiae",
+   "href": "microscope/#yeast",
+   "cell": null,
+   "structures": []
+  },
+  "diatom": {
+   "name": "Diatom",
+   "latin": "Pinnularia socialis",
+   "href": "microscope/#diatom",
+   "cell": null,
+   "structures": [
+    {
+     "key": "raphe",
+     "name": "Raphe",
+     "part": null,
+     "href": null,
+     "evidence": "It glides along surfaces using a slit in its shell called the raphe.",
+     "sources": [
+      {
+       "id": "exeter-diatom",
+       "title": "The Mystery of Diatom Movement Uncovered in New Study",
+       "url": "https://news.exeter.ac.uk/faculty-of-health-and-life-sciences/the-mystery-of-diatom-movement-uncovered-in-new-study/"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "atoms": {
+  "about": "Protons = atomic number; neutrons from the most abundant natural isotope (web/atom/atoms.json, RSC).",
+  "rows": {
+   "H": {
+    "name": "Hydrogen",
+    "z": 1,
+    "neutrons": 0,
+    "massNumber": 1,
+    "href": "elements/#H",
+    "atom": "atom/#H"
+   },
+   "He": {
+    "name": "Helium",
+    "z": 2,
+    "neutrons": 2,
+    "massNumber": 4,
+    "href": "elements/#He",
+    "atom": "atom/#He"
+   },
+   "Li": {
+    "name": "Lithium",
+    "z": 3,
+    "neutrons": 4,
+    "massNumber": 7,
+    "href": "elements/#Li",
+    "atom": "atom/#Li"
+   },
+   "Be": {
+    "name": "Beryllium",
+    "z": 4,
+    "neutrons": 5,
+    "massNumber": 9,
+    "href": "elements/#Be",
+    "atom": "atom/#Be"
+   },
+   "B": {
+    "name": "Boron",
+    "z": 5,
+    "neutrons": 6,
+    "massNumber": 11,
+    "href": "elements/#B",
+    "atom": "atom/#B"
+   },
+   "C": {
+    "name": "Carbon",
+    "z": 6,
+    "neutrons": 6,
+    "massNumber": 12,
+    "href": "elements/#C",
+    "atom": "atom/#C"
+   },
+   "N": {
+    "name": "Nitrogen",
+    "z": 7,
+    "neutrons": 7,
+    "massNumber": 14,
+    "href": "elements/#N",
+    "atom": "atom/#N"
+   },
+   "O": {
+    "name": "Oxygen",
+    "z": 8,
+    "neutrons": 8,
+    "massNumber": 16,
+    "href": "elements/#O",
+    "atom": "atom/#O"
+   },
+   "F": {
+    "name": "Fluorine",
+    "z": 9,
+    "neutrons": 10,
+    "massNumber": 19,
+    "href": "elements/#F",
+    "atom": "atom/#F"
+   },
+   "Ne": {
+    "name": "Neon",
+    "z": 10,
+    "neutrons": 10,
+    "massNumber": 20,
+    "href": "elements/#Ne",
+    "atom": "atom/#Ne"
+   },
+   "Na": {
+    "name": "Sodium",
+    "z": 11,
+    "neutrons": 12,
+    "massNumber": 23,
+    "href": "elements/#Na",
+    "atom": "atom/#Na"
+   },
+   "Mg": {
+    "name": "Magnesium",
+    "z": 12,
+    "neutrons": 12,
+    "massNumber": 24,
+    "href": "elements/#Mg",
+    "atom": "atom/#Mg"
+   },
+   "Al": {
+    "name": "Aluminium",
+    "z": 13,
+    "neutrons": 14,
+    "massNumber": 27,
+    "href": "elements/#Al",
+    "atom": "atom/#Al"
+   },
+   "Si": {
+    "name": "Silicon",
+    "z": 14,
+    "neutrons": 14,
+    "massNumber": 28,
+    "href": "elements/#Si",
+    "atom": "atom/#Si"
+   },
+   "P": {
+    "name": "Phosphorus",
+    "z": 15,
+    "neutrons": 16,
+    "massNumber": 31,
+    "href": "elements/#P",
+    "atom": "atom/#P"
+   },
+   "S": {
+    "name": "Sulfur",
+    "z": 16,
+    "neutrons": 16,
+    "massNumber": 32,
+    "href": "elements/#S",
+    "atom": "atom/#S"
+   },
+   "Cl": {
+    "name": "Chlorine",
+    "z": 17,
+    "neutrons": 18,
+    "massNumber": 35,
+    "href": "elements/#Cl",
+    "atom": "atom/#Cl"
+   },
+   "Ar": {
+    "name": "Argon",
+    "z": 18,
+    "neutrons": 22,
+    "massNumber": 40,
+    "href": "elements/#Ar",
+    "atom": "atom/#Ar"
+   },
+   "K": {
+    "name": "Potassium",
+    "z": 19,
+    "neutrons": 20,
+    "massNumber": 39,
+    "href": "elements/#K",
+    "atom": "atom/#K"
+   },
+   "Ca": {
+    "name": "Calcium",
+    "z": 20,
+    "neutrons": 20,
+    "massNumber": 40,
+    "href": "elements/#Ca",
+    "atom": "atom/#Ca"
+   },
+   "Sc": {
+    "name": "Scandium",
+    "z": 21,
+    "neutrons": 24,
+    "massNumber": 45,
+    "href": "elements/#Sc",
+    "atom": "atom/#Sc"
+   },
+   "Ti": {
+    "name": "Titanium",
+    "z": 22,
+    "neutrons": 26,
+    "massNumber": 48,
+    "href": "elements/#Ti",
+    "atom": "atom/#Ti"
+   },
+   "V": {
+    "name": "Vanadium",
+    "z": 23,
+    "neutrons": 28,
+    "massNumber": 51,
+    "href": "elements/#V",
+    "atom": "atom/#V"
+   },
+   "Cr": {
+    "name": "Chromium",
+    "z": 24,
+    "neutrons": 28,
+    "massNumber": 52,
+    "href": "elements/#Cr",
+    "atom": "atom/#Cr"
+   },
+   "Mn": {
+    "name": "Manganese",
+    "z": 25,
+    "neutrons": 30,
+    "massNumber": 55,
+    "href": "elements/#Mn",
+    "atom": "atom/#Mn"
+   },
+   "Fe": {
+    "name": "Iron",
+    "z": 26,
+    "neutrons": 30,
+    "massNumber": 56,
+    "href": "elements/#Fe",
+    "atom": "atom/#Fe"
+   },
+   "Co": {
+    "name": "Cobalt",
+    "z": 27,
+    "neutrons": 32,
+    "massNumber": 59,
+    "href": "elements/#Co",
+    "atom": "atom/#Co"
+   },
+   "Ni": {
+    "name": "Nickel",
+    "z": 28,
+    "neutrons": 30,
+    "massNumber": 58,
+    "href": "elements/#Ni",
+    "atom": "atom/#Ni"
+   },
+   "Cu": {
+    "name": "Copper",
+    "z": 29,
+    "neutrons": 34,
+    "massNumber": 63,
+    "href": "elements/#Cu",
+    "atom": "atom/#Cu"
+   },
+   "Zn": {
+    "name": "Zinc",
+    "z": 30,
+    "neutrons": 34,
+    "massNumber": 64,
+    "href": "elements/#Zn",
+    "atom": "atom/#Zn"
+   },
+   "Ga": {
+    "name": "Gallium",
+    "z": 31,
+    "neutrons": 38,
+    "massNumber": 69,
+    "href": "elements/#Ga",
+    "atom": "atom/#Ga"
+   },
+   "Ge": {
+    "name": "Germanium",
+    "z": 32,
+    "neutrons": 42,
+    "massNumber": 74,
+    "href": "elements/#Ge",
+    "atom": "atom/#Ge"
+   },
+   "As": {
+    "name": "Arsenic",
+    "z": 33,
+    "neutrons": 42,
+    "massNumber": 75,
+    "href": "elements/#As",
+    "atom": "atom/#As"
+   },
+   "Se": {
+    "name": "Selenium",
+    "z": 34,
+    "neutrons": 46,
+    "massNumber": 80,
+    "href": "elements/#Se",
+    "atom": "atom/#Se"
+   },
+   "Br": {
+    "name": "Bromine",
+    "z": 35,
+    "neutrons": 44,
+    "massNumber": 79,
+    "href": "elements/#Br",
+    "atom": "atom/#Br"
+   },
+   "Kr": {
+    "name": "Krypton",
+    "z": 36,
+    "neutrons": 48,
+    "massNumber": 84,
+    "href": "elements/#Kr",
+    "atom": "atom/#Kr"
+   },
+   "Rb": {
+    "name": "Rubidium",
+    "z": 37,
+    "neutrons": 48,
+    "massNumber": 85,
+    "href": "elements/#Rb",
+    "atom": "atom/#Rb"
+   },
+   "Sr": {
+    "name": "Strontium",
+    "z": 38,
+    "neutrons": 50,
+    "massNumber": 88,
+    "href": "elements/#Sr",
+    "atom": "atom/#Sr"
+   },
+   "Y": {
+    "name": "Yttrium",
+    "z": 39,
+    "neutrons": 50,
+    "massNumber": 89,
+    "href": "elements/#Y",
+    "atom": "atom/#Y"
+   },
+   "Zr": {
+    "name": "Zirconium",
+    "z": 40,
+    "neutrons": 50,
+    "massNumber": 90,
+    "href": "elements/#Zr",
+    "atom": "atom/#Zr"
+   },
+   "Nb": {
+    "name": "Niobium",
+    "z": 41,
+    "neutrons": 52,
+    "massNumber": 93,
+    "href": "elements/#Nb",
+    "atom": "atom/#Nb"
+   },
+   "Mo": {
+    "name": "Molybdenum",
+    "z": 42,
+    "neutrons": 56,
+    "massNumber": 98,
+    "href": "elements/#Mo",
+    "atom": "atom/#Mo"
+   },
+   "Tc": {
+    "name": "Technetium",
+    "z": 43,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Tc",
+    "atom": "atom/#Tc"
+   },
+   "Ru": {
+    "name": "Ruthenium",
+    "z": 44,
+    "neutrons": 58,
+    "massNumber": 102,
+    "href": "elements/#Ru",
+    "atom": "atom/#Ru"
+   },
+   "Rh": {
+    "name": "Rhodium",
+    "z": 45,
+    "neutrons": 58,
+    "massNumber": 103,
+    "href": "elements/#Rh",
+    "atom": "atom/#Rh"
+   },
+   "Pd": {
+    "name": "Palladium",
+    "z": 46,
+    "neutrons": 60,
+    "massNumber": 106,
+    "href": "elements/#Pd",
+    "atom": "atom/#Pd"
+   },
+   "Ag": {
+    "name": "Silver",
+    "z": 47,
+    "neutrons": 60,
+    "massNumber": 107,
+    "href": "elements/#Ag",
+    "atom": "atom/#Ag"
+   },
+   "Cd": {
+    "name": "Cadmium",
+    "z": 48,
+    "neutrons": 66,
+    "massNumber": 114,
+    "href": "elements/#Cd",
+    "atom": "atom/#Cd"
+   },
+   "In": {
+    "name": "Indium",
+    "z": 49,
+    "neutrons": 66,
+    "massNumber": 115,
+    "href": "elements/#In",
+    "atom": "atom/#In"
+   },
+   "Sn": {
+    "name": "Tin",
+    "z": 50,
+    "neutrons": 70,
+    "massNumber": 120,
+    "href": "elements/#Sn",
+    "atom": "atom/#Sn"
+   },
+   "Sb": {
+    "name": "Antimony",
+    "z": 51,
+    "neutrons": 70,
+    "massNumber": 121,
+    "href": "elements/#Sb",
+    "atom": "atom/#Sb"
+   },
+   "Te": {
+    "name": "Tellurium",
+    "z": 52,
+    "neutrons": 78,
+    "massNumber": 130,
+    "href": "elements/#Te",
+    "atom": "atom/#Te"
+   },
+   "I": {
+    "name": "Iodine",
+    "z": 53,
+    "neutrons": 74,
+    "massNumber": 127,
+    "href": "elements/#I",
+    "atom": "atom/#I"
+   },
+   "Xe": {
+    "name": "Xenon",
+    "z": 54,
+    "neutrons": 78,
+    "massNumber": 132,
+    "href": "elements/#Xe",
+    "atom": "atom/#Xe"
+   },
+   "Cs": {
+    "name": "Caesium",
+    "z": 55,
+    "neutrons": 78,
+    "massNumber": 133,
+    "href": "elements/#Cs",
+    "atom": "atom/#Cs"
+   },
+   "Ba": {
+    "name": "Barium",
+    "z": 56,
+    "neutrons": 82,
+    "massNumber": 138,
+    "href": "elements/#Ba",
+    "atom": "atom/#Ba"
+   },
+   "La": {
+    "name": "Lanthanum",
+    "z": 57,
+    "neutrons": 82,
+    "massNumber": 139,
+    "href": "elements/#La",
+    "atom": "atom/#La"
+   },
+   "Ce": {
+    "name": "Cerium",
+    "z": 58,
+    "neutrons": 82,
+    "massNumber": 140,
+    "href": "elements/#Ce",
+    "atom": "atom/#Ce"
+   },
+   "Pr": {
+    "name": "Praseodymium",
+    "z": 59,
+    "neutrons": 82,
+    "massNumber": 141,
+    "href": "elements/#Pr",
+    "atom": "atom/#Pr"
+   },
+   "Nd": {
+    "name": "Neodymium",
+    "z": 60,
+    "neutrons": 82,
+    "massNumber": 142,
+    "href": "elements/#Nd",
+    "atom": "atom/#Nd"
+   },
+   "Pm": {
+    "name": "Promethium",
+    "z": 61,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Pm",
+    "atom": "atom/#Pm"
+   },
+   "Sm": {
+    "name": "Samarium",
+    "z": 62,
+    "neutrons": 90,
+    "massNumber": 152,
+    "href": "elements/#Sm",
+    "atom": "atom/#Sm"
+   },
+   "Eu": {
+    "name": "Europium",
+    "z": 63,
+    "neutrons": 90,
+    "massNumber": 153,
+    "href": "elements/#Eu",
+    "atom": "atom/#Eu"
+   },
+   "Gd": {
+    "name": "Gadolinium",
+    "z": 64,
+    "neutrons": 94,
+    "massNumber": 158,
+    "href": "elements/#Gd",
+    "atom": "atom/#Gd"
+   },
+   "Tb": {
+    "name": "Terbium",
+    "z": 65,
+    "neutrons": 94,
+    "massNumber": 159,
+    "href": "elements/#Tb",
+    "atom": "atom/#Tb"
+   },
+   "Dy": {
+    "name": "Dysprosium",
+    "z": 66,
+    "neutrons": 98,
+    "massNumber": 164,
+    "href": "elements/#Dy",
+    "atom": "atom/#Dy"
+   },
+   "Ho": {
+    "name": "Holmium",
+    "z": 67,
+    "neutrons": 98,
+    "massNumber": 165,
+    "href": "elements/#Ho",
+    "atom": "atom/#Ho"
+   },
+   "Er": {
+    "name": "Erbium",
+    "z": 68,
+    "neutrons": 98,
+    "massNumber": 166,
+    "href": "elements/#Er",
+    "atom": "atom/#Er"
+   },
+   "Tm": {
+    "name": "Thulium",
+    "z": 69,
+    "neutrons": 100,
+    "massNumber": 169,
+    "href": "elements/#Tm",
+    "atom": "atom/#Tm"
+   },
+   "Yb": {
+    "name": "Ytterbium",
+    "z": 70,
+    "neutrons": 104,
+    "massNumber": 174,
+    "href": "elements/#Yb",
+    "atom": "atom/#Yb"
+   },
+   "Lu": {
+    "name": "Lutetium",
+    "z": 71,
+    "neutrons": 104,
+    "massNumber": 175,
+    "href": "elements/#Lu",
+    "atom": "atom/#Lu"
+   },
+   "Hf": {
+    "name": "Hafnium",
+    "z": 72,
+    "neutrons": 108,
+    "massNumber": 180,
+    "href": "elements/#Hf",
+    "atom": "atom/#Hf"
+   },
+   "Ta": {
+    "name": "Tantalum",
+    "z": 73,
+    "neutrons": 108,
+    "massNumber": 181,
+    "href": "elements/#Ta",
+    "atom": "atom/#Ta"
+   },
+   "W": {
+    "name": "Tungsten",
+    "z": 74,
+    "neutrons": 110,
+    "massNumber": 184,
+    "href": "elements/#W",
+    "atom": "atom/#W"
+   },
+   "Re": {
+    "name": "Rhenium",
+    "z": 75,
+    "neutrons": 112,
+    "massNumber": 187,
+    "href": "elements/#Re",
+    "atom": "atom/#Re"
+   },
+   "Os": {
+    "name": "Osmium",
+    "z": 76,
+    "neutrons": 116,
+    "massNumber": 192,
+    "href": "elements/#Os",
+    "atom": "atom/#Os"
+   },
+   "Ir": {
+    "name": "Iridium",
+    "z": 77,
+    "neutrons": 116,
+    "massNumber": 193,
+    "href": "elements/#Ir",
+    "atom": "atom/#Ir"
+   },
+   "Pt": {
+    "name": "Platinum",
+    "z": 78,
+    "neutrons": 117,
+    "massNumber": 195,
+    "href": "elements/#Pt",
+    "atom": "atom/#Pt"
+   },
+   "Au": {
+    "name": "Gold",
+    "z": 79,
+    "neutrons": 118,
+    "massNumber": 197,
+    "href": "elements/#Au",
+    "atom": "atom/#Au"
+   },
+   "Hg": {
+    "name": "Mercury",
+    "z": 80,
+    "neutrons": 122,
+    "massNumber": 202,
+    "href": "elements/#Hg",
+    "atom": "atom/#Hg"
+   },
+   "Tl": {
+    "name": "Thallium",
+    "z": 81,
+    "neutrons": 124,
+    "massNumber": 205,
+    "href": "elements/#Tl",
+    "atom": "atom/#Tl"
+   },
+   "Pb": {
+    "name": "Lead",
+    "z": 82,
+    "neutrons": 126,
+    "massNumber": 208,
+    "href": "elements/#Pb",
+    "atom": "atom/#Pb"
+   },
+   "Bi": {
+    "name": "Bismuth",
+    "z": 83,
+    "neutrons": 126,
+    "massNumber": 209,
+    "href": "elements/#Bi",
+    "atom": "atom/#Bi"
+   },
+   "Po": {
+    "name": "Polonium",
+    "z": 84,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Po",
+    "atom": "atom/#Po"
+   },
+   "At": {
+    "name": "Astatine",
+    "z": 85,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#At",
+    "atom": "atom/#At"
+   },
+   "Rn": {
+    "name": "Radon",
+    "z": 86,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Rn",
+    "atom": "atom/#Rn"
+   },
+   "Fr": {
+    "name": "Francium",
+    "z": 87,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Fr",
+    "atom": "atom/#Fr"
+   },
+   "Ra": {
+    "name": "Radium",
+    "z": 88,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Ra",
+    "atom": "atom/#Ra"
+   },
+   "Ac": {
+    "name": "Actinium",
+    "z": 89,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Ac",
+    "atom": "atom/#Ac"
+   },
+   "Th": {
+    "name": "Thorium",
+    "z": 90,
+    "neutrons": 142,
+    "massNumber": 232,
+    "href": "elements/#Th",
+    "atom": "atom/#Th"
+   },
+   "Pa": {
+    "name": "Protactinium",
+    "z": 91,
+    "neutrons": 140,
+    "massNumber": 231,
+    "href": "elements/#Pa",
+    "atom": "atom/#Pa"
+   },
+   "U": {
+    "name": "Uranium",
+    "z": 92,
+    "neutrons": 146,
+    "massNumber": 238,
+    "href": "elements/#U",
+    "atom": "atom/#U"
+   },
+   "Np": {
+    "name": "Neptunium",
+    "z": 93,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Np",
+    "atom": "atom/#Np"
+   },
+   "Pu": {
+    "name": "Plutonium",
+    "z": 94,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Pu",
+    "atom": "atom/#Pu"
+   },
+   "Am": {
+    "name": "Americium",
+    "z": 95,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Am",
+    "atom": "atom/#Am"
+   },
+   "Cm": {
+    "name": "Curium",
+    "z": 96,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Cm",
+    "atom": "atom/#Cm"
+   },
+   "Bk": {
+    "name": "Berkelium",
+    "z": 97,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Bk",
+    "atom": "atom/#Bk"
+   },
+   "Cf": {
+    "name": "Californium",
+    "z": 98,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Cf",
+    "atom": "atom/#Cf"
+   },
+   "Es": {
+    "name": "Einsteinium",
+    "z": 99,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Es",
+    "atom": "atom/#Es"
+   },
+   "Fm": {
+    "name": "Fermium",
+    "z": 100,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Fm",
+    "atom": "atom/#Fm"
+   },
+   "Md": {
+    "name": "Mendelevium",
+    "z": 101,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Md",
+    "atom": "atom/#Md"
+   },
+   "No": {
+    "name": "Nobelium",
+    "z": 102,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#No",
+    "atom": "atom/#No"
+   },
+   "Lr": {
+    "name": "Lawrencium",
+    "z": 103,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Lr",
+    "atom": "atom/#Lr"
+   },
+   "Rf": {
+    "name": "Rutherfordium",
+    "z": 104,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Rf",
+    "atom": "atom/#Rf"
+   },
+   "Db": {
+    "name": "Dubnium",
+    "z": 105,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Db",
+    "atom": "atom/#Db"
+   },
+   "Sg": {
+    "name": "Seaborgium",
+    "z": 106,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Sg",
+    "atom": "atom/#Sg"
+   },
+   "Bh": {
+    "name": "Bohrium",
+    "z": 107,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Bh",
+    "atom": "atom/#Bh"
+   },
+   "Hs": {
+    "name": "Hassium",
+    "z": 108,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Hs",
+    "atom": "atom/#Hs"
+   },
+   "Mt": {
+    "name": "Meitnerium",
+    "z": 109,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Mt",
+    "atom": "atom/#Mt"
+   },
+   "Ds": {
+    "name": "Darmstadtium",
+    "z": 110,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Ds",
+    "atom": "atom/#Ds"
+   },
+   "Rg": {
+    "name": "Roentgenium",
+    "z": 111,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Rg",
+    "atom": "atom/#Rg"
+   },
+   "Cn": {
+    "name": "Copernicium",
+    "z": 112,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Cn",
+    "atom": "atom/#Cn"
+   },
+   "Nh": {
+    "name": "Nihonium",
+    "z": 113,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Nh",
+    "atom": "atom/#Nh"
+   },
+   "Fl": {
+    "name": "Flerovium",
+    "z": 114,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Fl",
+    "atom": "atom/#Fl"
+   },
+   "Mc": {
+    "name": "Moscovium",
+    "z": 115,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Mc",
+    "atom": "atom/#Mc"
+   },
+   "Lv": {
+    "name": "Livermorium",
+    "z": 116,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Lv",
+    "atom": "atom/#Lv"
+   },
+   "Ts": {
+    "name": "Tennessine",
+    "z": 117,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Ts",
+    "atom": "atom/#Ts"
+   },
+   "Og": {
+    "name": "Oganesson",
+    "z": 118,
+    "neutrons": null,
+    "massNumber": null,
+    "href": "elements/#Og",
+    "atom": "atom/#Og"
+   }
+  }
+ },
+ "processes": {
+  "dna-to-protein": {
+   "name": "DNA to protein",
+   "href": "processes/#dna-to-protein"
+  },
+  "mitosis": {
+   "name": "Cell division (mitosis)",
+   "href": "processes/#mitosis"
+  },
+  "respiration": {
+   "name": "Cellular respiration",
+   "href": "processes/#respiration"
+  },
+  "photosynthesis": {
+   "name": "Photosynthesis",
+   "href": "processes/#photosynthesis"
+  },
+  "osmosis-lab": {
+   "name": "Diffusion and osmosis lab",
+   "href": "processes/#osmosis-lab"
+  }
+ },
+ "explore": {
+  "molecule": {
+   "dna": [
+    {
+     "page": "heat",
+     "href": "heat/"
+    }
+   ],
+   "water": [
+    {
+     "page": "heat",
+     "href": "heat/"
+    }
+   ],
+   "lysozyme": [
+    {
+     "page": "heat",
+     "href": "heat/"
+    }
+   ],
+   "potassium-channel": [
+    {
+     "page": "spark",
+     "href": "spark/"
+    }
+   ],
+   "vitamin-c": [
+    {
+     "page": "nutrients",
+     "href": "nutrients/#vitamin-c"
+    }
+   ],
+   "beta-carotene": [
+    {
+     "page": "nutrients",
+     "href": "nutrients/#vitamin-a"
+    }
+   ],
+   "chlorophyll": [
+    {
+     "page": "light",
+     "href": "light/#antenna"
+    }
+   ],
+   "rubisco": [
+    {
+     "page": "light",
+     "href": "light/"
+    }
+   ]
+  },
+  "cell": {
+   "neuron": [
+    {
+     "page": "spark",
+     "href": "spark/"
+    }
+   ],
+   "plant": [
+    {
+     "page": "light",
+     "href": "light/#cell"
+    }
+   ]
+  },
+  "organism": {
+   "paramecium": [
+    {
+     "page": "shrink",
+     "href": "microscope/shrink.html#paramecium"
+    }
+   ],
+   "bacteria": [
+    {
+     "page": "shrink",
+     "href": "microscope/shrink.html#ecoli"
+    }
+   ]
+  },
+  "element": {
+   "Ca": [
+    {
+     "page": "nutrients",
+     "href": "nutrients/#calcium"
+    }
+   ],
+   "P": [
+    {
+     "page": "nutrients",
+     "href": "nutrients/#phosphorus"
+    }
+   ],
+   "Mg": [
+    {
+     "page": "light",
+     "href": "light/#antenna"
+    },
+    {
+     "page": "nutrients",
+     "href": "nutrients/#magnesium"
+    }
+   ],
+   "Na": [
+    {
+     "page": "nutrients",
+     "href": "nutrients/#sodium"
+    }
+   ],
+   "K": [
+    {
+     "page": "nutrients",
+     "href": "nutrients/#potassium"
+    }
+   ],
+   "Cl": [
+    {
+     "page": "nutrients",
+     "href": "nutrients/#chloride"
+    }
+   ],
+   "Fe": [
+    {
+     "page": "nutrients",
+     "href": "nutrients/#iron"
+    }
+   ],
+   "Zn": [
+    {
+     "page": "nutrients",
+     "href": "nutrients/#zinc"
+    }
+   ],
+   "I": [
+    {
+     "page": "nutrients",
+     "href": "nutrients/#iodine"
+    }
+   ],
+   "Se": [
+    {
+     "page": "nutrients",
+     "href": "nutrients/#selenium"
+    }
+   ],
+   "Cu": [
+    {
+     "page": "nutrients",
+     "href": "nutrients/#copper"
+    }
+   ],
+   "F": [
+    {
+     "page": "nutrients",
+     "href": "nutrients/#fluoride"
+    }
+   ],
+   "Co": [
+    {
+     "page": "nutrients",
+     "href": "nutrients/#b12"
+    }
+   ],
+   "Mn": [
+    {
+     "page": "nutrients",
+     "href": "nutrients/#manganese"
+    }
+   ],
+   "Mo": [
+    {
+     "page": "nutrients",
+     "href": "nutrients/#molybdenum"
+    }
+   ],
+   "Cr": [
+    {
+     "page": "nutrients",
+     "href": "nutrients/#chromium"
+    }
+   ]
+  },
+  "process": {
+   "photosynthesis": [
+    {
+     "page": "light",
+     "href": "light/#leaf"
+    }
+   ],
+   "dna-to-protein": [
+    {
+     "page": "heat",
+     "href": "heat/"
+    }
+   ]
+  }
+ }
+}

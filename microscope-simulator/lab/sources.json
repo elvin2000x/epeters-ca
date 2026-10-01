@@ -1,0 +1,401 @@
+{
+  "_note": "Every fact the molecule lab states or uses points at a key here. Saved copies of each page are in .refs/lab/ (tools/lab_fetch_refs.py fetches them and writes .refs/lab/grep.log with the backing sentences). The pubchem-* entries are written by tools/lab_build.py; do not edit those by hand.",
+  "sources": {
+    "os-chem-7-3": {
+      "type": "textbook",
+      "cite": "OpenStax Chemistry 2e, section 7.3 Lewis Symbols and Structures.",
+      "url": "https://openstax.org/books/chemistry-2e/pages/7-3-lewis-symbols-and-structures",
+      "used_for": "Valence electrons per element (Lewis symbols), the octet rule, hydrogen needing only two electrons, group 15 atoms forming three bonds and group 16 atoms forming two, single, double and triple bonds, hypervalent PCl5 and SF6 (why P may make 5 bonds and S 4 or 6), lone pairs.",
+      "checked": "2026-10-01: page states the octet rule; 'hydrogen only needs two electrons'; group 15 atoms form three covalent bonds as in NH3; group 16 atoms form two covalent bonds; double bond in CH2O and C2H4; triple bond as in CO, HCN, HCCH; PCl5 phosphorus shares five pairs and SF6 sulfur shares six pairs."
+    },
+    "os-chem-7-1": {
+      "type": "textbook",
+      "cite": "OpenStax Chemistry 2e, section 7.1 Ionic Bonding.",
+      "url": "https://openstax.org/books/chemistry-2e/pages/7-1-ionic-bonding",
+      "used_for": "Ionic bonds as attraction between cations and anions; NaCl as a regular arrangement of Na+ and Cl- ions; Ca2+; iron forming Fe2+ and Fe3+.",
+      "checked": "2026-10-01: page defines ionic bonds as electrostatic attraction between oppositely charged cations and anions; NaCl is a regular arrangement of equal numbers of Na+ and Cl- ions; Ca2+ is isoelectronic with Ar; iron forms Fe2+ and Fe3+."
+    },
+    "os-chem-2-6": {
+      "type": "textbook",
+      "cite": "OpenStax Chemistry 2e, section 2.6 Molecular and Ionic Compounds.",
+      "url": "https://openstax.org/books/chemistry-2e/pages/2-6-molecular-and-ionic-compounds",
+      "used_for": "Metals lose electrons to form cations (group 1 1+, group 2 2+, iron 2+ or 3+); nonmetals gain electrons (group 17 1-, group 16 2-); ionic compounds are electrically neutral overall; metal plus nonmetal predicts ionic, nonmetals together predict molecular.",
+      "checked": "2026-10-01: page states alkali metals form 1+ and alkaline earth metals 2+ cations; iron can form 2+ or 3+ ions; group 17 forms 1- and group 16 forms 2- anions; ionic compounds are electrically neutral overall; H2O2 and CHCl3 predicted molecular because all elements are nonmetals."
+    },
+    "os-chem-2-4": {
+      "type": "textbook",
+      "cite": "OpenStax Chemistry 2e, section 2.4 Chemical Formulas.",
+      "url": "https://openstax.org/books/chemistry-2e/pages/2-4-chemical-formulas",
+      "used_for": "Molecular formula subscripts; isomers (same formula, different structure), with acetic acid and methyl formate as the example pair.",
+      "checked": "2026-10-01: page states subscripts give the number of atoms of each element, a subscript is used only when more than one atom is present, and acetic acid and methyl formate are structural isomers with formula C2H4O2."
+    },
+    "os-chem-7-5": {
+      "type": "textbook",
+      "cite": "OpenStax Chemistry 2e, section 7.5 Strengths of Ionic and Covalent Bonds.",
+      "url": "https://openstax.org/books/chemistry-2e/pages/7-5-strengths-of-ionic-and-covalent-bonds",
+      "used_for": "Triple bonds are shorter than double bonds, which are shorter than single bonds (the lab draws them that way; the exact shortening factors are a drawing choice).",
+      "checked": "2026-10-01: page states triple bonds are stronger and shorter than double bonds between the same two atoms, and double bonds stronger and shorter than single bonds."
+    },
+    "os-chem-7-6": {
+      "type": "textbook",
+      "cite": "OpenStax Chemistry 2e, section 7.6 Molecular Structure and Polarity (VSEPR theory).",
+      "url": "https://openstax.org/books/chemistry-2e/pages/7-6-molecular-structure-and-polarity",
+      "used_for": "VSEPR: electron pairs around a central atom spread out to minimise repulsion; 2, 3, 4, 5, 6 regions give linear, trigonal planar, tetrahedral, trigonal bipyramidal, octahedral; a single, double or triple bond counts as one region; lone pairs take more space than bonds; the molecular structure names (bent, trigonal pyramidal, seesaw, T-shaped, square pyramidal, square planar); NH3 angles slightly less than 109.5 degrees; water 104.5 degrees.",
+      "checked": "2026-10-01: page states each of these, including 'A single, double, or triple bond counts as one region of electron density', the H-N-H angles in NH3 are slightly smaller than 109.5 degrees because of the lone pair, and the water bond angle is 104.5 degrees."
+    },
+    "cordero-2008": {
+      "type": "paper",
+      "cite": "Cordero B, Gomez V, Platero-Prats AE, Reves M, Echeverria J, Cremades E, Barragan F, Alvarez S. Covalent radii revisited. Dalton Transactions 2008, (21):2832-2838. Values read from the table in Wikipedia, Covalent radius.",
+      "url": "https://en.wikipedia.org/wiki/Covalent_radius",
+      "used_for": "Atom sizes and bond lengths in the drawing: H 31, C 76 (sp3), N 71, O 66, Na 166, P 107, S 105, Cl 102, Ca 176, Fe 132 (low spin) picometres.",
+      "checked": "2026-10-01: values read from the Cambridge Structural Database table on the saved page (.refs/lab/wiki-covalent-radius.html)."
+    },
+    "jmol-colors": {
+      "type": "software",
+      "cite": "Jmol: an open-source Java viewer for chemical structures in 3D. Default element colours (CPK scheme as used by Jmol).",
+      "url": "https://jmol.sourceforge.net/jscolors/",
+      "used_for": "Atom colours: H FFFFFF, C 909090, N 3050F8, O FF0D0D, Na AB5CF2, P FF8000, S FFFF30, Cl 1FF01F, Ca 3DFF00, Fe E06633. Colours are a convention, not a property of the atoms.",
+      "checked": "2026-10-01: read from jmol_constants.js, the table the page draws (saved as .refs/lab/jmol-jmol_constants.js)."
+    },
+    "hill-system": {
+      "type": "reference",
+      "cite": "Hill EA. On a system of indexing chemical literature. J Am Chem Soc 1900, 22(8):478-494. Summary read in Wikipedia, Chemical formula (Hill system).",
+      "url": "https://en.wikipedia.org/wiki/Chemical_formula",
+      "used_for": "Order of elements in the live formula when the molecule is not a named compound: carbon first, then hydrogen, then the rest alphabetically; with no carbon, all alphabetically.",
+      "checked": "2026-10-01: page states the Hill system puts carbon first, hydrogen next, then others alphabetically, and when there is no carbon all elements including hydrogen are listed alphabetically."
+    },
+    "ciaaw-2024": {
+      "type": "reference",
+      "cite": "IUPAC CIAAW, Abridged Standard Atomic Weights 2024, as stored in web/data/elements.json of this site.",
+      "url": "https://www.ciaaw.org/abridged-atomic-weights.htm",
+      "used_for": "Molar mass of the molecule on the bench (sum of the abridged atomic weights).",
+      "checked": "2026-10-01: weights read at run time from ../data/elements.json, which cites this source."
+    },
+    "os-bio-3-2": {
+      "type": "textbook",
+      "cite": "OpenStax Biology 2e, section 3.2 Carbohydrates.",
+      "url": "https://openstax.org/books/biology-2e/pages/3-2-carbohydrates",
+      "used_for": "Glucose challenge fact: C6H12O6, usually ring-shaped in water, broken down in cellular respiration to make ATP.",
+      "checked": "2026-10-01 (checked for the molecule gallery, web/molecules/sources.json key os-3-2): glucose formula C6H12O6; monosaccharides are usually ring-shaped in water; cellular respiration releases energy from glucose to make ATP."
+    },
+    "os-bio-3-4": {
+      "type": "textbook",
+      "cite": "OpenStax Biology 2e, section 3.4 Proteins.",
+      "url": "https://openstax.org/books/biology-2e/pages/3-4-proteins",
+      "used_for": "Glycine challenge fact: glycine's R group (side chain) is a hydrogen atom.",
+      "checked": "2026-10-01 (checked for the molecule gallery, web/molecules/sources.json key os-3-4): glycine's R group is a hydrogen atom."
+    },
+    "pubchem-962": {
+      "type": "database",
+      "cite": "PubChem Compound CID 962 (Water). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/962",
+      "checked": "2026-10-01: molecular formula H2O read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-280": {
+      "type": "database",
+      "cite": "PubChem Compound CID 280 (Carbon Dioxide). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/280",
+      "checked": "2026-10-01: molecular formula CO2 read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-297": {
+      "type": "database",
+      "cite": "PubChem Compound CID 297 (Methane). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/297",
+      "checked": "2026-10-01: molecular formula CH4 read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-222": {
+      "type": "database",
+      "cite": "PubChem Compound CID 222 (Ammonia). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/222",
+      "checked": "2026-10-01: molecular formula H3N read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-977": {
+      "type": "database",
+      "cite": "PubChem Compound CID 977 (Oxygen). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/977",
+      "checked": "2026-10-01: molecular formula O2 read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-702": {
+      "type": "database",
+      "cite": "PubChem Compound CID 702 (Ethanol). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/702",
+      "checked": "2026-10-01: molecular formula C2H6O read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-5793": {
+      "type": "database",
+      "cite": "PubChem Compound CID 5793 (D-Glucose). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/5793",
+      "checked": "2026-10-01: molecular formula C6H12O6 read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-107526": {
+      "type": "database",
+      "cite": "PubChem Compound CID 107526 ((2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanal). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/107526",
+      "checked": "2026-10-01: molecular formula C6H12O6 read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-750": {
+      "type": "database",
+      "cite": "PubChem Compound CID 750 (Glycine). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/750",
+      "checked": "2026-10-01: molecular formula C2H5NO2 read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-783": {
+      "type": "database",
+      "cite": "PubChem Compound CID 783 (Hydrogen). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/783",
+      "checked": "2026-10-01: molecular formula H2 read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-947": {
+      "type": "database",
+      "cite": "PubChem Compound CID 947 (Nitrogen). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/947",
+      "checked": "2026-10-01: molecular formula N2 read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-24526": {
+      "type": "database",
+      "cite": "PubChem Compound CID 24526 (Chlorine). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/24526",
+      "checked": "2026-10-01: molecular formula Cl2 read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-313": {
+      "type": "database",
+      "cite": "PubChem Compound CID 313 (Hydrochloric Acid). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/313",
+      "checked": "2026-10-01: molecular formula ClH read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-784": {
+      "type": "database",
+      "cite": "PubChem Compound CID 784 (Hydrogen Peroxide). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/784",
+      "checked": "2026-10-01: molecular formula H2O2 read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-402": {
+      "type": "database",
+      "cite": "PubChem Compound CID 402 (Hydrogen Sulfide). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/402",
+      "checked": "2026-10-01: molecular formula H2S read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-24404": {
+      "type": "database",
+      "cite": "PubChem Compound CID 24404 (Phosphine). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/24404",
+      "checked": "2026-10-01: molecular formula H3P read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-9321": {
+      "type": "database",
+      "cite": "PubChem Compound CID 9321 (Hydrazine). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/9321",
+      "checked": "2026-10-01: molecular formula H4N2 read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-768": {
+      "type": "database",
+      "cite": "PubChem Compound CID 768 (Hydrogen Cyanide). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/768",
+      "checked": "2026-10-01: molecular formula CHN read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-712": {
+      "type": "database",
+      "cite": "PubChem Compound CID 712 (Formaldehyde). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/712",
+      "checked": "2026-10-01: molecular formula CH2O read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-887": {
+      "type": "database",
+      "cite": "PubChem Compound CID 887 (Methanol). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/887",
+      "checked": "2026-10-01: molecular formula CH4O read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-284": {
+      "type": "database",
+      "cite": "PubChem Compound CID 284 (Formic Acid). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/284",
+      "checked": "2026-10-01: molecular formula CH2O2 read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-767": {
+      "type": "database",
+      "cite": "PubChem Compound CID 767 (Carbonic Acid). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/767",
+      "checked": "2026-10-01: molecular formula CH2O3 read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-1176": {
+      "type": "database",
+      "cite": "PubChem Compound CID 1176 (Urea). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/1176",
+      "checked": "2026-10-01: molecular formula CH4N2O read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-6329": {
+      "type": "database",
+      "cite": "PubChem Compound CID 6329 (Methylamine). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/6329",
+      "checked": "2026-10-01: molecular formula CH5N read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-6327": {
+      "type": "database",
+      "cite": "PubChem Compound CID 6327 (Methyl Chloride). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/6327",
+      "checked": "2026-10-01: molecular formula CH3Cl read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-6212": {
+      "type": "database",
+      "cite": "PubChem Compound CID 6212 (Chloroform). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/6212",
+      "checked": "2026-10-01: molecular formula CHCl3 read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-5943": {
+      "type": "database",
+      "cite": "PubChem Compound CID 5943 (Carbon Tetrachloride). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/5943",
+      "checked": "2026-10-01: molecular formula CCl4 read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-6324": {
+      "type": "database",
+      "cite": "PubChem Compound CID 6324 (Ethane). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/6324",
+      "checked": "2026-10-01: molecular formula C2H6 read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-6325": {
+      "type": "database",
+      "cite": "PubChem Compound CID 6325 (Ethylene). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/6325",
+      "checked": "2026-10-01: molecular formula C2H4 read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-6326": {
+      "type": "database",
+      "cite": "PubChem Compound CID 6326 (Acetylene). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/6326",
+      "checked": "2026-10-01: molecular formula C2H2 read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-6334": {
+      "type": "database",
+      "cite": "PubChem Compound CID 6334 (Propane). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/6334",
+      "checked": "2026-10-01: molecular formula C3H8 read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-8254": {
+      "type": "database",
+      "cite": "PubChem Compound CID 8254 (Dimethyl Ether). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/8254",
+      "checked": "2026-10-01: molecular formula C2H6O read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-177": {
+      "type": "database",
+      "cite": "PubChem Compound CID 177 (Acetaldehyde). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/177",
+      "checked": "2026-10-01: molecular formula C2H4O read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-176": {
+      "type": "database",
+      "cite": "PubChem Compound CID 176 (Acetic Acid). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/176",
+      "checked": "2026-10-01: molecular formula C2H4O2 read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-7865": {
+      "type": "database",
+      "cite": "PubChem Compound CID 7865 (Methyl formate). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/7865",
+      "checked": "2026-10-01: molecular formula C2H4O2 read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-180": {
+      "type": "database",
+      "cite": "PubChem Compound CID 180 (Acetone). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/180",
+      "checked": "2026-10-01: molecular formula C3H6O read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-1119": {
+      "type": "database",
+      "cite": "PubChem Compound CID 1119 (Sulfur Dioxide). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/1119",
+      "checked": "2026-10-01: molecular formula O2S read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-24682": {
+      "type": "database",
+      "cite": "PubChem Compound CID 24682 (Sulfur trioxide). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/24682",
+      "checked": "2026-10-01: molecular formula O3S read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-1118": {
+      "type": "database",
+      "cite": "PubChem Compound CID 1118 (Sulfuric Acid). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/1118",
+      "checked": "2026-10-01: molecular formula H2O4S read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-1004": {
+      "type": "database",
+      "cite": "PubChem Compound CID 1004 (Phosphoric Acid). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/1004",
+      "checked": "2026-10-01: molecular formula H3O4P read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-24387": {
+      "type": "database",
+      "cite": "PubChem Compound CID 24387 (Phosphorus trichloride). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/24387",
+      "checked": "2026-10-01: molecular formula Cl3P read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-24819": {
+      "type": "database",
+      "cite": "PubChem Compound CID 24819 (Phosphorus pentachloride). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/24819",
+      "checked": "2026-10-01: molecular formula Cl5P read from PUG REST; atoms and bond orders read from the 2D SDF record and counted back to the formula by tools/lab_build.py."
+    },
+    "pubchem-5234": {
+      "type": "database",
+      "cite": "PubChem Compound CID 5234 (Sodium Chloride). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/5234",
+      "checked": "2026-10-01: molecular formula ClNa read from PUG REST."
+    },
+    "pubchem-14798": {
+      "type": "database",
+      "cite": "PubChem Compound CID 14798 (Sodium Hydroxide). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/14798",
+      "checked": "2026-10-01: molecular formula HNaO read from PUG REST."
+    },
+    "pubchem-73971": {
+      "type": "database",
+      "cite": "PubChem Compound CID 73971 (Sodium oxide). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/73971",
+      "checked": "2026-10-01: molecular formula Na2O read from PUG REST."
+    },
+    "pubchem-5284359": {
+      "type": "database",
+      "cite": "PubChem Compound CID 5284359 (Calcium Chloride). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/5284359",
+      "checked": "2026-10-01: molecular formula CaCl2 read from PUG REST."
+    },
+    "pubchem-14778": {
+      "type": "database",
+      "cite": "PubChem Compound CID 14778 (Calcium Oxide). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/14778",
+      "checked": "2026-10-01: molecular formula CaO read from PUG REST."
+    },
+    "pubchem-6093208": {
+      "type": "database",
+      "cite": "PubChem Compound CID 6093208 (Calcium Hydroxide). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/6093208",
+      "checked": "2026-10-01: molecular formula CaH2O2 read from PUG REST."
+    },
+    "pubchem-24458": {
+      "type": "database",
+      "cite": "PubChem Compound CID 24458 (Ferrous Chloride). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/24458",
+      "checked": "2026-10-01: molecular formula Cl2Fe read from PUG REST."
+    },
+    "pubchem-24380": {
+      "type": "database",
+      "cite": "PubChem Compound CID 24380 (Iron chloride (FeCl3)). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/24380",
+      "checked": "2026-10-01: molecular formula Cl3Fe read from PUG REST."
+    },
+    "pubchem-449809": {
+      "type": "database",
+      "cite": "PubChem Compound CID 449809 (Ferrous oxide). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/449809",
+      "checked": "2026-10-01: molecular formula FeO read from PUG REST."
+    },
+    "pubchem-518696": {
+      "type": "database",
+      "cite": "PubChem Compound CID 518696 (Iron oxide (Fe2O3)). National Library of Medicine.",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/compound/518696",
+      "checked": "2026-10-01: molecular formula Fe2O3 read from PUG REST."
+    }
+  }
+}

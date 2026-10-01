@@ -1,0 +1,64 @@
+{
+ "id": "insulin",
+ "structure": "4INS",
+ "tour": [
+  {"id": "whole", "title": "A tiny hormone", "focus": {"chains": ["A", "B", "C", "D"], "residues": null, "ligands": null, "whole": true}, "view": "cartoon",
+   "text": [{"t": "Insulin is a tiny protein hormone that tells your body how much sugar is in the blood.", "s": ["motm-insulin", "os-3-4"]},
+            {"t": "This crystal holds two insulin molecules side by side, each made of an A chain and a B chain.", "s": ["rcsb-4INS", "paper-baker-1988"]}]},
+  {"id": "a-chain", "title": "The A chain", "focus": {"chains": ["A"], "residues": null, "ligands": null, "whole": false}, "view": "cartoon",
+   "text": [{"t": "The A chain is just 21 amino acids long, starting with glycine and ending with asparagine.", "s": ["os-3-4", "rcsb-4INS"]}]},
+  {"id": "b-chain", "title": "The B chain", "focus": {"chains": ["B"], "residues": null, "ligands": null, "whole": false}, "view": "cartoon",
+   "text": [{"t": "The B chain has 30 amino acids.", "s": ["os-3-4", "rcsb-4INS"]},
+            {"t": "Cells first make one longer chain, let it fold, then clip out the middle to leave these two pieces.", "s": ["motm-insulin"]}]},
+  {"id": "disulfides", "title": "Three sulfur bridges", "focus": {"chains": ["A", "B"], "residues": [[6, 7, "A"], [11, 11, "A"], [20, 20, "A"], [7, 7, "B"], [19, 19, "B"]], "ligands": null, "whole": false}, "view": "ball-and-stick",
+   "text": [{"t": "Three disulfide bridges between cysteines hold this small protein together: one inside the A chain and two joining A to B.", "s": ["motm-insulin", "rcsb-4INS"]}]},
+  {"id": "zinc", "title": "Zinc holds the store together", "focus": {"chains": ["B", "D"], "residues": [[10, 10]], "ligands": ["ZN"], "whole": false}, "view": "ball-and-stick",
+   "text": [{"t": "In this crystal, histidine 10 of the B chains grips a zinc ion.", "s": ["rcsb-4INS"]},
+            {"t": "Six insulins gather around two zinc ions to form a hexamer, the form used to store the hormone before release.", "s": ["paper-baker-1988", "motm-insulin"]}]},
+  {"id": "pig-end", "title": "Pig or human?", "focus": {"chains": ["B"], "residues": [[30, 30]], "ligands": null, "whole": false}, "view": "spacefill",
+   "text": [{"t": "This is pig insulin, and it differs from human insulin at only this spot: alanine at the end of the B chain where humans have threonine.", "s": ["motm-insulin", "rcsb-4INS"]}]}
+ ],
+ "sections": {
+  "does": [
+   {"t": "Insulin is made in the pancreas and released into the blood when sugar levels rise, for example after a meal.", "s": ["motm-insulin", "os-37-3"]},
+   {"t": "It binds to receptors on liver, muscle and fat cells and tells them to take glucose out of the blood and store it.", "s": ["motm-insulin", "os-37-3"]},
+   {"t": "As a result, blood glucose falls.", "s": ["os-37-3"]}
+  ],
+  "shape": [
+   {"t": "Being small lets insulin travel quickly through the blood and be caught easily by receptors on cell surfaces.", "s": ["motm-insulin"]},
+   {"t": "Small proteins are hard to keep folded, so insulin is braced by three disulfide bridges.", "s": ["motm-insulin"]},
+   {"t": "Carbon-rich amino acids such as leucine and isoleucine cluster in the middle, while charged ones cover the surface facing water.", "s": ["motm-insulin"]}
+  ],
+  "lives": {
+   "text": [
+    {"t": "Insulin is made by the beta cells of the pancreas and carried in the blood to cells all over the body.", "s": ["os-37-3", "motm-insulin"]}
+   ],
+   "links": [{"type": "molecule", "id": "glucose"}, {"type": "element", "id": "Zn"}, {"type": "element", "id": "S"}]
+  },
+  "wrong": [
+   {"t": "When insulin does not work properly, blood glucose rises dangerously and the result is diabetes mellitus.", "s": ["motm-insulin", "os-37-3"]},
+   {"t": "Type I diabetes happens when the pancreas fails to make insulin.", "s": ["os-37-3"]},
+   {"t": "It can be treated by replacing the missing insulin, which today is made by engineered bacteria or yeast.", "s": ["motm-insulin"]}
+  ],
+  "history": {
+   "year": 1988, "who": "E.N. Baker, T.L. Blundell, G.G. Dodson, D.M. Hodgkin and colleagues", "method": "X-ray", "resolution_A": 1.5,
+   "text": [
+    {"t": "This pig insulin structure was worked out from X-ray data reaching 1.5 angstroms.", "s": ["paper-baker-1988", "rcsb-4INS"]},
+    {"t": "The study traced how two insulins pair up and how three pairs build a hexamer around two zinc ions.", "s": ["paper-baker-1988"]}
+   ]
+  },
+  "size": {
+   "nm": 4.3,
+   "compare": [
+    {"t": "The two insulins in this file span about 4.3 nm from end to end.", "s": ["rcsb-4INS"]},
+    {"t": "A single hemoglobin in this gallery measures about 7 nm, so insulin is one of the smallest proteins here.", "s": ["rcsb-4HHB", "rcsb-4INS"]}
+   ]
+  }
+ },
+ "highlights": [
+  {"chain": "B", "residue": 30, "comp": "ALA", "label": "Pig insulin's one difference (AlaB30)", "text": [{"t": "Human insulin has threonine here; pig insulin has alanine.", "s": ["motm-insulin", "rcsb-4INS"]}]},
+  {"chain": "B", "residue": 10, "comp": "HIS", "label": "Zinc-binding histidine (HisB10)", "text": [{"t": "This histidine holds a zinc ion in the stored form.", "s": ["rcsb-4INS"]}]},
+  {"chain": "A", "residue": 7, "comp": "CYS", "label": "Bridge to the B chain (CysA7)", "text": [{"t": "This cysteine forms a disulfide bridge with cysteine 7 of the B chain.", "s": ["rcsb-4INS"]}]}
+ ],
+ "review": "pending"
+}

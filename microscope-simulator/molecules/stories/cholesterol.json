@@ -1,0 +1,50 @@
+{
+ "id": "cholesterol",
+ "structure": "CLR",
+ "tour": [
+  {"id": "whole", "title": "A steroid", "focus": {"atoms": ["C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "C11", "C12", "C13", "C14", "C15", "C16", "C17", "O1"]}, "view": "ball-and-stick",
+   "text": [{"t": "Cholesterol is the most common steroid, a lipid built from linked carbon rings.", "s": ["os-3-3"]},
+            {"t": "Its formula is C27H46O: 27 carbons and a single oxygen.", "s": ["pubchem-cholesterol", "ccd-CLR"]}]},
+  {"id": "rings", "title": "Four fused rings", "focus": {"atoms": ["C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "C11", "C12", "C13", "C14", "C15", "C16", "C17"]}, "view": "ball-and-stick",
+   "text": [{"t": "All steroids share four linked carbon rings, three with six carbons and one with five.", "s": ["os-3-3", "ccd-CLR"]}]},
+  {"id": "oh", "title": "The OH head", "focus": {"atoms": ["O1", "C3"]}, "view": "spacefill",
+   "text": [{"t": "One OH group sits on the end of the rings, which puts cholesterol in the alcohol family called sterols.", "s": ["os-3-3", "ccd-CLR"]}]},
+  {"id": "tail", "title": "The short tail", "focus": {"atoms": ["C20", "C21", "C22", "C23", "C24", "C25", "C26", "C27"]}, "view": "ball-and-stick",
+   "text": [{"t": "At the other end, cholesterol has a short tail of carbon and hydrogen.", "s": ["os-3-3", "ccd-CLR"]}]},
+  {"id": "membrane", "title": "In the membrane", "focus": {"atoms": ["C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "C11", "C12", "C13", "C14", "C15", "C16", "C17", "C20", "C21", "C22", "C23", "C24", "C25", "C26", "C27", "O1"]}, "view": "spacefill",
+   "text": [{"t": "In a cell membrane, cholesterol lies alongside the phospholipids in the membrane's core.", "s": ["os-5-1"]}]}
+ ],
+ "sections": {
+  "does": [
+   {"t": "In the membrane, cholesterol dampens the effect of temperature, keeping the membrane fluid over a wider range of temperatures.", "s": ["os-5-1"]},
+   {"t": "It is also the starting material for steroid hormones such as testosterone and estradiol, for vitamin D and for bile salts that help digest fats.", "s": ["os-3-3"]}
+  ],
+  "shape": [
+   {"t": "Like other lipids, cholesterol is mostly carbon and hydrogen, so it does not dissolve in water.", "s": ["os-3-3"]},
+   {"t": "Its rings and tail avoid water, so in a membrane it sits alongside the phospholipids in the water-free core.", "s": ["os-3-3", "os-5-1"]}
+  ],
+  "lives": {
+   "text": [
+    {"t": "The liver makes cholesterol.", "s": ["os-3-3"]},
+    {"t": "Cholesterol is a component of the plasma membrane of animal cells.", "s": ["os-3-3", "os-5-1"]}
+   ],
+   "links": [{"type": "part", "id": "membrane"}, {"type": "cell", "id": "animal"}, {"type": "molecule", "id": "palmitic-acid"}, {"type": "element", "id": "C"}]
+  },
+  "wrong": [
+   {"t": "High levels of LDL, often called bad cholesterol, may lead to plaque in the arteries and heart disease.", "s": ["os-3-3"]},
+   {"t": "Even so, cholesterol itself is necessary for the body to work properly.", "s": ["os-3-3"]}
+  ],
+  "size": {
+   "nm": 1.8,
+   "compare": [
+    {"t": "From its farthest atom to its farthest atom, cholesterol measures about 1.8 nm.", "s": ["ccd-CLR"]},
+    {"t": "Palmitic acid, also in this gallery, measures about 2.2 nm.", "s": ["ccd-PLM"]}
+   ]
+  }
+ },
+ "highlights": [
+  {"atoms": ["O1"], "label": "OH group", "text": [{"t": "The single oxygen, which makes cholesterol a sterol.", "s": ["os-3-3", "ccd-CLR"]}]},
+  {"atoms": ["C5", "C6"], "label": "The one double bond", "text": [{"t": "The only carbon-to-carbon double bond in cholesterol joins these two ring carbons.", "s": ["ccd-CLR"]}]}
+ ],
+ "review": "pending"
+}

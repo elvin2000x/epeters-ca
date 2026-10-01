@@ -1,0 +1,39 @@
+{
+  "_note": "Every fact in dna.json 'facts' points at one or more keys here. 'checked' says what was read and when. The model's numbers (rise, pairs per turn, width, handedness, strand direction, hydrogen bonds per pair) come only from these entries.",
+  "sources": {
+    "os-14-2": {
+      "type": "textbook",
+      "cite": "OpenStax Biology 2e, section 14.2 DNA Structure and Sequencing.",
+      "url": "https://openstax.org/books/biology-2e/pages/14-2-dna-structure-and-sequencing",
+      "checked": "2026-10-01, page text read: two strands twisted into a right-handed helix; A pairs with T and G with C; each base pair is 0.34 nm from the next and each turn measures 3.4 nm, so 10 base pairs per turn; diameter 2 nm, uniform throughout; the two strands are antiparallel; twisting makes uniformly spaced major and minor grooves; A and T form two hydrogen bonds, C and G form three."
+    },
+    "wc-1953": {
+      "type": "primary paper",
+      "cite": "Watson, J. D. and Crick, F. H. C. (1953). Molecular Structure of Nucleic Acids: A Structure for Deoxyribose Nucleic Acid. Nature 171, 737-738.",
+      "doi": "10.1038/171737a0",
+      "url": "https://doi.org/10.1038/171737a0",
+      "checked": "2026-10-01, Crossref record read (api.crossref.org/works/10.1038/171737a0): title, journal Nature, volume 171, pages 737-738, issued 1953-04-25, authors Watson and Crick. Cited as the original double helix proposal; the numbers in this model are taken from os-14-2 and wang-1979."
+    },
+    "wang-1979": {
+      "type": "primary paper",
+      "cite": "Wang, J. C. (1979). Helical repeat of DNA in solution. Proc. Natl. Acad. Sci. USA 76, 200-203.",
+      "doi": "10.1073/pnas.76.1.200",
+      "url": "https://doi.org/10.1073/pnas.76.1.200",
+      "checked": "2026-10-01, abstract read (Europe PMC, PMID 284332): helical repeat of DNA in solution is 10.4 base pairs per turn under physiological conditions, probable error plus or minus 0.1, significantly different from the 10.0 of the B form fibre structure."
+    },
+    "rcsb-1BNA": {
+      "type": "PDB entry",
+      "cite": "RCSB PDB 1BNA, Structure of a B-DNA dodecamer: conformation and dynamics.",
+      "url": "https://www.rcsb.org/structure/1BNA",
+      "file": "../molecules/data/1BNA.cif",
+      "checked": "2026-10-01, the local mmCIF file read directly: chain A and chain B each CGCGAATTCGCG (residues 1 to 12 and 13 to 24), residue n on chain A pairs with residue 25 minus n on chain B. The close-up draws these coordinates as they are, converted from angstroms to nanometres."
+    },
+    "drew-1981": {
+      "type": "primary paper",
+      "cite": "Drew, H. R., Wing, R. M., Takano, T. et al. (1981). Structure of a B-DNA dodecamer: conformation and dynamics. Proc. Natl. Acad. Sci. USA 78, 2179-2183.",
+      "doi": "10.1073/pnas.78.4.2179",
+      "url": "https://doi.org/10.1073/pnas.78.4.2179",
+      "checked": "2026-10-01, entry in ../molecules/sources.json (abstract read via Europe PMC, PMID 6941276): synthetic dodecamer d(CGCGAATTCGCG), slightly more than one complete turn of right-handed double-stranded B helix."
+    }
+  }
+}

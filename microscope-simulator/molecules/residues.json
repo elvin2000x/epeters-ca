@@ -1,0 +1,43 @@
+{
+  "about": "Names and codes for the building blocks the molecules page shows when you tap a residue or read the sequence strip. Three-letter codes are the ones PDB files use (label_comp_id). molecule: a gallery id on this page with that exact building block in 3D. lab: a lab page with a challenge to build it. Sources are numbered on the page next to the residue card.",
+  "sources": {
+    "iupac-1984": { "cite": "IUPAC-IUB Joint Commission on Biochemical Nomenclature. Nomenclature and symbolism for amino acids and peptides. European Journal of Biochemistry 138 (1984) 9-37.", "doi": "10.1111/j.1432-1033.1984.tb07877.x", "used_for": "Three-letter and one-letter codes and names of the amino acids." },
+    "iupac-1970-nuc": { "cite": "IUPAC-IUB Commission on Biochemical Nomenclature. Abbreviations and symbols for nucleic acids, polynucleotides and their constituents. Biochemistry 9 (1970) 4022-4027.", "doi": "10.1021/bi00822a023", "used_for": "One-letter codes of the nucleotides." },
+    "wimley-white-1996": { "cite": "Wimley WC, White SH. Experimentally determined hydrophobicity scale for proteins at membrane interfaces. Nature Structural Biology 3 (1996) 842-848.", "doi": "10.1038/nsb1096-842", "used_for": "The water-loving to water-fearing colours (the Mol* hydrophobicity colouring uses this scale, water to membrane interface)." },
+    "wwpdb-ccd": { "cite": "wwPDB Chemical Component Dictionary.", "url": "https://www.wwpdb.org/data/ccd", "used_for": "The three-letter residue codes in PDB files." }
+  },
+  "aminoSources": ["iupac-1984", "wwpdb-ccd"],
+  "nucleotideSources": ["iupac-1970-nuc", "wwpdb-ccd"],
+  "hydroSources": ["wimley-white-1996"],
+  "residues": {
+    "ALA": { "one": "A", "name": "alanine", "kind": "amino" },
+    "ARG": { "one": "R", "name": "arginine", "kind": "amino" },
+    "ASN": { "one": "N", "name": "asparagine", "kind": "amino" },
+    "ASP": { "one": "D", "name": "aspartic acid", "kind": "amino" },
+    "CYS": { "one": "C", "name": "cysteine", "kind": "amino" },
+    "GLN": { "one": "Q", "name": "glutamine", "kind": "amino" },
+    "GLU": { "one": "E", "name": "glutamic acid", "kind": "amino" },
+    "GLY": { "one": "G", "name": "glycine", "kind": "amino", "molecule": "glycine", "lab": "../lab/" },
+    "HIS": { "one": "H", "name": "histidine", "kind": "amino" },
+    "ILE": { "one": "I", "name": "isoleucine", "kind": "amino" },
+    "LEU": { "one": "L", "name": "leucine", "kind": "amino" },
+    "LYS": { "one": "K", "name": "lysine", "kind": "amino" },
+    "MET": { "one": "M", "name": "methionine", "kind": "amino" },
+    "PHE": { "one": "F", "name": "phenylalanine", "kind": "amino" },
+    "PRO": { "one": "P", "name": "proline", "kind": "amino" },
+    "SER": { "one": "S", "name": "serine", "kind": "amino" },
+    "THR": { "one": "T", "name": "threonine", "kind": "amino" },
+    "TRP": { "one": "W", "name": "tryptophan", "kind": "amino" },
+    "TYR": { "one": "Y", "name": "tyrosine", "kind": "amino" },
+    "VAL": { "one": "V", "name": "valine", "kind": "amino" },
+    "HYP": { "one": null, "name": "hydroxyproline", "kind": "amino" },
+    "DA": { "one": "A", "name": "deoxyadenosine (A)", "kind": "nucleotide" },
+    "DC": { "one": "C", "name": "deoxycytidine (C)", "kind": "nucleotide" },
+    "DG": { "one": "G", "name": "deoxyguanosine (G)", "kind": "nucleotide" },
+    "DT": { "one": "T", "name": "deoxythymidine (T)", "kind": "nucleotide" },
+    "A": { "one": "A", "name": "adenosine (A)", "kind": "nucleotide" },
+    "C": { "one": "C", "name": "cytidine (C)", "kind": "nucleotide" },
+    "G": { "one": "G", "name": "guanosine (G)", "kind": "nucleotide" },
+    "U": { "one": "U", "name": "uridine (U)", "kind": "nucleotide" }
+  }
+}

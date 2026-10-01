@@ -1,0 +1,63 @@
+{
+ "id": "collagen",
+ "structure": "1CAG",
+ "tour": [
+  {"id": "triple-helix", "title": "A three-strand rope", "focus": {"chains": ["A", "B", "C"], "residues": null, "ligands": null, "whole": true}, "view": "cartoon",
+   "text": [{"t": "Collagen is three protein chains wound together into a tight triple helix.", "s": ["motm-collagen", "rcsb-1CAG"]},
+            {"t": "This is a short lab-made piece of 30 amino acids per chain; a real collagen chain is over 1400 amino acids long.", "s": ["rcsb-1CAG", "motm-collagen"]}]},
+  {"id": "one-chain", "title": "Follow one chain", "focus": {"chains": ["A"], "residues": null, "ligands": null, "whole": false}, "view": "cartoon",
+   "text": [{"t": "Each chain repeats the same three amino acids again and again: proline, hydroxyproline, glycine.", "s": ["rcsb-1CAG", "motm-collagen"]}]},
+  {"id": "glycine", "title": "Glycine on the inside", "focus": {"chains": ["A", "B", "C"], "residues": [[3, 3, "A"], [6, 6, "A"], [9, 9, "A"], [12, 12, "A"], [33, 33, "B"], [36, 36, "B"], [39, 39, "B"], [42, 42, "B"], [63, 63, "C"], [66, 66, "C"], [69, 69, "C"], [72, 72, "C"]], "ligands": null, "whole": false}, "view": "spacefill",
+   "text": [{"t": "Every third amino acid is glycine, a small amino acid that fits neatly into the crowded centre of the helix.", "s": ["motm-collagen"]}]},
+  {"id": "hydroxyproline", "title": "Hydroxyproline", "focus": {"chains": ["A"], "residues": [[2, 2], [5, 5], [8, 8], [11, 11], [14, 14], [17, 17], [20, 20], [23, 23], [26, 26], [29, 29]], "ligands": null, "whole": false}, "view": "ball-and-stick",
+   "text": [{"t": "Hydroxyproline is proline with an extra oxygen added after the chain is built, a step that needs vitamin C.", "s": ["motm-collagen"]},
+            {"t": "In this crystal hydroxyprolines help hold a sleeve of water molecules around the helix.", "s": ["paper-bella-1994"]}]},
+  {"id": "alanine-swap", "title": "One wrong piece", "focus": {"chains": ["A", "B", "C"], "residues": [[15, 15, "A"], [45, 45, "B"], [75, 75, "C"]], "ligands": null, "whole": false}, "view": "spacefill",
+   "text": [{"t": "Here the researchers put a bigger alanine where a glycine should be.", "s": ["motm-collagen", "rcsb-1CAG"]},
+            {"t": "It crowds the neighbouring chains and makes the helix untwist a little at that spot.", "s": ["motm-collagen", "paper-bella-1994"]}]}
+ ],
+ "sections": {
+  "does": [
+   {"t": "Collagen is a major structural protein that forms cables in tendons and tough sheets that support skin and internal organs.", "s": ["motm-collagen"]},
+   {"t": "Bones and teeth are made by adding mineral crystals to collagen.", "s": ["motm-collagen"]},
+   {"t": "About one quarter of all the protein in your body is collagen.", "s": ["motm-collagen"]}
+  ],
+  "shape": [
+   {"t": "Three long chains twist around each other like the strands of a rope, forming a sturdy molecular cable.", "s": ["motm-collagen", "paper-bella-1994"]},
+   {"t": "Glycine at every third position tucks into the tight centre, while proline and hydroxyproline bend each chain smoothly around the helix.", "s": ["motm-collagen"]},
+   {"t": "Type I collagen molecules line up side by side, like fibers in a rope, to build tough fibrils between our cells.", "s": ["motm-collagen"]}
+  ],
+  "lives": {
+   "text": [
+    {"t": "Collagen sits outside cells, filling the space between nearly all of them.", "s": ["motm-collagen"]},
+    {"t": "Hemoglobin is a round, globular protein, but collagen in the skin is a long, fibrous one.", "s": ["os-3-4"]}
+   ],
+   "links": [{"type": "molecule", "id": "glycine"}, {"type": "element", "id": "C"}, {"type": "element", "id": "N"}, {"type": "element", "id": "O"}]
+  },
+  "wrong": [
+   {"t": "Without enough vitamin C, the body cannot make hydroxyproline, new collagen stops being built, and the result is scurvy.", "s": ["motm-collagen"]},
+   {"t": "Loose teeth and easy bruising in scurvy come from missing collagen repairs.", "s": ["motm-collagen"]},
+   {"t": "Changes of a glycine to another amino acid in collagen are linked to diseases such as osteogenesis imperfecta and Ehlers-Danlos syndrome type IV.", "s": ["paper-bella-1994"]}
+  ],
+  "history": {
+   "year": 1994, "who": "J. Bella, M. Eaton, B. Brodsky and H.M. Berman", "method": "X-ray", "resolution_A": 1.85,
+   "text": [
+    {"t": "This X-ray study of a collagen-like peptide showed a protein triple helix atom by atom at 1.9 angstroms.", "s": ["paper-bella-1994"]},
+    {"t": "It confirmed the basic triple-helix shape that earlier studies of collagen fibers had predicted.", "s": ["paper-bella-1994"]}
+   ]
+  },
+  "size": {
+   "nm": 8.7,
+   "compare": [
+    {"t": "This short piece of collagen is about 8.7 nm long from end to end.", "s": ["rcsb-1CAG"]},
+    {"t": "Each chain here has 30 amino acids, while a full collagen chain has over 1400, so a whole molecule is far longer.", "s": ["rcsb-1CAG", "motm-collagen"]}
+   ]
+  }
+ },
+ "highlights": [
+  {"chain": "A", "residue": 15, "comp": "ALA", "label": "Alanine in a glycine spot (Ala15)", "text": [{"t": "This alanine replaces a glycine and locally untwists the triple helix.", "s": ["paper-bella-1994", "rcsb-1CAG"]}]},
+  {"chain": "A", "residue": 3, "comp": "GLY", "label": "Glycine (Gly3)", "text": [{"t": "Glycine sits at every third position, inside the helix.", "s": ["motm-collagen", "rcsb-1CAG"]}]},
+  {"chain": "A", "residue": 2, "comp": "HYP", "label": "Hydroxyproline (Hyp2)", "text": [{"t": "Hydroxyproline needs vitamin C to be made.", "s": ["motm-collagen"]}]}
+ ],
+ "review": "pending"
+}

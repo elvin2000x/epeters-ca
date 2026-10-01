@@ -1,0 +1,61 @@
+{
+ "id": "actin",
+ "structure": "1J6Z",
+ "tour": [
+  {"id": "u-shape", "title": "A U-shaped building block", "focus": {"chains": ["A"], "residues": null, "ligands": null, "whole": true}, "view": "cartoon",
+   "text": [{"t": "Actin is a U-shaped protein, and many of them join together to build actin filaments.", "s": ["motm-actin", "os-4-5"]},
+            {"t": "This file holds a single rabbit actin, not a whole filament.", "s": ["rcsb-1J6Z", "motm-actin"]}]},
+  {"id": "nucleotide", "title": "Fuel in the groove", "focus": {"chains": ["A"], "residues": null, "ligands": ["ADP"], "whole": false}, "view": "ball-and-stick",
+   "text": [{"t": "Deep in the groove between the two arms sits the nucleotide, here ADP.", "s": ["motm-actin", "rcsb-1J6Z"]},
+            {"t": "Actin carries ATP when it joins a filament, then splits it to ADP, and ADP-actin lets go more easily.", "s": ["motm-actin"]}]},
+  {"id": "calcium", "title": "Calcium ions", "focus": {"chains": ["A"], "residues": null, "ligands": ["CA"], "whole": false}, "view": "spacefill",
+   "text": [{"t": "Small calcium ions are bound around the protein, and one of them holds onto a phosphate of the ADP.", "s": ["rcsb-1J6Z"]}]},
+  {"id": "blocked", "title": "Kept from building filaments", "focus": {"chains": ["A"], "residues": null, "ligands": ["RHO"], "whole": false}, "view": "ball-and-stick",
+   "text": [{"t": "Filaments do not form neat crystals, so this actin was chemically modified to stop it joining filaments.", "s": ["paper-otterbein-2001", "motm-actin"]},
+            {"t": "The file also holds a small dye molecule attached to the protein, called tetramethylrhodamine.", "s": ["rcsb-1J6Z"]}]},
+  {"id": "adp-state", "title": "The ADP shape", "focus": {"chains": ["A"], "residues": null, "ligands": ["ADP"], "whole": true}, "view": "surface",
+   "text": [{"t": "Compared with actin holding ATP, this ADP form shows a marked change of shape in one region, called subdomain 2.", "s": ["paper-otterbein-2001"]}]}
+ ],
+ "sections": {
+  "does": [
+   {"t": "Actin filaments form a scaffold inside cells, part of the cytoskeleton that gives a cell its shape.", "s": ["motm-actin", "os-4-5"]},
+   {"t": "They are also the track that myosin climbs to make muscles contract.", "s": ["motm-actin", "os-4-5"]},
+   {"t": "Actin can make up about 5 percent of the protein in a typical cell and up to one fifth in muscle cells.", "s": ["motm-actin"]}
+  ],
+  "shape": [
+   {"t": "Each actin grips its nucleotide in a groove between two arms, and whether it holds ATP or ADP changes how tightly it binds in a filament.", "s": ["motm-actin", "paper-otterbein-2001"]},
+   {"t": "Because new ATP-actin adds at one end while ADP-actin falls off the other, a filament can treadmill through the cell.", "s": ["motm-actin"]},
+   {"t": "A microfilament is two intertwined strands of actin.", "s": ["os-4-5"]}
+  ],
+  "lives": {
+   "text": [
+    {"t": "Actin fills the cytoplasm of animal, plant and fungal cells as a tangle of filaments.", "s": ["motm-actin"]},
+    {"t": "Actin and myosin are plentiful in muscle cells.", "s": ["os-4-5"]}
+   ],
+   "links": [{"type": "part", "id": "cytoskeleton"}, {"type": "part", "id": "myofibrils"}, {"type": "cell", "id": "muscle"}, {"type": "molecule", "id": "myosin"}, {"type": "element", "id": "Ca"}]
+  },
+  "wrong": [
+   {"t": "Phalloidin, a poison from the death cap mushroom, makes actin filaments grow out of control.", "s": ["motm-actin"]},
+   {"t": "The cells clog with rigid filaments, causing fatal liver and kidney damage.", "s": ["motm-actin"]}
+  ],
+  "history": {
+   "year": 2001, "who": "L.R. Otterbein, P. Graceffa and R. Dominguez", "method": "X-ray", "resolution_A": 1.54,
+   "text": [
+    {"t": "Earlier actin structures were all caught bound to other proteins, such as DNase I, profilin or gelsolin.", "s": ["paper-otterbein-2001"]},
+    {"t": "This was actin on its own, in the ADP state, solved at 1.54 angstroms.", "s": ["paper-otterbein-2001", "rcsb-1J6Z"]}
+   ]
+  },
+  "size": {
+   "nm": 7.4,
+   "compare": [
+    {"t": "One actin measures about 7.4 nm from end to end in this file.", "s": ["rcsb-1J6Z"]},
+    {"t": "A whole actin filament, or microfilament, is about 7 nm wide and the narrowest fibre of the cytoskeleton.", "s": ["os-4-5"]}
+   ]
+  }
+ },
+ "highlights": [
+  {"chain": "A", "residue": 1380, "comp": "ADP", "label": "ADP", "text": [{"t": "The nucleotide in actin's groove.", "s": ["motm-actin", "rcsb-1J6Z"]}]},
+  {"chain": "A", "residue": 382, "comp": "CA", "label": "Calcium on the ADP", "text": [{"t": "This calcium ion binds to the ADP.", "s": ["rcsb-1J6Z"]}]}
+ ],
+ "review": "pending"
+}

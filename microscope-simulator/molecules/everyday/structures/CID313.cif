@@ -1,0 +1,46 @@
+data_CID313
+#
+# PubChem CID 313 (Hydrogen Chloride), computed 3D conformer, converted to the CCD layout for the Cell and Molecule Explorer.
+# Source: https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/313/record/SDF?record_type=3d (downloaded 2026-10-01).
+# Licence: NCBI Molecular Data Usage policy, NCBI places no restrictions on use or distribution. Coordinates centred, otherwise unchanged.
+#
+_chem_comp.id                     CID313
+_chem_comp.name                   'HYDROGEN CHLORIDE'
+_chem_comp.type                   NON-POLYMER
+_chem_comp.formula                'H Cl'
+_chem_comp.pdbx_formal_charge     0
+_chem_comp.three_letter_code      CID313
+_chem_comp.pdbx_ideal_coordinates_missing_flag N
+#
+loop_
+_chem_comp_atom.comp_id
+_chem_comp_atom.atom_id
+_chem_comp_atom.alt_atom_id
+_chem_comp_atom.type_symbol
+_chem_comp_atom.charge
+_chem_comp_atom.pdbx_align
+_chem_comp_atom.pdbx_aromatic_flag
+_chem_comp_atom.pdbx_leaving_atom_flag
+_chem_comp_atom.pdbx_stereo_config
+_chem_comp_atom.model_Cartn_x
+_chem_comp_atom.model_Cartn_y
+_chem_comp_atom.model_Cartn_z
+_chem_comp_atom.pdbx_model_Cartn_x_ideal
+_chem_comp_atom.pdbx_model_Cartn_y_ideal
+_chem_comp_atom.pdbx_model_Cartn_z_ideal
+_chem_comp_atom.pdbx_component_atom_id
+_chem_comp_atom.pdbx_component_comp_id
+_chem_comp_atom.pdbx_ordinal
+CID313 CL1 CL1 CL 0 1 N N N -0.3029 0.1027 0.5692 -0.3029 0.1027 0.5692 CL1 CID313 1
+CID313 H1 H1 H 0 1 N N N 0.3029 -0.1027 -0.5692 0.3029 -0.1027 -0.5692 H1 CID313 2
+#
+loop_
+_chem_comp_bond.comp_id
+_chem_comp_bond.atom_id_1
+_chem_comp_bond.atom_id_2
+_chem_comp_bond.value_order
+_chem_comp_bond.pdbx_aromatic_flag
+_chem_comp_bond.pdbx_stereo_config
+_chem_comp_bond.pdbx_ordinal
+CID313 CL1 H1 SING N N 1
+#

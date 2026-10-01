@@ -1,0 +1,48 @@
+{
+ "id": "atp",
+ "structure": "ATP",
+ "tour": [
+  {"id": "whole", "title": "The energy molecule", "focus": {"atoms": ["N9", "C1'", "PA", "PB", "PG"]}, "view": "ball-and-stick",
+   "text": [{"t": "ATP, adenosine triphosphate, is the cell's energy-supplying molecule.", "s": ["os-6-4"]},
+            {"t": "It is built from three parts: adenine, the sugar ribose, and a tail of three phosphate groups.", "s": ["os-6-4", "ccd-ATP"]}]},
+  {"id": "adenine", "title": "Adenine", "focus": {"atoms": ["N9", "C8", "N7", "C5", "C6", "N6", "N1", "C2", "N3", "C4"]}, "view": "ball-and-stick",
+   "text": [{"t": "This flat double ring of carbon and nitrogen is adenine, the same base that spells the letter A in DNA.", "s": ["ccd-ATP", "os-3-5"]}]},
+  {"id": "ribose", "title": "Ribose", "focus": {"atoms": ["C1'", "C2'", "C3'", "C4'", "O4'", "C5'", "O2'", "O3'"]}, "view": "ball-and-stick",
+   "text": [{"t": "The five-sided ring is the sugar ribose; adenine plus ribose together make adenosine.", "s": ["ccd-ATP", "os-6-4"]}]},
+  {"id": "phosphates", "title": "Alpha, beta, gamma", "focus": {"atoms": ["PA", "PB", "PG", "O1A", "O2A", "O3A", "O1B", "O2B", "O3B", "O1G", "O2G", "O3G"]}, "view": "ball-and-stick",
+   "text": [{"t": "The three phosphate groups are named alpha, beta and gamma, counting outward from the sugar.", "s": ["os-6-4", "ccd-ATP"]}]},
+  {"id": "last-bond", "title": "Snap off the last one", "focus": {"atoms": ["PB", "O3B", "PG"]}, "view": "spacefill",
+   "text": [{"t": "Splitting off the gamma phosphate leaves ADP and a free phosphate, and releases energy the cell can use.", "s": ["os-6-4"]},
+            {"t": "The bonds linking the phosphates are called high-energy bonds.", "s": ["os-6-4"]}]}
+ ],
+ "sections": {
+  "does": [
+   {"t": "ATP supplies the energy for many reactions and processes inside cells.", "s": ["os-6-4"]},
+   {"t": "Myosin uses ATP to power muscle movement, and actin uses it to build its filaments.", "s": ["os-38-4", "os-4-5"]}
+  ],
+  "shape": [
+   {"t": "Its formula is C10H16N5O13P3, and the three phosphorus atoms all sit in the phosphate tail.", "s": ["pubchem-atp", "ccd-ATP"]},
+   {"t": "Breaking ATP into ADP and phosphate releases energy because the products hold much less free energy than ATP and water.", "s": ["os-6-4"]},
+   {"t": "The reaction can run the other way too: cells rebuild ATP by adding a phosphate back to ADP.", "s": ["os-6-4", "os-7-4"]}
+  ],
+  "lives": {
+   "text": [
+    {"t": "Most ATP is made in mitochondria by ATP synthase, using energy released from food.", "s": ["motm-atp-synthase", "os-7-4"]},
+    {"t": "The energy in glucose is used during cellular respiration to make ATP.", "s": ["os-3-2"]}
+   ],
+   "links": [{"type": "part", "id": "mitochondrion"}, {"type": "molecule", "id": "atp-synthase"}, {"type": "process", "id": "respiration"}, {"type": "molecule", "id": "myosin"}, {"type": "element", "id": "P"}]
+  },
+  "size": {
+   "nm": 1.7,
+   "compare": [
+    {"t": "From its farthest atom to its farthest atom, ATP measures about 1.7 nm.", "s": ["ccd-ATP"]},
+    {"t": "ATP synthase, the machine that makes it, measures about 13.6 nm in this gallery, and that is only its head.", "s": ["rcsb-1MAB", "ccd-ATP"]}
+   ]
+  }
+ },
+ "highlights": [
+  {"atoms": ["PG"], "label": "Gamma phosphate", "text": [{"t": "The outermost phosphate, the one removed to make ADP.", "s": ["os-6-4"]}]},
+  {"atoms": ["O3B"], "label": "The beta to gamma link", "text": [{"t": "This oxygen links the beta and gamma phosphates.", "s": ["ccd-ATP"]}]}
+ ],
+ "review": "pending"
+}

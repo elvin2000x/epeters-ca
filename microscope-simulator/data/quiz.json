@@ -1,0 +1,5177 @@
+{
+ "about": "Built by tools/build_quiz.py from the data files. o[0] is the right answer. Do not edit by hand; rerun the script.",
+ "sections": {
+  "atoms": 56,
+  "molecules": 108,
+  "cells": 23,
+  "organisms": 11
+ },
+ "questions": [
+  {
+   "id": "sym-H",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "H"
+   },
+   "o": [
+    "Hydrogen",
+    "Helium",
+    "Lithium",
+    "Beryllium"
+   ],
+   "why": {
+    "t": "H is the symbol for hydrogen, element number 1.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#H"
+  },
+  {
+   "id": "pro-H",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "hydrogen"
+   },
+   "o": [
+    "1",
+    "2",
+    "3"
+   ],
+   "why": {
+    "t": "A hydrogen atom has 1 proton and 1 electron. Its most common natural isotope, hydrogen-1, has 0 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#H"
+  },
+  {
+   "id": "sym-He",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "He"
+   },
+   "o": [
+    "Helium",
+    "Lithium",
+    "Hydrogen",
+    "Beryllium"
+   ],
+   "why": {
+    "t": "He is the symbol for helium, element number 2.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#He"
+  },
+  {
+   "id": "pro-He",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "helium"
+   },
+   "o": [
+    "2",
+    "3",
+    "1",
+    "4"
+   ],
+   "why": {
+    "t": "A helium atom has 2 protons and 2 electrons. Its most common natural isotope, helium-4, has 2 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#He"
+  },
+  {
+   "id": "sym-Li",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "Li"
+   },
+   "o": [
+    "Lithium",
+    "Beryllium",
+    "Helium",
+    "Boron"
+   ],
+   "why": {
+    "t": "Li is the symbol for lithium, element number 3.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#Li"
+  },
+  {
+   "id": "pro-Li",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "lithium"
+   },
+   "o": [
+    "3",
+    "4",
+    "2",
+    "5"
+   ],
+   "why": {
+    "t": "A lithium atom has 3 protons and 3 electrons. Its most common natural isotope, lithium-7, has 4 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#Li"
+  },
+  {
+   "id": "sym-Be",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "Be"
+   },
+   "o": [
+    "Beryllium",
+    "Boron",
+    "Lithium",
+    "Carbon"
+   ],
+   "why": {
+    "t": "Be is the symbol for beryllium, element number 4.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#Be"
+  },
+  {
+   "id": "pro-Be",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "beryllium"
+   },
+   "o": [
+    "4",
+    "5",
+    "3",
+    "6"
+   ],
+   "why": {
+    "t": "A beryllium atom has 4 protons and 4 electrons. Its most common natural isotope, beryllium-9, has 5 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#Be"
+  },
+  {
+   "id": "sym-B",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "B"
+   },
+   "o": [
+    "Boron",
+    "Carbon",
+    "Beryllium",
+    "Nitrogen"
+   ],
+   "why": {
+    "t": "B is the symbol for boron, element number 5.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#B"
+  },
+  {
+   "id": "pro-B",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "boron"
+   },
+   "o": [
+    "5",
+    "6",
+    "4",
+    "7"
+   ],
+   "why": {
+    "t": "A boron atom has 5 protons and 5 electrons. Its most common natural isotope, boron-11, has 6 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#B"
+  },
+  {
+   "id": "sym-C",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "C"
+   },
+   "o": [
+    "Carbon",
+    "Nitrogen",
+    "Boron",
+    "Oxygen"
+   ],
+   "why": {
+    "t": "C is the symbol for carbon, element number 6.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#C"
+  },
+  {
+   "id": "pro-C",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "carbon"
+   },
+   "o": [
+    "6",
+    "7",
+    "5",
+    "8"
+   ],
+   "why": {
+    "t": "A carbon atom has 6 protons and 6 electrons. Its most common natural isotope, carbon-12, has 6 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#C"
+  },
+  {
+   "id": "sym-N",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "N"
+   },
+   "o": [
+    "Nitrogen",
+    "Oxygen",
+    "Carbon",
+    "Fluorine"
+   ],
+   "why": {
+    "t": "N is the symbol for nitrogen, element number 7.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#N"
+  },
+  {
+   "id": "pro-N",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "nitrogen"
+   },
+   "o": [
+    "7",
+    "8",
+    "6",
+    "9"
+   ],
+   "why": {
+    "t": "A nitrogen atom has 7 protons and 7 electrons. Its most common natural isotope, nitrogen-14, has 7 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#N"
+  },
+  {
+   "id": "sym-O",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "O"
+   },
+   "o": [
+    "Oxygen",
+    "Fluorine",
+    "Nitrogen",
+    "Neon"
+   ],
+   "why": {
+    "t": "O is the symbol for oxygen, element number 8.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#O"
+  },
+  {
+   "id": "pro-O",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "oxygen"
+   },
+   "o": [
+    "8",
+    "9",
+    "7",
+    "10"
+   ],
+   "why": {
+    "t": "An oxygen atom has 8 protons and 8 electrons. Its most common natural isotope, oxygen-16, has 8 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#O"
+  },
+  {
+   "id": "sym-F",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "F"
+   },
+   "o": [
+    "Fluorine",
+    "Neon",
+    "Oxygen",
+    "Sodium"
+   ],
+   "why": {
+    "t": "F is the symbol for fluorine, element number 9.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#F"
+  },
+  {
+   "id": "pro-F",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "fluorine"
+   },
+   "o": [
+    "9",
+    "10",
+    "8",
+    "11"
+   ],
+   "why": {
+    "t": "A fluorine atom has 9 protons and 9 electrons. Its most common natural isotope, fluorine-19, has 10 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#F"
+  },
+  {
+   "id": "sym-Ne",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "Ne"
+   },
+   "o": [
+    "Neon",
+    "Sodium",
+    "Fluorine",
+    "Magnesium"
+   ],
+   "why": {
+    "t": "Ne is the symbol for neon, element number 10.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#Ne"
+  },
+  {
+   "id": "pro-Ne",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "neon"
+   },
+   "o": [
+    "10",
+    "11",
+    "9",
+    "12"
+   ],
+   "why": {
+    "t": "A neon atom has 10 protons and 10 electrons. Its most common natural isotope, neon-20, has 10 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#Ne"
+  },
+  {
+   "id": "sym-Na",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "Na"
+   },
+   "o": [
+    "Sodium",
+    "Magnesium",
+    "Neon",
+    "Aluminium"
+   ],
+   "why": {
+    "t": "Na is the symbol for sodium, element number 11.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#Na"
+  },
+  {
+   "id": "pro-Na",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "sodium"
+   },
+   "o": [
+    "11",
+    "12",
+    "10",
+    "13"
+   ],
+   "why": {
+    "t": "A sodium atom has 11 protons and 11 electrons. Its most common natural isotope, sodium-23, has 12 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#Na"
+  },
+  {
+   "id": "sym-Mg",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "Mg"
+   },
+   "o": [
+    "Magnesium",
+    "Aluminium",
+    "Sodium",
+    "Silicon"
+   ],
+   "why": {
+    "t": "Mg is the symbol for magnesium, element number 12.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#Mg"
+  },
+  {
+   "id": "pro-Mg",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "magnesium"
+   },
+   "o": [
+    "12",
+    "13",
+    "11",
+    "14"
+   ],
+   "why": {
+    "t": "A magnesium atom has 12 protons and 12 electrons. Its most common natural isotope, magnesium-24, has 12 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#Mg"
+  },
+  {
+   "id": "sym-Al",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "Al"
+   },
+   "o": [
+    "Aluminium",
+    "Silicon",
+    "Magnesium",
+    "Phosphorus"
+   ],
+   "why": {
+    "t": "Al is the symbol for aluminium, element number 13.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#Al"
+  },
+  {
+   "id": "pro-Al",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "aluminium"
+   },
+   "o": [
+    "13",
+    "14",
+    "12",
+    "15"
+   ],
+   "why": {
+    "t": "An aluminium atom has 13 protons and 13 electrons. Its most common natural isotope, aluminium-27, has 14 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#Al"
+  },
+  {
+   "id": "sym-Si",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "Si"
+   },
+   "o": [
+    "Silicon",
+    "Phosphorus",
+    "Aluminium",
+    "Sulfur"
+   ],
+   "why": {
+    "t": "Si is the symbol for silicon, element number 14.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#Si"
+  },
+  {
+   "id": "pro-Si",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "silicon"
+   },
+   "o": [
+    "14",
+    "15",
+    "13",
+    "16"
+   ],
+   "why": {
+    "t": "A silicon atom has 14 protons and 14 electrons. Its most common natural isotope, silicon-28, has 14 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#Si"
+  },
+  {
+   "id": "sym-P",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "P"
+   },
+   "o": [
+    "Phosphorus",
+    "Sulfur",
+    "Silicon",
+    "Chlorine"
+   ],
+   "why": {
+    "t": "P is the symbol for phosphorus, element number 15.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#P"
+  },
+  {
+   "id": "pro-P",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "phosphorus"
+   },
+   "o": [
+    "15",
+    "16",
+    "14",
+    "17"
+   ],
+   "why": {
+    "t": "A phosphorus atom has 15 protons and 15 electrons. Its most common natural isotope, phosphorus-31, has 16 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#P"
+  },
+  {
+   "id": "sym-S",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "S"
+   },
+   "o": [
+    "Sulfur",
+    "Chlorine",
+    "Phosphorus",
+    "Argon"
+   ],
+   "why": {
+    "t": "S is the symbol for sulfur, element number 16.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#S"
+  },
+  {
+   "id": "pro-S",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "sulfur"
+   },
+   "o": [
+    "16",
+    "17",
+    "15",
+    "18"
+   ],
+   "why": {
+    "t": "A sulfur atom has 16 protons and 16 electrons. Its most common natural isotope, sulfur-32, has 16 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#S"
+  },
+  {
+   "id": "sym-Cl",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "Cl"
+   },
+   "o": [
+    "Chlorine",
+    "Argon",
+    "Sulfur",
+    "Potassium"
+   ],
+   "why": {
+    "t": "Cl is the symbol for chlorine, element number 17.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#Cl"
+  },
+  {
+   "id": "pro-Cl",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "chlorine"
+   },
+   "o": [
+    "17",
+    "18",
+    "16",
+    "19"
+   ],
+   "why": {
+    "t": "A chlorine atom has 17 protons and 17 electrons. Its most common natural isotope, chlorine-35, has 18 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#Cl"
+  },
+  {
+   "id": "sym-Ar",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "Ar"
+   },
+   "o": [
+    "Argon",
+    "Potassium",
+    "Chlorine",
+    "Calcium"
+   ],
+   "why": {
+    "t": "Ar is the symbol for argon, element number 18.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#Ar"
+  },
+  {
+   "id": "pro-Ar",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "argon"
+   },
+   "o": [
+    "18",
+    "19",
+    "17",
+    "20"
+   ],
+   "why": {
+    "t": "An argon atom has 18 protons and 18 electrons. Its most common natural isotope, argon-40, has 22 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#Ar"
+  },
+  {
+   "id": "sym-K",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "K"
+   },
+   "o": [
+    "Potassium",
+    "Calcium",
+    "Argon",
+    "Scandium"
+   ],
+   "why": {
+    "t": "K is the symbol for potassium, element number 19.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#K"
+  },
+  {
+   "id": "pro-K",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "potassium"
+   },
+   "o": [
+    "19",
+    "20",
+    "18",
+    "21"
+   ],
+   "why": {
+    "t": "A potassium atom has 19 protons and 19 electrons. Its most common natural isotope, potassium-39, has 20 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#K"
+  },
+  {
+   "id": "sym-Ca",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "Ca"
+   },
+   "o": [
+    "Calcium",
+    "Scandium",
+    "Potassium",
+    "Titanium"
+   ],
+   "why": {
+    "t": "Ca is the symbol for calcium, element number 20.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#Ca"
+  },
+  {
+   "id": "pro-Ca",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "calcium"
+   },
+   "o": [
+    "20",
+    "21",
+    "19",
+    "22"
+   ],
+   "why": {
+    "t": "A calcium atom has 20 protons and 20 electrons. Its most common natural isotope, calcium-40, has 20 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#Ca"
+  },
+  {
+   "id": "sym-Mn",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "Mn"
+   },
+   "o": [
+    "Manganese",
+    "Iron",
+    "Chromium",
+    "Cobalt"
+   ],
+   "why": {
+    "t": "Mn is the symbol for manganese, element number 25.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#Mn"
+  },
+  {
+   "id": "pro-Mn",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "manganese"
+   },
+   "o": [
+    "25",
+    "26",
+    "24",
+    "27"
+   ],
+   "why": {
+    "t": "A manganese atom has 25 protons and 25 electrons. Its most common natural isotope, manganese-55, has 30 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#Mn"
+  },
+  {
+   "id": "sym-Fe",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "Fe"
+   },
+   "o": [
+    "Iron",
+    "Cobalt",
+    "Manganese",
+    "Nickel"
+   ],
+   "why": {
+    "t": "Fe is the symbol for iron, element number 26.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#Fe"
+  },
+  {
+   "id": "pro-Fe",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "iron"
+   },
+   "o": [
+    "26",
+    "27",
+    "25",
+    "28"
+   ],
+   "why": {
+    "t": "An iron atom has 26 protons and 26 electrons. Its most common natural isotope, iron-56, has 30 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#Fe"
+  },
+  {
+   "id": "sym-Cu",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "Cu"
+   },
+   "o": [
+    "Copper",
+    "Zinc",
+    "Nickel",
+    "Gallium"
+   ],
+   "why": {
+    "t": "Cu is the symbol for copper, element number 29.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#Cu"
+  },
+  {
+   "id": "pro-Cu",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "copper"
+   },
+   "o": [
+    "29",
+    "30",
+    "28",
+    "31"
+   ],
+   "why": {
+    "t": "A copper atom has 29 protons and 29 electrons. Its most common natural isotope, copper-63, has 34 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#Cu"
+  },
+  {
+   "id": "sym-Zn",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "Zn"
+   },
+   "o": [
+    "Zinc",
+    "Gallium",
+    "Copper",
+    "Germanium"
+   ],
+   "why": {
+    "t": "Zn is the symbol for zinc, element number 30.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#Zn"
+  },
+  {
+   "id": "pro-Zn",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "zinc"
+   },
+   "o": [
+    "30",
+    "31",
+    "29",
+    "32"
+   ],
+   "why": {
+    "t": "A zinc atom has 30 protons and 30 electrons. Its most common natural isotope, zinc-64, has 34 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#Zn"
+  },
+  {
+   "id": "sym-Se",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "Se"
+   },
+   "o": [
+    "Selenium",
+    "Bromine",
+    "Arsenic",
+    "Krypton"
+   ],
+   "why": {
+    "t": "Se is the symbol for selenium, element number 34.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#Se"
+  },
+  {
+   "id": "pro-Se",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "selenium"
+   },
+   "o": [
+    "34",
+    "35",
+    "33",
+    "36"
+   ],
+   "why": {
+    "t": "A selenium atom has 34 protons and 34 electrons. Its most common natural isotope, selenium-80, has 46 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#Se"
+  },
+  {
+   "id": "sym-Ag",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "Ag"
+   },
+   "o": [
+    "Silver",
+    "Cadmium",
+    "Palladium",
+    "Indium"
+   ],
+   "why": {
+    "t": "Ag is the symbol for silver, element number 47.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#Ag"
+  },
+  {
+   "id": "pro-Ag",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "silver"
+   },
+   "o": [
+    "47",
+    "48",
+    "46",
+    "49"
+   ],
+   "why": {
+    "t": "A silver atom has 47 protons and 47 electrons. Its most common natural isotope, silver-107, has 60 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#Ag"
+  },
+  {
+   "id": "sym-Au",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "Au"
+   },
+   "o": [
+    "Gold",
+    "Mercury",
+    "Platinum",
+    "Thallium"
+   ],
+   "why": {
+    "t": "Au is the symbol for gold, element number 79.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#Au"
+  },
+  {
+   "id": "pro-Au",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "gold"
+   },
+   "o": [
+    "79",
+    "80",
+    "78",
+    "81"
+   ],
+   "why": {
+    "t": "A gold atom has 79 protons and 79 electrons. Its most common natural isotope, gold-197, has 118 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#Au"
+  },
+  {
+   "id": "sym-Hg",
+   "sec": "atoms",
+   "q": "quiz.q.symbol",
+   "v": {
+    "symbol": "Hg"
+   },
+   "o": [
+    "Mercury",
+    "Thallium",
+    "Gold",
+    "Lead"
+   ],
+   "why": {
+    "t": "Hg is the symbol for mercury, element number 80.",
+    "src": [
+     {
+      "id": "elements:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ]
+   },
+   "h": "elements/#Hg"
+  },
+  {
+   "id": "pro-Hg",
+   "sec": "atoms",
+   "q": "quiz.q.protons",
+   "v": {
+    "element": "mercury"
+   },
+   "o": [
+    "80",
+    "81",
+    "79",
+    "82"
+   ],
+   "why": {
+    "t": "A mercury atom has 80 protons and 80 electrons. Its most common natural isotope, mercury-202, has 122 neutrons.",
+    "src": [
+     {
+      "id": "atom:rsc",
+      "t": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org)",
+      "u": "https://periodic-table.rsc.org/"
+     }
+    ],
+    "computed": true
+   },
+   "h": "atom/#Hg"
+  },
+  {
+   "id": "has-water",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "water"
+   },
+   "o": [
+    "Oxygen",
+    "Iron",
+    "Phosphorus",
+    "Chlorine"
+   ],
+   "why": {
+    "t": "The water structure in this explorer has 1 oxygen atom, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-HOH",
+      "t": "RCSB PDB Chemical Component Dictionary, HOH (water)",
+      "u": "https://www.rcsb.org/ligand/HOH"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#water?el=O"
+  },
+  {
+   "id": "gap-water",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is one oxygen atom bonded to two hydrogen atoms, and the oxygen end carries a slight negative charge while the hydrogen ends are slightly positive."
+   },
+   "o": [
+    "Water",
+    "Glucose",
+    "Cholesterol",
+    "Acetylcholine"
+   ],
+   "why": {
+    "t": "Water is one oxygen atom bonded to two hydrogen atoms, and the oxygen end carries a slight negative charge while the hydrogen ends are slightly positive.",
+    "src": [
+     {
+      "id": "molecules:ccd-HOH",
+      "t": "RCSB PDB Chemical Component Dictionary, HOH (water)",
+      "u": "https://www.rcsb.org/ligand/HOH"
+     },
+     {
+      "id": "molecules:os-2-2",
+      "t": "OpenStax Biology 2e, section 2.2 Water",
+      "u": "https://openstax.org/books/biology-2e/pages/2-2-water"
+     }
+    ]
+   },
+   "h": "molecules/#water"
+  },
+  {
+   "id": "has-glucose",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "glucose"
+   },
+   "o": [
+    "Oxygen",
+    "Calcium",
+    "Sulfur",
+    "Potassium"
+   ],
+   "why": {
+    "t": "The glucose structure in this explorer has 6 oxygen atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-GLC",
+      "t": "RCSB PDB Chemical Component Dictionary, GLC (alpha-D-glucopyranose)",
+      "u": "https://www.rcsb.org/ligand/GLC"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#glucose?el=O"
+  },
+  {
+   "id": "gap-glucose",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is a simple sugar with six carbon atoms, and in water it mostly curls into a ring, the form shown here."
+   },
+   "o": [
+    "Glucose",
+    "ATP",
+    "Adrenaline",
+    "Chlorophyll a"
+   ],
+   "why": {
+    "t": "Glucose is a simple sugar with six carbon atoms, and in water it mostly curls into a ring, the form shown here.",
+    "src": [
+     {
+      "id": "molecules:os-3-2",
+      "t": "OpenStax Biology 2e, section 3.2 Carbohydrates",
+      "u": "https://openstax.org/books/biology-2e/pages/3-2-carbohydrates"
+     },
+     {
+      "id": "molecules:ccd-GLC",
+      "t": "RCSB PDB Chemical Component Dictionary, GLC (alpha-D-glucopyranose)",
+      "u": "https://www.rcsb.org/ligand/GLC"
+     }
+    ]
+   },
+   "h": "molecules/#glucose"
+  },
+  {
+   "id": "has-atp",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "ATP"
+   },
+   "o": [
+    "Phosphorus",
+    "Magnesium",
+    "Chlorine",
+    "Zinc"
+   ],
+   "why": {
+    "t": "The ATP structure in this explorer has 3 phosphorus atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-ATP",
+      "t": "RCSB PDB Chemical Component Dictionary, ATP (adenosine-5'-triphosphate)",
+      "u": "https://www.rcsb.org/ligand/ATP"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#atp?el=P"
+  },
+  {
+   "id": "gap-atp",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ (____) is the base adenine and the sugar ribose joined to a chain of three phosphate groups."
+   },
+   "o": [
+    "ATP",
+    "Glycine",
+    "Dopamine",
+    "Caffeine"
+   ],
+   "why": {
+    "t": "ATP (adenosine triphosphate) is the base adenine and the sugar ribose joined to a chain of three phosphate groups.",
+    "src": [
+     {
+      "id": "molecules:os-6-4",
+      "t": "OpenStax Biology 2e, section 6.4 ATP: Adenosine Triphosphate",
+      "u": "https://openstax.org/books/biology-2e/pages/6-4-atp-adenosine-triphosphate"
+     },
+     {
+      "id": "molecules:ccd-ATP",
+      "t": "RCSB PDB Chemical Component Dictionary, ATP (adenosine-5'-triphosphate)",
+      "u": "https://www.rcsb.org/ligand/ATP"
+     }
+    ]
+   },
+   "h": "molecules/#atp"
+  },
+  {
+   "id": "has-glycine",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "glycine"
+   },
+   "o": [
+    "Nitrogen",
+    "Zinc",
+    "Chlorine",
+    "Magnesium"
+   ],
+   "why": {
+    "t": "The glycine structure in this explorer has 1 nitrogen atom, counted from its structure file.",
+    "src": [],
+    "computed": true
+   },
+   "h": "molecules/#glycine?el=N"
+  },
+  {
+   "id": "has-palmitic-acid",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "palmitic acid"
+   },
+   "o": [
+    "Oxygen",
+    "Phosphorus",
+    "Chlorine",
+    "Magnesium"
+   ],
+   "why": {
+    "t": "The palmitic acid structure in this explorer has 2 oxygen atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-PLM",
+      "t": "RCSB PDB Chemical Component Dictionary, PLM (palmitic acid)",
+      "u": "https://www.rcsb.org/ligand/PLM"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#palmitic-acid?el=O"
+  },
+  {
+   "id": "gap-palmitic-acid",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is a fatty acid: a long chain of carbon and hydrogen with a carboxyl group at one end, 16 carbons in all."
+   },
+   "o": [
+    "Palmitic acid",
+    "Cholesterol",
+    "Acetylcholine",
+    "Sucrose"
+   ],
+   "why": {
+    "t": "Palmitic acid is a fatty acid: a long chain of carbon and hydrogen with a carboxyl group at one end, 16 carbons in all.",
+    "src": [
+     {
+      "id": "molecules:os-3-3",
+      "t": "OpenStax Biology 2e, section 3.3 Lipids",
+      "u": "https://openstax.org/books/biology-2e/pages/3-3-lipids"
+     },
+     {
+      "id": "molecules:ccd-PLM",
+      "t": "RCSB PDB Chemical Component Dictionary, PLM (palmitic acid)",
+      "u": "https://www.rcsb.org/ligand/PLM"
+     }
+    ]
+   },
+   "h": "molecules/#palmitic-acid"
+  },
+  {
+   "id": "has-cholesterol",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "cholesterol"
+   },
+   "o": [
+    "Oxygen",
+    "Sulfur",
+    "Potassium",
+    "Zinc"
+   ],
+   "why": {
+    "t": "The cholesterol structure in this explorer has 1 oxygen atom, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-CLR",
+      "t": "RCSB PDB Chemical Component Dictionary, CLR (cholesterol)",
+      "u": "https://www.rcsb.org/ligand/CLR"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#cholesterol?el=O"
+  },
+  {
+   "id": "gap-cholesterol",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is a steroid, a lipid built on four linked carbon rings."
+   },
+   "o": [
+    "Cholesterol",
+    "Adrenaline",
+    "Chlorophyll a",
+    "Vitamin C"
+   ],
+   "why": {
+    "t": "Cholesterol is a steroid, a lipid built on four linked carbon rings.",
+    "src": [
+     {
+      "id": "molecules:os-3-3",
+      "t": "OpenStax Biology 2e, section 3.3 Lipids",
+      "u": "https://openstax.org/books/biology-2e/pages/3-3-lipids"
+     },
+     {
+      "id": "molecules:ccd-CLR",
+      "t": "RCSB PDB Chemical Component Dictionary, CLR (cholesterol)",
+      "u": "https://www.rcsb.org/ligand/CLR"
+     }
+    ]
+   },
+   "h": "molecules/#cholesterol"
+  },
+  {
+   "id": "has-actin",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "actin"
+   },
+   "o": [
+    "Calcium",
+    "Iron",
+    "Chlorine",
+    "Sodium"
+   ],
+   "why": {
+    "t": "The actin structure in this explorer has 6 calcium atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:rcsb-1J6Z",
+      "t": "RCSB PDB 1J6Z, Uncomplexed actin",
+      "u": "https://www.rcsb.org/structure/1J6Z"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#actin?el=Ca"
+  },
+  {
+   "id": "gap-actin",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is one of the two proteins that make muscle contract, working together with myosin."
+   },
+   "o": [
+    "Actin",
+    "Lysozyme",
+    "Potassium channel",
+    "Pepsin"
+   ],
+   "why": {
+    "t": "Actin is one of the two proteins that make muscle contract, working together with myosin.",
+    "src": [
+     {
+      "id": "molecules:os-3-4",
+      "t": "OpenStax Biology 2e, section 3.4 Proteins",
+      "u": "https://openstax.org/books/biology-2e/pages/3-4-proteins"
+     }
+    ]
+   },
+   "h": "molecules/#actin"
+  },
+  {
+   "id": "has-dna",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "DNA"
+   },
+   "o": [
+    "Phosphorus",
+    "Potassium",
+    "Zinc",
+    "Calcium"
+   ],
+   "why": {
+    "t": "The DNA structure in this explorer has 22 phosphorus atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:rcsb-1BNA",
+      "t": "RCSB PDB 1BNA, Structure of a B-DNA dodecamer: conformation and dynamics",
+      "u": "https://www.rcsb.org/structure/1BNA"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#dna?el=P"
+  },
+  {
+   "id": "gap-dna",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is the genetic material of living things, built from two strands wound into a double helix."
+   },
+   "o": [
+    "DNA",
+    "Aquaporin 1",
+    "Nucleosome",
+    "Oxytocin"
+   ],
+   "why": {
+    "t": "DNA is the genetic material of living things, built from two strands wound into a double helix.",
+    "src": [
+     {
+      "id": "molecules:os-3-5",
+      "t": "OpenStax Biology 2e, section 3.5 Nucleic Acids",
+      "u": "https://openstax.org/books/biology-2e/pages/3-5-nucleic-acids"
+     }
+    ]
+   },
+   "h": "molecules/#dna"
+  },
+  {
+   "id": "has-hemoglobin",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "hemoglobin"
+   },
+   "o": [
+    "Iron",
+    "Zinc",
+    "Calcium",
+    "Magnesium"
+   ],
+   "why": {
+    "t": "The hemoglobin structure in this explorer has 4 iron atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:rcsb-4HHB",
+      "t": "RCSB PDB 4HHB, The crystal structure of human deoxyhaemoglobin at 1.74 angstroms resolution",
+      "u": "https://www.rcsb.org/structure/4HHB"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#hemoglobin?el=Fe"
+  },
+  {
+   "id": "gap-hemoglobin",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is the protein that carries oxygen in the blood, packed inside red blood cells."
+   },
+   "o": [
+    "Hemoglobin",
+    "ATP synthase",
+    "Acetylcholinesterase",
+    "Antibody"
+   ],
+   "why": {
+    "t": "Hemoglobin is the protein that carries oxygen in the blood, packed inside red blood cells.",
+    "src": [
+     {
+      "id": "molecules:os-40-2",
+      "t": "OpenStax Biology 2e, section 40.2 Components of the Blood",
+      "u": "https://openstax.org/books/biology-2e/pages/40-2-components-of-the-blood"
+     }
+    ]
+   },
+   "h": "molecules/#hemoglobin"
+  },
+  {
+   "id": "has-insulin",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "insulin"
+   },
+   "o": [
+    "Zinc",
+    "Magnesium",
+    "Potassium",
+    "Sodium"
+   ],
+   "why": {
+    "t": "The insulin structure in this explorer has 2 zinc atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:rcsb-4INS",
+      "t": "RCSB PDB 4INS, The structure of 2Zn pig insulin crystals at 1.5 angstroms resolution",
+      "u": "https://www.rcsb.org/structure/4INS"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#insulin?el=Zn"
+  },
+  {
+   "id": "gap-insulin",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is a protein hormone that helps control the level of glucose in the blood."
+   },
+   "o": [
+    "Insulin",
+    "Kinesin",
+    "HIV-1 protease with ritonavir",
+    "Virus shell"
+   ],
+   "why": {
+    "t": "Insulin is a protein hormone that helps control the level of glucose in the blood.",
+    "src": [
+     {
+      "id": "molecules:os-3-4",
+      "t": "OpenStax Biology 2e, section 3.4 Proteins",
+      "u": "https://openstax.org/books/biology-2e/pages/3-4-proteins"
+     }
+    ]
+   },
+   "h": "molecules/#insulin"
+  },
+  {
+   "id": "has-collagen",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "collagen"
+   },
+   "o": [
+    "Nitrogen",
+    "Calcium",
+    "Sulfur",
+    "Iron"
+   ],
+   "why": {
+    "t": "The collagen structure in this explorer has 88 nitrogen atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:rcsb-1CAG",
+      "t": "RCSB PDB 1CAG, Crystal and molecular structure of a collagen-like peptide at 1.9 angstrom resolution",
+      "u": "https://www.rcsb.org/structure/1CAG"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#collagen?el=N"
+  },
+  {
+   "id": "gap-collagen",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is a fibrous protein found in skin and other connective tissues."
+   },
+   "o": [
+    "Collagen",
+    "Potassium channel",
+    "Pepsin",
+    "MHC class I"
+   ],
+   "why": {
+    "t": "Collagen is a fibrous protein found in skin and other connective tissues.",
+    "src": [
+     {
+      "id": "molecules:os-3-4",
+      "t": "OpenStax Biology 2e, section 3.4 Proteins",
+      "u": "https://openstax.org/books/biology-2e/pages/3-4-proteins"
+     },
+     {
+      "id": "molecules:bella-1994",
+      "t": "Bella, J., Eaton, M., Brodsky, B. and Berman, H. M. (1994). Crystal and molecular structure of a collagen-like peptide at 1.9 A resolution. Science 266, 75-81",
+      "u": null
+     }
+    ]
+   },
+   "h": "molecules/#collagen"
+  },
+  {
+   "id": "has-myosin",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "myosin"
+   },
+   "o": [
+    "Magnesium",
+    "Zinc",
+    "Iron",
+    "Chlorine"
+   ],
+   "why": {
+    "t": "The myosin structure in this explorer has 2 magnesium atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:rcsb-1B7T",
+      "t": "RCSB PDB 1B7T, Myosin digested by papain",
+      "u": "https://www.rcsb.org/structure/1B7T"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#myosin?el=Mg"
+  },
+  {
+   "id": "gap-myosin",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is the other protein that drives muscle contraction, working together with actin."
+   },
+   "o": [
+    "Myosin",
+    "Nucleosome",
+    "Oxytocin",
+    "Rubisco"
+   ],
+   "why": {
+    "t": "Myosin is the other protein that drives muscle contraction, working together with actin.",
+    "src": [
+     {
+      "id": "molecules:os-3-4",
+      "t": "OpenStax Biology 2e, section 3.4 Proteins",
+      "u": "https://openstax.org/books/biology-2e/pages/3-4-proteins"
+     }
+    ]
+   },
+   "h": "molecules/#myosin"
+  },
+  {
+   "id": "has-gfp",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "green fluorescent protein"
+   },
+   "o": [
+    "Sulfur",
+    "Phosphorus",
+    "Iron",
+    "Chlorine"
+   ],
+   "why": {
+    "t": "The green fluorescent protein structure in this explorer has 2 sulfur atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:rcsb-1EMA",
+      "t": "RCSB PDB 1EMA, Green fluorescent protein from Aequorea victoria",
+      "u": "https://www.rcsb.org/structure/1EMA"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#gfp?el=S"
+  },
+  {
+   "id": "gap-gfp",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ (GFP) comes from the jellyfish Aequorea victoria."
+   },
+   "o": [
+    "Green fluorescent protein",
+    "Acetylcholinesterase",
+    "Antibody",
+    "Myoglobin"
+   ],
+   "why": {
+    "t": "Green fluorescent protein (GFP) comes from the jellyfish Aequorea victoria.",
+    "src": [
+     {
+      "id": "molecules:rcsb-1EMA",
+      "t": "RCSB PDB 1EMA, Green fluorescent protein from Aequorea victoria",
+      "u": "https://www.rcsb.org/structure/1EMA"
+     },
+     {
+      "id": "molecules:ormo-1996",
+      "t": "Ormo, M., Cubitt, A. B., Kallio, K. et al. (1996). Crystal structure of the Aequorea victoria green fluorescent protein. Science 273, 1392-1395",
+      "u": null
+     }
+    ]
+   },
+   "h": "molecules/#gfp"
+  },
+  {
+   "id": "has-lysozyme",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "lysozyme"
+   },
+   "o": [
+    "Sulfur",
+    "Sodium",
+    "Calcium",
+    "Potassium"
+   ],
+   "why": {
+    "t": "The lysozyme structure in this explorer has 10 sulfur atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:rcsb-1LYZ",
+      "t": "RCSB PDB 1LYZ, Real-space refinement of the structure of hen egg-white lysozyme",
+      "u": "https://www.rcsb.org/structure/1LYZ"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#lysozyme?el=S"
+  },
+  {
+   "id": "gap-lysozyme",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is an enzyme that attacks bacteria by cutting the bonds between sugars in peptidoglycan, the material of bacterial cell walls."
+   },
+   "o": [
+    "Lysozyme",
+    "HIV-1 protease with ritonavir",
+    "Virus shell",
+    "Keratin"
+   ],
+   "why": {
+    "t": "Lysozyme is an enzyme that attacks bacteria by cutting the bonds between sugars in peptidoglycan, the material of bacterial cell walls.",
+    "src": [
+     {
+      "id": "molecules:uniprot-P00698",
+      "t": "UniProt P00698, Lysozyme C (Gallus gallus)",
+      "u": "https://www.uniprot.org/uniprotkb/P00698/entry"
+     },
+     {
+      "id": "molecules:os-22-2",
+      "t": "OpenStax Biology 2e, section 22.2 Structure of Prokaryotes",
+      "u": "https://openstax.org/books/biology-2e/pages/22-2-structure-of-prokaryotes-bacteria-and-archaea"
+     }
+    ]
+   },
+   "h": "molecules/#lysozyme"
+  },
+  {
+   "id": "has-aquaporin",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "aquaporin 1"
+   },
+   "o": [
+    "Sulfur",
+    "Chlorine",
+    "Magnesium",
+    "Iron"
+   ],
+   "why": {
+    "t": "The aquaporin 1 structure in this explorer has 7 sulfur atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:rcsb-1J4N",
+      "t": "RCSB PDB 1J4N, Crystal structure of the AQP1 water channel",
+      "u": "https://www.rcsb.org/structure/1J4N"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#aquaporin?el=S"
+  },
+  {
+   "id": "has-atp-synthase",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "ATP synthase"
+   },
+   "o": [
+    "Magnesium",
+    "Sodium",
+    "Calcium",
+    "Zinc"
+   ],
+   "why": {
+    "t": "The ATP synthase structure in this explorer has 1 magnesium atom, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:rcsb-1MAB",
+      "t": "RCSB PDB 1MAB, Rat liver F1-ATPase",
+      "u": "https://www.rcsb.org/structure/1MAB"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#atp-synthase?el=Mg"
+  },
+  {
+   "id": "gap-atp-synthase",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is a protein machine in the inner membrane of mitochondria. Hydrogen ions flowing through it turn part of it like a tiny generator, and the turning adds a phosphate to ADP to make ATP."
+   },
+   "o": [
+    "ATP synthase",
+    "Oxytocin",
+    "Rubisco",
+    "Actin"
+   ],
+   "why": {
+    "t": "ATP synthase is a protein machine in the inner membrane of mitochondria. Hydrogen ions flowing through it turn part of it like a tiny generator, and the turning adds a phosphate to ADP to make ATP.",
+    "src": [
+     {
+      "id": "molecules:os-7-4",
+      "t": "OpenStax Biology 2e, section 7.4 Oxidative Phosphorylation",
+      "u": "https://openstax.org/books/biology-2e/pages/7-4-oxidative-phosphorylation"
+     }
+    ]
+   },
+   "h": "molecules/#atp-synthase"
+  },
+  {
+   "id": "has-kinesin",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "kinesin"
+   },
+   "o": [
+    "Phosphorus",
+    "Magnesium",
+    "Potassium",
+    "Sodium"
+   ],
+   "why": {
+    "t": "The kinesin structure in this explorer has 4 phosphorus atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:rcsb-3KIN",
+      "t": "RCSB PDB 3KIN, Kinesin (dimeric) from Rattus norvegicus",
+      "u": "https://www.rcsb.org/structure/3KIN"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#kinesin?el=P"
+  },
+  {
+   "id": "gap-kinesin",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is a motor protein that carries cargo inside cells, crawling hand over hand along tracks called microtubules."
+   },
+   "o": [
+    "Kinesin",
+    "Antibody",
+    "Myoglobin",
+    "DNA"
+   ],
+   "why": {
+    "t": "Kinesin is a motor protein that carries cargo inside cells, crawling hand over hand along tracks called microtubules.",
+    "src": [
+     {
+      "id": "molecules:motm-64",
+      "t": "PDB-101 Molecule of the Month: Kinesin (April 2005)",
+      "u": "https://pdb101.rcsb.org/motm/64"
+     }
+    ]
+   },
+   "h": "molecules/#kinesin"
+  },
+  {
+   "id": "has-potassium-channel",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "potassium channel"
+   },
+   "o": [
+    "Sulfur",
+    "Zinc",
+    "Iron",
+    "Chlorine"
+   ],
+   "why": {
+    "t": "The potassium channel structure in this explorer has 8 sulfur atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:rcsb-1BL8",
+      "t": "RCSB PDB 1BL8, Potassium channel (KcsA) from Streptomyces lividans",
+      "u": "https://www.rcsb.org/structure/1BL8"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#potassium-channel?el=S"
+  },
+  {
+   "id": "has-nucleosome",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "nucleosome"
+   },
+   "o": [
+    "Phosphorus",
+    "Sodium",
+    "Calcium",
+    "Iron"
+   ],
+   "why": {
+    "t": "The nucleosome structure in this explorer has 290 phosphorus atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:rcsb-1AOI",
+      "t": "RCSB PDB 1AOI, Complex between nucleosome core particle (H3, H4, H2A, H2B) and 146 bp long DNA fragment",
+      "u": "https://www.rcsb.org/structure/1AOI"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#nucleosome?el=P"
+  },
+  {
+   "id": "has-acetylcholinesterase",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "acetylcholinesterase"
+   },
+   "o": [
+    "Sulfur",
+    "Zinc",
+    "Potassium",
+    "Phosphorus"
+   ],
+   "why": {
+    "t": "The acetylcholinesterase structure in this explorer has 21 sulfur atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:rcsb-1ACJ",
+      "t": "RCSB PDB 1ACJ, Quaternary ligand binding to aromatic residues in the active-site gorge of acetylcholinesterase",
+      "u": "https://www.rcsb.org/structure/1ACJ"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#acetylcholinesterase?el=S"
+  },
+  {
+   "id": "gap-acetylcholinesterase",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ ends nerve signals by breaking the messenger acetylcholine into acetic acid and choline, each one in about 80 microseconds."
+   },
+   "o": [
+    "Acetylcholinesterase",
+    "Rubisco",
+    "Actin",
+    "Myosin"
+   ],
+   "why": {
+    "t": "Acetylcholinesterase ends nerve signals by breaking the messenger acetylcholine into acetic acid and choline, each one in about 80 microseconds.",
+    "src": [
+     {
+      "id": "molecules:motm-54",
+      "t": "PDB-101 Molecule of the Month: Acetylcholinesterase (June 2004)",
+      "u": "https://pdb101.rcsb.org/motm/54"
+     }
+    ]
+   },
+   "h": "molecules/#acetylcholinesterase"
+  },
+  {
+   "id": "has-hiv-protease",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "HIV-1 protease with ritonavir"
+   },
+   "o": [
+    "Sulfur",
+    "Phosphorus",
+    "Iron",
+    "Chlorine"
+   ],
+   "why": {
+    "t": "The HIV-1 protease with ritonavir structure in this explorer has 10 sulfur atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:rcsb-1HXW",
+      "t": "RCSB PDB 1HXW, HIV-1 protease dimer complexed with A-84538",
+      "u": "https://www.rcsb.org/structure/1HXW"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#hiv-protease?el=S"
+  },
+  {
+   "id": "has-pepsin",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "pepsin"
+   },
+   "o": [
+    "Phosphorus",
+    "Iron",
+    "Sodium",
+    "Magnesium"
+   ],
+   "why": {
+    "t": "The pepsin structure in this explorer has 1 phosphorus atom, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:rcsb-4PEP",
+      "t": "RCSB PDB 4PEP, The molecular and crystal structures of monoclinic porcine pepsin refined at 1.8 angstroms resolution",
+      "u": "https://www.rcsb.org/structure/4PEP"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#pepsin?el=P"
+  },
+  {
+   "id": "gap-pepsin",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is a digestive enzyme: in the stomach, protein chains bind in its deep active-site groove and are broken into smaller pieces."
+   },
+   "o": [
+    "Pepsin",
+    "Keratin",
+    "Hemoglobin",
+    "Lysozyme"
+   ],
+   "why": {
+    "t": "Pepsin is a digestive enzyme: in the stomach, protein chains bind in its deep active-site groove and are broken into smaller pieces.",
+    "src": [
+     {
+      "id": "molecules:motm-12",
+      "t": "PDB-101 Molecule of the Month: Pepsin (December 2000)",
+      "u": "https://pdb101.rcsb.org/motm/12"
+     },
+     {
+      "id": "molecules:os-3-4-roles",
+      "t": "OpenStax Biology 2e, section 3.4 Proteins",
+      "u": "https://openstax.org/books/biology-2e/pages/3-4-proteins"
+     }
+    ]
+   },
+   "h": "molecules/#pepsin"
+  },
+  {
+   "id": "has-adrenaline",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "adrenaline"
+   },
+   "o": [
+    "Nitrogen",
+    "Phosphorus",
+    "Potassium",
+    "Zinc"
+   ],
+   "why": {
+    "t": "The adrenaline structure in this explorer has 1 nitrogen atom, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-ALE",
+      "t": "RCSB PDB Chemical Component Dictionary, ALE (L-epinephrine)",
+      "u": "https://www.rcsb.org/ligand/ALE"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#adrenaline?el=N"
+  },
+  {
+   "id": "gap-adrenaline",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____, also called epinephrine, is the hormone that readies the body for danger in the flight or fight response."
+   },
+   "o": [
+    "Adrenaline",
+    "Citric acid",
+    "Hydrochloric acid",
+    "Propane"
+   ],
+   "why": {
+    "t": "Adrenaline, also called epinephrine, is the hormone that readies the body for danger in the flight or fight response.",
+    "src": [
+     {
+      "id": "molecules:motm-100",
+      "t": "PDB-101 Molecule of the Month: Adrenergic Receptors (April 2008)",
+      "u": "https://pdb101.rcsb.org/motm/100"
+     },
+     {
+      "id": "molecules:pubchem-5816",
+      "t": "PubChem CID 5816, Epinephrine (record description)",
+      "u": "https://pubchem.ncbi.nlm.nih.gov/compound/5816"
+     }
+    ]
+   },
+   "h": "molecules/#adrenaline"
+  },
+  {
+   "id": "has-dopamine",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "dopamine"
+   },
+   "o": [
+    "Nitrogen",
+    "Sulfur",
+    "Iron",
+    "Sodium"
+   ],
+   "why": {
+    "t": "The dopamine structure in this explorer has 1 nitrogen atom, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-LDP",
+      "t": "RCSB PDB Chemical Component Dictionary, LDP (L-dopamine)",
+      "u": "https://www.rcsb.org/ligand/LDP"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#dopamine?el=N"
+  },
+  {
+   "id": "gap-dopamine",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is one of the catecholamine neurotransmitters in the brain, and it is important in regulating movement."
+   },
+   "o": [
+    "Dopamine",
+    "Baking soda",
+    "Ammonia",
+    "Soap"
+   ],
+   "why": {
+    "t": "Dopamine is one of the catecholamine neurotransmitters in the brain, and it is important in regulating movement.",
+    "src": [
+     {
+      "id": "molecules:pubchem-681",
+      "t": "PubChem CID 681, Dopamine (record description)",
+      "u": "https://pubchem.ncbi.nlm.nih.gov/compound/681"
+     },
+     {
+      "id": "molecules:os-35-2",
+      "t": "OpenStax Biology 2e, section 35.2 How Neurons Communicate",
+      "u": "https://openstax.org/books/biology-2e/pages/35-2-how-neurons-communicate"
+     }
+    ]
+   },
+   "h": "molecules/#dopamine"
+  },
+  {
+   "id": "has-serotonin",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "serotonin"
+   },
+   "o": [
+    "Nitrogen",
+    "Sodium",
+    "Calcium",
+    "Chlorine"
+   ],
+   "why": {
+    "t": "The serotonin structure in this explorer has 2 nitrogen atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-SRO",
+      "t": "RCSB PDB Chemical Component Dictionary, SRO (serotonin)",
+      "u": "https://www.rcsb.org/ligand/SRO"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#serotonin?el=N"
+  },
+  {
+   "id": "gap-serotonin",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is a messenger molecule made from the amino acid tryptophan, and it helps control our moods, hunger and much more."
+   },
+   "o": [
+    "Serotonin",
+    "Ethanol",
+    "Hydrogen peroxide",
+    "Aspirin"
+   ],
+   "why": {
+    "t": "Serotonin is a messenger molecule made from the amino acid tryptophan, and it helps control our moods, hunger and much more.",
+    "src": [
+     {
+      "id": "molecules:motm-164",
+      "t": "PDB-101 Molecule of the Month: Serotonin Receptor (August 2013)",
+      "u": "https://pdb101.rcsb.org/motm/164"
+     },
+     {
+      "id": "molecules:pubchem-5202",
+      "t": "PubChem CID 5202, Serotonin (record description)",
+      "u": "https://pubchem.ncbi.nlm.nih.gov/compound/5202"
+     }
+    ]
+   },
+   "h": "molecules/#serotonin"
+  },
+  {
+   "id": "has-oxytocin",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "oxytocin"
+   },
+   "o": [
+    "Sulfur",
+    "Calcium",
+    "Sodium",
+    "Magnesium"
+   ],
+   "why": {
+    "t": "The oxytocin structure in this explorer has 32 sulfur atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:rcsb-1NPO",
+      "t": "RCSB PDB 1NPO, Bovine neurophysin II complex with oxytocin",
+      "u": "https://www.rcsb.org/structure/1NPO"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#oxytocin?el=S"
+  },
+  {
+   "id": "gap-oxytocin",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is a small peptide hormone made by nerve cells in the hypothalamus and carried along their axons to the posterior pituitary."
+   },
+   "o": [
+    "Oxytocin",
+    "Hemoglobin",
+    "Green fluorescent protein",
+    "Kinesin"
+   ],
+   "why": {
+    "t": "Oxytocin is a small peptide hormone made by nerve cells in the hypothalamus and carried along their axons to the posterior pituitary.",
+    "src": [
+     {
+      "id": "molecules:os-37-5",
+      "t": "OpenStax Biology 2e, section 37.5 Endocrine Glands",
+      "u": "https://openstax.org/books/biology-2e/pages/37-5-endocrine-glands"
+     }
+    ]
+   },
+   "h": "molecules/#oxytocin"
+  },
+  {
+   "id": "has-acetylcholine",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "acetylcholine"
+   },
+   "o": [
+    "Nitrogen",
+    "Potassium",
+    "Zinc",
+    "Iron"
+   ],
+   "why": {
+    "t": "The acetylcholine structure in this explorer has 1 nitrogen atom, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-ACH",
+      "t": "RCSB PDB Chemical Component Dictionary, ACH (acetylcholine)",
+      "u": "https://www.rcsb.org/ligand/ACH"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#acetylcholine?el=N"
+  },
+  {
+   "id": "gap-acetylcholine",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is a neurotransmitter made of acetic acid joined to choline as an ester."
+   },
+   "o": [
+    "Acetylcholine",
+    "Hydrochloric acid",
+    "Propane",
+    "Water"
+   ],
+   "why": {
+    "t": "Acetylcholine is a neurotransmitter made of acetic acid joined to choline as an ester.",
+    "src": [
+     {
+      "id": "molecules:pubchem-187",
+      "t": "PubChem CID 187, Acetylcholine (record description)",
+      "u": "https://pubchem.ncbi.nlm.nih.gov/compound/187"
+     }
+    ]
+   },
+   "h": "molecules/#acetylcholine"
+  },
+  {
+   "id": "has-antibody",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "antibody"
+   },
+   "o": [
+    "Sulfur",
+    "Zinc",
+    "Potassium",
+    "Phosphorus"
+   ],
+   "why": {
+    "t": "The antibody structure in this explorer has 56 sulfur atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:rcsb-1IGT",
+      "t": "RCSB PDB 1IGT, Structure of immunoglobulin (intact IgG2a monoclonal antibody)",
+      "u": "https://www.rcsb.org/structure/1IGT"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#antibody?el=S"
+  },
+  {
+   "id": "has-virus-capsid",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "virus shell"
+   },
+   "o": [
+    "Calcium",
+    "Iron",
+    "Sodium",
+    "Zinc"
+   ],
+   "why": {
+    "t": "The virus shell structure in this explorer has 3 calcium atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:rcsb-2BUK",
+      "t": "RCSB PDB 2BUK, Satellite tobacco necrosis virus",
+      "u": "https://www.rcsb.org/structure/2BUK"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#virus-capsid?el=Ca"
+  },
+  {
+   "id": "has-mhc",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "MHC class I"
+   },
+   "o": [
+    "Sulfur",
+    "Sodium",
+    "Calcium",
+    "Potassium"
+   ],
+   "why": {
+    "t": "The MHC class I structure in this explorer has 20 sulfur atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:rcsb-1HSA",
+      "t": "RCSB PDB 1HSA, The three-dimensional structure of HLA-B27 at 2.1 angstroms resolution",
+      "u": "https://www.rcsb.org/structure/1HSA"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#mhc?el=S"
+  },
+  {
+   "id": "has-rubisco",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "rubisco"
+   },
+   "o": [
+    "Magnesium",
+    "Iron",
+    "Chlorine",
+    "Sodium"
+   ],
+   "why": {
+    "t": "The rubisco structure in this explorer has 4 magnesium atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:rcsb-8RUC",
+      "t": "RCSB PDB 8RUC, Activated spinach rubisco complexed with 2-carboxyarabinitol bisphosphate",
+      "u": "https://www.rcsb.org/structure/8RUC"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#rubisco?el=Mg"
+  },
+  {
+   "id": "gap-rubisco",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is the enzyme that captures carbon dioxide in photosynthesis, attaching it to ribulose bisphosphate, a sugar with five carbon atoms."
+   },
+   "o": [
+    "Rubisco",
+    "Lysozyme",
+    "Potassium channel",
+    "Pepsin"
+   ],
+   "why": {
+    "t": "Rubisco is the enzyme that captures carbon dioxide in photosynthesis, attaching it to ribulose bisphosphate, a sugar with five carbon atoms.",
+    "src": [
+     {
+      "id": "molecules:motm-11",
+      "t": "PDB-101 Molecule of the Month: Rubisco (November 2000)",
+      "u": "https://pdb101.rcsb.org/motm/11"
+     }
+    ]
+   },
+   "h": "molecules/#rubisco"
+  },
+  {
+   "id": "has-chlorophyll",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "chlorophyll a"
+   },
+   "o": [
+    "Magnesium",
+    "Potassium",
+    "Phosphorus",
+    "Calcium"
+   ],
+   "why": {
+    "t": "The chlorophyll a structure in this explorer has 1 magnesium atom, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-CLA",
+      "t": "RCSB PDB Chemical Component Dictionary, CLA (chlorophyll a)",
+      "u": "https://www.rcsb.org/ligand/CLA"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#chlorophyll?el=Mg"
+  },
+  {
+   "id": "has-caffeine",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "caffeine"
+   },
+   "o": [
+    "Nitrogen",
+    "Sulfur",
+    "Iron",
+    "Sodium"
+   ],
+   "why": {
+    "t": "The caffeine structure in this explorer has 4 nitrogen atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-CFF",
+      "t": "RCSB PDB Chemical Component Dictionary, CFF (caffeine)",
+      "u": "https://www.rcsb.org/ligand/CFF"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#caffeine?el=N"
+  },
+  {
+   "id": "gap-caffeine",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is a major component of coffee, tea and chocolate, and in people it acts as a stimulant of the central nervous system."
+   },
+   "o": [
+    "Caffeine",
+    "Aspirin",
+    "ATP",
+    "Dopamine"
+   ],
+   "why": {
+    "t": "Caffeine is a major component of coffee, tea and chocolate, and in people it acts as a stimulant of the central nervous system.",
+    "src": [
+     {
+      "id": "molecules:pubchem-2519",
+      "t": "PubChem CID 2519, Caffeine (record description)",
+      "u": "https://pubchem.ncbi.nlm.nih.gov/compound/2519"
+     }
+    ]
+   },
+   "h": "molecules/#caffeine"
+  },
+  {
+   "id": "has-capsaicin",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "capsaicin"
+   },
+   "o": [
+    "Nitrogen",
+    "Sodium",
+    "Calcium",
+    "Chlorine"
+   ],
+   "why": {
+    "t": "The capsaicin structure in this explorer has 1 nitrogen atom, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-4DY",
+      "t": "RCSB PDB Chemical Component Dictionary, 4DY (capsaicin)",
+      "u": "https://www.rcsb.org/ligand/4DY"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#capsaicin?el=N"
+  },
+  {
+   "id": "gap-capsaicin",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is the main pungent compound in chili peppers, the fruits of plants in the genus Capsicum."
+   },
+   "o": [
+    "Capsaicin",
+    "Menthol",
+    "Glycine",
+    "Serotonin"
+   ],
+   "why": {
+    "t": "Capsaicin is the main pungent compound in chili peppers, the fruits of plants in the genus Capsicum.",
+    "src": [
+     {
+      "id": "molecules:pubchem-1548943",
+      "t": "PubChem CID 1548943, Capsaicin (record description)",
+      "u": "https://pubchem.ncbi.nlm.nih.gov/compound/1548943"
+     },
+     {
+      "id": "molecules:motm-250",
+      "t": "PDB-101 Molecule of the Month: Capsaicin Receptor TRPV1 (October 2020)",
+      "u": "https://pdb101.rcsb.org/motm/250"
+     }
+    ]
+   },
+   "h": "molecules/#capsaicin"
+  },
+  {
+   "id": "has-sucrose",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "sucrose"
+   },
+   "o": [
+    "Oxygen",
+    "Phosphorus",
+    "Chlorine",
+    "Magnesium"
+   ],
+   "why": {
+    "t": "The sucrose structure in this explorer has 11 oxygen atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-SUC",
+      "t": "RCSB PDB Chemical Component Dictionary, SUC (sucrose)",
+      "u": "https://www.rcsb.org/ligand/SUC"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#sucrose?el=O"
+  },
+  {
+   "id": "gap-sucrose",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is ____: one glucose and one fructose joined by a glycosidic bond."
+   },
+   "o": [
+    "Sucrose",
+    "Water",
+    "Palmitic acid",
+    "Serotonin"
+   ],
+   "why": {
+    "t": "Sucrose is table sugar: one glucose and one fructose joined by a glycosidic bond.",
+    "src": [
+     {
+      "id": "molecules:os-3-2-sucrose",
+      "t": "OpenStax Biology 2e, section 3.2 Carbohydrates",
+      "u": "https://openstax.org/books/biology-2e/pages/3-2-carbohydrates"
+     },
+     {
+      "id": "molecules:pubchem-5988",
+      "t": "PubChem CID 5988, Sucrose (record description)",
+      "u": "https://pubchem.ncbi.nlm.nih.gov/compound/5988"
+     }
+    ]
+   },
+   "h": "molecules/#sucrose"
+  },
+  {
+   "id": "has-vitamin-c",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "vitamin C"
+   },
+   "o": [
+    "Oxygen",
+    "Sulfur",
+    "Potassium",
+    "Zinc"
+   ],
+   "why": {
+    "t": "The vitamin C structure in this explorer has 6 oxygen atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-ASC",
+      "t": "RCSB PDB Chemical Component Dictionary, ASC (ascorbic acid)",
+      "u": "https://www.rcsb.org/ligand/ASC"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#vitamin-c?el=O"
+  },
+  {
+   "id": "gap-vitamin-c",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____, or ____, is a powerful antioxidant that keeps the enzyme that builds collagen working by restoring its iron atoms."
+   },
+   "o": [
+    "Vitamin C",
+    "Glucose",
+    "Cholesterol",
+    "Acetylcholine"
+   ],
+   "why": {
+    "t": "Vitamin C, or ascorbic acid, is a powerful antioxidant that keeps the enzyme that builds collagen working by restoring its iron atoms.",
+    "src": [
+     {
+      "id": "molecules:motm-288",
+      "t": "PDB-101 Molecule of the Month: Vitamins (December 2023)",
+      "u": "https://pdb101.rcsb.org/motm/288"
+     }
+    ]
+   },
+   "h": "molecules/#vitamin-c"
+  },
+  {
+   "id": "has-beta-carotene",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "beta-carotene"
+   },
+   "o": [
+    "Hydrogen",
+    "Nitrogen",
+    "Iron",
+    "Sulfur"
+   ],
+   "why": {
+    "t": "The beta-carotene structure in this explorer has 56 hydrogen atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-BCR",
+      "t": "RCSB PDB Chemical Component Dictionary, BCR (beta-carotene)",
+      "u": "https://www.rcsb.org/ligand/BCR"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#beta-carotene?el=H"
+  },
+  {
+   "id": "gap-beta-carotene",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ gives carrots and many other orange and yellow vegetables their bright colour."
+   },
+   "o": [
+    "Beta-carotene",
+    "ATP",
+    "Adrenaline",
+    "Chlorophyll a"
+   ],
+   "why": {
+    "t": "Beta-carotene gives carrots and many other orange and yellow vegetables their bright colour.",
+    "src": [
+     {
+      "id": "molecules:motm-66",
+      "t": "PDB-101 Molecule of the Month: Carotenoid Oxygenase (June 2005)",
+      "u": "https://pdb101.rcsb.org/motm/66"
+     }
+    ]
+   },
+   "h": "molecules/#beta-carotene"
+  },
+  {
+   "id": "has-myoglobin",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "myoglobin"
+   },
+   "o": [
+    "Iron",
+    "Zinc",
+    "Potassium",
+    "Sodium"
+   ],
+   "why": {
+    "t": "The myoglobin structure in this explorer has 1 iron atom, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:rcsb-1MBN",
+      "t": "RCSB PDB 1MBN, The stereochemistry of the protein myoglobin",
+      "u": "https://www.rcsb.org/structure/1MBN"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#myoglobin?el=Fe"
+  },
+  {
+   "id": "gap-myoglobin",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is a small, bright red protein that stores oxygen in muscle cells, and it gives meat much of its red colour."
+   },
+   "o": [
+    "Myoglobin",
+    "HIV-1 protease with ritonavir",
+    "Virus shell",
+    "Rhodopsin"
+   ],
+   "why": {
+    "t": "Myoglobin is a small, bright red protein that stores oxygen in muscle cells, and it gives meat much of its red colour.",
+    "src": [
+     {
+      "id": "molecules:motm-1",
+      "t": "PDB-101 Molecule of the Month: Myoglobin (January 2000)",
+      "u": "https://pdb101.rcsb.org/motm/1"
+     }
+    ]
+   },
+   "h": "molecules/#myoglobin"
+  },
+  {
+   "id": "has-keratin",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "keratin"
+   },
+   "o": [
+    "Sulfur",
+    "Chlorine",
+    "Magnesium",
+    "Iron"
+   ],
+   "why": {
+    "t": "The keratin structure in this explorer has 12 sulfur atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:rcsb-3TNU",
+      "t": "RCSB PDB 3TNU, Heterocomplex of coil 2B domains of human keratin 5 and keratin 14",
+      "u": "https://www.rcsb.org/structure/3TNU"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#keratin?el=S"
+  },
+  {
+   "id": "gap-keratin",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is a structural protein, and ____ filaments give vital mechanical support to the cells that line body surfaces such as the skin."
+   },
+   "o": [
+    "Keratin",
+    "Pepsin",
+    "MHC class I",
+    "Actin"
+   ],
+   "why": {
+    "t": "Keratin is a structural protein, and keratin filaments give vital mechanical support to the cells that line body surfaces such as the skin.",
+    "src": [
+     {
+      "id": "molecules:lee-2012",
+      "t": "Lee, C. H., Kim, M. S., Chung, B. M. et al. (2012). Structural basis for heteromeric assembly and perinuclear organization of keratin filaments. Nature Structural and Molecular Biology 19, 707-715",
+      "u": "https://doi.org/10.1038/nsmb.2330"
+     },
+     {
+      "id": "molecules:os-3-4-roles",
+      "t": "OpenStax Biology 2e, section 3.4 Proteins",
+      "u": "https://openstax.org/books/biology-2e/pages/3-4-proteins"
+     }
+    ]
+   },
+   "h": "molecules/#keratin"
+  },
+  {
+   "id": "has-rhodopsin",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "rhodopsin"
+   },
+   "o": [
+    "Zinc",
+    "Sodium",
+    "Calcium",
+    "Iron"
+   ],
+   "why": {
+    "t": "The rhodopsin structure in this explorer has 4 zinc atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:rcsb-1F88",
+      "t": "RCSB PDB 1F88, Crystal structure of bovine rhodopsin",
+      "u": "https://www.rcsb.org/structure/1F88"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#rhodopsin?el=Zn"
+  },
+  {
+   "id": "gap-rhodopsin",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is the molecule in the eye that senses light, and our most sensitive eye cells, rod cells, can be triggered by a single photon."
+   },
+   "o": [
+    "Rhodopsin",
+    "Oxytocin",
+    "Rubisco",
+    "DNA"
+   ],
+   "why": {
+    "t": "Rhodopsin is the molecule in the eye that senses light, and our most sensitive eye cells, rod cells, can be triggered by a single photon.",
+    "src": [
+     {
+      "id": "molecules:motm-147",
+      "t": "PDB-101 Molecule of the Month: Rhodopsin (March 2012)",
+      "u": "https://pdb101.rcsb.org/motm/147"
+     }
+    ]
+   },
+   "h": "molecules/#rhodopsin"
+  },
+  {
+   "id": "has-nitrogen",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "nitrogen gas"
+   },
+   "o": [
+    "Nitrogen",
+    "Phosphorus",
+    "Potassium",
+    "Zinc"
+   ],
+   "why": {
+    "t": "The nitrogen gas structure in this explorer has 2 nitrogen atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-HDZ",
+      "t": "RCSB PDB Chemical Component Dictionary, HDZ (nitrogen molecule)",
+      "u": "https://www.rcsb.org/ligand/HDZ"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#nitrogen?el=N"
+  },
+  {
+   "id": "gap-nitrogen",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is a molecule of two nitrogen atoms, and it makes up 78.08 percent of dry air, more than any other gas."
+   },
+   "o": [
+    "Nitrogen gas",
+    "Adrenaline",
+    "Chlorophyll a",
+    "Vitamin C"
+   ],
+   "why": {
+    "t": "Nitrogen gas is a molecule of two nitrogen atoms, and it makes up 78.08 percent of dry air, more than any other gas.",
+    "src": [
+     {
+      "id": "molecules:pubchem-947",
+      "t": "PubChem CID 947, Nitrogen (record description and Use and Manufacturing sections)",
+      "u": "https://pubchem.ncbi.nlm.nih.gov/compound/947"
+     },
+     {
+      "id": "molecules:nasa-earthfact",
+      "t": "NASA Goddard Space Flight Center, Earth Fact Sheet (atmospheric composition)",
+      "u": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html"
+     }
+    ]
+   },
+   "h": "molecules/#nitrogen"
+  },
+  {
+   "id": "has-oxygen",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "oxygen gas"
+   },
+   "o": [
+    "Oxygen",
+    "Calcium",
+    "Sulfur",
+    "Potassium"
+   ],
+   "why": {
+    "t": "The oxygen gas structure in this explorer has 2 oxygen atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-OXY",
+      "t": "RCSB PDB Chemical Component Dictionary, OXY (oxygen molecule)",
+      "u": "https://www.rcsb.org/ligand/OXY"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#oxygen?el=O"
+  },
+  {
+   "id": "gap-oxygen",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is a molecule of two oxygen atoms, and it makes up 20.95 percent of dry air."
+   },
+   "o": [
+    "Oxygen gas",
+    "Dopamine",
+    "Caffeine",
+    "Beta-carotene"
+   ],
+   "why": {
+    "t": "Oxygen gas is a molecule of two oxygen atoms, and it makes up 20.95 percent of dry air.",
+    "src": [
+     {
+      "id": "molecules:pubchem-977",
+      "t": "PubChem CID 977, Oxygen (record description and Use and Manufacturing sections)",
+      "u": "https://pubchem.ncbi.nlm.nih.gov/compound/977"
+     },
+     {
+      "id": "molecules:nasa-earthfact",
+      "t": "NASA Goddard Space Flight Center, Earth Fact Sheet (atmospheric composition)",
+      "u": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html"
+     }
+    ]
+   },
+   "h": "molecules/#oxygen"
+  },
+  {
+   "id": "has-argon",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "argon"
+   },
+   "o": [
+    "Argon",
+    "Magnesium",
+    "Nitrogen",
+    "Iron"
+   ],
+   "why": {
+    "t": "The argon structure in this explorer has 1 argon atom, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-AR",
+      "t": "RCSB PDB Chemical Component Dictionary, AR (argon)",
+      "u": "https://www.rcsb.org/ligand/AR"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#argon?el=Ar"
+  },
+  {
+   "id": "gap-argon",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is the third most common gas in dry air, about 0.93 percent, after nitrogen and oxygen."
+   },
+   "o": [
+    "Argon",
+    "Serotonin",
+    "Capsaicin",
+    "Nitrogen gas"
+   ],
+   "why": {
+    "t": "Argon is the third most common gas in dry air, about 0.93 percent, after nitrogen and oxygen.",
+    "src": [
+     {
+      "id": "molecules:osc-18-12",
+      "t": "OpenStax Chemistry 2e, section 18.12 Occurrence, Preparation, and Properties of the Noble Gases",
+      "u": "https://openstax.org/books/chemistry-2e/pages/18-12-occurrence-preparation-and-properties-of-the-noble-gases"
+     },
+     {
+      "id": "molecules:nasa-earthfact",
+      "t": "NASA Goddard Space Flight Center, Earth Fact Sheet (atmospheric composition)",
+      "u": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html"
+     }
+    ]
+   },
+   "h": "molecules/#argon"
+  },
+  {
+   "id": "has-carbon-dioxide",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "carbon dioxide"
+   },
+   "o": [
+    "Oxygen",
+    "Zinc",
+    "Sodium",
+    "Calcium"
+   ],
+   "why": {
+    "t": "The carbon dioxide structure in this explorer has 2 oxygen atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-CO2",
+      "t": "RCSB PDB Chemical Component Dictionary, CO2 (carbon dioxide)",
+      "u": "https://www.rcsb.org/ligand/CO2"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#carbon-dioxide?el=O"
+  },
+  {
+   "id": "gap-carbon-dioxide",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is one carbon atom joined to two oxygen atoms by double bonds, a colourless gas with no smell."
+   },
+   "o": [
+    "Carbon dioxide",
+    "Acetylcholine",
+    "Sucrose",
+    "Oxygen gas"
+   ],
+   "why": {
+    "t": "Carbon dioxide is one carbon atom joined to two oxygen atoms by double bonds, a colourless gas with no smell.",
+    "src": [
+     {
+      "id": "molecules:pubchem-280",
+      "t": "PubChem CID 280, Carbon Dioxide (record description and Use and Manufacturing sections)",
+      "u": "https://pubchem.ncbi.nlm.nih.gov/compound/280"
+     }
+    ]
+   },
+   "h": "molecules/#carbon-dioxide"
+  },
+  {
+   "id": "has-ozone",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "ozone"
+   },
+   "o": [
+    "Oxygen",
+    "Phosphorus",
+    "Chlorine",
+    "Magnesium"
+   ],
+   "why": {
+    "t": "The ozone structure in this explorer has 3 oxygen atoms, counted from its structure file.",
+    "src": [],
+    "computed": true
+   },
+   "h": "molecules/#ozone?el=O"
+  },
+  {
+   "id": "gap-ozone",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is a molecule of three oxygen atoms, a pale blue gas with a sharp smell."
+   },
+   "o": [
+    "Ozone",
+    "Chlorophyll a",
+    "Vitamin C",
+    "Argon"
+   ],
+   "why": {
+    "t": "Ozone is a molecule of three oxygen atoms, a pale blue gas with a sharp smell.",
+    "src": [
+     {
+      "id": "molecules:pubchem-24823",
+      "t": "PubChem CID 24823, Ozone (record description and Use and Manufacturing sections)",
+      "u": "https://pubchem.ncbi.nlm.nih.gov/compound/24823"
+     },
+     {
+      "id": "molecules:osc-18-9",
+      "t": "OpenStax Chemistry 2e, section 18.9 Occurrence, Preparation, and Compounds of Oxygen",
+      "u": "https://openstax.org/books/chemistry-2e/pages/18-9-occurrence-preparation-and-compounds-of-oxygen"
+     }
+    ]
+   },
+   "h": "molecules/#ozone"
+  },
+  {
+   "id": "has-table-salt",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "table salt"
+   },
+   "o": [
+    "Chlorine",
+    "Sulfur",
+    "Calcium",
+    "Potassium"
+   ],
+   "why": {
+    "t": "The table salt structure in this explorer has 32 chlorine atoms, counted from its structure file.",
+    "src": [],
+    "computed": true
+   },
+   "h": "molecules/#table-salt?el=Cl"
+  },
+  {
+   "id": "gap-table-salt",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is not made of molecules: it is an ionic compound, a crystal of sodium ions and chloride ions held together by the pull between opposite charges."
+   },
+   "o": [
+    "Table salt",
+    "Caffeine",
+    "Beta-carotene",
+    "Carbon dioxide"
+   ],
+   "why": {
+    "t": "Table salt is not made of molecules: it is an ionic compound, a crystal of sodium ions and chloride ions held together by the pull between opposite charges.",
+    "src": [
+     {
+      "id": "molecules:osc-2-6",
+      "t": "OpenStax Chemistry 2e, section 2.6 Ionic and Molecular Compounds",
+      "u": "https://openstax.org/books/chemistry-2e/pages/2-6-molecular-and-ionic-compounds"
+     },
+     {
+      "id": "molecules:pubchem-5234",
+      "t": "PubChem CID 5234, Sodium Chloride (record description and Use and Manufacturing sections)",
+      "u": "https://pubchem.ncbi.nlm.nih.gov/compound/5234"
+     }
+    ]
+   },
+   "h": "molecules/#table-salt"
+  },
+  {
+   "id": "has-acetic-acid",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "acetic acid"
+   },
+   "o": [
+    "Oxygen",
+    "Nitrogen",
+    "Iron",
+    "Sulfur"
+   ],
+   "why": {
+    "t": "The acetic acid structure in this explorer has 2 oxygen atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-ACY",
+      "t": "RCSB PDB Chemical Component Dictionary, ACY (acetic acid)",
+      "u": "https://www.rcsb.org/ligand/ACY"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#acetic-acid?el=O"
+  },
+  {
+   "id": "gap-acetic-acid",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is the acid in vinegar, and it gives vinegar its sour taste and sharp smell."
+   },
+   "o": [
+    "Acetic acid",
+    "Capsaicin",
+    "Nitrogen gas",
+    "Ozone"
+   ],
+   "why": {
+    "t": "Acetic acid is the acid in vinegar, and it gives vinegar its sour taste and sharp smell.",
+    "src": [
+     {
+      "id": "molecules:pubchem-176",
+      "t": "PubChem CID 176, Acetic Acid (record description and Use and Manufacturing sections)",
+      "u": "https://pubchem.ncbi.nlm.nih.gov/compound/176"
+     },
+     {
+      "id": "molecules:osc-14-3",
+      "t": "OpenStax Chemistry 2e, section 14.3 Relative Strengths of Acids and Bases",
+      "u": "https://openstax.org/books/chemistry-2e/pages/14-3-relative-strengths-of-acids-and-bases"
+     }
+    ]
+   },
+   "h": "molecules/#acetic-acid"
+  },
+  {
+   "id": "has-citric-acid",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "citric acid"
+   },
+   "o": [
+    "Oxygen",
+    "Sodium",
+    "Calcium",
+    "Nitrogen"
+   ],
+   "why": {
+    "t": "The citric acid structure in this explorer has 7 oxygen atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-CIT",
+      "t": "RCSB PDB Chemical Component Dictionary, CIT (citric acid)",
+      "u": "https://www.rcsb.org/ligand/CIT"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#citric-acid?el=O"
+  },
+  {
+   "id": "gap-citric-acid",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ comes from citrus fruits like lemons and limes, and food makers add it to drinks and foods to make them more acidic."
+   },
+   "o": [
+    "Citric acid",
+    "Sucrose",
+    "Oxygen gas",
+    "Table salt"
+   ],
+   "why": {
+    "t": "Citric acid comes from citrus fruits like lemons and limes, and food makers add it to drinks and foods to make them more acidic.",
+    "src": [
+     {
+      "id": "molecules:pubchem-311",
+      "t": "PubChem CID 311, Citric Acid (record description and Use and Manufacturing sections)",
+      "u": "https://pubchem.ncbi.nlm.nih.gov/compound/311"
+     }
+    ]
+   },
+   "h": "molecules/#citric-acid"
+  },
+  {
+   "id": "has-baking-soda",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "baking soda"
+   },
+   "o": [
+    "Oxygen",
+    "Chlorine",
+    "Magnesium",
+    "Sodium"
+   ],
+   "why": {
+    "t": "The baking soda structure in this explorer has 3 oxygen atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-BCT",
+      "t": "RCSB PDB Chemical Component Dictionary, BCT (bicarbonate ion)",
+      "u": "https://www.rcsb.org/ligand/BCT"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#baking-soda?el=O"
+  },
+  {
+   "id": "gap-baking-soda",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is ____, a salt made of sodium ions and bicarbonate ions; this model shows one bicarbonate ion."
+   },
+   "o": [
+    "Baking soda",
+    "Vitamin C",
+    "Argon",
+    "Acetic acid"
+   ],
+   "why": {
+    "t": "Baking soda is sodium bicarbonate, a salt made of sodium ions and bicarbonate ions; this model shows one bicarbonate ion.",
+    "src": [
+     {
+      "id": "molecules:pubchem-516892",
+      "t": "PubChem CID 516892, Sodium Bicarbonate (record description and Use and Manufacturing sections)",
+      "u": "https://pubchem.ncbi.nlm.nih.gov/compound/516892"
+     },
+     {
+      "id": "molecules:ccd-BCT",
+      "t": "RCSB PDB Chemical Component Dictionary, BCT (bicarbonate ion)",
+      "u": "https://www.rcsb.org/ligand/BCT"
+     }
+    ]
+   },
+   "h": "molecules/#baking-soda"
+  },
+  {
+   "id": "has-ethanol",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "ethanol"
+   },
+   "o": [
+    "Oxygen",
+    "Potassium",
+    "Zinc",
+    "Chlorine"
+   ],
+   "why": {
+    "t": "The ethanol structure in this explorer has 1 oxygen atom, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-EOH",
+      "t": "RCSB PDB Chemical Component Dictionary, EOH (ethanol)",
+      "u": "https://www.rcsb.org/ligand/EOH"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#ethanol?el=O"
+  },
+  {
+   "id": "gap-ethanol",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is the alcohol in alcoholic drinks: an ethane molecule with one hydrogen swapped for an OH group."
+   },
+   "o": [
+    "Ethanol",
+    "Beta-carotene",
+    "Carbon dioxide",
+    "Citric acid"
+   ],
+   "why": {
+    "t": "Ethanol is the alcohol in alcoholic drinks: an ethane molecule with one hydrogen swapped for an OH group.",
+    "src": [
+     {
+      "id": "molecules:pubchem-702",
+      "t": "PubChem CID 702, Ethanol (record description and Use and Manufacturing sections)",
+      "u": "https://pubchem.ncbi.nlm.nih.gov/compound/702"
+     }
+    ]
+   },
+   "h": "molecules/#ethanol"
+  },
+  {
+   "id": "has-vanillin",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "vanillin"
+   },
+   "o": [
+    "Oxygen",
+    "Iron",
+    "Phosphorus",
+    "Chlorine"
+   ],
+   "why": {
+    "t": "The vanillin structure in this explorer has 3 oxygen atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-V55",
+      "t": "RCSB PDB Chemical Component Dictionary, V55 (4-hydroxy-3-methoxybenzaldehyde, vanillin)",
+      "u": "https://www.rcsb.org/ligand/V55"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#vanillin?el=O"
+  },
+  {
+   "id": "has-hydrochloric-acid",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "hydrochloric acid"
+   },
+   "o": [
+    "Chlorine",
+    "Nitrogen",
+    "Calcium",
+    "Sodium"
+   ],
+   "why": {
+    "t": "The hydrochloric acid structure in this explorer has 1 chlorine atom, counted from its structure file.",
+    "src": [],
+    "computed": true
+   },
+   "h": "molecules/#hydrochloric-acid?el=Cl"
+  },
+  {
+   "id": "gap-hydrochloric-acid",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is found naturally in your stomach juice: cells in the stomach lining called parietal cells make it."
+   },
+   "o": [
+    "Hydrochloric acid",
+    "Oxygen gas",
+    "Table salt",
+    "Ethanol"
+   ],
+   "why": {
+    "t": "Hydrochloric acid is found naturally in your stomach juice: cells in the stomach lining called parietal cells make it.",
+    "src": [
+     {
+      "id": "molecules:pubchem-313",
+      "t": "PubChem CID 313, Hydrochloric Acid (record description and Use and Manufacturing sections)",
+      "u": "https://pubchem.ncbi.nlm.nih.gov/compound/313"
+     },
+     {
+      "id": "molecules:osap-23-4",
+      "t": "OpenStax Anatomy and Physiology 2e, section 23.4 The Stomach",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-4-the-stomach"
+     }
+    ]
+   },
+   "h": "molecules/#hydrochloric-acid"
+  },
+  {
+   "id": "has-ammonia",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "ammonia"
+   },
+   "o": [
+    "Nitrogen",
+    "Chlorine",
+    "Magnesium",
+    "Potassium"
+   ],
+   "why": {
+    "t": "The ammonia structure in this explorer has 1 nitrogen atom, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-NH3",
+      "t": "RCSB PDB Chemical Component Dictionary, NH3 (ammonia)",
+      "u": "https://www.rcsb.org/ligand/NH3"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#ammonia?el=N"
+  },
+  {
+   "id": "gap-ammonia",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is a gas made of one nitrogen atom bonded to three hydrogen atoms, and it is in many household and industrial cleaners."
+   },
+   "o": [
+    "Ammonia",
+    "Argon",
+    "Acetic acid",
+    "Vanillin"
+   ],
+   "why": {
+    "t": "Ammonia is a gas made of one nitrogen atom bonded to three hydrogen atoms, and it is in many household and industrial cleaners.",
+    "src": [
+     {
+      "id": "molecules:pubchem-222",
+      "t": "PubChem CID 222, Ammonia (record description and Use and Manufacturing sections)",
+      "u": "https://pubchem.ncbi.nlm.nih.gov/compound/222"
+     }
+    ]
+   },
+   "h": "molecules/#ammonia"
+  },
+  {
+   "id": "has-hydrogen-peroxide",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "hydrogen peroxide"
+   },
+   "o": [
+    "Oxygen",
+    "Zinc",
+    "Sodium",
+    "Calcium"
+   ],
+   "why": {
+    "t": "The hydrogen peroxide structure in this explorer has 2 oxygen atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-PEO",
+      "t": "RCSB PDB Chemical Component Dictionary, PEO (hydrogen peroxide)",
+      "u": "https://www.rcsb.org/ligand/PEO"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#hydrogen-peroxide?el=O"
+  },
+  {
+   "id": "gap-hydrogen-peroxide",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____, H2O2, is two hydrogen atoms and two oxygen atoms, like water with one extra oxygen."
+   },
+   "o": [
+    "Hydrogen peroxide",
+    "Carbon dioxide",
+    "Citric acid",
+    "Hydrochloric acid"
+   ],
+   "why": {
+    "t": "Hydrogen peroxide, H2O2, is two hydrogen atoms and two oxygen atoms, like water with one extra oxygen.",
+    "src": [
+     {
+      "id": "molecules:ccd-PEO",
+      "t": "RCSB PDB Chemical Component Dictionary, PEO (hydrogen peroxide)",
+      "u": "https://www.rcsb.org/ligand/PEO"
+     }
+    ]
+   },
+   "h": "molecules/#hydrogen-peroxide"
+  },
+  {
+   "id": "has-methane",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "methane"
+   },
+   "o": [
+    "Hydrogen",
+    "Phosphorus",
+    "Chlorine",
+    "Magnesium"
+   ],
+   "why": {
+    "t": "The methane structure in this explorer has 4 hydrogen atoms, counted from its structure file.",
+    "src": [],
+    "computed": true
+   },
+   "h": "molecules/#methane?el=H"
+  },
+  {
+   "id": "gap-methane",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is one carbon atom bonded to four hydrogen atoms, a colourless gas with no smell that burns easily."
+   },
+   "o": [
+    "Methane",
+    "Ozone",
+    "Baking soda",
+    "Ammonia"
+   ],
+   "why": {
+    "t": "Methane is one carbon atom bonded to four hydrogen atoms, a colourless gas with no smell that burns easily.",
+    "src": [
+     {
+      "id": "molecules:pubchem-297",
+      "t": "PubChem CID 297, Methane (record description and Use and Manufacturing sections)",
+      "u": "https://pubchem.ncbi.nlm.nih.gov/compound/297"
+     }
+    ]
+   },
+   "h": "molecules/#methane"
+  },
+  {
+   "id": "has-propane",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "propane"
+   },
+   "o": [
+    "Hydrogen",
+    "Sulfur",
+    "Potassium",
+    "Zinc"
+   ],
+   "why": {
+    "t": "The propane structure in this explorer has 8 hydrogen atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-TME",
+      "t": "RCSB PDB Chemical Component Dictionary, TME (propane)",
+      "u": "https://www.rcsb.org/ligand/TME"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#propane?el=H"
+  },
+  {
+   "id": "gap-propane",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is a chain of three carbons with eight hydrogens, and it is a gas at room temperature."
+   },
+   "o": [
+    "Propane",
+    "Table salt",
+    "Ethanol",
+    "Hydrogen peroxide"
+   ],
+   "why": {
+    "t": "Propane is a chain of three carbons with eight hydrogens, and it is a gas at room temperature.",
+    "src": [
+     {
+      "id": "molecules:osc-20-1",
+      "t": "OpenStax Chemistry 2e, section 20.1 Hydrocarbons",
+      "u": "https://openstax.org/books/chemistry-2e/pages/20-1-hydrocarbons"
+     },
+     {
+      "id": "molecules:ccd-TME",
+      "t": "RCSB PDB Chemical Component Dictionary, TME (propane)",
+      "u": "https://www.rcsb.org/ligand/TME"
+     }
+    ]
+   },
+   "h": "molecules/#propane"
+  },
+  {
+   "id": "has-soap",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "soap"
+   },
+   "o": [
+    "Oxygen",
+    "Nitrogen",
+    "Iron",
+    "Sulfur"
+   ],
+   "why": {
+    "t": "The soap structure in this explorer has 2 oxygen atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-STE",
+      "t": "RCSB PDB Chemical Component Dictionary, STE (stearic acid)",
+      "u": "https://www.rcsb.org/ligand/STE"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#soap?el=O"
+  },
+  {
+   "id": "gap-soap",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "Soaps are salts of fatty acids, and ____, made from ____, is the most common ingredient in ____."
+   },
+   "o": [
+    "Soap",
+    "Acetic acid",
+    "Vanillin",
+    "Methane"
+   ],
+   "why": {
+    "t": "Soaps are salts of fatty acids, and sodium stearate, made from stearic acid, is the most common ingredient in soap.",
+    "src": [
+     {
+      "id": "molecules:osc-11-5",
+      "t": "OpenStax Chemistry 2e, section 11.5 Colloids",
+      "u": "https://openstax.org/books/chemistry-2e/pages/11-5-colloids"
+     },
+     {
+      "id": "molecules:pubchem-2724691",
+      "t": "PubChem CID 2724691, Sodium Stearate (record description and Use and Manufacturing sections)",
+      "u": "https://pubchem.ncbi.nlm.nih.gov/compound/2724691"
+     }
+    ]
+   },
+   "h": "molecules/#soap"
+  },
+  {
+   "id": "has-aspirin",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "aspirin"
+   },
+   "o": [
+    "Oxygen",
+    "Sodium",
+    "Calcium",
+    "Nitrogen"
+   ],
+   "why": {
+    "t": "The aspirin structure in this explorer has 4 oxygen atoms, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-AIN",
+      "t": "RCSB PDB Chemical Component Dictionary, AIN (2-(acetyloxy)benzoic acid, aspirin)",
+      "u": "https://www.rcsb.org/ligand/AIN"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#aspirin?el=O"
+  },
+  {
+   "id": "gap-aspirin",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____, or ____, relieves pain, brings down fever and keeps blood from clotting quickly."
+   },
+   "o": [
+    "Aspirin",
+    "Citric acid",
+    "Hydrochloric acid",
+    "Propane"
+   ],
+   "why": {
+    "t": "Aspirin, or acetylsalicylic acid, relieves pain, brings down fever and keeps blood from clotting quickly.",
+    "src": [
+     {
+      "id": "molecules:pubchem-2244",
+      "t": "PubChem CID 2244, Aspirin (record description and Use and Manufacturing sections)",
+      "u": "https://pubchem.ncbi.nlm.nih.gov/compound/2244"
+     }
+    ]
+   },
+   "h": "molecules/#aspirin"
+  },
+  {
+   "id": "has-menthol",
+   "sec": "molecules",
+   "q": "quiz.q.contains",
+   "v": {
+    "molecule": "menthol"
+   },
+   "o": [
+    "Oxygen",
+    "Chlorine",
+    "Magnesium",
+    "Sodium"
+   ],
+   "why": {
+    "t": "The menthol structure in this explorer has 1 oxygen atom, counted from its structure file.",
+    "src": [
+     {
+      "id": "molecules:ccd-XUQ",
+      "t": "RCSB PDB Chemical Component Dictionary, XUQ ((1R,2S,5R)-5-methyl-2-(propan-2-yl)cyclohexan-1-ol, (-)-menthol)",
+      "u": "https://www.rcsb.org/ligand/XUQ"
+     }
+    ],
+    "computed": true
+   },
+   "h": "molecules/#menthol?el=O"
+  },
+  {
+   "id": "gap-menthol",
+   "sec": "molecules",
+   "q": "quiz.q.molCloze",
+   "v": {
+    "text": "____ is found in peppermint oil and other mint oils, and it flavours sweets, cough drops and nasal inhalers."
+   },
+   "o": [
+    "Menthol",
+    "Baking soda",
+    "Ammonia",
+    "Soap"
+   ],
+   "why": {
+    "t": "Menthol is found in peppermint oil and other mint oils, and it flavours sweets, cough drops and nasal inhalers.",
+    "src": [
+     {
+      "id": "molecules:pubchem-16666",
+      "t": "PubChem CID 16666, (-)-Menthol (record description and Use and Manufacturing sections)",
+      "u": "https://pubchem.ncbi.nlm.nih.gov/compound/16666"
+     }
+    ]
+   },
+   "h": "molecules/#menthol"
+  },
+  {
+   "id": "gap-membrane",
+   "sec": "cells",
+   "q": "quiz.q.partCloze",
+   "v": {
+    "text": "The ____ is a double layer of phospholipids with proteins set into it, and it separates the inside of the cell from its surroundings."
+   },
+   "o": [
+    "Cell membrane",
+    "Nucleus",
+    "Golgi apparatus",
+    "Cell wall"
+   ],
+   "why": {
+    "t": "The cell membrane is a double layer of phospholipids with proteins set into it, and it separates the inside of the cell from its surroundings.",
+    "src": [
+     {
+      "id": "cells:bio-4-3",
+      "t": "Biology 2e, section 4.3 Eukaryotic Cells",
+      "u": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+     }
+    ]
+   },
+   "h": "cells/#animal/membrane"
+  },
+  {
+   "id": "gap-nucleus",
+   "sec": "cells",
+   "q": "quiz.q.partCloze",
+   "v": {
+    "text": "The ____ holds the cell's DNA and directs the making of ribosomes and proteins."
+   },
+   "o": [
+    "Nucleus",
+    "Cytoskeleton",
+    "Flagellum",
+    "Myelin sheath"
+   ],
+   "why": {
+    "t": "The nucleus holds the cell's DNA and directs the making of ribosomes and proteins.",
+    "src": [
+     {
+      "id": "cells:bio-4-3",
+      "t": "Biology 2e, section 4.3 Eukaryotic Cells",
+      "u": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+     }
+    ]
+   },
+   "h": "cells/#animal/nucleus"
+  },
+  {
+   "id": "gap-mitochondrion",
+   "sec": "cells",
+   "q": "quiz.q.partCloze",
+   "v": {
+    "text": "____ make ATP, the cell's main energy-carrying molecule, from the chemical energy in glucose and other nutrients."
+   },
+   "o": [
+    "Mitochondria",
+    "Nucleoid",
+    "Axon",
+    "Nuclei"
+   ],
+   "why": {
+    "t": "Mitochondria make ATP, the cell's main energy-carrying molecule, from the chemical energy in glucose and other nutrients.",
+    "src": [
+     {
+      "id": "cells:bio-4-3",
+      "t": "Biology 2e, section 4.3 Eukaryotic Cells",
+      "u": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+     }
+    ]
+   },
+   "h": "cells/#animal/mitochondrion"
+  },
+  {
+   "id": "gap-ribosomes",
+   "sec": "cells",
+   "q": "quiz.q.partCloze",
+   "v": {
+    "text": "____ build proteins, joining amino acids in the order set by messenger RNA copied from the DNA in the nucleus."
+   },
+   "o": [
+    "Ribosomes",
+    "Axon terminals",
+    "Sarcoplasmic reticulum",
+    "Golgi apparatus"
+   ],
+   "why": {
+    "t": "Ribosomes build proteins, joining amino acids in the order set by messenger RNA copied from the DNA in the nucleus.",
+    "src": [
+     {
+      "id": "cells:bio-4-3",
+      "t": "Biology 2e, section 4.3 Eukaryotic Cells",
+      "u": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+     }
+    ]
+   },
+   "h": "cells/#animal/ribosomes"
+  },
+  {
+   "id": "gap-er",
+   "sec": "cells",
+   "q": "quiz.q.partCloze",
+   "v": {
+    "text": "The ____ is a network of connected membrane sacs and tubes that modifies proteins and makes lipids."
+   },
+   "o": [
+    "Endoplasmic reticulum",
+    "Sarcoplasmic reticulum",
+    "Ribosomes",
+    "Cell wall"
+   ],
+   "why": {
+    "t": "The endoplasmic reticulum is a network of connected membrane sacs and tubes that modifies proteins and makes lipids.",
+    "src": [
+     {
+      "id": "cells:bio-4-4",
+      "t": "Biology 2e, section 4.4 The Endomembrane System and Proteins",
+      "u": "https://openstax.org/books/biology-2e/pages/4-4-the-endomembrane-system-and-proteins"
+     }
+    ]
+   },
+   "h": "cells/#animal/er"
+  },
+  {
+   "id": "gap-golgi",
+   "sec": "cells",
+   "q": "quiz.q.partCloze",
+   "v": {
+    "text": "The ____ is a stack of flattened membrane sacs that sorts, tags and packages proteins and lipids."
+   },
+   "o": [
+    "Golgi apparatus",
+    "Endoplasmic reticulum",
+    "Cell wall",
+    "Cell body"
+   ],
+   "why": {
+    "t": "The Golgi apparatus is a stack of flattened membrane sacs that sorts, tags and packages proteins and lipids.",
+    "src": [
+     {
+      "id": "cells:bio-4-4",
+      "t": "Biology 2e, section 4.4 The Endomembrane System and Proteins",
+      "u": "https://openstax.org/books/biology-2e/pages/4-4-the-endomembrane-system-and-proteins"
+     }
+    ]
+   },
+   "h": "cells/#animal/golgi"
+  },
+  {
+   "id": "gap-lysosome",
+   "sec": "cells",
+   "q": "quiz.q.partCloze",
+   "v": {
+    "text": "____ are the cell's digestive sacs, with enzymes that break down proteins, complex sugars, lipids, nucleic acids and worn-out organelles."
+   },
+   "o": [
+    "Lysosomes",
+    "Cell body",
+    "Axon terminals",
+    "Cell membrane"
+   ],
+   "why": {
+    "t": "Lysosomes are the cell's digestive sacs, with enzymes that break down proteins, complex sugars, lipids, nucleic acids and worn-out organelles.",
+    "src": [
+     {
+      "id": "cells:bio-4-3",
+      "t": "Biology 2e, section 4.3 Eukaryotic Cells",
+      "u": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+     }
+    ]
+   },
+   "h": "cells/#animal/lysosome"
+  },
+  {
+   "id": "gap-cytoskeleton",
+   "sec": "cells",
+   "q": "quiz.q.partCloze",
+   "v": {
+    "text": "The ____ is a network of protein fibres that holds the cell's shape, keeps some organelles in place and lets the cell and its contents move."
+   },
+   "o": [
+    "Cytoskeleton",
+    "Axon",
+    "Nuclei",
+    "Nucleus"
+   ],
+   "why": {
+    "t": "The cytoskeleton is a network of protein fibres that holds the cell's shape, keeps some organelles in place and lets the cell and its contents move.",
+    "src": [
+     {
+      "id": "cells:bio-4-5",
+      "t": "Biology 2e, section 4.5 The Cytoskeleton",
+      "u": "https://openstax.org/books/biology-2e/pages/4-5-the-cytoskeleton"
+     }
+    ]
+   },
+   "h": "cells/#animal/cytoskeleton"
+  },
+  {
+   "id": "gap-chloroplast",
+   "sec": "cells",
+   "q": "quiz.q.partCloze",
+   "v": {
+    "text": "____ carry out photosynthesis, using light energy, carbon dioxide and water to make sugar and oxygen."
+   },
+   "o": [
+    "Chloroplasts",
+    "Myofibrils",
+    "Mitochondria",
+    "Cytoskeleton"
+   ],
+   "why": {
+    "t": "Chloroplasts carry out photosynthesis, using light energy, carbon dioxide and water to make sugar and oxygen.",
+    "src": [
+     {
+      "id": "cells:bio-4-3",
+      "t": "Biology 2e, section 4.3 Eukaryotic Cells",
+      "u": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+     }
+    ]
+   },
+   "h": "cells/#plant/chloroplast"
+  },
+  {
+   "id": "gap-cellwall",
+   "sec": "cells",
+   "q": "quiz.q.partCloze",
+   "v": {
+    "text": "The ____ is a rigid layer outside the membrane that protects the cell, supports it and gives it its shape."
+   },
+   "o": [
+    "Cell wall",
+    "Ribosomes",
+    "Cytoskeleton",
+    "Flagellum"
+   ],
+   "why": {
+    "t": "The cell wall is a rigid layer outside the membrane that protects the cell, supports it and gives it its shape.",
+    "src": [
+     {
+      "id": "cells:bio-4-3",
+      "t": "Biology 2e, section 4.3 Eukaryotic Cells",
+      "u": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+     }
+    ]
+   },
+   "h": "cells/#plant/cellwall"
+  },
+  {
+   "id": "gap-vacuole",
+   "sec": "cells",
+   "q": "quiz.q.partCloze",
+   "v": {
+    "text": "The ____ takes up most of a plant cell's volume and helps control how much water the cell holds."
+   },
+   "o": [
+    "Large central vacuole",
+    "Flagellum",
+    "Myelin sheath",
+    "Myofibrils"
+   ],
+   "why": {
+    "t": "The large central vacuole takes up most of a plant cell's volume and helps control how much water the cell holds.",
+    "src": [
+     {
+      "id": "cells:bio-4-3",
+      "t": "Biology 2e, section 4.3 Eukaryotic Cells",
+      "u": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+     }
+    ]
+   },
+   "h": "cells/#plant/vacuole"
+  },
+  {
+   "id": "gap-soma",
+   "sec": "cells",
+   "q": "quiz.q.partCloze",
+   "v": {
+    "text": "The ____, also called the soma, holds the nucleus and most of the neuron's major organelles."
+   },
+   "o": [
+    "Cell body",
+    "Lysosomes",
+    "Large central vacuole",
+    "Axon"
+   ],
+   "why": {
+    "t": "The cell body, also called the soma, holds the nucleus and most of the neuron's major organelles.",
+    "src": [
+     {
+      "id": "cells:ap-12-2",
+      "t": "Anatomy and Physiology 2e, section 12.2 Nervous Tissue",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-2-nervous-tissue"
+     }
+    ]
+   },
+   "h": "cells/#neuron/soma"
+  },
+  {
+   "id": "gap-dendrites",
+   "sec": "cells",
+   "q": "quiz.q.partCloze",
+   "v": {
+    "text": "____ are branched extensions that receive information from other neurons at contact points called synapses."
+   },
+   "o": [
+    "Dendrites",
+    "Cytoskeleton",
+    "Nucleoid",
+    "Myelin sheath"
+   ],
+   "why": {
+    "t": "Dendrites are branched extensions that receive information from other neurons at contact points called synapses.",
+    "src": [
+     {
+      "id": "cells:ap-12-2",
+      "t": "Anatomy and Physiology 2e, section 12.2 Nervous Tissue",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-2-nervous-tissue"
+     }
+    ]
+   },
+   "h": "cells/#neuron/dendrites"
+  },
+  {
+   "id": "gap-axon",
+   "sec": "cells",
+   "q": "quiz.q.partCloze",
+   "v": {
+    "text": "The ____ is a single long fibre that leaves the cell body and reaches toward the cells it signals to."
+   },
+   "o": [
+    "Axon",
+    "Sarcoplasmic reticulum",
+    "Ribosomes",
+    "Chloroplasts"
+   ],
+   "why": {
+    "t": "The axon is a single long fibre that leaves the cell body and reaches toward the cells it signals to.",
+    "src": [
+     {
+      "id": "cells:ap-12-2",
+      "t": "Anatomy and Physiology 2e, section 12.2 Nervous Tissue",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-2-nervous-tissue"
+     }
+    ]
+   },
+   "h": "cells/#neuron/axon"
+  },
+  {
+   "id": "gap-myofibrils",
+   "sec": "cells",
+   "q": "quiz.q.partCloze",
+   "v": {
+    "text": "____ are strands that run the whole length of the cell, built from repeating units called sarcomeres."
+   },
+   "o": [
+    "Myofibrils",
+    "Myelin sheath",
+    "Sarcoplasmic reticulum",
+    "Ribosomes"
+   ],
+   "why": {
+    "t": "Myofibrils are strands that run the whole length of the cell, built from repeating units called sarcomeres.",
+    "src": [
+     {
+      "id": "cells:ap-10-2",
+      "t": "Anatomy and Physiology 2e, section 10.2 Skeletal Muscle",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/10-2-skeletal-muscle"
+     }
+    ]
+   },
+   "h": "cells/#muscle/myofibrils"
+  },
+  {
+   "id": "gap-sr",
+   "sec": "cells",
+   "q": "quiz.q.partCloze",
+   "v": {
+    "text": "The ____ is a special smooth endoplasmic reticulum that stores, releases and takes back calcium ions."
+   },
+   "o": [
+    "Sarcoplasmic reticulum",
+    "Lysosomes",
+    "Large central vacuole",
+    "Dendrites"
+   ],
+   "why": {
+    "t": "The sarcoplasmic reticulum is a special smooth endoplasmic reticulum that stores, releases and takes back calcium ions.",
+    "src": [
+     {
+      "id": "cells:ap-10-2",
+      "t": "Anatomy and Physiology 2e, section 10.2 Skeletal Muscle",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/10-2-skeletal-muscle"
+     }
+    ]
+   },
+   "h": "cells/#muscle/sr"
+  },
+  {
+   "id": "cell-chloroplast",
+   "sec": "cells",
+   "q": "quiz.q.cellHas",
+   "v": {
+    "part": "chloroplasts"
+   },
+   "o": [
+    "Plant cell",
+    "Animal cell",
+    "Muscle cell (fibre)",
+    "Bacterial cell"
+   ],
+   "why": {
+    "t": "Chloroplasts carry out photosynthesis, using light energy, carbon dioxide and water to make sugar and oxygen.",
+    "src": [
+     {
+      "id": "cells:bio-4-3",
+      "t": "Biology 2e, section 4.3 Eukaryotic Cells",
+      "u": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+     }
+    ]
+   },
+   "h": "cells/#plant/chloroplast"
+  },
+  {
+   "id": "cell-vacuole",
+   "sec": "cells",
+   "q": "quiz.q.cellHas",
+   "v": {
+    "part": "large central vacuole"
+   },
+   "o": [
+    "Plant cell",
+    "Bacterial cell",
+    "Animal cell",
+    "Nerve cell (neuron)"
+   ],
+   "why": {
+    "t": "The large central vacuole takes up most of a plant cell's volume and helps control how much water the cell holds.",
+    "src": [
+     {
+      "id": "cells:bio-4-3",
+      "t": "Biology 2e, section 4.3 Eukaryotic Cells",
+      "u": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+     }
+    ]
+   },
+   "h": "cells/#plant/vacuole"
+  },
+  {
+   "id": "cell-nucleoid",
+   "sec": "cells",
+   "q": "quiz.q.cellHas",
+   "v": {
+    "part": "nucleoid"
+   },
+   "o": [
+    "Bacterial cell",
+    "Red blood cell",
+    "Plant cell",
+    "Muscle cell (fibre)"
+   ],
+   "why": {
+    "t": "A bacterium has no nucleus, so its DNA sits in a central region called the nucleoid.",
+    "src": [
+     {
+      "id": "cells:bio-4-2",
+      "t": "Biology 2e, section 4.2 Prokaryotic Cells",
+      "u": "https://openstax.org/books/biology-2e/pages/4-2-prokaryotic-cells"
+     }
+    ]
+   },
+   "h": "cells/#bacterium/nucleoid"
+  },
+  {
+   "id": "cell-myelin",
+   "sec": "cells",
+   "q": "quiz.q.cellHas",
+   "v": {
+    "part": "myelin sheath"
+   },
+   "o": [
+    "Nerve cell (neuron)",
+    "Muscle cell (fibre)",
+    "Plant cell",
+    "Red blood cell"
+   ],
+   "why": {
+    "t": "Many axons are wrapped in myelin, an insulating layer that is made by glial cells, not by the neuron itself.",
+    "src": [
+     {
+      "id": "cells:ap-12-2",
+      "t": "Anatomy and Physiology 2e, section 12.2 Nervous Tissue",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-2-nervous-tissue"
+     }
+    ]
+   },
+   "h": "cells/#neuron/myelin"
+  },
+  {
+   "id": "cell-dendrites",
+   "sec": "cells",
+   "q": "quiz.q.cellHas",
+   "v": {
+    "part": "dendrites"
+   },
+   "o": [
+    "Nerve cell (neuron)",
+    "Plant cell",
+    "Bacterial cell",
+    "Red blood cell"
+   ],
+   "why": {
+    "t": "Dendrites are branched extensions that receive information from other neurons at contact points called synapses.",
+    "src": [
+     {
+      "id": "cells:ap-12-2",
+      "t": "Anatomy and Physiology 2e, section 12.2 Nervous Tissue",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-2-nervous-tissue"
+     }
+    ]
+   },
+   "h": "cells/#neuron/dendrites"
+  },
+  {
+   "id": "cell-myofibrils",
+   "sec": "cells",
+   "q": "quiz.q.cellHas",
+   "v": {
+    "part": "myofibrils"
+   },
+   "o": [
+    "Muscle cell (fibre)",
+    "Bacterial cell",
+    "Red blood cell",
+    "Nerve cell (neuron)"
+   ],
+   "why": {
+    "t": "Myofibrils are strands that run the whole length of the cell, built from repeating units called sarcomeres.",
+    "src": [
+     {
+      "id": "cells:ap-10-2",
+      "t": "Anatomy and Physiology 2e, section 10.2 Skeletal Muscle",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/10-2-skeletal-muscle"
+     }
+    ]
+   },
+   "h": "cells/#muscle/myofibrils"
+  },
+  {
+   "id": "cell-sr",
+   "sec": "cells",
+   "q": "quiz.q.cellHas",
+   "v": {
+    "part": "sarcoplasmic reticulum"
+   },
+   "o": [
+    "Muscle cell (fibre)",
+    "Red blood cell",
+    "Nerve cell (neuron)",
+    "Plant cell"
+   ],
+   "why": {
+    "t": "The sarcoplasmic reticulum is a special smooth endoplasmic reticulum that stores, releases and takes back calcium ions.",
+    "src": [
+     {
+      "id": "cells:ap-10-2",
+      "t": "Anatomy and Physiology 2e, section 10.2 Skeletal Muscle",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/10-2-skeletal-muscle"
+     }
+    ]
+   },
+   "h": "cells/#muscle/sr"
+  },
+  {
+   "id": "gap-paramecium",
+   "sec": "organisms",
+   "q": "quiz.q.orgCloze",
+   "v": {
+    "text": "____ is a single cell 170 to 330 micrometres long, so the biggest are about a third of a millimetre."
+   },
+   "o": [
+    "Paramecium",
+    "Amoeba",
+    "Diatom",
+    "Euglena"
+   ],
+   "why": {
+    "t": "Paramecium caudatum is a single cell 170 to 330 micrometres long, so the biggest are about a third of a millimetre.",
+    "src": [
+     {
+      "id": "microscope:neupane-pcaudatum",
+      "t": "Paramecium caudatum: Habitat, Culture, Structure, Locomotion",
+      "u": "https://microbenotes.com/paramecium-caudatum-habitat-culture-structure-locomotion/"
+     },
+     {
+      "id": "microscope:kreutz-pcaudatum",
+      "t": "Paramecium caudatum Ehrenberg, 1833",
+      "u": "https://realmicrolife.com/paramecium-caudatum/"
+     }
+    ]
+   },
+   "h": "microscope/#paramecium"
+  },
+  {
+   "id": "gap-amoeba",
+   "sec": "organisms",
+   "q": "quiz.q.orgCloze",
+   "v": {
+    "text": "A moving ____ is 160 to 760 micrometres long, with one nucleus 22 to 62 micrometres across."
+   },
+   "o": [
+    "Amoeba",
+    "Euglena",
+    "Paramecium",
+    "Yeast"
+   ],
+   "why": {
+    "t": "A moving Amoeba proteus is 160 to 760 micrometres long, with one nucleus 22 to 62 micrometres across.",
+    "src": [
+     {
+      "id": "microscope:kreutz-aproteus",
+      "t": "Amoeba proteus",
+      "u": "https://realmicrolife.com/amoeba-proteus/"
+     },
+     {
+      "id": "microscope:siemensma-aproteus",
+      "t": "Amoeba proteus",
+      "u": "https://arcella.nl/amoeba-proteus/"
+     }
+    ]
+   },
+   "h": "microscope/#amoeba"
+  },
+  {
+   "id": "gap-euglena",
+   "sec": "organisms",
+   "q": "quiz.q.orgCloze",
+   "v": {
+    "text": "____ is a single cell up to about 100 micrometres long that can squeeze itself into a ball about 20 micrometres across."
+   },
+   "o": [
+    "Euglena",
+    "Bacteria",
+    "Amoeba",
+    "Diatom"
+   ],
+   "why": {
+    "t": "Euglena gracilis is a single cell up to about 100 micrometres long that can squeeze itself into a ball about 20 micrometres across.",
+    "src": [
+     {
+      "id": "microscope:fbpb-egracilis",
+      "t": "Euglena gracilis Klebs, 1883",
+      "u": "https://freshwaterbiodiversity.org.bd/?p=12482"
+     },
+     {
+      "id": "microscope:hader2022",
+      "t": "Euglena, a Gravitactic Flagellate of Multiple Usages",
+      "u": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9605500"
+     }
+    ]
+   },
+   "h": "microscope/#euglena"
+  },
+  {
+   "id": "gap-bacteria",
+   "sec": "organisms",
+   "q": "quiz.q.orgCloze",
+   "v": {
+    "text": "____ come in three basic shapes: rods (bacilli), spheres (cocci) and spirals."
+   },
+   "o": [
+    "Bacteria",
+    "Yeast",
+    "Euglena",
+    "Paramecium"
+   ],
+   "why": {
+    "t": "Bacteria come in three basic shapes: rods (bacilli), spheres (cocci) and spirals.",
+    "src": [
+     {
+      "id": "microscope:kaiser-bacteria",
+      "t": "2.1: Sizes, Shapes, and Arrangements of Bacteria",
+      "u": "https://bio.libretexts.org/Bookshelves/Microbiology/Microbiology_(Kaiser)/Unit_1:_Introduction_to_Microbiology_and_Prokaryotic_Cell_Anatomy/2:_The_Prokaryotic_Cell_-_Bacteria/2.1:_Sizes_Shapes_and_Arrangements_of_Bacteria"
+     }
+    ]
+   },
+   "h": "microscope/#bacteria"
+  },
+  {
+   "id": "gap-yeast",
+   "sec": "organisms",
+   "q": "quiz.q.orgCloze",
+   "v": {
+    "text": "____ is a single cell about 5 micrometres across."
+   },
+   "o": [
+    "Yeast",
+    "Diatom",
+    "Bacteria",
+    "Amoeba"
+   ],
+   "why": {
+    "t": "Baker's yeast, Saccharomyces cerevisiae, is a single cell about 5 micrometres across.",
+    "src": [
+     {
+      "id": "microscope:bionumbers-yeast",
+      "t": "BioNumbers BNID 101796: rule of thumb for the diameter of budding yeast",
+      "u": "https://bionumbers.hms.harvard.edu/bionumber.aspx?id=101796"
+     }
+    ]
+   },
+   "h": "microscope/#yeast"
+  },
+  {
+   "id": "gap-diatom",
+   "sec": "organisms",
+   "q": "quiz.q.orgCloze",
+   "v": {
+    "text": "____ is a ____, a single algal cell inside a shell that is basically glass, and this species is 71 to 126 micrometres long."
+   },
+   "o": [
+    "Diatom",
+    "Paramecium",
+    "Yeast",
+    "Amoeba"
+   ],
+   "why": {
+    "t": "Pinnularia is a diatom, a single algal cell inside a shell that is basically glass, and this species is 71 to 126 micrometres long.",
+    "src": [
+     {
+      "id": "microscope:dona-pinnularia",
+      "t": "Pinnularia socialis",
+      "u": "https://diatoms.org/species/229152/pinnularia-socialis"
+     },
+     {
+      "id": "microscope:exeter-diatom",
+      "t": "The Mystery of Diatom Movement Uncovered in New Study",
+      "u": "https://news.exeter.ac.uk/faculty-of-health-and-life-sciences/the-mystery-of-diatom-movement-uncovered-in-new-study/"
+     }
+    ]
+   },
+   "h": "microscope/#diatom"
+  },
+  {
+   "id": "org-cilia",
+   "sec": "organisms",
+   "q": "quiz.q.orgHas",
+   "v": {
+    "structure": "cilia"
+   },
+   "o": [
+    "Paramecium",
+    "Amoeba",
+    "Euglena",
+    "Yeast"
+   ],
+   "why": {
+    "t": "Between 10,000 and 14,000 cilia cover it and beat in waves, pushing it along at about one millimetre per second.",
+    "src": [
+     {
+      "id": "microscope:neupane-pcaudatum",
+      "t": "Paramecium caudatum: Habitat, Culture, Structure, Locomotion",
+      "u": "https://microbenotes.com/paramecium-caudatum-habitat-culture-structure-locomotion/"
+     },
+     {
+      "id": "microscope:jana2012",
+      "t": "Paramecium swimming in capillary tube",
+      "u": "https://arxiv.org/abs/1012.4812"
+     }
+    ]
+   },
+   "h": "microscope/#paramecium"
+  },
+  {
+   "id": "org-pseudopodia",
+   "sec": "organisms",
+   "q": "quiz.q.orgHas",
+   "v": {
+    "structure": "pseudopodia"
+   },
+   "o": [
+    "Amoeba",
+    "Euglena",
+    "Yeast",
+    "Diatom"
+   ],
+   "why": {
+    "t": "It has no fixed shape and usually pushes out several pseudopodia at once, one bigger than the rest.",
+    "src": [
+     {
+      "id": "microscope:siemensma-aproteus",
+      "t": "Amoeba proteus",
+      "u": "https://arcella.nl/amoeba-proteus/"
+     },
+     {
+      "id": "microscope:kreutz-aproteus",
+      "t": "Amoeba proteus",
+      "u": "https://realmicrolife.com/amoeba-proteus/"
+     }
+    ]
+   },
+   "h": "microscope/#amoeba"
+  },
+  {
+   "id": "org-eyespot",
+   "sec": "organisms",
+   "q": "quiz.q.orgHas",
+   "v": {
+    "structure": "eyespot"
+   },
+   "o": [
+    "Euglena",
+    "Yeast",
+    "Diatom",
+    "Paramecium"
+   ],
+   "why": {
+    "t": "A red eyespot sits near the base of the flagellum it swims with.",
+    "src": [
+     {
+      "id": "microscope:hader2022",
+      "t": "Euglena, a Gravitactic Flagellate of Multiple Usages",
+      "u": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9605500"
+     }
+    ]
+   },
+   "h": "microscope/#euglena"
+  },
+  {
+   "id": "org-raphe",
+   "sec": "organisms",
+   "q": "quiz.q.orgHas",
+   "v": {
+    "structure": "raphe"
+   },
+   "o": [
+    "Diatom",
+    "Yeast",
+    "Paramecium",
+    "Euglena"
+   ],
+   "why": {
+    "t": "It glides along surfaces using a slit in its shell called the raphe.",
+    "src": [
+     {
+      "id": "microscope:exeter-diatom",
+      "t": "The Mystery of Diatom Movement Uncovered in New Study",
+      "u": "https://news.exeter.ac.uk/faculty-of-health-and-life-sciences/the-mystery-of-diatom-movement-uncovered-in-new-study/"
+     }
+    ]
+   },
+   "h": "microscope/#diatom"
+  },
+  {
+   "id": "org-oral-groove",
+   "sec": "organisms",
+   "q": "quiz.q.orgHas",
+   "v": {
+    "structure": "oral groove"
+   },
+   "o": [
+    "Paramecium",
+    "Amoeba",
+    "Euglena",
+    "Yeast"
+   ],
+   "why": {
+    "t": "Cilia sweep bacteria, yeast and algae into its oral groove.",
+    "src": [
+     {
+      "id": "microscope:brette2021",
+      "t": "Integrative Neuroscience of Paramecium, a \"Swimming Neuron\"",
+      "u": "https://www.eneuro.org/content/8/3/eneuro.0018-21.2021"
+     },
+     {
+      "id": "microscope:neupane-pcaudatum",
+      "t": "Paramecium caudatum: Habitat, Culture, Structure, Locomotion",
+      "u": "https://microbenotes.com/paramecium-caudatum-habitat-culture-structure-locomotion/"
+     }
+    ]
+   },
+   "h": "microscope/#paramecium"
+  }
+ ]
+}

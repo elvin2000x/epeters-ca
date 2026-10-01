@@ -1,0 +1,117 @@
+{
+  "_note": "Every fact in spark.json and every constant in hh.js points at keys here. 'checked' says what was read and when. Raw copies of the pages read are in .refs/spark/ (tools/spark_fetch.py). Model outputs (threshold, peak) are computed live by hh.js and labelled as model results on the page.",
+  "sources": {
+    "hh-1952": {
+      "type": "primary paper",
+      "cite": "Hodgkin, A. L. and Huxley, A. F. (1952). A quantitative description of membrane current and its application to conduction and excitation in nerve. J. Physiol. 117, 500-544.",
+      "doi": "10.1113/jphysiol.1952.sp004764",
+      "url": "https://doi.org/10.1113/jphysiol.1952.sp004764",
+      "checked": "2026-10-01, Crossref and Europe PMC records read (PMID 12991237): title, authors, J Physiol 117(4), August 1952. The paper has no abstract online and the PMC scan sits behind a bot check, so the equations and constants were read from two curated transcriptions of this paper: hh-cellml and hh-mod."
+    },
+    "hh-cellml": {
+      "type": "model repository",
+      "cite": "Physiome Model Repository: Hodgkin and Huxley 1952 squid axon model (CellML), curated and unit checked.",
+      "url": "https://models.physiomeproject.org/workspace/hodgkin_huxley_1952/rawfile/HEAD/hodgkin_huxley_1952.cellml",
+      "checked": "2026-10-01, file read: Cm 1 uF/cm2, g_Na 120, g_K 36, g_L 0.3 mS/cm2; E_Na = E_R + 115 mV, E_K = E_R - 12 mV, E_L = E_R + 10.613 mV; the model cites Hodgkin and Huxley 1952, J Physiol 117, 500-544, PubMed 12991237, giant nerve fibre of a squid."
+    },
+    "hh-mod": {
+      "type": "model source code",
+      "cite": "NEURON simulator, hh.mod: squid sodium, potassium and leak channels (the original Hodgkin-Huxley treatment), S. W. Jaslove 1992.",
+      "url": "https://raw.githubusercontent.com/neuronsimulator/nrn/master/src/nrnoc/hh.mod",
+      "checked": "2026-10-01, file read: membrane voltage in absolute mV, polarity reversed from the original HH convention and shifted to a resting potential of -65 mV; gnabar 0.12, gkbar 0.036, gl 0.0003 S/cm2; rate functions alpha_m = 0.1 vtrap(-(v+40),10), beta_m = 4 exp(-(v+65)/18), alpha_h = 0.07 exp(-(v+65)/20), beta_h = 1/(exp(-(v+35)/10)+1), alpha_n = 0.01 vtrap(-(v+55),10), beta_n = 0.125 exp(-(v+65)/80); squid temperature 6.3 C."
+    },
+    "ap-12-4": {
+      "type": "textbook",
+      "cite": "OpenStax Anatomy and Physiology 2e, section 12.4 The Action Potential.",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-4-the-action-potential",
+      "checked": "2026-10-01, page text read: Na/K pump uses ATP (an ATPase) and moves ions against their gradients; Na+ outside is 10 times the inside; resting membrane potential -70 mV, most commonly used value, varies between cells; threshold -55 mV; peak +30 mV; a 100 mV change; all or none, a stronger stimulus does not make a bigger action potential, stronger stimuli start more of them; voltage-gated Na+ channel has an activation gate and an inactivation gate that closes after a fraction of a millisecond; voltage-gated K+ channel has one gate and opens more slowly; hyperpolarizing overshoot because K+ channels close late; all within about 2 milliseconds; absolute refractory period from the Na+ inactivation gate, relative refractory period needs a stronger stimulus; continuous conduction in unmyelinated axons, saltatory conduction in myelinated axons (saltare, to leap); a wider axon conducts faster."
+    },
+    "bio-35-2": {
+      "type": "textbook",
+      "cite": "OpenStax Biology 2e, section 35.2 How Neurons Communicate, including Table 35.1.",
+      "url": "https://openstax.org/books/biology-2e/pages/35-2-how-neurons-communicate",
+      "checked": "2026-10-01, page text read: Table 35.1 ion concentrations inside and outside neurons in mM: Na+ 145 outside, 12 inside; K+ 4 outside, 155 inside; Cl- 120 outside, 4 inside; organic anions 100 inside. K+ difference dominates the resting potential. The sodium potassium pump brings two K+ in and removes three Na+ per ATP. Saltatory conduction jumps node to node."
+    },
+    "ibn-2-4": {
+      "type": "textbook",
+      "cite": "OpenStax Introduction to Behavioral Neuroscience, section 2.4 Mechanisms of Neural Signaling.",
+      "url": "https://openstax.org/books/introduction-behavioral-neuroscience/pages/2-4-mechanisms-of-neural-signaling",
+      "checked": "2026-10-01, page text read: resting potential around -60 to -80 mV depending on the neuron, typically around -65 mV; rest is produced by leak channels (mainly leak K+) and concentration gradients made by pumps; action potential rises to about +40 mV in about 0.5 ms in a typical cortical neuron, falls, undershoots 5 to 10 mV below rest; myelin lets current spread fast but leaks over about 1 mm, so it is wrapped in bands with nodes of Ranvier crowded with voltage-gated channels; saltatory conduction reaches up to 150 m/s; unmyelinated axons typically 0.5 to 10 m/s; nowhere near the speed of light."
+    },
+    "ibn-9-1": {
+      "type": "textbook",
+      "cite": "OpenStax Introduction to Behavioral Neuroscience, section 9.1 Somatosensory Receptors.",
+      "url": "https://openstax.org/books/introduction-behavioral-neuroscience/pages/9-1-somatosensory-receptors",
+      "checked": "2026-10-01, page text read: the larger the diameter, the faster the conduction; A alpha 12 to 20 um, 72 to 120 m/s; A beta 6 to 12 um, 36 to 72 m/s; A delta 1 to 6 um, 4 to 36 m/s; unmyelinated C fibres 0.2 to 1.5 um, 0.4 to 2 m/s; a racing car (120 m/s) against fast walking (2 m/s)."
+    },
+    "phys-20-7": {
+      "type": "textbook",
+      "cite": "OpenStax College Physics 2e, section 20.7 Nerve Conduction and Electrocardiograms.",
+      "url": "https://openstax.org/books/college-physics-2e/pages/20-7-nerve-conduction-electrocardiograms",
+      "checked": "2026-10-01, page text read: only small fractions of the ions move, so the cell can fire many hundreds of times without depleting the concentration differences; active transport slowly maintains them; the membrane is only about 8 nm thick and the field across it is on the order of 11 MV/m; about 25 percent of the energy used by cells goes to creating and maintaining these potentials; the impulse in an unmyelinated cell moves slowly, about 1 m/s."
+    },
+    "chem-17-4": {
+      "type": "textbook",
+      "cite": "OpenStax Chemistry 2e, section 17.4 Potential, Free Energy, and Equilibrium (the Nernst equation).",
+      "url": "https://openstax.org/books/chemistry-2e/pages/17-4-potential-free-energy-and-equilibrium",
+      "checked": "2026-10-01, page text read: the Nernst equation gives potentials under nonstandard conditions from RT/nF and the log of concentrations; Faraday's constant is the charge of one mole of electrons, 96,485 C/mol."
+    },
+    "nist-r": {
+      "type": "reference data",
+      "cite": "NIST CODATA: molar gas constant R.",
+      "url": "https://physics.nist.gov/cgi-bin/cuu/Value?r",
+      "checked": "2026-10-01, page read: 8.314 462 618... J/(mol K), exact."
+    },
+    "nist-f": {
+      "type": "reference data",
+      "cite": "NIST CODATA: Faraday constant F.",
+      "url": "https://physics.nist.gov/cgi-bin/cuu/Value?f",
+      "checked": "2026-10-01, page read: 96 485.332 12... C/mol, exact."
+    },
+    "ap-1-5": {
+      "type": "textbook",
+      "cite": "OpenStax Anatomy and Physiology 2e, section 1.5 Homeostasis.",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-5-homeostasis",
+      "checked": "2026-10-01, page text read: the set point for normal human body temperature is approximately 37 C (98.6 F)."
+    },
+    "ap-10-3": {
+      "type": "textbook",
+      "cite": "OpenStax Anatomy and Physiology 2e, section 10.3 Muscle Fiber Contraction and Relaxation.",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/10-3-muscle-fiber-contraction-and-relaxation",
+      "checked": "2026-10-01, page text read: contraction of a muscle fibre begins with a signal, the neurotransmitter ACh, from the motor neuron; Na+ enters, the fibre membrane depolarizes and an action potential spreads along it; myosin heads then pull the thin filaments (cross-bridge cycle), using ATP."
+    },
+    "doyle-1998": {
+      "type": "primary paper",
+      "cite": "Doyle, D. A., Morais Cabral, J., Pfuetzner, R. A. et al. (1998). The structure of the potassium channel: molecular basis of K+ conduction and selectivity. Science 280, 69-77.",
+      "doi": "10.1126/science.280.5360.69",
+      "url": "https://doi.org/10.1126/science.280.5360.69",
+      "checked": "2026-10-01, abstract read (Europe PMC, PMID 9525859): KcsA from Streptomyces lividans, X-ray data to 3.2 angstroms; four identical subunits make an inverted teepee cradling the selectivity filter at its outer end; the filter is only 12 angstroms long, the rest of the pore wider and lined with water-avoiding amino acids, with a large water-filled cavity; main chain carbonyl oxygens from the K+ channel signature sequence line the filter, held open to coordinate K+ but not the smaller Na+; two K+ ions in the filter about 7.5 angstroms apart, their repulsion helps conduction."
+    },
+    "rcsb-1BL8": {
+      "type": "PDB entry",
+      "cite": "RCSB PDB 1BL8, Potassium channel (KcsA) from Streptomyces lividans.",
+      "url": "https://www.rcsb.org/structure/1BL8",
+      "file": "../molecules/data/1BL8.cif",
+      "checked": "2026-10-01, RCSB Data API entry read (deposited 1998-07-23, released 1998-07-29, primary citation Doyle et al. 1998) and the local mmCIF read by tools/spark_build.py: four chains A to D, 97 residues each modelled (author numbers 23 to 119), filter residues 75 to 79 read TVGYG, three K ions and one water."
+    },
+    "motm-38": {
+      "type": "educational",
+      "cite": "PDB-101 Molecule of the Month: Potassium Channels (February 2003).",
+      "url": "https://pdb101.rcsb.org/motm/38",
+      "checked": "2026-10-01, page read: one sodium ion passes for every ten thousand potassium ions; in water potassium is cushioned by a shell of water; in the channel it sheds the shell and touches channel oxygens spaced to mimic it; sodium is too small to fit those oxygens and stays in its water shell."
+    },
+    "measured-1bl8": {
+      "type": "measured here",
+      "cite": "Measured by tools/spark_build.py from the local 1BL8 file (coordinates only moved and turned).",
+      "url": "https://www.rcsb.org/structure/1BL8",
+      "file": "kcsa.json",
+      "checked": "2026-10-01: 16 main chain oxygens of residues 75 to 79 sit within 4 angstroms of the pore axis, spread over 10.2 angstroms along it; the 3 K ions sit on the axis, gaps 3.3 and 7.3 angstroms."
+    },
+    "model-run": {
+      "type": "computed here",
+      "cite": "Computed live in this page by hh.js (and printed by tools/spark_hh_check.mjs) from the hh-mod and hh-cellml constants.",
+      "url": "hh.js",
+      "checked": "2026-10-01: with a 1 ms pulse the model fires above about 6.9 uA/cm2 and stays below threshold under it; spikes peak at about +36 to +41 mV and dip to about -76 mV; a second pulse within about 5 ms fails even at 200 uA/cm2; E_K -97.7 mV and E_Na +66.6 mV at 37 C from Table 35.1."
+    }
+  }
+}

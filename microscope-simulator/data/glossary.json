@@ -1,0 +1,1776 @@
+{
+ "about": "Built by tools/build_glossary.py. Do not edit by hand; rerun the script. 'written' marks a paraphrase of the cited source rather than a reused sentence.",
+ "terms": [
+  {
+   "id": "organelle",
+   "term": "Organelle",
+   "match": "\\borganelles?\\b",
+   "case": false,
+   "def": {
+    "t": "A compartment wrapped in membrane inside a eukaryotic cell, with its own job, like the nucleus or a mitochondrion.",
+    "src": [
+     {
+      "id": "cells:bio-4-3",
+      "t": "Biology 2e, section 4.3 Eukaryotic Cells",
+      "u": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+     }
+    ],
+    "written": true
+   },
+   "href": "cells/#animal"
+  },
+  {
+   "id": "atp",
+   "term": "ATP",
+   "match": "\\bATP\\b",
+   "case": true,
+   "def": {
+    "t": "ATP (adenosine triphosphate) is the cell's main energy currency: splitting off its last phosphate releases energy that powers other reactions.",
+    "src": [
+     {
+      "id": "molecules:os-6-4",
+      "t": "OpenStax Biology 2e, section 6.4 ATP: Adenosine Triphosphate",
+      "u": "https://openstax.org/books/biology-2e/pages/6-4-atp-adenosine-triphosphate"
+     }
+    ],
+    "written": true
+   },
+   "href": "molecules/#atp"
+  },
+  {
+   "id": "protein",
+   "term": "Protein",
+   "match": "\\bproteins?\\b",
+   "case": false,
+   "def": {
+    "t": "A large molecule made of one or more chains of amino acids, folded into the shape that lets it do its job.",
+    "src": [
+     {
+      "id": "molecules:os-3-4",
+      "t": "OpenStax Biology 2e, section 3.4 Proteins",
+      "u": "https://openstax.org/books/biology-2e/pages/3-4-proteins"
+     }
+    ],
+    "written": true
+   },
+   "href": "molecules/#actin"
+  },
+  {
+   "id": "amino-acid",
+   "term": "Amino acid",
+   "match": "\\bamino acids?\\b",
+   "case": false,
+   "def": {
+    "t": "Amino acids are the building blocks of proteins, and proteins use 20 common ones.",
+    "src": [
+     {
+      "id": "molecules:os-3-4",
+      "t": "OpenStax Biology 2e, section 3.4 Proteins",
+      "u": "https://openstax.org/books/biology-2e/pages/3-4-proteins"
+     }
+    ]
+   },
+   "href": "molecules/#glycine"
+  },
+  {
+   "id": "enzyme",
+   "term": "Enzyme",
+   "match": "\\benzymes?\\b",
+   "case": false,
+   "def": {
+    "t": "A protein that speeds up a chemical reaction in a cell without being used up by it.",
+    "src": [
+     {
+      "id": "extra:os-6-5",
+      "t": "OpenStax Biology 2e, section 6.5 Enzymes",
+      "u": "https://openstax.org/books/biology-2e/pages/6-5-enzymes"
+     }
+    ],
+    "written": true
+   },
+   "href": "molecules/#lysozyme"
+  },
+  {
+   "id": "membrane",
+   "term": "Cell membrane",
+   "match": "\\b(?:cell |plasma )?membranes?\\b",
+   "case": false,
+   "def": {
+    "t": "The cell membrane is a double layer of phospholipids with proteins set into it, and it separates the inside of the cell from its surroundings.",
+    "src": [
+     {
+      "id": "cells:bio-4-3",
+      "t": "Biology 2e, section 4.3 Eukaryotic Cells",
+      "u": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+     }
+    ]
+   },
+   "href": "cells/#animal/membrane"
+  },
+  {
+   "id": "eukaryote",
+   "term": "Eukaryote",
+   "match": "\\beukaryot(?:e|es|ic)\\b",
+   "case": false,
+   "def": {
+    "t": "A living thing whose cells have a nucleus and other organelles wrapped in membrane. Animals, plants, fungi and protists are eukaryotes.",
+    "src": [
+     {
+      "id": "cells:bio-4-3",
+      "t": "Biology 2e, section 4.3 Eukaryotic Cells",
+      "u": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+     }
+    ],
+    "written": true
+   },
+   "href": "cells/#animal"
+  },
+  {
+   "id": "prokaryote",
+   "term": "Prokaryote",
+   "match": "\\bprokaryot(?:e|es|ic)\\b",
+   "case": false,
+   "def": {
+    "t": "A mostly single-celled living thing with no nucleus and no other organelles wrapped in membrane, such as a bacterium.",
+    "src": [
+     {
+      "id": "cells:bio-4-2",
+      "t": "Biology 2e, section 4.2 Prokaryotic Cells",
+      "u": "https://openstax.org/books/biology-2e/pages/4-2-prokaryotic-cells"
+     }
+    ],
+    "written": true
+   },
+   "href": "cells/#bacterium"
+  },
+  {
+   "id": "nucleus",
+   "term": "Nucleus (of a cell)",
+   "match": "\\bnucle(?:us|i)\\b",
+   "case": false,
+   "def": {
+    "t": "The nucleus holds the cell's DNA and directs the making of ribosomes and proteins.",
+    "src": [
+     {
+      "id": "cells:bio-4-3",
+      "t": "Biology 2e, section 4.3 Eukaryotic Cells",
+      "u": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+     }
+    ]
+   },
+   "href": "cells/#animal/nucleus",
+   "scope": [
+    "home",
+    "cells",
+    "microscope",
+    "molecules",
+    "muscle",
+    "paths",
+    "lab",
+    "processes",
+    "teach"
+   ]
+  },
+  {
+   "id": "atomic-nucleus",
+   "term": "Nucleus (of an atom)",
+   "match": "\\bnucle(?:us|i)\\b",
+   "case": false,
+   "def": {
+    "t": "The tiny, dense centre of an atom, made of protons and neutrons. It is about 100,000 times smaller across than the whole atom.",
+    "src": [
+     {
+      "id": "journey:os-chem-2-3",
+      "t": "OpenStax Chemistry 2e, section 2.3 Atomic Structure and Symbolism",
+      "u": "https://openstax.org/books/chemistry-2e/pages/2-3-atomic-structure-and-symbolism"
+     }
+    ],
+    "written": true
+   },
+   "href": "atom/",
+   "scope": [
+    "elements",
+    "atom"
+   ]
+  },
+  {
+   "id": "dna",
+   "term": "DNA",
+   "match": "\\bDNA\\b",
+   "case": true,
+   "def": {
+    "t": "DNA is the genetic material of living things, built from two strands wound into a double helix.",
+    "src": [
+     {
+      "id": "molecules:os-3-5",
+      "t": "OpenStax Biology 2e, section 3.5 Nucleic Acids",
+      "u": "https://openstax.org/books/biology-2e/pages/3-5-nucleic-acids"
+     }
+    ]
+   },
+   "href": "molecules/#dna"
+  },
+  {
+   "id": "proton",
+   "term": "Proton",
+   "match": "\\bprotons?\\b",
+   "case": false,
+   "def": {
+    "t": "A particle with a positive charge in an atom's nucleus. The number of protons is the element's atomic number.",
+    "src": [
+     {
+      "id": "journey:os-chem-2-3",
+      "t": "OpenStax Chemistry 2e, section 2.3 Atomic Structure and Symbolism",
+      "u": "https://openstax.org/books/chemistry-2e/pages/2-3-atomic-structure-and-symbolism"
+     }
+    ],
+    "written": true
+   },
+   "href": "elements/"
+  },
+  {
+   "id": "neutron",
+   "term": "Neutron",
+   "match": "\\bneutrons?\\b",
+   "case": false,
+   "def": {
+    "t": "A particle with no charge in an atom's nucleus, about as heavy as a proton.",
+    "src": [
+     {
+      "id": "journey:os-chem-2-3",
+      "t": "OpenStax Chemistry 2e, section 2.3 Atomic Structure and Symbolism",
+      "u": "https://openstax.org/books/chemistry-2e/pages/2-3-atomic-structure-and-symbolism"
+     }
+    ],
+    "written": true
+   },
+   "href": "atom/"
+  },
+  {
+   "id": "electron",
+   "term": "Electron",
+   "match": "\\belectrons?\\b",
+   "case": false,
+   "def": {
+    "t": "A very light particle with a negative charge that moves around an atom's nucleus.",
+    "src": [
+     {
+      "id": "journey:os-chem-2-3",
+      "t": "OpenStax Chemistry 2e, section 2.3 Atomic Structure and Symbolism",
+      "u": "https://openstax.org/books/chemistry-2e/pages/2-3-atomic-structure-and-symbolism"
+     }
+    ],
+    "written": true
+   },
+   "href": "atom/"
+  },
+  {
+   "id": "isotope",
+   "term": "Isotope",
+   "match": "\\bisotopes?\\b",
+   "case": false,
+   "def": {
+    "t": "Atoms of the same element with the same number of protons but different numbers of neutrons.",
+    "src": [
+     {
+      "id": "journey:os-chem-2-3",
+      "t": "OpenStax Chemistry 2e, section 2.3 Atomic Structure and Symbolism",
+      "u": "https://openstax.org/books/chemistry-2e/pages/2-3-atomic-structure-and-symbolism"
+     }
+    ],
+    "written": true
+   },
+   "href": "atom/"
+  },
+  {
+   "id": "orbital",
+   "term": "Orbital",
+   "match": "\\borbitals?\\b",
+   "case": false,
+   "def": {
+    "t": "A region around the nucleus where an electron is likely to be found. s, p, d and f orbitals have different shapes.",
+    "src": [
+     {
+      "id": "atom:openstax-6-3",
+      "t": "OpenStax, Chemistry 2e, section 6.3 Development of Quantum Theory (Figure 6.21, shapes of s, p, d and f orbitals; orbitals per subshell 2l + 1)",
+      "u": "https://openstax.org/books/chemistry-2e/pages/6-3-development-of-quantum-theory"
+     }
+    ],
+    "written": true
+   },
+   "href": "atom/"
+  },
+  {
+   "id": "photosynthesis",
+   "term": "Photosynthesis",
+   "match": "\\bphotosynth(?:esis|etic)\\b",
+   "case": false,
+   "def": {
+    "t": "Chloroplasts carry out photosynthesis, using light energy, carbon dioxide and water to make sugar and oxygen.",
+    "src": [
+     {
+      "id": "cells:bio-4-3",
+      "t": "Biology 2e, section 4.3 Eukaryotic Cells",
+      "u": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+     }
+    ]
+   },
+   "href": "cells/#plant/chloroplast"
+  },
+  {
+   "id": "respiration",
+   "term": "Cellular respiration",
+   "match": "\\bcellular respiration\\b",
+   "case": false,
+   "def": {
+    "t": "Cells break glucose down during cellular respiration and use the energy released to make ATP.",
+    "src": [
+     {
+      "id": "molecules:os-3-2",
+      "t": "OpenStax Biology 2e, section 3.2 Carbohydrates",
+      "u": "https://openstax.org/books/biology-2e/pages/3-2-carbohydrates"
+     }
+    ]
+   },
+   "href": "cells/#animal/mitochondrion"
+  },
+  {
+   "id": "phospholipid",
+   "term": "Phospholipid",
+   "match": "\\bphospholipids?\\b",
+   "case": false,
+   "def": {
+    "t": "A phospholipid, the molecule that cell membranes are built from, carries two fatty acid tails like this one.",
+    "src": [
+     {
+      "id": "molecules:os-3-3",
+      "t": "OpenStax Biology 2e, section 3.3 Lipids",
+      "u": "https://openstax.org/books/biology-2e/pages/3-3-lipids"
+     }
+    ]
+   },
+   "href": "molecules/#palmitic-acid"
+  },
+  {
+   "id": "flagellum",
+   "term": "Flagellum",
+   "match": "\\bflagell(?:um|a)\\b",
+   "case": false,
+   "def": {
+    "t": "Some bacteria have flagella, long threads they use to move around.",
+    "src": [
+     {
+      "id": "cells:bio-4-2",
+      "t": "Biology 2e, section 4.2 Prokaryotic Cells",
+      "u": "https://openstax.org/books/biology-2e/pages/4-2-prokaryotic-cells"
+     }
+    ]
+   },
+   "href": "cells/#bacterium/flagellum"
+  },
+  {
+   "id": "peptidoglycan",
+   "term": "Peptidoglycan",
+   "match": "\\bpeptidoglycan\\b",
+   "case": false,
+   "def": {
+    "t": "Most bacteria have a cell wall made of peptidoglycan just outside the membrane.",
+    "src": [
+     {
+      "id": "cells:bio-4-2",
+      "t": "Biology 2e, section 4.2 Prokaryotic Cells",
+      "u": "https://openstax.org/books/biology-2e/pages/4-2-prokaryotic-cells"
+     }
+    ]
+   },
+   "href": "cells/#bacterium/b-wall"
+  },
+  {
+   "id": "sarcomere",
+   "term": "Sarcomere",
+   "match": "\\bsarcomeres?\\b",
+   "case": false,
+   "def": {
+    "t": "One repeat of the stripe pattern is called a sarcomere, and it holds two kinds of overlapping filament, thick and thin, that slide past each other when the muscle shortens.",
+    "src": [
+     {
+      "id": "stops:huxley-hanson-1954",
+      "t": "Huxley, H. and Hanson, J. (1954). Changes in the cross-striations of muscle during contraction and stretch and their structural interpretation. Nature 173, 973-976",
+      "u": "https://doi.org/10.1038/173973a0"
+     },
+     {
+      "id": "stops:huxley-niedergerke-1954",
+      "t": "Huxley, A. F. and Niedergerke, R. (1954). Structural changes in muscle during contraction: interference microscopy of living muscle fibres. Nature 173, 971-973",
+      "u": "https://doi.org/10.1038/173971a0"
+     }
+    ]
+   },
+   "href": "muscle.html#s=sarcomere"
+  },
+  {
+   "id": "binary-fission",
+   "term": "Binary fission",
+   "match": "\\bbinary fission\\b",
+   "case": false,
+   "def": {
+    "t": "Binary fission is how many bacteria and some eukaryotes such as amoeba and Paramecium reproduce.",
+    "src": [
+     {
+      "id": "microscope:mbn-binary-fission",
+      "t": "Binary Fission: Steps, Types, Examples",
+      "u": "https://microbenotes.com/binary-fission/"
+     }
+    ]
+   },
+   "href": "microscope/#amoeba"
+  },
+  {
+   "id": "reynolds-number",
+   "term": "Reynolds number",
+   "match": "\\bReynolds[ -]numbers?\\b",
+   "case": false,
+   "def": {
+    "t": "A number, ρvL/μ, that compares inertia with viscosity for something moving through a fluid. Small means smooth, sticky flow; large means swirls and gliding.",
+    "src": [
+     {
+      "id": "shrink:os-cp-12-6",
+      "t": "12.6 Motion of an Object in a Viscous Fluid",
+      "u": "https://openstax.org/books/college-physics-2e/pages/12-6-motion-of-an-object-in-a-viscous-fluid"
+     },
+     {
+      "id": "shrink:purcell1977",
+      "t": "Life at low Reynolds number",
+      "u": "https://www.damtp.cam.ac.uk/user/gold/pdfs/purcell.pdf"
+     }
+    ]
+   },
+   "href": "microscope/shrink.html",
+   "from": [
+    "shrink"
+   ]
+  },
+  {
+   "id": "viscosity",
+   "term": "Viscosity",
+   "match": "\\bViscosity\\b",
+   "case": false,
+   "def": {
+    "t": "How sticky or thick a fluid is: how strongly it resists layers sliding past each other. Water at 20 °C has about 0.001 pascal seconds.",
+    "src": [
+     {
+      "id": "shrink:os-cp-12-6",
+      "t": "12.6 Motion of an Object in a Viscous Fluid",
+      "u": "https://openstax.org/books/college-physics-2e/pages/12-6-motion-of-an-object-in-a-viscous-fluid"
+     },
+     {
+      "id": "shrink:nist-water",
+      "t": "Thermophysical Properties of Fluid Systems: water at 20 °C and 0.101325 MPa",
+      "u": "https://webbook.nist.gov/cgi/fluid.cgi?Action=Data&Wide=on&ID=C7732185&Type=IsoBar&Digits=5&P=0.101325&THigh=20&TLow=20&TInc=1&RefState=DEF&TUnit=C&PUnit=MPa&DUnit=kg%2Fm3&HUnit=kJ%2Fmol&WUnit=m%2Fs&VisUnit=Pa*s&STUnit=N%2Fm"
+     }
+    ]
+   },
+   "href": "microscope/shrink.html",
+   "from": [
+    "shrink"
+   ]
+  },
+  {
+   "id": "inertia",
+   "term": "Inertia",
+   "match": "\\bInertias?\\b",
+   "case": false,
+   "def": {
+    "t": "The way a moving mass keeps moving until a force slows it. It is what lets a swimmer glide.",
+    "src": [
+     {
+      "id": "shrink:purcell1977",
+      "t": "Life at low Reynolds number",
+      "u": "https://www.damtp.cam.ac.uk/user/gold/pdfs/purcell.pdf"
+     }
+    ]
+   },
+   "href": "microscope/shrink.html",
+   "from": [
+    "shrink"
+   ],
+   "scope": [
+    "shrink"
+   ]
+  },
+  {
+   "id": "scallop-theorem",
+   "term": "Scallop theorem",
+   "match": "\\bScallop[ -]theorems?\\b",
+   "case": false,
+   "def": {
+    "t": "Purcell's rule that at low Reynolds number a motion that simply reverses itself produces no net movement.",
+    "src": [
+     {
+      "id": "shrink:purcell1977",
+      "t": "Life at low Reynolds number",
+      "u": "https://www.damtp.cam.ac.uk/user/gold/pdfs/purcell.pdf"
+     }
+    ]
+   },
+   "href": "microscope/shrink.html",
+   "from": [
+    "shrink"
+   ]
+  },
+  {
+   "id": "brownian-motion",
+   "term": "Brownian motion",
+   "match": "\\bBrownian (?:motion|jiggle)\\b",
+   "case": false,
+   "def": {
+    "t": "The random jiggling of a small particle caused by the molecules of a warm fluid hitting it from all sides.",
+    "src": [
+     {
+      "id": "shrink:os-cp-12-7",
+      "t": "12.7 Molecular Transport Phenomena: Diffusion, Osmosis, and Related Processes",
+      "u": "https://openstax.org/books/college-physics-2e/pages/12-7-molecular-transport-phenomena-diffusion-osmosis-and-related-processes"
+     },
+     {
+      "id": "shrink:berg2006",
+      "t": "Marvels of Bacterial Behavior",
+      "u": "https://dash.harvard.edu/server/api/core/bitstreams/7312037c-8102-6bd4-e053-0100007fdf3b/content"
+     }
+    ]
+   },
+   "href": "microscope/shrink.html",
+   "from": [
+    "shrink"
+   ]
+  },
+  {
+   "id": "diffusion-coefficient",
+   "term": "Diffusion coefficient",
+   "match": "\\bDiffusion[ -]coefficients?\\b",
+   "case": false,
+   "def": {
+    "t": "D, a measure of how fast something spreads by random motion. Its typical drift in time t is √(2Dt) along one direction.",
+    "src": [
+     {
+      "id": "shrink:os-cp-12-7",
+      "t": "12.7 Molecular Transport Phenomena: Diffusion, Osmosis, and Related Processes",
+      "u": "https://openstax.org/books/college-physics-2e/pages/12-7-molecular-transport-phenomena-diffusion-osmosis-and-related-processes"
+     },
+     {
+      "id": "shrink:lt-ses",
+      "t": "5.5: Stokes-Einstein-Sutherland Equation",
+      "u": "https://chem.libretexts.org/Courses/University_of_Wisconsin_Oshkosh/Chem_371%3A_P-Chem_2_to_Folow_Combined_Biophysical_and_P-Chem_1_(Gutow)/05%3A_Moving_Molecules_and_Chemical_Kinetics/5.05%3A_Stokes-Einstein-Sutherland_Equation"
+     }
+    ]
+   },
+   "href": "microscope/shrink.html",
+   "from": [
+    "shrink"
+   ]
+  },
+  {
+   "id": "stokes-drag",
+   "term": "Stokes drag",
+   "match": "\\bStokes[ -]drags?\\b",
+   "case": false,
+   "def": {
+    "t": "The drag on a small ball moving slowly through a fluid: 6πrμv, proportional to speed.",
+    "src": [
+     {
+      "id": "shrink:os-cp-12-6",
+      "t": "12.6 Motion of an Object in a Viscous Fluid",
+      "u": "https://openstax.org/books/college-physics-2e/pages/12-6-motion-of-an-object-in-a-viscous-fluid"
+     }
+    ]
+   },
+   "href": "microscope/shrink.html",
+   "from": [
+    "shrink"
+   ]
+  },
+  {
+   "id": "thermal-energy",
+   "term": "Thermal energy",
+   "match": "\\bThermal[ -]energy\\b",
+   "case": false,
+   "def": {
+    "t": "The energy of molecules moving and jiggling. The hotter something is, the faster its molecules move.",
+    "src": [
+     {
+      "id": "heat:os-chem-9-5",
+      "t": "OpenStax Chemistry 2e, section 9.5 The Kinetic-Molecular Theory",
+      "u": "https://openstax.org/books/chemistry-2e/pages/9-5-the-kinetic-molecular-theory"
+     }
+    ]
+   },
+   "href": "heat/",
+   "from": [
+    "heat"
+   ]
+  },
+  {
+   "id": "rt-and-kt",
+   "term": "RT and kT",
+   "match": "\\b(?:RT|kT)\\b",
+   "case": false,
+   "def": {
+    "t": "The energy scale of heat. RT is for a mole of molecules (R is the gas constant, T the temperature in kelvin); kT is the same thing for one molecule (k is the Boltzmann constant).",
+    "src": [
+     {
+      "id": "heat:nist-r",
+      "t": "NIST CODATA recommended values: molar gas constant R",
+      "u": "https://physics.nist.gov/cgi-bin/cuu/Value?r"
+     },
+     {
+      "id": "heat:nist-k",
+      "t": "NIST CODATA recommended values: Boltzmann constant k",
+      "u": "https://physics.nist.gov/cgi-bin/cuu/Value?k"
+     }
+    ]
+   },
+   "href": "heat/",
+   "from": [
+    "heat"
+   ],
+   "scope": [
+    "heat"
+   ]
+  },
+  {
+   "id": "bond-energy",
+   "term": "Bond energy",
+   "match": "\\bBond[ -]energy\\b",
+   "case": false,
+   "def": {
+    "t": "The energy needed to break one mole of a particular bond. Bigger number, stronger bond.",
+    "src": [
+     {
+      "id": "heat:os-chem-7-5",
+      "t": "OpenStax Chemistry 2e, section 7.5 Strengths of Ionic and Covalent Bonds",
+      "u": "https://openstax.org/books/chemistry-2e/pages/7-5-strengths-of-ionic-and-covalent-bonds"
+     }
+    ]
+   },
+   "href": "heat/",
+   "from": [
+    "heat"
+   ],
+   "scope": [
+    "heat"
+   ]
+  },
+  {
+   "id": "covalent-bond",
+   "term": "Covalent bond",
+   "match": "\\bCovalent[ -]bonds?\\b",
+   "case": false,
+   "def": {
+    "t": "A strong bond where two atoms share electrons, like the C-C and O-H bonds inside molecules.",
+    "src": [
+     {
+      "id": "heat:os-chem-7-5",
+      "t": "OpenStax Chemistry 2e, section 7.5 Strengths of Ionic and Covalent Bonds",
+      "u": "https://openstax.org/books/chemistry-2e/pages/7-5-strengths-of-ionic-and-covalent-bonds"
+     },
+     {
+      "id": "heat:os-bio-2-1",
+      "t": "OpenStax Biology 2e, section 2.1 Atoms, Isotopes, Ions, and Molecules: The Building Blocks",
+      "u": "https://openstax.org/books/biology-2e/pages/2-1-atoms-isotopes-ions-and-molecules-the-building-blocks"
+     }
+    ]
+   },
+   "href": "heat/",
+   "from": [
+    "heat"
+   ]
+  },
+  {
+   "id": "hydrogen-bond",
+   "term": "Hydrogen bond",
+   "match": "\\bHydrogen[ -]bonds?\\b",
+   "case": false,
+   "def": {
+    "t": "A weak pull between a slightly positive hydrogen and a slightly negative atom such as oxygen or nitrogen nearby. It holds DNA strands together and water molecules to each other.",
+    "src": [
+     {
+      "id": "heat:os-chem-10-1",
+      "t": "OpenStax Chemistry 2e, section 10.1 Intermolecular Forces",
+      "u": "https://openstax.org/books/chemistry-2e/pages/10-1-intermolecular-forces"
+     },
+     {
+      "id": "heat:os-bio-2-1",
+      "t": "OpenStax Biology 2e, section 2.1 Atoms, Isotopes, Ions, and Molecules: The Building Blocks",
+      "u": "https://openstax.org/books/biology-2e/pages/2-1-atoms-isotopes-ions-and-molecules-the-building-blocks"
+     }
+    ]
+   },
+   "href": "heat/",
+   "from": [
+    "heat"
+   ]
+  },
+  {
+   "id": "van-der-waals-interactions",
+   "term": "Van der Waals interactions",
+   "match": "\\bvan der Waals(?: interactions?| forces?)?\\b",
+   "case": false,
+   "def": {
+    "t": "Very weak attractions between neutral atoms and molecules caused by brief shifts in their electrons. Millions of them let a gecko stick to a wall.",
+    "src": [
+     {
+      "id": "heat:os-chem-10-1",
+      "t": "OpenStax Chemistry 2e, section 10.1 Intermolecular Forces",
+      "u": "https://openstax.org/books/chemistry-2e/pages/10-1-intermolecular-forces"
+     },
+     {
+      "id": "heat:os-bio-2-1",
+      "t": "OpenStax Biology 2e, section 2.1 Atoms, Isotopes, Ions, and Molecules: The Building Blocks",
+      "u": "https://openstax.org/books/biology-2e/pages/2-1-atoms-isotopes-ions-and-molecules-the-building-blocks"
+     }
+    ]
+   },
+   "href": "heat/",
+   "from": [
+    "heat"
+   ]
+  },
+  {
+   "id": "ionic-bond",
+   "term": "Ionic bond",
+   "match": "\\bIonic[ -]bonds?\\b",
+   "case": false,
+   "def": {
+    "t": "The pull between a positive ion and a negative ion. Very strong in a dry crystal, but water weakens it about 80 times.",
+    "src": [
+     {
+      "id": "heat:os-bio-2-1",
+      "t": "OpenStax Biology 2e, section 2.1 Atoms, Isotopes, Ions, and Molecules: The Building Blocks",
+      "u": "https://openstax.org/books/biology-2e/pages/2-1-atoms-isotopes-ions-and-molecules-the-building-blocks"
+     },
+     {
+      "id": "heat:os-up2-8-5",
+      "t": "OpenStax University Physics Volume 2, section 8.5 Molecular Model of a Dielectric (Table 8.1)",
+      "u": "https://openstax.org/books/university-physics-volume-2/pages/8-5-molecular-model-of-a-dielectric"
+     }
+    ]
+   },
+   "href": "heat/",
+   "from": [
+    "heat"
+   ]
+  },
+  {
+   "id": "denaturation",
+   "term": "Denaturation",
+   "match": "\\bdenatur(?:ation|ed|es|e)\\b",
+   "case": false,
+   "def": {
+    "t": "When a protein or DNA loses its shape because of heat, acid or chemicals, without its chain changing.",
+    "src": [
+     {
+      "id": "heat:os-bio-3-4",
+      "t": "OpenStax Biology 2e, section 3.4 Proteins",
+      "u": "https://openstax.org/books/biology-2e/pages/3-4-proteins"
+     },
+     {
+      "id": "heat:os-micro-10-2",
+      "t": "OpenStax Microbiology, section 10.2 Structure and Function of DNA",
+      "u": "https://openstax.org/books/microbiology/pages/10-2-structure-and-function-of-dna"
+     }
+    ]
+   },
+   "href": "heat/",
+   "from": [
+    "heat"
+   ]
+  },
+  {
+   "id": "melting-temperature-tm",
+   "term": "Melting temperature (Tm)",
+   "match": "\\bmelting (?:temperature|point)s?\\b",
+   "case": false,
+   "def": {
+    "t": "For DNA, the temperature where half of the double strands have come apart. More G-C pairs means a higher Tm.",
+    "src": [
+     {
+      "id": "heat:hz1v-1982",
+      "t": "Huang, Y. S., Hedberg, M., Kawanishi, C. Y. (1982). Characterization of the DNA of a nonoccluded baculovirus, Hz-1V. Journal of Virology 43, 174-181",
+      "u": "https://doi.org/10.1128/jvi.43.1.174-181.1982"
+     },
+     {
+      "id": "heat:os-micro-10-2",
+      "t": "OpenStax Microbiology, section 10.2 Structure and Function of DNA",
+      "u": "https://openstax.org/books/microbiology/pages/10-2-structure-and-function-of-dna"
+     }
+    ]
+   },
+   "href": "heat/",
+   "from": [
+    "heat"
+   ]
+  },
+  {
+   "id": "membrane-potential",
+   "term": "Membrane potential",
+   "match": "\\bMembrane[ -]potentials?\\b",
+   "case": false,
+   "def": {
+    "t": "The voltage across a cell membrane, inside compared with outside, measured in millivolts (mV).",
+    "src": [
+     {
+      "id": "spark:ap-12-4",
+      "t": "OpenStax Anatomy and Physiology 2e, section 12.4 The Action Potential",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-4-the-action-potential"
+     },
+     {
+      "id": "nutrients:lpi-potassium",
+      "t": "Linus Pauling Institute Micronutrient Information Center: Potassium",
+      "u": "https://lpi.oregonstate.edu/mic/minerals/potassium"
+     }
+    ]
+   },
+   "href": "spark/",
+   "from": [
+    "spark",
+    "nutrients"
+   ]
+  },
+  {
+   "id": "resting-potential",
+   "term": "Resting potential",
+   "match": "\\bResting[ -]potentials?\\b",
+   "case": false,
+   "def": {
+    "t": "The steady negative voltage of a neuron that is not signalling, about -70 mV in a typical neuron.",
+    "src": [
+     {
+      "id": "spark:ap-12-4",
+      "t": "OpenStax Anatomy and Physiology 2e, section 12.4 The Action Potential",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-4-the-action-potential"
+     },
+     {
+      "id": "spark:ibn-2-4",
+      "t": "OpenStax Introduction to Behavioral Neuroscience, section 2.4 Mechanisms of Neural Signaling",
+      "u": "https://openstax.org/books/introduction-behavioral-neuroscience/pages/2-4-mechanisms-of-neural-signaling"
+     }
+    ]
+   },
+   "href": "spark/",
+   "from": [
+    "spark"
+   ]
+  },
+  {
+   "id": "action-potential",
+   "term": "Action potential",
+   "match": "\\bAction[ -]potentials?\\b",
+   "case": false,
+   "def": {
+    "t": "A quick all or none flip of the membrane voltage from negative to positive and back, the signal neurons use.",
+    "src": [
+     {
+      "id": "spark:ap-12-4",
+      "t": "OpenStax Anatomy and Physiology 2e, section 12.4 The Action Potential",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-4-the-action-potential"
+     }
+    ]
+   },
+   "href": "spark/",
+   "from": [
+    "spark"
+   ]
+  },
+  {
+   "id": "threshold",
+   "term": "Threshold",
+   "match": "\\bThresholds?\\b",
+   "case": false,
+   "def": {
+    "t": "The voltage a stimulus must reach for voltage gated Na+ channels to open and a spike to start, about -55 mV in textbook neurons.",
+    "src": [
+     {
+      "id": "spark:ap-12-4",
+      "t": "OpenStax Anatomy and Physiology 2e, section 12.4 The Action Potential",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-4-the-action-potential"
+     }
+    ]
+   },
+   "href": "spark/",
+   "from": [
+    "spark"
+   ],
+   "scope": [
+    "spark"
+   ]
+  },
+  {
+   "id": "depolarization",
+   "term": "Depolarization",
+   "match": "\\bDepolarizations?\\b",
+   "case": false,
+   "def": {
+    "t": "A change that makes the inside of the cell less negative, moving the voltage toward zero.",
+    "src": [
+     {
+      "id": "spark:ap-12-4",
+      "t": "OpenStax Anatomy and Physiology 2e, section 12.4 The Action Potential",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-4-the-action-potential"
+     }
+    ]
+   },
+   "href": "spark/",
+   "from": [
+    "spark"
+   ]
+  },
+  {
+   "id": "repolarization",
+   "term": "Repolarization",
+   "match": "\\bRepolarizations?\\b",
+   "case": false,
+   "def": {
+    "t": "The return of the voltage toward rest after the peak of a spike, driven by K+ leaving the cell.",
+    "src": [
+     {
+      "id": "spark:ap-12-4",
+      "t": "OpenStax Anatomy and Physiology 2e, section 12.4 The Action Potential",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-4-the-action-potential"
+     }
+    ]
+   },
+   "href": "spark/",
+   "from": [
+    "spark"
+   ]
+  },
+  {
+   "id": "hyperpolarization",
+   "term": "Hyperpolarization",
+   "match": "\\bHyperpolarizations?\\b",
+   "case": false,
+   "def": {
+    "t": "A dip below the resting voltage, as at the end of a spike while K+ channels are still open.",
+    "src": [
+     {
+      "id": "spark:ap-12-4",
+      "t": "OpenStax Anatomy and Physiology 2e, section 12.4 The Action Potential",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-4-the-action-potential"
+     }
+    ]
+   },
+   "href": "spark/",
+   "from": [
+    "spark"
+   ]
+  },
+  {
+   "id": "refractory-period",
+   "term": "Refractory period",
+   "match": "\\bRefractory[ -]periods?\\b",
+   "case": false,
+   "def": {
+    "t": "The short time after a spike when a new spike cannot start (absolute) or needs a stronger push (relative).",
+    "src": [
+     {
+      "id": "spark:ap-12-4",
+      "t": "OpenStax Anatomy and Physiology 2e, section 12.4 The Action Potential",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-4-the-action-potential"
+     }
+    ]
+   },
+   "href": "spark/",
+   "from": [
+    "spark"
+   ]
+  },
+  {
+   "id": "voltage-gated-channel",
+   "term": "Voltage gated channel",
+   "match": "\\bvoltage[ -]gated (?:\\w+\\+? )?channels?\\b",
+   "case": false,
+   "def": {
+    "t": "An ion channel that opens or closes when the membrane voltage changes.",
+    "src": [
+     {
+      "id": "spark:ap-12-4",
+      "t": "OpenStax Anatomy and Physiology 2e, section 12.4 The Action Potential",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-4-the-action-potential"
+     }
+    ]
+   },
+   "href": "spark/",
+   "from": [
+    "spark"
+   ]
+  },
+  {
+   "id": "sodium-potassium-pump",
+   "term": "Sodium potassium pump",
+   "match": "\\bsodium[ -]potassium pumps?\\b|\\bNa\\+/K\\+ pumps?\\b",
+   "case": false,
+   "def": {
+    "t": "A membrane protein that uses ATP to move 3 Na+ out and 2 K+ in, keeping the ion gradients in place.",
+    "src": [
+     {
+      "id": "spark:bio-35-2",
+      "t": "OpenStax Biology 2e, section 35.2 How Neurons Communicate, including Table 35.1",
+      "u": "https://openstax.org/books/biology-2e/pages/35-2-how-neurons-communicate"
+     },
+     {
+      "id": "spark:ap-12-4",
+      "t": "OpenStax Anatomy and Physiology 2e, section 12.4 The Action Potential",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-4-the-action-potential"
+     }
+    ]
+   },
+   "href": "spark/",
+   "from": [
+    "spark"
+   ]
+  },
+  {
+   "id": "selectivity-filter",
+   "term": "Selectivity filter",
+   "match": "\\bSelectivity[ -]filters?\\b",
+   "case": false,
+   "def": {
+    "t": "The narrowest part of an ion channel pore, which picks the ion that may pass. In K+ channels it is lined by backbone oxygen atoms.",
+    "src": [
+     {
+      "id": "spark:doyle-1998",
+      "t": "Doyle, D. A., Morais Cabral, J., Pfuetzner, R. A. et al. (1998). The structure of the potassium channel: molecular basis of K+ conduction and selectivity. Science 280, 69-77",
+      "u": "https://doi.org/10.1126/science.280.5360.69"
+     }
+    ]
+   },
+   "href": "spark/",
+   "from": [
+    "spark"
+   ]
+  },
+  {
+   "id": "myelin",
+   "term": "Myelin",
+   "match": "\\bMyelins?\\b",
+   "case": false,
+   "def": {
+    "t": "A fatty insulating wrap around an axon, laid down in bands, that speeds up signals.",
+    "src": [
+     {
+      "id": "spark:ibn-2-4",
+      "t": "OpenStax Introduction to Behavioral Neuroscience, section 2.4 Mechanisms of Neural Signaling",
+      "u": "https://openstax.org/books/introduction-behavioral-neuroscience/pages/2-4-mechanisms-of-neural-signaling"
+     },
+     {
+      "id": "spark:ap-12-4",
+      "t": "OpenStax Anatomy and Physiology 2e, section 12.4 The Action Potential",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-4-the-action-potential"
+     }
+    ]
+   },
+   "href": "spark/",
+   "from": [
+    "spark"
+   ]
+  },
+  {
+   "id": "node-of-ranvier",
+   "term": "Node of Ranvier",
+   "match": "\\bnodes? of Ranvier\\b",
+   "case": false,
+   "def": {
+    "t": "A bare gap between myelin bands, crowded with voltage gated channels that regenerate the spike.",
+    "src": [
+     {
+      "id": "spark:ibn-2-4",
+      "t": "OpenStax Introduction to Behavioral Neuroscience, section 2.4 Mechanisms of Neural Signaling",
+      "u": "https://openstax.org/books/introduction-behavioral-neuroscience/pages/2-4-mechanisms-of-neural-signaling"
+     }
+    ]
+   },
+   "href": "spark/",
+   "from": [
+    "spark"
+   ]
+  },
+  {
+   "id": "saltatory-conduction",
+   "term": "Saltatory conduction",
+   "match": "\\bSaltatory[ -]conductions?\\b",
+   "case": false,
+   "def": {
+    "t": "The way a spike jumps from node to node along a myelinated axon (from Latin saltare, to leap).",
+    "src": [
+     {
+      "id": "spark:ap-12-4",
+      "t": "OpenStax Anatomy and Physiology 2e, section 12.4 The Action Potential",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-4-the-action-potential"
+     },
+     {
+      "id": "spark:bio-35-2",
+      "t": "OpenStax Biology 2e, section 35.2 How Neurons Communicate, including Table 35.1",
+      "u": "https://openstax.org/books/biology-2e/pages/35-2-how-neurons-communicate"
+     }
+    ]
+   },
+   "href": "spark/",
+   "from": [
+    "spark"
+   ]
+  },
+  {
+   "id": "nernst-equation",
+   "term": "Nernst equation",
+   "match": "\\bNernst[ -]equations?\\b",
+   "case": false,
+   "def": {
+    "t": "The formula for the voltage at which one ion's concentration push and electrical pull cancel out.",
+    "src": [
+     {
+      "id": "spark:chem-17-4",
+      "t": "OpenStax Chemistry 2e, section 17.4 Potential, Free Energy, and Equilibrium (the Nernst equation)",
+      "u": "https://openstax.org/books/chemistry-2e/pages/17-4-potential-free-energy-and-equilibrium"
+     },
+     {
+      "id": "spark:ibn-2-4",
+      "t": "OpenStax Introduction to Behavioral Neuroscience, section 2.4 Mechanisms of Neural Signaling",
+      "u": "https://openstax.org/books/introduction-behavioral-neuroscience/pages/2-4-mechanisms-of-neural-signaling"
+     }
+    ]
+   },
+   "href": "spark/",
+   "from": [
+    "spark"
+   ]
+  },
+  {
+   "id": "vitamin",
+   "term": "Vitamin",
+   "match": "\\bVitamins?\\b",
+   "case": false,
+   "def": {
+    "t": "An organic compound in food that the body needs for its chemical reactions.",
+    "src": [
+     {
+      "id": "nutrients:os-ap-24-7",
+      "t": "OpenStax Anatomy and Physiology 2e, 24.7 Nutrition and Diet (Tables 24.3 to 24.6)",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/24-7-nutrition-and-diet"
+     }
+    ]
+   },
+   "href": "nutrients/",
+   "from": [
+    "nutrients"
+   ]
+  },
+  {
+   "id": "mineral",
+   "term": "Mineral",
+   "match": "\\bMinerals?\\b",
+   "case": false,
+   "def": {
+    "t": "An inorganic nutrient from food that the body cannot make, such as calcium or iron.",
+    "src": [
+     {
+      "id": "nutrients:os-ap-24-7",
+      "t": "OpenStax Anatomy and Physiology 2e, 24.7 Nutrition and Diet (Tables 24.3 to 24.6)",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/24-7-nutrition-and-diet"
+     }
+    ]
+   },
+   "href": "nutrients/",
+   "from": [
+    "nutrients"
+   ],
+   "scope": [
+    "nutrients"
+   ]
+  },
+  {
+   "id": "cofactor",
+   "term": "Cofactor",
+   "match": "\\bCofactors?\\b",
+   "case": false,
+   "def": {
+    "t": "An inorganic ion, such as iron or magnesium, that an enzyme needs to bind to work well.",
+    "src": [
+     {
+      "id": "nutrients:os-bio-6-5",
+      "t": "OpenStax Biology 2e, 6.5 Enzymes",
+      "u": "https://openstax.org/books/biology-2e/pages/6-5-enzymes"
+     }
+    ]
+   },
+   "href": "nutrients/",
+   "from": [
+    "nutrients"
+   ]
+  },
+  {
+   "id": "coenzyme",
+   "term": "Coenzyme",
+   "match": "\\bCoenzymes?\\b",
+   "case": false,
+   "def": {
+    "t": "An organic helper molecule that an enzyme needs. Many vitamins are coenzymes or are made into them.",
+    "src": [
+     {
+      "id": "nutrients:os-bio-6-5",
+      "t": "OpenStax Biology 2e, 6.5 Enzymes",
+      "u": "https://openstax.org/books/biology-2e/pages/6-5-enzymes"
+     }
+    ]
+   },
+   "href": "nutrients/",
+   "from": [
+    "nutrients"
+   ]
+  },
+  {
+   "id": "fat-soluble",
+   "term": "Fat soluble",
+   "match": "\\bfat[ -]soluble\\b",
+   "case": false,
+   "def": {
+    "t": "Dissolves in fat. Vitamins A, D, E and K are absorbed with fats and can be stored in body fat.",
+    "src": [
+     {
+      "id": "nutrients:os-ap-24-7",
+      "t": "OpenStax Anatomy and Physiology 2e, 24.7 Nutrition and Diet (Tables 24.3 to 24.6)",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/24-7-nutrition-and-diet"
+     }
+    ]
+   },
+   "href": "nutrients/",
+   "from": [
+    "nutrients"
+   ]
+  },
+  {
+   "id": "water-soluble",
+   "term": "Water soluble",
+   "match": "\\bwater[ -]soluble\\b",
+   "case": false,
+   "def": {
+    "t": "Dissolves in water. The B vitamins and vitamin C move easily through body fluids and are not stored.",
+    "src": [
+     {
+      "id": "nutrients:os-ap-24-7",
+      "t": "OpenStax Anatomy and Physiology 2e, 24.7 Nutrition and Diet (Tables 24.3 to 24.6)",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/24-7-nutrition-and-diet"
+     }
+    ]
+   },
+   "href": "nutrients/",
+   "from": [
+    "nutrients"
+   ]
+  },
+  {
+   "id": "hypervitaminosis",
+   "term": "Hypervitaminosis",
+   "match": "\\bHypervitaminosis\\b",
+   "case": false,
+   "def": {
+    "t": "Harm from too much of a vitamin, most often a fat-soluble one stored in body fat.",
+    "src": [
+     {
+      "id": "nutrients:os-ap-24-7",
+      "t": "OpenStax Anatomy and Physiology 2e, 24.7 Nutrition and Diet (Tables 24.3 to 24.6)",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/24-7-nutrition-and-diet"
+     }
+    ]
+   },
+   "href": "nutrients/",
+   "from": [
+    "nutrients"
+   ]
+  },
+  {
+   "id": "electrolyte",
+   "term": "Electrolyte",
+   "match": "\\bElectrolytes?\\b",
+   "case": false,
+   "def": {
+    "t": "A substance that splits into ions in solution, so it can carry electricity. Sodium, potassium and chloride are electrolytes.",
+    "src": [
+     {
+      "id": "nutrients:lpi-potassium",
+      "t": "Linus Pauling Institute Micronutrient Information Center: Potassium",
+      "u": "https://lpi.oregonstate.edu/mic/minerals/potassium"
+     },
+     {
+      "id": "nutrients:os-ap-24-7",
+      "t": "OpenStax Anatomy and Physiology 2e, 24.7 Nutrition and Diet (Tables 24.3 to 24.6)",
+      "u": "https://openstax.org/books/anatomy-and-physiology-2e/pages/24-7-nutrition-and-diet"
+     }
+    ]
+   },
+   "href": "nutrients/",
+   "from": [
+    "nutrients"
+   ]
+  },
+  {
+   "id": "heme",
+   "term": "Heme",
+   "match": "\\bHemes?\\b",
+   "case": false,
+   "def": {
+    "t": "The iron-holding ring inside hemoglobin, myoglobin and cytochromes.",
+    "src": [
+     {
+      "id": "nutrients:lpi-iron",
+      "t": "Linus Pauling Institute Micronutrient Information Center: Iron",
+      "u": "https://lpi.oregonstate.edu/mic/minerals/iron"
+     }
+    ]
+   },
+   "href": "nutrients/",
+   "from": [
+    "nutrients"
+   ],
+   "scope": [
+    "nutrients"
+   ]
+  },
+  {
+   "id": "anemia",
+   "term": "Anemia",
+   "match": "\\ban(?:a)?emi(?:a|c)\\b",
+   "case": false,
+   "def": {
+    "t": "Too few working red blood cells or too little hemoglobin. Lack of iron, folate or vitamin B12 can cause it.",
+    "src": [
+     {
+      "id": "nutrients:lpi-iron",
+      "t": "Linus Pauling Institute Micronutrient Information Center: Iron",
+      "u": "https://lpi.oregonstate.edu/mic/minerals/iron"
+     },
+     {
+      "id": "nutrients:lpi-folate",
+      "t": "Linus Pauling Institute Micronutrient Information Center: Folate",
+      "u": "https://lpi.oregonstate.edu/mic/vitamins/folate"
+     }
+    ]
+   },
+   "href": "nutrients/",
+   "from": [
+    "nutrients"
+   ]
+  },
+  {
+   "id": "goitre",
+   "term": "Goitre",
+   "match": "\\bgoit(?:re|er)s?\\b",
+   "case": false,
+   "def": {
+    "t": "A swollen thyroid gland, often from too little iodine. Also spelled goiter.",
+    "src": [
+     {
+      "id": "nutrients:lpi-iodine",
+      "t": "Linus Pauling Institute Micronutrient Information Center: Iodine",
+      "u": "https://lpi.oregonstate.edu/mic/minerals/iodine"
+     }
+    ]
+   },
+   "href": "nutrients/",
+   "from": [
+    "nutrients"
+   ]
+  },
+  {
+   "id": "intrinsic-factor",
+   "term": "Intrinsic factor",
+   "match": "\\bIntrinsic[ -]factors?\\b",
+   "case": false,
+   "def": {
+    "t": "A protein made in the stomach that vitamin B12 must bind to be absorbed.",
+    "src": [
+     {
+      "id": "nutrients:lpi-vitamin-b12",
+      "t": "Linus Pauling Institute Micronutrient Information Center: Vitamin B12",
+      "u": "https://lpi.oregonstate.edu/mic/vitamins/vitamin-B12"
+     }
+    ]
+   },
+   "href": "nutrients/",
+   "from": [
+    "nutrients"
+   ]
+  },
+  {
+   "id": "rda",
+   "term": "RDA",
+   "match": "\\bRDAs?\\b",
+   "case": true,
+   "def": {
+    "t": "Recommended Dietary Allowance: the daily amount that meets the needs of nearly all (97 to 98 percent) healthy people in a group.",
+    "src": [
+     {
+      "id": "nutrients:nasem-2019-dri",
+      "t": "National Academies of Sciences, Engineering, and Medicine (2019). Dietary Reference Intakes for Sodium and Potassium, Appendix J: DRI Summary Tables. doi:10.17226/25353",
+      "u": "https://nap.nationalacademies.org/read/25353/chapter/28"
+     }
+    ]
+   },
+   "href": "nutrients/",
+   "from": [
+    "nutrients"
+   ],
+   "scope": [
+    "nutrients"
+   ]
+  },
+  {
+   "id": "ai",
+   "term": "AI",
+   "match": "\\bAIs?\\b",
+   "case": true,
+   "def": {
+    "t": "Adequate Intake: a daily amount used when there is not enough evidence to set an RDA.",
+    "src": [
+     {
+      "id": "nutrients:nasem-2019-dri",
+      "t": "National Academies of Sciences, Engineering, and Medicine (2019). Dietary Reference Intakes for Sodium and Potassium, Appendix J: DRI Summary Tables. doi:10.17226/25353",
+      "u": "https://nap.nationalacademies.org/read/25353/chapter/28"
+     }
+    ]
+   },
+   "href": "nutrients/",
+   "from": [
+    "nutrients"
+   ],
+   "scope": [
+    "nutrients"
+   ]
+  },
+  {
+   "id": "ul",
+   "term": "UL",
+   "match": "\\bULs?\\b",
+   "case": true,
+   "def": {
+    "t": "Tolerable Upper Intake Level: the highest daily amount likely to pose no risk of harm to almost everyone.",
+    "src": [
+     {
+      "id": "nutrients:nasem-2019-dri",
+      "t": "National Academies of Sciences, Engineering, and Medicine (2019). Dietary Reference Intakes for Sodium and Potassium, Appendix J: DRI Summary Tables. doi:10.17226/25353",
+      "u": "https://nap.nationalacademies.org/read/25353/chapter/28"
+     }
+    ]
+   },
+   "href": "nutrients/",
+   "from": [
+    "nutrients"
+   ],
+   "scope": [
+    "nutrients"
+   ]
+  },
+  {
+   "id": "photon",
+   "term": "Photon",
+   "match": "\\bPhotons?\\b",
+   "case": false,
+   "def": {
+    "t": "A tiny packet of light. Every photon moves at the speed of light and carries a set amount of energy, E = hf.",
+    "src": [
+     {
+      "id": "light:os-up3-6-2",
+      "t": "OpenStax University Physics Volume 3, section 6.2 Photoelectric Effect",
+      "u": "https://openstax.org/books/university-physics-volume-3/pages/6-2-photoelectric-effect"
+     }
+    ]
+   },
+   "href": "light/",
+   "from": [
+    "light"
+   ]
+  },
+  {
+   "id": "wavelength",
+   "term": "Wavelength",
+   "match": "\\bWavelengths?\\b",
+   "case": false,
+   "def": {
+    "t": "The distance from one crest of a wave to the next. Shorter wavelengths carry more energy than longer ones.",
+    "src": [
+     {
+      "id": "light:os-bio-8-2",
+      "t": "OpenStax Biology 2e, section 8.2 The Light-Dependent Reactions of Photosynthesis",
+      "u": "https://openstax.org/books/biology-2e/pages/8-2-the-light-dependent-reactions-of-photosynthesis"
+     }
+    ]
+   },
+   "href": "light/",
+   "from": [
+    "light"
+   ]
+  },
+  {
+   "id": "visible-light",
+   "term": "Visible light",
+   "match": "\\bVisible[ -]lights?\\b",
+   "case": false,
+   "def": {
+    "t": "The narrow band of light, from about 400 to about 750 nanometres, that the human eye can see.",
+    "src": [
+     {
+      "id": "light:os-up2-16-5",
+      "t": "OpenStax University Physics Volume 2, section 16.5 The Electromagnetic Spectrum",
+      "u": "https://openstax.org/books/university-physics-volume-2/pages/16-5-the-electromagnetic-spectrum"
+     }
+    ]
+   },
+   "href": "light/",
+   "from": [
+    "light"
+   ]
+  },
+  {
+   "id": "electronvolt",
+   "term": "Electronvolt",
+   "match": "\\bElectronvolts?\\b",
+   "case": false,
+   "def": {
+    "t": "A tiny unit of energy that suits single photons. It is the energy one electron picks up crossing 1 volt, about 1.6 × 10⁻¹⁹ joules.",
+    "src": [
+     {
+      "id": "light:codata-e",
+      "t": "NIST, CODATA Value: elementary charge (2022 CODATA recommended values)",
+      "u": "https://physics.nist.gov/cgi-bin/cuu/Value?e"
+     }
+    ]
+   },
+   "href": "light/",
+   "from": [
+    "light"
+   ]
+  },
+  {
+   "id": "chlorophyll-a-and-b",
+   "term": "Chlorophyll a and b",
+   "match": "\\bChlorophyll[ -]a[ -]and[ -]bs?\\b",
+   "case": false,
+   "def": {
+    "t": "The green pigments that catch light for photosynthesis. They absorb blue and red light well but not green, which is why leaves look green.",
+    "src": [
+     {
+      "id": "light:os-bio-8-2",
+      "t": "OpenStax Biology 2e, section 8.2 The Light-Dependent Reactions of Photosynthesis",
+      "u": "https://openstax.org/books/biology-2e/pages/8-2-the-light-dependent-reactions-of-photosynthesis"
+     },
+     {
+      "id": "light:pcad",
+      "t": "PhotochemCAD 2.1a spectra (Du, H., Fuh, R. A., Li, J., Corkan, A. and Lindsey, J. S. (1998) Photochem. Photobiol. 68, 141-142; Dixon, J. M., Taniguchi, M. and Lindsey, J. S. (2005) Photochem. Photobiol. 81, 212-213), as published by S. Prahl at OMLC: Chlorophyll a in diethyl ether (123) and Chlorophyll b in diethyl ether (125)",
+      "u": "https://omlc.org/spectra/PhotochemCAD/html/123.html"
+     }
+    ]
+   },
+   "href": "light/",
+   "from": [
+    "light"
+   ]
+  },
+  {
+   "id": "carotenoid",
+   "term": "Carotenoid",
+   "match": "\\bCarotenoids?\\b",
+   "case": false,
+   "def": {
+    "t": "Yellow, orange or red pigments that also sit in the thylakoid membrane. They catch blue light and safely get rid of extra energy as heat.",
+    "src": [
+     {
+      "id": "light:os-bio-8-2",
+      "t": "OpenStax Biology 2e, section 8.2 The Light-Dependent Reactions of Photosynthesis",
+      "u": "https://openstax.org/books/biology-2e/pages/8-2-the-light-dependent-reactions-of-photosynthesis"
+     }
+    ]
+   },
+   "href": "light/",
+   "from": [
+    "light"
+   ]
+  },
+  {
+   "id": "chloroplast",
+   "term": "Chloroplast",
+   "match": "\\bChloroplasts?\\b",
+   "case": false,
+   "def": {
+    "t": "The part of a plant cell that does photosynthesis. It has an outer and an inner membrane around stacks of thylakoids.",
+    "src": [
+     {
+      "id": "light:os-bio-4-3",
+      "t": "OpenStax Biology 2e, section 4.3 Eukaryotic Cells",
+      "u": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+     },
+     {
+      "id": "light:os-bio-8-1",
+      "t": "OpenStax Biology 2e, section 8.1 Overview of Photosynthesis",
+      "u": "https://openstax.org/books/biology-2e/pages/8-1-overview-of-photosynthesis"
+     }
+    ]
+   },
+   "href": "light/",
+   "from": [
+    "light"
+   ]
+  },
+  {
+   "id": "thylakoid",
+   "term": "Thylakoid",
+   "match": "\\bThylakoids?\\b",
+   "case": false,
+   "def": {
+    "t": "A flat, disc-shaped sac inside a chloroplast. Chlorophyll and the photosystems sit in its membrane, so this is where light is caught.",
+    "src": [
+     {
+      "id": "light:os-bio-8-1",
+      "t": "OpenStax Biology 2e, section 8.1 Overview of Photosynthesis",
+      "u": "https://openstax.org/books/biology-2e/pages/8-1-overview-of-photosynthesis"
+     },
+     {
+      "id": "light:os-bio-8-2",
+      "t": "OpenStax Biology 2e, section 8.2 The Light-Dependent Reactions of Photosynthesis",
+      "u": "https://openstax.org/books/biology-2e/pages/8-2-the-light-dependent-reactions-of-photosynthesis"
+     }
+    ]
+   },
+   "href": "light/",
+   "from": [
+    "light"
+   ]
+  },
+  {
+   "id": "granum",
+   "term": "Granum",
+   "match": "\\bGranums?\\b",
+   "case": false,
+   "def": {
+    "t": "A stack of thylakoids, like a pile of coins. More than one are called grana.",
+    "src": [
+     {
+      "id": "light:os-bio-8-1",
+      "t": "OpenStax Biology 2e, section 8.1 Overview of Photosynthesis",
+      "u": "https://openstax.org/books/biology-2e/pages/8-1-overview-of-photosynthesis"
+     }
+    ]
+   },
+   "href": "light/",
+   "from": [
+    "light"
+   ]
+  },
+  {
+   "id": "stroma",
+   "term": "Stroma",
+   "match": "\\bStromas?\\b",
+   "case": false,
+   "def": {
+    "t": "The fluid around the thylakoid stacks inside a chloroplast. This is where the plant uses the energy from light to make sugar from carbon dioxide.",
+    "src": [
+     {
+      "id": "light:os-bio-8-1",
+      "t": "OpenStax Biology 2e, section 8.1 Overview of Photosynthesis",
+      "u": "https://openstax.org/books/biology-2e/pages/8-1-overview-of-photosynthesis"
+     }
+    ]
+   },
+   "href": "light/",
+   "from": [
+    "light"
+   ]
+  },
+  {
+   "id": "light-harvesting-complex",
+   "term": "Light-harvesting complex",
+   "match": "\\bLight\\-harvesting[ -]complexs?\\b",
+   "case": false,
+   "def": {
+    "t": "Proteins holding many chlorophylls and carotenoids that work like an antenna. They catch photons and pass the energy on to the reaction centre.",
+    "src": [
+     {
+      "id": "light:os-bio-8-2",
+      "t": "OpenStax Biology 2e, section 8.2 The Light-Dependent Reactions of Photosynthesis",
+      "u": "https://openstax.org/books/biology-2e/pages/8-2-the-light-dependent-reactions-of-photosynthesis"
+     },
+     {
+      "id": "light:standfuss-2005",
+      "t": "Standfuss, J., Terwisscha van Scheltinga, A. C., Lamborghini, M. and Kuhlbrandt, W. (2005). Mechanisms of photoprotection and nonphotochemical quenching in pea light-harvesting complex at 2.5 A resolution. EMBO J. 24, 919-928",
+      "u": "https://doi.org/10.1038/sj.emboj.7600585"
+     }
+    ]
+   },
+   "href": "light/",
+   "from": [
+    "light"
+   ]
+  },
+  {
+   "id": "resonance-energy-transfer",
+   "term": "Resonance energy transfer",
+   "match": "\\bResonance[ -]energy[ -]transfers?\\b",
+   "case": false,
+   "def": {
+    "t": "How energy jumps from an excited pigment to a nearby one without giving off any light. It gets much weaker as the pigments move apart.",
+    "src": [
+     {
+      "id": "light:fret",
+      "t": "Wikipedia, Forster resonance energy transfer (read 2026-10-01)",
+      "u": "https://en.wikipedia.org/wiki/F%C3%B6rster_resonance_energy_transfer"
+     },
+     {
+      "id": "light:mirkovic-2017",
+      "t": "Mirkovic, T., Ostroumov, E. E., Anna, J. M., van Grondelle, R., Govindjee and Scholes, G. D. (2017). Light Absorption and Energy Transfer in the Antenna Complexes of Photosynthetic Organisms. Chem. Rev. 117, 249-293",
+      "u": "https://doi.org/10.1021/acs.chemrev.6b00002"
+     }
+    ]
+   },
+   "href": "light/",
+   "from": [
+    "light"
+   ]
+  },
+  {
+   "id": "reaction-centre",
+   "term": "Reaction centre",
+   "match": "\\bReaction[ -]centres?\\b",
+   "case": false,
+   "def": {
+    "t": "The heart of a photosystem. A special pair of chlorophyll a molecules there turns light energy into an excited electron.",
+    "src": [
+     {
+      "id": "light:os-bio-8-2",
+      "t": "OpenStax Biology 2e, section 8.2 The Light-Dependent Reactions of Photosynthesis",
+      "u": "https://openstax.org/books/biology-2e/pages/8-2-the-light-dependent-reactions-of-photosynthesis"
+     }
+    ]
+   },
+   "href": "light/",
+   "from": [
+    "light"
+   ]
+  },
+  {
+   "id": "photosystem-ii",
+   "term": "Photosystem II",
+   "match": "\\bPhotosystem[ -]IIs?\\b",
+   "case": false,
+   "def": {
+    "t": "One of two light-catching machines in the thylakoid membrane, made of a light-harvesting complex and a reaction centre. Its reaction centre, P680, takes electrons from water and releases oxygen.",
+    "src": [
+     {
+      "id": "light:os-bio-8-2",
+      "t": "OpenStax Biology 2e, section 8.2 The Light-Dependent Reactions of Photosynthesis",
+      "u": "https://openstax.org/books/biology-2e/pages/8-2-the-light-dependent-reactions-of-photosynthesis"
+     }
+    ]
+   },
+   "href": "light/",
+   "from": [
+    "light"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,88 @@
+{
+  "_note": "Data for the home-page zoom journey. 'view' is the real width of the view (short side of the screen, in metres) when you arrive at a level; the live scale readout is computed from it. Shapes are drawn by code; the sizes they are drawn at follow the facts below. Visitor-facing marketing words live in data/copy.json; the facts here are data and each cites a source. No em dashes.",
+  "levels": [
+    {
+      "id": "organism",
+      "view": 6.0e-4,
+      "railKey": "journey.level.organism",
+      "nameKey": "journey.name.organism",
+      "linkKey": "journey.open.organism",
+      "link": "microscope/index.html#paramecium",
+      "kind": "illustrative",
+      "fact": "A single-celled Paramecium caudatum in pond water. It is 170 to 330 micrometres long, about a quarter of a millimetre; a 10x microscope objective shows a circle about 1.8 mm across.",
+      "drawn": "Paramecium drawn 240 micrometres long and 60 wide, with a Euglena (90 micrometres) and diatoms (100 micrometres) nearby.",
+      "sources": ["neupane-pcaudatum", "kreutz-pcaudatum", "mw-fov"]
+    },
+    {
+      "id": "cell",
+      "view": 3.0e-5,
+      "railKey": "journey.level.cell",
+      "nameKey": "journey.name.cell",
+      "linkKey": "journey.open.cell",
+      "link": "cells/index.html#animal",
+      "kind": "illustrative",
+      "fact": "Inside the paramecium. The whole living thing is this one cell, covered in 10,000 to 14,000 cilia that beat to swim it forward.",
+      "drawn": "Mitochondria drawn 2 micrometres long and 1 across; food vacuoles and the edge of the large nucleus around them.",
+      "sources": ["neupane-pcaudatum", "bionumbers-mito"]
+    },
+    {
+      "id": "part",
+      "view": 3.0e-6,
+      "railKey": "journey.level.part",
+      "nameKey": "journey.name.part",
+      "linkKey": "journey.open.part",
+      "link": "cells/index.html#animal/mitochondrion",
+      "kind": "illustrative",
+      "fact": "A mitochondrion, roughly 2 micrometres long and 1 micrometre across. Its folded inner membrane is where most of the cell's ATP is made.",
+      "drawn": "Outer membrane, inner membrane and its folds, at 2 by 1 micrometres.",
+      "sources": ["bionumbers-mito", "os-7-4"]
+    },
+    {
+      "id": "big",
+      "view": 3.2e-8,
+      "railKey": "journey.level.big",
+      "nameKey": "journey.name.big",
+      "linkKey": "journey.open.big",
+      "link": "molecules/index.html#atp-synthase",
+      "kind": "illustrative",
+      "fact": "ATP synthase, a protein machine in the inner membrane. Its round head is about 9 nanometres across, and turning parts of it add a phosphate to ADP to make ATP.",
+      "drawn": "Head drawn 9 nanometres across, standing on the membrane; the middle part turns. Membrane thickness and lipid spacing are illustrative.",
+      "sources": ["boundless-f1", "os-7-4"]
+    },
+    {
+      "id": "mol",
+      "view": 2.6e-9,
+      "railKey": "journey.level.mol",
+      "nameKey": "journey.name.mol",
+      "linkKey": "journey.open.mol",
+      "link": "molecules/index.html#atp",
+      "kind": "real",
+      "fact": "One molecule of ATP, the cell's energy currency: 31 atoms plus 16 hydrogens, about 1.6 nanometres end to end. Atom positions here are real.",
+      "drawn": "Atom positions are the ideal coordinates of RCSB entry ATP; the longest span between two non-hydrogen atoms is 16.0 angstroms (computed by tools/journey_atp.py).",
+      "sources": ["ccd-ATP", "os-6-4"]
+    },
+    {
+      "id": "atom",
+      "view": 4.0e-10,
+      "railKey": "journey.level.atom",
+      "nameKey": "journey.name.atom",
+      "linkKey": "journey.open.atom",
+      "link": "elements/index.html#P",
+      "kind": "illustrative",
+      "fact": "One phosphorus atom from the end of ATP, held to four oxygens. An atom is on the order of 0.1 nanometres across, and its nucleus is about 100,000 times smaller still.",
+      "drawn": "Electron cloud drawn as a haze about 2 angstroms across, because a cloud has no hard edge; oxygen positions are real (RCSB ATP).",
+      "sources": ["os-chem-2-3", "ccd-ATP"]
+    }
+  ],
+  "sources": {
+    "neupane-pcaudatum": { "cite": "Neupane, Paramecium caudatum: Habitat, Culture, Structure, Locomotion. Microbe Notes.", "url": "https://microbenotes.com/paramecium-caudatum-habitat-culture-structure-locomotion/", "supports": "170 to 330 micrometres long, about 4 times as long as broad; 10,000 to 14,000 cilia.", "from": "web/microscope/sources.json" },
+    "kreutz-pcaudatum": { "cite": "Kreutz, Paramecium caudatum Ehrenberg, 1833. Real Micro Life.", "url": "https://realmicrolife.com/paramecium-caudatum/", "supports": "Length 170 to 300 micrometres; slipper shaped; macronucleus in mid body; two contractile vacuoles.", "from": "web/microscope/sources.json" },
+    "mw-fov": { "cite": "Microscope World, How to Calculate Microscope Field of View.", "url": "https://www.microscopeworld.com/microscope-field-of-view/", "supports": "A field number of 18 with a 10x objective gives a 1.8 mm circle.", "from": "web/microscope/sources.json" },
+    "bionumbers-mito": { "cite": "Milo and Phillips, Cell Biology by the Numbers: How big are mitochondria?", "url": "https://book.bionumbers.org/how-big-are-mitochondria/", "supports": "Read 2026-10-01: textbook mitochondria are spherocylinders with a length of roughly two microns and a diameter of roughly one micron.", "from": "new, read 2026-10-01" },
+    "os-7-4": { "cite": "OpenStax Biology 2e, section 7.4 Oxidative Phosphorylation.", "url": "https://openstax.org/books/biology-2e/pages/7-4-oxidative-phosphorylation", "supports": "Read 2026-10-01: hydrogen ions pass through the inner mitochondrial membrane by an integral membrane protein called ATP synthase; the turning of parts of this molecular machine adds a phosphate to ADP, forming ATP.", "from": "new, read 2026-10-01" },
+    "boundless-f1": { "cite": "Boundless Microbiology (LibreTexts), 5.5C F1F0 ATP Synthase.", "url": "https://bio.libretexts.org/Bookshelves/Microbiology/Microbiology_(Boundless)/05%3A_Microbial_Metabolism/5.05%3A_Respiratory_ETS_and_ATP_Synthase/5.5C%3A_F10_ATP_Synthase", "supports": "Read 2026-10-01: F1 particles of 9 nm diameter pepper the inner mitochondrial membrane.", "from": "new, read 2026-10-01" },
+    "ccd-ATP": { "cite": "RCSB PDB Chemical Component Dictionary, ATP (adenosine-5'-triphosphate).", "url": "https://www.rcsb.org/ligand/ATP", "supports": "Formula C10 H16 N5 O13 P3; ideal coordinates used for the drawn atoms.", "from": "web/molecules/sources.json" },
+    "os-6-4": { "cite": "OpenStax Biology 2e, section 6.4 ATP: Adenosine Triphosphate.", "url": "https://openstax.org/books/biology-2e/pages/6-4-atp-adenosine-triphosphate", "supports": "ATP is the cell's primary energy currency; adenosine bound to three phosphate groups.", "from": "web/molecules/sources.json" },
+    "os-chem-2-3": { "cite": "OpenStax Chemistry 2e, section 2.3 Atomic Structure and Symbolism.", "url": "https://openstax.org/books/chemistry-2e/pages/2-3-atomic-structure-and-symbolism", "supports": "Read 2026-10-01: the diameter of an atom is on the order of 10 to the minus 10 m; the nucleus is roughly 10 to the minus 15 m, about 100,000 times smaller.", "from": "new, read 2026-10-01" }
+  }
+}

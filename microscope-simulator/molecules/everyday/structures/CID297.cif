@@ -1,0 +1,52 @@
+data_CID297
+#
+# PubChem CID 297 (Methane), computed 3D conformer, converted to the CCD layout for the Cell and Molecule Explorer.
+# Source: https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/297/record/SDF?record_type=3d (downloaded 2026-10-01).
+# Licence: NCBI Molecular Data Usage policy, NCBI places no restrictions on use or distribution. Coordinates centred, otherwise unchanged.
+#
+_chem_comp.id                     CID297
+_chem_comp.name                   METHANE
+_chem_comp.type                   NON-POLYMER
+_chem_comp.formula                'C H4'
+_chem_comp.pdbx_formal_charge     0
+_chem_comp.three_letter_code      CID297
+_chem_comp.pdbx_ideal_coordinates_missing_flag N
+#
+loop_
+_chem_comp_atom.comp_id
+_chem_comp_atom.atom_id
+_chem_comp_atom.alt_atom_id
+_chem_comp_atom.type_symbol
+_chem_comp_atom.charge
+_chem_comp_atom.pdbx_align
+_chem_comp_atom.pdbx_aromatic_flag
+_chem_comp_atom.pdbx_leaving_atom_flag
+_chem_comp_atom.pdbx_stereo_config
+_chem_comp_atom.model_Cartn_x
+_chem_comp_atom.model_Cartn_y
+_chem_comp_atom.model_Cartn_z
+_chem_comp_atom.pdbx_model_Cartn_x_ideal
+_chem_comp_atom.pdbx_model_Cartn_y_ideal
+_chem_comp_atom.pdbx_model_Cartn_z_ideal
+_chem_comp_atom.pdbx_component_atom_id
+_chem_comp_atom.pdbx_component_comp_id
+_chem_comp_atom.pdbx_ordinal
+CID297 C1 C1 C 0 1 N N N 0.0000 -0.0000 0.0000 0.0000 -0.0000 0.0000 C1 CID297 1
+CID297 H1 H1 H 0 1 N N N 0.5541 0.7996 0.4965 0.5541 0.7996 0.4965 H1 CID297 2
+CID297 H2 H2 H 0 1 N N N 0.6833 -0.8134 -0.2536 0.6833 -0.8134 -0.2536 H2 CID297 3
+CID297 H3 H3 H 0 1 N N N -0.7782 -0.3735 0.6692 -0.7782 -0.3735 0.6692 H3 CID297 4
+CID297 H4 H4 H 0 1 N N N -0.4593 0.3874 -0.9121 -0.4593 0.3874 -0.9121 H4 CID297 5
+#
+loop_
+_chem_comp_bond.comp_id
+_chem_comp_bond.atom_id_1
+_chem_comp_bond.atom_id_2
+_chem_comp_bond.value_order
+_chem_comp_bond.pdbx_aromatic_flag
+_chem_comp_bond.pdbx_stereo_config
+_chem_comp_bond.pdbx_ordinal
+CID297 C1 H1 SING N N 1
+CID297 C1 H2 SING N N 2
+CID297 C1 H3 SING N N 3
+CID297 C1 H4 SING N N 4
+#

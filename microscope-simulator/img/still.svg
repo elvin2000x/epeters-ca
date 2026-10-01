@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 200" width="640" height="200" role="img" aria-labelledby="t d">
+  <title id="t">Muscle, fibre, sarcomere and actin molecule</title>
+  <desc id="d">Four panels from left to right: a tapering muscle with pale tendons, a bundle of fibres with one cut open to show banded strands, one sarcomere with thin blue filaments and thick orange filaments between two dark plates, and a ribbon drawing of one actin protein. Illustrative, not to scale.</desc>
+  <rect width="640" height="200" rx="12" fill="#e7eeec"/>
+  <g font-family="IBM Plex Sans, system-ui, sans-serif" font-size="11" fill="#13201e" text-anchor="middle">
+    <!-- 1 muscle -->
+    <path d="M12 98 H34 C52 98 58 62 90 62 C122 62 128 98 146 98 C128 98 122 134 90 134 C58 134 52 98 34 98 Z" fill="#c4423a"/>
+    <rect x="8" y="94" width="30" height="8" rx="4" fill="#e8dfcf"/><rect x="142" y="94" width="30" height="8" rx="4" fill="#e8dfcf"/>
+    <text x="90" y="168">1 Muscle</text>
+    <!-- 2 fibre -->
+    <g transform="translate(180 0)">
+      <rect x="6" y="52" width="130" height="24" rx="12" fill="#c4423a"/><rect x="6" y="122" width="130" height="24" rx="12" fill="#c4423a"/>
+      <rect x="6" y="78" width="130" height="42" rx="21" fill="#c4423a"/>
+      <rect x="14" y="86" width="114" height="8" rx="4" fill="#e6a27a"/><rect x="14" y="98" width="114" height="8" rx="4" fill="#e6a27a"/>
+      <g fill="#5a3b36"><rect x="30" y="86" width="14" height="8"/><rect x="62" y="86" width="14" height="8"/><rect x="94" y="86" width="14" height="8"/>
+      <rect x="30" y="98" width="14" height="8"/><rect x="62" y="98" width="14" height="8"/><rect x="94" y="98" width="14" height="8"/></g>
+      <text x="71" y="168">2 Fibre</text>
+    </g>
+    <!-- 3 sarcomere -->
+    <g transform="translate(340 0)">
+      <g fill="#e08a2c"><rect x="38" y="76" width="66" height="9" rx="4"/><rect x="38" y="95" width="66" height="9" rx="4"/><rect x="38" y="114" width="66" height="9" rx="4"/></g>
+      <g fill="#3f7fd6"><rect x="12" y="86" width="52" height="5" rx="2"/><rect x="12" y="106" width="52" height="5" rx="2"/><rect x="12" y="66" width="52" height="5" rx="2"/><rect x="12" y="126" width="52" height="5" rx="2"/>
+      <rect x="78" y="86" width="52" height="5" rx="2"/><rect x="78" y="106" width="52" height="5" rx="2"/><rect x="78" y="66" width="52" height="5" rx="2"/><rect x="78" y="126" width="52" height="5" rx="2"/></g>
+      <rect x="8" y="56" width="8" height="86" rx="2" fill="#4a4458"/><rect x="126" y="56" width="8" height="86" rx="2" fill="#4a4458"/>
+      <text x="71" y="168">3 Sarcomere</text>
+    </g>
+    <!-- 4 molecule -->
+    <g transform="translate(500 0)">
+      <path d="M30 120 C14 96 28 62 58 58 C84 54 100 70 104 90 C112 108 100 138 74 140 C54 142 40 134 30 120 Z" fill="none" stroke="#2f8f83" stroke-width="9" stroke-linejoin="round"/>
+      <path d="M48 96 C58 80 80 82 86 100 C90 116 70 124 56 116" fill="none" stroke="#2f8f83" stroke-width="7" stroke-linecap="round"/>
+      <circle cx="68" cy="102" r="5" fill="#8f8f8f"/><circle cx="76" cy="98" r="4" fill="#d9822b"/><circle cx="60" cy="108" r="4" fill="#d34a3b"/>
+      <g fill="#3dff00" stroke="#1e8a00"><circle cx="44" cy="70" r="3.5"/><circle cx="102" cy="68" r="3.5"/><circle cx="96" cy="132" r="3.5"/></g>
+      <text x="68" y="168">4 Actin (real structure)</text>
+    </g>
+    <text x="320" y="190" fill="#4c5e5b">Illustrative, not to scale. The last panel is a simplified sketch of the real structure PDB 1J6Z.</text>
+  </g>
+</svg>

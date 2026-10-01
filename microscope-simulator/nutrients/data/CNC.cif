@@ -1,0 +1,512 @@
+data_CNC
+# 
+_chem_comp.id                                    CNC 
+_chem_comp.name                                  CYANOCOBALAMIN 
+_chem_comp.type                                  NON-POLYMER 
+_chem_comp.pdbx_type                             HETAIN 
+_chem_comp.formula                               "C63 H89 Co N14 O14 P" 
+_chem_comp.mon_nstd_parent_comp_id               ? 
+_chem_comp.pdbx_synonyms                         ? 
+_chem_comp.pdbx_formal_charge                    ? 
+_chem_comp.pdbx_initial_date                     1999-07-08 
+_chem_comp.pdbx_modified_date                    2026-09-16 
+_chem_comp.pdbx_ambiguous_flag                   Y 
+_chem_comp.pdbx_release_status                   REL 
+_chem_comp.pdbx_replaced_by                      ? 
+_chem_comp.pdbx_replaces                         ? 
+_chem_comp.formula_weight                        1356.373 
+_chem_comp.one_letter_code                       ? 
+_chem_comp.three_letter_code                     ? 
+_chem_comp.pdbx_model_coordinates_details        ? 
+_chem_comp.pdbx_model_coordinates_missing_flag   N 
+_chem_comp.pdbx_ideal_coordinates_details        MetalCoord 
+_chem_comp.pdbx_ideal_coordinates_missing_flag   N 
+_chem_comp.pdbx_model_coordinates_db_code        1CCW 
+_chem_comp.pdbx_subcomponent_list                ? 
+_chem_comp.pdbx_processing_site                  RCSB 
+_chem_comp.pdbx_pcm                              Y 
+_chem_comp.pdbx_comp_type                        "metal-containing ligand" 
+# 
+loop_
+_chem_comp_atom.comp_id 
+_chem_comp_atom.atom_id 
+_chem_comp_atom.alt_atom_id 
+_chem_comp_atom.type_symbol 
+_chem_comp_atom.charge 
+_chem_comp_atom.pdbx_align 
+_chem_comp_atom.pdbx_aromatic_flag 
+_chem_comp_atom.pdbx_leaving_atom_flag 
+_chem_comp_atom.pdbx_stereo_config 
+_chem_comp_atom.pdbx_backbone_atom_flag 
+_chem_comp_atom.pdbx_n_terminal_atom_flag 
+_chem_comp_atom.pdbx_c_terminal_atom_flag 
+_chem_comp_atom.model_Cartn_x 
+_chem_comp_atom.model_Cartn_y 
+_chem_comp_atom.model_Cartn_z 
+_chem_comp_atom.pdbx_model_Cartn_x_ideal 
+_chem_comp_atom.pdbx_model_Cartn_y_ideal 
+_chem_comp_atom.pdbx_model_Cartn_z_ideal 
+_chem_comp_atom.pdbx_component_atom_id 
+_chem_comp_atom.pdbx_component_comp_id 
+_chem_comp_atom.pdbx_ordinal 
+CNC CO   CO   CO ?  0 N N N N N N 5.891  36.575 85.161  6.788  36.272 85.685  CO   CNC 1   
+CNC N21  N21  N  0  1 N N N N N N 7.617  35.823 85.325  7.882  34.821 85.162  N21  CNC 2   
+CNC N22  N22  N  0  1 N N N N N N 6.511  37.652 83.711  8.025  37.427 84.810  N22  CNC 3   
+CNC N23  N23  N  0  1 N N N N N N 4.087  37.144 85.123  5.712  37.609 86.485  N23  CNC 4   
+CNC N24  N24  N  -1 1 N N R N N N 5.427  35.267 86.445  5.586  34.946 86.332  N24  CNC 5   
+CNC C1   C1   C  0  1 N N R N N N 7.808  34.815 86.409  7.645  33.596 85.969  C1   CNC 6   
+CNC C20  C20  C  0  1 N N N N N N 8.173  35.548 87.713  8.192  34.048 87.335  C20  CNC 7   
+CNC C2   C2   C  0  1 N N S N N N 8.977  33.933 85.832  8.484  32.503 85.079  C2   CNC 8   
+CNC C25  C25  C  0  1 N N N N N N 9.819  33.262 86.934  9.049  31.354 85.947  C25  CNC 9   
+CNC C26  C26  C  0  1 N N N N N N 8.459  32.848 84.861  7.686  31.842 83.883  C26  CNC 10  
+CNC C27  C27  C  0  1 N N N N N N 9.563  32.120 84.106  8.370  30.799 83.002  C27  CNC 11  
+CNC O28  O28  O  0  1 N N N N N N 9.941  32.553 83.001  9.012  31.159 82.008  O28  CNC 12  
+CNC N29  N29  N  0  1 N N N N N N 10.078 31.042 84.658  8.216  29.505 83.283  N29  CNC 13  
+CNC C3   C3   C  0  1 N N S N N N 9.757  34.952 84.960  9.586  33.427 84.422  C3   CNC 14  
+CNC C30  C30  C  0  1 N N N N N N 11.043 35.561 85.576  10.993 33.659 85.062  C30  CNC 15  
+CNC C31  C31  C  0  1 N N N N N N 12.224 34.875 84.928  12.146 32.803 84.515  C31  CNC 16  
+CNC C32  C32  C  0  1 N N N N N N 13.554 34.961 85.618  13.409 32.883 85.350  C32  CNC 17  
+CNC O34  O34  O  0  1 N N N N N N 14.441 34.321 85.052  13.580 32.085 86.278  O34  CNC 18  
+CNC N33  N33  N  0  1 N N N N N N 13.736 35.636 86.718  14.304 33.819 85.056  N33  CNC 19  
+CNC C4   C4   C  0  1 N N N N N N 8.665  35.921 84.586  8.831  34.750 84.258  C4   CNC 20  
+CNC C5   C5   C  0  1 N N N N N N 8.745  36.748 83.390  9.116  35.798 83.369  C5   CNC 21  
+CNC C35  C35  C  0  1 N N N N N N 10.030 36.486 82.609  9.773  35.439 82.037  C35  CNC 22  
+CNC C6   C6   C  0  1 N N N N N N 7.721  37.541 83.007  8.887  37.156 83.746  C6   CNC 23  
+CNC C7   C7   C  0  1 N N S N N N 7.567  38.350 81.697  9.430  38.500 83.183  C7   CNC 24  
+CNC C36  C36  C  0  1 N N N N N N 8.768  39.019 81.014  10.896 38.448 82.684  C36  CNC 25  
+CNC C37  C37  C  0  1 N N N N N N 6.825  37.428 80.669  8.507  39.116 82.062  C37  CNC 26  
+CNC C38  C38  C  0  1 N N N N N N 7.494  36.124 80.403  8.250  38.337 80.784  C38  CNC 27  
+CNC O39  O39  O  0  1 N N N N N N 7.046  35.064 80.877  7.302  37.545 80.748  O39  CNC 28  
+CNC N40  N40  N  0  1 N N N N N N 8.555  36.099 79.660  9.046  38.517 79.731  N40  CNC 29  
+CNC C8   C8   C  0  1 N N S N N N 6.514  39.408 82.126  9.256  39.432 84.437  C8   CNC 30  
+CNC C41  C41  C  0  1 N N N N N N 7.198  40.631 82.764  10.382 39.579 85.504  C41  CNC 31  
+CNC C42  C42  C  0  1 N N N N N N 6.225  41.667 83.310  10.431 40.942 86.213  C42  CNC 32  
+CNC C43  C43  C  0  1 N N N N N N 6.994  42.734 84.079  11.560 41.069 87.218  C43  CNC 33  
+CNC O44  O44  O  0  1 N N N N N N 7.556  42.433 85.105  11.425 40.585 88.348  O44  CNC 34  
+CNC N45  N45  N  0  1 N N N N N N 7.000  43.926 83.560  12.670 41.703 86.857  N45  CNC 35  
+CNC C9   C9   C  0  1 N N N N N N 5.742  38.613 83.153  8.065  38.751 85.091  C9   CNC 36  
+CNC C10  C10  C  0  1 N N N N N N 4.395  38.801 83.386  7.167  39.427 85.888  C10  CNC 37  
+CNC C11  C11  C  0  1 N N N N N N 3.614  38.059 84.259  6.063  38.926 86.562  C11  CNC 38  
+CNC C12  C12  C  0  1 N N N N N N 2.134  38.261 84.443  5.077  39.756 87.388  C12  CNC 39  
+CNC C46  C46  C  0  1 N N N N N N 1.436  37.257 83.478  4.077  40.463 86.447  C46  CNC 40  
+CNC C47  C47  C  0  1 N N N N N N 1.658  39.676 84.106  5.782  40.840 88.243  C47  CNC 41  
+CNC C13  C13  C  0  1 N N S N N N 1.939  37.793 85.895  4.411  38.598 88.189  C13  CNC 42  
+CNC C48  C48  C  0  1 N N N N N N 2.127  38.893 86.949  4.910  38.121 89.583  C48  CNC 43  
+CNC C49  C49  C  0  1 N N N N N N 0.857  39.721 87.283  4.229  38.764 90.801  C49  CNC 44  
+CNC C50  C50  C  0  1 N N N N N N 1.192  40.750 88.336  4.560  38.103 92.126  C50  CNC 45  
+CNC O51  O51  O  0  1 N N N N N N 1.505  40.386 89.464  3.717  37.386 92.678  O51  CNC 46  
+CNC N52  N52  N  0  1 N N N N N N 1.165  42.034 88.002  5.752  38.328 92.666  N52  CNC 47  
+CNC C14  C14  C  0  1 N N N N N N 3.112  36.845 86.066  4.568  37.427 87.209  C14  CNC 48  
+CNC C15  C15  C  0  1 N N N N N N 3.163  35.824 86.991  3.792  36.258 87.122  C15  CNC 49  
+CNC C53  C53  C  0  1 N N N N N N 1.946  35.664 87.855  2.299  36.378 87.430  C53  CNC 50  
+CNC C16  C16  C  0  1 N N N N N N 4.348  35.029 87.115  4.381  34.973 86.870  C16  CNC 51  
+CNC C17  C17  C  0  1 N N R N N N 4.476  33.689 87.872  3.926  33.521 87.193  C17  CNC 52  
+CNC C54  C54  C  0  1 N N N N N N 3.734  32.620 87.043  2.823  33.101 86.175  C54  CNC 53  
+CNC C55  C55  C  0  1 N N N N N N 4.017  33.612 89.340  3.363  33.318 88.637  C55  CNC 54  
+CNC C56  C56  C  0  1 N N N N N N 4.405  34.837 90.185  4.088  33.972 89.829  C56  CNC 55  
+CNC C57  C57  C  0  1 N N N N N N 3.578  34.883 91.468  3.402  33.699 91.151  C57  CNC 56  
+CNC O58  O58  O  0  1 N N N N N N 2.703  35.745 91.581  2.325  34.266 91.400  O58  CNC 57  
+CNC N59  N59  N  0  1 N N N N N N 3.839  33.963 92.384  3.993  32.864 92.028  N59  CNC 58  
+CNC C18  C18  C  0  1 N N R N N N 6.015  33.475 87.834  5.271  32.711 86.986  C18  CNC 59  
+CNC C60  C60  C  0  1 N N N N N N 6.491  32.023 87.824  5.211  31.206 86.608  C60  CNC 60  
+CNC C61  C61  C  0  1 N N N N N N 6.277  31.189 89.060  4.644  30.248 87.648  C61  CNC 61  
+CNC O63  O63  O  0  1 N N N N N N 6.634  31.593 90.186  5.297  29.983 88.664  O63  CNC 62  
+CNC N62  N62  N  0  1 N N N N N N 5.754  30.020 88.849  3.446  29.707 87.425  N62  CNC 63  
+CNC C19  C19  C  0  1 N N R N N N 6.408  34.186 86.541  6.097  33.589 86.003  C19  CNC 64  
+CNC C1P  C1P  C  0  1 N N N N N N 3.111  33.951 93.661  3.438  32.451 93.313  C1P  CNC 65  
+CNC C2P  C2P  C  0  1 N N R N N N 3.778  34.892 94.679  3.698  33.435 94.448  C2P  CNC 66  
+CNC C3P  C3P  C  0  1 N N N N N N 3.066  34.857 96.011  2.978  33.119 95.741  C3P  CNC 67  
+CNC O3   O3   O  0  1 N N N N N N 5.109  34.446 94.882  5.129  33.440 94.709  O3   CNC 68  
+CNC O4   O4   O  0  1 N N N N N N 6.016  36.195 93.373  5.731  35.195 93.004  O4   CNC 69  
+CNC O5   O5   O  -1 1 N N N N N N 7.309  34.052 93.812  7.461  34.282 94.639  O5   CNC 70  
+CNC P    P    P  0  1 N N N N N N 6.402  35.102 94.276  6.050  34.688 94.369  P    CNC 71  
+CNC O2   O2   O  0  1 N N N N N N 7.007  35.791 95.601  5.503  35.746 95.455  O2   CNC 72  
+CNC C3R  C3R  C  0  1 N N S N N N 7.338  35.059 96.774  6.020  35.825 96.784  C3R  CNC 73  
+CNC C2R  C2R  C  0  1 N N R N N N 8.788  34.671 96.846  6.958  37.031 96.979  C2R  CNC 74  
+CNC O7R  O7R  O  0  1 N N N N N N 9.617  34.854 95.744  7.647  37.348 95.784  O7R  CNC 75  
+CNC C1R  C1R  C  0  1 N N S N N N 9.313  35.456 98.040  6.015  38.132 97.455  C1R  CNC 76  
+CNC O6R  O6R  O  0  1 N N N N N N 8.187  35.650 98.851  4.930  37.469 98.109  O6R  CNC 77  
+CNC C4R  C4R  C  0  1 N N R N N N 7.114  35.973 97.962  4.870  36.065 97.773  C4R  CNC 78  
+CNC C5R  C5R  C  0  1 N N N N N N 5.794  35.963 98.685  4.877  35.254 99.055  C5R  CNC 79  
+CNC O8R  O8R  O  0  1 N N N N N N 5.464  34.614 99.096  5.941  35.599 99.928  O8R  CNC 80  
+CNC N1B  N1B  N  0  1 Y N N N N N 9.949  36.704 97.765  5.492  39.023 96.421  N1B  CNC 81  
+CNC C8B  C8B  C  0  1 Y N N N N N 10.875 37.346 98.594  6.131  40.149 95.929  C8B  CNC 82  
+CNC C2B  C2B  C  0  1 Y N N N N N 9.831  37.480 96.674  4.308  38.942 95.761  C2B  CNC 83  
+CNC N3B  N3B  N  0  1 Y N N N N N 10.551 38.601 96.744  4.129  39.906 94.890  N3B  CNC 84  
+CNC C9B  C9B  C  0  1 Y N N N N N 11.219 38.537 97.960  5.273  40.696 94.969  C9B  CNC 85  
+CNC C4B  C4B  C  0  1 Y N N N N N 12.101 39.438 98.588  5.634  41.851 94.278  C4B  CNC 86  
+CNC C5B  C5B  C  0  1 Y N N N N N 12.600 39.070 99.831  6.845  42.462 94.546  C5B  CNC 87  
+CNC C5M  C5M  C  0  1 N N N N N N 13.625 39.955 100.508 7.208  43.716 93.772  C5M  CNC 88  
+CNC C6B  C6B  C  0  1 Y N N N N N 12.193 37.857 100.460 7.724  41.900 95.522  C6B  CNC 89  
+CNC C6M  C6M  C  0  1 N N N N N N 12.669 37.551 101.860 9.061  42.533 95.843  C6M  CNC 90  
+CNC C7B  C7B  C  0  1 Y N N N N N 11.303 37.002 99.867  7.356  40.748 96.207  C7B  CNC 91  
+CNC N1A  N1A  N  0  1 N N N N N N 5.075  34.264 83.299  5.113  36.310 83.038  N1A  CNC 92  
+CNC C1A  C1A  C  -1 1 N N N N N N 5.455  35.159 83.895  5.781  36.295 84.094  C1A  CNC 93  
+CNC H201 H201 H  0  0 N N N N N N 8.316  34.814 88.519  8.047  33.349 88.000  H201 CNC 94  
+CNC H202 H202 H  0  0 N N N N N N 9.103  36.117 87.566  7.753  34.869 87.630  H202 CNC 95  
+CNC H203 H203 H  0  0 N N N N N N 7.361  36.238 87.985  9.142  34.222 87.274  H203 CNC 96  
+CNC H251 H251 H  0  0 N N N N N N 10.617 32.662 86.472  9.691  30.833 85.432  H251 CNC 97  
+CNC H252 H252 H  0  0 N N N N N N 10.267 34.035 87.575  8.327  30.770 86.237  H252 CNC 98  
+CNC H253 H253 H  0  0 N N N N N N 9.175  32.610 87.542  9.499  31.710 86.732  H253 CNC 99  
+CNC H261 H261 H  0  0 N N N N N N 7.889  32.107 85.441  7.361  32.564 83.289  H261 CNC 100 
+CNC H262 H262 H  0  0 N N N N N N 7.795  33.328 84.127  6.879  31.409 84.254  H262 CNC 101 
+CNC H291 H291 H  0  0 N N N N N N 10.802 30.537 84.188  8.606  28.892 82.773  H291 CNC 102 
+CNC H292 H292 H  0  0 N N N N N N 9.745  30.728 85.547  7.727  29.246 83.979  H292 CNC 103 
+CNC H3   H3   H  0  1 N N N N N N 10.059 34.425 84.043  9.739  33.096 83.512  H3   CNC 104 
+CNC H301 H301 H  0  0 N N N N N N 11.080 36.642 85.376  10.936 33.508 86.030  H301 CNC 105 
+CNC H302 H302 H  0  0 N N N N N N 11.058 35.388 86.662  11.240 34.604 84.936  H302 CNC 106 
+CNC H311 H311 H  0  0 N N N N N N 11.972 33.808 84.835  12.347 33.091 83.613  H311 CNC 107 
+CNC H312 H312 H  0  0 N N N N N N 12.347 35.312 83.926  11.860 31.878 84.474  H312 CNC 108 
+CNC H331 H331 H  0  0 N N N N N N 14.637 35.654 87.150  15.048 33.874 85.537  H331 CNC 109 
+CNC H332 H332 H  0  0 N N N N N N 12.974 36.136 87.130  14.180 34.395 84.389  H332 CNC 110 
+CNC H351 H351 H  0  0 N N N N N N 10.054 37.127 81.716  9.403  34.607 81.704  H351 CNC 111 
+CNC H352 H352 H  0  0 N N N N N N 10.898 36.712 83.245  10.729 35.338 82.166  H352 CNC 112 
+CNC H353 H353 H  0  0 N N N N N N 10.064 35.430 82.303  9.609  36.134 81.385  H353 CNC 113 
+CNC H361 H361 H  0  0 N N N N N N 8.431  39.537 80.104  10.933 38.075 81.785  H361 CNC 114 
+CNC H362 H362 H  0  0 N N N N N N 9.223  39.746 81.702  11.426 37.886 83.281  H362 CNC 115 
+CNC H363 H363 H  0  0 N N N N N N 9.511  38.253 80.746  11.275 39.350 82.664  H363 CNC 116 
+CNC H371 H371 H  0  0 N N N N N N 5.817  37.222 81.059  8.880  39.976 81.804  H371 CNC 117 
+CNC H372 H372 H  0  0 N N N N N N 6.745  37.972 79.716  7.637  39.301 82.450  H372 CNC 118 
+CNC H401 H401 H  0  0 N N N N N N 9.011  35.230 79.469  8.898  38.066 78.981  H401 CNC 119 
+CNC H402 H402 H  0  0 N N N N N N 8.918  36.949 79.278  9.730  39.085 79.772  H402 CNC 120 
+CNC H8   H8   H  0  1 N N N N N N 5.879  39.702 81.277  8.973  40.340 84.150  H8   CNC 121 
+CNC H411 H411 H  0  0 N N N N N N 7.832  40.281 83.592  11.255 39.433 85.086  H411 CNC 122 
+CNC H412 H412 H  0  0 N N N N N N 7.826  41.114 82.001  10.267 38.879 86.188  H412 CNC 123 
+CNC H421 H421 H  0  0 N N N N N N 5.683  42.136 82.476  9.591  41.084 86.672  H421 CNC 124 
+CNC H422 H422 H  0  0 N N N N N N 5.507  41.176 83.984  10.525 41.639 85.546  H422 CNC 125 
+CNC H451 H451 H  0  0 N N N N N N 7.494  44.667 84.015  13.331 41.785 87.444  H451 CNC 126 
+CNC H452 H452 H  0  0 N N N N N N 6.511  44.102 82.706  12.775 42.046 86.043  H452 CNC 127 
+CNC H10  H10  H  0  1 N N N N N N 3.907  39.595 82.841  7.313  40.357 85.950  H10  CNC 128 
+CNC H461 H461 H  0  0 N N N N N N 0.344  37.359 83.569  3.384  40.912 86.973  H461 CNC 129 
+CNC H462 H462 H  0  0 N N N N N N 1.739  37.472 82.443  3.657  39.807 85.857  H462 CNC 130 
+CNC H463 H463 H  0  0 N N N N N N 1.731  36.230 83.741  4.547  41.125 85.900  H463 CNC 131 
+CNC H471 H471 H  0  0 N N N N N N 0.572  39.745 84.264  6.113  41.559 87.667  H471 CNC 132 
+CNC H472 H472 H  0  0 N N N N N N 2.170  40.400 84.757  6.537  40.443 88.716  H472 CNC 133 
+CNC H473 H473 H  0  0 N N N N N N 1.890  39.900 83.054  5.152  41.210 88.893  H473 CNC 134 
+CNC H13  H13  H  0  1 N N N N N N 0.977  37.275 86.023  3.443  38.799 88.277  H13  CNC 135 
+CNC H481 H481 H  0  0 N N N N N N 2.475  38.417 87.877  5.879  38.284 89.648  H481 CNC 136 
+CNC H482 H482 H  0  0 N N N N N N 2.897  39.587 86.581  4.780  37.150 89.649  H482 CNC 137 
+CNC H491 H491 H  0  0 N N N N N N 0.500  40.228 86.375  3.268  38.733 90.675  H491 CNC 138 
+CNC H492 H492 H  0  0 N N N N N N 0.071  39.051 87.662  4.489  39.694 90.847  H492 CNC 139 
+CNC H521 H521 H  0  0 N N N N N N 1.404  42.732 88.678  5.957  37.947 93.441  H521 CNC 140 
+CNC H522 H522 H  0  0 N N N N N N 0.906  42.304 87.075  6.353  38.852 92.271  H522 CNC 141 
+CNC H531 H531 H  0  0 N N N N N N 2.097  34.825 88.551  1.998  37.287 87.276  H531 CNC 142 
+CNC H532 H532 H  0  0 N N N N N N 1.778  36.589 88.427  2.140  36.139 88.357  H532 CNC 143 
+CNC H533 H533 H  0  0 N N N N N N 1.070  35.461 87.221  1.796  35.785 86.854  H533 CNC 144 
+CNC H541 H541 H  0  0 N N N N N N 3.803  31.647 87.552  2.040  33.662 86.282  H541 CNC 145 
+CNC H542 H542 H  0  0 N N N N N N 2.677  32.905 86.939  2.561  32.174 86.326  H542 CNC 146 
+CNC H543 H543 H  0  0 N N N N N N 4.193  32.545 86.046  3.159  33.197 85.263  H543 CNC 147 
+CNC H551 H551 H  0  0 N N N N N N 2.921  33.515 89.355  3.316  32.359 88.818  H551 CNC 148 
+CNC H552 H552 H  0  0 N N N N N N 4.470  32.720 89.797  2.441  33.645 88.654  H552 CNC 149 
+CNC H561 H561 H  0  0 N N N N N N 5.472  34.775 90.444  4.123  34.928 89.693  H561 CNC 150 
+CNC H562 H562 H  0  0 N N N N N N 4.221  35.752 89.603  5.000  33.652 89.868  H562 CNC 151 
+CNC H59  H59  H  0  1 N N N N N N 4.538  33.270 92.205  4.778  32.540 91.810  H59  CNC 152 
+CNC H18  H18  H  0  1 N N N N N N 6.469  33.999 88.688  5.773  32.751 87.842  H18  CNC 153 
+CNC H601 H601 H  0  0 N N N N N N 5.972  31.517 86.997  6.113  30.910 86.415  H601 CNC 154 
+CNC H602 H602 H  0  0 N N N N N N 7.573  32.037 87.625  4.709  31.105 85.779  H602 CNC 155 
+CNC H621 H621 H  0  0 N N N N N N 5.618  29.388 89.612  3.093  29.154 88.022  H621 CNC 156 
+CNC H622 H622 H  0  0 N N N N N N 5.487  29.751 87.924  2.996  29.885 86.680  H622 CNC 157 
+CNC H1P1 H1P1 H  0  0 N N N N N N 2.076  34.281 93.489  3.827  31.578 93.555  H1P1 CNC 158 
+CNC H1P2 H1P2 H  0  0 N N N N N N 3.107  32.928 94.064  2.464  32.328 93.209  H1P2 CNC 159 
+CNC H2P  H2P  H  0  1 N N N N N N 3.766  35.918 94.283  3.409  34.330 94.125  H2P  CNC 160 
+CNC H3P1 H3P1 H  0  0 N N N N N N 3.567  35.539 96.713  3.196  33.793 96.406  H3P1 CNC 161 
+CNC H3P2 H3P2 H  0  0 N N N N N N 2.021  35.173 95.876  3.257  32.245 96.065  H3P2 CNC 162 
+CNC H3P3 H3P3 H  0  0 N N N N N N 3.091  33.833 96.413  2.018  33.116 95.588  H3P3 CNC 163 
+CNC HOP5 HOP5 H  0  0 N N N N N N 7.556  34.222 92.910  7.157  33.982 94.450  HOP5 CNC 164 
+CNC H3R  H3R  H  0  1 N N N N N N 6.707  34.164 96.872  6.512  35.000 97.011  H3R  CNC 165 
+CNC H2R  H2R  H  0  1 N N N N N N 8.820  33.608 97.129  7.603  36.813 97.700  H2R  CNC 166 
+CNC HOR7 HOR7 H  0  0 N N N N N N 10.495 34.560 95.955  8.262  37.901 95.936  HOR7 CNC 167 
+CNC H1R  H1R  H  0  1 N N N N N N 10.027 34.809 98.570  6.488  38.680 98.136  H1R  CNC 168 
+CNC H4R  H4R  H  0  1 N N N N N N 7.273  37.001 97.604  4.013  35.893 97.308  H4R  CNC 169 
+CNC H5R1 H5R1 H  0  0 N N N N N N 5.860  36.608 99.573  4.936  34.301 98.837  H5R1 CNC 170 
+CNC H5R2 H5R2 H  0  0 N N N N N N 5.009  36.342 98.014  4.026  35.393 99.519  H5R2 CNC 171 
+CNC HOR8 HOR8 H  0  0 N N N N N N 4.630  34.616 99.551  5.895  35.118 100.622 HOR8 CNC 172 
+CNC H2B  H2B  H  0  1 N N N N N N 9.215  37.222 95.825  3.686  38.257 95.919  H2B  CNC 173 
+CNC H4B  H4B  H  0  1 N N N N N N 12.377 40.373 98.124  5.050  42.217 93.632  H4B  CNC 174 
+CNC HM51 HM51 H  0  0 N N N N N N 13.112 40.688 101.147 7.393  44.445 94.388  HM51 CNC 175 
+CNC HM52 HM52 H  0  0 N N N N N N 14.294 39.336 101.124 6.472  43.978 93.192  HM52 CNC 176 
+CNC HM53 HM53 H  0  0 N N N N N N 14.215 40.483 99.744  7.993  43.548 93.224  HM53 CNC 177 
+CNC HM61 HM61 H  0  0 N N N N N N 11.974 37.993 102.589 9.496  42.050 96.566  HM61 CNC 178 
+CNC HM62 HM62 H  0  0 N N N N N N 12.707 36.461 102.004 8.932  43.455 96.123  HM62 CNC 179 
+CNC HM63 HM63 H  0  0 N N N N N N 13.673 37.975 102.007 9.635  42.507 95.058  HM63 CNC 180 
+CNC H7B  H7B  H  0  1 N N N N N N 10.954 36.109 100.364 7.944  40.375 96.860  H7B  CNC 181 
+CNC H1   H1   H  0  1 N N N N N N 6.263  33.489 85.703  5.789  33.367 85.093  H1   CNC 182 
+# 
+loop_
+_chem_comp_bond.comp_id 
+_chem_comp_bond.atom_id_1 
+_chem_comp_bond.atom_id_2 
+_chem_comp_bond.value_order 
+_chem_comp_bond.pdbx_aromatic_flag 
+_chem_comp_bond.pdbx_stereo_config 
+_chem_comp_bond.pdbx_ordinal 
+_chem_comp_bond.pdbx_metal_coordination_flag 
+_chem_comp_bond.pdbx_metal_pi_flag 
+CNC CO  N21  SING N N 1   Y N 
+CNC CO  N22  SING N N 2   Y N 
+CNC CO  N23  SING N N 3   Y N 
+CNC CO  N24  SING N N 4   Y N 
+CNC CO  C1A  SING N N 5   Y N 
+CNC N21 C1   SING N N 6   N N 
+CNC N21 C4   DOUB N N 7   N N 
+CNC N22 C6   SING N N 8   N N 
+CNC N22 C9   DOUB N N 9   N N 
+CNC N23 C11  SING N N 10  N N 
+CNC N23 C14  DOUB N N 11  N N 
+CNC N24 C16  SING N N 12  N N 
+CNC N24 C19  SING N N 13  N N 
+CNC C1  C20  SING N N 14  N N 
+CNC C1  C2   SING N N 15  N N 
+CNC C1  C19  SING N N 16  N N 
+CNC C20 H201 SING N N 17  N N 
+CNC C20 H202 SING N N 18  N N 
+CNC C20 H203 SING N N 19  N N 
+CNC C2  C25  SING N N 20  N N 
+CNC C2  C26  SING N N 21  N N 
+CNC C2  C3   SING N N 22  N N 
+CNC C25 H251 SING N N 23  N N 
+CNC C25 H252 SING N N 24  N N 
+CNC C25 H253 SING N N 25  N N 
+CNC C26 C27  SING N N 26  N N 
+CNC C26 H261 SING N N 27  N N 
+CNC C26 H262 SING N N 28  N N 
+CNC C27 O28  DOUB N N 29  N N 
+CNC C27 N29  SING N N 30  N N 
+CNC N29 H291 SING N N 31  N N 
+CNC N29 H292 SING N N 32  N N 
+CNC C3  C30  SING N N 33  N N 
+CNC C3  C4   SING N N 34  N N 
+CNC C3  H3   SING N N 35  N N 
+CNC C30 C31  SING N N 36  N N 
+CNC C30 H301 SING N N 37  N N 
+CNC C30 H302 SING N N 38  N N 
+CNC C31 C32  SING N N 39  N N 
+CNC C31 H311 SING N N 40  N N 
+CNC C31 H312 SING N N 41  N N 
+CNC C32 O34  DOUB N N 42  N N 
+CNC C32 N33  SING N N 43  N N 
+CNC N33 H331 SING N N 44  N N 
+CNC N33 H332 SING N N 45  N N 
+CNC C4  C5   SING N N 46  N N 
+CNC C5  C35  SING N N 47  N N 
+CNC C5  C6   DOUB N N 48  N N 
+CNC C35 H351 SING N N 49  N N 
+CNC C35 H352 SING N N 50  N N 
+CNC C35 H353 SING N N 51  N N 
+CNC C6  C7   SING N N 52  N N 
+CNC C7  C36  SING N N 53  N N 
+CNC C7  C37  SING N N 54  N N 
+CNC C7  C8   SING N N 55  N N 
+CNC C36 H361 SING N N 56  N N 
+CNC C36 H362 SING N N 57  N N 
+CNC C36 H363 SING N N 58  N N 
+CNC C37 C38  SING N N 59  N N 
+CNC C37 H371 SING N N 60  N N 
+CNC C37 H372 SING N N 61  N N 
+CNC C38 O39  DOUB N N 62  N N 
+CNC C38 N40  SING N N 63  N N 
+CNC N40 H401 SING N N 64  N N 
+CNC N40 H402 SING N N 65  N N 
+CNC C8  C41  SING N N 66  N N 
+CNC C8  C9   SING N N 67  N N 
+CNC C8  H8   SING N N 68  N N 
+CNC C41 C42  SING N N 69  N N 
+CNC C41 H411 SING N N 70  N N 
+CNC C41 H412 SING N N 71  N N 
+CNC C42 C43  SING N N 72  N N 
+CNC C42 H421 SING N N 73  N N 
+CNC C42 H422 SING N N 74  N N 
+CNC C43 O44  DOUB N N 75  N N 
+CNC C43 N45  SING N N 76  N N 
+CNC N45 H451 SING N N 77  N N 
+CNC N45 H452 SING N N 78  N N 
+CNC C9  C10  SING N N 79  N N 
+CNC C10 C11  DOUB N N 80  N N 
+CNC C10 H10  SING N N 81  N N 
+CNC C11 C12  SING N N 82  N N 
+CNC C12 C46  SING N N 83  N N 
+CNC C12 C47  SING N N 84  N N 
+CNC C12 C13  SING N N 85  N N 
+CNC C46 H461 SING N N 86  N N 
+CNC C46 H462 SING N N 87  N N 
+CNC C46 H463 SING N N 88  N N 
+CNC C47 H471 SING N N 89  N N 
+CNC C47 H472 SING N N 90  N N 
+CNC C47 H473 SING N N 91  N N 
+CNC C13 C48  SING N N 92  N N 
+CNC C13 C14  SING N N 93  N N 
+CNC C13 H13  SING N N 94  N N 
+CNC C48 C49  SING N N 95  N N 
+CNC C48 H481 SING N N 96  N N 
+CNC C48 H482 SING N N 97  N N 
+CNC C49 C50  SING N N 98  N N 
+CNC C49 H491 SING N N 99  N N 
+CNC C49 H492 SING N N 100 N N 
+CNC C50 O51  DOUB N N 101 N N 
+CNC C50 N52  SING N N 102 N N 
+CNC N52 H521 SING N N 103 N N 
+CNC N52 H522 SING N N 104 N N 
+CNC C14 C15  SING N N 105 N N 
+CNC C15 C53  SING N N 106 N N 
+CNC C15 C16  DOUB N N 107 N N 
+CNC C53 H531 SING N N 108 N N 
+CNC C53 H532 SING N N 109 N N 
+CNC C53 H533 SING N N 110 N N 
+CNC C16 C17  SING N N 111 N N 
+CNC C17 C54  SING N N 112 N N 
+CNC C17 C55  SING N N 113 N N 
+CNC C17 C18  SING N N 114 N N 
+CNC C54 H541 SING N N 115 N N 
+CNC C54 H542 SING N N 116 N N 
+CNC C54 H543 SING N N 117 N N 
+CNC C55 C56  SING N N 118 N N 
+CNC C55 H551 SING N N 119 N N 
+CNC C55 H552 SING N N 120 N N 
+CNC C56 C57  SING N N 121 N N 
+CNC C56 H561 SING N N 122 N N 
+CNC C56 H562 SING N N 123 N N 
+CNC C57 O58  DOUB N N 124 N N 
+CNC C57 N59  SING N N 125 N N 
+CNC N59 C1P  SING N N 126 N N 
+CNC N59 H59  SING N N 127 N N 
+CNC C18 C60  SING N N 128 N N 
+CNC C18 C19  SING N N 129 N N 
+CNC C18 H18  SING N N 130 N N 
+CNC C60 C61  SING N N 131 N N 
+CNC C60 H601 SING N N 132 N N 
+CNC C60 H602 SING N N 133 N N 
+CNC C61 O63  DOUB N N 134 N N 
+CNC C61 N62  SING N N 135 N N 
+CNC N62 H621 SING N N 136 N N 
+CNC N62 H622 SING N N 137 N N 
+CNC C1P C2P  SING N N 138 N N 
+CNC C1P H1P1 SING N N 139 N N 
+CNC C1P H1P2 SING N N 140 N N 
+CNC C2P C3P  SING N N 141 N N 
+CNC C2P O3   SING N N 142 N N 
+CNC C2P H2P  SING N N 143 N N 
+CNC C3P H3P1 SING N N 144 N N 
+CNC C3P H3P2 SING N N 145 N N 
+CNC C3P H3P3 SING N N 146 N N 
+CNC O3  P    SING N N 147 N N 
+CNC O4  P    DOUB N N 148 N N 
+CNC O5  P    SING N N 149 N N 
+CNC O5  HOP5 SING N N 150 N N 
+CNC P   O2   SING N N 151 N N 
+CNC O2  C3R  SING N N 152 N N 
+CNC C3R C2R  SING N N 153 N N 
+CNC C3R C4R  SING N N 154 N N 
+CNC C3R H3R  SING N N 155 N N 
+CNC C2R O7R  SING N N 156 N N 
+CNC C2R C1R  SING N N 157 N N 
+CNC C2R H2R  SING N N 158 N N 
+CNC O7R HOR7 SING N N 159 N N 
+CNC C1R O6R  SING N N 160 N N 
+CNC C1R N1B  SING N N 161 N N 
+CNC C1R H1R  SING N N 162 N N 
+CNC O6R C4R  SING N N 163 N N 
+CNC C4R C5R  SING N N 164 N N 
+CNC C4R H4R  SING N N 165 N N 
+CNC C5R O8R  SING N N 166 N N 
+CNC C5R H5R1 SING N N 167 N N 
+CNC C5R H5R2 SING N N 168 N N 
+CNC O8R HOR8 SING N N 169 N N 
+CNC N1B C8B  SING Y N 170 N N 
+CNC N1B C2B  SING Y N 171 N N 
+CNC C8B C9B  DOUB Y N 172 N N 
+CNC C8B C7B  SING Y N 173 N N 
+CNC C2B N3B  DOUB Y N 174 N N 
+CNC C2B H2B  SING N N 175 N N 
+CNC N3B C9B  SING Y N 176 N N 
+CNC C9B C4B  SING Y N 177 N N 
+CNC C4B C5B  DOUB Y N 178 N N 
+CNC C4B H4B  SING N N 179 N N 
+CNC C5B C5M  SING N N 180 N N 
+CNC C5B C6B  SING Y N 181 N N 
+CNC C5M HM51 SING N N 182 N N 
+CNC C5M HM52 SING N N 183 N N 
+CNC C5M HM53 SING N N 184 N N 
+CNC C6B C6M  SING N N 185 N N 
+CNC C6B C7B  DOUB Y N 186 N N 
+CNC C6M HM61 SING N N 187 N N 
+CNC C6M HM62 SING N N 188 N N 
+CNC C6M HM63 SING N N 189 N N 
+CNC C7B H7B  SING N N 190 N N 
+CNC N1A C1A  TRIP N N 191 N N 
+CNC C19 H1   SING N N 192 N N 
+# 
+loop_
+_pdbx_chem_comp_descriptor.comp_id 
+_pdbx_chem_comp_descriptor.type 
+_pdbx_chem_comp_descriptor.program 
+_pdbx_chem_comp_descriptor.program_version 
+_pdbx_chem_comp_descriptor.descriptor 
+CNC SMILES           ACDLabs              12.01 "NC(=O)CC1(C)C2=C(C)C=3C(CCC(N)=O)C(C)(CC(N)=O)C4(C)N=3[Co+2]35(C#N)N2=C(C=C2n3c(C(CCC(N)=O)C2(C)C)c(C)c2n5C4C(CC(N)=O)C2(C)CCC(=O)NCC(C)OP(=O)(O)OC2C(CO)OC(n3cnc4cc(C)c(C)cc43)C2O)C1CCC(N)=O"                                                                                                                                                                                                                                                                                                                                                       
+CNC InChI            InChI                1.03  "InChI=1S/C62H90N13O14P.CN.Co/c1-29-20-39-40(21-30(29)2)75(28-70-39)57-52(84)53(41(27-76)87-57)89-90(85,86)88-31(3)26-69-49(83)18-19-59(8)37(22-46(66)80)56-62(11)61(10,25-48(68)82)36(14-17-45(65)79)51(74-62)33(5)55-60(9,24-47(67)81)34(12-15-43(63)77)38(71-55)23-42-58(6,7)35(13-16-44(64)78)50(72-42)32(4)54(59)73-56;1-2;/h20-21,23,28,31,34-37,41,52-53,56-57,76,84H,12-19,22,24-27H2,1-11H3,(H15,63,64,65,66,67,68,69,71,72,73,74,77,78,79,80,81,82,83,85,86);;/q;;+3/p-1/t31-,34-,35-,36-,37+,41-,52-,53-,56?,57+,59-,60+,61+,62+;;/m1../s1" 
+CNC InChIKey         InChI                1.03  SYZBZQWSWIJYAR-UVKKECPRSA-M                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+CNC SMILES_CANONICAL CACTVS               3.385 "C[C@H](CNC(=O)CC[C@]1(C)[C@@H](CC(N)=O)[C@H]2[N@@]([Co++]C#N)C1=C(C)C3=NC(=CC4=NC(=C(C)C5=N[C@]2(C)[C@@](C)(CC(N)=O)[C@@H]5CCC(N)=O)[C@@](C)(CC(N)=O)[C@@H]4CCC(N)=O)C(C)(C)[C@@H]3CCC(N)=O)O[P](O)(=O)O[C@H]6[C@@H](O)[C@H](O[C@@H]6CO)n7cnc8cc(C)c(C)cc78"                                                                                                                                                                                                                                                                                          
+CNC SMILES           CACTVS               3.385 "C[CH](CNC(=O)CC[C]1(C)[CH](CC(N)=O)[CH]2[N]([Co++]C#N)C1=C(C)C3=NC(=CC4=NC(=C(C)C5=N[C]2(C)[C](C)(CC(N)=O)[CH]5CCC(N)=O)[C](C)(CC(N)=O)[CH]4CCC(N)=O)C(C)(C)[CH]3CCC(N)=O)O[P](O)(=O)O[CH]6[CH](O)[CH](O[CH]6CO)n7cnc8cc(C)c(C)cc78"                                                                                                                                                                                                                                                                                                                  
+CNC SMILES_CANONICAL "OpenEye OEToolkits" 2.0.7 "Cc1cc2c(cc1C)n(cn2)[C@@H]3[C@@H]([C@@H]([C@H](O3)CO)O[P@@](=O)(O)O[C@H](C)CNC(=O)CC[C@@]4([C@H](C5[C@]6([C@@]([C@@H](C7=[N]6[Co+2]89(N5C4=C(C1=[N]8C(=CC2=[N]9C(=C7C)[C@@]([C@@H]2CCC(=O)N)(C)CC(=O)N)C([C@@H]1CCC(=O)N)(C)C)C)C#N)CCC(=O)N)(C)CC(=O)N)C)CC(=O)N)C)O"                                                                                                                                                                                                                                                                                 
+CNC SMILES           "OpenEye OEToolkits" 2.0.7 "Cc1cc2c(cc1C)n(cn2)C3C(C(C(O3)CO)OP(=O)(O)OC(C)CNC(=O)CCC4(C(C5C6(C(C(C7=[N]6[Co+2]89(N5C4=C(C1=[N]8C(=CC2=[N]9C(=C7C)C(C2CCC(=O)N)(C)CC(=O)N)C(C1CCC(=O)N)(C)C)C)C#N)CCC(=O)N)(C)CC(=O)N)C)CC(=O)N)C)O"                                                                                                                                                                                                                                                                                                                                              
+# 
+_pdbx_chem_comp_identifier.comp_id           CNC 
+_pdbx_chem_comp_identifier.type              "SYSTEMATIC NAME" 
+_pdbx_chem_comp_identifier.program           ACDLabs 
+_pdbx_chem_comp_identifier.program_version   12.01 
+_pdbx_chem_comp_identifier.identifier        "(cyanido-kappaC)[5-(5,6-dimethyl-1H-benzimidazol-1-yl)-4-hydroxy-2-(hydroxymethyl)oxolan-3-yl 1-{3-[3,14,19-tris(2-amino-2-oxoethyl)-8,13,18-tris(3-amino-3-oxopropyl)-1,4,6,9,9,14,16,19-octamethyl-20,21,22,23-tetraazapentacyclo[15.2.1.1~2,5~.1~7,10~.1~12,15~]tricosa-5,7(22),10,12(21),15,17(20)-hexaen-4-yl-kappa~4~N~20~,N~21~,N~22~,N~23~]propanamido}propan-2-yl hydrogenato phosphate]cobalt(2+) (non-preferred name)" 
+# 
+loop_
+_pdbx_chem_comp_pcm.pcm_id 
+_pdbx_chem_comp_pcm.comp_id 
+_pdbx_chem_comp_pcm.modified_residue_id 
+_pdbx_chem_comp_pcm.type 
+_pdbx_chem_comp_pcm.category 
+_pdbx_chem_comp_pcm.position 
+_pdbx_chem_comp_pcm.polypeptide_position 
+_pdbx_chem_comp_pcm.comp_id_linking_atom 
+_pdbx_chem_comp_pcm.modified_residue_id_linking_atom 
+_pdbx_chem_comp_pcm.uniprot_specific_ptm_accession 
+_pdbx_chem_comp_pcm.uniprot_generic_ptm_accession 
+1 CNC 4QK None "Covalent chemical modification" "Amino-acid side chain" "Any position" C5R NZ2 ? ? 
+2 CNC HIS None "Metal coordination"             "Amino-acid side chain" "Any position" CO  NE2 ? ? 
+# 
+loop_
+_pdbx_chem_comp_atom_coordination.geometry_id 
+_pdbx_chem_comp_atom_coordination.comp_id 
+_pdbx_chem_comp_atom_coordination.atom_id 
+_pdbx_chem_comp_atom_coordination.number 
+_pdbx_chem_comp_atom_coordination.geometry_calculated 
+_pdbx_chem_comp_atom_coordination.geometry_generic 
+_pdbx_chem_comp_atom_coordination.geometry_abbr 
+_pdbx_chem_comp_atom_coordination.provenance 
+1 CNC CO 6 octahedron       octahedral         OCT FindGeo    
+1 CNC CO 6 octahedral       octahedral         OCT MetalCoord 
+2 CNC CO 5 "square pyramid" "square pyramidal" SPY FindGeo    
+2 CNC CO 5 square-pyramid   "square pyramidal" SQP MetalCoord 
+# 
+loop_
+_pdbx_chem_comp_atom_coordination_sphere.id 
+_pdbx_chem_comp_atom_coordination_sphere.geometry_id 
+_pdbx_chem_comp_atom_coordination_sphere.comp_id 
+_pdbx_chem_comp_atom_coordination_sphere.atom_id 
+_pdbx_chem_comp_atom_coordination_sphere.descriptor 
+_pdbx_chem_comp_atom_coordination_sphere.provenance 
+1 1 CNC CO "@OCT{Co,C,N,N,N,N,N}"  MetalCoord 
+2 1 CNC CO "@OCT{Co,Cl,N,N,N,N,N}" MetalCoord 
+3 2 CNC CO "@SQP{Co,N,N,N,N,N}"    MetalCoord 
+4 2 CNC CO "@SQP{Co,N,N,N,N,C}"    MetalCoord 
+# 
+loop_
+_pdbx_chem_comp_audit.comp_id 
+_pdbx_chem_comp_audit.action_type 
+_pdbx_chem_comp_audit.date 
+_pdbx_chem_comp_audit.processing_site 
+CNC "Create component"   1999-07-08 RCSB 
+CNC "Modify descriptor"  2012-01-05 RCSB 
+CNC "Modify coordinates" 2012-01-05 RCSB 
+CNC "Other modification" 2021-08-10 RCSB 
+CNC "Modify PCM"         2024-09-27 PDBE 
+CNC "Other modification" 2026-07-17 RCSB 
+CNC "Other modification" 2026-07-31 RCSB 
+CNC "Other modification" 2026-09-16 RCSB 
+# 

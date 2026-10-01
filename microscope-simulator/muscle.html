@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cell and Molecule Explorer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Zoom from a muscle to a real molecule, one plain-English step at a time.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' data: blob:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'none'">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%230b7469'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='%23fff' stroke-width='3'/%3E%3C/svg%3E">
+<script>try { var t = localStorage.getItem('cme-theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}</script>
+<link rel="stylesheet" href="vendor/fonts/fonts.css">
+<style>
+:root {
+  --stage-a: #e7eeec; --stage-b: #cdd9d6;
+  --panel: #f7faf9; --raised: #ffffff;
+  --ink: #13201e; --muted: #4c5e5b; --line: #7d8d8a;
+  --accent: #0b7469; --accent-soft: rgba(11, 116, 105, 0.12); --on-accent: #ffffff;
+  --good: #14693a; --bad: #a3321f;
+  --shadow: 0 10px 30px rgba(17, 36, 33, 0.14);
+  --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Menlo, Consolas, monospace;
+  --top: env(safe-area-inset-top, 0px); --bottom: env(safe-area-inset-bottom, 0px);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --stage-a: #17211f; --stage-b: #0b1110;
+    --panel: #141e1d; --raised: #1b2826;
+    --ink: #e4eeeb; --muted: #9db0ac; --line: #66807b;
+    --accent: #39b9ab; --accent-soft: rgba(57, 185, 171, 0.16); --on-accent: #04201c;
+    --good: #5fd18b; --bad: #ff8a74;
+    --shadow: 0 12px 34px rgba(0, 0, 0, 0.5);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --stage-a: #17211f; --stage-b: #0b1110;
+  --panel: #141e1d; --raised: #1b2826;
+  --ink: #e4eeeb; --muted: #9db0ac; --line: #66807b;
+  --accent: #39b9ab; --accent-soft: rgba(57, 185, 171, 0.16); --on-accent: #04201c;
+  --good: #5fd18b; --bad: #ff8a74;
+  --shadow: 0 12px 34px rgba(0, 0, 0, 0.5);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body { margin: 0; background: var(--panel); color: var(--ink); font-family: var(--font-ui); font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; overflow: hidden; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.skip { position: absolute; left: 8px; top: -60px; z-index: 50; background: var(--accent); color: var(--on-accent); padding: 8px 12px; border-radius: 8px; }
+.skip:focus { top: calc(8px + var(--top)); }
+
+.app { display: flex; flex-direction: column; height: 100vh; height: 100dvh; }
+.stagewrap { position: relative; flex: 0 0 46%; min-height: 250px; background: radial-gradient(120% 100% at 50% 40%, var(--stage-a), var(--stage-b)); overflow: hidden; }
+.panel { flex: 1 1 auto; min-height: 0; overflow-y: auto; background: var(--panel); border-top: 1px solid var(--line); padding: 14px 16px calc(20px + var(--bottom)); -webkit-overflow-scrolling: touch; }
+@media (min-width: 880px) {
+  .app { flex-direction: row; }
+  .stagewrap { flex: 1 1 auto; min-height: 0; }
+  .panel { flex: 0 0 410px; border-top: 0; border-left: 1px solid var(--line); padding: 18px 22px 28px; }
+}
+
+#gl, #mol { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+#gl { touch-action: none; outline: none; }
+#viewport { position: absolute; inset: 0; outline: none; }
+#viewport:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
+#mol { opacity: 0; pointer-events: none; transition: opacity 0.5s; }
+#mol.on { opacity: 1; pointer-events: auto; }
+/* Mol* draws its own small control strips; our panel carries the controls, so hide them to keep the look clean and the focus order short. */
+#mol .msp-viewport-controls, #mol .msp-state-snapshot-viewport-controls, #mol .msp-viewport-top-left-controls, #mol .msp-help-text, #mol .msp-canvas3d-axes { display: none !important; }
+#mol .msp-plugin, #mol .msp-plugin > div, #mol .msp-plugin .msp-layout-standard { background: transparent !important; border: 0 !important; }
+#mol canvas, #mol .msp-viewport, #mol .msp-viewport-host3d { background: transparent !important; background-image: none !important; }
+#mol .msp-plugin .msp-layout-static, #mol .msp-plugin .msp-layout-region { background: transparent !important; }
+
+.badge { position: absolute; left: 10px; bottom: 10px; z-index: 4; max-width: calc(100% - 20px); background: var(--panel); border: 1px solid var(--line); color: var(--ink); border-radius: 999px; padding: 4px 12px; font-size: 13px; font-weight: 500; box-shadow: var(--shadow); }
+.brand { position: absolute; left: 12px; top: calc(10px + var(--top)); z-index: 4; font-weight: 600; font-size: 15px; letter-spacing: -0.005em; padding: 4px 10px; border-radius: 8px; background: var(--panel); border: 1px solid var(--line); color: var(--ink); text-decoration: none; min-height: 32px; display: inline-flex; align-items: center; }
+.brand:hover { border-color: var(--accent); }
+.viewbtn { position: absolute; right: 10px; top: calc(10px + var(--top)); z-index: 4; border: 1px solid var(--line); background: var(--panel); border-radius: 999px; padding: 8px 14px; min-height: 40px; font-size: 14px; font-weight: 500; }
+.viewbtn:hover { border-color: var(--accent); }
+
+.hotspot { position: absolute; left: 0; top: 0; z-index: 5; display: flex; align-items: center; gap: 8px; border: 0; background: transparent; padding: 0; margin: 0; transform: translate(-100px, -100px); will-change: transform; }
+.hotspot .dot { position: relative; flex: none; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; background: var(--accent); border: 3px solid var(--on-accent); box-shadow: 0 2px 10px rgba(0,0,0,0.35); }
+.hotspot .dot::before { content: ""; position: absolute; inset: -3px; border-radius: 50%; border: 3px solid var(--accent); animation: pulse 1.8s ease-out infinite; }
+.hotspot .dot::after { content: ""; position: absolute; left: 50%; top: 50%; width: 16px; height: 16px; margin: -8px 0 0 -8px; background: var(--on-accent); border-radius: 50%; }
+/* the tag sits beside the dot and flips to the left near the right edge so it never clips */
+.hotspot .tag { position: absolute; left: 0; top: 30px; background: var(--panel); color: var(--ink); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px 5px 14px; font-size: 14px; font-weight: 500; box-shadow: var(--shadow); width: max-content; max-width: min(210px, 52vw); line-height: 1.25; }
+.hotspot:hover .dot, .hotspot:focus-visible .dot { background: var(--ink); }
+.hotspot:focus-visible { outline: none; }
+.hotspot:focus-visible .dot { outline: 3px solid var(--ink); outline-offset: 3px; }
+@keyframes pulse { 0% { transform: scale(1); opacity: 0.9; } 100% { transform: scale(1.9); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .hotspot .dot::before { animation: none; transform: scale(1.35); opacity: 0.6; } #mol { transition: none; } }
+
+.msg { position: absolute; inset: 0; z-index: 6; display: flex; align-items: center; justify-content: center; padding: 20px; text-align: center; background: color-mix(in srgb, var(--panel) 80%, transparent); }
+.msg .box { max-width: 380px; }
+.spin { display: inline-block; width: 22px; height: 22px; border-radius: 50%; border: 3px solid var(--line); border-top-color: var(--accent); animation: spin 0.9s linear infinite; vertical-align: -5px; margin-right: 8px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spin { animation-duration: 3s; } }
+
+/* No-WebGL fallback: still image + the whole story as text */
+.fallback { position: absolute; inset: 0; z-index: 7; overflow-y: auto; padding: 14px; background: var(--panel); }
+.fallback img { width: 100%; max-width: 640px; height: auto; display: block; margin: 8px auto; border-radius: 12px; border: 1px solid var(--line); }
+.fallback h2 { font-size: 18px; margin: 18px 0 2px; }
+.fallback p { margin: 4px 0; max-width: 62ch; }
+
+.steps { list-style: none; display: flex; gap: 6px; margin: 0 0 12px; padding: 0; }
+.steps li { flex: 1 1 0; min-width: 0; }
+.steps button { width: 100%; min-height: 44px; padding: 6px 4px; border: 1px solid var(--line); background: var(--raised); border-radius: 10px; font-size: 13px; font-weight: 500; color: var(--muted); display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.15; }
+.steps button b { font-family: var(--font-data); font-weight: 400; font-size: 12px; }
+.steps button[aria-current="step"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.steps button:disabled { opacity: 0.5; cursor: not-allowed; }
+.eyebrow { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+h1 { margin: 2px 0 6px; font-size: 24px; line-height: 1.2; letter-spacing: -0.01em; }
+.story { font-size: 19px; line-height: 1.45; margin: 0 0 14px; max-width: 46ch; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
+.btn { min-height: 44px; padding: 8px 16px; border-radius: 10px; border: 1px solid var(--line); background: var(--raised); font-weight: 500; font-size: 15px; }
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.btn.primary:hover { filter: brightness(1.08); }
+.btn[aria-expanded="true"] { background: var(--accent-soft); border-color: var(--accent); }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+.card { border: 1px solid var(--line); background: var(--raised); border-radius: 12px; padding: 12px 14px; margin: 0 0 12px; }
+.card h2 { margin: 0 0 4px; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.card p { margin: 0 0 6px; }
+.small { font-size: 14px; color: var(--muted); }
+details.card > summary { cursor: pointer; font-weight: 600; font-size: 15px; min-height: 28px; }
+details.card[open] > summary { margin-bottom: 8px; }
+.legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.legend li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; }
+.legend i { flex: none; width: 18px; height: 18px; margin-top: 2px; border-radius: 5px; border: 1px solid rgba(0,0,0,0.35); }
+.slider { display: grid; gap: 4px; }
+.slider input { width: 100%; height: 36px; accent-color: var(--accent); }
+.slider .ends { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); }
+.sources { margin: 6px 0 0; padding-left: 18px; font-size: 13px; color: var(--muted); }
+.sources li { margin: 0 0 4px; }
+.sources a { color: var(--accent); overflow-wrap: anywhere; }
+.q { margin: 0 0 12px; padding: 0; border: 0; }
+.q legend { padding: 0; font-weight: 600; margin-bottom: 6px; }
+.q .opts { display: grid; gap: 6px; }
+.q .opt { text-align: left; min-height: 44px; padding: 8px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--panel); }
+.q .opt[aria-pressed="true"] { border-width: 2px; border-color: var(--accent); }
+.q .opt.right { border-color: var(--good); background: color-mix(in srgb, var(--good) 14%, var(--panel)); }
+.q .opt.wrong { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 12%, var(--panel)); }
+.q .fb { margin: 6px 0 0; font-size: 14px; min-height: 1.4em; }
+.foot { font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+.foot summary { cursor: pointer; }
+</style>
+</head>
+<body>
+<a class="skip" href="#panel">Skip to the story</a>
+<div class="app">
+  <main class="stagewrap" id="stagewrap">
+    <div id="viewport" tabindex="0" role="group" aria-label="3D view" aria-describedby="viewhelp">
+      <canvas id="gl"></canvas>
+      <div id="mol"></div>
+    </div>
+    <span id="viewhelp" class="sr-only">Drag to turn the view. Arrow keys turn it, plus and minus zoom, zero resets. A text description of the view is in the panel.</span>
+    <a class="brand" href="./" aria-label="Cell and Molecule Explorer home">Cell and Molecule Explorer</a>
+    <button class="viewbtn" id="resetView" type="button">Reset view</button>
+    <button class="hotspot" id="hotspot" type="button" hidden><span class="dot"></span><span class="tag" id="hotspotTag"></span></button>
+    <div class="badge" id="badge"></div>
+    <div class="msg" id="loadMsg" hidden role="status"><div class="box" id="loadMsgBox"></div></div>
+    <div class="fallback" id="fallback" hidden></div>
+  </main>
+  <section class="panel" id="panel" aria-labelledby="stopTitle" tabindex="-1">
+    <nav aria-label="Steps"><ol class="steps" id="steps"></ol></nav>
+    <p class="eyebrow" id="scale"></p>
+    <h1 id="stopTitle" tabindex="-1">Cell and Molecule Explorer</h1>
+    <p class="story" id="story">Loading the first step.</p>
+    <div class="row">
+      <button class="btn" id="back" type="button" hidden>Back</button>
+      <button class="btn primary" id="next" type="button" hidden>Zoom in</button>
+      <button class="btn" id="deeperBtn" type="button" aria-expanded="false" aria-controls="deeper" hidden>Go deeper</button>
+    </div>
+    <div class="card slider" id="sliderCard" hidden>
+      <label for="slide" id="slideLabel"></label>
+      <input type="range" id="slide" min="0" max="100" value="0">
+      <div class="ends"><span id="slideMin"></span><span id="slideMax"></span></div>
+      <div class="row" style="margin:6px 0 0"><button class="btn" id="play" type="button">Play</button></div>
+    </div>
+    <div class="card" id="deeper" hidden>
+      <h2>Go deeper</h2>
+      <p id="deeperText"></p>
+      <h2 style="margin-top:10px">Sources for this step</h2>
+      <ul class="sources" id="sourceList"></ul>
+    </div>
+    <details class="card" id="altCard">
+      <summary>Text description of this view</summary>
+      <p id="alt"></p>
+    </details>
+    <div class="card" id="legendCard" hidden>
+      <h2>Colour key</h2>
+      <ul class="legend" id="legend"></ul>
+    </div>
+    <section class="card" id="quizCard" hidden aria-labelledby="quizTitle">
+      <h2 id="quizTitle">Quick quiz (optional, 3 questions)</h2>
+      <div id="quiz"></div>
+      <p class="small" id="quizScore" aria-live="polite"></p>
+    </section>
+    <div class="row"><button class="btn" id="copyLink" type="button">Copy link to this step</button><span class="small" id="copyMsg" role="status"></span></div>
+    <details class="foot"><summary>Credits and licences</summary><div id="credits"></div></details>
+  </section>
+</div>
+<div id="live" class="sr-only" aria-live="polite"></div>
+
+<script type="importmap">
+{ "imports": { "three": "./vendor/three/0.170.0/build/three.module.js", "three/addons/": "./vendor/three/0.170.0/examples/jsm/" } }
+</script>
+<script type="module">
+const $ = (s) => document.querySelector(s);
+const el = (tag, props = {}, ...kids) => {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(props)) {
+    if (v == null) continue;
+    if (k === 'class') n.className = v; else if (k === 'text') n.textContent = v; else if (k.startsWith('on')) n.addEventListener(k.slice(2), v); else n.setAttribute(k, v);
+  }
+  for (const c of kids) if (c != null) n.append(c);
+  return n;
+};
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+const smooth = (a, b, x) => { const t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
+const reduceMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isDark = () => document.documentElement.dataset.theme ? document.documentElement.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+
+/* ---------- content (data, not code) ---------- */
+let DATA = null, STOPS = [], SRC = {};
+const REQUIRED = ['id', 'kind', 'short', 'scale', 'title', 'story', 'alt'];
+const isValid = (s) => s && REQUIRED.every((k) => typeof s[k] === 'string' && s[k].trim()) && (s.kind === 'scene' || (s.kind === 'molecule' && s.file && s.pdb));
+const colorFor = (key, fallback = '#888888') => {
+  for (const s of DATA ? DATA.stops : []) for (const l of s.legend || []) if (l.key === key) return l.swatch;
+  return fallback;
+};
+
+/* ---------- WebGL check ---------- */
+function webglOK() {
+  try {
+    const c = document.createElement('canvas');
+    return !!(window.WebGLRenderingContext && (c.getContext('webgl2') || c.getContext('webgl')));
+  } catch (e) { return false; }
+}
+
+/* ---------- boot ---------- */
+(async function boot() {
+  try {
+    const r = await fetch('data/stops.json');
+    if (!r.ok) throw new Error('stops.json ' + r.status);
+    DATA = await r.json();
+  } catch (e) {
+    $('#panel').replaceChildren(el('h1', { text: 'Could not load the story' }), el('p', { text: 'The content file did not load. Please reload the page.' }), el('button', { class: 'btn primary', type: 'button', onclick: () => location.reload(), text: 'Reload' }));
+    return;
+  }
+  SRC = DATA.sources || {};
+  STOPS = (DATA.stops || []).map((s) => {
+    if (isValid(s)) return s;
+    console.warn('stops.json: skipping a stop with missing fields', s && s.id);
+    return { id: (s && s.id) || 'bad', short: (s && s.short) || '?', broken: true };
+  });
+  if (!STOPS.some((s) => !s.broken)) { $('#panel').textContent = 'No steps are available.'; return; }
+  $('#credits').append(
+    el('p', { text: DATA.credits.molstar }), el('p', { text: DATA.credits.molstarLicence }), el('p', { text: DATA.credits.three }),
+    el('p', { text: DATA.credits.fonts }), el('p', { text: DATA.credits.pdb }), el('p', { text: DATA.contentStatus }));
+  buildSteps();
+  if (!webglOK()) { showFallback(); return; }
+  let engine;
+  try { engine = await import('./engine.js'); } catch (e) { console.error(e); showFallback(); return; }
+  startApp(engine);
+})();
+
+/* ---------- panel UI shared by app and fallback ---------- */
+const stepsEl = $('#steps');
+function buildSteps() {
+  stepsEl.replaceChildren(...STOPS.map((s, i) => el('li', {}, el('button', { type: 'button', 'data-i': i, disabled: s.broken ? '' : null, title: s.broken ? 'This step is unavailable' : null }, el('b', { text: String(i + 1) }), el('span', { text: s.short })))));
+  for (const b of stepsEl.querySelectorAll('button')) if (b.getAttribute('disabled') === null) b.removeAttribute('disabled');
+}
+function sourcesFor(ids) {
+  const seen = new Set();
+  return (ids || []).filter((id) => !seen.has(id) && seen.add(id) && SRC[id]).map((id) => {
+    const s = SRC[id];
+    const li = el('li', {}, el('span', { text: s.cite + ' ' }));
+    if (s.doi) li.append(el('a', { href: 'https://doi.org/' + s.doi, target: '_blank', rel: 'noopener noreferrer', text: 'doi:' + s.doi }));
+    return li;
+  });
+}
+function showFallback() {
+  const fb = $('#fallback');
+  fb.hidden = false;
+  $('#badge').textContent = DATA.sceneLabel;
+  $('#resetView').hidden = true;
+  fb.append(el('p', { class: 'small', text: 'Your device could not start 3D graphics, so here is the whole story as text and a still picture.' }),
+    el('img', { src: 'img/still.svg', alt: 'A four-panel drawing. A tapering muscle, a bundle of fibres with one cut open, one sarcomere with thin and thick filaments between two plates, and a ribbon drawing of one actin molecule. Illustrative, not to scale.', width: '640', height: '200' }));
+  for (const s of STOPS.filter((x) => !x.broken)) {
+    fb.append(el('h2', { text: `${s.short}: ${s.title}` }), el('p', { text: s.story }), el('p', { class: 'small', text: s.alt }));
+    if (s.deeper) fb.append(el('p', { text: s.deeper }));
+    const list = sourcesFor([...(s.storySources || []), ...(s.deeperSources || [])]);
+    if (list.length) fb.append(el('ul', { class: 'sources' }, ...list));
+  }
+  fb.append(el('p', { class: 'small', text: DATA.moleculeLabel + '. ' + DATA.sceneLabel + ' applies to the first three pictures.' }));
+  $('#panel').querySelectorAll('.row, #sliderCard, #deeper, #altCard, #legendCard, #quizCard, .eyebrow, #stopTitle, #story').forEach((n) => { n.hidden = true; });
+  stepsEl.parentElement.hidden = true;
+  $('#panel').prepend(el('h1', { text: DATA.title }), el('p', { text: 'This page needs WebGL for the 3D view. The full text version and a still picture are in the main area.' }));
+}
+
+/* ---------- the interactive app ---------- */
+function startApp(E) {
+  const view = E.createView($('#gl'), $('#stagewrap'), { colorFor, reduceMotion });
+  const state = { idx: -1, busy: false, deeper: false, answered: {}, playing: false };
+  const live = $('#live');
+  const molHost = $('#mol');
+  let molViewer = null, molLoading = null, molHome = null;
+  const molReset = () => { if (molViewer && molHome) molViewer.plugin.canvas3d.requestCameraReset({ snapshot: molHome, durationMs: 300 }); };
+  // turn the molecule by keyboard: rotate the camera around its target, about the up axis (left/right) or the side axis (up/down)
+  function molTurn(yaw, pitch) {
+    if (!molViewer) return;
+    const cam = molViewer.plugin.canvas3d.camera, sn = cam.getSnapshot();
+    const p = [...sn.position], t = [...sn.target], u = [...sn.up];
+    const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]], cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+    const norm = (a) => { const l = Math.hypot(...a) || 1; return a.map((x) => x / l); };
+    const rot = (v, k, ang) => { const c = Math.cos(ang), si = Math.sin(ang), d = v[0] * k[0] + v[1] * k[1] + v[2] * k[2], x = cross(k, v); return [0, 1, 2].map((i) => v[i] * c + x[i] * si + k[i] * d * (1 - c)); };
+    let off = sub(p, t); const up = norm(u), side = norm(cross(off, up));
+    off = rot(off, up, yaw); off = rot(off, side, pitch); const nu = rot(up, side, pitch);
+    cam.setState({ ...sn, position: [t[0] + off[0], t[1] + off[1], t[2] + off[2]], up: nu }, 120);
+  }
+
+  const nextIdx = (i) => { for (let j = i + 1; j < STOPS.length; j++) if (!STOPS[j].broken) return j; return -1; };
+  const prevIdx = (i) => { for (let j = i - 1; j >= 0; j--) if (!STOPS[j].broken) return j; return -1; };
+
+  function renderPanel(s) {
+    $('#scale').textContent = s.scale;
+    $('#stopTitle').textContent = s.title;
+    $('#story').textContent = s.story;
+    $('#alt').textContent = s.alt;
+    $('#deeperText').textContent = s.deeper || '';
+    $('#deeperBtn').hidden = !s.deeper;
+    $('#sourceList').replaceChildren(...sourcesFor([...(s.storySources || []), ...(s.deeperSources || [])]));
+    $('#legend').replaceChildren(...(s.legend || []).map((l) => el('li', {}, el('i', { style: `background:${l.swatch}` }), el('span', { text: l.label }))));
+    $('#legendCard').hidden = !(s.legend && s.legend.length);
+    $('#badge').textContent = s.kind === 'molecule' ? DATA.moleculeLabel : DATA.sceneLabel;
+    $('#viewport').setAttribute('aria-label', '3D view: ' + s.title);
+    const ni = nextIdx(state.idx), pi = prevIdx(state.idx);
+    $('#back').hidden = pi < 0;
+    $('#back').textContent = pi >= 0 ? (s.kind === 'molecule' ? 'Back to the sarcomere' : 'Back out') : '';
+    $('#next').hidden = ni < 0;
+    $('#next').textContent = ni >= 0 ? `Zoom in to the ${STOPS[ni].short.toLowerCase()}` : '';
+    const sl = s.slider;
+    $('#sliderCard').hidden = !sl;
+    if (sl) { $('#slideLabel').textContent = sl.label; $('#slideMin').textContent = sl.min; $('#slideMax').textContent = sl.max; }
+    renderQuiz(s);
+    stepsEl.querySelectorAll('button').forEach((b) => { if (+b.dataset.i === state.idx) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current'); });
+    setDeeper(false);
+    $('#panel').scrollTop = 0;
+  }
+  function setDeeper(open) {
+    state.deeper = open;
+    $('#deeper').hidden = !open;
+    $('#deeperBtn').setAttribute('aria-expanded', String(open));
+    $('#deeperBtn').textContent = open ? 'Hide the deeper part' : 'Go deeper';
+  }
+  function renderQuiz(s) {
+    const card = $('#quizCard');
+    card.hidden = !(s.quiz && s.quiz.length);
+    if (card.hidden) return;
+    const box = $('#quiz');
+    box.replaceChildren();
+    state.answered = {};
+    $('#quizScore').textContent = '';
+    s.quiz.forEach((q, qi) => {
+      const fb = el('p', { class: 'fb', 'aria-live': 'polite' });
+      const opts = el('div', { class: 'opts' });
+      q.options.forEach((o, oi) => {
+        const b = el('button', { class: 'opt', type: 'button', 'aria-pressed': 'false', text: o });
+        b.addEventListener('click', () => {
+          const right = oi === q.answer;
+          opts.querySelectorAll('.opt').forEach((x) => { x.setAttribute('aria-pressed', 'false'); x.classList.remove('wrong', 'right'); });
+          b.setAttribute('aria-pressed', 'true');
+          b.classList.add(right ? 'right' : 'wrong');
+          fb.textContent = (right ? 'Correct. ' : 'Not quite, try another. ') + (right ? q.why : '');
+          state.answered[qi] = right;
+          const done = Object.values(state.answered).filter(Boolean).length;
+          $('#quizScore').textContent = `${done} of ${s.quiz.length} correct so far.`;
+        });
+        opts.append(b);
+      });
+      const srcs = sourcesFor(q.sources);
+      box.append(el('fieldset', { class: 'q' }, el('legend', { text: `${qi + 1}. ${q.q}` }), opts, fb, srcs.length ? el('p', { class: 'small', text: 'Source: ' + q.sources.map((id) => (SRC[id] ? SRC[id].cite.split('(')[0].trim() : id)).join('; ') }) : null));
+    });
+  }
+
+  /* ----- molecule (Mol*) loaded only when the visitor gets here ----- */
+  const loadScript = (src) => new Promise((res, rej) => { const s = el('script', { src }); s.onload = res; s.onerror = () => rej(new Error('script ' + src)); document.head.append(s); });
+  const themeCss = el('link', { rel: 'stylesheet', id: 'molcss' });
+  const syncMolTheme = () => { themeCss.href = isDark() ? 'vendor/molstar/dark.css' : 'vendor/molstar/light.css'; if (!themeCss.isConnected) document.head.append(themeCss); };
+  async function ensureMol() {
+    if (molViewer) return molViewer;
+    if (molLoading) return molLoading;
+    molLoading = (async () => {
+      syncMolTheme();
+      await loadScript('vendor/molstar/molstar.js');
+      const lowEnd = (navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 2;
+      const v = await window.molstar.Viewer.create(molHost, {
+        layoutIsExpanded: false, layoutShowControls: false, layoutShowRemoteState: false, layoutShowSequence: false, layoutShowLog: false,
+        layoutShowLeftPanel: false, viewportShowExpand: false, viewportShowSelectionMode: false, viewportShowAnimation: false,
+        viewportShowControls: false, viewportShowSettings: false, viewportShowTrajectoryControls: false, collapseLeftPanel: true,
+        extensions: ['mvs'], pixelScale: lowEnd ? 1 : Math.min(window.devicePixelRatio || 1, 2), pickScale: 0.25,
+        illumination: false,
+      });
+      v.plugin.canvas3d.setProps({ transparentBackground: true });
+      try { v.plugin.canvas3d.setProps({ camera: { helper: { axes: { name: 'off', params: {} } } } }); } catch (e) { console.warn('axes helper', e); }
+      molViewer = v;
+      return v;
+    })();
+    try { return await molLoading; } catch (e) { molLoading = null; throw e; }
+  }
+  let molFor = null;
+  async function showMolecule(s) {
+    const msg = $('#loadMsg'), box = $('#loadMsgBox');
+    msg.hidden = false;
+    box.replaceChildren(el('span', { class: 'spin' }), 'Loading the molecule viewer (about 1.5 MB, once)');
+    try {
+      const v = await ensureMol();
+      if (molFor !== s.id) {
+        await v.plugin.clear();
+        const head = await fetch(new URL(s.file, location.href).href, { method: 'HEAD' });
+        if (!head.ok) throw new Error('structure file ' + head.status);
+        const { MVSData } = window.molstar.lib.extensions.mvs;
+        const b = MVSData.createBuilder();
+        const st = b.download({ url: new URL(s.file, location.href).href }).parse({ format: 'mmcif' }).modelStructure();
+        st.component({ selector: 'polymer' }).representation({ type: 'cartoon' }).color({ color: colorFor('actin') });
+        st.component({ selector: { label_comp_id: 'ADP' } }).representation({ type: 'ball_and_stick', size_factor: 1.4 }).color({ custom: { molstar_color_theme_name: 'element-symbol', molstar_color_theme_params: { carbonColor: { name: 'element-symbol', params: {} } } } });
+        st.component({ selector: 'ion' }).representation({ type: 'spacefill', size_factor: 0.5 }).color({ custom: { molstar_color_theme_name: 'element-symbol' } });
+        await v.loadMvsData(b.getState(), 'mvsj');
+        if (!v.plugin.managers.structure.hierarchy.current.structures.length) throw new Error('structure did not load');
+        molFor = s.id;
+        molHome = null;
+      }
+      v.handleResize();
+      v.plugin.managers.camera.reset(undefined, 0);
+      msg.hidden = true;
+      return true;
+    } catch (e) {
+      console.error(e);
+      box.replaceChildren(el('p', { text: 'The molecule viewer could not start on this device. The story and the text description still work.' }),
+        el('button', { class: 'btn primary', type: 'button', text: 'Try again', onclick: () => { molLoading = null; go(state.idx, { force: true }); } }));
+      return false;
+    }
+  }
+
+  /* ----- navigation ----- */
+  async function go(i, opts = {}) {
+    if (i < 0 || i >= STOPS.length || STOPS[i].broken) return;
+    if (state.busy || (i === state.idx && !opts.force)) return;
+    state.busy = true;
+    const prev = state.idx >= 0 ? STOPS[state.idx] : null;
+    const dir = i > state.idx ? 1 : -1;
+    const s = STOPS[i];
+    const instant = opts.instant || prev == null || reduceMotion();
+    $('#hotspot').hidden = true;
+    stopPlay();
+    try {
+      if (s.kind === 'molecule') {
+        state.idx = i; renderPanel(s);
+        const ok = await showMolecule(s);
+        if (ok) { molHost.classList.add('on'); view.setMode('hidden', instant); $('#resetView').hidden = false; }
+      } else {
+        const wasMol = prev && prev.kind === 'molecule';
+        molHost.classList.remove('on');
+        $('#loadMsg').hidden = true;
+        state.idx = i; renderPanel(s);
+        await view.show(s.id, prev && prev.kind === 'scene' ? prev.id : null, dir, instant || wasMol);
+        placeHotspot(s);
+      }
+    } finally { state.busy = false; }
+    if (location.hash !== '#s=' + s.id) history.replaceState(null, '', '#s=' + s.id);
+    live.textContent = `${s.title}. ${s.story}`;
+    if (opts.focus && document.activeElement === document.body) $('#stopTitle').focus({ preventScroll: true });
+  }
+  function placeHotspot(s) {
+    const h = $('#hotspot');
+    if (!s.hotspot) { h.hidden = true; view.setAnchorCallback(null); return; }
+    h.hidden = false;
+    $('#hotspotTag').textContent = s.hotspot.label;
+    h.setAttribute('aria-label', s.hotspot.label + '. Activates the next zoom.');
+    const wrap = $('#stagewrap');
+    view.setAnchorCallback((x, y, visible) => { h.style.transform = `translate(${x}px, ${y}px)`; h.style.visibility = visible ? 'visible' : 'hidden'; const tg = $('#hotspotTag'), w = tg.offsetWidth, hgt = tg.offsetHeight;
+      tg.style.left = clamp(-w / 2, 8 - x, wrap.clientWidth - 8 - x - w) + 'px';
+      tg.style.top = (y > wrap.clientHeight - hgt - 50 ? -hgt - 30 : 30) + 'px'; });
+  }
+  const goNext = () => { const n = nextIdx(state.idx); if (n >= 0) go(n); };
+  const goBack = () => { const p = prevIdx(state.idx); if (p >= 0) go(p); };
+  $('#hotspot').addEventListener('click', () => { const t = STOPS.findIndex((x) => x.id === STOPS[state.idx].hotspot.target); go(t >= 0 && !STOPS[t].broken ? t : nextIdx(state.idx), { focus: true }); });
+  $('#next').addEventListener('click', goNext);
+  $('#back').addEventListener('click', goBack);
+  $('#deeperBtn').addEventListener('click', () => setDeeper(!state.deeper));
+  stepsEl.addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) go(+b.dataset.i); });
+  $('#resetView').addEventListener('click', () => { if (STOPS[state.idx].kind === 'molecule') { molReset(); } else view.resetCamera(); });
+  $('#copyLink').addEventListener('click', async () => {
+    const m = $('#copyMsg');
+    try { await navigator.clipboard.writeText(location.href); m.textContent = 'Link copied.'; } catch (e) { m.textContent = 'Copy this from the address bar.'; }
+    setTimeout(() => { m.textContent = ''; }, 2500);
+  });
+  window.addEventListener('hashchange', () => { const m = /^#s=([\w-]+)$/.exec(location.hash); const i = m ? STOPS.findIndex((x) => x.id === m[1]) : -1; if (i >= 0 && i !== state.idx) go(i); });
+
+  /* slider + play (sarcomere) */
+  const slide = $('#slide');
+  slide.addEventListener('input', () => { stopPlay(); view.setContraction(+slide.value / 100); });
+  let playRaf = 0, playT0 = 0;
+  function stopPlay() { state.playing = false; cancelAnimationFrame(playRaf); $('#play').textContent = 'Play'; $('#play').setAttribute('aria-pressed', 'false'); }
+  $('#play').addEventListener('click', () => {
+    if (state.playing) { stopPlay(); return; }
+    state.playing = true; $('#play').textContent = 'Pause'; $('#play').setAttribute('aria-pressed', 'true');
+    playT0 = performance.now();
+    const base = +slide.value / 100;
+    const tick = (now) => {
+      if (!state.playing) return;
+      const ph = ((now - playT0) / 4200) * Math.PI * 2;
+      const v = 0.5 - 0.5 * Math.cos(ph + Math.acos(1 - 2 * clamp(base, 0, 1)));
+      slide.value = Math.round(v * 100); view.setContraction(v);
+      playRaf = requestAnimationFrame(tick);
+    };
+    playRaf = requestAnimationFrame(tick);
+  });
+
+  /* remember the framed opening pose of the molecule the first time the visitor touches it, so Reset view can return to it */
+  const grabHome = () => { if (molViewer && !molHome && STOPS[state.idx] && STOPS[state.idx].kind === 'molecule') molHome = molViewer.plugin.canvas3d.camera.getSnapshot(); };
+  for (const ev of ['pointerdown', 'wheel', 'keydown', 'touchstart']) $('#viewport').addEventListener(ev, grabHome, { capture: true, passive: true });
+  /* keyboard on the 3D view */
+  $('#viewport').addEventListener('keydown', (e) => {
+    const mol = STOPS[state.idx] && STOPS[state.idx].kind === 'molecule';
+    if (mol) {
+      const mk = { ArrowLeft: [-0.2, 0], ArrowRight: [0.2, 0], ArrowUp: [0, -0.15], ArrowDown: [0, 0.15] }[e.key];
+      if (mk) { molTurn(mk[0], mk[1]); e.preventDefault(); } else if (e.key === '0') { molReset(); e.preventDefault(); }
+      return;
+    }
+    const k = { ArrowLeft: ['rotate', -0.12, 0], ArrowRight: ['rotate', 0.12, 0], ArrowUp: ['rotate', 0, -0.08], ArrowDown: ['rotate', 0, 0.08], '+': ['zoom', 0.9], '=': ['zoom', 0.9], '-': ['zoom', 1.1], '0': ['reset'] }[e.key];
+    if (!k) return;
+    e.preventDefault();
+    if (k[0] === 'rotate') view.nudge(k[1], k[2]); else if (k[0] === 'zoom') view.zoomBy(k[1]); else view.resetCamera();
+  });
+
+  /* theme + resize */
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { if (molViewer) syncMolTheme(); });
+  new MutationObserver(() => { if (molViewer) syncMolTheme(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  new ResizeObserver(() => { if (molViewer) molViewer.handleResize(); }).observe($('#stagewrap'));
+
+  /* start: deep link or first step */
+  const m0 = /^#s=([\w-]+)$/.exec(location.hash);
+  const first = m0 ? STOPS.findIndex((x) => x.id === m0[1] && !x.broken) : -1;
+  go(first >= 0 ? first : nextIdx(-1), { instant: true });
+  window.__cme = { go, state, view, get mol() { return molViewer; } };
+}
+</script>
+<script type="module" src="shell/shell.js" data-page="muscle"></script>
+</body>
+</html>

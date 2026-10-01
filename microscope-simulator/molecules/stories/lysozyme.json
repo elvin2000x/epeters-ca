@@ -1,0 +1,55 @@
+{
+ "id": "lysozyme",
+ "structure": "1LYZ",
+ "tour": [
+  {"id": "whole", "title": "A small bacteria breaker", "focus": {"chains": ["A"], "residues": null, "ligands": null, "whole": true}, "view": "cartoon",
+   "text": [{"t": "Lysozyme is a small enzyme, one chain of 129 amino acids, from hen egg white.", "s": ["rcsb-1LYZ", "motm-lysozyme"]},
+            {"t": "Its job is to break open the cell walls of bacteria.", "s": ["motm-lysozyme", "uniprot-P00698"]}]},
+  {"id": "cleft", "title": "The long groove", "focus": {"chains": ["A"], "residues": null, "ligands": null, "whole": true}, "view": "surface",
+   "text": [{"t": "Look for a long cleft across the surface: this is the active site where the sugar chain of a bacterial cell wall binds.", "s": ["motm-lysozyme"]}]},
+  {"id": "active-site", "title": "The cutting pair", "focus": {"chains": ["A"], "residues": [[35, 35], [52, 52]], "ligands": null, "whole": false}, "view": "ball-and-stick",
+   "text": [{"t": "Glutamate 35 and aspartate 52 are the enzyme's two active-site amino acids.", "s": ["uniprot-P00698", "rcsb-1LYZ"]},
+            {"t": "They sit in the long cleft where the enzyme cuts the sugar chain of the bacterial cell wall.", "s": ["uniprot-P00698", "motm-lysozyme"]}]},
+  {"id": "disulfides", "title": "Four sulfur staples", "focus": {"chains": ["A"], "residues": [[6, 6], [127, 127], [30, 30], [115, 115], [64, 64], [80, 80], [76, 76], [94, 94]], "ligands": null, "whole": false}, "view": "ball-and-stick",
+   "text": [{"t": "Four disulfide bridges staple the chain to itself in this small, stable enzyme.", "s": ["rcsb-1LYZ", "uniprot-P00698", "motm-lysozyme"]}]},
+  {"id": "history-stop", "title": "The first enzyme seen", "focus": {"chains": ["A"], "residues": null, "ligands": null, "whole": true}, "view": "cartoon",
+   "text": [{"t": "Hen egg-white lysozyme was the first enzyme ever to have its structure solved.", "s": ["motm-lysozyme"]}]}
+ ],
+ "sections": {
+  "does": [
+   {"t": "Lysozyme attacks the carbohydrate chains that brace a bacterium's cell wall.", "s": ["motm-lysozyme"]},
+   {"t": "Once those chains are cut, the bacterium bursts under its own internal pressure.", "s": ["motm-lysozyme"]},
+   {"t": "Our tears and mucus contain lysozyme to protect exposed surfaces from infection.", "s": ["motm-lysozyme"]}
+  ],
+  "shape": [
+   {"t": "A long groove in the enzyme holds a stretch of the bacterial sugar chain so it can be cut.", "s": ["motm-lysozyme"]},
+   {"t": "Computer models suggested lysozyme bends one sugar ring out of its usual shape to make it easier to break, though other studies point to electric charges as more important.", "s": ["motm-lysozyme"]}
+  ],
+  "lives": {
+   "text": [
+    {"t": "Lysozyme is found in egg white, where it guards the food stored for the growing chick, and in our tears, mucus and blood.", "s": ["motm-lysozyme", "uniprot-P00698"]},
+    {"t": "Its target is the bacterial cell wall.", "s": ["motm-lysozyme"]}
+   ],
+   "links": [{"type": "cell", "id": "bacterium"}, {"type": "part", "id": "b-wall"}, {"type": "element", "id": "S"}]
+  },
+  "history": {
+   "year": 1974, "who": "R. Diamond", "method": "X-ray", "resolution_A": 2.0,
+   "text": [
+    {"t": "This file is a 1974 refinement of the hen egg-white lysozyme structure at 2.0 angstroms.", "s": ["rcsb-1LYZ"]},
+    {"t": "Alexander Fleming discovered lysozyme by chance when a drop of mucus from his cold killed bacteria in a dish.", "s": ["motm-lysozyme"]}
+   ]
+  },
+  "size": {
+   "nm": 4.9,
+   "compare": [
+    {"t": "Lysozyme measures about 4.9 nm from end to end.", "s": ["rcsb-1LYZ"]},
+    {"t": "That makes it smaller than hemoglobin in this gallery, which measures about 7 nm.", "s": ["rcsb-1LYZ", "rcsb-4HHB"]}
+   ]
+  }
+ },
+ "highlights": [
+  {"chain": "A", "residue": 35, "comp": "GLU", "label": "Active site (Glu35)", "text": [{"t": "One of the two active-site amino acids.", "s": ["uniprot-P00698"]}]},
+  {"chain": "A", "residue": 52, "comp": "ASP", "label": "Active site (Asp52)", "text": [{"t": "The other active-site amino acid.", "s": ["uniprot-P00698"]}]}
+ ],
+ "review": "pending"
+}

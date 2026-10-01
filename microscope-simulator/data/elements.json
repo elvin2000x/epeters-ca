@@ -1,0 +1,1907 @@
+{
+ "about": "All 118 elements. Edit a row here; run python tools\\check_data.py after any change.",
+ "sources": {
+  "rsc": {
+   "cite": "Royal Society of Chemistry, Periodic Table, one page per element (periodic-table.rsc.org).",
+   "url": "https://periodic-table.rsc.org/",
+   "used_for": "Name, group, period, block, and the facts behind each description. Descriptions are our own words.",
+   "read": "2026-10-01"
+  },
+  "ciaaw-2024": {
+   "cite": "IUPAC Commission on Isotopic Abundances and Atomic Weights (CIAAW), Abridged Standard Atomic Weights 2024.",
+   "url": "https://www.ciaaw.org/abridged-atomic-weights.htm",
+   "used_for": "Atomic weight. A dash on the CIAAW table means it gives no standard atomic weight for that element.",
+   "read": "2026-10-01"
+  }
+ },
+ "elements": [
+  {
+   "z": 1,
+   "symbol": "H",
+   "name": "Hydrogen",
+   "weight": "1.0080 ± 0.0002",
+   "group": 1,
+   "series": null,
+   "period": 1,
+   "block": "s",
+   "description": "A colourless, odourless gas with the lowest density of any gas. It is in water and in almost every molecule in living things.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/1"
+  },
+  {
+   "z": 2,
+   "symbol": "He",
+   "name": "Helium",
+   "weight": "4.0026 ± 0.0001",
+   "group": 18,
+   "series": null,
+   "period": 1,
+   "block": "s",
+   "description": "A colourless, odourless gas that does not react with anything. It is light enough to lift balloons, and it is used to keep the magnets in MRI scanners cold.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/2"
+  },
+  {
+   "z": 3,
+   "symbol": "Li",
+   "name": "Lithium",
+   "weight": "6.94 ± 0.06",
+   "group": 1,
+   "series": null,
+   "period": 2,
+   "block": "s",
+   "description": "The least dense of all metals: soft, silvery, and quick to react with water. Its biggest use is in rechargeable batteries for phones, laptops and electric cars.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/3"
+  },
+  {
+   "z": 4,
+   "symbol": "Be",
+   "name": "Beryllium",
+   "weight": "9.0122 ± 0.0001",
+   "group": 2,
+   "series": null,
+   "period": 2,
+   "block": "s",
+   "description": "A light, fairly soft, silvery-white metal. Mixed with copper or nickel it makes springs and tools that do not spark, but its dust is toxic to breathe in.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/4"
+  },
+  {
+   "z": 5,
+   "symbol": "B",
+   "name": "Boron",
+   "weight": "10.81 ± 0.02",
+   "group": 13,
+   "series": null,
+   "period": 2,
+   "block": "p",
+   "description": "Pure boron is a dark powder. Plants need it to build their cell walls, and its compounds, such as borax, turn up in eye drops and washing powders.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/5"
+  },
+  {
+   "z": 6,
+   "symbol": "C",
+   "name": "Carbon",
+   "weight": "12.011 ± 0.002",
+   "group": 14,
+   "series": null,
+   "period": 2,
+   "block": "p",
+   "description": "Carbon comes in several pure forms, from soft black graphite to diamond, the hardest known material. Its atoms can link into long chains, which is why carbon is the backbone of the molecules of life.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/6"
+  },
+  {
+   "z": 7,
+   "symbol": "N",
+   "name": "Nitrogen",
+   "weight": "14.007 ± 0.001",
+   "group": 15,
+   "series": null,
+   "period": 2,
+   "block": "p",
+   "description": "A colourless, odourless gas. Plants take it up from the soil to build DNA, RNA and amino acids, and industry turns it into ammonia to make fertilisers.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/7"
+  },
+  {
+   "z": 8,
+   "symbol": "O",
+   "name": "Oxygen",
+   "weight": "15.999 ± 0.001",
+   "group": 16,
+   "series": null,
+   "period": 2,
+   "block": "p",
+   "description": "A colourless, odourless gas. It built up in the air about 2 billion years ago from photosynthesis by blue-green algae, and its biggest industrial use is in making steel.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/8"
+  },
+  {
+   "z": 9,
+   "symbol": "F",
+   "name": "Fluorine",
+   "weight": "18.998 ± 0.001",
+   "group": 17,
+   "series": null,
+   "period": 2,
+   "block": "p",
+   "description": "A pale yellow-green gas and the most reactive of all the elements. As fluoride it strengthens teeth and bones, which is why some places add it to drinking water.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/9"
+  },
+  {
+   "z": 10,
+   "symbol": "Ne",
+   "name": "Neon",
+   "weight": "20.180 ± 0.001",
+   "group": 18,
+   "series": null,
+   "period": 2,
+   "block": "p",
+   "description": "A colourless gas that does not react with anything. In a glass tube with electricity running through it, it glows reddish orange, the colour of true neon signs.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/10"
+  },
+  {
+   "z": 11,
+   "symbol": "Na",
+   "name": "Sodium",
+   "weight": "22.990 ± 0.001",
+   "group": 1,
+   "series": null,
+   "period": 3,
+   "block": "s",
+   "description": "A soft metal that tarnishes within seconds in air and reacts strongly with water. All living things need sodium, and its best-known compound is table salt, sodium chloride.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/11"
+  },
+  {
+   "z": 12,
+   "symbol": "Mg",
+   "name": "Magnesium",
+   "weight": "24.305 ± 0.002",
+   "group": 2,
+   "series": null,
+   "period": 3,
+   "block": "s",
+   "description": "A silvery-white metal that catches fire easily and burns with a bright light. Plants need it because it sits at the centre of chlorophyll, the molecule that captures sunlight.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/12"
+  },
+  {
+   "z": 13,
+   "symbol": "Al",
+   "name": "Aluminium",
+   "weight": "26.982 ± 0.001",
+   "group": 13,
+   "series": null,
+   "period": 3,
+   "block": "p",
+   "description": "A light, soft, silvery-white metal that resists corrosion. It is used for drink cans, foil, window frames and aeroplane parts, and has no known role in living things.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/13"
+  },
+  {
+   "z": 14,
+   "symbol": "Si",
+   "name": "Silicon",
+   "weight": "28.085 ± 0.001",
+   "group": 14,
+   "series": null,
+   "period": 3,
+   "block": "p",
+   "description": "When very pure, a solid with a blue-grey metallic shine. It is the semiconductor at the heart of computer chips, and it also goes into alloys, silicone sealants and lubricants.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/14"
+  },
+  {
+   "z": 15,
+   "symbol": "P",
+   "name": "Phosphorus",
+   "weight": "30.974 ± 0.001",
+   "group": 15,
+   "series": null,
+   "period": 3,
+   "block": "p",
+   "description": "Its two main forms are white phosphorus, which is poisonous and glows in the dark, and red phosphorus, used on matchboxes. All living things need it: it forms the backbone of DNA and RNA and is part of ATP.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/15"
+  },
+  {
+   "z": 16,
+   "symbol": "S",
+   "name": "Sulfur",
+   "weight": "32.06 ± 0.02",
+   "group": 16,
+   "series": null,
+   "period": 3,
+   "block": "p",
+   "description": "Most often seen as yellow crystals or powder. Living things use it to make two amino acids that proteins need, and industry turns most of it into sulfuric acid.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/16"
+  },
+  {
+   "z": 17,
+   "symbol": "Cl",
+   "name": "Chlorine",
+   "weight": "35.45 ± 0.01",
+   "group": 17,
+   "series": null,
+   "period": 3,
+   "block": "p",
+   "description": "A dense, yellow-green gas with a choking smell. It kills bacteria, so it is used to clean drinking water and swimming pools, and as the chloride ion it is essential to life.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/17"
+  },
+  {
+   "z": 18,
+   "symbol": "Ar",
+   "name": "Argon",
+   "weight": "39.95 ± 0.16",
+   "group": 18,
+   "series": null,
+   "period": 3,
+   "block": "p",
+   "description": "A colourless, odourless gas that does not react with other substances. Welders and light-bulb makers use it as a protective gas, and it has no known role in living things.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/18"
+  },
+  {
+   "z": 19,
+   "symbol": "K",
+   "name": "Potassium",
+   "weight": "39.098 ± 0.001",
+   "group": 1,
+   "series": null,
+   "period": 4,
+   "block": "s",
+   "description": "A soft, silvery metal that tarnishes within minutes in air. Potassium ions are found in all cells and help keep the body's fluids in balance, and most potassium compounds go into fertilisers.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/19"
+  },
+  {
+   "z": 20,
+   "symbol": "Ca",
+   "name": "Calcium",
+   "weight": "40.078 ± 0.004",
+   "group": 2,
+   "series": null,
+   "period": 4,
+   "block": "s",
+   "description": "A soft, silvery-white metal that tarnishes quickly and reacts with water. All living things need it, and calcium phosphate is the main mineral in bone.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/20"
+  },
+  {
+   "z": 21,
+   "symbol": "Sc",
+   "name": "Scandium",
+   "weight": "44.956 ± 0.001",
+   "group": 3,
+   "series": null,
+   "period": 4,
+   "block": "d",
+   "description": "A silvery metal that tarnishes in air and reacts with water. It is mostly used in research, though a little is added to aluminium to make light, strong alloys for bike frames.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/21"
+  },
+  {
+   "z": 22,
+   "symbol": "Ti",
+   "name": "Titanium",
+   "weight": "47.867 ± 0.001",
+   "group": 4,
+   "series": null,
+   "period": 4,
+   "block": "d",
+   "description": "A hard, shiny metal that is as strong as steel but much less dense. Its alloys are used in aircraft and spacecraft because they are light and cope with extreme temperatures.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/22"
+  },
+  {
+   "z": 23,
+   "symbol": "V",
+   "name": "Vanadium",
+   "weight": "50.942 ± 0.001",
+   "group": 5,
+   "series": null,
+   "period": 4,
+   "block": "d",
+   "description": "A silvery metal that resists corrosion. About 80% of it is added to steel to make tough parts such as axles and tools, and humans need a tiny amount.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/23"
+  },
+  {
+   "z": 24,
+   "symbol": "Cr",
+   "name": "Chromium",
+   "weight": "51.996 ± 0.001",
+   "group": 6,
+   "series": null,
+   "period": 4,
+   "block": "d",
+   "description": "A hard, silvery metal with a blue tinge. It is used to make stainless steel and shiny chrome plating, and the body needs a trace of it to use glucose.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/24"
+  },
+  {
+   "z": 25,
+   "symbol": "Mn",
+   "name": "Manganese",
+   "weight": "54.938 ± 0.001",
+   "group": 7,
+   "series": null,
+   "period": 4,
+   "block": "d",
+   "description": "A hard, brittle, silvery metal that is mostly used to make steel stronger. All known living things need it, because many enzymes contain manganese.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/25"
+  },
+  {
+   "z": 26,
+   "symbol": "Fe",
+   "name": "Iron",
+   "weight": "55.845 ± 0.002",
+   "group": 8,
+   "series": null,
+   "period": 4,
+   "block": "d",
+   "description": "A shiny, greyish metal that rusts in damp air. About 90% of all refined metal is iron, mostly made into steel, and the body uses it in haemoglobin to carry oxygen in the blood.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/26"
+  },
+  {
+   "z": 27,
+   "symbol": "Co",
+   "name": "Cobalt",
+   "weight": "58.933 ± 0.001",
+   "group": 9,
+   "series": null,
+   "period": 4,
+   "block": "d",
+   "description": "A shiny, silvery-blue metal that is magnetic and is used to make powerful magnets. It is part of vitamin B12, so we need a tiny amount of it.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/27"
+  },
+  {
+   "z": 28,
+   "symbol": "Ni",
+   "name": "Nickel",
+   "weight": "58.693 ± 0.001",
+   "group": 10,
+   "series": null,
+   "period": 4,
+   "block": "d",
+   "description": "A silvery metal that resists corrosion even when hot, so it is used to plate other metals and in stainless steel. Its role in living things is uncertain, though some species need it.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/28"
+  },
+  {
+   "z": 29,
+   "symbol": "Cu",
+   "name": "Copper",
+   "weight": "63.546 ± 0.003",
+   "group": 11,
+   "series": null,
+   "period": 4,
+   "block": "d",
+   "description": "A reddish-gold metal that is easy to shape and draw into wires. It was the first metal people worked, and the body needs a little each day to help enzymes transfer energy.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/29"
+  },
+  {
+   "z": 30,
+   "symbol": "Zn",
+   "name": "Zinc",
+   "weight": "65.38 ± 0.02",
+   "group": 12,
+   "series": null,
+   "period": 4,
+   "block": "d",
+   "description": "A silvery-white metal with a blue tinge, used mostly to coat iron and steel so they do not rust. All living things need it, because it sits at the active site of many enzymes.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/30"
+  },
+  {
+   "z": 31,
+   "symbol": "Ga",
+   "name": "Gallium",
+   "weight": "69.723 ± 0.001",
+   "group": 13,
+   "series": null,
+   "period": 4,
+   "block": "p",
+   "description": "A soft, silvery-white metal similar to aluminium. Gallium arsenide is used in semiconductors and in red LEDs, which turn electricity into light.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/31"
+  },
+  {
+   "z": 32,
+   "symbol": "Ge",
+   "name": "Germanium",
+   "weight": "72.630 ± 0.008",
+   "group": 14,
+   "series": null,
+   "period": 4,
+   "block": "p",
+   "description": "A brittle, silvery-white semi-metal. It was once used in transistors, and today its main use is germanium oxide for wide-angle camera lenses and microscope lenses.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/32"
+  },
+  {
+   "z": 33,
+   "symbol": "As",
+   "name": "Arsenic",
+   "weight": "74.922 ± 0.001",
+   "group": 15,
+   "series": null,
+   "period": 4,
+   "block": "p",
+   "description": "A brittle, silver-grey semi-metal and a well-known poison. Its compounds have been used, under strict control, as rat poisons and insecticides.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/33"
+  },
+  {
+   "z": 34,
+   "symbol": "Se",
+   "name": "Selenium",
+   "weight": "78.971 ± 0.008",
+   "group": 16,
+   "series": null,
+   "period": 4,
+   "block": "p",
+   "description": "A semi-metal found either as a silvery metal or a red powder. Its biggest use is in glass, and humans need a trace of it.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/34"
+  },
+  {
+   "z": 35,
+   "symbol": "Br",
+   "name": "Bromine",
+   "weight": "79.904 ± 0.003",
+   "group": 17,
+   "series": null,
+   "period": 4,
+   "block": "p",
+   "description": "A deep-red, oily, toxic liquid with a sharp smell. Its compounds are used as flame retardants and in farm chemicals, dyes and medicines.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/35"
+  },
+  {
+   "z": 36,
+   "symbol": "Kr",
+   "name": "Krypton",
+   "weight": "83.798 ± 0.002",
+   "group": 18,
+   "series": null,
+   "period": 4,
+   "block": "p",
+   "description": "A colourless, odourless gas that reacts only with fluorine. It fills some energy-saving lights and the flash lamps used for high-speed photography.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/36"
+  },
+  {
+   "z": 37,
+   "symbol": "Rb",
+   "name": "Rubidium",
+   "weight": "85.468 ± 0.001",
+   "group": 1,
+   "series": null,
+   "period": 5,
+   "block": "s",
+   "description": "A soft metal that catches fire in air and reacts violently with water. It is used mostly in research, and our bodies take it up from food because it behaves like potassium.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/37"
+  },
+  {
+   "z": 38,
+   "symbol": "Sr",
+   "name": "Strontium",
+   "weight": "87.62 ± 0.01",
+   "group": 2,
+   "series": null,
+   "period": 5,
+   "block": "s",
+   "description": "A soft, silvery metal that burns in air and reacts with water. Its salts give fireworks and flares their brilliant red, and some stony corals need it.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/38"
+  },
+  {
+   "z": 39,
+   "symbol": "Y",
+   "name": "Yttrium",
+   "weight": "88.906 ± 0.001",
+   "group": 3,
+   "series": null,
+   "period": 5,
+   "block": "d",
+   "description": "A soft, silvery metal that makes aluminium and magnesium alloys stronger. Crystals of yttrium-aluminium garnet are used in lasers that cut through metal.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/39"
+  },
+  {
+   "z": 40,
+   "symbol": "Zr",
+   "name": "Zirconium",
+   "weight": "91.222 ± 0.003",
+   "group": 4,
+   "series": null,
+   "period": 5,
+   "block": "d",
+   "description": "A hard, silvery metal that is very resistant to corrosion. It does not absorb neutrons, so more than 90% of it is used in nuclear power stations.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/40"
+  },
+  {
+   "z": 41,
+   "symbol": "Nb",
+   "name": "Niobium",
+   "weight": "92.906 ± 0.001",
+   "group": 5,
+   "series": null,
+   "period": 5,
+   "block": "d",
+   "description": "A silvery metal protected from corrosion by a thin layer of oxide on its surface. It strengthens the steels used in jet engines, rockets, buildings and pipelines.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/41"
+  },
+  {
+   "z": 42,
+   "symbol": "Mo",
+   "name": "Molybdenum",
+   "weight": "95.95 ± 0.01",
+   "group": 6,
+   "series": null,
+   "period": 5,
+   "block": "d",
+   "description": "A shiny, silvery metal with a very high melting point, mostly used to make steel stronger and harder. Plants and animals need small amounts, because about 50 different enzymes use it.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/42"
+  },
+  {
+   "z": 43,
+   "symbol": "Tc",
+   "name": "Technetium",
+   "weight": null,
+   "group": 7,
+   "series": null,
+   "period": 5,
+   "block": "d",
+   "description": "A radioactive, silvery metal that does not occur naturally. One form, technetium-99m, is widely used in hospitals to take images of the inside of the body.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/43"
+  },
+  {
+   "z": 44,
+   "symbol": "Ru",
+   "name": "Ruthenium",
+   "weight": "101.07 ± 0.02",
+   "group": 8,
+   "series": null,
+   "period": 5,
+   "block": "d",
+   "description": "A shiny, silvery metal used mostly in electronics, for chip resistors and electrical contacts. It also goes into catalysts that help make ammonia.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/44"
+  },
+  {
+   "z": 45,
+   "symbol": "Rh",
+   "name": "Rhodium",
+   "weight": "102.91 ± 0.01",
+   "group": 9,
+   "series": null,
+   "period": 5,
+   "block": "d",
+   "description": "A hard, shiny, silvery metal. About 80% of it goes into car catalytic converters, where it helps remove nitrogen oxides from exhaust gases.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/45"
+  },
+  {
+   "z": 46,
+   "symbol": "Pd",
+   "name": "Palladium",
+   "weight": "106.42 ± 0.01",
+   "group": 10,
+   "series": null,
+   "period": 5,
+   "block": "d",
+   "description": "A shiny, silvery-white metal that resists corrosion. Most is used in car catalytic converters, and some goes into jewellery, dental crowns and electronics.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/46"
+  },
+  {
+   "z": 47,
+   "symbol": "Ag",
+   "name": "Silver",
+   "weight": "107.87 ± 0.01",
+   "group": 11,
+   "series": null,
+   "period": 5,
+   "block": "d",
+   "description": "A fairly soft, shiny metal that slowly turns black in air. It reflects visible light better than any other known material, so it is used for mirrors as well as jewellery and tableware.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/47"
+  },
+  {
+   "z": 48,
+   "symbol": "Cd",
+   "name": "Cadmium",
+   "weight": "112.41 ± 0.01",
+   "group": 12,
+   "series": null,
+   "period": 5,
+   "block": "d",
+   "description": "A silvery metal with a bluish tinge. It is toxic and causes cancer, and most of it has gone into nickel-cadmium rechargeable batteries, which are being phased out.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/48"
+  },
+  {
+   "z": 49,
+   "symbol": "In",
+   "name": "Indium",
+   "weight": "114.82 ± 0.01",
+   "group": 13,
+   "series": null,
+   "period": 5,
+   "block": "p",
+   "description": "A soft, silvery metal. Most is made into indium tin oxide, a clear coating that conducts electricity in touch screens, flat-screen TVs and solar panels.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/49"
+  },
+  {
+   "z": 50,
+   "symbol": "Sn",
+   "name": "Tin",
+   "weight": "118.71 ± 0.01",
+   "group": 14,
+   "series": null,
+   "period": 5,
+   "block": "p",
+   "description": "A soft, bendable metal that slowly crumbles into a powder below 13 degrees Celsius. It coats the steel in tin cans and goes into solder, pewter and bronze.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/50"
+  },
+  {
+   "z": 51,
+   "symbol": "Sb",
+   "name": "Antimony",
+   "weight": "121.76 ± 0.01",
+   "group": 15,
+   "series": null,
+   "period": 5,
+   "block": "p",
+   "description": "A hard, brittle, silvery semi-metal. It is added to lead to make it harder, for example in batteries, and it is used in some semiconductor devices.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/51"
+  },
+  {
+   "z": 52,
+   "symbol": "Te",
+   "name": "Tellurium",
+   "weight": "127.60 ± 0.03",
+   "group": 16,
+   "series": null,
+   "period": 5,
+   "block": "p",
+   "description": "A semi-metal usually made as a grey powder. Small amounts make copper and steel easier to machine, and it has been used in solar cells and rewritable CDs and DVDs.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/52"
+  },
+  {
+   "z": 53,
+   "symbol": "I",
+   "name": "Iodine",
+   "weight": "126.90 ± 0.01",
+   "group": 17,
+   "series": null,
+   "period": 5,
+   "block": "p",
+   "description": "A black, shiny solid that turns straight into a purple vapour when heated. Humans need a little each day, and most of the iodine in the body is in the thyroid gland.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/53"
+  },
+  {
+   "z": 54,
+   "symbol": "Xe",
+   "name": "Xenon",
+   "weight": "131.29 ± 0.01",
+   "group": 18,
+   "series": null,
+   "period": 5,
+   "block": "p",
+   "description": "A colourless, odourless, very unreactive gas. It glows blue in an electric discharge, so it is used in photographers' flash lamps and other special lights.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/54"
+  },
+  {
+   "z": 55,
+   "symbol": "Cs",
+   "name": "Caesium",
+   "weight": "132.91 ± 0.01",
+   "group": 1,
+   "series": null,
+   "period": 6,
+   "block": "s",
+   "description": "A soft, gold-coloured metal that reacts explosively with water. It is used in atomic clocks, which help run the internet and mobile phone networks.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/55"
+  },
+  {
+   "z": 56,
+   "symbol": "Ba",
+   "name": "Barium",
+   "weight": "137.33 ± 0.01",
+   "group": 2,
+   "series": null,
+   "period": 6,
+   "block": "s",
+   "description": "A soft, silvery metal that tarnishes quickly in air. Its compounds are toxic, but barium sulfate does not dissolve, so patients can swallow it to make the stomach and gut show up on X-rays.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/56"
+  },
+  {
+   "z": 57,
+   "symbol": "La",
+   "name": "Lanthanum",
+   "weight": "138.91 ± 0.01",
+   "group": null,
+   "series": "lanthanoids",
+   "period": 6,
+   "block": "d",
+   "description": "A soft, silvery-white metal that tarnishes quickly in air. Its alloys can store hydrogen gas, and it is found in the batteries of hybrid cars.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/57"
+  },
+  {
+   "z": 58,
+   "symbol": "Ce",
+   "name": "Cerium",
+   "weight": "140.12 ± 0.01",
+   "group": null,
+   "series": "lanthanoids",
+   "period": 6,
+   "block": "f",
+   "description": "A grey metal that tarnishes easily and burns when heated. It throws sparks when struck, so its alloy, mischmetal, is used to make lighter flints.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/58"
+  },
+  {
+   "z": 59,
+   "symbol": "Pr",
+   "name": "Praseodymium",
+   "weight": "140.91 ± 0.01",
+   "group": null,
+   "series": "lanthanoids",
+   "period": 6,
+   "block": "f",
+   "description": "A soft, silvery metal. With magnesium it forms a strong alloy used in aircraft engines, and it is also used in permanent magnets.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/59"
+  },
+  {
+   "z": 60,
+   "symbol": "Nd",
+   "name": "Neodymium",
+   "weight": "144.24 ± 0.01",
+   "group": null,
+   "series": "lanthanoids",
+   "period": 6,
+   "block": "f",
+   "description": "A silvery-white metal that tarnishes quickly in air. Mixed with iron and boron it makes very strong magnets, which made small loudspeakers, microphones and mobile phones possible.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/60"
+  },
+  {
+   "z": 61,
+   "symbol": "Pm",
+   "name": "Promethium",
+   "weight": null,
+   "group": null,
+   "series": "lanthanoids",
+   "period": 6,
+   "block": "f",
+   "description": "A radioactive metal used mostly in research. A little goes into tiny atomic batteries, about the size of a drawing pin, used in pacemakers and radios.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/61"
+  },
+  {
+   "z": 62,
+   "symbol": "Sm",
+   "name": "Samarium",
+   "weight": "150.36 ± 0.02",
+   "group": null,
+   "series": "lanthanoids",
+   "period": 6,
+   "block": "f",
+   "description": "A silvery-white metal. Samarium-cobalt magnets stay magnetic when hot, and they helped shrink devices such as headphones.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/62"
+  },
+  {
+   "z": 63,
+   "symbol": "Eu",
+   "name": "Europium",
+   "weight": "151.96 ± 0.01",
+   "group": null,
+   "series": "lanthanoids",
+   "period": 6,
+   "block": "f",
+   "description": "A soft, silvery metal that tarnishes quickly and reacts with water. It glows red under ultraviolet light, which is used to check that euro banknotes are real.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/63"
+  },
+  {
+   "z": 64,
+   "symbol": "Gd",
+   "name": "Gadolinium",
+   "weight": "157.25 ± 0.01",
+   "group": null,
+   "series": "lanthanoids",
+   "period": 6,
+   "block": "f",
+   "description": "A soft, silvery metal that reacts with oxygen and water. Small amounts improve iron and chromium alloys, and its compounds are used in MRI scans.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/64"
+  },
+  {
+   "z": 65,
+   "symbol": "Tb",
+   "name": "Terbium",
+   "weight": "158.93 ± 0.01",
+   "group": null,
+   "series": "lanthanoids",
+   "period": 6,
+   "block": "f",
+   "description": "A soft, silvery metal used in solid-state devices and low-energy light bulbs. It has helped make medical X-rays safer by cutting the exposure time needed for a good image.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/65"
+  },
+  {
+   "z": 66,
+   "symbol": "Dy",
+   "name": "Dysprosium",
+   "weight": "162.50 ± 0.01",
+   "group": null,
+   "series": "lanthanoids",
+   "period": 6,
+   "block": "f",
+   "description": "A bright, silvery metal that reacts readily with air and water. It is added to neodymium magnets so they keep their magnetism when hot, as in motors and wind turbines.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/66"
+  },
+  {
+   "z": 67,
+   "symbol": "Ho",
+   "name": "Holmium",
+   "weight": "164.93 ± 0.01",
+   "group": null,
+   "series": "lanthanoids",
+   "period": 6,
+   "block": "f",
+   "description": "A bright, silvery metal. It absorbs neutrons, so it is used in nuclear reactors to keep the chain reaction under control.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/67"
+  },
+  {
+   "z": 68,
+   "symbol": "Er",
+   "name": "Erbium",
+   "weight": "167.26 ± 0.01",
+   "group": null,
+   "series": "lanthanoids",
+   "period": 6,
+   "block": "f",
+   "description": "A soft, silvery metal that slowly tarnishes in air. Erbium oxide goes into glass that absorbs infrared light, such as safety glasses for welders.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/68"
+  },
+  {
+   "z": 69,
+   "symbol": "Tm",
+   "name": "Thulium",
+   "weight": "168.93 ± 0.01",
+   "group": null,
+   "series": "lanthanoids",
+   "period": 6,
+   "block": "f",
+   "description": "A bright, silvery metal. A form of it made in a nuclear reactor gives off X-rays and powers small portable X-ray machines, and it is used in surgical lasers.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/69"
+  },
+  {
+   "z": 70,
+   "symbol": "Yb",
+   "name": "Ytterbium",
+   "weight": "173.05 ± 0.02",
+   "group": null,
+   "series": "lanthanoids",
+   "period": 6,
+   "block": "f",
+   "description": "A soft, silvery metal that forms a protective surface layer as it slowly reacts with air. It is starting to be used in memory devices, tuneable lasers and as a catalyst.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/70"
+  },
+  {
+   "z": 71,
+   "symbol": "Lu",
+   "name": "Lutetium",
+   "weight": "174.97 ± 0.01",
+   "group": null,
+   "series": "lanthanoids",
+   "period": 6,
+   "block": "f",
+   "description": "A hard, dense, silvery-white metal. It is little used outside research, though it serves as a catalyst for breaking down hydrocarbons in oil refineries.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/71"
+  },
+  {
+   "z": 72,
+   "symbol": "Hf",
+   "name": "Hafnium",
+   "weight": "178.49 ± 0.01",
+   "group": 4,
+   "series": null,
+   "period": 6,
+   "block": "d",
+   "description": "A shiny, silvery metal that resists corrosion. It absorbs neutrons well, so it is used for the control rods in nuclear submarines.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/72"
+  },
+  {
+   "z": 73,
+   "symbol": "Ta",
+   "name": "Tantalum",
+   "weight": "180.95 ± 0.01",
+   "group": 5,
+   "series": null,
+   "period": 6,
+   "block": "d",
+   "description": "A shiny, silvery metal that resists corrosion very well. Its main use is in electronics, where a thin oxide layer on its surface makes small, high-capacity capacitors.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/73"
+  },
+  {
+   "z": 74,
+   "symbol": "W",
+   "name": "Tungsten",
+   "weight": "183.84 ± 0.01",
+   "group": 6,
+   "series": null,
+   "period": 6,
+   "block": "d",
+   "description": "A shiny, silvery-white metal with the highest melting point of all metals. It made the filaments of old light bulbs, and it is the heaviest metal known to have a role in living things, in some bacteria.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/74"
+  },
+  {
+   "z": 75,
+   "symbol": "Re",
+   "name": "Rhenium",
+   "weight": "186.21 ± 0.01",
+   "group": 7,
+   "series": null,
+   "period": 6,
+   "block": "d",
+   "description": "A metal with a very high melting point; among metals only tungsten melts at a higher temperature. It is added to tungsten and molybdenum alloys for oven filaments and X-ray machines.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/75"
+  },
+  {
+   "z": 76,
+   "symbol": "Os",
+   "name": "Osmium",
+   "weight": "190.23 ± 0.03",
+   "group": 8,
+   "series": null,
+   "period": 6,
+   "block": "d",
+   "description": "A shiny, silver metal and the densest of all the elements, twice as dense as lead. It makes very hard alloys for fountain pen tips and electrical contacts.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/76"
+  },
+  {
+   "z": 77,
+   "symbol": "Ir",
+   "name": "Iridium",
+   "weight": "192.22 ± 0.01",
+   "group": 9,
+   "series": null,
+   "period": 6,
+   "block": "d",
+   "description": "A hard, silvery metal and the most corrosion-resistant material known. It is used in spark plug contacts, and mixed with platinum it made the old standard metre bar.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/77"
+  },
+  {
+   "z": 78,
+   "symbol": "Pt",
+   "name": "Platinum",
+   "weight": "195.08 ± 0.02",
+   "group": 10,
+   "series": null,
+   "period": 6,
+   "block": "d",
+   "description": "A shiny, silvery-white metal that resists corrosion as well as gold does. Its main use is in catalytic converters that clean exhaust from cars, trucks and buses, and it is popular in jewellery.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/78"
+  },
+  {
+   "z": 79,
+   "symbol": "Au",
+   "name": "Gold",
+   "weight": "196.97 ± 0.01",
+   "group": 11,
+   "series": null,
+   "period": 6,
+   "block": "d",
+   "description": "A soft, yellow metal that hardly reacts with anything. Most mined gold is stored as bullion, and much of the rest is made into jewellery.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/79"
+  },
+  {
+   "z": 80,
+   "symbol": "Hg",
+   "name": "Mercury",
+   "weight": "200.59 ± 0.01",
+   "group": 12,
+   "series": null,
+   "period": 6,
+   "block": "d",
+   "description": "A heavy, silvery metal that is a liquid. It is toxic, so many of its old uses are being phased out, and it is now mainly used as a catalyst in the chemical industry.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/80"
+  },
+  {
+   "z": 81,
+   "symbol": "Tl",
+   "name": "Thallium",
+   "weight": "204.38 ± 0.01",
+   "group": 13,
+   "series": null,
+   "period": 6,
+   "block": "p",
+   "description": "A soft, silvery-white metal that tarnishes easily. It is very toxic, and most of it is used in photoelectric cells for electronics.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/81"
+  },
+  {
+   "z": 82,
+   "symbol": "Pb",
+   "name": "Lead",
+   "weight": "207.2 ± 1.1",
+   "group": 14,
+   "series": null,
+   "period": 6,
+   "block": "p",
+   "description": "A dull, silvery-grey metal that is soft and easy to roll into sheets. It was used for pipes and paint since Roman times, but it is toxic, so those uses are now banned or discouraged.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/82"
+  },
+  {
+   "z": 83,
+   "symbol": "Bi",
+   "name": "Bismuth",
+   "weight": "208.98 ± 0.01",
+   "group": 15,
+   "series": null,
+   "period": 6,
+   "block": "p",
+   "description": "A dense, silvery metal with a pink tinge. Its low-melting alloys are used in fire detectors and electric fuses, and bismuth oxide is a yellow pigment in cosmetics and paints.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/83"
+  },
+  {
+   "z": 84,
+   "symbol": "Po",
+   "name": "Polonium",
+   "weight": null,
+   "group": 16,
+   "series": null,
+   "period": 6,
+   "block": "p",
+   "description": "A silvery-grey, radioactive semi-metal. It gives off alpha particles, which are used in antistatic devices, and a single gram heats itself to about 500 degrees Celsius.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/84"
+  },
+  {
+   "z": 85,
+   "symbol": "At",
+   "name": "Astatine",
+   "weight": null,
+   "group": 17,
+   "series": null,
+   "period": 6,
+   "block": "p",
+   "description": "A dangerously radioactive element, made only in tiny amounts. Its most stable form has a half-life of only 8 hours, and tests show it behaves chemically like iodine.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/85"
+  },
+  {
+   "z": 86,
+   "symbol": "Rn",
+   "name": "Radon",
+   "weight": null,
+   "group": 18,
+   "series": null,
+   "period": 6,
+   "block": "p",
+   "description": "A colourless, odourless gas that is chemically inert but radioactive. It was once sealed into tiny tubes and placed in tumours to treat them, though safer treatments are now used.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/86"
+  },
+  {
+   "z": 87,
+   "symbol": "Fr",
+   "name": "Francium",
+   "weight": null,
+   "group": 1,
+   "series": null,
+   "period": 7,
+   "block": "s",
+   "description": "An intensely radioactive metal. It has no uses, because its half-life is only 22 minutes.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/87"
+  },
+  {
+   "z": 88,
+   "symbol": "Ra",
+   "name": "Radium",
+   "weight": null,
+   "group": 2,
+   "series": null,
+   "period": 7,
+   "block": "s",
+   "description": "A soft, shiny, silvery metal that is highly radioactive. Because it behaves like calcium, radium-223 can reach bone and is sometimes used to treat prostate cancer that has spread to the bones.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/88"
+  },
+  {
+   "z": 89,
+   "symbol": "Ac",
+   "name": "Actinium",
+   "weight": null,
+   "group": null,
+   "series": "actinoids",
+   "period": 7,
+   "block": "d",
+   "description": "A soft, silvery-white radioactive metal that glows blue in the dark, because its radiation excites the air around it. It is rarely used outside research.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/89"
+  },
+  {
+   "z": 90,
+   "symbol": "Th",
+   "name": "Thorium",
+   "weight": "232.04 ± 0.01",
+   "group": null,
+   "series": "actinoids",
+   "period": 7,
+   "block": "f",
+   "description": "A weakly radioactive, silvery metal that makes magnesium alloys stronger at high temperatures. It could be used for nuclear power and is about three times as abundant as uranium.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/90"
+  },
+  {
+   "z": 91,
+   "symbol": "Pa",
+   "name": "Protactinium",
+   "weight": "231.04 ± 0.01",
+   "group": null,
+   "series": "actinoids",
+   "period": 7,
+   "block": "f",
+   "description": "A silvery, radioactive metal. It is little used outside research.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/91"
+  },
+  {
+   "z": 92,
+   "symbol": "U",
+   "name": "Uranium",
+   "weight": "238.03 ± 0.01",
+   "group": null,
+   "series": "actinoids",
+   "period": 7,
+   "block": "f",
+   "description": "A radioactive, silvery metal that is the fuel for nuclear power stations. Natural uranium is 99% uranium-238 and 1% uranium-235.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/92"
+  },
+  {
+   "z": 93,
+   "symbol": "Np",
+   "name": "Neptunium",
+   "weight": null,
+   "group": null,
+   "series": "actinoids",
+   "period": 7,
+   "block": "f",
+   "description": "A radioactive metal that is little used outside research. One form, neptunium-237, has been used in neutron detectors.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/93"
+  },
+  {
+   "z": 94,
+   "symbol": "Pu",
+   "name": "Plutonium",
+   "weight": null,
+   "group": null,
+   "series": "actinoids",
+   "period": 7,
+   "block": "f",
+   "description": "A radioactive, silvery metal that is extremely toxic because of its radioactivity. It is used in nuclear weapons and is a key material in nuclear power.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/94"
+  },
+  {
+   "z": 95,
+   "symbol": "Am",
+   "name": "Americium",
+   "weight": null,
+   "group": null,
+   "series": "actinoids",
+   "period": 7,
+   "block": "f",
+   "description": "A shiny, silvery radioactive metal. Its main everyday use is in smoke alarms.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/95"
+  },
+  {
+   "z": 96,
+   "symbol": "Cm",
+   "name": "Curium",
+   "weight": null,
+   "group": null,
+   "series": "actinoids",
+   "period": 7,
+   "block": "f",
+   "description": "A silver-coloured radioactive metal that tarnishes quickly in air. It has been used to power electrical equipment on space missions.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/96"
+  },
+  {
+   "z": 97,
+   "symbol": "Bk",
+   "name": "Berkelium",
+   "weight": null,
+   "group": null,
+   "series": "actinoids",
+   "period": 7,
+   "block": "f",
+   "description": "A radioactive, silvery metal. It is so rare that it has no commercial or technological use.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/97"
+  },
+  {
+   "z": 98,
+   "symbol": "Cf",
+   "name": "Californium",
+   "weight": null,
+   "group": null,
+   "series": "actinoids",
+   "period": 7,
+   "block": "f",
+   "description": "A radioactive metal that gives off many neutrons. It is used in portable metal detectors, to find water and oil layers in oil wells, and to check aeroplanes for metal fatigue.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/98"
+  },
+  {
+   "z": 99,
+   "symbol": "Es",
+   "name": "Einsteinium",
+   "weight": null,
+   "group": null,
+   "series": "actinoids",
+   "period": 7,
+   "block": "f",
+   "description": "A radioactive metal made by firing neutrons at plutonium in a nuclear reactor, only a few milligrams a year. It has no uses outside research.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/99"
+  },
+  {
+   "z": 100,
+   "symbol": "Fm",
+   "name": "Fermium",
+   "weight": null,
+   "group": null,
+   "series": "actinoids",
+   "period": 7,
+   "block": "f",
+   "description": "A radioactive metal made only in microgram amounts, by firing neutrons at plutonium in a nuclear reactor. It has no uses outside research.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/100"
+  },
+  {
+   "z": 101,
+   "symbol": "Md",
+   "name": "Mendelevium",
+   "weight": null,
+   "group": null,
+   "series": "actinoids",
+   "period": 7,
+   "block": "f",
+   "description": "A radioactive metal that does not occur in nature. The first seventeen atoms were made in 1955 in an all-night experiment at Berkeley, California, and it is used only in research.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/101"
+  },
+  {
+   "z": 102,
+   "symbol": "No",
+   "name": "Nobelium",
+   "weight": null,
+   "group": null,
+   "series": "actinoids",
+   "period": 7,
+   "block": "f",
+   "description": "A radioactive metal made by firing carbon at curium, and only a few atoms have ever been made. Its half-life is just 58 minutes, and it has no uses outside research.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/102"
+  },
+  {
+   "z": 103,
+   "symbol": "Lr",
+   "name": "Lawrencium",
+   "weight": null,
+   "group": null,
+   "series": "actinoids",
+   "period": 7,
+   "block": "f",
+   "description": "A radioactive metal that does not occur naturally and is made by firing boron at californium. Only a few atoms have ever been made, and who discovered it was disputed for years.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/103"
+  },
+  {
+   "z": 104,
+   "symbol": "Rf",
+   "name": "Rutherfordium",
+   "weight": null,
+   "group": 4,
+   "series": null,
+   "period": 7,
+   "block": "d",
+   "description": "A radioactive metal that does not occur naturally, made by firing carbon nuclei at californium. Teams in Russia and the USA both reported making it in the 1960s, and it is used only in research.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/104"
+  },
+  {
+   "z": 105,
+   "symbol": "Db",
+   "name": "Dubnium",
+   "weight": null,
+   "group": 5,
+   "series": null,
+   "period": 7,
+   "block": "d",
+   "description": "A highly radioactive metal made by firing nitrogen nuclei at californium, with only a few atoms ever made. Teams in Russia and the USA disputed who made it first and gave it different names.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/105"
+  },
+  {
+   "z": 106,
+   "symbol": "Sg",
+   "name": "Seaborgium",
+   "weight": null,
+   "group": 6,
+   "series": null,
+   "period": 7,
+   "block": "d",
+   "description": "A radioactive metal that does not occur naturally, made by firing oxygen nuclei at californium. Only a few atoms have ever been made, and it is used only in research.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/106"
+  },
+  {
+   "z": 107,
+   "symbol": "Bh",
+   "name": "Bohrium",
+   "weight": null,
+   "group": 7,
+   "series": null,
+   "period": 7,
+   "block": "d",
+   "description": "A highly radioactive metal that does not occur naturally, and only a few atoms have ever been made. It will probably never be made in amounts large enough to see.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/107"
+  },
+  {
+   "z": 108,
+   "symbol": "Hs",
+   "name": "Hassium",
+   "weight": null,
+   "group": 8,
+   "series": null,
+   "period": 7,
+   "block": "d",
+   "description": "A highly radioactive metal made by firing iron atoms at lead. Its longest-lived form has a half-life of 1.1 hours, and it will probably never be made in amounts large enough to see.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/108"
+  },
+  {
+   "z": 109,
+   "symbol": "Mt",
+   "name": "Meitnerium",
+   "weight": null,
+   "group": 9,
+   "series": null,
+   "period": 7,
+   "block": "d",
+   "description": "A highly radioactive metal made by firing iron at bismuth, and fewer than 10 atoms have ever been made. It was first made in Germany in 1982, when a week of work produced a single atom.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/109"
+  },
+  {
+   "z": 110,
+   "symbol": "Ds",
+   "name": "Darmstadtium",
+   "weight": null,
+   "group": 10,
+   "series": null,
+   "period": 7,
+   "block": "d",
+   "description": "A man-made, highly radioactive metal formed by fusing nickel and lead atoms in a heavy ion accelerator. Only a few atoms have ever been made, and its longest-lived form has a half-life of 4 minutes.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/110"
+  },
+  {
+   "z": 111,
+   "symbol": "Rg",
+   "name": "Roentgenium",
+   "weight": null,
+   "group": 11,
+   "series": null,
+   "period": 7,
+   "block": "d",
+   "description": "A man-made, highly radioactive metal formed by fusing nickel and bismuth atoms. Only a few atoms have ever been made, and its longest-lived form has a half-life of 22.8 seconds.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/111"
+  },
+  {
+   "z": 112,
+   "symbol": "Cn",
+   "name": "Copernicium",
+   "weight": null,
+   "group": 12,
+   "series": null,
+   "period": 7,
+   "block": "d",
+   "description": "A man-made, highly radioactive element formed by fusing lead and zinc atoms, with only a few atoms ever made. It is thought to be unreactive, more like a noble gas than a metal.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/112"
+  },
+  {
+   "z": 113,
+   "symbol": "Nh",
+   "name": "Nihonium",
+   "weight": null,
+   "group": 13,
+   "series": null,
+   "period": 7,
+   "block": "p",
+   "description": "A highly radioactive element of which only a few atoms have ever been made. IUPAC confirmed in 2015 that scientists at RIKEN in Japan had discovered it.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/113"
+  },
+  {
+   "z": 114,
+   "symbol": "Fl",
+   "name": "Flerovium",
+   "weight": null,
+   "group": 14,
+   "series": null,
+   "period": 7,
+   "block": "p",
+   "description": "A highly radioactive element of which only a few atoms have ever been made. Its longest-lived known form has a half-life of 2.6 seconds, and it is used only in research.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/114"
+  },
+  {
+   "z": 115,
+   "symbol": "Mc",
+   "name": "Moscovium",
+   "weight": null,
+   "group": 15,
+   "series": null,
+   "period": 7,
+   "block": "p",
+   "description": "A highly radioactive element of which only a few atoms have ever been made. IUPAC confirmed its discovery in 2015, by scientists in Dubna, Russia, and at Livermore and Oak Ridge in the USA.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/115"
+  },
+  {
+   "z": 116,
+   "symbol": "Lv",
+   "name": "Livermorium",
+   "weight": null,
+   "group": 16,
+   "series": null,
+   "period": 7,
+   "block": "p",
+   "description": "A highly radioactive element that does not occur naturally, made by firing calcium at curium. Only a few atoms have ever been made, and its most stable form lasts only a fraction of a second.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/116"
+  },
+  {
+   "z": 117,
+   "symbol": "Ts",
+   "name": "Tennessine",
+   "weight": null,
+   "group": 17,
+   "series": null,
+   "period": 7,
+   "block": "p",
+   "description": "A highly radioactive element of which only a few atoms have ever been made. IUPAC confirmed its discovery in 2015, by scientists in Russia and the USA, including Oak Ridge in Tennessee.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/117"
+  },
+  {
+   "z": 118,
+   "symbol": "Og",
+   "name": "Oganesson",
+   "weight": null,
+   "group": 18,
+   "series": null,
+   "period": 7,
+   "block": "p",
+   "description": "A highly radioactive element of which only a few atoms have ever been made. IUPAC confirmed its discovery in 2015, by scientists in Dubna, Russia, and Livermore, California.",
+   "sources": [
+    "rsc",
+    "ciaaw-2024"
+   ],
+   "page": "https://periodic-table.rsc.org/element/118"
+  }
+ ]
+}

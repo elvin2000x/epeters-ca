@@ -1,0 +1,415 @@
+{
+  "ui": {
+    "copy.pageTitle": "Molecules of life",
+    "copy.intro": "Fifty-nine molecules, from the air you breathe to the machines inside every cell. Pick one to turn it in 3D.",
+    "legend.atom": "One ball: a single atom, coloured by element.",
+    "legend.ions": "Each ball is an ion, coloured by element and drawn at its real size: purple sodium ions (small) and green chloride ions (large). There are no sticks, because ions are held by the pull between charges, not by shared bonds.",
+    "alt.lattice": "A small cube cut from a {name} crystal: {list} ions in rows, each sodium ion surrounded by six chloride ions. The balls are drawn at the real sizes of the ions. Drag to turn it, scroll or pinch to zoom.",
+    "alt.atom": "A single {name} atom shown as a ball. It is not bonded to any other atom. Drag to turn it, scroll or pinch to zoom.",
+    "detail.formulaUnit": "Formula unit {formula}: one sodium ion for every chloride ion. Counted from the {n} ions in this piece.",
+    "detail.badgeBuilt": "Built model: salt crystal piece",
+    "detail.builtLabel": "Built model: ions placed at the spacing measured in real salt crystals",
+    "detail.badgePubchem": "Computed model: PubChem {cid}",
+    "detail.pubchemLabel": "Computed model: PubChem compound {cid}",
+    "coll.notesTitle": "Good to know",
+    "copy.metaDescription": "Fifty-nine molecules in 3D, from the air you breathe to the machines inside every cell, each with a plain-English description and the elements it contains.",
+    "copy.groupSmall": "Small molecules",
+    "copy.groupBig": "Big molecules",
+    "copy.back": "Back to the explorer",
+    "copy.skip": "Skip to the description",
+    "copy.reset": "Reset view",
+    "copy.spinOn": "Spin",
+    "copy.spinOff": "Stop spin",
+    "copy.theme": "Theme",
+    "copy.loading": "Loading the 3D viewer (about 1.5 MB, once)",
+    "copy.noWebgl": "3D needs WebGL, which this browser or device does not offer. The description, formula and elements below still work.",
+    "copy.viewFailed": "The 3D viewer could not start on this device. The description, formula and elements below still work.",
+    "copy.retry": "Try again",
+    "copy.docTitle": "{name}: Molecules of Life",
+    "copy.loadFailed": "The molecule list could not load. Please refresh the page.",
+    "copy.loadingShort": "Loading.",
+    "copy.credits": "3D viewer: Mol* (molstar.org), MIT licence. Structures: RCSB Protein Data Bank (rcsb.org) and PubChem (pubchem.ncbi.nlm.nih.gov); salt crystal spacing from the Crystallography Open Database. Textbook facts: OpenStax Biology 2e and Chemistry 2e (CC BY 4.0).",
+    "copy.drawing": "Drawing the new view",
+    "copy.viewport": "3D view",
+    "theme.auto": "Auto",
+    "theme.light": "Light",
+    "theme.dark": "Dark",
+    "theme.label": "{theme}: {mode}. Press to change.",
+    "detail.realLabel": "Real structure: PDB {code}",
+    "detail.idealLabel": "Ideal model: PDB Chemical Component {code}",
+    "detail.badgeReal": "Real structure: PDB {code}",
+    "detail.badgeIdeal": "Ideal model: ligand {code}",
+    "detail.madeOf": "Made of",
+    "detail.formula": "Formula",
+    "detail.elements": "Elements",
+    "detail.countedPdb": "Counted from the {n} atoms in this file (water molecules left out).",
+    "detail.countedCcd": "Counted from the {n} atoms in the model file.",
+    "detail.noH": "This file lists no hydrogen atoms.",
+    "detail.noFile": "The structure file could not be read, so the elements are not shown.",
+    "detail.sources": "Sources ({n})",
+    "detail.srcLink": "link",
+    "detail.srcLabel": "source {n}",
+    "detail.checked": "Checked: {date}.",
+    "legend.title": "Colour key",
+    "legend.ribbon": "{label} (ribbon)",
+    "legend.part": "{label}",
+    "legend.ccd": "Atoms (balls) coloured by element. Sticks are bonds.",
+    "legend.byElement": "{labels}: coloured by element",
+    "legend.chain": "Each chain has its own colour.",
+    "legend.rainbow": "Each chain runs from blue at its start to red at its end.",
+    "legend.hydro": "Blue parts like water. Orange parts avoid it. White is in between.",
+    "legend.element": "Every atom is coloured by its element.",
+    "legend.hydroSource": "Scale",
+    "alt.title": "What the 3D view shows",
+    "alt.ccd": "A ball and stick model of one {name} molecule{counts}. Each ball is an atom coloured by element, and each stick is a chemical bond. Drag to turn it, scroll or pinch to zoom.",
+    "alt.ccdCounts": " ({list} atoms)",
+    "alt.pdb": "The real 3D structure from PDB entry {code}. {ribbons}.{sticks} Ribbons trace the backbone of each chain rather than every atom. Drag to turn it, scroll or pinch to zoom.",
+    "alt.ribbon": "{label} as a ribbon in {colour}",
+    "alt.sticks": " {labels} shown as atoms coloured by element.",
+    "alt.viewport": "3D view of {name}. {alt}",
+    "colour.#2a9d8f": "teal",
+    "colour.#3f7fd6": "blue",
+    "colour.#e07a3f": "orange",
+    "colour.#d4577a": "pink",
+    "colour.#8e6cc7": "purple",
+    "colour.#3fae5a": "green",
+    "colour.#c9932b": "gold",
+    "tour.start": "Take the tour",
+    "tour.startShort": "Tour",
+    "tour.startLabel": "Take the guided tour of {name}, {n} stops",
+    "tour.stops": "{n} stops",
+    "tour.region": "Guided tour",
+    "tour.stopOf": "Stop {i} of {n}",
+    "tour.play": "Play",
+    "tour.pause": "Pause",
+    "tour.playLabel": "Play the tour",
+    "tour.pauseLabel": "Pause the tour",
+    "tour.next": "Next",
+    "tour.back": "Back",
+    "tour.nextLabel": "Next stop",
+    "tour.backLabel": "Previous stop",
+    "tour.close": "Close",
+    "tour.closeLabel": "Close the tour",
+    "tour.dot": "Go to stop {i}: {title}",
+    "tour.dots": "Tour stops",
+    "tour.keys": "Space plays or pauses. Arrow keys move between stops. Esc closes.",
+    "tour.textTitle": "Read the tour as text",
+    "tour.showStop": "Show this stop",
+    "tour.done": "That was the last stop.",
+    "story.does": "What it does",
+    "story.shape": "How the shape works",
+    "story.lives": "Where it lives",
+    "story.wrong": "What goes wrong",
+    "story.history": "Who solved it",
+    "story.size": "Size",
+    "story.year": "Year",
+    "story.who": "Who",
+    "story.method": "Method",
+    "story.resolution": "Sharpness",
+    "story.resolutionValue": "{a} Å (smaller means sharper)",
+    "story.sizeNm": "About {nm} nm across.",
+    "story.look": "Look closer",
+    "story.lookHint": "Tap a chip to fly to that spot.",
+    "story.linkElement": "{name} in the periodic table",
+    "story.linkProcess": "How it works: {name}",
+    "story.linkMolecule": "{name} in 3D",
+    "story.linkPage": "Open",
+    "view.open": "View",
+    "view.openLabel": "View options: style, colour and measure",
+    "view.panel": "View options",
+    "view.style": "Style",
+    "view.default": "Normal",
+    "view.cartoon": "Ribbon",
+    "view.surface": "Surface",
+    "view.ball_and_stick": "Ball and stick",
+    "view.spacefill": "Spacefill",
+    "view.colour": "Colour by",
+    "colour.parts": "Parts",
+    "colour.chain": "Chain",
+    "colour.rainbow": "Start to end",
+    "colour.hydro": "Water-loving",
+    "colour.element": "Element",
+    "view.close": "Done",
+    "measure.toggle": "Measure",
+    "measure.toggleLabel": "Measure the distance between two atoms",
+    "measure.hint": "Tap two atoms to measure the distance between them.",
+    "measure.keyHint": "With a keyboard, pick two letters in the sequence strip.",
+    "measure.first": "First point: {a}. Now pick a second one.",
+    "measure.result": "{a} to {b}: {d} Å",
+    "measure.unit": "1 Å (angstrom) is a ten-billionth of a metre.",
+    "measure.clear": "Clear",
+    "seq.title": "Sequence",
+    "seq.chain": "Chain",
+    "seq.chainOpt": "Chain {c} ({n})",
+    "seq.hint": "Tap a letter to fly to it.",
+    "seq.letter": "{code} {num}, {name}, chain {chain}",
+    "seq.strip": "Sequence of chain {chain}",
+    "pick.region": "What you picked",
+    "pick.title": "{code} {num}",
+    "pick.chain": "Chain {c}",
+    "pick.atom": "Tapped atom: {sym} ({name})",
+    "pick.madeOf": "Made of",
+    "pick.see3d": "See it in 3D",
+    "pick.lab": "Build it in the lab",
+    "pick.close": "Close",
+    "pick.closeLabel": "Close this card",
+    "pick.hint": "Tap any part of the molecule to see what it is.",
+    "pick.names": "Names",
+    "pick.ligand": "Not part of the protein chain: a small molecule held by it.",
+    "pick.modified": "Part of the protein chain: an amino acid with a small chemical change.",
+    "pick.sources": "Sources",
+    "lines.title": "What the lines mean",
+    "pick.elementLabel": "{name}, {n} atoms here. Opens the periodic table.",
+    "pick.resTitle": "{name} {num}",
+    "pick.chainName": "{name}, chain {c}",
+    "pick.chainOnly": "Chain {c}",
+    "pick.heldBy": "Held by {chain}",
+    "pick.inChain": "Part of {chain}",
+    "pick.code": "File code: {code} {num}, chain {c}",
+    "pick.here": "What it does here",
+    "holds.label": "Balls or ribbon?",
+    "holds.some": "Besides its {poly} chains, this file holds {list}. In Ribbon these are the balls you see, and the chains are the ribbons.",
+    "holds.none": "This file holds only {poly} chains and no small molecules, so Ribbon shows ribbons only.",
+    "holds.hidden": "The file also holds {list}, which this view leaves out.",
+    "holds.noneShown": "Besides its {poly} chains, this file holds only {list}, which this view leaves out, so Ribbon shows ribbons only.",
+    "holds.poly.protein": "protein",
+    "holds.poly.dna": "DNA",
+    "holds.poly.both": "protein and DNA",
+    "holds.item": "{name} ({n})",
+    "holds.and": "and",
+    "coll.title": "Collections",
+    "coll.all": "All",
+    "coll.week": "Molecule of the week",
+    "coll.weekGo": "Open {name}",
+    "coll.lineup": "Size lineup",
+    "coll.lineupLabel": "Size lineup: see {name} next to other molecules, to scale",
+    "cine.breathe": "Watch it breathe",
+    "cine.breatheLabel": "Watch it breathe: see hemoglobin change shape as it grabs oxygen",
+    "cine.spin": "Watch it spin",
+    "cine.spinLabel": "Watch it spin: see ATP synthase turn as it makes ATP",
+    "light.note": "To keep this phone fast, you are seeing the part the file holds, not the full assembly.",
+    "light.full": "Show the full assembly",
+    "light.back": "Show the lighter view",
+    "light.noSurface": "Surface is off for this big molecule on phones."
+  },
+  "moleculeOfTheWeek": {
+    "about": "One molecule per ISO week, in this order, starting the week of 'start' (a Monday) and looping. Read by molecules.js and molecules/motw.js (for a home card).",
+    "start": "2026-09-28",
+    "ids": ["hemoglobin", "caffeine", "atp-synthase", "dna", "insulin", "chlorophyll", "gfp", "virus-capsid", "water", "myosin",
+      "dopamine", "collagen", "rubisco", "glucose", "antibody", "kinesin", "serotonin", "aquaporin", "potassium-channel", "vitamin-c",
+      "lysozyme", "hiv-protease", "cholesterol", "actin", "rhodopsin", "adrenaline", "myoglobin", "nucleosome", "capsaicin", "keratin",
+      "atp", "acetylcholinesterase", "oxytocin", "sucrose", "mhc", "pepsin", "glycine", "beta-carotene", "acetylcholine", "palmitic-acid"]
+  },
+  "phoneLight": {
+    "about": "Big assemblies that open lighter on narrow (under 600 px) or low-power devices: the file's own chains as ribbons, no Surface, with a button for the full assembly.",
+    "ids": ["virus-capsid", "rubisco"]
+  },
+  "molecules": [
+    {
+      "id": "water", "aliases": ["h2o"], "name": "Water", "group": "small", "kind": "ccd", "code": "HOH", "file": "data/HOH.cif",
+      "madeOf": "One oxygen atom bonded to two hydrogen atoms.",
+      "description": [
+        { "t": "Water is one oxygen atom bonded to two hydrogen atoms, and the oxygen end carries a slight negative charge while the hydrogen ends are slightly positive.", "s": ["ccd-HOH", "os-2-2"] },
+        { "t": "Those opposite charges let water molecules hold onto each other with hydrogen bonds and dissolve many ions and polar molecules.", "s": ["os-2-2"] },
+        { "t": "Water makes up roughly 60 to 70 percent of the human body.", "s": ["os-2-2"] }
+      ]
+    },
+    {
+      "id": "glucose", "aliases": ["sugar"], "name": "Glucose", "group": "small", "kind": "ccd", "code": "GLC", "file": "data/GLC.cif",
+      "madeOf": "A ring of five carbons and one oxygen, with a sixth carbon and five OH groups around it.",
+      "description": [
+        { "t": "Glucose is a simple sugar with six carbon atoms, and in water it mostly curls into a ring, the form shown here.", "s": ["os-3-2", "ccd-GLC"] },
+        { "t": "Cells break glucose down during cellular respiration and use the energy released to make ATP.", "s": ["os-3-2"] },
+        { "t": "This model is alpha-D-glucopyranose, one of glucose's ring forms, from the PDB Chemical Component Dictionary.", "s": ["ccd-GLC"] }
+      ]
+    },
+    {
+      "id": "atp", "aliases": ["adenosine-triphosphate"], "name": "ATP", "group": "small", "kind": "ccd", "code": "ATP", "file": "data/ATP.cif",
+      "view": { "eye": [0, 1, 0], "up": [1, 0, 0] },
+      "madeOf": "Adenine and the sugar ribose, joined to a chain of three phosphate groups.",
+      "description": [
+        { "t": "ATP (adenosine triphosphate) is the base adenine and the sugar ribose joined to a chain of three phosphate groups.", "s": ["os-6-4", "ccd-ATP"] },
+        { "t": "It is the cell's main energy currency: splitting off the last phosphate leaves ADP and releases energy that powers other reactions.", "s": ["os-6-4"] },
+        { "t": "The actin and myosin structures in this gallery each hold an ADP molecule.", "s": ["rcsb-1J6Z", "rcsb-1B7T"] }
+      ]
+    },
+    {
+      "id": "glycine", "aliases": ["amino-acid", "gly"], "name": "Glycine (an amino acid)", "short": "Glycine", "group": "small", "kind": "ccd", "code": "GLY", "file": "data/GLY.cif",
+      "madeOf": "A central carbon carrying an amino group, a carboxyl group and two hydrogen atoms (one of them is the R group).",
+      "description": [
+        { "t": "Amino acids are the building blocks of proteins, and proteins use 20 common ones.", "s": ["os-3-4"] },
+        { "t": "Glycine is the simplest, because its side group (the R group) is a single hydrogen atom.", "s": ["os-3-4"] },
+        { "t": "Peptide bonds link amino acids into chains, and those chains fold into proteins like the big molecules in this gallery.", "s": ["os-3-4"] }
+      ]
+    },
+    {
+      "id": "palmitic-acid", "aliases": ["fatty-acid", "fat", "phospholipid"], "name": "Palmitic acid (a fatty acid)", "short": "Palmitic acid", "group": "small", "kind": "ccd", "code": "PLM", "file": "data/PLM.cif",
+      "madeOf": "A chain of 16 carbon atoms with a carboxyl group (COOH) at one end.",
+      "description": [
+        { "t": "Palmitic acid is a fatty acid: a long chain of carbon and hydrogen with a carboxyl group at one end, 16 carbons in all.", "s": ["os-3-3", "ccd-PLM"] },
+        { "t": "Its carbons are joined only by single bonds, so it holds the most hydrogen it can, which makes it a saturated fatty acid.", "s": ["os-3-3"] },
+        { "t": "Fat molecules are built from glycerol and fatty acids, and cells use fats to store energy for the long term.", "s": ["os-3-3"] },
+        { "t": "A phospholipid, the molecule that cell membranes are built from, carries two fatty acid tails like this one.", "s": ["os-3-3"] }
+      ]
+    },
+    {
+      "id": "cholesterol", "aliases": ["steroid"], "name": "Cholesterol", "group": "small", "kind": "ccd", "code": "CLR", "file": "data/CLR.cif",
+      "madeOf": "Four linked carbon rings with a short carbon tail and one OH group.",
+      "description": [
+        { "t": "Cholesterol is a steroid, a lipid built on four linked carbon rings.", "s": ["os-3-3", "ccd-CLR"] },
+        { "t": "In animal cells it is part of the plasma membrane.", "s": ["os-3-3"] },
+        { "t": "The liver makes it, and it is the starting material for many steroid hormones.", "s": ["os-3-3"] }
+      ]
+    },
+    {
+      "id": "actin", "name": "Actin", "group": "big", "kind": "pdb", "code": "1J6Z", "file": "../data/1J6Z.cif",
+      "madeOf": "One protein chain of 375 amino acids, with ADP and calcium ions bound.",
+      "parts": [
+        { "sel": "polymer", "rep": "cartoon", "color": "#2a9d8f", "label": "Actin protein chain" },
+        { "sel": { "label_comp_id": "ADP" }, "rep": "ball_and_stick", "element": true, "label": "ADP" },
+        { "sel": "ion", "rep": "spacefill", "element": true, "label": "Calcium ions" }
+      ],
+      "description": [
+        { "t": "Actin is one of the two proteins that make muscle contract, working together with myosin.", "s": ["os-3-4"] },
+        { "t": "This is a single rabbit actin molecule, modified so it could not join a filament, and solved with ADP bound.", "s": ["rcsb-1J6Z", "otterbein-2001"] },
+        { "t": "Many actin molecules link up along a helix to build an actin filament.", "s": ["holmes-1990"] }
+      ]
+    },
+    {
+      "id": "dna", "aliases": ["b-dna", "1bna"], "name": "DNA", "group": "big", "kind": "pdb", "code": "1BNA", "file": "data/1BNA.cif",
+      "madeOf": "Two strands of 12 nucleotides each, paired into 12 base pairs (CGCGAATTCGCG).",
+      "parts": [
+        { "sel": { "label_asym_id": "A" }, "rep": "cartoon", "color": "#3f7fd6", "label": "Strand 1" },
+        { "sel": { "label_asym_id": "B" }, "rep": "cartoon", "color": "#e07a3f", "label": "Strand 2" }
+      ],
+      "description": [
+        { "t": "DNA is the genetic material of living things, built from two strands wound into a double helix.", "s": ["os-3-5"] },
+        { "t": "The sugar and phosphate backbone runs along the outside, and the bases pair across the middle, A with T and G with C.", "s": ["os-3-5"] },
+        { "t": "This crystal holds a short synthetic piece of 12 base pairs, a little more than one full right-handed turn.", "s": ["rcsb-1BNA", "drew-1981"] }
+      ]
+    },
+    {
+      "id": "hemoglobin", "aliases": ["haemoglobin", "4hhb"], "name": "Hemoglobin", "group": "big", "kind": "pdb", "code": "4HHB", "file": "data/4HHB.cif",
+      "madeOf": "Four protein chains (two alpha, two beta), each holding a heme group with one iron atom.",
+      "parts": [
+        { "sel": { "label_entity_id": "1" }, "rep": "cartoon", "color": "#d4577a", "label": "Alpha chains (2)" },
+        { "sel": { "label_entity_id": "2" }, "rep": "cartoon", "color": "#3f7fd6", "label": "Beta chains (2)" },
+        { "sel": { "label_comp_id": "HEM" }, "rep": "ball_and_stick", "element": true, "label": "Heme groups (4)" }
+      ],
+      "description": [
+        { "t": "Hemoglobin is the protein that carries oxygen in the blood, packed inside red blood cells.", "s": ["os-40-2"] },
+        { "t": "It is made of four protein chains, two alpha and two beta, and each chain holds a heme group with an iron atom.", "s": ["os-40-2", "rcsb-4HHB"] },
+        { "t": "This is human hemoglobin in its deoxy (oxygen-free) form, from a 1984 X-ray study.", "s": ["rcsb-4HHB", "fermi-1984"] }
+      ]
+    },
+    {
+      "id": "insulin", "aliases": ["4ins"], "name": "Insulin", "group": "big", "kind": "pdb", "code": "4INS", "file": "data/4INS.cif",
+      "madeOf": "Two short protein chains per molecule (A: 21 amino acids, B: 30); this file has two molecules and two zinc ions.",
+      "parts": [
+        { "sel": { "label_entity_id": "1" }, "rep": "cartoon", "color": "#8e6cc7", "label": "Chain A (21 amino acids)" },
+        { "sel": { "label_entity_id": "2" }, "rep": "cartoon", "color": "#2a9d8f", "label": "Chain B (30 amino acids)" },
+        { "sel": "ion", "rep": "spacefill", "element": true, "label": "Zinc ions" }
+      ],
+      "description": [
+        { "t": "Insulin is a protein hormone that helps control the level of glucose in the blood.", "s": ["os-3-4"] },
+        { "t": "Each insulin molecule is two short chains: chain A with 21 amino acids and chain B with 30.", "s": ["rcsb-4INS"] },
+        { "t": "This crystal is pig insulin, and the file holds two insulin molecules and two zinc ions.", "s": ["rcsb-4INS", "baker-1988"] }
+      ]
+    },
+    {
+      "id": "collagen", "aliases": ["1cag"], "name": "Collagen", "group": "big", "kind": "pdb", "code": "1CAG", "file": "data/1CAG.cif",
+      "madeOf": "Three chains of 30 amino acids twisted into a triple helix, in a repeating pattern with glycine every third position.",
+      "parts": [
+        { "sel": { "label_asym_id": "A" }, "rep": "cartoon", "color": "#2a9d8f", "label": "Chain 1" },
+        { "sel": { "label_asym_id": "B" }, "rep": "cartoon", "color": "#e07a3f", "label": "Chain 2" },
+        { "sel": { "label_asym_id": "C" }, "rep": "cartoon", "color": "#8e6cc7", "label": "Chain 3" }
+      ],
+      "description": [
+        { "t": "Collagen is a fibrous protein found in skin and other connective tissues.", "s": ["os-3-4", "bella-1994"] },
+        { "t": "Three chains twist around each other into a triple helix, following a repeating pattern with glycine at every third position.", "s": ["bella-1994"] },
+        { "t": "This model is a short collagen-like peptide in which one glycine was swapped for alanine, which untwists the helix slightly at that spot.", "s": ["rcsb-1CAG", "bella-1994"] }
+      ]
+    },
+    {
+      "id": "myosin", "aliases": ["1b7t"], "name": "Myosin (head)", "short": "Myosin", "group": "big", "kind": "pdb", "code": "1B7T", "file": "data/1B7T.cif",
+      "madeOf": "One heavy chain plus an essential and a regulatory light chain, with ADP, magnesium and calcium bound.",
+      "parts": [
+        { "sel": { "label_entity_id": "1" }, "rep": "cartoon", "color": "#e07a3f", "label": "Heavy chain (motor)" },
+        { "sel": { "label_entity_id": "3" }, "rep": "cartoon", "color": "#3f7fd6", "label": "Essential light chain" },
+        { "sel": { "label_entity_id": "2" }, "rep": "cartoon", "color": "#8e6cc7", "label": "Regulatory light chain" },
+        { "sel": { "label_comp_id": "ADP" }, "rep": "ball_and_stick", "element": true, "label": "ADP" },
+        { "sel": "ion", "rep": "spacefill", "element": true, "label": "Magnesium and calcium ions" }
+      ],
+      "description": [
+        { "t": "Myosin is the other protein that drives muscle contraction, working together with actin.", "s": ["os-3-4"] },
+        { "t": "This structure is the head of scallop muscle myosin: one heavy chain plus two light chains, with ADP and magnesium bound.", "s": ["rcsb-1B7T", "houdusse-1999"] },
+        { "t": "Its authors read this shape as a stage of the contraction cycle in which the head is let go from actin.", "s": ["houdusse-1999"] }
+      ]
+    },
+    {
+      "id": "gfp", "aliases": ["green-fluorescent-protein", "1ema"], "name": "Green fluorescent protein", "short": "GFP", "group": "big", "kind": "pdb", "code": "1EMA", "file": "data/1EMA.cif",
+      "madeOf": "One protein chain of 236 amino acids folded into a barrel, with the chromophore inside.",
+      "note": "The selenium comes from selenomethionine (residue MSE), which this file has in place of methionine.",
+      "parts": [
+        { "sel": "polymer", "rep": "cartoon", "color": "#3fae5a", "label": "GFP protein chain" },
+        { "sel": { "label_comp_id": "CRO" }, "rep": "ball_and_stick", "element": true, "label": "Chromophore (the part that glows)" }
+      ],
+      "description": [
+        { "t": "Green fluorescent protein (GFP) comes from the jellyfish Aequorea victoria.", "s": ["rcsb-1EMA", "ormo-1996"] },
+        { "t": "Its chain folds into a barrel of 11 beta strands, and the light-emitting chromophore forms by itself from three amino acids at the centre.", "s": ["ormo-1996"] },
+        { "t": "Scientists use GFP as a marker to see where genes are switched on and where their products go.", "s": ["ormo-1996"] }
+      ]
+    },
+    {
+      "id": "lysozyme", "aliases": ["1lyz"], "name": "Lysozyme", "group": "big", "kind": "pdb", "code": "1LYZ", "file": "data/1LYZ.cif",
+      "madeOf": "One protein chain of 129 amino acids.",
+      "parts": [
+        { "sel": "polymer", "rep": "cartoon", "color": "#c9932b", "label": "Lysozyme protein chain" }
+      ],
+      "description": [
+        { "t": "Lysozyme is an enzyme that attacks bacteria by cutting the bonds between sugars in peptidoglycan, the material of bacterial cell walls.", "s": ["uniprot-P00698", "os-22-2"] },
+        { "t": "It is plentiful in egg white, which is where this hen protein comes from.", "s": ["uniprot-P00698", "rcsb-1LYZ"] },
+        { "t": "This entry is a 1974 refinement of hen egg-white lysozyme, one chain of 129 amino acids.", "s": ["rcsb-1LYZ", "diamond-1974"] }
+      ]
+    },
+    {
+      "id": "aquaporin", "aliases": ["aqp1", "1j4n"], "name": "Aquaporin 1", "group": "big", "kind": "pdb", "code": "1J4N", "file": "data/1J4N.cif",
+      "madeOf": "One protein chain of 271 amino acids that sits across the cell membrane.",
+      "parts": [
+        { "sel": "polymer", "rep": "cartoon", "color": "#3f7fd6", "label": "AQP1 protein chain" }
+      ],
+      "description": [
+        { "t": "Aquaporins are channels that let water cross cell membranes quickly.", "s": ["sui-2001"] },
+        { "t": "Through the middle of AQP1 runs a long, narrow pore that passes water but makes it very hard for protons to get through.", "s": ["sui-2001"] },
+        { "t": "This structure is AQP1 from cow blood, solved by X-ray at 2.2 angstrom resolution.", "s": ["rcsb-1J4N", "sui-2001"] }
+      ]
+    },
+    {
+      "id": "atp-synthase", "aliases": ["atp-synthase-f1", "f1-atpase", "1mab"], "name": "ATP synthase (F1 head)", "short": "ATP synthase", "group": "big", "kind": "pdb", "code": "1MAB", "file": "data/1MAB.cif",
+      "assembly": "1",
+      "madeOf": "Three alpha and three beta chains in a ring around one gamma chain, with ATP, ADP and magnesium bound. Only the F1 head: the part in the membrane is not in this entry.",
+      "note": "The 3D view builds the full head (three alpha and three beta chains) from the file's own symmetry records; the counts are for what the file holds, one alpha, one beta and the gamma chain.",
+      "parts": [
+        { "sel": { "label_entity_id": "1" }, "rep": "cartoon", "color": "#d4577a", "label": "Alpha chains (3)" },
+        { "sel": { "label_entity_id": "2" }, "rep": "cartoon", "color": "#c9932b", "label": "Beta chains (3)" },
+        { "sel": { "label_entity_id": "3" }, "rep": "cartoon", "color": "#3f7fd6", "label": "Gamma chain (central stalk)" },
+        { "sel": { "label_comp_id": "ATP" }, "rep": "ball_and_stick", "element": true, "label": "ATP" },
+        { "sel": { "label_comp_id": "ADP" }, "rep": "ball_and_stick", "element": true, "label": "ADP" },
+        { "sel": "ion", "rep": "spacefill", "element": true, "label": "Magnesium ions" }
+      ],
+      "description": [
+        { "t": "ATP synthase is a protein machine in the inner membrane of mitochondria. Hydrogen ions flowing through it turn part of it like a tiny generator, and the turning adds a phosphate to ADP to make ATP.", "s": ["os-7-4"] },
+        { "t": "This entry is its F1 head, the part where ATP is made: three alpha and three beta chains in a ring around the central gamma chain, from rat liver, solved by X-ray at 2.8 angstroms.", "s": ["rcsb-1MAB", "bianchet-1998"] },
+        { "t": "The file holds one alpha, one beta and the gamma chain with ATP and ADP bound, and the viewer builds the full ring of six from the file's own symmetry records.", "s": ["rcsb-1MAB"] }
+      ]
+    }
+  ],
+  "elementColors": {
+    "H": "#ffffff", "C": "#909090", "N": "#3050f8", "O": "#ff0d0d", "P": "#ff8000", "S": "#ffff30",
+    "FE": "#e06633", "ZN": "#7d80b0", "MG": "#8aff00", "CA": "#3dff00", "SE": "#ffa100", "NA": "#ab5cf2", "CL": "#1ff01f", "AR": "#80d1e3"
+  },
+  "elementNames": {
+    "H": "Hydrogen", "C": "Carbon", "N": "Nitrogen", "O": "Oxygen", "P": "Phosphorus", "S": "Sulfur",
+    "FE": "Iron", "ZN": "Zinc", "MG": "Magnesium", "CA": "Calcium", "SE": "Selenium", "NA": "Sodium", "CL": "Chlorine", "AR": "Argon"
+  }
+}

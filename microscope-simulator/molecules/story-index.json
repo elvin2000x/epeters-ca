@@ -1,0 +1,21 @@
+{
+ "about": "Molecule ids with a story file in stories/. Built by tools/build_story_index.py.",
+ "stories": [
+  "actin",
+  "aquaporin",
+  "atp-synthase",
+  "atp",
+  "cholesterol",
+  "collagen",
+  "dna",
+  "gfp",
+  "glucose",
+  "glycine",
+  "hemoglobin",
+  "insulin",
+  "lysozyme",
+  "myosin",
+  "palmitic-acid",
+  "water"
+ ]
+}

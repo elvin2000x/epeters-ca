@@ -1,0 +1,152 @@
+{
+  "note": "Every size and every field-guide sentence in specimens.json points at one or more of these IDs. No Wikipedia, no memory. Each page was read on the date in 'checked'.",
+  "sources": {
+    "kreutz-pcaudatum": {
+      "title": "Paramecium caudatum Ehrenberg, 1833",
+      "publisher": "Martin Kreutz, Real Micro Life",
+      "url": "https://realmicrolife.com/paramecium-caudatum/",
+      "checked": "2026-10-01",
+      "supports": "Length 170 to 300 micrometres; slipper-shaped; ellipsoid macronucleus in mid-body; two contractile vacuoles in the anterior and posterior thirds on the dorsal side; distinct oral groove widening toward the front."
+    },
+    "neupane-pcaudatum": {
+      "title": "Paramecium caudatum: Habitat, Culture, Structure, Locomotion",
+      "publisher": "Laxmi Neupane, Microbe Notes (2022, updated 2023)",
+      "url": "https://microbenotes.com/paramecium-caudatum-habitat-culture-structure-locomotion/",
+      "checked": "2026-10-01",
+      "supports": "170 to 330 micrometres long and about 4 times as long as broad; 10,000 to 14,000 cilia; each contractile vacuole ringed by 6 to 10 radial canals; swims forward in a spiral path."
+    },
+    "jana2012": {
+      "title": "Paramecium swimming in capillary tube",
+      "publisher": "Saikat Jana, Soong Ho Um and Sunghwan Jung, Physics of Fluids 24, 041901 (2012); preprint arXiv:1012.4812",
+      "url": "https://arxiv.org/abs/1012.4812",
+      "checked": "2026-10-01",
+      "supports": "Paramecium swimming speed in open fluid 1064 plus or minus 83 micrometres per second; cilia 10 to 12 micrometres long; metachronal wavelength 27 micrometres; beat about 30 Hz."
+    },
+    "kreutz-aproteus": {
+      "title": "Amoeba proteus",
+      "publisher": "Martin Kreutz, Real Micro Life",
+      "url": "https://realmicrolife.com/amoeba-proteus/",
+      "checked": "2026-10-01",
+      "supports": "Length 160 to 760 micrometres; usually polypodial with longitudinal folds; one lens-shaped or ovoid nucleus 22 to 62 micrometres across; one contractile vacuole, often near the rear (uroid); numerous crystals, mainly truncated bipyramids."
+    },
+    "siemensma-aproteus": {
+      "title": "Amoeba proteus",
+      "publisher": "Ferry Siemensma, Microworld (arcella.nl), page last modified 2026-01-26",
+      "url": "https://arcella.nl/amoeba-proteus/",
+      "checked": "2026-10-01",
+      "supports": "Moving cells 220 to 760 micrometres long, mean 425; usually several pseudopodia with one dominant; nucleus 22 to 62 micrometres."
+    },
+    "garden-amoebae": {
+      "title": "Amoebae: food uptake",
+      "publisher": "Microbiological Garden (microbial-world.com)",
+      "url": "https://mikrobiologischer-garten.microbial-world.com/eng/enamoe02.htm",
+      "checked": "2026-10-01",
+      "supports": "Amoebae are predators; they enclose their food, mostly bacteria and algae, and take it into a food vacuole (phagocytosis)."
+    },
+    "hader2022": {
+      "title": "Euglena, a Gravitactic Flagellate of Multiple Usages",
+      "publisher": "Donat-P. Haeder and Ruth Hemmersbach, Life (Basel) 12 (2022), PMC9605500",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9605500",
+      "checked": "2026-10-01",
+      "supports": "Cells elongated, about 100 micrometres long; red eyespot near the base of the emerging flagellum; one flagellum powers forward movement; chloroplasts with chlorophylls a and b; in darkness can grow heterotrophically on organic material. In weak light the cells swim toward the light (positive phototaxis) and in strong light away from it. Reproduction is by cell division: the cell splits lengthwise into two."
+    },
+    "fbpb-egracilis": {
+      "title": "Euglena gracilis Klebs, 1883",
+      "publisher": "Freshwater Biodiversity Portal of Bangladesh",
+      "url": "https://freshwaterbiodiversity.org.bd/?p=12482",
+      "checked": "2026-10-01",
+      "supports": "Mixotroph (photosynthesis and phagocytosis); flexible surface lets it change from a thin cell up to 100 micrometres long to a sphere about 20 micrometres across; one flagellum emerges from a reservoir at the front; swims or moves by euglenoid motion."
+    },
+    "kaiser-bacteria": {
+      "title": "2.1: Sizes, Shapes, and Arrangements of Bacteria",
+      "publisher": "Gary Kaiser, Microbiology (LibreTexts), CC BY 4.0",
+      "url": "https://bio.libretexts.org/Bookshelves/Microbiology/Microbiology_(Kaiser)/Unit_1:_Introduction_to_Microbiology_and_Prokaryotic_Cell_Anatomy/2:_The_Prokaryotic_Cell_-_Bacteria/2.1:_Sizes_Shapes_and_Arrangements_of_Bacteria",
+      "checked": "2026-10-01",
+      "supports": "Three basic shapes: coccus, bacillus, spiral. Average coccus 0.5 to 1.0 micrometre across; average bacillus 0.5 to 1.0 wide by 1.0 to 4.0 long; spirals 1 to over 100 micrometres long; staphylococci in grape-like clusters."
+    },
+    "mm-spirilla": {
+      "title": "Spirilla Bacteria",
+      "publisher": "MicroscopeMaster",
+      "url": "https://microscopemaster.com/spirilla.html",
+      "checked": "2026-10-01",
+      "supports": "Spirillum cells 1.4 to 1.7 micrometres in diameter, some about 60 micrometres long; one to about 5 helical turns; flagella at both ends."
+    },
+    "bionumbers-yeast": {
+      "title": "BioNumbers BNID 101796: rule of thumb for the diameter of budding yeast",
+      "publisher": "BioNumbers, Harvard Medical School; primary source Phillips, Kondev and Theriot, Physical Biology of the Cell (2009), p. 26",
+      "url": "https://bionumbers.hms.harvard.edu/bionumber.aspx?id=101796",
+      "checked": "2026-10-01",
+      "supports": "Saccharomyces cerevisiae cell diameter about 5 micrometres."
+    },
+    "bionumbers-bud": {
+      "title": "BioNumbers BNID 103716: ratio between volume of daughter and mother cell in first budding",
+      "publisher": "BioNumbers, Harvard Medical School; primary source Zadrag-Tecza et al., Biogerontology (2008), Table 2",
+      "url": "https://bionumbers.hms.harvard.edu/bionumber.aspx?id=103716",
+      "checked": "2026-10-01",
+      "supports": "Budding yeast: daughter to mother volume ratio 0.5 to 0.7 at the first budding."
+    },
+    "dona-pinnularia": {
+      "title": "Pinnularia socialis",
+      "publisher": "Marina Potapova (contributor) and Sarah Spaulding (reviewer), Diatoms of North America, 2022",
+      "url": "https://diatoms.org/species/229152/pinnularia-socialis",
+      "checked": "2026-10-01",
+      "supports": "Valves 71 to 126 micrometres long and 13.7 to 18.7 wide; broadly linear with tapering rounded ends; moderately motile."
+    },
+    "dona-pinnularia-genus": {
+      "title": "Guide to Pinnularia",
+      "publisher": "Diatoms of North America",
+      "url": "https://diatoms.org/genera/pinnularia/guide",
+      "checked": "2026-10-01",
+      "supports": "Living cells contain two plastids; raphe ends curve like a question mark."
+    },
+    "exeter-diatom": {
+      "title": "The Mystery of Diatom Movement Uncovered in New Study",
+      "publisher": "University of Exeter News, 18 March 2025 (study published in PNAS, senior author Kirsty Wan)",
+      "url": "https://news.exeter.ac.uk/faculty-of-health-and-life-sciences/the-mystery-of-diatom-movement-uncovered-in-new-study/",
+      "checked": "2026-10-01",
+      "supports": "Diatoms are single-celled photosynthetic algae, basically made of glass; they glide on surfaces, and a slit called the raphe is responsible; they generate one fifth of the world's oxygen."
+    },
+    "mw-fov": {
+      "title": "How to Calculate Microscope Field of View",
+      "publisher": "Microscope World",
+      "url": "https://www.microscopeworld.com/microscope-field-of-view/",
+      "checked": "2026-10-01",
+      "supports": "Field of view diameter = eyepiece field number divided by objective magnification; a field number of 18 with a 10x objective gives a 1.8 mm circle. Used for the field-of-view and scale-bar maths."
+    },
+    "brette2021": {
+      "title": "Integrative Neuroscience of Paramecium, a \"Swimming Neuron\"",
+      "publisher": "Romain Brette, eNeuro 8(3) ENEURO.0018-21.2021 (2021)",
+      "url": "https://www.eneuro.org/content/8/3/eneuro.0018-21.2021",
+      "checked": "2026-10-01",
+      "supports": "When it hits an obstacle or is stimulated it swims backward, turns and swims forward again (the avoiding reaction). Feeds on bacteria, yeast and algae brought into the oral groove by cilia. A well-fed Paramecium can divide by fission every 6 hours. Swims in spirals at about 1 mm per second."
+    },
+    "mbn-binary-fission": {
+      "title": "Binary Fission: Steps, Types, Examples",
+      "publisher": "Microbe Notes",
+      "url": "https://microbenotes.com/binary-fission/",
+      "checked": "2026-10-01",
+      "supports": "Binary fission is how many bacteria and some eukaryotes such as amoeba and Paramecium reproduce; the two daughter cells carry the same genetic material as the parent."
+    },
+    "mbn-aproteus": {
+      "title": "Amoeba proteus: Habitat, Culture and Structures",
+      "publisher": "Microbe Notes",
+      "url": "https://microbenotes.com/amoeba-proteus/",
+      "checked": "2026-10-01",
+      "supports": "Pseudopodia form as cytoplasm flows forward and are used to move and to engulf prey. Food vacuoles form when the amoeba engulfs food with a drop of water; digestion happens inside the food vacuole."
+    },
+    "kaiser-flagella": {
+      "title": "2.5B: Flagella (Microbiology, Kaiser)",
+      "publisher": "Gary Kaiser, Biology LibreTexts",
+      "url": "https://bio.libretexts.org/Bookshelves/Microbiology/Microbiology_(Kaiser)/Unit_1%3A_Introduction_to_Microbiology_and_Prokaryotic_Cell_Anatomy/2%3A_The_Prokaryotic_Cell_-_Bacteria/2.5%3A_Structures_Outside_the_Cell_Wall/2.5B%3A_Flagella",
+      "checked": "2026-10-01",
+      "supports": "A run lasts about one second and moves the bacterium 10 to 20 times its length; a tumble lasts about a tenth of a second; after a tumble the next run points in a random direction."
+    },
+    "bionumbers-chlorella": {
+      "title": "Size (diameter) of Chlorella vulgaris, BNID 101481",
+      "publisher": "BioNumbers, Harvard Medical School",
+      "url": "https://bionumbers.hms.harvard.edu/bionumber.aspx?id=101481",
+      "checked": "2026-10-01",
+      "supports": "Chlorella vulgaris cells are about 3 (2 to 4) micrometres across."
+    }
+  }
+}

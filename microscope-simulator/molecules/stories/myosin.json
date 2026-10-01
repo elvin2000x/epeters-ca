@@ -1,0 +1,57 @@
+{
+ "id": "myosin",
+ "structure": "1B7T",
+ "tour": [
+  {"id": "head", "title": "A motor head", "focus": {"chains": ["A", "Y", "Z"], "residues": null, "ligands": null, "whole": true}, "view": "cartoon",
+   "text": [{"t": "Myosin is a molecular motor that powers every movement your muscles make, from blinking to each heartbeat.", "s": ["motm-myosin"]},
+            {"t": "This file is only the head of a scallop muscle myosin; the long tail was clipped off so it could be studied.", "s": ["rcsb-1B7T", "motm-myosin"]}]},
+  {"id": "heavy-chain", "title": "The heavy chain", "focus": {"chains": ["A"], "residues": null, "ligands": null, "whole": false}, "view": "cartoon",
+   "text": [{"t": "Chain A is the heavy chain, and it holds most of the motor domain, the part that makes the power stroke.", "s": ["rcsb-1B7T", "motm-myosin"]}]},
+  {"id": "fuel", "title": "The fuel site", "focus": {"chains": ["A"], "residues": null, "ligands": ["ADP", "MG"], "whole": false}, "view": "ball-and-stick",
+   "text": [{"t": "Myosin catches ATP here and splits it into ADP and phosphate.", "s": ["motm-myosin", "os-38-4"]},
+            {"t": "This crystal caught it holding ADP and a magnesium ion.", "s": ["rcsb-1B7T", "paper-houdusse-1999"]}]},
+  {"id": "light-chains", "title": "Two light chains", "focus": {"chains": ["Y", "Z"], "residues": null, "ligands": null, "whole": false}, "view": "cartoon",
+   "text": [{"t": "Two small light chains ride along with the heavy chain: chain Y is the regulatory light chain and chain Z the essential light chain.", "s": ["rcsb-1B7T", "motm-myosin"]}]},
+  {"id": "lever", "title": "A lever caught mid-swing", "focus": {"chains": ["A", "Y", "Z"], "residues": null, "ligands": ["ADP"], "whole": true}, "view": "surface",
+   "text": [{"t": "When phosphate leaves, a converter part swings and a long lever arm amplifies the motion into a power stroke.", "s": ["motm-myosin"]},
+            {"t": "In this structure the converter and lever arm sit in a new position, likely a stage before ATP is split, when the head stays detached from actin.", "s": ["paper-houdusse-1999"]}]}
+ ],
+ "sections": {
+  "does": [
+   {"t": "Myosin turns the chemical energy in ATP into movement.", "s": ["motm-myosin"]},
+   {"t": "Its heads grab actin filaments and pull them, forming cross-bridges that make a muscle shorten.", "s": ["os-38-4", "motm-myosin"]},
+   {"t": "About 2 trillion myosin molecules working together are needed to hold up a baseball.", "s": ["motm-myosin"]}
+  ],
+  "shape": [
+   {"t": "Splitting ATP cocks the head into a bent, ready position.", "s": ["os-38-4", "motm-myosin"]},
+   {"t": "The bent head grabs actin, and the release of phosphate snaps it straight, pushing along the filament.", "s": ["motm-myosin"]},
+   {"t": "A new ATP then binds and the head lets go of actin, ready for the next stroke.", "s": ["motm-myosin", "os-38-4"]}
+  ],
+  "lives": {
+   "text": [
+    {"t": "In muscle cells about 300 myosin molecules bundle their tails into a thick filament, with the heads sticking out toward the actin filaments.", "s": ["motm-myosin"]},
+    {"t": "Actin and myosin are plentiful in muscle cells, and muscles contract when their filaments slide past each other.", "s": ["os-4-5"]}
+   ],
+   "links": [{"type": "cell", "id": "muscle"}, {"type": "part", "id": "myofibrils"}, {"type": "molecule", "id": "actin"}, {"type": "molecule", "id": "atp"}]
+  },
+  "history": {
+   "year": 1999, "who": "A. Houdusse, V.N. Kalabokis, D. Himmel, A.G. Szent-Gyorgyi and C. Cohen", "method": "X-ray", "resolution_A": 2.5,
+   "text": [
+    {"t": "This scallop myosin head with MgADP was solved by X-ray crystallography at 2.5 angstroms.", "s": ["paper-houdusse-1999", "rcsb-1B7T"]},
+    {"t": "It showed a new shape of the myosin head, different from earlier structures before and after the power stroke.", "s": ["paper-houdusse-1999"]}
+   ]
+  },
+  "size": {
+   "nm": 17.4,
+   "compare": [
+    {"t": "This myosin head with its two light chains is about 17.4 nm from end to end, the longest protein file in this gallery.", "s": ["rcsb-1B7T"]},
+    {"t": "A whole myosin is much larger, with a long tail added to this head.", "s": ["motm-myosin"]}
+   ]
+  }
+ },
+ "highlights": [
+  {"chain": "A", "residue": 999, "comp": "ADP", "label": "ADP in the fuel site", "text": [{"t": "The ADP left after ATP is split.", "s": ["rcsb-1B7T", "os-38-4"]}]},
+  {"chain": "A", "residue": 836, "comp": "MG", "label": "Magnesium ion", "text": [{"t": "A magnesium ion sits with the ADP in the fuel site.", "s": ["rcsb-1B7T"]}]}
+ ],
+ "review": "pending"
+}

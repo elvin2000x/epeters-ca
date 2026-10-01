@@ -1,0 +1,961 @@
+{
+ "about": "Plain words for the small things a visitor can tap in a real (PDB) structure that are not one of the 20 amino acids or the DNA letters: metal ions, water, ATP and ADP, dyes, modified amino acids, sugars, drugs. Keyed by the wwPDB Chemical Component Dictionary code (label_comp_id). Every code found by tools/mol_het_scan.py across the 40 molecules has an entry (python tools/mol_het_scan.py --check). kind picks the tag and the shared sentences; recipe holds sentences for one structure only, read from that file's own crystal-growing record. lines is the key to the dashed lines Mol* draws in the close-up after a tap; colours read from Mol* 5.12.0 (vendor/molstar/molstar.js). Every sentence names its sources (s). No em or en dashes.",
+ "kinds": {
+  "metal": {
+   "label": "Metal ion",
+   "text": [
+    {
+     "t": "Proteins hold metal ions with oxygen, nitrogen or sulfur atoms of their amino acids, and the metals help with jobs such as holding the protein's shape, passing signals and speeding up chemical reactions.",
+     "s": [
+      "pdb101-metals"
+     ]
+    },
+    {
+     "t": "Some small molecules in a structure are byproducts of the experiment rather than part of what was studied.",
+     "s": [
+      "pdb101-ligands"
+     ]
+    }
+   ]
+  },
+  "ion": {
+   "label": "Ion",
+   "text": [
+    {
+     "t": "Some small molecules in a structure are byproducts of the experiment rather than part of what was studied.",
+     "s": [
+      "pdb101-ligands"
+     ]
+    }
+   ]
+  },
+  "water": {
+   "label": "Water",
+   "text": [
+    {
+     "t": "Some small molecules in a structure are byproducts of the experiment rather than part of what was studied.",
+     "s": [
+      "pdb101-ligands"
+     ]
+    }
+   ]
+  },
+  "fuel": {
+   "label": "Cell fuel",
+   "text": []
+  },
+  "cofactor": {
+   "label": "Helper molecule",
+   "text": []
+  },
+  "dye": {
+   "label": "Dye label",
+   "text": []
+  },
+  "modified": {
+   "label": "Modified amino acid",
+   "text": []
+  },
+  "sugar": {
+   "label": "Sugar",
+   "text": []
+  },
+  "drug": {
+   "label": "Drug",
+   "text": []
+  },
+  "small": {
+   "label": "Small molecule",
+   "text": [
+    {
+     "t": "Some small molecules in a structure are byproducts of the experiment rather than part of what was studied.",
+     "s": [
+      "pdb101-ligands"
+     ]
+    }
+   ]
+  }
+ },
+ "codes": {
+  "CA": {
+   "kind": "metal",
+   "name": "Calcium ion",
+   "text": [
+    {
+     "t": "Calcium ion (Ca2+): a calcium atom that has lost two electrons, so it carries two positive charges.",
+     "s": [
+      "ccd-CA",
+      "os-2-1"
+     ]
+    }
+   ]
+  },
+  "MG": {
+   "kind": "metal",
+   "name": "Magnesium ion",
+   "text": [
+    {
+     "t": "Magnesium ion (Mg2+): a magnesium atom that has lost two electrons, so it carries two positive charges.",
+     "s": [
+      "ccd-MG",
+      "os-2-1"
+     ]
+    }
+   ]
+  },
+  "ZN": {
+   "kind": "metal",
+   "name": "Zinc ion",
+   "text": [
+    {
+     "t": "Zinc ion (Zn2+): a zinc atom that has lost two electrons, so it carries two positive charges.",
+     "s": [
+      "ccd-ZN",
+      "os-2-1"
+     ]
+    },
+    {
+     "t": "Proteins usually hold zinc with four atoms around it, often from the amino acids histidine and cysteine.",
+     "s": [
+      "pdb101-metals"
+     ]
+    }
+   ]
+  },
+  "MN": {
+   "kind": "metal",
+   "name": "Manganese ion",
+   "text": [
+    {
+     "t": "Manganese ion (Mn2+): a manganese atom that has lost two electrons, so it carries two positive charges.",
+     "s": [
+      "ccd-MN",
+      "os-2-1"
+     ]
+    }
+   ]
+  },
+  "FE": {
+   "kind": "metal",
+   "name": "Iron ion",
+   "text": [
+    {
+     "t": "Iron ion (Fe3+): an iron atom that has lost three electrons, so it carries three positive charges.",
+     "s": [
+      "ccd-FE",
+      "os-2-1"
+     ]
+    },
+    {
+     "t": "In animals, iron held inside heme is what carries and stores oxygen.",
+     "s": [
+      "pdb101-metals"
+     ]
+    }
+   ]
+  },
+  "NA": {
+   "kind": "metal",
+   "name": "Sodium ion",
+   "text": [
+    {
+     "t": "Sodium ion (Na+): a sodium atom that has lost one electron, so it carries one positive charge.",
+     "s": [
+      "ccd-NA",
+      "os-2-1"
+     ]
+    },
+    {
+     "t": "Proteins usually hold sodium with six oxygen atoms around it.",
+     "s": [
+      "pdb101-metals"
+     ]
+    }
+   ]
+  },
+  "K": {
+   "kind": "metal",
+   "name": "Potassium ion",
+   "text": [
+    {
+     "t": "Potassium ion (K+): a potassium atom that has lost one electron, so it carries one positive charge.",
+     "s": [
+      "ccd-K",
+      "os-2-1"
+     ]
+    },
+    {
+     "t": "Potassium channels pick out potassium by wrapping it in eight oxygen atoms from the protein's backbone.",
+     "s": [
+      "pdb101-metals"
+     ]
+    }
+   ]
+  },
+  "HG": {
+   "kind": "metal",
+   "name": "Mercury ion",
+   "text": [
+    {
+     "t": "Mercury ion (Hg2+): a mercury atom that has lost two electrons, so it carries two positive charges.",
+     "s": [
+      "ccd-HG",
+      "os-2-1"
+     ]
+    }
+   ]
+  },
+  "CL": {
+   "kind": "ion",
+   "name": "Chloride ion",
+   "text": [
+    {
+     "t": "Chloride ion (Cl-): a chlorine atom that has gained one electron, so it carries one negative charge.",
+     "s": [
+      "ccd-CL",
+      "os-2-1"
+     ]
+    }
+   ]
+  },
+  "OH": {
+   "kind": "ion",
+   "name": "Hydroxide ion",
+   "text": [
+    {
+     "t": "Hydroxide ion (OH-): one oxygen and one hydrogen with an extra electron, so it carries one negative charge.",
+     "s": [
+      "ccd-OH",
+      "os-2-1"
+     ]
+    }
+   ]
+  },
+  "PO4": {
+   "kind": "ion",
+   "name": "Phosphate ion",
+   "text": [
+    {
+     "t": "Phosphate ion: one phosphorus atom with four oxygen atoms around it, carrying three negative charges.",
+     "s": [
+      "ccd-PO4"
+     ]
+    }
+   ]
+  },
+  "HOH": {
+   "kind": "water",
+   "name": "Water",
+   "text": [
+    {
+     "t": "A water molecule: one oxygen atom bonded to two hydrogen atoms.",
+     "s": [
+      "ccd-HOH",
+      "os-2-2"
+     ]
+    },
+    {
+     "t": "Water molecules stuck to a protein are often important to how it works and what it binds.",
+     "s": [
+      "pdb101-coords"
+     ]
+    }
+   ]
+  },
+  "ADP": {
+   "kind": "fuel",
+   "name": "ADP",
+   "text": [
+    {
+     "t": "ADP (adenosine diphosphate) is what is left when ATP, the cell's main energy currency, gives up one of its three phosphate groups to release energy.",
+     "s": [
+      "ccd-ADP",
+      "os-6-4"
+     ]
+    }
+   ]
+  },
+  "ATP": {
+   "kind": "fuel",
+   "name": "ATP",
+   "text": [
+    {
+     "t": "ATP (adenosine triphosphate) is the cell's main energy currency: breaking off one of its three phosphate groups releases energy the cell uses for its work.",
+     "s": [
+      "ccd-ATP",
+      "os-6-4"
+     ]
+    }
+   ]
+  },
+  "HEM": {
+   "kind": "cofactor",
+   "name": "Heme",
+   "text": [
+    {
+     "t": "Heme: a flat ring molecule with one iron atom held at its centre.",
+     "s": [
+      "ccd-HEM"
+     ]
+    },
+    {
+     "t": "In animals, the iron in heme is what carries and stores oxygen.",
+     "s": [
+      "pdb101-metals"
+     ]
+    }
+   ]
+  },
+  "RET": {
+   "kind": "cofactor",
+   "name": "Retinal",
+   "text": [
+    {
+     "t": "Retinal: the light-catching part of rhodopsin in the eye.",
+     "s": [
+      "ccd-RET",
+      "motm-147"
+     ]
+    },
+    {
+     "t": "When it absorbs light, one bond flips from a bent to an extended shape, which starts the signal to the brain.",
+     "s": [
+      "motm-147"
+     ]
+    }
+   ]
+  },
+  "RHO": {
+   "kind": "dye",
+   "name": "Tetramethylrhodamine",
+   "text": [
+    {
+     "t": "Tetramethylrhodamine maleimide: a dye molecule.",
+     "s": [
+      "ccd-RHO",
+      "pubchem-tmr"
+     ]
+    },
+    {
+     "t": "The paper behind this structure says the actin was modified so it could not join filaments, and the file lists this dye among its keywords.",
+     "s": [
+      "otterbein-2001",
+      "rcsb-1J6Z"
+     ]
+    }
+   ]
+  },
+  "HIC": {
+   "kind": "modified",
+   "name": "4-Methylhistidine",
+   "text": [
+    {
+     "t": "4-Methylhistidine: the amino acid histidine with one extra methyl group (one carbon and its hydrogens).",
+     "s": [
+      "ccd-HIC"
+     ]
+    },
+    {
+     "t": "It is linked into the chain like any other amino acid, at position 73.",
+     "s": [
+      "rcsb-1J6Z"
+     ]
+    }
+   ]
+  },
+  "CRO": {
+   "kind": "modified",
+   "name": "GFP chromophore",
+   "text": [
+    {
+     "t": "The chromophore: the light-emitting heart of GFP.",
+     "s": [
+      "ormo-1996"
+     ]
+    },
+    {
+     "t": "It forms by itself from three amino acids of the chain, threonine, tyrosine and glycine, which fuse into one new ring structure.",
+     "s": [
+      "ccd-CRO",
+      "ormo-1996"
+     ]
+    }
+   ]
+  },
+  "MSE": {
+   "kind": "modified",
+   "name": "Selenomethionine",
+   "text": [
+    {
+     "t": "Selenomethionine: the amino acid methionine with its sulfur atom swapped for selenium.",
+     "s": [
+      "ccd-MSE"
+     ]
+    }
+   ]
+  },
+  "KCX": {
+   "kind": "modified",
+   "name": "Carboxylated lysine",
+   "text": [
+    {
+     "t": "Lysine with an extra carboxylic acid group on the tip of its side chain.",
+     "s": [
+      "ccd-KCX"
+     ]
+    }
+   ]
+  },
+  "SEP": {
+   "kind": "modified",
+   "name": "Phosphoserine",
+   "text": [
+    {
+     "t": "Phosphoserine: the amino acid serine with a phosphate group attached.",
+     "s": [
+      "ccd-SEP"
+     ]
+    }
+   ]
+  },
+  "NAG": {
+   "kind": "sugar",
+   "name": "N-acetylglucosamine",
+   "text": [
+    {
+     "t": "N-acetylglucosamine: a sugar unit built on a glucose ring.",
+     "s": [
+      "ccd-NAG"
+     ]
+    }
+   ]
+  },
+  "MAN": {
+   "kind": "sugar",
+   "name": "Mannose",
+   "text": [
+    {
+     "t": "Mannose: a sugar unit with six carbon atoms.",
+     "s": [
+      "ccd-MAN"
+     ]
+    }
+   ]
+  },
+  "BMA": {
+   "kind": "sugar",
+   "name": "Mannose",
+   "text": [
+    {
+     "t": "Mannose (beta form): a sugar unit with six carbon atoms.",
+     "s": [
+      "ccd-BMA"
+     ]
+    }
+   ]
+  },
+  "GAL": {
+   "kind": "sugar",
+   "name": "Galactose",
+   "text": [
+    {
+     "t": "Galactose: a sugar unit with six carbon atoms.",
+     "s": [
+      "ccd-GAL"
+     ]
+    }
+   ]
+  },
+  "FUC": {
+   "kind": "sugar",
+   "name": "Fucose",
+   "text": [
+    {
+     "t": "Fucose: a sugar unit with six carbon atoms.",
+     "s": [
+      "ccd-FUC"
+     ]
+    }
+   ]
+  },
+  "FUL": {
+   "kind": "sugar",
+   "name": "Fucose",
+   "text": [
+    {
+     "t": "Fucose (beta form): a sugar unit with six carbon atoms.",
+     "s": [
+      "ccd-FUL"
+     ]
+    }
+   ]
+  },
+  "BNG": {
+   "kind": "small",
+   "name": "Nonyl glucoside",
+   "text": [
+    {
+     "t": "Nonyl glucoside: a glucose ring with a chain of nine carbon atoms attached.",
+     "s": [
+      "ccd-BNG"
+     ]
+    }
+   ]
+  },
+  "CAP": {
+   "kind": "small",
+   "name": "Carboxyarabinitol bisphosphate",
+   "text": [
+    {
+     "t": "2-Carboxyarabinitol 1,5-bisphosphate: a sugar-like molecule carrying two phosphate groups.",
+     "s": [
+      "ccd-CAP"
+     ]
+    }
+   ]
+  },
+  "ACY": {
+   "kind": "small",
+   "name": "Acetic acid",
+   "text": [
+    {
+     "t": "Acetic acid: a small molecule with two carbon atoms.",
+     "s": [
+      "ccd-ACY"
+     ]
+    }
+   ]
+  },
+  "RIT": {
+   "kind": "drug",
+   "name": "Ritonavir",
+   "text": [
+    {
+     "t": "Ritonavir: a drug that blocks HIV protease, used to treat HIV infection.",
+     "s": [
+      "ccd-RIT",
+      "drugbank-RIT",
+      "motm-6"
+     ]
+    }
+   ]
+  },
+  "THA": {
+   "kind": "drug",
+   "name": "Tacrine",
+   "text": [
+    {
+     "t": "Tacrine: a drug that blocks cholinesterase; it was used for Alzheimer's disease and has since been discontinued in the United States.",
+     "s": [
+      "ccd-THA",
+      "drugbank-THA"
+     ]
+    }
+   ]
+  }
+ },
+ "recipe": {
+  "actin": {
+   "CA": [
+    {
+     "t": "Calcium acetate was in the liquid used to grow this crystal.",
+     "s": [
+      "grow-1J6Z"
+     ]
+    }
+   ]
+  },
+  "rhodopsin": {
+   "ZN": [
+    {
+     "t": "Zinc acetate was in the liquid used to grow this crystal.",
+     "s": [
+      "grow-1F88"
+     ]
+    }
+   ],
+   "HG": [
+    {
+     "t": "Mercury acetate was in the liquid used to grow this crystal.",
+     "s": [
+      "grow-1F88"
+     ]
+    }
+   ]
+  },
+  "atp-synthase": {
+   "ATP": [
+    {
+     "t": "ATP was added to the liquid used to grow this crystal.",
+     "s": [
+      "grow-1MAB"
+     ]
+    }
+   ]
+  }
+ },
+ "lines": {
+  "intro": [
+   {
+    "t": "The sticks are the amino acids and other parts within 5 angstroms of what you tapped; solid sticks are covalent bonds, where atoms share electrons.",
+    "s": [
+     "molstar",
+     "os-2-1"
+    ]
+   },
+   {
+    "t": "Dashed lines are weak attractions between atoms, not covalent bonds.",
+    "s": [
+     "os-2-1",
+     "molstar"
+    ]
+   }
+  ],
+  "items": [
+   {
+    "id": "hbond",
+    "color": "#2b83ba",
+    "name": "Blue: hydrogen bond",
+    "t": "A slightly positive hydrogen atom pulled toward a slightly negative atom nearby.",
+    "s": [
+     "os-2-1",
+     "molstar"
+    ]
+   },
+   {
+    "id": "metal",
+    "color": "#8c4099",
+    "name": "Purple: metal coordination",
+    "t": "A metal ion held by nearby atoms of the protein or of water.",
+    "s": [
+     "pdb101-metals",
+     "molstar"
+    ]
+   },
+   {
+    "id": "other",
+    "colors": [
+     "#8cb366",
+     "#ff8000",
+     "#40ffbf"
+    ],
+    "name": "Green, orange, teal: other attractions",
+    "t": "Pi stacking (between rings), cation-pi (a positive charge near a ring) and halogen bonds, the other kinds Mol* looks for here.",
+    "s": [
+     "molstar"
+    ]
+   }
+  ]
+ },
+ "sources": {
+  "pdb101-ligands": {
+   "cite": "PDB-101, Guide to Understanding PDB Data: Small Molecule Ligands (RCSB PDB).",
+   "url": "https://pdb101.rcsb.org/learn/guide-to-understanding-pdb-data/small-molecule-ligands",
+   "checked": "2026-10-01, raw page in .refs/hets: ligands include cofactors, metabolites and drugs; every chemical component has a CCD code (HEM for heme); a Ligand of Interest is the subject of the research rather than a byproduct of the experimental conditions.",
+   "name": "PDB-101: Small Molecule Ligands"
+  },
+  "pdb101-metals": {
+   "cite": "PDB-101, Guide to Understanding PDB Data: Exploring Metalloproteins (Biester, Shao and Kramer Green, RCSB PDB).",
+   "url": "https://pdb101.rcsb.org/learn/guide-to-understanding-pdb-data/exploring-metalloproteins",
+   "checked": "2026-10-01, raw page in .refs/hets: metals serve membrane potential, protein stabilization, signalling, electron and oxygen transport, catalysis; sodium takes 6 oxygen donors (octahedral); zinc prefers 4 (tetrahedral) from histidine N, cysteine S, aspartate and glutamate O; potassium channels use main chain carbonyls for 8-coordinate binding; in vertebrates iron in heme carries and stores oxygen.",
+   "name": "PDB-101: Exploring Metalloproteins"
+  },
+  "pdb101-coords": {
+   "cite": "PDB-101, Guide to Understanding PDB Data: Dealing with Coordinates (RCSB PDB).",
+   "url": "https://pdb101.rcsb.org/learn/guide-to-understanding-pdb-data/dealing-with-coordinates",
+   "checked": "2026-10-01, raw page in .refs/hets: water molecules present in a structure are often important to the function and interaction of biological molecules.",
+   "name": "PDB-101: Dealing with Coordinates"
+  },
+  "os-2-1": {
+   "cite": "OpenStax Biology 2e, section 2.1 Atoms, Isotopes, Ions, and Molecules: The Building Blocks.",
+   "url": "https://openstax.org/books/biology-2e/pages/2-1-atoms-isotopes-ions-and-molecules-the-building-blocks",
+   "licence": "CC BY-NC-SA 4.0 as stated on the page; clear before paid use",
+   "checked": "2026-10-01, raw page in .refs/hets: ions form when atoms gain or lose electrons (cations lose, anions gain, chlorine's anion is chloride); covalent bonds share electrons; hydrogen bonds are weak bonds between slightly positive hydrogens and slightly negative atoms, and stabilize proteins and DNA.",
+   "name": "OpenStax Biology 2e, 2.1"
+  },
+  "os-2-2": {
+   "cite": "OpenStax Biology 2e, section 2.2 Water.",
+   "url": "https://openstax.org/books/biology-2e/pages/2-2-water",
+   "checked": "2026-10-01 (from web/molecules/sources.json): water's polarity and hydrogen bonding.",
+   "name": "OpenStax Biology 2e, 2.2"
+  },
+  "os-6-4": {
+   "cite": "OpenStax Biology 2e, section 6.4 ATP: Adenosine Triphosphate.",
+   "url": "https://openstax.org/books/biology-2e/pages/6-4-atp-adenosine-triphosphate",
+   "checked": "2026-10-01 (from web/molecules/sources.json): ATP is the cell's primary energy currency; three phosphate groups; hydrolysis to ADP releases energy.",
+   "name": "OpenStax Biology 2e, 6.4"
+  },
+  "motm-147": {
+   "cite": "PDB-101 Molecule of the Month: Rhodopsin.",
+   "url": "https://pdb101.rcsb.org/motm/147",
+   "checked": "2026-10-01 (from web/molecules/library-sources.json): retinal absorbs light and a bond flips, starting the signal.",
+   "name": "PDB-101 Molecule of the Month: Rhodopsin"
+  },
+  "motm-6": {
+   "cite": "PDB-101 Molecule of the Month: HIV-1 Protease.",
+   "url": "https://pdb101.rcsb.org/motm/6",
+   "checked": "2026-10-01 (from web/molecules/library-sources.json): protease inhibitor drugs jam the enzyme.",
+   "name": "PDB-101 Molecule of the Month: HIV-1 Protease"
+  },
+  "ormo-1996": {
+   "cite": "Ormo, M. et al. (1996). Crystal structure of the Aequorea victoria green fluorescent protein. Science 273, 1392-1395.",
+   "doi": "10.1126/science.273.5280.1392",
+   "checked": "From web/molecules/sources.json: the light-emitting chromophore forms by itself from three amino acids at the centre of the barrel.",
+   "name": "Ormo and others, 1996"
+  },
+  "otterbein-2001": {
+   "cite": "Otterbein, L. R., Graceffa, P. and Dominguez, R. (2001). The crystal structure of uncomplexed actin in the ADP state. Science 293, 708-711.",
+   "doi": "10.1126/science.1059700",
+   "checked": "2026-10-01, abstract (Europe PMC, saved in .refs/hets): actin modified to block polymerization was crystallized in the ADP state.",
+   "name": "Otterbein, Graceffa and Dominguez, 2001"
+  },
+  "rcsb-1J6Z": {
+   "cite": "RCSB PDB 1J6Z, Uncomplexed actin (file web/data/1J6Z.cif).",
+   "url": "https://www.rcsb.org/structure/1J6Z",
+   "checked": "2026-10-01: _struct_keywords lists TETRAMETHYLRHODAMINE-5-MALEIMIDE; _pdbx_struct_mod_residue: HIC 73, parent HIS, 4-METHYL-HISTIDINE.",
+   "name": "PDB 1J6Z"
+  },
+  "grow-1J6Z": {
+   "cite": "RCSB PDB 1J6Z, crystal growth record (_exptl_crystal_grow.pdbx_details).",
+   "url": "https://www.rcsb.org/structure/1J6Z",
+   "checked": "2026-10-01: PEG 2000 monomethylether 22%, calcium acetate 200 mM, Tris 10 mM (pH 7), vapor diffusion, hanging drop, 293 K.",
+   "name": "PDB 1J6Z crystal record"
+  },
+  "grow-1F88": {
+   "cite": "RCSB PDB 1F88, crystal growth record (_exptl_crystal_grow.pdbx_details).",
+   "url": "https://www.rcsb.org/structure/1F88",
+   "checked": "2026-10-01: MES, 2-mercaptoethanol, zinc acetate, heptanetriol, nonyl-glucoside, ammonium sulfate in the hanging drops; mercury acetate; pH 6.0.",
+   "name": "PDB 1F88 crystal record"
+  },
+  "grow-1MAB": {
+   "cite": "RCSB PDB 1MAB, crystal growth record (_exptl_crystal_grow.pdbx_details).",
+   "url": "https://www.rcsb.org/structure/1MAB",
+   "checked": "2026-10-01: 2.1 M ammonium sulfate as precipitant, 0.2 M KPi (pH 7.14) buffer, 0.005 M ATP, room temperature.",
+   "name": "PDB 1MAB crystal record"
+  },
+  "pubchem-tmr": {
+   "cite": "PubChem, Tetramethylrhodamine (CID 9952143), description from ChEBI.",
+   "url": "https://pubchem.ncbi.nlm.nih.gov/compound/9952143",
+   "checked": "2026-10-01, PUG REST description saved in .refs/hets: Tetramethylrhodamine is a xanthene dye.",
+   "name": "PubChem and ChEBI: tetramethylrhodamine"
+  },
+  "drugbank-RIT": {
+   "cite": "DrugBank record for ritonavir, via the RCSB PDB data API (drugbank/RIT).",
+   "url": "https://www.rcsb.org/ligand/RIT",
+   "licence": "DrugBank text is CC BY-NC 4.0; paraphrased facts only",
+   "checked": "2026-10-01, saved in .refs/hets: an HIV protease inhibitor; indicated with other antiretrovirals for HIV-1 infection.",
+   "name": "DrugBank: ritonavir"
+  },
+  "drugbank-THA": {
+   "cite": "DrugBank record for tacrine, via the RCSB PDB data API (drugbank/THA).",
+   "url": "https://www.rcsb.org/ligand/THA",
+   "licence": "DrugBank text is CC BY-NC 4.0; paraphrased facts only",
+   "checked": "2026-10-01, saved in .refs/hets: a cholinesterase inhibitor used for mild to moderate Alzheimer's dementia; groups approved and withdrawn; discontinued for the United States market.",
+   "name": "DrugBank: tacrine"
+  },
+  "molstar": {
+   "cite": "Mol* 5.12.0 source, vendor/molstar/molstar.js: structure focus representation and interaction-type colour theme.",
+   "url": "https://molstar.org/",
+   "checked": "2026-10-01: focus surroundings radius 5 angstroms (expandRadius default 5) drawn as ball-and-stick with non-covalent interactions; interactions on by default: hydrogen bonds, metal coordination, pi stacking, cation-pi, halogen bonds; colours HydrogenBond 0x2b83ba, MetalCoordination 0x8c4099, PiStacking 0x8cb366, CationPi 0xff8000, HalogenBond 0x40ffbf.",
+   "name": "Mol* 5.12.0 source code"
+  },
+  "ccd-CA": {
+   "cite": "wwPDB Chemical Component Dictionary, CA (CALCIUM ION), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/CA",
+   "checked": "2026-10-01, record saved in .refs/hets: name CALCIUM ION; type non-polymer; formula Ca; formal charge 2.",
+   "name": "PDB Chemical Component Dictionary: CA"
+  },
+  "ccd-MG": {
+   "cite": "wwPDB Chemical Component Dictionary, MG (MAGNESIUM ION), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/MG",
+   "checked": "2026-10-01, record saved in .refs/hets: name MAGNESIUM ION; type non-polymer; formula Mg; formal charge 2.",
+   "name": "PDB Chemical Component Dictionary: MG"
+  },
+  "ccd-ZN": {
+   "cite": "wwPDB Chemical Component Dictionary, ZN (ZINC ION), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/ZN",
+   "checked": "2026-10-01, record saved in .refs/hets: name ZINC ION; type non-polymer; formula Zn; formal charge 2.",
+   "name": "PDB Chemical Component Dictionary: ZN"
+  },
+  "ccd-MN": {
+   "cite": "wwPDB Chemical Component Dictionary, MN (MANGANESE (II) ION), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/MN",
+   "checked": "2026-10-01, record saved in .refs/hets: name MANGANESE (II) ION; type non-polymer; formula Mn; formal charge 2.",
+   "name": "PDB Chemical Component Dictionary: MN"
+  },
+  "ccd-FE": {
+   "cite": "wwPDB Chemical Component Dictionary, FE (FE (III) ION), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/FE",
+   "checked": "2026-10-01, record saved in .refs/hets: name FE (III) ION; type non-polymer; formula Fe; formal charge 3.",
+   "name": "PDB Chemical Component Dictionary: FE"
+  },
+  "ccd-NA": {
+   "cite": "wwPDB Chemical Component Dictionary, NA (SODIUM ION), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/NA",
+   "checked": "2026-10-01, record saved in .refs/hets: name SODIUM ION; type non-polymer; formula Na; formal charge 1.",
+   "name": "PDB Chemical Component Dictionary: NA"
+  },
+  "ccd-K": {
+   "cite": "wwPDB Chemical Component Dictionary, K (POTASSIUM ION), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/K",
+   "checked": "2026-10-01, record saved in .refs/hets: name POTASSIUM ION; type non-polymer; formula K; formal charge 1.",
+   "name": "PDB Chemical Component Dictionary: K"
+  },
+  "ccd-HG": {
+   "cite": "wwPDB Chemical Component Dictionary, HG (MERCURY (II) ION), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/HG",
+   "checked": "2026-10-01, record saved in .refs/hets: name MERCURY (II) ION; type non-polymer; formula Hg; formal charge 2.",
+   "name": "PDB Chemical Component Dictionary: HG"
+  },
+  "ccd-CL": {
+   "cite": "wwPDB Chemical Component Dictionary, CL (CHLORIDE ION), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/CL",
+   "checked": "2026-10-01, record saved in .refs/hets: name CHLORIDE ION; type non-polymer; formula Cl; formal charge -1.",
+   "name": "PDB Chemical Component Dictionary: CL"
+  },
+  "ccd-OH": {
+   "cite": "wwPDB Chemical Component Dictionary, OH (HYDROXIDE ION), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/OH",
+   "checked": "2026-10-01, record saved in .refs/hets: name HYDROXIDE ION; type non-polymer; formula H O; formal charge -1.",
+   "name": "PDB Chemical Component Dictionary: OH"
+  },
+  "ccd-PO4": {
+   "cite": "wwPDB Chemical Component Dictionary, PO4 (PHOSPHATE ION), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/PO4",
+   "checked": "2026-10-01, record saved in .refs/hets: name PHOSPHATE ION; type non-polymer; formula O4 P; formal charge -3.",
+   "name": "PDB Chemical Component Dictionary: PO4"
+  },
+  "ccd-HOH": {
+   "cite": "wwPDB Chemical Component Dictionary, HOH (WATER), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/HOH",
+   "checked": "2026-10-01, record saved in .refs/hets: name WATER; type non-polymer; formula H2 O.",
+   "name": "PDB Chemical Component Dictionary: HOH"
+  },
+  "ccd-ADP": {
+   "cite": "wwPDB Chemical Component Dictionary, ADP (ADENOSINE-5'-DIPHOSPHATE), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/ADP",
+   "checked": "2026-10-01, record saved in .refs/hets: name ADENOSINE-5'-DIPHOSPHATE; type non-polymer; formula C10 H15 N5 O10 P2; parent A.",
+   "name": "PDB Chemical Component Dictionary: ADP"
+  },
+  "ccd-ATP": {
+   "cite": "wwPDB Chemical Component Dictionary, ATP (ADENOSINE-5'-TRIPHOSPHATE), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/ATP",
+   "checked": "2026-10-01, record saved in .refs/hets: name ADENOSINE-5'-TRIPHOSPHATE; type non-polymer; formula C10 H16 N5 O13 P3.",
+   "name": "PDB Chemical Component Dictionary: ATP"
+  },
+  "ccd-HEM": {
+   "cite": "wwPDB Chemical Component Dictionary, HEM (PROTOPORPHYRIN IX CONTAINING FE), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/HEM",
+   "checked": "2026-10-01, record saved in .refs/hets: name PROTOPORPHYRIN IX CONTAINING FE; type non-polymer; formula C34 H32 Fe N4 O4.",
+   "name": "PDB Chemical Component Dictionary: HEM"
+  },
+  "ccd-RET": {
+   "cite": "wwPDB Chemical Component Dictionary, RET (RETINAL), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/RET",
+   "checked": "2026-10-01, record saved in .refs/hets: name RETINAL; type non-polymer; formula C20 H28 O.",
+   "name": "PDB Chemical Component Dictionary: RET"
+  },
+  "ccd-RHO": {
+   "cite": "wwPDB Chemical Component Dictionary, RHO (TETRAMETHYLRHODAMINE-5-MALEIMIDE), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/RHO",
+   "checked": "2026-10-01, record saved in .refs/hets: name TETRAMETHYLRHODAMINE-5-MALEIMIDE; type non-polymer; formula C28 H25 N3 O5.",
+   "name": "PDB Chemical Component Dictionary: RHO"
+  },
+  "ccd-HIC": {
+   "cite": "wwPDB Chemical Component Dictionary, HIC (4-METHYL-HISTIDINE), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/HIC",
+   "checked": "2026-10-01, record saved in .refs/hets: name 4-METHYL-HISTIDINE; type L-peptide linking; formula C7 H11 N3 O2; parent HIS.",
+   "name": "PDB Chemical Component Dictionary: HIC"
+  },
+  "ccd-CRO": {
+   "cite": "wwPDB Chemical Component Dictionary, CRO ({2-[(1R,2R)-1-amino-2-hydroxypropyl]-4-(4-hydroxybenzylidene)-5-oxo-4,5-dihydro-1H-imidazol-1-yl}acetic acid), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/CRO",
+   "checked": "2026-10-01, record saved in .refs/hets: name {2-[(1R,2R)-1-amino-2-hydroxypropyl]-4-(4-hydroxybenzylidene)-5-oxo-4,5-dihydro-1H-imidazol-1-yl}acetic acid; type L-peptide linking; formula C15 H17 N3 O5; parent THR TYR GLY.",
+   "name": "PDB Chemical Component Dictionary: CRO"
+  },
+  "ccd-MSE": {
+   "cite": "wwPDB Chemical Component Dictionary, MSE (SELENOMETHIONINE), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/MSE",
+   "checked": "2026-10-01, record saved in .refs/hets: name SELENOMETHIONINE; type L-peptide linking; formula C5 H11 N O2 Se; parent MET.",
+   "name": "PDB Chemical Component Dictionary: MSE"
+  },
+  "ccd-KCX": {
+   "cite": "wwPDB Chemical Component Dictionary, KCX (LYSINE NZ-CARBOXYLIC ACID), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/KCX",
+   "checked": "2026-10-01, record saved in .refs/hets: name LYSINE NZ-CARBOXYLIC ACID; type L-peptide linking; formula C7 H14 N2 O4; parent LYS.",
+   "name": "PDB Chemical Component Dictionary: KCX"
+  },
+  "ccd-SEP": {
+   "cite": "wwPDB Chemical Component Dictionary, SEP (PHOSPHOSERINE), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/SEP",
+   "checked": "2026-10-01, record saved in .refs/hets: name PHOSPHOSERINE; type L-peptide linking; formula C3 H8 N O6 P; parent SER.",
+   "name": "PDB Chemical Component Dictionary: SEP"
+  },
+  "ccd-NAG": {
+   "cite": "wwPDB Chemical Component Dictionary, NAG (2-acetamido-2-deoxy-beta-D-glucopyranose), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/NAG",
+   "checked": "2026-10-01, record saved in .refs/hets: name 2-acetamido-2-deoxy-beta-D-glucopyranose; type D-saccharide, beta linking; formula C8 H15 N O6.",
+   "name": "PDB Chemical Component Dictionary: NAG"
+  },
+  "ccd-MAN": {
+   "cite": "wwPDB Chemical Component Dictionary, MAN (alpha-D-mannopyranose), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/MAN",
+   "checked": "2026-10-01, record saved in .refs/hets: name alpha-D-mannopyranose; type D-saccharide, alpha linking; formula C6 H12 O6.",
+   "name": "PDB Chemical Component Dictionary: MAN"
+  },
+  "ccd-BMA": {
+   "cite": "wwPDB Chemical Component Dictionary, BMA (beta-D-mannopyranose), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/BMA",
+   "checked": "2026-10-01, record saved in .refs/hets: name beta-D-mannopyranose; type D-saccharide, beta linking; formula C6 H12 O6.",
+   "name": "PDB Chemical Component Dictionary: BMA"
+  },
+  "ccd-GAL": {
+   "cite": "wwPDB Chemical Component Dictionary, GAL (beta-D-galactopyranose), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/GAL",
+   "checked": "2026-10-01, record saved in .refs/hets: name beta-D-galactopyranose; type D-saccharide, beta linking; formula C6 H12 O6.",
+   "name": "PDB Chemical Component Dictionary: GAL"
+  },
+  "ccd-FUC": {
+   "cite": "wwPDB Chemical Component Dictionary, FUC (alpha-L-fucopyranose), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/FUC",
+   "checked": "2026-10-01, record saved in .refs/hets: name alpha-L-fucopyranose; type L-saccharide, alpha linking; formula C6 H12 O5.",
+   "name": "PDB Chemical Component Dictionary: FUC"
+  },
+  "ccd-FUL": {
+   "cite": "wwPDB Chemical Component Dictionary, FUL (beta-L-fucopyranose), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/FUL",
+   "checked": "2026-10-01, record saved in .refs/hets: name beta-L-fucopyranose; type L-saccharide, beta linking; formula C6 H12 O5.",
+   "name": "PDB Chemical Component Dictionary: FUL"
+  },
+  "ccd-BNG": {
+   "cite": "wwPDB Chemical Component Dictionary, BNG (nonyl beta-D-glucopyranoside), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/BNG",
+   "checked": "2026-10-01, record saved in .refs/hets: name nonyl beta-D-glucopyranoside; type D-saccharide; formula C15 H30 O6; parent BGC.",
+   "name": "PDB Chemical Component Dictionary: BNG"
+  },
+  "ccd-CAP": {
+   "cite": "wwPDB Chemical Component Dictionary, CAP (2-CARBOXYARABINITOL-1,5-DIPHOSPHATE), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/CAP",
+   "checked": "2026-10-01, record saved in .refs/hets: name 2-CARBOXYARABINITOL-1,5-DIPHOSPHATE; type saccharide; formula C6 H14 O13 P2.",
+   "name": "PDB Chemical Component Dictionary: CAP"
+  },
+  "ccd-ACY": {
+   "cite": "wwPDB Chemical Component Dictionary, ACY (ACETIC ACID), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/ACY",
+   "checked": "2026-10-01, record saved in .refs/hets: name ACETIC ACID; type non-polymer; formula C2 H4 O2.",
+   "name": "PDB Chemical Component Dictionary: ACY"
+  },
+  "ccd-RIT": {
+   "cite": "wwPDB Chemical Component Dictionary, RIT (RITONAVIR), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/RIT",
+   "checked": "2026-10-01, record saved in .refs/hets: name RITONAVIR; type peptide-like; formula C37 H48 N6 O5 S2.",
+   "name": "PDB Chemical Component Dictionary: RIT"
+  },
+  "ccd-THA": {
+   "cite": "wwPDB Chemical Component Dictionary, THA (TACRINE), via RCSB PDB.",
+   "url": "https://www.rcsb.org/ligand/THA",
+   "checked": "2026-10-01, record saved in .refs/hets: name TACRINE; type non-polymer; formula C13 H14 N2.",
+   "name": "PDB Chemical Component Dictionary: THA"
+  }
+ }
+}
