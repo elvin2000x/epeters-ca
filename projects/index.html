@@ -140,10 +140,12 @@
     }).join('');
 
   function cardFor(a) {
+    // a.demo: a public no-login demo of a private tool (card #530) links the card there.
+    if (a.demo) a = Object.assign({}, a, { status: 'live', href: a.demo });
     var live = a.status === 'live';
     var inner =
       '<div class="row"><h3>' + esc(a.name) + '</h3>' +
-        '<span class="badge ' + (live ? 'live' : 'private') + '">' + (live ? 'Live' : 'Private') + '</span></div>' +
+        '<span class="badge ' + (live ? 'live' : 'private') + '">' + (a.demo ? 'Live demo' : live ? 'Live' : 'Private') + '</span></div>' +
       '<p>' + esc(a.blurb) + '</p>' +
       (a.tags ? '<div class="tags">' + a.tags.map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('') + '</div>' : '') +
       '<div class="foot-row"><span class="stat">' + esc(a.stat || '') + '</span>' +
