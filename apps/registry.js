@@ -8,7 +8,7 @@
            'private' — real and running, but behind a login; shown, not linked
            'soon'    — under construction; shown with no link
    demo: '<url>' — optional; a public no-login demo of a private tool (e.g. elvinpeters.com/record/demo/).
-           The card links there with a "Live demo" badge (card #530).
+           The card links there with a "Demo" badge (card #530).
    Every `href` in here has been checked to return 200. Do not add a link
    without checking it first.
    ========================================================================== */
