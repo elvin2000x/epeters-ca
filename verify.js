@@ -53,10 +53,13 @@ for (const f of PAGES) {
   if (!foot) FAIL(f, 'no footer line');
   else for (const l of CH.NAVC.footer.links) if (!foot.includes(CH.esc(CH.utm(l.href, 'footer', CH.sectionOf(f))))) FAIL(f, `footer missing ${l.label}`);
   if (CH.NAVC.barPages.includes(f) && !/<!-- ep:ca-bar -->/.test(s)) FAIL(f, 'no top bar');
+  // Decision 2026-10-05 (TASKMASTER, cell explorer owner): /microscope-simulator/ stays noindex while Elvin tests,
+  // so its noindex and canonical checks are skipped. Every other check still runs. Add a canonical when it goes indexed.
+  const testing = f.startsWith('microscope-simulator/');
   const noindex = /<meta name="robots" content="[^"]*noindex/i.test(s);
-  if (noindex && !NOINDEX_OK.has(f)) FAIL(f, 'noindex (pages on epeters.ca are indexable)');
+  if (noindex && !NOINDEX_OK.has(f) && !testing) FAIL(f, 'noindex (pages on epeters.ca are indexable)');
   const canon = (s.match(/<link rel="canonical" href="([^"]+)"/i) || [])[1];
-  if (!canon) { if (f !== '404.html') FAIL(f, 'no canonical'); }
+  if (!canon) { if (f !== '404.html' && !testing) FAIL(f, 'no canonical'); }
   else if (!canon.startsWith('https://epeters.ca/')) FAIL(f, `canonical off-site: ${canon}`);
   if (f.startsWith('blog/') && f !== 'blog/index.html' && !s.includes(`source:'${CH.newsletterSource('blog')}'`)) FAIL(f, 'newsletter form not tagged ' + CH.newsletterSource('blog'));
 }
