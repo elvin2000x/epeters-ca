@@ -30,7 +30,7 @@ window.APPS_REGISTRY = {
       slug: 'record-studio', name: 'Record Studio', cat: 'platforms', status: 'private',
       demo: 'https://elvinpeters.com/record/demo/?utm_source=epeters.ca&utm_medium=link&utm_campaign=apps',
       href: 'https://elvinpeters.com/record/?utm_source=epeters.ca&utm_medium=link&utm_campaign=apps',
-      blurb: 'Interview recorder for journalists and researchers. Words appear on screen as they are spoken, the audio is saved to the server every five seconds, and a minute after you stop you get a transcript with speakers named, a summary, pull quotes and Word, text and subtitle exports. Runs on Google’s transcription models behind a login.'
+      blurb: 'Turns an interview into a transcript of who said what and a summary. Tap to look through a finished sample. No sign-in.'
     },
     /* ---------------- tools ---------------- */
     {
