@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Teleprompter</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  :root { --bg:#000; --fg:#f5f5f0; --accent:#c9a250; --panel:#141414; }
+  html, body { height: 100%; background: var(--bg); color: var(--fg);
+    font-family: -apple-system, Segoe UI, Roboto, sans-serif; overflow: hidden; }
+
+  /* EDITOR */
+  #editor { position: fixed; inset: 0; z-index: 10; background: var(--bg); display: flex; flex-direction: column; padding: 18px; gap: 12px; }
+  #editor h1 { font-size: 18px; color: var(--accent); letter-spacing: .04em; }
+  #editor p { font-size: 13px; color: #888; line-height: 1.5; }
+  #script { flex: 1; width: 100%; resize: none; background: var(--panel); color: var(--fg);
+    border: 1px solid #333; border-radius: 10px; padding: 14px; font-size: 16px; line-height: 1.5; }
+  #startBtn { background: var(--accent); color: #000; border: none; border-radius: 10px;
+    padding: 18px; font-size: 19px; font-weight: 800; cursor: pointer; }
+
+  /* PROMPTER */
+  #stage { position: fixed; inset: 0; z-index: 10; background: var(--bg); display: none; overflow: hidden; touch-action: none; }
+  #scroll { position: absolute; left: 0; right: 0; padding: 0 6vw; will-change: transform; cursor: grab; user-select: none; -webkit-user-select: none; }
+  body.dragging #scroll { cursor: grabbing; }
+  /* in-place editing: the prompter text itself becomes the editor */
+  body.editing #scroll { cursor: text; user-select: text; -webkit-user-select: text; }
+  #text[contenteditable="true"], #text[contenteditable="plaintext-only"] { outline: none; caret-color: var(--accent); }
+  body.editing #text { color: #fff; background: rgba(201,162,80,.06); }
+  #editHint { display: none; position: fixed; top: 0; left: 0; right: 0; z-index: 45; padding: 8px 14px;
+    background: rgba(201,162,80,.95); color: #000; font-size: 14px; font-weight: 700; text-align: center; }
+  body.editing #editHint { display: block; }
+  #text { font-size: 56px; line-height: 1.45; font-weight: 600; white-space: pre-wrap;
+    word-wrap: break-word; padding-top: 58vh; padding-bottom: 90vh; }
+  #guide { position: fixed; top: 36%; left: 0; right: 0; height: 0; border-top: 2px solid rgba(201,162,80,.4); pointer-events: none; }
+  #guide::before { content:"▶"; position:absolute; left:8px; top:-11px; color:var(--accent); font-size:16px; }
+  #guide::after  { content:"◀"; position:absolute; right:8px; top:-11px; color:var(--accent); font-size:16px; }
+
+  /* COUNTDOWN */
+  #count { position: fixed; inset: 0; display: none; align-items: center; justify-content: center;
+    font-size: 22vw; font-weight: 800; color: var(--accent); background: rgba(0,0,0,.85); z-index: 50; }
+
+  /* CONTROLS */
+  #panel { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+    background: rgba(15,15,15,.92); backdrop-filter: blur(8px); border-top: 1px solid #2a2a2a;
+    padding: 12px 14px calc(12px + env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 10px; }
+  .sliderRow { display: flex; align-items: center; gap: 12px; }
+  .sliderRow label { width: 58px; font-size: 13px; color: #aaa; flex-shrink: 0; }
+  .sliderRow .val { width: 46px; text-align: right; font-size: 13px; color: var(--accent); font-variant-numeric: tabular-nums; }
+  input[type=range] { -webkit-appearance: none; appearance: none; flex: 1; height: 36px; background: transparent; }
+  input[type=range]::-webkit-slider-runnable-track { height: 8px; border-radius: 4px; background: #333; }
+  input[type=range]::-moz-range-track { height: 8px; border-radius: 4px; background: #333; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 30px; height: 30px;
+    border-radius: 50%; background: var(--accent); margin-top: -11px; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,.6); }
+  input[type=range]::-moz-range-thumb { width: 30px; height: 30px; border: none; border-radius: 50%; background: var(--accent); cursor: pointer; }
+  .btnRow { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btnRow button { flex: 1; min-width: 64px; background: #1f1f1f; color: var(--fg); border: 1px solid #333;
+    border-radius: 10px; padding: 14px 8px; font-size: 15px; cursor: pointer; }
+  #playBtn { flex: 2; background: var(--accent); color: #000; font-weight: 800; }
+  button.on { outline: 2px solid var(--accent); }
+  /* read loader (#383): load .txt/.md reads from the vault, pick one per take */
+  #loadRow { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  #loadBtn { background: #1f1f1f; color: var(--fg); border: 1px solid #444; border-radius: 10px; padding: 12px 16px; font-size: 15px; cursor: pointer; }
+  #reads { display: flex; gap: 8px; flex-wrap: wrap; }
+  #reads button { background: #141414; color: var(--fg); border: 1px solid #333; border-radius: 999px; padding: 10px 16px; font-size: 15px; cursor: pointer; }
+  #reads button.on { border-color: var(--accent); color: var(--accent); outline: none; }
+  body.guideTop #guide { top: 12%; }
+  body.guideTop #text { padding-top: 14vh; }
+</style>
+<link rel="canonical" href="https://epeters.ca/teleprompter/">
+</head>
+<body>
+
+<div id="editor">
+  <h1>📿 PROMPTER</h1>
+  <p>Paste your script, tap <b>Start</b>. Drag the <b>Speed</b> slider any time while recording. Tap the text to pause. Drag the text (or use the mouse wheel) to scroll back or skip ahead. Tap <b>✎ Edit</b> to fix a line right in the prompter. Put this screen right beside your camera lens.</p>
+  <div id="loadRow">
+    <button id="loadBtn" type="button">📄 Load .txt / .md read(s)</button>
+    <input id="fileIn" type="file" accept=".txt,.md,text/plain,text/markdown" multiple hidden />
+    <div id="reads"></div>
+  </div>
+  <textarea id="script" placeholder="Paste your script here..."></textarea>
+  <button id="startBtn">▶  Start</button>
+</div>
+
+<div id="stage">
+  <div id="guide"></div>
+  <div id="editHint">Editing: type to change the script. Drag or wheel to scroll. Tap ✓ Done when finished.</div>
+  <div id="scroll"><div id="text" spellcheck="false"></div></div>
+  <div id="count"></div>
+  <div id="panel">
+    <div class="sliderRow">
+      <label>Speed</label>
+      <input type="range" id="speed" min="0" max="250" step="5" />
+      <span class="val" id="speedVal"></span>
+    </div>
+    <div class="sliderRow">
+      <label>Size</label>
+      <input type="range" id="font" min="24" max="130" step="2" />
+      <span class="val" id="fontVal"></span>
+    </div>
+    <div class="btnRow">
+      <button id="playBtn">❚❚ Pause</button>
+      <button id="mirrorBtn">⇋ Flip</button>
+      <button id="restartBtn">Restart</button>
+      <button id="fullBtn">⛶</button>
+      <button id="guideBtn" title="Reading line near the top, for a screen under the phone lens">⤒ Top</button>
+      <button id="editBtn" title="Edit the text right here (saves as you type)">✎ Edit</button>
+      <button id="backBtn" title="Back to the script screen (Esc)">☰ Script</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const editor=$('editor'), stage=$('stage'), scroll=$('scroll'), textEl=$('text'), countEl=$('count');
+  const speedEl=$('speed'), fontEl=$('font'), speedVal=$('speedVal'), fontVal=$('fontVal');
+
+  let y=0, speed=+(localStorage.getItem('tp_speed')||70),
+      fontSize=+(localStorage.getItem('tp_font')||56),
+      playing=false, last=0, raf=null, mirror=false, editing=false, drag=null;
+
+  $('script').value = localStorage.getItem('tp_script') || '';
+  speedEl.value=speed; fontEl.value=fontSize;
+  const save=()=>{ localStorage.setItem('tp_script',$('script').value);
+    localStorage.setItem('tp_speed',speed); localStorage.setItem('tp_font',fontSize); };
+  // mirror is off while editing so the text reads (and types) the right way round
+  const render=()=>{ scroll.style.transform = `translateY(${y}px)` + (mirror&&!editing?' scaleX(-1)':''); };
+  // y runs from 0 (top of script) down to the point where the last line has passed the screen
+  const minY=()=>Math.min(0, window.innerHeight - textEl.offsetHeight);
+  const clampY=v=>Math.max(minY(), Math.min(0, v));
+  const nudge=dy=>{ y=clampY(y+dy); render(); };
+  const showSpeed=()=>speedVal.textContent=speed;
+  const showFont=()=>fontVal.textContent=fontSize;
+
+  function loop(ts){
+    if(!playing) return;
+    if(!last) last=ts;
+    const dt=(ts-last)/1000; last=ts;
+    if(!drag?.moved){ y=clampY(y - speed*dt); render(); } // hold still while a finger or mouse is dragging
+    raf=requestAnimationFrame(loop);
+  }
+  function play(on){
+    playing = (on===undefined) ? !playing : on;
+    if(playing && editing) editText(false);
+    $('playBtn').textContent = playing ? '❚❚ Pause' : '▶ Play';
+    if(playing){ last=0; cancelAnimationFrame(raf); raf=requestAnimationFrame(loop); }
+    else cancelAnimationFrame(raf);
+  }
+  function countdownStart(){
+    let n=3; countEl.style.display='flex'; countEl.textContent=n;
+    const iv=setInterval(()=>{ n--; if(n<=0){ clearInterval(iv); countEl.style.display='none'; play(true); }
+      else countEl.textContent=n; }, 700);
+  }
+  function start(){
+    textEl.textContent = $('script').value.trim() || 'Paste a script first.';
+    textEl.style.fontSize = fontSize+'px';
+    editor.style.display='none'; stage.style.display='block';
+    y=0; render(); save(); countdownStart();
+  }
+  function edit(){ editText(false); play(false); stage.style.display='none'; editor.style.display='flex'; }
+
+  // ---- edit in place: the prompter text becomes editable; every keystroke is saved to the script ----
+  function editText(on){
+    on = (on===undefined) ? !editing : on;
+    if(on===editing) return;
+    editing=on;
+    document.body.classList.toggle('editing', on);
+    $('editBtn').textContent = on ? '✓ Done' : '✎ Edit';
+    $('editBtn').classList.toggle('on', on);
+    if(on){
+      play(false);
+      textEl.contentEditable='plaintext-only';
+      if(textEl.contentEditable!=='plaintext-only') textEl.contentEditable='true'; // older Firefox
+      textEl.focus({preventScroll:true});
+    } else {
+      textEl.contentEditable='false';
+      textEl.textContent = $('script').value; // drop any markup a paste or the browser added
+      textEl.blur();
+    }
+    render();
+  }
+  textEl.addEventListener('input', ()=>{ $('script').value = textEl.innerText.replace(/\n$/,''); save(); });
+  textEl.addEventListener('paste', e=>{ // plain text only, also where plaintext-only is not supported
+    e.preventDefault();
+    document.execCommand('insertText', false, (e.clipboardData||window.clipboardData).getData('text/plain'));
+  });
+  // typing near the bottom makes the browser scroll the stage to show the caret: fold that into y instead
+  stage.addEventListener('scroll', ()=>{ if(stage.scrollTop){ y=clampY(y-stage.scrollTop); stage.scrollTop=0; render(); } });
+
+  // ---- manual scroll: drag the text (finger or mouse) or use the wheel / trackpad ----
+  stage.addEventListener('wheel', e=>{
+    if($('panel').contains(e.target)) return;
+    e.preventDefault();
+    nudge(-e.deltaY * (e.deltaMode===1 ? 40 : e.deltaMode===2 ? window.innerHeight : 1));
+  }, {passive:false});
+  scroll.addEventListener('pointerdown', e=>{
+    if(editing && e.pointerType==='mouse') return; // a mouse in edit mode selects text; it scrolls with the wheel
+    drag={id:e.pointerId, y0:e.clientY, start:y, moved:false};
+  });
+  window.addEventListener('pointermove', e=>{
+    if(!drag || e.pointerId!==drag.id) return;
+    const dy=e.clientY-drag.y0;
+    if(!drag.moved && Math.abs(dy)>6){ drag.moved=true; document.body.classList.add('dragging'); }
+    if(drag.moved){ y=clampY(drag.start+dy); render(); }
+  });
+  const endDrag=()=>{ if(!drag) return;
+    if(drag.moved) setTimeout(()=>{ drag=null; }, 0); else drag=null; // let the click handler see it was a drag
+    document.body.classList.remove('dragging'); last=0; };
+  window.addEventListener('pointerup', endDrag);
+  window.addEventListener('pointercancel', endDrag);
+
+  // ---- read loader (#383): same rules as the phone recorder's mdstrip.js. .txt as-is, .md with markup stripped ----
+  function stripMarkdown(src){
+    let s=String(src||'').replace(/\r\n?/g,'\n');
+    s=s.replace(/<!--[\s\S]*?(-->|$)/g,'').replace(/^﻿?---\n[\s\S]*?\n---[ \t]*(\n|$)/,'')
+       .replace(/^[ \t]*(```|~~~).*$/gm,'').replace(/^[ \t]*([-*_][ \t]*){3,}$/gm,'')
+       .replace(/^[ \t]*\|?[ \t]*:?-{2,}:?[ \t]*(\|[ \t]*:?-{2,}:?[ \t]*)*\|?[ \t]*$/gm,'')
+       .replace(/^[ \t]*\[[^\]\n]+\]:[ \t]+\S.*$/gm,'')
+       .replace(/^[ \t]{0,3}#{1,6}[ \t]+(.*?)[ \t]*#*[ \t]*$/gm,'$1').replace(/^(.+)\n[ \t]*(=+|-+)[ \t]*$/gm,'$1')
+       .replace(/^[ \t]*(>[ \t]?)+/gm,'').replace(/^[ \t]*(?:[-*+]|\d{1,3}[.)])[ \t]+(\[[ xX]\][ \t]+)?/gm,'')
+       .replace(/!\[([^\]\n]*)\]\([^)\n]*\)/g,'$1').replace(/\[([^\]\n]+)\]\([^)\n]*\)/g,'$1')
+       .replace(/\[([^\]\n]+)\]\[[^\]\n]*\]/g,'$1').replace(/<(https?:\/\/[^>\s]+)>/g,'$1')
+       .replace(/`{1,3}([^`\n]+)`{1,3}/g,'$1').replace(/(\*\*\*|___)([^*_\n]+?)\1/g,'$2').replace(/(\*\*|__)([^\n]+?)\1/g,'$2')
+       .replace(/(^|[^\w*])\*([^*\s][^*\n]*?)\*(?=[^\w*]|$)/gm,'$1$2').replace(/(^|[^\w_])_([^_\s][^_\n]*?)_(?=[^\w_]|$)/gm,'$1$2')
+       .replace(/~~([^~\n]+)~~/g,'$1').replace(/<br\s*\/?>/gi,'\n').replace(/<\/?[A-Za-z][^>\n]*>/g,'')
+       .replace(/^[ \t]*\|(.*)\|[ \t]*$/gm,(_,row)=>row.split('|').map(c=>c.trim()).join('   '))
+       .replace(/\\([\\`*_{}\[\]()#+\-.!>~|])/g,'$1')
+       .replace(/&nbsp;/g,' ').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'")
+       .replace(/[ \t]+$/gm,'').replace(/\n{3,}/g,'\n\n');
+    return s.trim();
+  }
+  const ORDER=['long-ending-a','long-ending-b','mid-ending-a','mid-ending-b','short-ending-a','short-ending-b','long','mid','short','ending-a','ending-b','teleprompter'];
+  const rank=n=>{ const i=ORDER.indexOf(n); return i<0?ORDER.length:i; };
+  let reads=[];
+  function pickRead(i){
+    $('script').value=reads[i].text; save();
+    [...$('reads').children].forEach((b,j)=>b.classList.toggle('on',j===i));
+  }
+  $('loadBtn').onclick=()=>$('fileIn').click();
+  $('fileIn').addEventListener('change', async e=>{
+    const files=[...e.target.files].filter(f=>/\.(txt|md|markdown)$/i.test(f.name)); e.target.value='';
+    if(!files.length) return;
+    reads=await Promise.all(files.map(async f=>{
+      const raw=await f.text(), name=f.name.replace(/\.(txt|md|markdown)$/i,'').toLowerCase();
+      return {name, text: /\.(md|markdown)$/i.test(f.name) ? stripMarkdown(raw) : raw.replace(/\r\n?/g,'\n').trim()};
+    }));
+    reads.sort((a,b)=>rank(a.name)-rank(b.name)||a.name.localeCompare(b.name));
+    $('reads').innerHTML='';
+    reads.forEach((r,i)=>{ const b=document.createElement('button'); b.type='button'; b.textContent=r.name; b.onclick=()=>pickRead(i); $('reads').appendChild(b); });
+    pickRead(0);
+  });
+  if(localStorage.getItem('tp_guideTop')==='1') document.body.classList.add('guideTop');
+
+  // wire up
+  showSpeed(); showFont();
+  // on a PC, Start goes full screen too (a phone keeps its own chrome; iPhone Safari has no fullscreen for pages)
+  $('startBtn').onclick = ()=>{ if(!matchMedia('(pointer:coarse)').matches && !document.fullscreenElement) document.documentElement.requestFullscreen?.().catch(()=>{}); start(); };
+  $('guideBtn').onclick = e=>{ const on=document.body.classList.toggle('guideTop'); e.target.classList.toggle('on',on); localStorage.setItem('tp_guideTop',on?'1':'0'); };
+  $('guideBtn').classList.toggle('on', document.body.classList.contains('guideTop'));
+  speedEl.addEventListener('input', e=>{ speed=+e.target.value; showSpeed(); save(); });
+  fontEl.addEventListener('input', e=>{ fontSize=+e.target.value; textEl.style.fontSize=fontSize+'px'; showFont(); save(); });
+  $('playBtn').onclick = ()=>play();
+  $('mirrorBtn').onclick = e=>{ mirror=!mirror; e.target.classList.toggle('on',mirror); render(); };
+  $('restartBtn').onclick = ()=>{ y=0; render(); };
+  $('editBtn').onclick = ()=>editText();
+  $('backBtn').onclick = edit;
+  $('fullBtn').onclick = ()=>{ if(!document.fullscreenElement) document.documentElement.requestFullscreen?.(); else document.exitFullscreen?.(); };
+  // tap the scrolling area to pause/play (text is inside #scroll; panel is outside it). Not after a drag, not while editing.
+  scroll.addEventListener('click', ()=>{ if(editing || drag?.moved) return; play(); });
+  // desktop keys
+  document.addEventListener('keydown', e=>{
+    if(stage.style.display==='none') return;
+    if(editing){ if(e.key==='Escape'){ e.preventDefault(); editText(false); } return; } // every other key types
+    if(e.code==='Space'){ e.preventDefault(); play(); }
+    if(e.code==='PageDown'){ e.preventDefault(); nudge(-window.innerHeight*0.4); }
+    if(e.code==='PageUp'){ e.preventDefault(); nudge(window.innerHeight*0.4); }
+    if(e.code==='Home'){ e.preventDefault(); y=0; render(); }
+    if(e.code==='KeyE'){ e.preventDefault(); editText(true); }
+    if(e.code==='ArrowUp'){ speed=Math.min(250,speed+5); speedEl.value=speed; showSpeed(); save(); }
+    if(e.code==='ArrowDown'){ speed=Math.max(0,speed-5); speedEl.value=speed; showSpeed(); save(); }
+    if(e.key==='Escape') edit();
+  });
+</script>
+<!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:12px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}@media (max-width:480px){.rhfoot{display:flex;flex-direction:column;align-items:center;gap:2px}.rhfoot .rhsep{display:none}.rhfoot>span:first-child{padding-bottom:4px}}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=teleprompter">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=teleprompter">Get the monthly letter</a></footer><!-- /ep:ca-foot -->
+</body>
+</html>
