@@ -30,7 +30,7 @@
   #editHint { display: none; position: fixed; top: 0; left: 0; right: 0; z-index: 45; padding: 8px 14px;
     background: rgba(201,162,80,.95); color: #000; font-size: 14px; font-weight: 700; text-align: center; }
   body.editing #editHint { display: block; }
-  #text { font-size: 56px; line-height: 1.45; font-weight: 600; white-space: pre-wrap;
+  #text { font-size: 56px; line-height: 1.45; font-weight: 600; white-space: pre-wrap; max-width: 70%; margin: 0 auto;
     word-wrap: break-word; padding-top: 58vh; padding-bottom: 90vh; }
   #guide { position: fixed; top: 36%; left: 0; right: 0; height: 0; border-top: 2px solid rgba(201,162,80,.4); pointer-events: none; }
   #guide::before { content:"▶"; position:absolute; left:8px; top:-11px; color:var(--accent); font-size:16px; }
@@ -99,6 +99,11 @@
       <input type="range" id="font" min="24" max="130" step="2" />
       <span class="val" id="fontVal"></span>
     </div>
+    <div class="sliderRow">
+      <label>Width</label>
+      <input type="range" id="width" min="30" max="100" step="5" />
+      <span class="val" id="widthVal"></span>
+    </div>
     <div class="btnRow">
       <button id="playBtn">❚❚ Pause</button>
       <button id="mirrorBtn">⇋ Flip</button>
@@ -118,12 +123,14 @@
 
   let y=0, speed=+(localStorage.getItem('tp_speed')||70),
       fontSize=+(localStorage.getItem('tp_font')||56),
+      width=+(localStorage.getItem('tp_width')||70), // text column as % of the screen, centred
+
       playing=false, last=0, raf=null, mirror=false, editing=false, drag=null;
 
   $('script').value = localStorage.getItem('tp_script') || '';
   speedEl.value=speed; fontEl.value=fontSize;
   const save=()=>{ localStorage.setItem('tp_script',$('script').value);
-    localStorage.setItem('tp_speed',speed); localStorage.setItem('tp_font',fontSize); };
+    localStorage.setItem('tp_speed',speed); localStorage.setItem('tp_font',fontSize); localStorage.setItem('tp_width',width); };
   // mirror is off while editing so the text reads (and types) the right way round
   const render=()=>{ scroll.style.transform = `translateY(${y}px)` + (mirror&&!editing?' scaleX(-1)':''); };
   // y runs from 0 (top of script) down to the point where the last line has passed the screen
@@ -132,6 +139,7 @@
   const nudge=dy=>{ y=clampY(y+dy); render(); };
   const showSpeed=()=>speedVal.textContent=speed;
   const showFont=()=>fontVal.textContent=fontSize;
+  const applyWidth=()=>{ textEl.style.maxWidth=width+'%'; $('widthVal').textContent=width+'%'; };
 
   function loop(ts){
     if(!playing) return;
@@ -253,7 +261,8 @@
   if(localStorage.getItem('tp_guideTop')==='1') document.body.classList.add('guideTop');
 
   // wire up
-  showSpeed(); showFont();
+  showSpeed(); showFont(); $('width').value=width; applyWidth();
+  $('width').addEventListener('input', e=>{ width=+e.target.value; applyWidth(); y=clampY(y); render(); save(); });
   // on a PC, Start goes full screen too (a phone keeps its own chrome; iPhone Safari has no fullscreen for pages)
   $('startBtn').onclick = ()=>{ if(!matchMedia('(pointer:coarse)').matches && !document.fullscreenElement) document.documentElement.requestFullscreen?.().catch(()=>{}); start(); };
   $('guideBtn').onclick = e=>{ const on=document.body.classList.toggle('guideTop'); e.target.classList.toggle('on',on); localStorage.setItem('tp_guideTop',on?'1':'0'); };
