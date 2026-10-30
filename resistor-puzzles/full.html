@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resistor puzzles, full set</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=EB+Garamond:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="puzzles.css">
+</head>
+<body>
+<nav class="rhbar" aria-label="Elvin Peters"><div class="rhin"><a class="rhbrand" href="/">Elvin Peters</a><span class="rhlk"><a href="/playground/">Playground</a></span></div></nav>
+<main>
+  <p class="kicker" id="progress"></p>
+  <h1 id="level">Resistor puzzles</h1>
+  <section id="scene" hidden>
+    <div class="scene-copy" id="scene-copy"></div>
+    <p class="next"><button type="button" id="scene-go">Try it</button></p>
+  </section>
+  <div id="play" hidden>
+    <p class="ask" id="ask"></p>
+    <div class="stage">
+      <div class="board" id="board"></div>
+      <div class="choices" id="choices"></div>
+    </div>
+    <p class="meter" id="meter" aria-live="polite"></p>
+    <p class="next" id="next-wrap" hidden><button type="button" id="next">Next</button></p>
+  </div>
+  <section id="locked" hidden>
+    <p id="locked-line"></p>
+    <p class="next"><button type="button" id="again">Play the set again</button></p>
+  </section>
+  <p class="credit">OpenStax, <em>Physics</em>, chapter 19. <a href="https://openstax.org/books/physics/pages/preface">CC BY 4.0</a>.</p>
+</main>
+<script>window.PUZZLE_MODE = "all";</script>
+<script src="circuit.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

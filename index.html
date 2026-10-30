@@ -1,61 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>The Rabbit Hole · Elvin Peters</title>
-<meta name="description" content="Everything Elvin Peters has made while learning to build with AI: the blog, browser games, quizzes, free Canadian calculators and side projects.">
+<title>Software · Elvin Peters</title>
+<meta name="description" content="Software by Elvin Peters.">
 <link rel="canonical" href="https://epeters.ca/">
-<meta property="og:type" content="website"><meta property="og:title" content="The Rabbit Hole"><meta property="og:description" content="Everything Elvin Peters has made while learning to build with AI."><meta property="og:image" content="https://epeters.ca/img/og.jpg"><meta property="og:url" content="https://epeters.ca/">
-<meta name="theme-color" content="#0a1524">
+<meta property="og:type" content="website"><meta property="og:title" content="Software · Elvin Peters"><meta property="og:description" content="Software by Elvin Peters."><meta property="og:image" content="https://epeters.ca/img/og.jpg"><meta property="og:url" content="https://epeters.ca/">
+<meta name="theme-color" content="#e6ebf1">
 <link rel="icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CLZ7N26J1Q');</script>
-<script>document.documentElement.classList.add('js')</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=EB+Garamond:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/home.css">
-<link rel="preload" href="/content/exhibits.json" as="fetch" crossorigin>
 </head>
 <body>
-<!-- ep:ca-bar --><style>.rhbar{background:#0a1524;border-bottom:1px solid #2b405c;font:500 14px/1.4 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;position:relative;z-index:50}.rhbar .rhin{max-width:1120px;margin:0 auto;padding:0 16px;min-height:52px;display:flex;align-items:center;gap:6px 18px;flex-wrap:wrap}.rhbar a{color:#b7c6d9;text-decoration:none;padding:13px 2px;display:inline-block}.rhbar a:hover{color:#e0bd6b}.rhbar .rhbrand{color:#e0bd6b;font-family:'EB Garamond',Georgia,serif;font-size:18px;margin-right:auto}.rhbar .rhlk{display:flex;gap:16px;flex-wrap:wrap}.rhbar a:focus-visible,.rhfoot a:focus-visible{outline:2px solid #e0bd6b;outline-offset:2px}@media (max-width:480px){.rhbar .rhin{flex-wrap:nowrap;gap:10px}.rhbar .rhbrand{font-size:16px;flex:none}.rhbar .rhlk{flex-wrap:nowrap;gap:12px;font-size:13px;overflow-x:auto;scrollbar-width:none;min-width:0}.rhbar .rhlk::-webkit-scrollbar{display:none}.rhbar .rhlk a{white-space:nowrap}}</style><nav class="rhbar" aria-label="The Rabbit Hole"><div class="rhin"><a class="rhbrand" href="/">The Rabbit Hole</a><span class="rhlk"><a href="/blog/">Blog</a><a href="/play/">Play</a><a href="/#quizzes">Quizzes</a><a href="/projects/">Projects</a></span></div></nav><!-- /ep:ca-bar -->
-<div class="rh-top"><div class="in"><fieldset class="rh-switch"><legend>View</legend><span class="pill" aria-hidden="true"></span><input type="radio" name="rh-v" id="sw-story" value="story" checked><label for="sw-story">Story</label><input type="radio" name="rh-v" id="sw-map" value="map"><label for="sw-map">Map</label><input type="radio" name="rh-v" id="sw-scan" value="scan"><label for="sw-scan">Scan</label></fieldset></div></div>
-<main>
-<section id="v-story" class="rh-view" aria-label="Story"><div class="story-in">
-  <header class="hero">
-    <p class="kicker"><i></i>Elvin's playground</p>
-    <h1>The Rabbit Hole</h1>
-    <p class="lede">Everything I've made while learning to build with AI lives here: the blog, games to play with friends, quizzes, free calculators and a few side projects. Pick a door and fall in.</p>
-    <p class="hero-acts"><a class="btn primary big" href="#map" data-go="map">See everything</a></p>
-  </header>
-  <ul class="doors">
-    <li class="door w"><div class="top"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span><h2><a href="/blog/">Blog</a></h2></div>
-      <p>Notes on how I build: the harness around the AI, the zero-dependency habit, and what broke along the way.</p>
-      <div class="meta"><span class="chip">10 posts</span><span class="go" aria-hidden="true">&rarr;</span></div></li>
-    <li class="door p"><div class="top"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="6"/><path d="M6 12h4M8 10v4"/><circle cx="15.5" cy="11" r=".9" fill="currentColor"/><circle cx="17.5" cy="13.5" r=".9" fill="currentColor"/></svg></span><h2><a href="/play/">Play</a></h2></div>
-      <p>Browser games and quick decision-makers. Play classics with friends in a shared lobby, or settle an argument with a coin flip.</p>
-      <div class="meta"><span class="chip">Play with friends</span><span class="go" aria-hidden="true">&rarr;</span></div></li>
-    <li class="door q" id="quizzes"><div class="top"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></span><h2>Quizzes</h2></div>
-      <p>Four 60-second quizzes on how you use AI at work.</p>
-      <!-- ep:quizzes --><ul>
-        <li><a href="https://elvinpeters.com/quiz/?utm_source=epeters.ca&amp;utm_medium=link&amp;utm_campaign=quizzes">What's your AI style? <span aria-hidden="true">&rarr;</span></a></li>
-        <li><a href="/quiz-ai-risk/">What's your AI risk score? <span aria-hidden="true">&rarr;</span></a></li>
-        <li><a href="/quiz-time-waste/">The AI time-waste calculator <span aria-hidden="true">&rarr;</span></a></li>
-        <li><a href="/quiz-tool-picker/">Which AI tool should you use? <span aria-hidden="true">&rarr;</span></a></li>
-      </ul><!-- /ep:quizzes --></li>
-    <li class="door a"><div class="top"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="3"/><path d="M8 6h8"/><path d="M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h4"/></svg></span><h2><a href="/apps/calculators/">Apps</a></h2></div>
-      <p>Free Canadian money calculators for mortgages, debt payoff, rent versus buy and nine more.</p>
-      <div class="meta"><span class="chip">12 calculators</span><span class="go" aria-hidden="true">&rarr;</span></div></li>
-    <li class="door j"><div class="top"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/></svg></span><h2><a href="/projects/">Projects</a></h2></div>
-      <p>The bigger builds, including Colour Match and a 3D anatomy sandbox you can pose and peel back.</p>
-      <div class="meta"><span class="chip">Colour Match &middot; Anatomy Sandbox</span><span class="go" aria-hidden="true">&rarr;</span></div></li>
-  </ul>
-</div></section>
-<section id="v-map" class="rh-view" aria-label="Map" hidden></section>
-<section id="v-scan" class="rh-view" aria-label="Scan" hidden></section>
+<!-- ep:ca-bar --><style>.rhbar{background:#0a1524;border-bottom:1px solid #2b405c;font:500 14px/1.4 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;position:relative;z-index:50}.rhbar .rhin{max-width:1120px;margin:0 auto;padding:0 16px;min-height:52px;display:flex;align-items:center;gap:6px 18px;flex-wrap:wrap}.rhbar a{color:#b7c6d9;text-decoration:none;padding:13px 2px;display:inline-block}.rhbar a:hover{color:#e0bd6b}.rhbar .rhbrand{color:#e0bd6b;font-family:'EB Garamond',Georgia,serif;font-size:18px;margin-right:auto}.rhbar .rhlk{display:flex;gap:16px;flex-wrap:wrap}.rhbar a:focus-visible,.rhfoot a:focus-visible{outline:2px solid #e0bd6b;outline-offset:2px}@media (max-width:480px){.rhbar .rhin{flex-wrap:nowrap;gap:10px}.rhbar .rhbrand{font-size:16px;flex:none}.rhbar .rhlk{flex-wrap:nowrap;gap:12px;font-size:13px;overflow-x:auto;scrollbar-width:none;min-width:0}.rhbar .rhlk::-webkit-scrollbar{display:none}.rhbar .rhlk a{white-space:nowrap}}</style><nav class="rhbar" aria-label="Elvin Peters"><div class="rhin"><a class="rhbrand" href="/">Elvin Peters</a><span class="rhlk"><a href="/playground/">Playground</a></span></div></nav><!-- /ep:ca-bar -->
+<main class="shelf">
+  <h1>Software</h1>
+  <section class="feature" aria-labelledby="rp-title">
+    <p class="eyebrow">On the bench</p>
+    <h2 id="rp-title">Resistor puzzles</h2>
+    <p>Nine open puzzles. A short lesson, then one resistor and a target on the meter.</p>
+    <div class="idea-grid">
+      <article>
+        <h3>One resistor</h3>
+        <p>Current = voltage ÷ resistance.</p>
+      </article>
+      <article>
+        <h3>In a row</h3>
+        <p>Add the ohms, then divide.</p>
+      </article>
+      <article>
+        <h3>The wire splits</h3>
+        <p>Branch currents add. A pair combines first.</p>
+      </article>
+    </div>
+    <p class="soon-line">The other 91 puzzles are coming soon. Not for sale yet.</p>
+    <p class="actions"><a class="btn primary" href="/resistor-puzzles/">The page</a><a class="btn" href="/resistor-puzzles/play.html">Try the nine</a></p>
+  </section>
+  <p class="empty" id="shelf-empty">Nothing is for sale here yet.</p>
+  <div id="shelf-list"></div>
 </main>
-<div class="rh-scrim"></div><div class="rh-sheet" role="dialog" aria-modal="true" aria-labelledby="rh-sheet-h" hidden></div>
-<!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:12px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}@media (max-width:480px){.rhfoot{display:flex;flex-direction:column;align-items:center;gap:2px}.rhfoot .rhsep{display:none}.rhfoot>span:first-child{padding-bottom:4px}}</style><footer class="rhfoot"><span>Elvin's playground</span><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=home">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=home">Get the monthly letter</a></footer><!-- /ep:ca-foot -->
-<script src="/js/home.js" defer></script>
+<script src="/js/shelf.js" defer></script>
+<!-- ep:ca-foot --><style>.rhfoot{background:#0a1524;border-top:1px solid #2b405c;color:#b7c6d9;font:400 14px/1.6 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:18px 16px;text-align:center;clear:both}.rhfoot a{color:#e0bd6b;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:12px 4px}.rhfoot .rhsep{padding:0 6px;color:#8ba2bd}@media (max-width:480px){.rhfoot{display:flex;flex-direction:column;align-items:center;gap:2px}.rhfoot .rhsep{display:none}.rhfoot>span:first-child{padding-bottom:4px}}</style><footer class="rhfoot"><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=home">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=home">Get the monthly letter</a></footer><!-- /ep:ca-foot -->
 </body>
 </html>

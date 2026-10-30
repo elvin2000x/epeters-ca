@@ -96,7 +96,43 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   background:color-mix(in srgb,var(--ink) 4%,transparent); border:1px solid var(--line); color:var(--ink); text-decoration:none; font-size:15px}
 .door li a:hover{border-color:var(--c); color:var(--c)}
 .door li a span{color:var(--c)}
-.door.w{--c:var(--gold)} .door.p{--c:var(--mint)} .door.a{--c:var(--blue)} .door.q{--c:var(--pink)} .door.j{--c:var(--lilac)}
+.door.w{--c:var(--gold)} .door.p{--c:var(--mint)} .door.a{--c:var(--blue)} .door.q{--c:var(--pink)} .door.j{--c:var(--lilac)} .door.s{--c:var(--coral)}
+.shelf{flex:none;max-width:1040px;margin:0 auto;padding:40px 22px 64px}
+.shelf h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.05;margin:0 0 22px;color:var(--ink)}
+.shelf .empty{color:var(--ink-2);max-width:36ch;margin:0;font-size:1.125rem}
+#shelf-list{display:grid;grid-template-columns:1fr;gap:16px}
+@media (min-width:800px){#shelf-list{grid-template-columns:1fr 1fr}}
+.shelf-item{margin:0;padding:22px;border:1px solid var(--line);border-radius:16px;background:var(--panel);display:flex;flex-direction:column}
+.shelf-item h2{font-family:var(--serif);font-weight:500;font-size:1.75rem;line-height:1.15;margin:0 0 8px;color:var(--ink)}
+.shelf-item p{margin:0 0 12px;color:var(--ink-2)}
+.shelf-item .price{color:var(--ink);font-weight:600}
+.shelf-item .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;margin-bottom:0}
+.shelf-item .made{margin-top:16px}
+.shelf-item .made h3{font-size:1rem;margin:14px 0 4px;color:var(--ink)}
+body:has(.shelf) .rhbar{background:var(--bg);border-bottom-color:var(--line)}
+body:has(.shelf) .rhbar a{color:var(--ink-2)}
+body:has(.shelf) .rhbar .rhbrand{color:var(--ink)}
+body:has(.shelf) .rhbar a:hover{color:var(--gold)}
+body:has(.shelf) .rhfoot{background:var(--bg);color:var(--ink-2);border-top-color:var(--line)}
+body:has(.shelf) .rhfoot a{color:var(--ink)}
+.eyebrow{margin:0 0 8px;font:600 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.feature{margin:0 0 28px;padding:22px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
+.feature h2,.land h1{font-family:var(--serif);font-weight:500;line-height:1.05;margin:0 0 8px;color:var(--ink)}
+.feature h2{font-size:2rem}
+.land h1{font-size:clamp(2.4rem,6vw,3.4rem)}
+.land .lede{max-width:42rem;margin:0 0 16px}
+.idea-grid{display:grid;grid-template-columns:1fr;gap:12px;margin:16px 0}
+@media (min-width:800px){.idea-grid{grid-template-columns:1fr 1fr 1fr}}
+.idea-grid article{margin:0;padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
+.idea-grid h2,.idea-grid h3{font-family:var(--serif);font-weight:500;font-size:1.35rem;margin:0 0 6px;color:var(--ink)}
+.idea-grid p{margin:0;color:var(--ink-2)}
+.idea-grid .ex{margin-top:8px;color:var(--ink);font-weight:600}
+.soon{margin-top:28px}
+.soon h2{font-family:var(--serif);font-weight:500;font-size:1.75rem;margin:0 0 8px}
+.soon-line{color:var(--muted);margin:12px 0}
+.shelf .actions,.land .actions{display:flex;flex-wrap:wrap;gap:10px}
+.land .credit{margin-top:28px;color:var(--muted)}
+.land .credit a{color:var(--ink)}
 .door.q{grid-row:span 2}
 
 /* ---------- sheet (exhibit card on the Map) ---------- */

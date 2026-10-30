@@ -1,0 +1,57 @@
+[
+  {
+    "name": "Colour Match",
+    "paragraph": "Answer five quick questions, upload one selfie, and get your season, undertone, the colours that suit you and the ones to skip. Then let the extension grey out the wrong shades while you shop.",
+    "try": "/projects/colour/",
+    "price": "The palette is free. The extension is $19 once, or $4 a month.",
+    "buy": "",
+    "problem": "",
+    "thinking": "",
+    "prompt": "",
+    "result": ""
+  },
+  {
+    "name": "Financial calculators",
+    "paragraph": "11 free calculators for Canadian mortgages, debt payoff, investing and marketing ROI. Real Canadian math: semi-annual compounding, the stress test, and Toronto land transfer tax. No sign-up.",
+    "try": "/apps/calculators/",
+    "price": "",
+    "buy": "",
+    "problem": "",
+    "thinking": "",
+    "prompt": "",
+    "result": ""
+  },
+  {
+    "name": "Teleprompter",
+    "paragraph": "Paste your script, tap Start. Drag the Speed slider any time while recording. Tap the text to pause. Drag the text or use the mouse wheel to scroll back or skip ahead. Tap Edit to fix a line right in the prompter.",
+    "try": "/teleprompter/",
+    "price": "",
+    "buy": "",
+    "problem": "",
+    "thinking": "",
+    "prompt": "",
+    "result": ""
+  },
+  {
+    "name": "Cell and Molecule Explorer",
+    "paragraph": "Zoom from a drop of pond water to a single atom, then explore microorganisms, cells, molecules and the elements.",
+    "try": "/microscope-simulator/",
+    "price": "",
+    "buy": "",
+    "problem": "",
+    "thinking": "",
+    "prompt": "",
+    "result": ""
+  },
+  {
+    "name": "Anatomy Sandbox",
+    "paragraph": "Turn it, pose it, make it walk. Tap any muscle to see the exercises that work it.",
+    "try": "https://elvinpeters.com/projects/anatomy-sandbox/?utm_source=epeters.ca&utm_medium=link&utm_campaign=home",
+    "price": "",
+    "buy": "",
+    "problem": "",
+    "thinking": "",
+    "prompt": "",
+    "result": ""
+  }
+]
