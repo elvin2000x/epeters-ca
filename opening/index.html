@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Opening and the Unity · Elvin Peters</title>
+<meta name="description" content="Pickthall's 1930 English for two chapters, beside the Tanzil Arabic, both unchanged.">
+<link rel="canonical" href="https://epeters.ca/opening/">
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="/css/bench.css">
+</head>
+<body>
+<nav class="rhbar" aria-label="Elvin Peters"><div class="rhin"><a class="rhbrand" href="/">Elvin Peters</a><span class="rhlk"><a href="/playground/">Playground</a></span></div></nav>
+<main class="shelf toy">
+  <p class="eyebrow">Two chapters. Not for sale yet.</p>
+  <h1>The Opening and the Unity</h1>
+  <p class="lede">Pickthall’s 1930 English comes first. The Tanzil Arabic sits beside it on a wide screen and under it on a phone. Neither text is edited. Pickthall prints the opening phrase on its own line. Tanzil numbers that phrase as 1|1 in The Opening, and includes it at the start of line 112|1 in The Unity.</p>
+  <div class="nums" id="nums"></div>
+  <div class="pair" id="pair">The chapters are loading.</div>
+  <label class="slide">Your margin
+    <textarea class="note" id="note" placeholder="A note, not a change to either text."></textarea>
+  </label>
+  <pre class="notice" id="notice"></pre>
+  <p class="credit" id="credit"></p>
+</main>
+<footer class="rhfoot"><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=opening">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=opening">Get the monthly letter</a></footer>
+<script>
+(function () {
+  var note = document.getElementById('note');
+  var book = null;
+  var at = 0;
+  function esc(s) {
+    return String(s).replace(/[&<>]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; });
+  }
+  function key() { return 'opening-' + book.chapters[at].id + '-margin'; }
+  function readNote() {
+    try { note.value = localStorage.getItem(key()) || ''; } catch (e) { note.value = ''; }
+  }
+  note.addEventListener('input', function () {
+    try { localStorage.setItem(key(), note.value); } catch (e) {}
+  });
+  function show(i) {
+    at = i;
+    var ch = book.chapters[i];
+    document.querySelectorAll('#nums button').forEach(function (btn) {
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-i') === String(i) ? 'true' : 'false');
+    });
+    var en = ch.englishHead.map(function (line) { return '<p>' + esc(line) + '</p>'; }).join('') +
+      ch.english.map(function (v) { return '<p><strong>' + v.n + '</strong> ' + esc(v.text) + '</p>'; }).join('');
+    var ar = ch.arabic.map(function (v) { return '<p dir="rtl" lang="ar"><strong>' + esc(v.id) + '</strong> ' + esc(v.text) + '</p>'; }).join('');
+    document.getElementById('pair').innerHTML = '<article class="passage"><h2>English</h2>' + en + '</article><article class="passage"><h2>Arabic</h2>' + ar + '</article>';
+    readNote();
+    if (location.hash !== '#' + ch.id) history.replaceState(null, '', '#' + ch.id);
+  }
+  fetch('chapters.json').then(function (r) { return r.json(); }).then(function (data) {
+    book = data;
+    document.getElementById('nums').innerHTML = data.chapters.map(function (ch, i) {
+      return '<button type="button" data-i="' + i + '">' + esc(ch.title) + '</button>';
+    }).join('');
+    document.getElementById('notice').textContent = data.notice;
+    document.getElementById('credit').innerHTML = esc(data.pickthall) + ' <a href="' + esc(data.wikisource) + '">Wikisource</a>. Arabic: Tanzil Project. <a href="https://tanzil.net/">tanzil.net</a>. <a href="https://tanzil.net/updates/">Updates</a>.';
+    var start = 0;
+    data.chapters.forEach(function (ch, i) { if ('#' + ch.id === location.hash) start = i; });
+    show(start);
+  }).catch(function () {
+    document.getElementById('pair').textContent = 'The chapters did not load. Reload the page.';
+  });
+  document.getElementById('nums').addEventListener('click', function (ev) {
+    var btn = ev.target.closest('button');
+    if (!btn || !book) return;
+    show(Number(btn.getAttribute('data-i')));
+  });
+})();
+</script>
+</body>
+</html>

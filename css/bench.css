@@ -39,6 +39,12 @@
 .toy label.field{display:block;margin:0 0 12px;font:600 14px/1.4 var(--sans)}
 .toy .clock{font:600 14px/1 var(--sans);color:var(--muted);min-height:1em}
 .toy .move .btn,.toy .home-actions .btn,.toy .actions .btn{min-height:44px}
+.toy .nums{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.toy .nums button{min-width:44px;min-height:44px;padding:8px 12px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:600 16px/1 var(--sans);cursor:pointer}
+.toy .nums button[aria-pressed="true"]{border-color:var(--gold);background:var(--bg)}
+.toy .pair{display:grid;grid-template-columns:1fr;gap:18px}
+.toy pre.notice{white-space:pre-wrap;font:400 14px/1.45 var(--sans);color:var(--muted)}
+@media (min-width:800px){.toy .pair{grid-template-columns:1fr 1fr}}
 .rhbar{background:#0a1524;border-bottom:1px solid #2b405c;font:500 14px/1.4 Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;position:relative;z-index:50}
 .rhbar .rhin{max-width:1120px;margin:0 auto;padding:0 16px;min-height:52px;display:flex;align-items:center;gap:6px 18px;flex-wrap:wrap}
 .rhbar a{color:#b7c6d9;text-decoration:none;padding:13px 2px;display:inline-block}

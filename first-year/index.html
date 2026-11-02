@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>First-year path · Elvin Peters</title>
+<meta name="description" content="Six doors into the free Rebus philosophy series. Five have an original question. Nothing is copied from the books.">
+<link rel="canonical" href="https://epeters.ca/first-year/">
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="/css/bench.css">
+</head>
+<body>
+<nav class="rhbar" aria-label="Elvin Peters"><div class="rhin"><a class="rhbrand" href="/">Elvin Peters</a><span class="rhlk"><a href="/playground/">Playground</a></span></div></nav>
+<main class="shelf toy">
+  <p class="eyebrow">Six doors. The books are free.</p>
+  <h1>First-year path</h1>
+  <p class="lede">Each door opens a volume in the Rebus series. The question on five of them is original. Philosophy of religion stays a link.</p>
+  <p class="meter" id="count" aria-live="polite"></p>
+  <div id="doors"></div>
+  <p class="credit">The series is CC BY 4.0, lead editor Christina Hendricks. <a href="https://forum.rebus.community/t/project-summary/618">Series page</a>. This page does not quote the books. Not for sale yet.</p>
+</main>
+<footer class="rhfoot"><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=first-year">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=first-year">Get the monthly letter</a></footer>
+<script src="doors.js"></script>
+<script>
+(function () {
+  var D = window.FirstYear;
+  var key = 'first-year-path';
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(key) || '{}'); } catch (e) { saved = {}; }
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c];
+    });
+  }
+  function save() {
+    try { localStorage.setItem(key, JSON.stringify(saved)); } catch (e) {}
+  }
+  function count() {
+    var n = D.doors.filter(function (door) { return saved[door.id]; }).length;
+    document.getElementById('count').textContent = n + ' of ' + D.doors.length + ' doors marked.';
+  }
+  function doorHtml(door) {
+    var links = '<p><a href="' + esc(door.series) + '">Series page</a>';
+    if (door.book) links += ' · <a href="' + esc(door.book) + '">Open the book</a>';
+    if (door.practice) links += ' · <a href="' + esc(door.practice) + '">Practice the drills</a>';
+    links += '</p>';
+    if (door.linkOnly) {
+      return '<article class="step" id="' + esc(door.id) + '"><h2>' + esc(door.name) + '</h2><p>' + esc(door.note) + '</p>' + links +
+        '<label><input type="checkbox" data-door="' + esc(door.id) + '"' + (saved[door.id] ? ' checked' : '') + '> I opened the link</label></article>';
+    }
+    var buttons = door.choices.map(function (c) {
+      return '<button type="button" data-door="' + esc(door.id) + '" data-id="' + esc(c.id) + '">' + esc(c.text) + '</button>';
+    }).join('');
+    return '<article class="step" id="' + esc(door.id) + '"><h2>' + esc(door.name) + '</h2><p class="ask">' + esc(door.ask) + '</p>' +
+      '<div class="choices"><div class="row">' + buttons + '</div></div><p class="meter" data-meter="' + esc(door.id) + '"></p>' + links + '</article>';
+  }
+  var root = document.getElementById('doors');
+  root.innerHTML = D.doors.map(doorHtml).join('');
+  count();
+  root.addEventListener('change', function (ev) {
+    var box = ev.target;
+    if (!box.getAttribute || !box.getAttribute('data-door')) return;
+    saved[box.getAttribute('data-door')] = box.checked;
+    save();
+    count();
+  });
+  root.addEventListener('click', function (ev) {
+    var btn = ev.target.closest('button');
+    if (!btn) return;
+    var door = null;
+    D.doors.forEach(function (item) { if (item.id === btn.getAttribute('data-door')) door = item; });
+    if (!door || door.linkOnly) return;
+    var right = D.correctId(door);
+    var picked = btn.getAttribute('data-id');
+    var meter = root.querySelector('[data-meter="' + door.id + '"]');
+    root.querySelectorAll('button[data-door="' + door.id + '"]').forEach(function (b) {
+      b.disabled = true;
+      if (b === btn) b.setAttribute('aria-pressed', 'true');
+    });
+    if (picked === right) {
+      meter.textContent = 'That’s the one.';
+      saved[door.id] = true;
+      save();
+      count();
+    } else {
+      var miss = '';
+      door.choices.forEach(function (c) { if (c.id === picked) miss = c.miss; });
+      meter.textContent = miss || 'Not that one.';
+      root.querySelectorAll('button[data-door="' + door.id + '"]').forEach(function (b) { b.disabled = false; });
+    }
+  });
+})();
+</script>
+</body>
+</html>

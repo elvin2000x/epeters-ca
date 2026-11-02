@@ -99,9 +99,31 @@
     "result": ""
   },
   {
-    "name": "Mark 1",
-    "paragraph": "The Gospel of Mark, chapter 1, in the World English Bible. A margin note stays in this browser. The other chapters are coming.",
+    "name": "Mark",
+    "paragraph": "The Gospel of Mark, all sixteen chapters, in the World English Bible. A margin note stays in this browser. Not for sale yet.",
     "try": "/mark/",
+    "price": "",
+    "buy": "",
+    "problem": "",
+    "thinking": "",
+    "prompt": "",
+    "result": ""
+  },
+  {
+    "name": "The Opening and the Unity",
+    "paragraph": "Pickthall's 1930 English for two chapters, beside the Tanzil Arabic. Both texts are unchanged. Not for sale yet.",
+    "try": "/opening/",
+    "price": "",
+    "buy": "",
+    "problem": "",
+    "thinking": "",
+    "prompt": "",
+    "result": ""
+  },
+  {
+    "name": "First-year path",
+    "paragraph": "Six doors into the free Rebus philosophy series. Five original questions. Philosophy of religion stays a link. Not for sale yet.",
+    "try": "/first-year/",
     "price": "",
     "buy": "",
     "problem": "",

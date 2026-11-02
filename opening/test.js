@@ -1,0 +1,16 @@
+var assert = require('assert');
+var fs = require('fs');
+var path = require('path');
+var book = JSON.parse(fs.readFileSync(path.join(__dirname, 'chapters.json'), 'utf8'));
+assert.strictEqual(book.chapters.length, 2);
+assert.strictEqual(book.chapters[0].english.length, 7);
+assert.strictEqual(book.chapters[1].english.length, 4);
+assert.strictEqual(book.chapters[0].arabic.length, 7);
+assert.strictEqual(book.chapters[1].arabic.length, 4);
+assert.strictEqual(book.chapters[0].english[0].text, 'Praise be to Allah, Lord of the Worlds,');
+assert.strictEqual(book.chapters[1].english[0].text, 'Say: He is Allah, the One!');
+assert.ok(book.chapters[0].arabic[0].text.indexOf('بِسْمِ') === 0);
+assert.ok(book.chapters[1].arabic[0].text.indexOf('بِسْمِ') === 0);
+assert.ok(book.chapters[1].arabic[0].text.indexOf('قُلْ') > 0);
+assert.ok(book.notice.indexOf('CHANGING IT IS NOT ALLOWED') !== -1);
+console.log('opening chapters ok');

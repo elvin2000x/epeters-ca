@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mark 1 · Elvin Peters</title>
-<meta name="description" content="The Gospel of Mark, chapter 1, in the World English Bible, with a margin note saved in this browser.">
+<title>Mark · Elvin Peters</title>
+<meta name="description" content="The Gospel of Mark in the World English Bible, sixteen chapters, with a margin note saved in this browser.">
 <link rel="canonical" href="https://epeters.ca/mark/">
 <link rel="icon" href="/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,35 +16,64 @@
 <body>
 <nav class="rhbar" aria-label="Elvin Peters"><div class="rhin"><a class="rhbrand" href="/">Elvin Peters</a><span class="rhlk"><a href="/playground/">Playground</a></span></div></nav>
 <main class="shelf toy">
-  <p class="eyebrow">Chapter 1. The rest of Mark is coming.</p>
-  <h1>Mark 1</h1>
-  <p class="lede">The text is the World English Bible, unchanged. The note under it is yours. It stays in this browser.</p>
+  <p class="eyebrow">Sixteen chapters. Not for sale yet.</p>
+  <h1>Mark</h1>
+  <p class="lede">The text is the World English Bible, unchanged. The note under a chapter is yours. It stays in this browser.</p>
+  <div class="nums" id="nums"></div>
   <article class="passage" id="passage">The chapter is loading.</article>
   <label class="slide">Your margin
     <textarea class="note" id="note" placeholder="A note, not a change to the text."></textarea>
   </label>
-  <p class="soon-line">Chapters 2 to 16 are coming. Not for sale yet.</p>
   <p class="credit" id="credit"></p>
 </main>
 <footer class="rhfoot"><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=mark">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=mark">Get the monthly letter</a></footer>
 <script>
 (function () {
   var note = document.getElementById('note');
-  var key = 'mark-1-margin';
-  try { note.value = localStorage.getItem(key) || ''; } catch (e) {}
-  note.addEventListener('input', function () {
-    try { localStorage.setItem(key, note.value); } catch (e) {}
-  });
+  var nums = document.getElementById('nums');
+  var passage = document.getElementById('passage');
+  var credit = document.getElementById('credit');
+  var book = null;
+  var at = 1;
+
   function esc(s) {
     return String(s).replace(/[&<>]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; });
   }
-  fetch('chapter1.json').then(function (r) { return r.json(); }).then(function (data) {
-    document.getElementById('passage').innerHTML = data.verses.map(function (v) {
+  function key() { return 'mark-' + at + '-margin'; }
+  function readNote() {
+    try { note.value = localStorage.getItem(key()) || ''; } catch (e) { note.value = ''; }
+  }
+  note.addEventListener('input', function () {
+    try { localStorage.setItem(key(), note.value); } catch (e) {}
+  });
+  function show(n) {
+    at = n;
+    var chapter = book.chapters[n - 1];
+    nums.querySelectorAll('button').forEach(function (btn) {
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-n') === String(n) ? 'true' : 'false');
+    });
+    passage.innerHTML = '<h2>Chapter ' + n + '</h2>' + chapter.verses.map(function (v) {
       return '<p><strong>' + v.n + '</strong> ' + esc(v.text) + '</p>';
     }).join('');
-    document.getElementById('credit').innerHTML = esc(data.source) + ' <a href="' + esc(data.credit) + '">eBible.org</a>.';
+    credit.innerHTML = esc(chapter.source) + ' <a href="' + esc(chapter.credit) + '">eBible.org</a>.';
+    readNote();
+    if (location.hash !== '#' + n) history.replaceState(null, '', '#' + n);
+  }
+  fetch('gospel.json').then(function (r) { return r.json(); }).then(function (data) {
+    book = data;
+    nums.innerHTML = data.chapters.map(function (ch) {
+      return '<button type="button" data-n="' + ch.n + '">' + ch.n + '</button>';
+    }).join('');
+    var start = Number(String(location.hash || '').slice(1));
+    if (!(start >= 1 && start <= data.chapters.length)) start = 1;
+    show(start);
   }).catch(function () {
-    document.getElementById('passage').textContent = 'The chapter did not load.';
+    passage.textContent = 'The chapter did not load. Reload the page.';
+  });
+  nums.addEventListener('click', function (ev) {
+    var btn = ev.target.closest('button');
+    if (!btn || !book) return;
+    show(Number(btn.getAttribute('data-n')));
   });
 })();
 </script>
