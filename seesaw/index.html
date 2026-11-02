@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Seesaw · Elvin Peters</title>
+<meta name="description" content="Balance a plank. Torque is weight times distance from the fulcrum. Not for sale yet.">
+<link rel="canonical" href="https://epeters.ca/seesaw/">
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="/css/bench.css">
+</head>
+<body>
+<nav class="rhbar" aria-label="Elvin Peters"><div class="rhin"><a class="rhbrand" href="/">Elvin Peters</a><span class="rhlk"><a href="/playground/">Playground</a></span></div></nav>
+<main class="shelf toy">
+  <p class="eyebrow">Eight planks. Not for sale yet.</p>
+  <h1>Seesaw</h1>
+  <p class="lede">The left weight is already sitting down. Pick a weight and a distance on the right until the two torques match.</p>
+  <div id="play">
+    <p class="kicker" id="progress"></p>
+    <p class="ask" id="ask"></p>
+    <div class="stage">
+      <div class="board" id="board"></div>
+      <div>
+        <div class="choices" id="choices"></div>
+        <p class="meter" id="meter" aria-live="polite"></p>
+        <p class="actions"><button type="button" class="btn primary" id="next" hidden>Next</button></p>
+      </div>
+    </div>
+  </div>
+  <section id="locked" hidden>
+    <h2>That's the eight.</h2>
+    <p class="soon-line">More planks are coming. Not for sale yet.</p>
+    <p class="actions"><button type="button" class="btn" id="again">Play them again</button></p>
+  </section>
+  <p class="credit">OpenStax, <em>Physics</em>, chapter 9, simple machines. <a href="https://openstax.org/books/physics/pages/9-introduction">The chapter</a>. <a href="https://openstax.org/books/physics/pages/preface">CC BY 4.0</a>. The drawing is original.</p>
+</main>
+<footer class="rhfoot"><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=seesaw">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=seesaw">Get the monthly letter</a></footer>
+<script src="/js/bench-math.js"></script>
+<script src="app.js"></script>
+<script>document.getElementById('again').addEventListener('click', function () { location.reload(); });</script>
+</body>
+</html>

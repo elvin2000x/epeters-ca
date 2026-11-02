@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mark 1 · Elvin Peters</title>
+<meta name="description" content="The Gospel of Mark, chapter 1, in the World English Bible, with a margin note saved in this browser.">
+<link rel="canonical" href="https://epeters.ca/mark/">
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="/css/bench.css">
+</head>
+<body>
+<nav class="rhbar" aria-label="Elvin Peters"><div class="rhin"><a class="rhbrand" href="/">Elvin Peters</a><span class="rhlk"><a href="/playground/">Playground</a></span></div></nav>
+<main class="shelf toy">
+  <p class="eyebrow">Chapter 1. The rest of Mark is coming.</p>
+  <h1>Mark 1</h1>
+  <p class="lede">The text is the World English Bible, unchanged. The note under it is yours. It stays in this browser.</p>
+  <article class="passage" id="passage">The chapter is loading.</article>
+  <label class="slide">Your margin
+    <textarea class="note" id="note" placeholder="A note, not a change to the text."></textarea>
+  </label>
+  <p class="soon-line">Chapters 2 to 16 are coming. Not for sale yet.</p>
+  <p class="credit" id="credit"></p>
+</main>
+<footer class="rhfoot"><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=mark">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=mark">Get the monthly letter</a></footer>
+<script>
+(function () {
+  var note = document.getElementById('note');
+  var key = 'mark-1-margin';
+  try { note.value = localStorage.getItem(key) || ''; } catch (e) {}
+  note.addEventListener('input', function () {
+    try { localStorage.setItem(key, note.value); } catch (e) {}
+  });
+  function esc(s) {
+    return String(s).replace(/[&<>]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; });
+  }
+  fetch('chapter1.json').then(function (r) { return r.json(); }).then(function (data) {
+    document.getElementById('passage').innerHTML = data.verses.map(function (v) {
+      return '<p><strong>' + v.n + '</strong> ' + esc(v.text) + '</p>';
+    }).join('');
+    document.getElementById('credit').innerHTML = esc(data.source) + ' <a href="' + esc(data.credit) + '">eBible.org</a>.';
+  }).catch(function () {
+    document.getElementById('passage').textContent = 'The chapter did not load.';
+  });
+})();
+</script>
+</body>
+</html>

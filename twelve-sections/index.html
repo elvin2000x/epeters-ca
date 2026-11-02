@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Meditations, Book 2 · Elvin Peters</title>
+<meta name="description" content="Casaubon's 1634 Book 2, one section at a time. Sort one clause: in my power, or not.">
+<link rel="canonical" href="https://epeters.ca/twelve-sections/">
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="/css/bench.css">
+</head>
+<body>
+<nav class="rhbar" aria-label="Elvin Peters"><div class="rhin"><a class="rhbrand" href="/">Elvin Peters</a><span class="rhlk"><a href="/playground/">Playground</a></span></div></nav>
+<main class="shelf toy">
+  <p class="eyebrow">Casaubon, 1634. Not for sale yet.</p>
+  <h1>Meditations, Book 2</h1>
+  <p class="lede">In his power: what he does, says, and holds. Not in his power: what happens, what other people think, and how long the body lasts.</p>
+  <p class="kicker" id="progress"></p>
+  <article class="passage" id="passage"></article>
+  <p class="ask" id="ask"></p>
+  <div class="choices" id="choices">
+    <button type="button" id="yes">In my power</button>
+    <button type="button" id="no">Not in my power</button>
+  </div>
+  <p class="meter" id="meter" aria-live="polite"></p>
+  <p class="actions"><button type="button" class="btn primary" id="next" hidden>Next</button></p>
+  <section id="locked" hidden>
+    <h2>That's Book 2.</h2>
+    <p class="soon-line">The other eleven books are coming. Not for sale yet.</p>
+  </section>
+  <p class="credit" id="credit"></p>
+</main>
+<footer class="rhfoot"><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=meditations">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=meditations">Get the monthly letter</a></footer>
+<script>
+(function () {
+  var sorts = [
+    { quote: 'thou hast neglected it', answer: 'power' },
+    { quote: 'which by the fates or appointment of God have happened unto thee', answer: 'not' },
+    { quote: 'the souls, and conceits of other men', answer: 'not' },
+    { quote: 'these things that happen externally', answer: 'not' },
+    { quote: 'the state of another man\'s soul', answer: 'not' },
+    { quote: 'thou mayest always both do and speak those things', answer: 'power' },
+    { quote: 'did of himself merely resolve upon that action', answer: 'power' },
+    { quote: 'put in a man\'s own power', answer: 'power' },
+    { quote: 'all things are dissolved and resolved', answer: 'not' },
+    { quote: 'bare conceits and voices', answer: 'not' },
+    { quote: 'that spirit which is within him', answer: 'power' },
+    { quote: 'that which is either past or to come', answer: 'not' },
+    { quote: 'all is but opinion and conceit', answer: 'power' },
+    { quote: 'when she doth dissemble, and covertly and falsely either doth or saith anything', answer: 'power' },
+    { quote: 'Fame after life is no better than oblivion.', answer: 'not' }
+  ];
+  var book = null;
+  var i = 0;
+  var passage = document.getElementById('passage');
+  var ask = document.getElementById('ask');
+  var meter = document.getElementById('meter');
+  var next = document.getElementById('next');
+  var progress = document.getElementById('progress');
+  function textOf(section) { return section.paragraphs.join(' '); }
+  function show() {
+    var section = book.sections[i];
+    var sort = sorts[i];
+    progress.textContent = (i + 1) + ' of ' + book.sections.length;
+    passage.innerHTML = section.paragraphs.map(function (p) { return '<p>' + p.replace(/[&<>]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }) + '</p>'; }).join('');
+    if (textOf(section).indexOf(sort.quote) === -1) {
+      ask.textContent = 'This section is missing the clause the page expected.';
+      return;
+    }
+    ask.textContent = 'This clause: "' + sort.quote + '"';
+    meter.className = 'meter';
+    meter.textContent = 'Section ' + section.n + '.';
+    next.hidden = true;
+    document.getElementById('yes').disabled = false;
+    document.getElementById('no').disabled = false;
+  }
+  function pick(which) {
+    var sort = sorts[i];
+    var hit = which === sort.answer;
+    meter.className = 'meter' + (hit ? ' good' : ' bad');
+    meter.textContent = hit ? 'That\'s the one.' : 'Read the clause against the rule at the top.';
+    next.hidden = !hit;
+    if (hit) {
+      document.getElementById('yes').disabled = true;
+      document.getElementById('no').disabled = true;
+    }
+  }
+  document.getElementById('yes').addEventListener('click', function () { pick('power'); });
+  document.getElementById('no').addEventListener('click', function () { pick('not'); });
+  next.addEventListener('click', function () {
+    if (i + 1 >= book.sections.length) {
+      document.getElementById('choices').hidden = true;
+      ask.hidden = true;
+      next.hidden = true;
+      document.getElementById('locked').hidden = false;
+      return;
+    }
+    i += 1;
+    show();
+  });
+  fetch('book2.json').then(function (r) { return r.json(); }).then(function (data) {
+    book = data;
+    if (book.sections.length !== sorts.length) {
+      passage.textContent = 'The section list and the clauses do not match.';
+      return;
+    }
+    document.getElementById('credit').innerHTML = book.source + ' <a href="https://www.gutenberg.org/ebooks/2680">Gutenberg 2680</a>.';
+    show();
+  }).catch(function () {
+    passage.textContent = 'The book did not load.';
+  });
+})();
+</script>
+</body>
+</html>

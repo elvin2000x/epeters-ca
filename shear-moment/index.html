@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shear and moment · Elvin Peters</title>
+<meta name="description" content="Slide a load on a beam and read the peak moment from the shear diagram. Not for sale yet.">
+<link rel="canonical" href="https://epeters.ca/shear-moment/">
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="/css/bench.css">
+</head>
+<body>
+<nav class="rhbar" aria-label="Elvin Peters"><div class="rhin"><a class="rhbrand" href="/">Elvin Peters</a><span class="rhlk"><a href="/playground/">Playground</a></span></div></nav>
+<main class="shelf toy">
+  <p class="eyebrow">One beam, then four peaks. Not for sale yet.</p>
+  <h1>Shear and moment</h1>
+  <p class="lede">Pin on the left, roller on the right. Point loads point down. Shear jumps by each force. Moment is the area under that shear, and it ends at zero.</p>
+  <div id="play">
+    <p class="kicker" id="progress"></p>
+    <p class="ask" id="ask"></p>
+    <div class="stage">
+      <div class="board" id="board"></div>
+      <div>
+        <div class="choices" id="choices"></div>
+        <p class="meter" id="meter" aria-live="polite"></p>
+        <p class="actions"><button type="button" class="btn primary" id="next" hidden>Next</button></p>
+      </div>
+    </div>
+  </div>
+  <section id="locked" hidden>
+    <h2>That's the four.</h2>
+    <p class="soon-line">Distributed loads are coming. Not for sale yet.</p>
+    <p class="actions"><button type="button" class="btn" id="again">Start again</button></p>
+  </section>
+  <p class="credit">Mechanics Map, section 6.4, <a href="https://mechanicsmap.psu.edu/websites/6_internal_forces/6-4_shear_moment_diagrams/shear_moment_diagrams.html">shear and moment diagrams</a>. CC BY-SA 4.0. This page links that chapter and does not copy it. The drawing is original.</p>
+</main>
+<footer class="rhfoot"><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=shear">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=shear">Get the monthly letter</a></footer>
+<script src="/js/bench-math.js"></script>
+<script src="app.js"></script>
+<script>document.getElementById('again').addEventListener('click', function () { location.reload(); });</script>
+</body>
+</html>

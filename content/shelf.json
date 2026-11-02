@@ -1,5 +1,115 @@
 [
   {
+    "name": "Force arrows",
+    "paragraph": "Add up to four arrows until the net force matches the target. Ten setups. Not for sale yet.",
+    "try": "/force-arrows/",
+    "price": "",
+    "buy": "",
+    "problem": "",
+    "thinking": "",
+    "prompt": "",
+    "result": ""
+  },
+  {
+    "name": "Ontario path",
+    "paragraph": "Six original pictures, each one linked to a free chapter. The check marks stay in this browser.",
+    "try": "/ontario-path/",
+    "price": "",
+    "buy": "",
+    "problem": "",
+    "thinking": "",
+    "prompt": "",
+    "result": ""
+  },
+  {
+    "name": "Seesaw",
+    "paragraph": "A weight is already on the left. Pick a weight and a distance on the right until the torques match.",
+    "try": "/seesaw/",
+    "price": "",
+    "buy": "",
+    "problem": "",
+    "thinking": "",
+    "prompt": "",
+    "result": ""
+  },
+  {
+    "name": "Motion graphs",
+    "paragraph": "The line is position against time. Mark each piece forward, still, or back.",
+    "try": "/motion-graphs/",
+    "price": "",
+    "buy": "",
+    "problem": "",
+    "thinking": "",
+    "prompt": "",
+    "result": ""
+  },
+  {
+    "name": "Shear and moment",
+    "paragraph": "Slide a load on a beam, then read the peak moment off the shear diagram. Four beams.",
+    "try": "/shear-moment/",
+    "price": "",
+    "buy": "",
+    "problem": "",
+    "thinking": "",
+    "prompt": "",
+    "result": ""
+  },
+  {
+    "name": "One truss joint",
+    "paragraph": "One joint, a 3-4-5 member, a horizontal member, and a load straight down. Pick the two tensions.",
+    "try": "/truss-joint/",
+    "price": "",
+    "buy": "",
+    "problem": "",
+    "thinking": "",
+    "prompt": "",
+    "result": ""
+  },
+  {
+    "name": "Nodes on a string",
+    "paragraph": "Both ends stay fixed. Set the length and the frequency until the node count matches.",
+    "try": "/string-nodes/",
+    "price": "",
+    "buy": "",
+    "problem": "",
+    "thinking": "",
+    "prompt": "",
+    "result": ""
+  },
+  {
+    "name": "One argument",
+    "paragraph": "Sort a sample paragraph into a claim, a reason, and an objection. A passage from the logic book is coming.",
+    "try": "/one-argument/",
+    "price": "",
+    "buy": "",
+    "problem": "",
+    "thinking": "",
+    "prompt": "",
+    "result": ""
+  },
+  {
+    "name": "Meditations, Book 2",
+    "paragraph": "Casaubon's 1634 translation, fifteen sections. Sort one clause from each: in my power, or not.",
+    "try": "/twelve-sections/",
+    "price": "",
+    "buy": "",
+    "problem": "",
+    "thinking": "",
+    "prompt": "",
+    "result": ""
+  },
+  {
+    "name": "Mark 1",
+    "paragraph": "The Gospel of Mark, chapter 1, in the World English Bible. A margin note stays in this browser. The other chapters are coming.",
+    "try": "/mark/",
+    "price": "",
+    "buy": "",
+    "problem": "",
+    "thinking": "",
+    "prompt": "",
+    "result": ""
+  },
+  {
     "name": "Colour Match",
     "paragraph": "Answer five quick questions, upload one selfie, and get your season, undertone, the colours that suit you and the ones to skip. Then let the extension grey out the wrong shades while you shop.",
     "try": "/projects/colour/",
