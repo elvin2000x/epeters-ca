@@ -77,9 +77,9 @@
     "result": ""
   },
   {
-    "name": "One argument",
-    "paragraph": "Sort a sample paragraph into a claim, a reason, and an objection. A passage from the logic book is coming.",
-    "try": "/one-argument/",
+    "name": "Enlightened",
+    "paragraph": "Five moves of an argument, thirty-two checked drills. Claim, bridge, follows, one counterexample, and a reply that hits the reason. Not for sale yet.",
+    "try": "/enlightened/",
     "price": "",
     "buy": "",
     "problem": "",

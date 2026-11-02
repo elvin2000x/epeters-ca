@@ -1,72 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>One argument · Elvin Peters</title>
-<meta name="description" content="Sort one sample paragraph into a claim, a reason, and an objection. Not for sale yet.">
-<link rel="canonical" href="https://epeters.ca/one-argument/">
-<link rel="icon" href="/favicon.ico">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/home.css">
-<link rel="stylesheet" href="/css/bench.css">
+<title>Enlightened · Elvin Peters</title>
+<link rel="canonical" href="https://epeters.ca/enlightened/">
+<meta http-equiv="refresh" content="0; url=/enlightened/">
 </head>
 <body>
-<nav class="rhbar" aria-label="Elvin Peters"><div class="rhin"><a class="rhbrand" href="/">Elvin Peters</a><span class="rhlk"><a href="/playground/">Playground</a></span></div></nav>
-<main class="shelf toy">
-  <p class="eyebrow">One sample. A book paragraph is coming.</p>
-  <h1>One argument</h1>
-  <p class="lede">Three boxes. The sentences below are a sample written for this page. They are not a quotation.</p>
-  <div class="stage">
-    <div>
-      <article class="step"><h2>Claim</h2><p id="claim">Empty</p></article>
-      <article class="step"><h2>Reason</h2><p id="reason">Empty</p></article>
-      <article class="step"><h2>Objection</h2><p id="objection">Empty</p></article>
-    </div>
-    <div>
-      <div class="choices" id="lines"></div>
-      <p class="meter" id="meter" aria-live="polite"></p>
-    </div>
-  </div>
-  <p class="soon-line">The next paragraphs come from the Rebus <em>Introduction to Philosophy: Logic</em>, credited, once a short passage is copied from that CC BY book. Not for sale yet.</p>
-  <p class="credit">The Rebus series <em>Introduction to Philosophy</em>, Logic volume. Series page: <a href="https://forum.rebus.community/t/project-summary/618">Rebus Community</a>. The license pages already checked for that series say CC BY 4.0. This page does not quote the book yet.</p>
-</main>
-<footer class="rhfoot"><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=argument">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=argument">Get the monthly letter</a></footer>
-<script>
-(function () {
-  var lines = [
-    { id: 'bulb', text: 'This streetlight is out.', slot: 'reason' },
-    { id: 'city', text: 'The city never fixes the lights.', slot: 'claim' },
-    { id: 'one', text: 'One dark bulb is not every street.', slot: 'objection' }
-  ];
-  var put = {};
-  var box = document.getElementById('lines');
-  var meter = document.getElementById('meter');
-  function paint() {
-    ['claim', 'reason', 'objection'].forEach(function (name) {
-      var hit = lines.filter(function (line) { return put[line.id] === name; })[0];
-      document.getElementById(name).textContent = hit ? hit.text : 'Empty';
-    });
-    var done = lines.every(function (line) { return put[line.id] === line.slot; });
-    meter.className = 'meter' + (done ? ' good' : '');
-    meter.textContent = done ? 'Claim, reason, objection. That\'s the map.' : 'Put each sentence in one box.';
-    box.innerHTML = lines.map(function (line) {
-      return '<p>' + line.text + '</p><div class="row">' +
-        ['claim', 'reason', 'objection'].map(function (name) {
-          return '<button type="button" data-id="' + line.id + '" data-slot="' + name + '" aria-pressed="' + (put[line.id] === name) + '">' + name.charAt(0).toUpperCase() + name.slice(1) + '</button>';
-        }).join('') + '</div>';
-    }).join('');
-  }
-  box.addEventListener('click', function (e) {
-    var b = e.target.closest('button');
-    if (!b) return;
-    put[b.dataset.id] = b.dataset.slot;
-    paint();
-  });
-  paint();
-})();
-</script>
+<p><a href="/enlightened/">Enlightened</a></p>
 </body>
 </html>
