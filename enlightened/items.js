@@ -27,6 +27,7 @@
         { kind: 'rule', text: 'The reason reaches the claim only when a bridge sentence is true. Speakers usually leave that sentence out.' },
         { kind: 'work', text: '“The main road is closed, so take the alley.” The bridge is “If the main road is closed, the alley is the way.”' },
         { kind: 'work', text: 'Repeating “the main road is closed” only repeats the reason. Repeating “take the alley” only repeats the claim.' },
+        { kind: 'work', text: 'So, because, and since often mark a reason. So can also mean and then, which is a sequence.' },
         { kind: 'tease', text: 'The next drills ask for the bridge.' }
       ]
     },
@@ -406,6 +407,14 @@
       ]
     }
   ];
+
+  var coreShapes = ['mp', 'ac', 'mt', 'da', 'all-yes', 'all-back', 'some', 'none'];
+  var shapeAt = 0;
+  items.forEach(function (item, i) {
+    item.id = item.id || ('core-' + i);
+    item.pass = item.pass || 1;
+    if (item.kind === 'follows') item.shape = coreShapes[shapeAt++];
+  });
 
   return { lessons: lessons, items: items };
 });

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Enlightened · Elvin Peters</title>
-<meta name="description" content="Practice five moves of an argument. Each drill has one answer the page can check. Not for sale yet.">
+<meta name="description" content="Train five moves of an argument: claim, bridge, follows, one case, and a reply. The page checks each drill. Not for sale yet.">
 <link rel="canonical" href="https://epeters.ca/enlightened/">
 <link rel="icon" href="/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,30 +16,66 @@
 <body>
 <nav class="rhbar" aria-label="Elvin Peters"><div class="rhin"><a class="rhbrand" href="/">Elvin Peters</a><span class="rhlk"><a href="/playground/">Playground</a></span></div></nav>
 <main class="shelf toy">
-  <p class="eyebrow">Thirty-two drills. Not for sale yet.</p>
+  <p class="eyebrow">A training desk. Not for sale yet.</p>
   <h1>Enlightened</h1>
-  <p class="lede">Five moves: name the claim, name the skipped step, see whether the claim follows, break a general sentence with one case, and tell a reply that hits the reason. The page checks each one.</p>
+  <p class="lede">Five moves, two passes, and a place to build the argument yourself. The page checks the drills. A hint counts as assisted. The clock is off until you turn it on, and it never fails you.</p>
   <p class="track" id="track"></p>
-  <div id="play">
+
+  <div id="home">
+    <div class="moves" id="moves"></div>
+    <div class="home-actions" id="home-actions"></div>
+    <p class="meter" id="home-note" aria-live="polite"></p>
+  </div>
+
+  <div id="play" hidden>
     <p class="kicker" id="progress"></p>
     <h2 id="title"></h2>
     <div id="copy"></div>
     <p class="passage" id="passage" hidden></p>
+    <p class="credit" id="credit" hidden></p>
     <p class="ask" id="ask"></p>
+    <p class="tease" id="prep" hidden></p>
     <div class="choices" id="choices"></div>
     <p class="meter" id="meter" aria-live="polite"></p>
-    <p class="actions"><button type="button" class="btn primary" id="next">Try it</button></p>
+    <p class="clock" id="clock"></p>
+    <p class="actions">
+      <button type="button" class="btn" id="hint">Hint</button>
+      <button type="button" class="btn primary" id="next">Next</button>
+      <button type="button" class="btn" id="desk">Desk</button>
+    </p>
   </div>
-  <section id="locked" hidden>
-    <h2>That's the set.</h2>
-    <p class="soon-line">Still coming: a paragraph you write yourself, a longer passage, and the fair restatement of someone else's argument. Not for sale yet.</p>
-    <p class="actions"><button type="button" class="btn" id="again">Start again</button></p>
+
+  <section id="workshop" hidden>
+    <h2 id="work-title">Build an argument</h2>
+    <p id="work-help"></p>
+    <div id="build-fields">
+      <label class="field">Claim<textarea id="w-claim" class="note"></textarea></label>
+      <label class="field">Reason<textarea id="w-reason" class="note"></textarea></label>
+      <label class="field">Bridge<textarea id="w-bridge" class="note"></textarea></label>
+    </div>
+    <div id="reply-box" hidden>
+      <p class="passage" id="reply-passage"></p>
+      <label class="field">Your reply<textarea id="w-reply" class="note"></textarea></label>
+    </div>
+    <p class="meter" id="work-meter" aria-live="polite"></p>
+    <p class="actions">
+      <button type="button" class="btn primary" id="work-check">Check</button>
+      <button type="button" class="btn" id="work-desk">Desk</button>
+    </p>
   </section>
-  <p class="credit">The drills are original. The neighbouring book is the Rebus series <em>Introduction to Philosophy</em>, Logic volume, CC BY 4.0. <a href="https://forum.rebus.community/t/project-summary/618">Series page</a>. This page does not quote it.</p>
+
+  <section id="rules" hidden>
+    <h2>Five rules</h2>
+    <div id="rules-copy"></div>
+    <p class="actions"><button type="button" class="btn" id="rules-desk">Desk</button></p>
+  </section>
+
+  <p class="credit">The drills are original, except one public-domain paragraph from Casaubon, which the drill credits. The neighbouring book is the Rebus series <em>Introduction to Philosophy</em>, Logic volume, CC BY 4.0. <a href="https://forum.rebus.community/t/project-summary/618">Series page</a>. This page does not quote it.</p>
 </main>
 <footer class="rhfoot"><a href="https://elvinpeters.com/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=enlightened">Elvin's book: The Artificial Advantage</a><span class="rhsep">&middot;</span><a href="https://elvinpeters.com/newsletter/?utm_source=epeters.ca&amp;utm_medium=footer&amp;utm_campaign=enlightened">Get the monthly letter</a></footer>
 <script src="check.js"></script>
 <script src="items.js"></script>
+<script src="bank.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

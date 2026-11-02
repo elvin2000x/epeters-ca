@@ -11,6 +11,36 @@ assert.strictEqual(E.follows([['all', 'box-metal', 'conducts'], ['is', 'key', 'c
 assert.strictEqual(E.follows([['some', 'tickets', 'comps'], ['is', 'this', 'tickets']], ['is', 'this', 'comps']), false);
 assert.strictEqual(E.follows([['none', 'cupboard-solvent', 'water'], ['is', 'bottle', 'cupboard-solvent']], ['isnt', 'bottle', 'water']), true);
 assert.strictEqual(E.follows([['if', 'p', 'q'], ['if', 'q', 'r'], ['yes', 'p']], ['yes', 'r']), true);
+assert.strictEqual(E.follows([['if', ['and', 'alarm', 'dark'], 'shut'], ['yes', 'alarm'], ['yes', 'dark']], ['yes', 'shut']), true);
+assert.strictEqual(E.follows([['if', ['and', 'alarm', 'dark'], 'shut'], ['yes', 'alarm']], ['yes', 'shut']), false);
+assert.strictEqual(E.follows([['or', 'alarm', 'bell'], ['no', 'alarm']], ['yes', 'bell']), true);
+assert.strictEqual(E.follows([['or', 'alarm', 'bell'], ['yes', 'alarm']], ['no', 'bell']), false);
+assert.strictEqual(E.follows([['most', 'tickets', 'comps'], ['is', 'this', 'tickets']], ['is', 'this', 'comps']), false);
+assert.strictEqual(E.buildCheck('Bring a coat today.', 'The wind is up outside.', 'If the wind is up, bring a coat.').ok, true);
+assert.strictEqual(E.buildCheck('Bring a coat.', 'Bring a coat.', 'If the wind is up, bring a coat.').ok, false);
+assert.strictEqual(E.replyCheck('You never swim.', ['attendance']).ok, false);
+assert.strictEqual(E.replyCheck('Attendance is down because the heater broke for a month.', ['attendance']).ok, true);
+
+var B = require('./bank.js');
+var all = D.items.concat(B.items);
+assert.ok(all.length >= 100, 'catalog ' + all.length);
+all.forEach(function (item) {
+  assert.ok(item.id, 'id');
+  var key = E.correctId(item);
+  assert.ok(key, 'key ' + item.id + ' ' + item.kind);
+  if (item.kind === 'follows') {
+    assert.strictEqual(E.shapeAgrees(item), true, item.id + ' ' + item.shape);
+    assert.ok(E.chipSet(item.shape).indexOf(item.shape) !== -1, item.shape);
+  } else if (item.kind === 'parts') {
+    item.sentences.forEach(function (s) {
+      if (s.id !== key) assert.ok(s.miss, item.id);
+    });
+  } else {
+    item.choices.forEach(function (c) {
+      if (c.id !== key) assert.ok(c.miss, item.id + ' ' + c.id);
+    });
+  }
+});
 
 assert.strictEqual(E.breaks({ type: 'all', subject: 'dog', property: 'kind' }, { dog: true, kind: false }), true);
 assert.strictEqual(E.breaks({ type: 'all', subject: 'dog', property: 'kind' }, { dog: false, kind: false }), false);
@@ -56,4 +86,4 @@ assert.strictEqual(E.correctId(peach), 'd');
 var counter = peach.choices.filter(function (c) { return c.text.indexOf('counter') !== -1; })[0];
 assert.strictEqual(E.breaks(peach.claim, counter.attrs), false);
 
-console.log('enlightened checks ok', seq.length, 'steps');
+console.log('enlightened checks ok', seq.length, 'core steps');
