@@ -8,6 +8,7 @@
 <meta name="theme-color" content="#000000" />
 <title>Teleprompter</title>
 <link rel="canonical" href="https://epeters.ca/teleprompter/">
+<script src="https://accounts.google.com/gsi/client" async></script>
 <script>try{ if(localStorage.getItem('tp_gate')==='1') document.documentElement.classList.add('open'); }catch(e){}</script>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -23,11 +24,8 @@
   html.open #gate { display: none; }
   #gate h1 { font-size: 22px; color: var(--accent); letter-spacing: .04em; }
   #gate p { color: #9a9a9a; font-size: 15px; line-height: 1.45; }
-  #pw { width: 100%; font-size: 18px; padding: 16px; border-radius: 12px; border: 1px solid #333;
-    background: var(--panel); color: var(--fg); }
-  #pwBtn { background: var(--accent); color: #000; border: none; border-radius: 12px; padding: 18px;
-    font-size: 19px; font-weight: 800; cursor: pointer; }
-  #pwErr { min-height: 1.2em; color: #e07a7a; font-size: 14px; }
+  #gbtn { min-height: 44px; }
+  #gateErr { min-height: 1.2em; color: #e07a7a; font-size: 14px; }
 
   /* EDITOR */
   #editor { position: fixed; inset: 0; z-index: 10; background: var(--bg); display: flex; flex-direction: column;
@@ -107,7 +105,7 @@
     border-radius: 50%; background: var(--accent); margin-top: -11px; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,.6); }
   input[type=range]::-moz-range-thumb { width: 30px; height: 30px; border: none; border-radius: 50%; background: var(--accent); cursor: pointer; }
   .btnRow { display: flex; gap: 8px; flex-wrap: wrap; }
-  .btnRow button, #filmBtn, #startBtn, #pwBtn { min-width: 64px; }
+  .btnRow button, #filmBtn, #startBtn { min-width: 64px; }
   .btnRow button { flex: 1; background: #1f1f1f; color: var(--fg); border: 1px solid #333;
     border-radius: 10px; padding: 14px 8px; font-size: 15px; cursor: pointer; }
   #playBtn, #filmBtn, #startBtn { background: var(--accent); color: #000; font-weight: 800; border: none; }
@@ -130,13 +128,12 @@
 </head>
 <body>
 
-<form id="gate" autocomplete="on">
+<div id="gate">
   <h1>TELEPROMPTER</h1>
-  <p>Password for this phone. It stays unlocked after this.</p>
-  <input id="pw" type="password" name="password" autocomplete="current-password" enterkeyhint="go" placeholder="Password" />
-  <button id="pwBtn" type="submit">Open</button>
-  <p id="pwErr"></p>
-</form>
+  <p>Sign in with Google. This phone stays unlocked after that.</p>
+  <div id="gbtn"></div>
+  <p id="gateErr"></p>
+</div>
 
 <div id="note"></div>
 
@@ -223,7 +220,8 @@
 
 <script>
   const $ = id => document.getElementById(id);
-  const GATE = '50584856fd1b1171298ade692f21e86e24e6c80fcdf5eff620b73af936a3ce9c';
+  const GOOGLE_CLIENT = '781627966853-624hiu1sn1965ndepdturi3hrb596d71.apps.googleusercontent.com';
+  const ALLOWED = '986b3d5fb11453953476ab000ffaaba2460d9166ad536f2176d6d483293aa565';
   const editor=$('editor'), stage=$('stage'), win=$('window'), scroll=$('scroll'), textEl=$('text'), countEl=$('count');
   const speedEl=$('speed'), fontEl=$('font'), speedVal=$('speedVal'), fontVal=$('fontVal');
 
@@ -673,20 +671,39 @@
   });
   if(localStorage.getItem('tp_guideTop')==='1') document.body.classList.add('guideTop');
 
-  // ---- password ----
-  async function hashPw(s){
-    const buf=await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
-    return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
-  }
-  $('gate').addEventListener('submit', async e=>{
-    e.preventDefault();
-    if(!crypto.subtle){ $('pwErr').textContent='Open this page from epeters.ca.'; return; }
-    const got=await hashPw($('pw').value);
-    if(got!==GATE){ $('pwErr').textContent='Wrong password.'; $('pw').select(); return; }
+  // ---- Google sign-in. Google checks the account. Only one address opens the page. ----
+  function unlock(){
     localStorage.setItem('tp_gate','1');
     document.documentElement.classList.add('open');
-    $('pw').value='';
-  });
+  }
+  async function onGoogle(resp){
+    const err=$('gateErr');
+    try {
+      const r=await fetch('https://oauth2.googleapis.com/tokeninfo?id_token='+encodeURIComponent(resp.credential));
+      const p=await r.json();
+      const email=String(p.email||'').toLowerCase();
+      const emailHash=await crypto.subtle.digest('SHA-256', new TextEncoder().encode(email)).then(buf=>[...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join(''));
+      const verified=p.email_verified===true || p.email_verified==='true';
+      const iss=p.iss==='accounts.google.com' || p.iss==='https://accounts.google.com';
+      if(!r.ok || p.error || p.aud!==GOOGLE_CLIENT || !iss || !verified || emailHash!==ALLOWED){
+        err.textContent = email && emailHash!==ALLOWED ? 'That Google account cannot open this.' : 'Google did not confirm the sign-in. Try again.';
+        return;
+      }
+      localStorage.setItem('tp_who', email);
+      unlock();
+    } catch(e){ err.textContent='Google did not confirm the sign-in. Try again.'; }
+  }
+  function startGoogle(n){
+    if(document.documentElement.classList.contains('open')) return;
+    if(!window.google || !google.accounts || !google.accounts.id){
+      if((n||0) > 40){ $('gateErr').textContent='Google sign-in did not load. Check the connection and reload.'; return; }
+      setTimeout(()=>startGoogle((n||0)+1), 200);
+      return;
+    }
+    google.accounts.id.initialize({ client_id:GOOGLE_CLIENT, callback:onGoogle, auto_select:false, cancel_on_tap_outside:true });
+    google.accounts.id.renderButton($('gbtn'), { type:'standard', theme:'filled_black', size:'large', text:'signin_with', shape:'rectangular', width:320, logo_alignment:'left' });
+  }
+  startGoogle(0);
 
   showSpeed(); showFont(); $('width').value=width; applyWidth();
   $('gap').value=gap; applyGap(); $('show').value=expose; applyShow();
